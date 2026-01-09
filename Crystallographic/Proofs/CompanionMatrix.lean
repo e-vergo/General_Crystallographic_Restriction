@@ -10,18 +10,15 @@ import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
 import Mathlib.GroupTheory.OrderOfElement
-import Crystallographic.IntegerMatrixOrder
+import Crystallographic.Definitions.IntegerMatrixOrder
+import Crystallographic.Definitions.CompanionMatrix
 
 /-!
-# Companion Matrices
+# Companion Matrix Proofs
 
-This file defines companion matrices of monic polynomials and proves their key properties,
+This file proves the key properties of companion matrices,
 particularly for cyclotomic polynomials which are essential for the crystallographic
 restriction theorem.
-
-## Main definitions
-
-* `companion` - The companion matrix of a monic polynomial
 
 ## Main results
 
@@ -40,29 +37,6 @@ namespace Crystallographic
 open Matrix Polynomial
 
 variable {R : Type*} [CommRing R]
-
-/-! ### Companion matrix definition -/
-
-/-- The companion matrix of a monic polynomial p of degree n.
-
-For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
-```
-[0  0  0  ...  0  -a_0    ]
-[1  0  0  ...  0  -a_1    ]
-[0  1  0  ...  0  -a_2    ]
-[        ...              ]
-[0  0  0  ...  1  -a_{n-1}]
-```
-
-The matrix has 1s on the subdiagonal and the negatives of the polynomial
-coefficients in the last column.
--/
-def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
-    Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
-  Matrix.of fun i j =>
-    if j.val + 1 = i.val then 1
-    else if j.val + 1 = p.natDegree then -p.coeff i.val
-    else 0
 
 /-! ### Basic properties -/
 
