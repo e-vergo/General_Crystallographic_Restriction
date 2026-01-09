@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import WallpaperGroups.Crystallographic.General.IntegerMatrixOrder
+import Crystallographic.IntegerMatrixOrder
 import Mathlib.LinearAlgebra.Matrix.Notation
 
 /-!
@@ -30,7 +30,7 @@ These matrices demonstrate that the crystallographic orders are achievable by 2x
 * `*_mem_integerMatrixOrders_two` - Orders 1, 2, 3, 4, 6 are achievable
 -/
 
-namespace WallpaperGroups.Crystallographic
+namespace Crystallographic
 
 open Matrix
 
@@ -198,4 +198,4 @@ theorem six_mem_integerMatrixOrders_two : 6 ∈ integerMatrixOrders 2 := by
   use rotationMatrix6
   exact ⟨orderOf_rotationMatrix6, by norm_num⟩
 
-end WallpaperGroups.Crystallographic
+end Crystallographic

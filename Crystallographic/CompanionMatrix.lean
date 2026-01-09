@@ -10,7 +10,7 @@ import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
 import Mathlib.GroupTheory.OrderOfElement
-import WallpaperGroups.Crystallographic.General.IntegerMatrixOrder
+import Crystallographic.IntegerMatrixOrder
 
 /-!
 # Companion Matrices
@@ -902,7 +902,7 @@ This directly provides elements of integerMatrixOrders for dimensions ≥ φ(m).
 -/
 theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
-    m ∈ WallpaperGroups.Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
+    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
   use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
   constructor
   · exact companion_cyclotomic_orderOf m hm hn
@@ -910,7 +910,7 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
 
 /-- For m >= 2, m ∈ integerMatrixOrders(totient m). -/
 theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
-    m ∈ WallpaperGroups.Crystallographic.integerMatrixOrders (Nat.totient m) := by
+    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
   have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
   have htot_pos : 0 < Nat.totient m := Nat.totient_pos.mpr (by omega)
   have hn : 0 < (cyclotomic m ℤ).natDegree := by omega

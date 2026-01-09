@@ -3,10 +3,10 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import WallpaperGroups.Crystallographic.General.Psi
-import WallpaperGroups.Crystallographic.General.IntegerMatrixOrder
-import WallpaperGroups.Crystallographic.General.RotationMatrices
-import WallpaperGroups.Crystallographic.General.CompanionMatrix
+import Crystallographic.Psi
+import Crystallographic.IntegerMatrixOrder
+import Crystallographic.RotationMatrices
+import Crystallographic.CompanionMatrix
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
@@ -48,7 +48,7 @@ An N x N integer matrix can have finite order m if and only if psi(m) <= N.
 * Sasse, R. (2020). "Crystallographic Groups"
 -/
 
-namespace WallpaperGroups.Crystallographic
+namespace Crystallographic
 
 open Matrix Polynomial
 
@@ -1815,4 +1815,4 @@ theorem crystallographic_restriction (N : ℕ) (m : ℕ) (hm : 0 < m) (hNm : m =
 
 
 
-end WallpaperGroups.Crystallographic
+end Crystallographic

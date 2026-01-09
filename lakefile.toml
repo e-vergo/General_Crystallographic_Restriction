@@ -1,0 +1,29 @@
+name = "Crystallographic"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["Crystallographic"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.26.0"
+
+# Documentation generation
+[[require]]
+name = "doc-gen4"
+scope = "leanprover"
+git = "https://github.com/leanprover/doc-gen4"
+rev = "main"
+
+[[require]]
+name = "checkdecls"
+git = "https://github.com/PatrickMassot/checkdecls.git"
+
+[[lean_lib]]
+name = "Crystallographic"

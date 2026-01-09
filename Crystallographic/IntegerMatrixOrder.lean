@@ -31,7 +31,7 @@ We work with `Matrix (Fin N) (Fin N) ℤ` and use Mathlib's `orderOf` which retu
 elements of infinite order. We require `0 < m` to ensure we're talking about finite orders.
 -/
 
-namespace WallpaperGroups.Crystallographic
+namespace Crystallographic
 
 open Matrix
 
@@ -294,4 +294,4 @@ theorem mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
   rw [← lcm_eq_mul_of_coprime hcop]
   exact lcm_mem_integerMatrixOrders h₁ h₂
 
-end WallpaperGroups.Crystallographic
+end Crystallographic

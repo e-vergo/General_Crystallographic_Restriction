@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import WallpaperGroups.Crystallographic.General.MainTheorem
+import Crystallographic.MainTheorem
 
 /-!
 # The 2D Crystallographic Restriction Theorem
@@ -41,7 +41,7 @@ Use the psi function: psi(m) <= 2 implies m in {1,2,3,4,6}.
 * Sasse, R. (2020). "Crystallographic Groups"
 -/
 
-namespace WallpaperGroups.Crystallographic
+namespace Crystallographic
 
 open Matrix Polynomial
 
@@ -452,4 +452,4 @@ theorem crystallographic_restriction_2D (m : ℕ) (hm : 0 < m) :
   · intro h
     exact crystallographic_orders_achievable h
 
-end WallpaperGroups.Crystallographic
+end Crystallographic
