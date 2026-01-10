@@ -160,20 +160,12 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.tot
                 rcases h12 with h1 | h2
                 · exact hm'_ne_one h1
                 · exact hm'2 h2
-              -- totient is positive and ≠ 1, so ≥ 2
-              rcases Nat.lt_trichotomy (Nat.totient m') 2 with hlt | heq | hgt
-              · interval_cases Nat.totient m'; omega
-              · exact le_of_eq heq.symm
-              · exact le_of_lt hgt
+              omega
             have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := by
               rw [Nat.totient_prime_pow hminFac_prime he_pos]
               by_cases hp2 : p = 2
               · -- p = 2, but e ≠ 1 since ¬(p = 2 ∧ e = 1)
-                have he_ge2 : 2 ≤ e := by
-                  rcases Nat.lt_trichotomy e 1 with he0 | he1 | he_gt1
-                  · omega
-                  · exact (h21 ⟨hp2, he1⟩).elim
-                  · omega
+                have he_ge2 : 2 ≤ e := by omega
                 calc p ^ (e - 1) * (p - 1) = 2 ^ (e - 1) * (2 - 1) := by rw [hp2]
                   _ = 2 ^ (e - 1) := by ring
                   _ ≥ 2 ^ 1 := Nat.pow_le_pow_right (by omega) (by omega : 1 ≤ e - 1)

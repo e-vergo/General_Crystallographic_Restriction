@@ -53,6 +53,24 @@ namespace Crystallographic
 
 open Matrix Polynomial
 
+/-- If each cyclotomic polynomial in a finset divides a target polynomial,
+then their product also divides the target (using pairwise coprimality). -/
+lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
+    (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
+    (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by
+  induction S using Finset.induction with
+  | empty => simp only [Finset.prod_empty, one_dvd]
+  | @insert d s hd_notin IH =>
+    rw [Finset.prod_insert hd_notin]
+    have hdvd_d : cyclotomic d ℚ ∣ target := hdvd_each d (Finset.mem_insert_self d s)
+    have hdvd_prod : (∏ x ∈ s, cyclotomic x ℚ) ∣ target :=
+        IH (fun x hx => hdvd_each x (Finset.mem_insert_of_mem hx))
+    have hcop : IsCoprime (cyclotomic d ℚ) (∏ x ∈ s, cyclotomic x ℚ) := by
+      apply IsCoprime.prod_right
+      intro x hx
+      exact cyclotomic.isCoprime_rat (fun heq => hd_notin (heq ▸ hx))
+    exact hcop.mul_dvd hdvd_d hdvd_prod
+
 /-- If an N x N integer matrix has finite order m, then psi(m) <= N.
 
 This is the forward direction of the crystallographic restriction theorem.
@@ -249,28 +267,8 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
       rw [← prod_cyclotomic_eq_X_pow_sub_one hm, hprod_split] at hminpoly_dvd
       exact hcoprime_with_complement.dvd_of_dvd_mul_right hminpoly_dvd
     -- Conversely, ∏_{d∈S} Φ_d ∣ minpoly (by definition of S and coprimality)
-    have hprod_dvd_minpoly : (∏ d ∈ S, cyclotomic d ℚ) ∣ minpoly ℚ A_Q := by
-      -- Each Φ_d for d ∈ S divides minpoly by definition
-      -- The Φ_d are pairwise coprime, so their product divides minpoly
-      have hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ minpoly ℚ A_Q :=
-        fun d hd => (Finset.mem_filter.mp hd).2
-      -- Prove by suffices + induction to avoid variable shadowing
-      suffices h : ∀ (T : Finset ℕ), (∀ d ∈ T, cyclotomic d ℚ ∣ minpoly ℚ A_Q) →
-          (∏ d ∈ T, cyclotomic d ℚ) ∣ minpoly ℚ A_Q by
-        exact h S hdvd_each
-      intro T hT_dvd
-      induction T using Finset.induction with
-      | empty => simp only [Finset.prod_empty, one_dvd]
-      | @insert d s hd_notin IH =>
-        rw [Finset.prod_insert hd_notin]
-        have hdvd_d : cyclotomic d ℚ ∣ minpoly ℚ A_Q := hT_dvd d (Finset.mem_insert_self d s)
-        have hdvd_prod : (∏ x ∈ s, cyclotomic x ℚ) ∣ minpoly ℚ A_Q :=
-            IH (fun x hx => hT_dvd x (Finset.mem_insert_of_mem hx))
-        have hcop_prod : IsCoprime (cyclotomic d ℚ) (∏ x ∈ s, cyclotomic x ℚ) := by
-          apply IsCoprime.prod_right
-          intro x hx
-          exact cyclotomic.isCoprime_rat (fun heq => hd_notin (heq ▸ hx))
-        exact hcop_prod.mul_dvd hdvd_d hdvd_prod
+    have hprod_dvd_minpoly : (∏ d ∈ S, cyclotomic d ℚ) ∣ minpoly ℚ A_Q :=
+      cyclotomic_finset_product_dvd S (fun d hd => (Finset.mem_filter.mp hd).2)
     -- Therefore minpoly = ∏_{d∈S} Φ_d (up to units, but both are monic)
     have hminpoly_eq_prod : minpoly ℚ A_Q = ∏ d ∈ S, cyclotomic d ℚ := by
       apply Polynomial.eq_of_monic_of_associated
@@ -305,32 +303,11 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
         exact pow_one_sub_dvd_pow_mul_sub_one X d k
       have hminpoly_dvd_lcm : minpoly ℚ A_Q ∣ X ^ (S.lcm id) - 1 := by
         rw [hminpoly_eq_prod]
-        -- Each Φ_d for d ∈ S divides X^{lcm(S)} - 1 since d | lcm(S)
-        -- The Φ_d are pairwise coprime, so their product divides X^{lcm(S)} - 1
-        have hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ X ^ (S.lcm id) - 1 := by
-          intro d hd
-          have hd_dvd_lcm : d ∣ S.lcm id := Finset.dvd_lcm hd
-          calc cyclotomic d ℚ ∣ X ^ d - 1 := cyclotomic.dvd_X_pow_sub_one d ℚ
-            _ ∣ X ^ (S.lcm id) - 1 := X_pow_sub_one_dvd d (S.lcm id) hd_dvd_lcm
-        -- Prove by suffices + induction to avoid variable shadowing
-        suffices h : ∀ (T : Finset ℕ),
-            (∀ d ∈ T, cyclotomic d ℚ ∣ X ^ (S.lcm id) - 1) →
-            (∏ d ∈ T, cyclotomic d ℚ) ∣ X ^ (S.lcm id) - 1 by
-          exact h S hdvd_each
-        intro T hT_dvd
-        induction T using Finset.induction with
-        | empty => simp only [Finset.prod_empty, one_dvd]
-        | @insert d s hd_notin IH =>
-          rw [Finset.prod_insert hd_notin]
-          have hdvd_d : cyclotomic d ℚ ∣ X ^ (S.lcm id) - 1 :=
-            hT_dvd d (Finset.mem_insert_self d s)
-          have hdvd_prod : (∏ x ∈ s, cyclotomic x ℚ) ∣ X ^ (S.lcm id) - 1 :=
-              IH (fun x hx => hT_dvd x (Finset.mem_insert_of_mem hx))
-          have hcop : IsCoprime (cyclotomic d ℚ) (∏ x ∈ s, cyclotomic x ℚ) := by
-            apply IsCoprime.prod_right
-            intro x hx
-            exact cyclotomic.isCoprime_rat (fun heq => hd_notin (heq ▸ hx))
-          exact hcop.mul_dvd hdvd_d hdvd_prod
+        apply cyclotomic_finset_product_dvd
+        intro d hd
+        have hd_dvd_lcm : d ∣ S.lcm id := Finset.dvd_lcm hd
+        calc cyclotomic d ℚ ∣ X ^ d - 1 := cyclotomic.dvd_X_pow_sub_one d ℚ
+          _ ∣ X ^ (S.lcm id) - 1 := X_pow_sub_one_dvd d (S.lcm id) hd_dvd_lcm
       -- Therefore A^{lcm(S)} = 1
       have hpow_lcm : A ^ (S.lcm id) = 1 := pow_eq_one_of_minpoly_dvd (S.lcm id) hminpoly_dvd_lcm
       -- But orderOf A = m > lcm(S), so orderOf A | lcm(S) is false

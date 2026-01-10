@@ -166,35 +166,6 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
   · exact hA_pos
 
-/-- Helper: for d | m with d > 0 and m > 0, we have m / gcd(m, m/d) = d -/
-lemma div_gcd_div_eq {m d : ℕ} (hd : d ∣ m) (hd_pos : 0 < d) (hm_pos : 0 < m) :
-    m / Nat.gcd m (m / d) = d := by
-  obtain ⟨k, hk⟩ := hd
-  have hk_pos : 0 < k := by
-    rcases Nat.eq_zero_or_pos k with hk0 | hk_pos
-    · subst hk0
-      simp only [mul_zero] at hk
-      omega
-    · exact hk_pos
-  subst hk
-  rw [Nat.mul_div_cancel_left k hd_pos]
-  -- gcd(d * k, k) = k
-  have h1 : Nat.gcd (d * k) k = k := by
-    rw [Nat.gcd_comm]
-    exact Nat.gcd_eq_left (Nat.dvd_mul_left k d)
-  rw [h1]
-  rw [mul_comm]
-  exact Nat.mul_div_cancel_left d hk_pos
-
-/-- If an element has order m > 0 and d divides m with d > 0, then g^(m/d) has order d. -/
-lemma orderOf_pow_of_dvd {G : Type*} [Monoid G] (g : G) (m d : ℕ)
-    (hm : orderOf g = m) (hd : d ∣ m) (hd_pos : 0 < d) (hm_pos : 0 < m) :
-    orderOf (g ^ (m / d)) = d := by
-  have hdiv_pos : 0 < m / d := Nat.div_pos (Nat.le_of_dvd hm_pos hd) hd_pos
-  rw [orderOf_pow' g (ne_of_gt hdiv_pos)]
-  rw [hm]
-  exact div_gcd_div_eq hd hd_pos hm_pos
-
 /-- Divisibility: if m ∈ integerMatrixOrders N and d ∣ m with d > 0,
 then d ∈ integerMatrixOrders N. -/
 theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
@@ -204,7 +175,8 @@ theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
   obtain ⟨A, hA_ord, hA_pos⟩ := hm
   use A ^ (m / d)
   constructor
-  · exact orderOf_pow_of_dvd A m d hA_ord hd hd_pos hA_pos
+  · rw [← hA_ord]
+    exact orderOf_pow_orderOf_div (ne_of_gt (hA_ord.symm ▸ hA_pos)) (hA_ord.symm ▸ hd)
   · exact hd_pos
 
 /-! ## Block diagonal matrix infrastructure -/
@@ -260,11 +232,6 @@ theorem orderOf_blockDiag2 {M K : ℕ}
   have hφ : φ (A, B) = blockDiag2 A B := rfl
   rw [← hφ, orderOf_injective φ hinj (A, B), Prod.orderOf]
 
-/-- For coprime m and n, lcm(m, n) = m * n. -/
-lemma lcm_eq_mul_of_coprime {m n : ℕ} (h : Nat.Coprime m n) :
-    Nat.lcm m n = m * n := by
-  rw [Nat.lcm_comm, Nat.Coprime.lcm_eq_mul h.symm, mul_comm]
-
 /-- Block diagonal construction for integer matrix orders.
     If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
     then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
@@ -291,7 +258,7 @@ theorem mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
     (hcop : Nat.Coprime m₁ m₂) :
     m₁ * m₂ ∈ integerMatrixOrders (M + K) := by
-  rw [← lcm_eq_mul_of_coprime hcop]
+  rw [← hcop.lcm_eq_mul]
   exact lcm_mem_integerMatrixOrders h₁ h₂
 
 end Crystallographic
