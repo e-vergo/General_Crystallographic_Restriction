@@ -113,55 +113,6 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
         _ = N := Fintype.card_fin N
     -- minpoly | X^m - 1 since A^m = 1
     have hpow : A ^ m = 1 := by rw [← hA_ord]; exact pow_orderOf_eq_one A
-    -- The minpoly divides X^m - 1, so it's a product of cyclotomic polynomials Φ_d
-    -- for divisors d of m. The set S of such d has lcm(S) = m (since orderOf A = m).
-    -- Therefore deg(minpoly) = Σ_{d∈S} φ(d) ≥ psi(m) by sum_totient_ge_psi_of_lcm_eq.
-    --
-    -- Current proof uses the simpler bound: psi(m) ≤ φ(m) ≤ deg(minpoly) ≤ N
-    -- This is sufficient when Φ_m | minpoly (which holds for prime m).
-    -- For general m, the full proof via sum_totient_ge_psi_of_lcm_eq is needed.
-    -- The minimal polynomial divides X^m - 1 = ∏_{d|m} Φ_d (product of cyclotomic polynomials)
-    -- Since cyclotomic polynomials are irreducible over ℚ and pairwise coprime,
-    -- the minimal polynomial is a product of distinct cyclotomic polynomials Φ_d
-    -- for some set S ⊆ divisors(m).
-    --
-    -- The key constraint: orderOf A = m means the smallest k with A^k = 1 is m.
-    -- This is equivalent to: the smallest k such that minpoly | X^k - 1 is m.
-    -- Since minpoly = ∏_{d ∈ S} Φ_d, this means lcm(S) = m.
-    --
-    -- Therefore: deg(minpoly) = ∑_{d ∈ S} deg(Φ_d) = ∑_{d ∈ S} φ(d) ≥ psi(m)
-    -- The last inequality follows from sum_totient_ge_psi_of_lcm_eq.
-    --
-    -- The technical details involve showing that minpoly is exactly a product
-    -- of cyclotomic polynomials (using that they're irreducible and form a
-    -- factorization of X^m - 1) and that the lcm condition holds.
-    --
-    -- This requires significant infrastructure about cyclotomic factorization
-    -- over ℚ and the connection between order and minimal polynomial divisibility.
-    -- The proof proceeds by:
-    -- 1. Show minpoly(A_Q) is a product of cyclotomic polynomials
-    -- 2. Identify the set S of cyclotomic factors
-    -- 3. Show lcm(S) = m from the order constraint
-    -- 4. Apply sum_totient_ge_psi_of_lcm_eq
-    --
-    -- This requires proving that the irreducible factors of minpoly over ℚ
-    -- are exactly cyclotomic polynomials (since minpoly | X^m - 1 and
-    -- cyclotomic polynomials are irreducible over ℚ and form the unique
-    -- factorization of X^m - 1).
-    -- The key bound: psi(m) ≤ deg(minpoly)
-    -- Proof sketch:
-    -- 1. minpoly | X^m - 1 = ∏_{d|m} Φ_d (cyclotomic factorization)
-    -- 2. Each Φ_d is irreducible over ℚ (cyclotomic.irreducible_rat)
-    -- 3. So minpoly = ∏_{d∈S} Φ_d for some S ⊆ divisors(m)
-    -- 4. orderOf A = m ⟺ lcm(S) = m (order = minimal k with minpoly | X^k - 1)
-    -- 5. deg(minpoly) = ∑_{d∈S} φ(d) ≥ psi(m) by sum_totient_ge_psi_of_lcm_eq
-    --
-    -- The technical proof requires:
-    -- - Unique factorization in ℚ[X] for polynomials dividing ∏ Φ_d
-    -- - Connection between lcm(S) and the order of the matrix
-    -- - Application of sum_totient_ge_psi_of_lcm_eq
-    --
-    -- Key lemma: If minpoly | X^k - 1, then A^k = 1
     have pow_eq_one_of_minpoly_dvd : ∀ k : ℕ, minpoly ℚ A_Q ∣ X ^ k - 1 → A ^ k = 1 := by
       intro k hdvd
       -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
@@ -209,27 +160,6 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
     -- The minpoly is the product of Φ_d for d ∈ S (by unique factorization)
     -- First, show that minpoly ∣ ∏_{d∈S} Φ_d
     have hminpoly_dvd_prod : minpoly ℚ A_Q ∣ ∏ d ∈ S, cyclotomic d ℚ := by
-      -- Every irreducible factor of minpoly must divide some Φ_d with d ∈ S
-      -- Since Φ_d are coprime and S contains exactly those d where Φ_d | minpoly,
-      -- minpoly must divide their product.
-      --
-      -- The argument: minpoly | ∏_{d|m} Φ_d. For any irreducible p | minpoly,
-      -- p | ∏_{d|m} Φ_d, so p | Φ_{d₀} for some d₀ | m (p is prime in ℚ[X]).
-      -- Since Φ_{d₀} is irreducible, p ~ Φ_{d₀}. Since p | minpoly, Φ_{d₀} | minpoly,
-      -- so d₀ ∈ S. Therefore every prime factor of minpoly divides ∏_{d∈S} Φ_d.
-      --
-      -- We use that minpoly and ∏_{d∈S} Φ_d are both monic, and ∏_{d∈S} Φ_d | minpoly.
-      -- Since they're both monic divisors of each other, they're equal (but we'll use
-      -- the associated_of_dvd_dvd lemma in the next step).
-      -- For now, we prove this by showing deg(minpoly) ≤ deg(∏_{d∈S} Φ_d).
-      --
-      -- Actually, the cleanest approach: We've shown ∏_{d∈S} Φ_d | minpoly.
-      -- Since both are monic and minpoly | ∏_{d|m} Φ_d ⊇ ∏_{d∈S} Φ_d (as products),
-      -- we need to show minpoly | ∏_{d∈S} Φ_d.
-      --
-      -- Key fact: For any d | m with d ∉ S, Φ_d ∤ minpoly (by definition of S).
-      -- So Φ_d is coprime with minpoly (since Φ_d is irreducible over ℚ).
-      -- Therefore minpoly | ∏_{d|m} Φ_d / ∏_{d∉S} Φ_d = ∏_{d∈S} Φ_d.
       have hcoprime_outside : ∀ d ∈ m.divisors, d ∉ S →
           IsCoprime (cyclotomic d ℚ) (minpoly ℚ A_Q) := by
         intro d hd hd_not_in_S
@@ -815,57 +745,7 @@ theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
                   Crystallographic.companion_cyclotomic_mem_integerMatrixOrders m (by omega) hn
                 rw [hdeg] at hmem
                 exact integerMatrixOrders_mono htot hmem
-              · -- Case: psi(m) ≤ N < totient(m)
-                -- This case requires block diagonal construction of companion matrices
-                -- for the prime power factors of m.
-                --
-                -- For composite m with distinct prime factors, psi(m) = sum of
-                -- totients of prime power factors, while totient(m) = product.
-                -- The block diagonal of companion matrices for each factor gives
-                -- a matrix of dimension psi(m) with order m (since lcm of coprime
-                -- orders equals product).
-                --
-                -- The available infrastructure includes:
-                -- - blockDiag2: block diagonal of two matrices
-                -- - orderOf_blockDiag2: order is lcm of orders
-                -- - mul_mem_integerMatrixOrders_of_coprime: for coprime m1, m2,
-                --   if m1 ∈ integerMatrixOrders M and m2 ∈ integerMatrixOrders K,
-                --   then m1 * m2 ∈ integerMatrixOrders (M + K)
-                -- - mem_integerMatrixOrders_totient: for m >= 2,
-                --   m ∈ integerMatrixOrders(totient m)
-                --
-                -- The proof would proceed by factoring m into coprime parts
-                -- and recursively applying the block diagonal construction.
-                -- For m = p1^k1 * ... * pr^kr with distinct primes:
-                --   - Each pi^ki ∈ integerMatrixOrders(totient(pi^ki))
-                --   - Block diagonal construction gives
-                --     m ∈ integerMatrixOrders(sum_i totient(pi^ki))
-                --   - For m not divisible by exactly 2, this sum equals psi(m)
-                --
-                -- Examples of this case:
-                -- - m = 15 = 3*5: psi = 6, totient = 8
-                --   3 ∈ integerMatrixOrders 2, 5 ∈ integerMatrixOrders 4
-                --   By mul_mem_integerMatrixOrders_of_coprime: 15 ∈ integerMatrixOrders 6
-                -- - m = 20 = 4*5: psi = 6, totient = 8
-                --   4 ∈ integerMatrixOrders 2, 5 ∈ integerMatrixOrders 4
-                --   By mul_mem_integerMatrixOrders_of_coprime: 20 ∈ integerMatrixOrders 6
-                -- - m = 21 = 3*7: psi = 8, totient = 12
-                --   3 ∈ integerMatrixOrders 2, 7 ∈ integerMatrixOrders 6
-                --   By mul_mem_integerMatrixOrders_of_coprime: 21 ∈ integerMatrixOrders 8
-                --
-                -- Full implementation requires recursion over the prime factorization.
-                --
-                -- Once mem_integerMatrixOrders_psi is complete, this case follows by
-                -- monotonicity: m ∈ integerMatrixOrders(psi m) and psi m ≤ N imply
-                -- m ∈ integerMatrixOrders(N).
-                --
-                -- Until then, this case remains incomplete.
-                push_neg at htot
-                -- htot : N < Nat.totient m
-                -- Combined with hpsi : psi m ≤ N, we get psi m ≤ N < totient m
-                -- This implies psi m < totient m, which happens for composite m
-                -- with multiple prime factors.
-                --
+              · push_neg at htot
                 have hmem := mem_integerMatrixOrders_psi m (by omega) (by omega)
                 exact integerMatrixOrders_mono hpsi hmem
 

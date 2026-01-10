@@ -341,35 +341,6 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
         · intro h
           exact (h (Finset.mem_univ jm)).elim
       rw [hsum_eq]
-      -- Now we need: (-1)^m * C(p.coeff 0) * det(subminor) = C(p.coeff 0)
-      -- where subminor is the m×m matrix obtained by removing row 0 and column m from minor10
-      --
-      -- The subminor = minor10.submatrix Fin.succ jm.succAbove
-      -- This uses rows 1..m (via Fin.succ) and columns 0..m-1 (via jm.succAbove) of minor10
-      --
-      -- minor10(Fin.succ i, jm.succAbove j) for i, j ∈ Fin m
-      -- = A(succAbove 1 (succ i), succ (succAbove m j))
-      -- = A(i + 2, j + 1 if j < m else j + 2)
-      -- For j < m: A(i + 2, j + 1)
-      --
-      -- The m×m subminor has entry at (i, j) = A(i+2, j+1)
-      -- = charmatrix(companion p)(i+2, j+1) for i, j ∈ Fin m
-      --
-      -- Entry structure:
-      -- - Diagonal of charmatrix at (i+2, j+1) when i+2 = j+1, i.e., i = j-1, i.e., j = i+1
-      --   So superdiagonal of subminor has diagonal entries of charmatrix
-      -- - Subdiagonal of charmatrix at (i+2, j+1) when (j+1)+1 = i+2, i.e., j+2 = i+2, i.e., j = i
-      --   So diagonal of subminor has -1 (subdiagonal of charmatrix)
-      --
-      -- The m×m subminor has:
-      -- - Diagonal: -1 (from charmatrix subdiagonal)
-      -- - Superdiagonal: X (from charmatrix diagonal)
-      -- - Other: 0
-      --
-      -- This is an upper bidiagonal matrix with -1 on diagonal.
-      -- det = (-1)^m
-      --
-      -- Therefore: (-1)^m * C(p.coeff 0) * (-1)^m = C(p.coeff 0)
       have hsubminor_det : (minor10.submatrix Fin.succ jm.succAbove).det = (-1) ^ m := by
         -- The subminor is upper triangular with -1 on diagonal
         -- Let S = minor10.submatrix Fin.succ jm.succAbove
