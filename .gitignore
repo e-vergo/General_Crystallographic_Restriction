@@ -12,3 +12,6 @@ lake-packages/
 # OS
 .DS_Store
 Thumbs.db
+
+# Misc.
+blueprint/
