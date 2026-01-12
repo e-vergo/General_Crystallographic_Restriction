@@ -10,7 +10,8 @@ import Mathlib.Data.Nat.Totient
 
 import Architect
 
-import Crystallographic.Definitions.Psi
+import Crystallographic.Psi.Basic
+import Crystallographic.Lemmas
 
 /-!
 # Psi Lower Bound Lemmas
@@ -33,7 +34,9 @@ namespace Crystallographic
 
 /-! ## Helper lemmas for the forward direction -/
 
-/-- psiPrimePow is always ≤ totient. -/
+/-- psiPrimePow is always at most totient. -/
+@[blueprint "lem:psiPrimePow-le-totient"
+  (statement := /-- $\psi_{pp}(p, k) \leq \varphi(p^k)$. -/)]
 lemma psiPrimePow_le_totient (p k : ℕ) :
     Crystallographic.psiPrimePow p k ≤ Nat.totient (p ^ k) := by
   simp only [Crystallographic.psiPrimePow]
@@ -59,12 +62,18 @@ Key cases:
 @[blueprint "lem:psi-le-totient"
   (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
 
+  We prove $\psi(m) \leq \varphi(m)$ by strong induction on $m$. The key observation is that
+  $\psi$ excludes the contribution from $(2, 1)$, while $\varphi$ includes $\varphi(2) = 1$,
+  so $\psi \leq \varphi$ with equality when $2 \nmid m$ or $4 \mid m$.
+
   The proof proceeds by strong induction on $m$:
   \begin{itemize}
   \item For $m = 1$: $\psi(1) = 0 \leq 1 = \varphi(1)$
   \item For prime powers $p^k$: $\psi(p^k) = \varphi(p^k)$ (with the exception $\psi(2) = 0$)
-  \item For composite $m = 2 \cdot \text{odd}$: $\psi(m) = \psi(\text{odd}) \leq \varphi(\text{odd}) = \varphi(m)$
-  \item For general composite without $2^1$ factor: each $\varphi(p^k) \geq 2$, so sum $\leq$ product
+  \item For composite $m = 2 \cdot \text{odd}$:
+        $\psi(m) = \psi(\text{odd}) \leq \varphi(\text{odd}) = \varphi(m)$
+  \item For general composite without $2^1$ factor:
+        each $\varphi(p^k) \geq 2$, so sum $\leq$ product
   \end{itemize}
   \uses{psi-def, psiPrimePow-def} --/)]
 lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.totient m := by
@@ -235,8 +244,12 @@ The proof proceeds by showing that any other choice of S either:
   (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
 
-  This is the combinatorial heart of the forward direction. The minimum sum is achieved when
-  $S$ consists of one prime power for each distinct prime in $m$'s factorization, giving exactly $\psi(m)$.
+  For a finite set $S$ of divisors of $m$ with $\text{lcm}(S) = m$, we have
+  $\sum_{d \in S} \varphi(d) \geq \psi(m)$. This follows from the factorization structure:
+  each prime power $p^k \| m$ must appear in some $d \in S$, contributing at least
+  $\psi_{\text{pp}}(p, k)$. This is the combinatorial heart of the forward direction.
+  The minimum sum is achieved when $S$ consists of one prime power for each distinct prime
+  in $m$'s factorization, giving exactly $\psi(m)$.
   \uses{psi-def, lem:psi-le-totient} --/)]
 lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
@@ -290,57 +303,13 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     have hd_pos : 0 < d := Nat.zero_lt_of_lt hd_gt1
     -- Check if m is a prime power
     by_cases hpow : IsPrimePow m
-    · -- m is a prime power p^k
-      -- For lcm(S) = p^k with all elements dividing p^k, some element must equal p^k
-      -- (since divisors of p^k are 1, p, p^2, ..., p^k and lcm of smaller ones < p^k)
+    · -- m is a prime power p^k - use extracted lemma
       exfalso
       rw [isPrimePow_nat_iff] at hpow
       obtain ⟨p, k, hp, hk, hm_eq⟩ := hpow
-      -- S consists of divisors of p^k = m, i.e., powers of p
-      -- The lcm of powers of p is the maximum power
-      -- So lcm(S) = p^k = m requires m ∈ S (the only way to get full p^k)
-      -- This contradicts hm_in_S
-      --
-      -- Key fact: for divisors of a prime power p^k, lcm equals the max
-      -- If all d ∈ S satisfy d < m = p^k, then they're all ≤ p^(k-1)
-      -- and lcm(S) ≤ p^(k-1) < p^k = m, contradiction
-      have : m ∈ S := by
-        by_contra hm_not_in
-        -- All elements of S are proper divisors of m = p^k
-        -- So they're ≤ p^(k-1)
-        have hall_lt : ∀ d ∈ S, d < m := fun d hd =>
-          Nat.lt_of_le_of_ne (Nat.le_of_dvd hm (hS_sub d hd))
-            (fun heq => hm_not_in (heq ▸ hd))
-        -- For prime power m = p^k, proper divisors are ≤ p^(k-1)
-        have hall_le : ∀ d ∈ S, d ∣ p ^ (k - 1) := by
-          intro d hd
-          have hdvd : d ∣ m := hS_sub d hd
-          rw [← hm_eq] at hdvd
-          have hd_lt := hall_lt d hd
-          rw [← hm_eq] at hd_lt
-          -- d | p^k and d < p^k, so d | p^(k-1)
-          have hpr : Prime p := Nat.Prime.prime hp
-          rw [dvd_prime_pow hpr] at hdvd
-          obtain ⟨j, hj, hassoc⟩ := hdvd
-          have hd_eq := associated_iff_eq.mp hassoc
-          -- d = p^j and d < p^k, so p^j < p^k, hence j < k
-          rw [hd_eq] at hd_lt
-          have hj_lt : j < k := (Nat.pow_lt_pow_iff_right hp.one_lt).mp hd_lt
-          -- j < k implies j ≤ k - 1
-          have hj_le : j ≤ k - 1 := Nat.lt_succ_iff.mp (by omega)
-          -- d = p^j with j ≤ k-1, so d | p^(k-1)
-          rw [hd_eq]
-          exact Nat.pow_dvd_pow p hj_le
-        -- lcm of divisors of p^(k-1) is ≤ p^(k-1)
-        have hlcm_le : S.lcm id ∣ p ^ (k - 1) := Finset.lcm_dvd_iff.mpr (fun d hd => hall_le d hd)
-        -- But lcm(S) = m = p^k, so p^k | p^(k-1), contradiction for k > 0
-        rw [hS_lcm, ← hm_eq] at hlcm_le
-        have : p ^ k ≤ p ^ (k - 1) := Nat.le_of_dvd (Nat.pow_pos hp.pos) hlcm_le
-        have hk_gt1 : 1 ≤ k := hk
-        have hpow_strict : p ^ (k - 1) < p ^ k :=
-          Nat.pow_lt_pow_right hp.one_lt (Nat.sub_lt hk_gt1 Nat.one_pos)
-        omega
-      exact hm_in_S this
+      have hS_sub' : ∀ d ∈ S, d ∣ p ^ k := fun d hd => hm_eq ▸ hS_sub d hd
+      have hS_lcm' : S.lcm id = p ^ k := hm_eq ▸ hS_lcm
+      exact hm_in_S (hm_eq ▸ Crystallographic.primePow_mem_of_lcm_eq hp hk S hS_sub' hS_lcm')
     · -- m is not a prime power, so it has ≥ 2 distinct prime factors
       -- Factor m = a * b with coprime a, b > 1
       -- Use psi(m) = psi(a) + psi(b) and recursion
@@ -400,37 +369,10 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
           -- Show: (S.lcm id).factorization q ≤ S.sup (d.factorization q) < m.factorization q
           have hsup_lt : S.sup (fun d => d.factorization q) < m.factorization q :=
             Finset.sup_lt_iff hk_pos |>.mpr (fun d hd => hall' d hd)
-          -- For the first inequality, we prove by induction on S that
-          -- (S.lcm id).factorization q ≤ S.sup (d.factorization q)
-          -- We use a helper function since direct induction loses context
-          suffices h : ∀ (T : Finset ℕ), (∀ d ∈ T, d ≠ 0) →
-              (T.lcm id).factorization q ≤ T.sup (fun d => d.factorization q) by
-            have hS_ne_zero : ∀ d ∈ S, d ≠ 0 := fun d hd =>
-              (Nat.pos_of_dvd_of_pos (hS_sub d hd) hm).ne'
-            exact lt_of_le_of_lt (h S hS_ne_zero) hsup_lt
-          intro T hT_ne_zero
-          induction T using Finset.induction with
-          | empty =>
-            simp only [Finset.lcm_empty, Nat.factorization_one, Finsupp.coe_zero, Pi.zero_apply,
-              Finset.sup_empty, bot_eq_zero, le_refl]
-          | @insert a s' ha IH_inner =>
-            simp only [Finset.lcm_insert, Finset.sup_insert]
-            by_cases hs'_empty : s' = ∅
-            · simp [hs'_empty]
-            · have hs'_ne_zero : s'.lcm id ≠ 0 := by
-                rw [ne_eq, Finset.lcm_eq_zero_iff]
-                push_neg
-                intro d hd
-                simp only [id_eq]
-                exact hT_ne_zero d (Finset.mem_insert_of_mem hd)
-              have ha_ne_zero : a ≠ 0 := hT_ne_zero a (Finset.mem_insert_self a s')
-              simp only [id_eq, lcm_eq_nat_lcm]
-              rw [Nat.factorization_lcm ha_ne_zero hs'_ne_zero]
-              simp only [Finsupp.sup_apply, sup_le_iff]
-              constructor
-              · exact le_sup_left
-              · have hIH := IH_inner (fun d hd => hT_ne_zero d (Finset.mem_insert_of_mem hd))
-                exact le_trans hIH le_sup_right
+          -- Use extracted lemma for lcm factorization bound
+          have hS_ne_zero : ∀ d ∈ S, d ≠ 0 := fun d hd =>
+            (Nat.pos_of_dvd_of_pos (hS_sub d hd) hm).ne'
+          exact lt_of_le_of_lt (Finset.lcm_factorization_le_sup S id q hS_ne_zero) hsup_lt
         rw [hS_lcm] at hfact_q
         omega
       calc Crystallographic.psi m
@@ -620,41 +562,8 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
                     exact Nat.le_of_dvd h_pos h_dvd
                   -- ∏ ≥ ∑ when all factors ≥ 2
                   have h_prod_ge_sum : ∑ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤
-                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) := by
-                    -- Use suffices to abstract the ge2 property
-                    suffices h : ∀ (T : Finset ℕ),
-                        (∀ q ∈ T, 2 ≤ Nat.totient (q ^ m.factorization q)) →
-                        ∑ q ∈ T, Nat.totient (q ^ m.factorization q) ≤
-                          ∏ q ∈ T, Nat.totient (q ^ m.factorization q) by
-                      exact h fiber h_fiber_ge2
-                    intro T hT_ge2
-                    induction T using Finset.induction with
-                    | empty => simp
-                    | @insert a s' ha IH =>
-                      rw [Finset.sum_insert ha, Finset.prod_insert ha]
-                      have h2_a : 2 ≤ Nat.totient (a ^ m.factorization a) :=
-                        hT_ge2 a (Finset.mem_insert_self a s')
-                      by_cases hs_empty : s' = ∅
-                      · simp [hs_empty]
-                      · have hs_nonempty : s'.Nonempty := Finset.nonempty_of_ne_empty hs_empty
-                        have hs'_ge2 : ∀ q ∈ s', 2 ≤ Nat.totient (q ^ m.factorization q) :=
-                          fun q hq => hT_ge2 q (Finset.mem_insert_of_mem hq)
-                        have h2_prod : 2 ≤ ∏ q ∈ s', Nat.totient (q ^ m.factorization q) := by
-                          obtain ⟨b, hb⟩ := hs_nonempty
-                          have h1 : ∀ q ∈ s', 1 ≤ Nat.totient (q ^ m.factorization q) :=
-                            fun q hq => Nat.one_le_of_lt (hs'_ge2 q hq)
-                          calc ∏ q ∈ s', Nat.totient (q ^ m.factorization q)
-                              ≥ Nat.totient (b ^ m.factorization b) :=
-                                Finset.single_le_prod' h1 hb
-                            _ ≥ 2 := hs'_ge2 b hb
-                        have IH' := IH hs'_ge2
-                        calc Nat.totient (a ^ m.factorization a) +
-                              ∑ q ∈ s', Nat.totient (q ^ m.factorization q)
-                            ≤ Nat.totient (a ^ m.factorization a) +
-                              ∏ q ∈ s', Nat.totient (q ^ m.factorization q) := by omega
-                          _ ≤ Nat.totient (a ^ m.factorization a) *
-                              ∏ q ∈ s', Nat.totient (q ^ m.factorization q) :=
-                              Nat.add_le_mul h2_a h2_prod
+                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
+                    Finset.sum_le_prod_of_all_ge_two fiber _ h_fiber_ge2
                   exact le_trans h_prod_ge_sum h_totient_ge_prod
 
 

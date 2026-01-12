@@ -16,6 +16,8 @@ and proves basic properties about this set.
 ## Main definitions
 
 * `integerMatrixOrders N` - The set of orders achievable by N×N integer matrices with finite order.
+* `embedMatrixSum` - Block diagonal embedding of an M×M matrix into (M+K)×(M+K).
+* `blockDiag2` - Block diagonal of two matrices.
 
 ## Main results
 
@@ -23,11 +25,6 @@ and proves basic properties about this set.
 * `two_mem_integerMatrixOrders` - Negation of identity has order 2 (for N ≥ 1).
 * `integerMatrixOrders_mono` - Monotonicity: M ≤ N implies OrdM ⊆ OrdN.
 * `divisor_mem_integerMatrixOrders` - Divisibility: if m ∈ OrdN and d ∣ m, then d ∈ OrdN.
-
-## Implementation notes
-
-We work with `Matrix (Fin N) (Fin N) ℤ` and use Mathlib's `orderOf` which returns 0 for
-elements of infinite order. We require `0 < m` to ensure we're talking about finite orders.
 
 ## References
 
@@ -54,6 +51,8 @@ def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
 /-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
+@[blueprint "lem:one-mem-orders"
+  (statement := /-- Order $1$ is achievable in any dimension. -/)]
 theorem one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N := by
   use 1
   constructor
@@ -81,6 +80,8 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
     simp only [Nat.cast_zero]
 
 /-- For N ≥ 1, the negation of the identity matrix has order 2. -/
+@[blueprint "lem:two-mem-orders"
+  (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)]
 theorem two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N := by
   use -1
   constructor
@@ -167,6 +168,9 @@ def reindexMonoidEquiv {m n : Type*} [Fintype m] [Fintype n] [DecidableEq m] [De
 for N x N matrices.
 
 The construction pads the M x M matrix with an identity block in the lower-right corner. -/
+@[blueprint "lem:orders-mono"
+  (statement := /-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
+  \uses{integerMatrixOrders-def} -/)]
 theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     integerMatrixOrders M ⊆ integerMatrixOrders N := by
   intro m hm
@@ -192,6 +196,8 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
 then d ∈ integerMatrixOrders N.
 
 If A has order m and d | m, then A^{m/d} has order d. -/
+@[blueprint "lem:divisor-mem-orders"
+  (statement := /-- If $m \in \mathrm{Ord}_N$ and $d \mid m$, then $d \in \mathrm{Ord}_N$. -/)]
 theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
     (hm : m ∈ integerMatrixOrders N) (hd : d ∣ m) (hd_pos : 0 < d) :
     d ∈ integerMatrixOrders N := by
@@ -206,6 +212,8 @@ theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
 /-! ## Block diagonal matrix infrastructure -/
 
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
+@[blueprint "def:blockDiag2"
+  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
 def blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ :=
   Matrix.fromBlocks A 0 0 B
@@ -224,6 +232,8 @@ lemma blockDiag2_mul {M K : ℕ}
   congr 1 <;> simp
 
 /-- Block diagonal is one iff both components are one. -/
+@[blueprint "lem:blockDiag2-eq-one"
+  (statement := /-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/)]
 lemma blockDiag2_eq_one_iff {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by
@@ -234,60 +244,12 @@ lemma blockDiag2_eq_one_iff {M K : ℕ}
 /-- Power of block diagonal distributes to each block.
 
 (blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/
+@[blueprint "lem:blockDiag2-pow"
+  (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)]
 lemma blockDiag2_pow {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) (k : ℕ) :
     (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by
   simp only [blockDiag2]
   exact Matrix.fromBlocks_diagonal_pow A B k
-
-/-- Order of block diagonal is lcm of orders.
-
-Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
-and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
-theorem orderOf_blockDiag2 {M K : ℕ}
-    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
-    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
-  -- The order of (A, B) in the product monoid is lcm(orderOf A, orderOf B)
-  -- We show blockDiag2 induces an injective monoid hom from the product
-  let φ : Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ →*
-      Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ :=
-    { toFun := fun p => blockDiag2 p.1 p.2
-      map_one' := blockDiag2_one
-      map_mul' := fun p q => blockDiag2_mul _ _ _ _ }
-  have hinj : Function.Injective φ := by
-    intro p q hpq
-    have h1 := Matrix.fromBlocks_inj.mp hpq
-    exact Prod.ext h1.1 h1.2.2.2
-  have hφ : φ (A, B) = blockDiag2 A B := rfl
-  rw [← hφ, orderOf_injective φ hinj (A, B), Prod.orderOf]
-
-/-- Block diagonal construction for integer matrix orders.
-    If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
-theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
-    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
-  obtain ⟨A, hA_ord, hA_pos⟩ := h₁
-  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
-  -- Construct block diagonal matrix
-  let C := blockDiag2 A B
-  -- Reindex from Sum to Fin (M + K)
-  let e : Fin (M + K) ≃ Fin M ⊕ Fin K := (finSumEquiv M K)
-  let C' : Matrix (Fin (M + K)) (Fin (M + K)) ℤ := (reindexMonoidEquiv e).symm C
-  use C'
-  constructor
-  · have h1 : orderOf C' = orderOf C :=
-      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm C
-    rw [h1, orderOf_blockDiag2, hA_ord, hB_ord]
-  · exact Nat.lcm_pos hA_pos hB_pos
-
-/-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/
-theorem mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
-    (hcop : Nat.Coprime m₁ m₂) :
-    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by
-  rw [← hcop.lcm_eq_mul]
-  exact lcm_mem_integerMatrixOrders h₁ h₂
 
 end Crystallographic

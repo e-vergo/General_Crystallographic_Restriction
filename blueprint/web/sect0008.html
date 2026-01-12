@@ -12,9 +12,7 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Crystallographic Restriction Proof</title>
-<link rel="prev" href="sect0007.html" title="Rotation Matrices" />
-<link rel="up" href="index.html" title="Crystallographic Restriction Theorem" />
+<title>Crystallographic Restriction Theorem</title>
 <link rel="stylesheet" href="styles/theme-blue.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
 <link rel="stylesheet" href="styles/blueprint.css" />
@@ -25,7 +23,6 @@
 <body>
 <header>
 <svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
-<h1 id="doc_title"><a href="index.html">Crystallographic Restriction Theorem</a></h1>
 </header>
 
 <div class="wrapper">
@@ -35,31 +32,24 @@
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The Psi Function and Main Definitions</span></a>
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Supporting Lemmas</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">The Psi Function</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000011"><span class="toc_ref">2.1</span> <span class="toc_entry">The Psi Function</span></a>
+  <a href="sect0003.html#a0000000010"><span class="toc_ref">3.1</span> <span class="toc_entry">The Psi Function</span></a>
  </li>
 
   </ul>
  </li>
 <li class="">
-  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Integer Matrix Orders</span></a>
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Integer Matrix Orders</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0003.html#a0000000012"><span class="toc_ref">3.1</span> <span class="toc_entry">Integer Matrix Orders</span></a>
- </li>
-
-  </ul>
- </li>
-<li class="">
-  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">The Main Theorem</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0004.html#a0000000013"><span class="toc_ref">4.1</span> <span class="toc_entry">Main Theorem</span></a>
+  <a href="sect0004.html#a0000000011"><span class="toc_ref">4.1</span> <span class="toc_entry">Integer Matrix Orders</span></a>
  </li>
 
   </ul>
@@ -69,19 +59,23 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0005.html#a0000000014"><span class="toc_ref">5.1</span> <span class="toc_entry">Companion Matrices</span></a>
+  <a href="sect0005.html#a0000000012"><span class="toc_ref">5.1</span> <span class="toc_entry">Companion Matrices</span></a>
  </li>
 
   </ul>
  </li>
 <li class="">
-  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">Lower Bound on Psi</span></a>
+  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The Crystallographic Restriction</span></a>
  </li>
 <li class="">
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Rotation Matrices</span></a>
+  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Main Theorem</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000013"><span class="toc_ref">7.1</span> <span class="toc_entry">Main Theorem</span></a>
  </li>
-<li class=" active current">
-  <a href="sect0008.html"><span class="toc_ref">8</span> <span class="toc_entry">Crystallographic Restriction Proof</span></a>
+
+  </ul>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -92,315 +86,6 @@
 
 
 <div class="main-text">
-<h1 id="a0000000009">8 Crystallographic Restriction Proof</h1>
-<div class="theorem_thmwrapper theorem-style-definition" id="thm:forward-direction">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">8.0.1</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0008.html#thm:forward-direction">#</a>
-    
-    <a class="icon proof" href="sect0008.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.1.1</a></li>
-          
-          <li><a href="sect0002.html#psi-def">Definition 2.1.2</a></li>
-          
-          <li><a href="sect0006.html#lem:sum-totient-ge-psi">Theorem 6.0.2</a></li>
-          
-          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.1.1</a></li>
-          
-          <li><a href="sect0006.html#lem:sum-totient-ge-psi">Theorem 6.0.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_le_of_mem_integerMatrixOrders" class="lean_decl">Crystallographic.psi_le_of_mem_integerMatrixOrders</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   <b class="bfseries">Forward Direction:</b> If \(m \in \mathrm{Ord}_N\), then \(\psi (m) \leq N\). </p>
-<p><b class="bfseries">Proof outline:</b> </p>
-<ol class="enumerate">
-  <li><p>Let \(A\) be an \(N \times N\) integer matrix with \(\mathrm{ord}(A) = m\). </p>
-</li>
-  <li><p>The minimal polynomial of \(A\) divides \(X^m - 1\). </p>
-</li>
-  <li><p>Since \(\mathrm{ord}(A) = m\), the minimal polynomial is the lcm of cyclotomic polynomials \(\Phi _d\) for divisors \(d\) of \(m\) with \(\mathrm{lcm}\{ d\}  = m\). </p>
-</li>
-  <li><p>The degree of each \(\Phi _d\) is \(\varphi (d)\). </p>
-</li>
-  <li><p>By the sum-totient lemma, \(\psi (m) \leq \sum _d \varphi (d) \leq \deg (\mathrm{minpoly}) \leq N\). </p>
-</li>
-</ol>
-<p>  - </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000022">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="thm:backward-direction">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">8.0.2</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0008.html#thm:backward-direction">#</a>
-    
-    <a class="icon proof" href="sect0008.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.1.1</a></li>
-          
-          <li><a href="sect0002.html#psi-def">Definition 2.1.2</a></li>
-          
-          <li><a href="sect0005.html#companion-def">Definition 5.1.1</a></li>
-          
-          <li><a href="sect0005.html#thm:companion-charpoly">Theorem 5.1.1</a></li>
-          
-          <li><a href="sect0007.html#thm:order3-achievable">Theorem 7.0.1</a></li>
-          
-          <li><a href="sect0007.html#thm:order4-achievable">Theorem 7.0.2</a></li>
-          
-          <li><a href="sect0007.html#thm:order6-achievable">Theorem 7.0.3</a></li>
-          
-          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.1.1</a></li>
-          
-          <li><a href="sect0005.html#thm:companion-charpoly">Theorem 5.1.1</a></li>
-          
-          <li><a href="sect0005.html#companion-def">Definition 5.1.1</a></li>
-          
-          <li><a href="sect0007.html#thm:order4-achievable">Theorem 7.0.2</a></li>
-          
-          <li><a href="sect0007.html#thm:order6-achievable">Theorem 7.0.3</a></li>
-          
-          <li><a href="sect0007.html#thm:order3-achievable">Theorem 7.0.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mem_integerMatrixOrders_of_psi_le" class="lean_decl">Crystallographic.mem_integerMatrixOrders_of_psi_le</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   <b class="bfseries">Backward Direction:</b> If \(\psi (m) \leq N\), then \(m \in \mathrm{Ord}_N\). </p>
-<p><b class="bfseries">Proof by explicit construction:</b> </p>
-<ol class="enumerate">
-  <li><p>For \(m = 1\): Use the identity matrix. </p>
-</li>
-  <li><p>For \(m = 2\): Use \(-I\) (negation of identity). </p>
-</li>
-  <li><p>For prime power \(p^k\) with \(p\) odd or \(k \geq 2\): Use the companion matrix of the cyclotomic polynomial \(\Phi _{p^k}\), which has size \(\varphi (p^k) = \psi (p^k)\). </p>
-</li>
-  <li><p>For \(m = 3, 4, 6\): Use explicit \(2 \times 2\) rotation matrices. </p>
-</li>
-  <li><p>For general \(m = \prod p_i^{k_i}\): Take block diagonal of companion matrices. </p>
-</li>
-  <li><p>Pad with identity blocks to reach size \(N \times N\). </p>
-</li>
-</ol>
-<p>  - </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000023">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="thm:main-theorem">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">8.0.3</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0008.html#thm:main-theorem">#</a>
-    
-    <a class="icon proof" href="sect0008.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0008.html#thm:forward-direction">Theorem 8.0.1</a></li>
-          
-          <li><a href="sect0008.html#thm:backward-direction">Theorem 8.0.2</a></li>
-          
-          <li><a href="sect0002.html#psi-def">Definition 2.1.2</a></li>
-          
-          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.1.1</a></li>
-          
-          <li><a href="sect0008.html#thm:backward-direction">Theorem 8.0.2</a></li>
-          
-          <li><a href="sect0008.html#thm:forward-direction">Theorem 8.0.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mainTheorem" class="lean_decl">Crystallographic.mainTheorem</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   <b class="bfseries">The Crystallographic Restriction Theorem:</b> An \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
-<p>Equivalently: \(m \in \mathrm{Ord}_N \iff \psi (m) \leq N\). </p>
-<p>This theorem completely characterizes which rotation orders are achievable by integer matrices in each dimension.  - </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000024">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  
-
-  </div>
-</div>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -412,10 +97,6 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0007.html" title="Rotation Matrices"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
-</a>
-  <a href="index.html" title="Crystallographic Restriction Theorem"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
-</a>
 </nav>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>

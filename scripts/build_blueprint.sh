@@ -41,7 +41,10 @@ lake build :blueprint
 echo ""
 echo "=== Step 3: Building blueprint (PDF and web) ==="
 cd blueprint
-leanblueprint all
+# Use pdf and web separately instead of 'all' to skip checkdecls
+# (checkdecls requires extra dependency and is redundant when using LeanArchitect)
+leanblueprint pdf
+leanblueprint web
 
 echo ""
 echo "=== Step 4: Launching local server ==="

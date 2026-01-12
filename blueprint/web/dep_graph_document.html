@@ -75,7 +75,41 @@
       Definition
       </span>
       <span class="definition_thmlabel">5.1.1</span></div>
-    <div class="thm_thmcontent"><p>  The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column. </p>
+    <div class="thm_thmcontent"><p>  The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
+<div class="displaymath" id="a0000000051">
+  \[ C(p) = \begin{pmatrix}  0 
+
+&  0 
+
+&  \cdots 
+
+&  -a_0 
+
+\\ 1 
+
+&  0 
+
+&  \cdots 
+
+&  -a_1 
+
+\\ \vdots 
+
+&  \ddots 
+
+& &  \vdots 
+
+\\ 0 
+
+&  \cdots 
+
+&  1 
+
+&  -a_{n-1} 
+
+\end{pmatrix} \]
+</div>
+<p> This construction produces a matrix whose characteristic polynomial equals \(p\), providing a canonical matrix realization for any monic polynomial. </p>
 </div>
 
     <a class="latex_link" href="sect0005.html#companion-def">LaTeX</a>
@@ -93,109 +127,25 @@
 
 
     
-    <div class="dep-modal-container" id="def:rotation-matrix-3_modal">
+    <div class="dep-modal-container" id="def:blockDiag2_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="def:rotation-matrix-3" style="display: none">
+  <div class="thm" id="def:blockDiag2" style="display: none">
     <div class="thm_thmheading">
       <span class="definition_thmcaption">
       Definition
       </span>
-      <span class="definition_thmlabel">7.0.2</span></div>
-    <div class="thm_thmcontent"><p>  The \(120°\) rotation matrix in hexagonal coordinates \(R_3 = \begin{pmatrix}  0 
-
-&  -1 
-
-\\ 1 
-
-&  -1 
-
-\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(3\). - </p>
+      <span class="definition_thmlabel">4.1.2</span></div>
+    <div class="thm_thmcontent"><p>  Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
 </div>
 
-    <a class="latex_link" href="sect0007.html#def:rotation-matrix-3">LaTeX</a>
+    <a class="latex_link" href="sect0004.html#def:blockDiag2">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix3">Lean</a>
-    
-    
-  
-    
-  </div>
-    
-      </div>
-    </div>
-
-
-    
-    <div class="dep-modal-container" id="def:rotation-matrix-4_modal">
-      <div class="dep-modal-content">
-          <button class="dep-closebtn">
-<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        
-  <div class="thm" id="def:rotation-matrix-4" style="display: none">
-    <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
-      </span>
-      <span class="definition_thmlabel">7.0.1</span></div>
-    <div class="thm_thmcontent"><p>  The \(90°\) rotation matrix \(R_4 = \begin{pmatrix}  0 
-
-&  -1 
-
-\\ 1 
-
-&  0 
-
-\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(4\). - </p>
-</div>
-
-    <a class="latex_link" href="sect0007.html#def:rotation-matrix-4">LaTeX</a>
-    
-    
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix4">Lean</a>
-    
-    
-  
-    
-  </div>
-    
-      </div>
-    </div>
-
-
-    
-    <div class="dep-modal-container" id="def:rotation-matrix-6_modal">
-      <div class="dep-modal-content">
-          <button class="dep-closebtn">
-<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        
-  <div class="thm" id="def:rotation-matrix-6" style="display: none">
-    <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
-      </span>
-      <span class="definition_thmlabel">7.0.3</span></div>
-    <div class="thm_thmcontent"><p>  The \(60°\) rotation matrix in hexagonal coordinates \(R_6 = \begin{pmatrix}  1 
-
-&  -1 
-
-\\ 1 
-
-&  0 
-
-\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(6\). - </p>
-</div>
-
-    <a class="latex_link" href="sect0007.html#def:rotation-matrix-6">LaTeX</a>
-    
-    
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix6">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2">Lean</a>
     
     
   
@@ -218,14 +168,769 @@
       <span class="definition_thmcaption">
       Definition
       </span>
-      <span class="definition_thmlabel">3.1.1</span></div>
+      <span class="definition_thmlabel">4.1.1</span></div>
     <div class="thm_thmcontent"><p>  The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. An integer \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with \(\mathrm{ord}(A) = m\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#integerMatrixOrders-def">LaTeX</a>
+    <a class="latex_link" href="sect0004.html#integerMatrixOrders-def">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:blockDiag2-eq-one_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:blockDiag2-eq-one" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.5</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:blockDiag2-eq-one">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2_eq_one_iff">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:blockDiag2-pow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:blockDiag2-pow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.6</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:blockDiag2-pow">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2_pow">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:companion-aeval-zero_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:companion-aeval-zero" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.4</span></div>
+    <div class="thm_thmcontent"><p>   \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:companion-aeval-zero">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_aeval_eq_zero">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:companion-cycl-pow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:companion-cycl-pow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.6</span></div>
+    <div class="thm_thmcontent"><p>   \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:companion-cycl-pow">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_cyclotomic_pow_eq_one">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:companion-last-col_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:companion-last-col" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.2</span></div>
+    <div class="thm_thmcontent"><p>   Last column of \(C(p)\) contains \(-a_i\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:companion-last-col">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_last_col">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:companion-subdiag_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:companion-subdiag" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.1</span></div>
+    <div class="thm_thmcontent"><p>   Subdiagonal entries of \(C(p)\) are \(1\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#lem:companion-subdiag">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_subdiag">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:cyclotomic-finset-product-dvd_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:cyclotomic-finset-product-dvd" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.1</span></div>
+    <div class="thm_thmcontent"><p>  If \(\Phi _d \mid f\) for all \(d \in S\), then \(\prod _{d \in S} \Phi _d \mid f\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:cyclotomic-finset-product-dvd">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.cyclotomic_finset_product_dvd">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:divisor-mem-orders_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:divisor-mem-orders" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.4</span></div>
+    <div class="thm_thmcontent"><p>   If \(m \in \mathrm{Ord}_N\) and \(d \mid m\), then \(d \in \mathrm{Ord}_N\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:divisor-mem-orders">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.divisor_mem_integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:factorization-disjoint_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:factorization-disjoint" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.11</span></div>
+    <div class="thm_thmcontent"><p>  Coprime numbers have disjoint factorization supports. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:factorization-disjoint">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.factorization_support_disjoint">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:lcm-factorization-le-sup_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:lcm-factorization-le-sup" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.2</span></div>
+    <div class="thm_thmcontent"><p>  The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:lcm-factorization-le-sup">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Finset.lcm_factorization_le_sup">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:lcm-mem-orders_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:lcm-mem-orders" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.8</span></div>
+    <div class="thm_thmcontent"><p>   If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:lcm-mem-orders">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.lcm_mem_integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:mem-integerMatrixOrders-self_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:mem-integerMatrixOrders-self" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.5</span></div>
+    <div class="thm_thmcontent"><p>   \(m \in \mathrm{Ord}_m\) for \(m \geq 2\) via permutation matrix. </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:mem-integerMatrixOrders-self">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mem_integerMatrixOrders_self">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:mul-mem-orders-coprime_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:mul-mem-orders-coprime" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.9</span></div>
+    <div class="thm_thmcontent"><p>   Product of coprime achievable orders is achievable.  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:mul-mem-orders-coprime">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mul_mem_integerMatrixOrders_of_coprime">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:one-mem-orders_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:one-mem-orders" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.1</span></div>
+    <div class="thm_thmcontent"><p>   Order \(1\) is achievable in any dimension. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:one-mem-orders">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.one_mem_integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:order-one-achievable_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:order-one-achievable" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.6</span></div>
+    <div class="thm_thmcontent"><p>   Order 1 is achievable: \(1 \in \mathrm{Ord}_N\) for any \(N\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:order-one-achievable">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.order_one_achievable">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:order-two-achievable_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:order-two-achievable" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.7</span></div>
+    <div class="thm_thmcontent"><p>   Order 2 is achievable: \(2 \in \mathrm{Ord}_N\) for \(N \geq 1\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:order-two-achievable">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.order_two_achievable">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:orderOf-finRotate_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:orderOf-finRotate" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.4</span></div>
+    <div class="thm_thmcontent"><p>  \(\mathrm{ord}(\mathrm{finRotate}(n)) = n\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:orderOf-finRotate">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.orderOf_finRotate">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:orderOf-permMatrix_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:orderOf-permMatrix" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.3</span></div>
+    <div class="thm_thmcontent"><p>  \(\mathrm{ord}(P_\sigma ) = \mathrm{ord}(\sigma )\) for permutation matrix. </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:orderOf-permMatrix">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.orderOf_permMatrix'">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:orders-mono_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:orders-mono" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.3</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:orders-mono">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.integerMatrixOrders_mono">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:primePow-mem-of-lcm-eq_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:primePow-mem-of-lcm-eq" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.3</span></div>
+    <div class="thm_thmcontent"><p>  If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:primePow-mem-of-lcm-eq">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.primePow_mem_of_lcm_eq">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-coprime-add_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-coprime-add" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.12</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
+<p>When \(\gcd (m, n) = 1\), the prime factorizations of \(m\) and \(n\) share no common primes, so </p>
+<div class="displaymath" id="a0000000031">
+  \[ \psi (mn) = \sum _{p^k \|  mn} \psi _{\text{pp}}(p, k) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k) + \sum _{p^k \|  n} \psi _{\text{pp}}(p, k) = \psi (m) + \psi (n). \]
+</div>
+
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-coprime-add">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_coprime_add">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-eight_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-eight" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.9</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (8) = 4\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-eight">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_eight">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-five_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-five" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.7</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (5) = 4\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-five">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_five">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-four_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-four" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.6</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (4) = 2\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-four">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_four">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-ge-psiPrimePow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-ge-psiPrimePow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.16</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (m) \geq \psi _{pp}(p, v_p(m))\) for each prime \(p \mid m\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-ge-psiPrimePow">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_ge_psiPrimePow_of_mem_support">Lean</a>
     
     
   
@@ -248,8 +953,9 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">6.0.1</span></div>
+      <span class="theorem_thmlabel">3.1.21</span></div>
     <div class="thm_thmcontent"><p>   For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+<p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
 <p>The proof proceeds by strong induction on \(m\): </p>
 <ul class="itemize">
   <li><p>For \(m = 1\): \(\psi (1) = 0 \leq 1 = \varphi (1)\) </p>
@@ -264,10 +970,461 @@
 <p>  - </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#lem:psi-le-totient">LaTeX</a>
+    <a class="latex_link" href="sect0003.html#lem:psi-le-totient">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_le_totient">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-nine_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-nine" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.10</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (9) = 6\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-nine">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_nine">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-one_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-one" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.2</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (1) = 0\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-one">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_one">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-prime-pow_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-prime-pow" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.4</span></div>
+    <div class="thm_thmcontent"><p>   For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
+<p>For a prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{\text{pp}}(p, k)\). This equals \(\varphi (p^k) = p^{k-1}(p-1)\) except when \(p = 2\) and \(k = 1\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-prime-pow">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_prime_pow">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-seven_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-seven" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.8</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (7) = 6\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-seven">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_seven">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-six_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-six" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.13</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (6) = 2\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-six">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_six">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-ten_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-ten" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.14</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (10) = 4\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-ten">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_ten">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-three_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-three" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.5</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (3) = 2\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-three">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_three">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-twelve_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-twelve" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.15</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (12) = 4\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-twelve">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_twelve">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-two_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-two" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.3</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (2) = 0\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-two">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-zero_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-zero" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.1</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi (0) = 0\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psi-zero">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_zero">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psiPrimePow-ge-four-large_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psiPrimePow-ge-four-large" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.17</span></div>
+    <div class="thm_thmcontent"><p>   For \(p \geq 5\), \(\psi _{pp}(p, k) \geq 4\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psiPrimePow-ge-four-large">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow_ge_four_of_prime_ge_five">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psiPrimePow-ge-four-two_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psiPrimePow-ge-four-two" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.18</span></div>
+    <div class="thm_thmcontent"><p>   For \(k \geq 3\), \(\psi _{pp}(2, k) \geq 4\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psiPrimePow-ge-four-two">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow_ge_four_of_two_pow_ge_three">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psiPrimePow-ge-six-three_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psiPrimePow-ge-six-three" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.19</span></div>
+    <div class="thm_thmcontent"><p>   For \(k \geq 2\), \(\psi _{pp}(3, k) \geq 6\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psiPrimePow-ge-six-three">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow_ge_six_of_three_pow_ge_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psiPrimePow-le-totient_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psiPrimePow-le-totient" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.1.20</span></div>
+    <div class="thm_thmcontent"><p>   \(\psi _{pp}(p, k) \leq \varphi (p^k)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:psiPrimePow-le-totient">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow_le_totient">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sum-le-prod_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sum-le-prod" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.1</span></div>
+    <div class="thm_thmcontent"><p>  For a finset where all values \(\geq 2\), the sum is at most the product. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:sum-le-prod">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Finset.sum_le_prod_of_all_ge_two">Lean</a>
     
     
   
@@ -290,15 +1447,45 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">6.0.2</span></div>
+      <span class="theorem_thmlabel">3.1.22</span></div>
     <div class="thm_thmcontent"><p>   For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
-<p>This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s factorization, giving exactly \(\psi (m)\).  - </p>
+<p>For a finite set \(S\) of divisors of \(m\) with \(\text{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\text{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s factorization, giving exactly \(\psi (m)\).  - </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#lem:sum-totient-ge-psi">LaTeX</a>
+    <a class="latex_link" href="sect0003.html#lem:sum-totient-ge-psi">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.sum_totient_ge_psi_of_lcm_eq">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:two-mem-orders_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:two-mem-orders" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.1.2</span></div>
+    <div class="thm_thmcontent"><p>   Order \(2\) is achievable for \(N \geq 1\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:two-mem-orders">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.two_mem_integerMatrixOrders">Lean</a>
     
     
   
@@ -321,11 +1508,16 @@
       <span class="definition_thmcaption">
       Definition
       </span>
-      <span class="definition_thmlabel">2.1.2</span></div>
+      <span class="definition_thmlabel">3.1.2</span></div>
     <div class="thm_thmcontent"><p>   The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+<p>For \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\): </p>
+<div class="displaymath" id="a0000000018">
+  \[ \psi (m) = \sum _i \psi _{\text{pp}}(p_i, k_i) = \sum _{\substack {p^k \|  m \\ (p,k) \neq (2,1)}} \varphi (p^k) \]
+</div>
+<p> This gives the minimum dimension needed to realize order \(m\).  </p>
 </div>
 
-    <a class="latex_link" href="sect0002.html#psi-def">LaTeX</a>
+    <a class="latex_link" href="sect0003.html#psi-def">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi">Lean</a>
@@ -351,11 +1543,12 @@
       <span class="definition_thmcaption">
       Definition
       </span>
-      <span class="definition_thmlabel">2.1.1</span></div>
+      <span class="definition_thmlabel">3.1.1</span></div>
     <div class="thm_thmcontent"><p>  The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
+<p>The special case \(\psi _{\text{pp}}(2, 1) = 0\) reflects that \(-I\) achieves order \(2\) in any dimension \(\geq 1\), so order \(2\) does not require additional dimensions. For all other prime powers \(p^k\), we need \(\varphi (p^k)\) dimensions to achieve order \(p^k\). </p>
 </div>
 
-    <a class="latex_link" href="sect0002.html#psiPrimePow-def">LaTeX</a>
+    <a class="latex_link" href="sect0003.html#psiPrimePow-def">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow">Lean</a>
@@ -381,27 +1574,30 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">8.0.2</span></div>
+      <span class="theorem_thmlabel">6.0.9</span></div>
     <div class="thm_thmcontent"><p>   <b class="bfseries">Backward Direction:</b> If \(\psi (m) \leq N\), then \(m \in \mathrm{Ord}_N\). </p>
+<p><b class="bfseries">Mathematical context:</b> The companion matrix of a monic polynomial \(p(X)\) has \(p(X)\) as both its characteristic and minimal polynomial. For the cyclotomic polynomial \(\Phi _m\), the companion matrix \(C_m\) satisfies \(\Phi _m(C_m) = 0\), so \(C_m^m = I\), and since \(\Phi _m\) is minimal (irreducible over \(\mathbb {Q}\) and dividing \(X^m - 1\) but not \(X^k - 1\) for \(k {\lt} m\)), we get \(\mathrm{ord}(C_m) = m\). The key optimization in the \(\psi \) function is that \(\psi (2) = 0\): order 2 is achieved by \(-I\) in any dimension, so we do not need to “pay” \(\varphi (2) = 1\) for the factor of 2. </p>
 <p><b class="bfseries">Proof by explicit construction:</b> </p>
 <ol class="enumerate">
-  <li><p>For \(m = 1\): Use the identity matrix. </p>
+  <li><p>For \(m = 1\): Use the identity matrix (any dimension). </p>
 </li>
-  <li><p>For \(m = 2\): Use \(-I\) (negation of identity). </p>
+  <li><p>For \(m = 2\): Use \(-I\) (dimension \(\geq 1\)), achieving order 2 without adding to \(\psi \). </p>
 </li>
-  <li><p>For prime power \(p^k\) with \(p\) odd or \(k \geq 2\): Use the companion matrix of the cyclotomic polynomial \(\Phi _{p^k}\), which has size \(\varphi (p^k) = \psi (p^k)\). </p>
+  <li><p>For odd prime power \(p^k\): The companion matrix of \(\Phi _{p^k}\) has size \(\varphi (p^k)\). </p>
 </li>
-  <li><p>For \(m = 3, 4, 6\): Use explicit \(2 \times 2\) rotation matrices. </p>
+  <li><p>For \(2^k\) with \(k \geq 2\): The companion matrix of \(\Phi _{2^k}\) has size \(\varphi (2^k) = 2^{k-1}\). </p>
 </li>
-  <li><p>For general \(m = \prod p_i^{k_i}\): Take block diagonal of companion matrices. </p>
+  <li><p>For \(m = 2m'\) with \(m'\) odd: If \(A\) has order \(m'\), then \(-A\) has order \(2m'\) (same dimension). </p>
 </li>
-  <li><p>Pad with identity blocks to reach size \(N \times N\). </p>
+  <li><p>For general \(m = \prod p_i^{k_i}\): Block diagonal of companion matrices for \(p_i^{k_i}\) with \(p_i \neq 2\) or \(k_i \geq 2\). The orders combine via \(\mathrm{lcm}\) (which equals the product for coprime factors), giving total order \(m\) in dimension \(\psi (m)\). </p>
+</li>
+  <li><p>Pad with identity blocks to reach size \(N \times N\) (padding does not change order). </p>
 </li>
 </ol>
 <p>  - </p>
 </div>
 
-    <a class="latex_link" href="sect0008.html#thm:backward-direction">LaTeX</a>
+    <a class="latex_link" href="sect0006.html#thm:backward-direction">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mem_integerMatrixOrders_of_psi_le">Lean</a>
@@ -427,8 +1623,8 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">5.1.1</span></div>
-    <div class="thm_thmcontent"><p>   The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). </p>
+      <span class="theorem_thmlabel">5.1.3</span></div>
+    <div class="thm_thmcontent"><p>   The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
 </div>
 
     <a class="latex_link" href="sect0005.html#thm:companion-charpoly">LaTeX</a>
@@ -446,25 +1642,85 @@
 
 
     
-    <div class="dep-modal-container" id="thm:crystallographic-restriction_modal">
+    <div class="dep-modal-container" id="thm:companion-cycl-mem_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="thm:crystallographic-restriction" style="display: none">
+  <div class="thm" id="thm:companion-cycl-mem" style="display: none">
     <div class="thm_thmheading">
-      <span class="definition_thmcaption">
-      Definition
+      <span class="theorem_thmcaption">
+      Theorem
       </span>
-      <span class="definition_thmlabel">4.1.1</span></div>
-    <div class="thm_thmcontent"><p>   The crystallographic restriction theorem: an \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
+      <span class="theorem_thmlabel">5.1.8</span></div>
+    <div class="thm_thmcontent"><p>   \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:crystallographic-restriction">LaTeX</a>
+    <a class="latex_link" href="sect0005.html#thm:companion-cycl-mem">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.StatementOfTheorem">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_cyclotomic_mem_integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:companion-cycl-order_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:companion-cycl-order" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.7</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:companion-cycl-order">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_cyclotomic_orderOf">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:companion-pow-dvd_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:companion-pow-dvd" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.5</span></div>
+    <div class="thm_thmcontent"><p>   If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:companion-pow-dvd">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_pow_eq_one_of_dvd">Lean</a>
     
     
   
@@ -487,25 +1743,28 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">8.0.1</span></div>
+      <span class="theorem_thmlabel">6.0.2</span></div>
     <div class="thm_thmcontent"><p>   <b class="bfseries">Forward Direction:</b> If \(m \in \mathrm{Ord}_N\), then \(\psi (m) \leq N\). </p>
+<p><b class="bfseries">Mathematical context:</b> The key insight is that integer matrices with finite order have constrained eigenvalues: if \(A^m = I\), all eigenvalues are \(m\)-th roots of unity. The minimal polynomial over \(\mathbb {Q}\) factors into cyclotomic polynomials \(\Phi _d\) for various divisors \(d\) of \(m\). The requirement that \(\mathrm{ord}(A) = m\) (not some proper divisor) forces the set of cyclotomic factors to have \(\mathrm{lcm} = m\), which constrains the total degree. </p>
 <p><b class="bfseries">Proof outline:</b> </p>
 <ol class="enumerate">
   <li><p>Let \(A\) be an \(N \times N\) integer matrix with \(\mathrm{ord}(A) = m\). </p>
 </li>
-  <li><p>The minimal polynomial of \(A\) divides \(X^m - 1\). </p>
+  <li><p>The minimal polynomial of \(A\) over \(\mathbb {Q}\) divides \(X^m - 1 = \prod _{d \mid m} \Phi _d\). </p>
 </li>
-  <li><p>Since \(\mathrm{ord}(A) = m\), the minimal polynomial is the lcm of cyclotomic polynomials \(\Phi _d\) for divisors \(d\) of \(m\) with \(\mathrm{lcm}\{ d\}  = m\). </p>
+  <li><p>Since \(\Phi _d\) are irreducible and pairwise coprime over \(\mathbb {Q}\), the minimal polynomial equals \(\prod _{d \in S} \Phi _d\) for some \(S \subseteq \mathrm{divisors}(m)\). </p>
 </li>
-  <li><p>The degree of each \(\Phi _d\) is \(\varphi (d)\). </p>
+  <li><p>The condition \(\mathrm{ord}(A) = m\) forces \(\mathrm{lcm}(S) = m\): if \(\mathrm{lcm}(S) {\lt} m\), then \(A^{\mathrm{lcm}(S)} = I\), contradicting \(\mathrm{ord}(A) = m\). </p>
 </li>
-  <li><p>By the sum-totient lemma, \(\psi (m) \leq \sum _d \varphi (d) \leq \deg (\mathrm{minpoly}) \leq N\). </p>
+  <li><p>The degree of the minimal polynomial is \(\sum _{d \in S} \varphi (d)\). </p>
+</li>
+  <li><p>By the sum-totient lemma (applied to any \(S\) with \(\mathrm{lcm}(S) = m\)), \(\psi (m) \leq \sum _{d \in S} \varphi (d) = \deg (\mathrm{minpoly}) \leq \deg (\mathrm{charpoly}) = N\). </p>
 </li>
 </ol>
 <p>  - </p>
 </div>
 
-    <a class="latex_link" href="sect0008.html#thm:forward-direction">LaTeX</a>
+    <a class="latex_link" href="sect0006.html#thm:forward-direction">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_le_of_mem_integerMatrixOrders">Lean</a>
@@ -531,16 +1790,18 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">8.0.3</span></div>
+      <span class="theorem_thmlabel">7.1.1</span></div>
     <div class="thm_thmcontent"><p>   <b class="bfseries">The Crystallographic Restriction Theorem:</b> An \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
 <p>Equivalently: \(m \in \mathrm{Ord}_N \iff \psi (m) \leq N\). </p>
-<p>This theorem completely characterizes which rotation orders are achievable by integer matrices in each dimension.  - </p>
+<p>This theorem completely characterizes which rotation orders are achievable by integer matrices in each dimension. The function \(\psi \) is defined as: \(\psi (1) = \psi (2) = 0\), and for other \(m\), \(\psi (m) = \sum _{p^k \|  m, p \neq 2 \text{ or } k \geq 2} \varphi (p^k)\). </p>
+<p><b class="bfseries">Forward direction:</b> If \(A \in \mathbb {Z}^{N \times N}\) has order \(m\), the minimal polynomial of \(A\) over \(\mathbb {Q}\) divides \(X^m - 1\) and must include cyclotomic factors \(\Phi _d\) for divisors \(d\) whose lcm equals \(m\). The sum of \(\varphi (d)\) over these divisors is at least \(\psi (m)\), and this sum bounds the degree of the minimal polynomial, which is at most \(N\). </p>
+<p><b class="bfseries">Backward direction:</b> For each prime power \(p^k\) (with \(p \neq 2\) or \(k \geq 2\)), the companion matrix of \(\Phi _{p^k}\) has size \(\varphi (p^k)\) and order \(p^k\). For general \(m\), block diagonal combinations of these companion matrices achieve order \(m\) in dimension \(\psi (m)\).  - </p>
 </div>
 
-    <a class="latex_link" href="sect0008.html#thm:main-theorem">LaTeX</a>
+    <a class="latex_link" href="sect0007.html#thm:main-theorem">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mainTheorem">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.crystallographic_restriction">Lean</a>
     
     
   
@@ -552,25 +1813,25 @@
 
 
     
-    <div class="dep-modal-container" id="thm:order3-achievable_modal">
+    <div class="dep-modal-container" id="thm:mem-orders-totient_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="thm:order3-achievable" style="display: none">
+  <div class="thm" id="thm:mem-orders-totient" style="display: none">
     <div class="thm_thmheading">
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">7.0.1</span></div>
-    <div class="thm_thmcontent"><p>   Order \(3\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_3\).  - </p>
+      <span class="theorem_thmlabel">5.1.9</span></div>
+    <div class="thm_thmcontent"><p>   For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
 </div>
 
-    <a class="latex_link" href="sect0007.html#thm:order3-achievable">LaTeX</a>
+    <a class="latex_link" href="sect0005.html#thm:mem-orders-totient">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.three_mem_integerMatrixOrders_two">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mem_integerMatrixOrders_totient">Lean</a>
     
     
   
@@ -582,25 +1843,25 @@
 
 
     
-    <div class="dep-modal-container" id="thm:order4-achievable_modal">
+    <div class="dep-modal-container" id="thm:orderOf-blockDiag2_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="thm:order4-achievable" style="display: none">
+  <div class="thm" id="thm:orderOf-blockDiag2" style="display: none">
     <div class="thm_thmheading">
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">7.0.2</span></div>
-    <div class="thm_thmcontent"><p>   Order \(4\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_4\).  - </p>
+      <span class="theorem_thmlabel">4.1.7</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathrm{ord}(\mathrm{diag}(A, B)) = \mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
 </div>
 
-    <a class="latex_link" href="sect0007.html#thm:order4-achievable">LaTeX</a>
+    <a class="latex_link" href="sect0004.html#thm:orderOf-blockDiag2">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.four_mem_integerMatrixOrders_two">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.orderOf_blockDiag2">Lean</a>
     
     
   
@@ -612,25 +1873,25 @@
 
 
     
-    <div class="dep-modal-container" id="thm:order6-achievable_modal">
+    <div class="dep-modal-container" id="thm:primePow-mem-integerMatrixOrders-psi_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
 <svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
 </button>
         
-  <div class="thm" id="thm:order6-achievable" style="display: none">
+  <div class="thm" id="thm:primePow-mem-integerMatrixOrders-psi" style="display: none">
     <div class="thm_thmheading">
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">7.0.3</span></div>
-    <div class="thm_thmcontent"><p>   Order \(6\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_6\).  - </p>
+      <span class="theorem_thmlabel">6.0.8</span></div>
+    <div class="thm_thmcontent"><p>   \(p^k \in \mathrm{Ord}_{\psi (p^k)}\) for prime powers with \(p\) odd or \(k \geq 2\). </p>
 </div>
 
-    <a class="latex_link" href="sect0007.html#thm:order6-achievable">LaTeX</a>
+    <a class="latex_link" href="sect0006.html#thm:primePow-mem-integerMatrixOrders-psi">LaTeX</a>
     
     
-  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.six_mem_integerMatrixOrders_two">Lean</a>
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.primePow_mem_integerMatrixOrders_psi">Lean</a>
     
     
   
@@ -658,7 +1919,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"psiPrimePow-def"	[color=green,		fillcolor="#B0ECA3",		label="psiPrimePow-def",		shape=box,		style=filled];	"psi-def"	[color=green,		fillcolor="#B0ECA3",		label="psi-def",		shape=box,		style=filled];	"psiPrimePow-def" -> "psi-def"	[style=dashed];	"thm:backward-direction"	[color=green,		fillcolor="#1CAC78",		label="backward-direction",		shape=ellipse,		style=filled];	"psi-def" -> "thm:backward-direction"	[style=dashed];	"lem:psi-le-totient"	[color=green,		fillcolor="#1CAC78",		label="psi-le-totient",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-le-totient"	[style=dashed];	"thm:crystallographic-restriction"	[color=green,		fillcolor="#B0ECA3",		label="crystallographic-restriction",		shape=box,		style=filled];	"psi-def" -> "thm:crystallographic-restriction"	[style=dashed];	"lem:sum-totient-ge-psi"	[color=green,		fillcolor="#1CAC78",		label="sum-totient-ge-psi",		shape=ellipse,		style=filled];	"thm:forward-direction"	[color=green,		fillcolor="#1CAC78",		label="forward-direction",		shape=ellipse,		style=filled];	"lem:sum-totient-ge-psi" -> "thm:forward-direction"	[style=dashed];	"thm:main-theorem"	[color=green,		fillcolor="#1CAC78",		label="main-theorem",		shape=ellipse,		style=filled];	"thm:forward-direction" -> "thm:main-theorem"	[style=dashed];	"thm:backward-direction" -> "thm:main-theorem"	[style=dashed];	"lem:psi-le-totient" -> "lem:sum-totient-ge-psi"	[style=dashed];	"def:rotation-matrix-4"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-4",		shape=box,		style=filled];	"thm:order4-achievable"	[color=green,		fillcolor="#1CAC78",		label="order4-achievable",		shape=ellipse,		style=filled];	"def:rotation-matrix-4" -> "thm:order4-achievable"	[style=dashed];	"thm:order4-achievable" -> "thm:backward-direction"	[style=dashed];	"thm:order6-achievable"	[color=green,		fillcolor="#1CAC78",		label="order6-achievable",		shape=ellipse,		style=filled];	"thm:order6-achievable" -> "thm:backward-direction"	[style=dashed];	"integerMatrixOrders-def"	[color=green,		fillcolor="#B0ECA3",		label="integerMatrixOrders-def",		shape=box,		style=filled];	"integerMatrixOrders-def" -> "thm:forward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "thm:backward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "thm:crystallographic-restriction"	[style=dashed];	"companion-def"	[color=green,		fillcolor="#B0ECA3",		label="companion-def",		shape=box,		style=filled];	"thm:companion-charpoly"	[color=green,		fillcolor="#1CAC78",		label="companion-charpoly",		shape=ellipse,		style=filled];	"companion-def" -> "thm:companion-charpoly"	[style=dashed];	"thm:companion-charpoly" -> "thm:backward-direction"	[style=dashed];	"def:rotation-matrix-3"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-3",		shape=box,		style=filled];	"thm:order3-achievable"	[color=green,		fillcolor="#1CAC78",		label="order3-achievable",		shape=ellipse,		style=filled];	"def:rotation-matrix-3" -> "thm:order3-achievable"	[style=dashed];	"thm:order3-achievable" -> "thm:backward-direction"	[style=dashed];	"def:rotation-matrix-6"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-6",		shape=box,		style=filled];	"def:rotation-matrix-6" -> "thm:order6-achievable"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"lem:psi-eight"	[color=green,		fillcolor="#1CAC78",		label="psi-eight",		shape=ellipse,		style=filled];	"lem:psiPrimePow-ge-four-two"	[color=green,		fillcolor="#1CAC78",		label="psiPrimePow-ge-four-two",		shape=ellipse,		style=filled];	"lem:divisor-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="divisor-mem-orders",		shape=ellipse,		style=filled];	"lem:blockDiag2-eq-one"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-eq-one",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2"	[color=green,		fillcolor="#1CAC78",		label="orderOf-blockDiag2",		shape=ellipse,		style=filled];	"lem:blockDiag2-eq-one" -> "thm:orderOf-blockDiag2"	[style=dashed];	"lem:lcm-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="lcm-mem-orders",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2" -> "lem:lcm-mem-orders"	[style=dashed];	"lem:mul-mem-orders-coprime"	[color=green,		fillcolor="#1CAC78",		label="mul-mem-orders-coprime",		shape=ellipse,		style=filled];	"lem:lcm-mem-orders" -> "lem:mul-mem-orders-coprime"	[style=dashed];	"thm:forward-direction"	[color=green,		fillcolor="#1CAC78",		label="forward-direction",		shape=ellipse,		style=filled];	"thm:main-theorem"	[color=green,		fillcolor="#1CAC78",		label="main-theorem",		shape=ellipse,		style=filled];	"thm:forward-direction" -> "thm:main-theorem"	[style=dashed];	"lem:psi-four"	[color=green,		fillcolor="#1CAC78",		label="psi-four",		shape=ellipse,		style=filled];	"thm:backward-direction"	[color=green,		fillcolor="#1CAC78",		label="backward-direction",		shape=ellipse,		style=filled];	"lem:psi-four" -> "thm:backward-direction";	"lem:psi-twelve"	[color=green,		fillcolor="#1CAC78",		label="psi-twelve",		shape=ellipse,		style=filled];	"lem:psi-four" -> "lem:psi-twelve";	"thm:backward-direction" -> "thm:main-theorem"	[style=dashed];	"psi-def"	[color=green,		fillcolor="#B0ECA3",		label="psi-def",		shape=box,		style=filled];	"lem:psi-zero"	[color=green,		fillcolor="#1CAC78",		label="psi-zero",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-zero"	[style=dashed];	"lem:psi-ge-psiPrimePow"	[color=green,		fillcolor="#1CAC78",		label="psi-ge-psiPrimePow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-ge-psiPrimePow"	[style=dashed];	"lem:psi-prime-pow"	[color=green,		fillcolor="#1CAC78",		label="psi-prime-pow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-prime-pow"	[style=dashed];	"lem:psi-coprime-add"	[color=green,		fillcolor="#1CAC78",		label="psi-coprime-add",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-coprime-add"	[style=dashed];	"lem:psi-two"	[color=green,		fillcolor="#1CAC78",		label="psi-two",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-two"	[style=dashed];	"lem:psi-one"	[color=green,		fillcolor="#1CAC78",		label="psi-one",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-one"	[style=dashed];	"lem:psi-ge-psiPrimePow" -> "thm:backward-direction";	"lem:psi-prime-pow" -> "lem:psi-eight"	[style=dashed];	"lem:psi-prime-pow" -> "lem:psi-four"	[style=dashed];	"thm:primePow-mem-integerMatrixOrders-psi"	[color=green,		fillcolor="#1CAC78",		label="primePow-mem-integerMatrixOrders-psi",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "thm:primePow-mem-integerMatrixOrders-psi";	"lem:psi-le-totient"	[color=green,		fillcolor="#1CAC78",		label="psi-le-totient",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "lem:psi-le-totient";	"lem:psi-seven"	[color=green,		fillcolor="#1CAC78",		label="psi-seven",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "lem:psi-seven"	[style=dashed];	"lem:psi-five"	[color=green,		fillcolor="#1CAC78",		label="psi-five",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "lem:psi-five"	[style=dashed];	"lem:psi-nine"	[color=green,		fillcolor="#1CAC78",		label="psi-nine",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "lem:psi-nine"	[style=dashed];	"lem:psi-three"	[color=green,		fillcolor="#1CAC78",		label="psi-three",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "lem:psi-three"	[style=dashed];	"lem:psi-coprime-add" -> "lem:psi-twelve"	[style=dashed];	"lem:psi-coprime-add" -> "lem:psi-le-totient";	"lem:psi-ten"	[color=green,		fillcolor="#1CAC78",		label="psi-ten",		shape=ellipse,		style=filled];	"lem:psi-coprime-add" -> "lem:psi-ten"	[style=dashed];	"lem:psi-six"	[color=green,		fillcolor="#1CAC78",		label="psi-six",		shape=ellipse,		style=filled];	"lem:psi-coprime-add" -> "lem:psi-six"	[style=dashed];	"lem:psi-two" -> "lem:psi-le-totient";	"lem:psi-two" -> "lem:psi-ten";	"lem:psi-two" -> "lem:psi-six"	[style=dashed];	"lem:psi-one" -> "thm:backward-direction";	"lem:psi-one" -> "lem:psi-le-totient";	"thm:primePow-mem-integerMatrixOrders-psi" -> "thm:backward-direction";	"lem:sum-totient-ge-psi"	[color=green,		fillcolor="#1CAC78",		label="sum-totient-ge-psi",		shape=ellipse,		style=filled];	"lem:psi-le-totient" -> "lem:sum-totient-ge-psi"	[style=dashed];	"lem:psi-five" -> "thm:backward-direction";	"lem:psi-five" -> "lem:psi-ten";	"lem:psi-three" -> "lem:psi-twelve";	"lem:psi-three" -> "lem:psi-six"	[style=dashed];	"lem:psi-six" -> "thm:backward-direction";	"lem:sum-totient-ge-psi" -> "thm:forward-direction"	[style=dashed];	"lem:lcm-factorization-le-sup"	[color=green,		fillcolor="#1CAC78",		label="lcm-factorization-le-sup",		shape=ellipse,		style=filled];	"lem:lcm-factorization-le-sup" -> "lem:sum-totient-ge-psi";	"lem:one-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="one-mem-orders",		shape=ellipse,		style=filled];	"lem:order-one-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-one-achievable",		shape=ellipse,		style=filled];	"lem:one-mem-orders" -> "lem:order-one-achievable";	"lem:order-one-achievable" -> "thm:backward-direction";	"lem:orders-mono"	[color=green,		fillcolor="#1CAC78",		label="orders-mono",		shape=ellipse,		style=filled];	"lem:orders-mono" -> "thm:backward-direction";	"lem:blockDiag2-pow"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-pow",		shape=ellipse,		style=filled];	"lem:blockDiag2-pow" -> "thm:orderOf-blockDiag2"	[style=dashed];	"lem:mul-mem-orders-coprime" -> "thm:backward-direction";	"lem:companion-last-col"	[color=green,		fillcolor="#1CAC78",		label="companion-last-col",		shape=ellipse,		style=filled];	"thm:companion-pow-dvd"	[color=green,		fillcolor="#1CAC78",		label="companion-pow-dvd",		shape=ellipse,		style=filled];	"lem:companion-cycl-pow"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-pow",		shape=ellipse,		style=filled];	"thm:companion-pow-dvd" -> "lem:companion-cycl-pow"	[style=dashed];	"thm:companion-cycl-order"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-order",		shape=ellipse,		style=filled];	"lem:companion-cycl-pow" -> "thm:companion-cycl-order"	[style=dashed];	"thm:companion-cycl-mem"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-mem",		shape=ellipse,		style=filled];	"thm:companion-cycl-order" -> "thm:companion-cycl-mem"	[style=dashed];	"thm:mem-orders-totient"	[color=green,		fillcolor="#1CAC78",		label="mem-orders-totient",		shape=ellipse,		style=filled];	"thm:companion-cycl-mem" -> "thm:mem-orders-totient"	[style=dashed];	"thm:mem-orders-totient" -> "thm:primePow-mem-integerMatrixOrders-psi";	"lem:companion-aeval-zero"	[color=green,		fillcolor="#1CAC78",		label="companion-aeval-zero",		shape=ellipse,		style=filled];	"lem:companion-aeval-zero" -> "thm:companion-pow-dvd"	[style=dashed];	"integerMatrixOrders-def"	[color=green,		fillcolor="#B0ECA3",		label="integerMatrixOrders-def",		shape=box,		style=filled];	"integerMatrixOrders-def" -> "lem:divisor-mem-orders"	[style=dashed];	"integerMatrixOrders-def" -> "thm:forward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "thm:primePow-mem-integerMatrixOrders-psi"	[style=dashed];	"integerMatrixOrders-def" -> "lem:one-mem-orders"	[style=dashed];	"integerMatrixOrders-def" -> "lem:orders-mono"	[style=dashed];	"lem:mem-integerMatrixOrders-self"	[color=green,		fillcolor="#1CAC78",		label="mem-integerMatrixOrders-self",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:mem-integerMatrixOrders-self"	[style=dashed];	"lem:two-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="two-mem-orders",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:two-mem-orders"	[style=dashed];	"lem:mem-integerMatrixOrders-self" -> "thm:backward-direction";	"lem:order-two-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-two-achievable",		shape=ellipse,		style=filled];	"lem:two-mem-orders" -> "lem:order-two-achievable";	"lem:order-two-achievable" -> "thm:backward-direction";	"lem:factorization-disjoint"	[color=green,		fillcolor="#1CAC78",		label="factorization-disjoint",		shape=ellipse,		style=filled];	"lem:factorization-disjoint" -> "lem:psi-coprime-add"	[style=dashed];	"lem:psiPrimePow-ge-four-large"	[color=green,		fillcolor="#1CAC78",		label="psiPrimePow-ge-four-large",		shape=ellipse,		style=filled];	"lem:psiPrimePow-ge-six-three"	[color=green,		fillcolor="#1CAC78",		label="psiPrimePow-ge-six-three",		shape=ellipse,		style=filled];	"lem:psiPrimePow-le-totient"	[color=green,		fillcolor="#1CAC78",		label="psiPrimePow-le-totient",		shape=ellipse,		style=filled];	"companion-def"	[color=green,		fillcolor="#B0ECA3",		label="companion-def",		shape=box,		style=filled];	"companion-def" -> "lem:companion-last-col"	[style=dashed];	"lem:companion-subdiag"	[color=green,		fillcolor="#1CAC78",		label="companion-subdiag",		shape=ellipse,		style=filled];	"companion-def" -> "lem:companion-subdiag"	[style=dashed];	"thm:companion-charpoly"	[color=green,		fillcolor="#1CAC78",		label="companion-charpoly",		shape=ellipse,		style=filled];	"companion-def" -> "thm:companion-charpoly"	[style=dashed];	"thm:companion-charpoly" -> "lem:companion-aeval-zero"	[style=dashed];	"def:blockDiag2"	[color=green,		fillcolor="#B0ECA3",		label=blockDiag2,		shape=box,		style=filled];	"def:blockDiag2" -> "lem:blockDiag2-eq-one"	[style=dashed];	"def:blockDiag2" -> "lem:blockDiag2-pow"	[style=dashed];	"lem:sum-le-prod"	[color=green,		fillcolor="#1CAC78",		label="sum-le-prod",		shape=ellipse,		style=filled];	"lem:sum-le-prod" -> "lem:sum-totient-ge-psi";	"lem:primePow-mem-of-lcm-eq"	[color=green,		fillcolor="#1CAC78",		label="primePow-mem-of-lcm-eq",		shape=ellipse,		style=filled];	"lem:primePow-mem-of-lcm-eq" -> "lem:sum-totient-ge-psi";	"lem:cyclotomic-finset-product-dvd"	[color=green,		fillcolor="#1CAC78",		label="cyclotomic-finset-product-dvd",		shape=ellipse,		style=filled];	"lem:cyclotomic-finset-product-dvd" -> "thm:forward-direction";	"lem:orderOf-permMatrix"	[color=green,		fillcolor="#1CAC78",		label="orderOf-permMatrix",		shape=ellipse,		style=filled];	"lem:orderOf-permMatrix" -> "lem:mem-integerMatrixOrders-self";	"lem:orderOf-finRotate"	[color=green,		fillcolor="#1CAC78",		label="orderOf-finRotate",		shape=ellipse,		style=filled];	"lem:orderOf-finRotate" -> "lem:mem-integerMatrixOrders-self";	"psiPrimePow-def"	[color=green,		fillcolor="#B0ECA3",		label="psiPrimePow-def",		shape=box,		style=filled];	"psiPrimePow-def" -> "lem:psiPrimePow-ge-four-two"	[style=dashed];	"psiPrimePow-def" -> "psi-def"	[style=dashed];	"psiPrimePow-def" -> "lem:psiPrimePow-ge-four-large"	[style=dashed];	"psiPrimePow-def" -> "lem:psiPrimePow-ge-six-three"	[style=dashed];	"psiPrimePow-def" -> "lem:psiPrimePow-le-totient"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {

@@ -34,13 +34,10 @@ jobs:
       - name: Build project
         run: lake build
 
-      - name: Build docs
-        run: lake -Kdoc=on build Crystallographic:docs
-
       - name: Install blueprint dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra libgraphviz-dev graphviz
           pip install leanblueprint
 
       - name: Build blueprint
@@ -91,6 +88,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
+      - name: Build docs
+        run: lake -Kdoc=on build Crystallographic:docs
 
   deploy:
     needs: build

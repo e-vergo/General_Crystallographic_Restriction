@@ -3,31 +3,29 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Mathlib.Algebra.Polynomial.Degree.Definitions
+import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Matrix.Block
 import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
-import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
-import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
 import Architect
 
-import Crystallographic.Definitions.CompanionMatrix
-import Crystallographic.Definitions.IntegerMatrixOrder
-
 /-!
-# Companion Matrix Proofs
+# Companion Matrices
 
-This file proves the key properties of companion matrices,
-particularly for cyclotomic polynomials which are essential for the crystallographic
-restriction theorem.
+This file defines the companion matrix of a monic polynomial and proves its key properties.
+
+## Main definitions
+
+* `companion` - The companion matrix of a monic polynomial
 
 ## Main results
 
 * `companion_charpoly` - The characteristic polynomial of companion(p) equals p
 * `companion_aeval_eq_zero` - The polynomial p annihilates its companion matrix
-* `companion_pow_eq_one_of_cyclotomic` - companion(Φ_m)^m = 1
-* `companion_orderOf_cyclotomic` - orderOf(companion(Φ_m)) = m for m ≥ 1
+* `companion_pow_eq_one_of_dvd` - If p divides X^m - 1, then companion(p)^m = 1
 
 ## References
 
@@ -41,15 +39,50 @@ open Matrix Polynomial
 
 variable {R : Type*} [CommRing R]
 
+blueprint_comment /--
+\section{Companion Matrices}
+-/
+
+/-- The companion matrix of a monic polynomial p of degree n.
+
+For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
+```
+[0  0  0  ...  0  -a_0    ]
+[1  0  0  ...  0  -a_1    ]
+[0  1  0  ...  0  -a_2    ]
+[        ...              ]
+[0  0  0  ...  1  -a_{n-1}]
+```
+
+The matrix has 1s on the subdiagonal and the negatives of the polynomial
+coefficients in the last column.
+-/
+@[blueprint
+  "companion-def"
+  (statement := /-- The companion matrix $C(p)$ of a monic polynomial
+  $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
+  on the subdiagonal and $-a_i$ in the last column:
+  $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\ \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
+  This construction produces a matrix whose characteristic polynomial equals $p$, providing
+  a canonical matrix realization for any monic polynomial. -/)]
+def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
+    Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
+  Matrix.of fun i j =>
+    if j.val + 1 = i.val then 1
+    else if j.val + 1 = p.natDegree then -p.coeff i.val
+    else 0
+
 /-! ### Basic properties -/
 
-/-- The subdiagonal entries of the companion matrix are 1. -/
+@[blueprint "lem:companion-subdiag"
+  (statement := /-- Subdiagonal entries of $C(p)$ are $1$. \uses{companion-def} -/)]
 lemma companion_subdiag (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i : Fin p.natDegree) (hi : i.val + 1 < p.natDegree) :
     companion p hp hn ⟨i.val + 1, hi⟩ i = 1 := by
   simp only [companion, Matrix.of_apply, if_true]
 
-/-- The last column of the companion matrix contains -coeff. -/
+@[blueprint "lem:companion-last-col"
+  (statement := /-- Last column of $C(p)$ contains $-a_i$. \uses{companion-def} -/)]
 lemma companion_last_col (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i : Fin p.natDegree) :
     companion p hp hn i ⟨p.natDegree - 1, Nat.sub_lt hn Nat.one_pos⟩ = -p.coeff i.val := by
@@ -76,7 +109,7 @@ private lemma companion_charmatrix (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegr
     subst hij
     simp only [↓reduceIte]  -- Simplify "if i = i then ... else ..." and "if True then ..."
     rw [charmatrix_apply_eq, companion, Matrix.of_apply]
-    -- Now we have: X - C (if i.val + 1 = i.val then 1 else if i.val + 1 = n then -p.coeff i else 0)
+    -- Now we have: X - C (if i.val + 1 = i.val then 1 else if i.val + 1 = n then -p.coeff i ...)
     have h_not_eq : ¬(i.val + 1 = i.val) := by omega
     simp only [h_not_eq, ↓reduceIte]
     -- Now: X - C (if i.val + 1 = n then -p.coeff i else 0)
@@ -150,7 +183,8 @@ For the charmatrix A of companion(p) where p has degree m+2:
 private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
-    (hA_def : A = (companion p hp hn).charmatrix.submatrix (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)) :
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)) :
     (A 0 0 = X) ∧
     (A 1 0 = -1) ∧
     (∀ i : Fin (m + 2), 2 ≤ i.val → A i 0 = 0) := by
@@ -196,7 +230,8 @@ This minor is an upper triangular matrix with -1 on the diagonal (except row 0).
 private lemma companion_charpoly_minor10_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
-    (hA_def : A = (companion p hp hn).charmatrix.submatrix (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)) :
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)) :
     (A.submatrix (1 : Fin (m + 2)).succAbove Fin.succ).det = Polynomial.C (p.coeff 0) := by
   let minor10 := A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ
   -- First, establish the first row structure
@@ -327,7 +362,8 @@ has determinant equal to p.divX, because it equals charmatrix(companion(p.divX))
 private lemma companion_charpoly_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
-    (hA_def : A = (companion p hp hn).charmatrix.submatrix (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
     (IH : ∀ (q : R[X]) (hq : q.Monic) (hq_pos : 0 < q.natDegree), q.natDegree = m + 1 →
       (companion q hq hq_pos).charpoly = q) :
     (A.submatrix (0 : Fin (m + 2)).succAbove Fin.succ).det = p.divX := by
@@ -463,13 +499,16 @@ This is the fundamental property of companion matrices: they are constructed pre
 so that their characteristic polynomial matches the given monic polynomial.
 
 The proof proceeds by strong induction on the degree n. For degree 1, direct computation
-shows both sides equal X + C(a₀). For degree n+1, Laplace expansion along the first
+shows both sides equal X + C(a_0). For degree n+1, Laplace expansion along the first
 column gives a recurrence matching the polynomial structure.
 -/
 @[blueprint
   "thm:companion-charpoly"
   (statement := /-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
-  $\chi_{C(p)} = p$. -/)]
+  $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
+  along the first column. The key insight is that the minor structure reduces to smaller
+  companion matrices, and the base case (degree 1) follows by direct computation.
+  \uses{companion-def} -/)]
 theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     (companion p hp hn).charpoly = p := by
   obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne'
@@ -534,23 +573,23 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
 
 /-! ### Polynomial evaluation -/
 
-/-- The polynomial p annihilates its companion matrix.
-
-This follows from Cayley-Hamilton: every matrix satisfies its characteristic polynomial,
-and the characteristic polynomial of companion(p) is p itself.
--/
+@[blueprint "lem:companion-aeval-zero"
+  (statement := /-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
+  matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
+  $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.
+  \uses{thm:companion-charpoly} -/)]
 theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     aeval (companion p hp hn) p = 0 := by
   have h := aeval_self_charpoly (companion p hp hn)
   rwa [companion_charpoly p hp hn] at h
 
-/-! ### Powers and order for cyclotomic polynomials -/
+/-! ### Powers and order -/
 
-/-- If p divides X^m - 1, then companion(p)^m = 1.
-
-This is because p(companion(p)) = 0, and if p | X^m - 1, then
-X^m - 1 = p * q for some q, so companion(p)^m - 1 = p(companion(p)) * q(companion(p)) = 0.
--/
+@[blueprint "thm:companion-pow-dvd"
+  (statement := /-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
+  $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
+  $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.
+  \uses{lem:companion-aeval-zero} -/)]
 theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
     (companion p hp hn) ^ m = 1 := by
@@ -569,197 +608,5 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDeg
   -- So A^m - 1 = 0, i.e., A^m = 1
   rw [haeval] at hXm1_zero
   exact sub_eq_zero.mp hXm1_zero
-
-/-- The companion matrix of the m-th cyclotomic polynomial has (companion)^m = 1.
-
-This follows because Φ_m divides X^m - 1.
--/
-theorem companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
-    (hn : 0 < (cyclotomic m ℤ).natDegree) :
-    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
-  apply companion_pow_eq_one_of_dvd
-  exact cyclotomic.dvd_X_pow_sub_one m ℤ
-
-/-- The order of companion(Φ_m) is exactly m.
-
-This requires showing that companion(Φ_m)^k ≠ 1 for 0 < k < m.
-The key is that the eigenvalues of companion(Φ_m) are exactly the primitive
-m-th roots of unity, none of which are k-th roots of unity for k < m.
--/
-theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 < (cyclotomic m ℤ).natDegree) :
-    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
-  -- Use orderOf_eq_iff: need to show A^m = 1 and forall k, 0 < k < m → A^k ≠ 1
-  let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-  have hm_pos : 0 < m := Nat.lt_of_lt_of_le (by norm_num : 0 < 2) hm
-  rw [orderOf_eq_iff hm_pos]
-  constructor
-  · -- A^m = 1
-    exact companion_cyclotomic_pow_eq_one m hm_pos hn
-  · -- For k < m, 0 < k → A^k ≠ 1
-    intro k hk hk_pos hAk
-    -- If A^k = 1, then aeval A (X^k - 1) = 0
-    have haeval_zero : aeval A (X ^ k - (1 : ℤ[X])) = 0 := by
-      simp only [map_sub, map_pow, aeval_X, map_one]
-      rw [hAk, sub_self]
-    -- We also have aeval A (cyclotomic m ℤ) = 0
-    have hcycl_zero : aeval A (cyclotomic m ℤ) = 0 :=
-      companion_aeval_eq_zero (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-    -- Map everything to ℚ and work there
-    -- Let A_Q be the matrix over ℚ
-    let A_Q := A.map (algebraMap ℤ ℚ)
-    -- Both polynomials annihilate A_Q
-    have haeval_Q_zero : aeval A_Q ((X ^ k - 1 : ℤ[X]).map (algebraMap ℤ ℚ)) = 0 := by
-      have : A_Q = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
-      rw [this, aeval_map_algebraMap, aeval_algHom_apply, haeval_zero, map_zero]
-    have hcycl_Q_zero : aeval A_Q ((cyclotomic m ℤ).map (algebraMap ℤ ℚ)) = 0 := by
-      have : A_Q = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
-      rw [this, aeval_map_algebraMap, aeval_algHom_apply, hcycl_zero, map_zero]
-    -- Simplify the mapped polynomials
-    simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_one]
-      at haeval_Q_zero
-    -- Convert algebraMap ℤ ℚ to Int.castRingHom ℚ for map_cyclotomic_int
-    have hmap_eq : (cyclotomic m ℤ).map (algebraMap ℤ ℚ) = cyclotomic m ℚ := by
-      have h1 : algebraMap ℤ ℚ = Int.castRingHom ℚ := rfl
-      rw [h1, map_cyclotomic_int]
-    rw [hmap_eq] at hcycl_Q_zero
-    -- minpoly ℚ A_Q divides both X^k - 1 and cyclotomic m ℚ
-    have hdvd1 : minpoly ℚ A_Q ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ A_Q haeval_Q_zero
-    have hdvd2 : minpoly ℚ A_Q ∣ cyclotomic m ℚ := minpoly.dvd ℚ A_Q hcycl_Q_zero
-    -- minpoly divides charpoly, and charpoly = cyclotomic m ℚ
-    have hcharpoly : A_Q.charpoly = cyclotomic m ℚ := by
-      -- charpoly(A.map f) = (charpoly A).map f for ring homs
-      have h1 : A_Q.charpoly = (A.charpoly).map (algebraMap ℤ ℚ) := by
-        rw [Matrix.charpoly_map]
-      rw [h1, companion_charpoly, hmap_eq]
-    -- cyclotomic m ℚ is irreducible over ℚ
-    have hirr : Irreducible (cyclotomic m ℚ) := cyclotomic.irreducible_rat hm_pos
-    -- Since minpoly | cyclotomic (irreducible), minpoly = 1 or minpoly = cyclotomic
-    -- But minpoly has degree ≥ 1 (A_Q is not in ℚ), so minpoly = cyclotomic m ℚ (up to unit)
-    have hminpoly_eq : minpoly ℚ A_Q = cyclotomic m ℚ := by
-      have hdvd := Matrix.minpoly_dvd_charpoly A_Q
-      rw [hcharpoly] at hdvd
-      -- minpoly | cyclotomic, cyclotomic irreducible
-      -- By Irreducible.dvd_iff: minpoly | cycl ↔ IsUnit minpoly ∨ Associated cycl minpoly
-      rcases hirr.dvd_iff.mp hdvd with hunit | hassoc
-      · -- minpoly is unit, impossible since minpoly is monic and evaluates to zero at A_Q
-        exfalso
-        -- If minpoly is a unit, it must be a constant polynomial
-        -- But minpoly is monic, so it would have to be 1
-        -- But aeval A_Q (minpoly) = 0, so 1 = 0, contradiction
-        have hmonic := minpoly.monic (Matrix.isIntegral A_Q)
-        have haeval_minpoly := minpoly.aeval ℚ A_Q
-        -- For a unit polynomial over a field to be monic, it must equal 1
-        have hunit_eq : minpoly ℚ A_Q = 1 := by
-          rcases Polynomial.isUnit_iff.mp hunit with ⟨c, hc, heq⟩
-          rw [← heq] at hmonic
-          -- Monic (C c) means leadingCoeff (C c) = 1
-          -- For nonzero c, leadingCoeff (C c) = c
-          -- So c = 1
-          have hc_one : c = 1 := by
-            unfold Polynomial.Monic at hmonic
-            simp only [Polynomial.leadingCoeff_C] at hmonic
-            exact hmonic
-          simp [← heq, hc_one]
-        rw [hunit_eq] at haeval_minpoly
-        simp only [Polynomial.aeval_one] at haeval_minpoly
-        -- haeval_minpoly : (1 : Matrix _ _ ℚ) = 0, which is false
-        -- The matrix ring is nontrivial since the dimension is positive
-        haveI : Nonempty (Fin (cyclotomic m ℤ).natDegree) := ⟨⟨0, hn⟩⟩
-        -- (1 : Matrix n n R) (i, i) = 1 ≠ 0 for nontrivial R
-        have h1ne0 : (1 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-            (Fin (cyclotomic m ℤ).natDegree) ℚ) ≠ 0 := by
-          intro h0
-          have : (1 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-              (Fin (cyclotomic m ℤ).natDegree) ℚ) ⟨0, hn⟩ ⟨0, hn⟩ =
-              (0 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-              (Fin (cyclotomic m ℤ).natDegree) ℚ) ⟨0, hn⟩ ⟨0, hn⟩ := by rw [h0]
-          simp only [Matrix.one_apply_eq, Matrix.zero_apply] at this
-          exact one_ne_zero this
-        exact h1ne0 haeval_minpoly
-      · -- Associated cyclotomic minpoly, so they're equal since both are monic
-        have hmonic1 := minpoly.monic (Matrix.isIntegral A_Q)
-        have hmonic2 := cyclotomic.monic m ℚ
-        exact eq_of_monic_of_associated hmonic1 hmonic2 hassoc.symm
-    -- So cyclotomic m ℚ | X^k - 1
-    rw [hminpoly_eq] at hdvd1
-    -- But cyclotomic m only divides X^n - 1 when m | n
-    -- X^k - 1 = ∏_{d | k} cyclotomic d ℚ
-    -- So cyclotomic m ∣ X^k - 1 iff m ∈ k.divisors iff m ∣ k
-    have hm_dvd_k : m ∣ k := by
-      -- Use that X^k - 1 = ∏_{d | k} cyclotomic d
-      rw [← prod_cyclotomic_eq_X_pow_sub_one hk_pos ℚ] at hdvd1
-      -- cyclotomic m ℚ divides the product ∏_{d | k} cyclotomic d ℚ
-      -- Since cyclotomic polynomials are pairwise coprime (for different indices),
-      -- and cyclotomic m is irreducible, it must equal one of the factors
-      -- i.e., m ∈ k.divisors
-      have hcoprime : ∀ i j : ℕ, i ∈ k.divisors → j ∈ k.divisors → i ≠ j →
-          IsCoprime (cyclotomic i ℚ) (cyclotomic j ℚ) := by
-        intro i j _ _ hij
-        exact cyclotomic.isCoprime_rat hij
-      -- cyclotomic m is irreducible
-      -- If it divides a product of coprimes, it must divide one factor
-      -- Use Finset.prod_dvd_of_isUnit_of_dvd or similar
-      by_contra hndvd
-      have hm_notin : m ∉ k.divisors := by
-        simp only [Nat.mem_divisors]
-        push_neg
-        intro hd
-        -- If m | k then m ≤ k (since k > 0), but k < m, contradiction
-        have hle : m ≤ k := Nat.le_of_dvd hk_pos hd
-        omega
-      -- cyclotomic m ∣ ∏_{d | k} cyclotomic d, but m ∉ k.divisors
-      -- This is impossible because cyclotomics for different indices are coprime
-      have : cyclotomic m ℚ ∣ ∏ d ∈ k.divisors, cyclotomic d ℚ := hdvd1
-      -- If p is irreducible and divides a product of pairwise coprime terms,
-      -- it must divide one of them
-      have hex : ∃ d ∈ k.divisors, cyclotomic m ℚ ∣ cyclotomic d ℚ := by
-        -- Use the fact that irreducible dividing product of coprime terms
-        -- means it divides one of them
-        -- This follows from unique factorization
-        have huf := UniqueFactorizationMonoid.irreducible_iff_prime.mp hirr
-        exact Prime.exists_mem_finset_dvd huf this
-      obtain ⟨d, hd_mem, hdvd_d⟩ := hex
-      -- cyclotomic m | cyclotomic d, both monic irreducible, so they're equal
-      -- Since cyclotomic is injective on indices (over CharZero), m = d
-      have heq : m = d := by
-        have hirr_d : Irreducible (cyclotomic d ℚ) := by
-          have hd_pos : 0 < d := Nat.pos_of_mem_divisors hd_mem
-          exact cyclotomic.irreducible_rat hd_pos
-        -- Two monic irreducible polynomials where one divides the other must be equal
-        have hmonic_m := cyclotomic.monic m ℚ
-        have hmonic_d := cyclotomic.monic d ℚ
-        have hassoc : Associated (cyclotomic m ℚ) (cyclotomic d ℚ) :=
-          associated_of_dvd_dvd hdvd_d (hirr.dvd_symm hirr_d hdvd_d)
-        exact cyclotomic_injective (eq_of_monic_of_associated hmonic_m hmonic_d hassoc)
-      rw [heq] at hm_notin
-      exact hm_notin hd_mem
-    -- m | k and 0 < k < m is a contradiction
-    have : k < m := hk
-    have : m ≤ k := Nat.le_of_dvd hk_pos hm_dvd_k
-    omega
-
-/-! ### Integer matrix membership -/
-
-/-- The companion matrix of Φ_m gives an integer matrix with order m.
-
-This directly provides elements of integerMatrixOrders for dimensions ≥ φ(m).
--/
-theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 < (cyclotomic m ℤ).natDegree) :
-    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
-  use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-  constructor
-  · exact companion_cyclotomic_orderOf m hm hn
-  · omega
-
-/-- For m >= 2, m ∈ integerMatrixOrders(totient m). -/
-theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
-    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
-  have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
-  have htot_pos : 0 < Nat.totient m := Nat.totient_pos.mpr (by omega)
-  have hn : 0 < (cyclotomic m ℤ).natDegree := by omega
-  rw [← hdeg]
-  exact companion_cyclotomic_mem_integerMatrixOrders m hm hn
 
 end Crystallographic

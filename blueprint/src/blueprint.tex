@@ -8,9 +8,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem{lemma}{Lemma}[section]
-\newtheorem{sublemma}{Sublemma}[section]
 \newtheorem{corollary}{Corollary}[section]
-\newtheorem{remark}{Remark}[section]
 
 \title{Crystallographic Restriction Theorem}
 
@@ -27,12 +25,14 @@ are achievable by integer matrices. Specifically, an $N \times N$ integer matrix
 finite order $m$ if and only if $\psi(m) \leq N$, where $\psi$ is a function based on
 Euler's totient function.
 
-The project repository is \url{https://github.com/your-username/General_Crystallographic_Restriction}.
+\chapter{Supporting Lemmas}
 
-\chapter{The Psi Function and Main Definitions}
+\inputleanmodule{Crystallographic.Lemmas}
 
-The main theorem requires the definition of the $\psi$ function, which measures the
-``arithmetic complexity'' of a positive integer $m$. For a prime power $p^k$, we define:
+\chapter{The Psi Function}
+
+The $\psi$ function measures the ``arithmetic complexity'' of a positive integer $m$.
+For a prime power $p^k$, we define:
 \begin{itemize}
 \item $\psi_{pp}(p,k) = \varphi(p^k)$ for $p$ odd or $k \geq 2$
 \item $\psi_{pp}(2,1) = 0$
@@ -41,33 +41,33 @@ The main theorem requires the definition of the $\psi$ function, which measures 
 For a general integer $m$ with prime factorization $m = \prod_i p_i^{k_i}$, we have:
 $$\psi(m) = \sum_i \psi_{pp}(p_i, k_i)$$
 
-\inputleanmodule{Crystallographic.Definitions.Psi}
+\inputleanmodule{Crystallographic.Psi.Basic}
+\inputleanmodule{Crystallographic.Psi.Bounds}
 
 \chapter{Integer Matrix Orders}
 
-\inputleanmodule{Crystallographic.Definitions.IntegerMatrixOrder}
+We define the set $\mathrm{Ord}_N$ of achievable orders for $N \times N$ integer matrices.
 
-\chapter{The Main Theorem}
-
-\inputleanmodule{Crystallographic.MainTheorem}
+\inputleanmodule{Crystallographic.FiniteOrder.Basic}
+\inputleanmodule{Crystallographic.FiniteOrder.Order}
 
 \chapter{Companion Matrices}
 
-\inputleanmodule{Crystallographic.Definitions.CompanionMatrix}
-\inputleanmodule{Crystallographic.Proofs.CompanionMatrix}
+Companion matrices provide a key construction for achieving orders via cyclotomic polynomials.
 
-\chapter{Lower Bound on Psi}
+\inputleanmodule{Crystallographic.Companion}
+\inputleanmodule{Crystallographic.Companion.Cyclotomic}
 
-\inputleanmodule{Crystallographic.Proofs.PsiLowerBound}
+\chapter{The Crystallographic Restriction}
 
-\chapter{Rotation Matrices}
+The proof splits into two directions: showing $\psi(m) \leq N$ is necessary (forward)
+and sufficient (backward) for $m \in \mathrm{Ord}_N$.
 
-\inputleanmodule{Crystallographic.Definitions.RotationMatrices}
-\inputleanmodule{Crystallographic.Proofs.RotationMatrices}
+\inputleanmodule{Crystallographic.CrystallographicRestriction.Forward}
+\inputleanmodule{Crystallographic.CrystallographicRestriction.Backward}
 
-\chapter{Crystallographic Restriction Proof}
+\chapter{Main Theorem}
 
-\inputleanmodule{Crystallographic.Proofs.CrystallographicRestriction}
-\inputleanmodule{Crystallographic.ProofOfMainTheorem}
+\inputleanmodule{Crystallographic.MainTheorem}
 
 \end{document}
