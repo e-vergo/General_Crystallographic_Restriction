@@ -1,6 +1,9 @@
 Crystallographic.Finset.sum_le_prod_of_all_ge_two
 Crystallographic.Finset.lcm_factorization_le_sup
 Crystallographic.primePow_mem_of_lcm_eq
+Crystallographic.totient_ge_two_of_gt_two
+Crystallographic.Finset.prod_coprime_dvd
+Crystallographic.Nat.totient_finset_prod_of_coprime
 Crystallographic.psiPrimePow
 Crystallographic.psi
 Crystallographic.psi_zero

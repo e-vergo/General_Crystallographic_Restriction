@@ -200,229 +200,77 @@ theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
     simp only [Crystallographic.psi_one]
     exact one_mem_integerMatrixOrders 0
   · -- m > 1, i.e., m >= 2
-    -- Since m ≠ 2 (from hypothesis), m > 1 implies m >= 3
     have hm_gt2 : 2 < m := by omega
-    -- m > 2, i.e., m >= 3
     -- Check if m is a prime power
     by_cases hpow : IsPrimePow m
     · -- m is a prime power p^k
       rw [isPrimePow_nat_iff] at hpow
       obtain ⟨p, k, hp, hk, hpk⟩ := hpow
       subst hpk
-      -- Check if it's 2^1
       by_cases h21 : p = 2 ∧ k = 1
-      · -- m = 2^1 = 2, but m > 2, contradiction
-        obtain ⟨rfl, rfl⟩ := h21
-        simp only [pow_one] at hm_gt2
-        omega
-      · -- m = p^k with ¬(p = 2 ∧ k = 1)
-        exact primePow_mem_integerMatrixOrders_psi p k hp hk h21
-    · -- m is not a prime power, so it's composite with distinct prime factors
-        -- Factor m into coprime parts using minFac decomposition
-        have hm_ne_zero : m ≠ 0 := by omega
-        have hminFac : m.minFac.Prime := Nat.minFac_prime (by omega : m ≠ 1)
-        have hminFac_dvd : m.minFac ∣ m := Nat.minFac_dvd m
-        -- Define p and e as the smallest prime and its exponent
-        set p := m.minFac with hp_def
-        set e := m.factorization p with he_def
-        have he_pos : 0 < e := by
-          have : 0 < m.factorization m.minFac := Nat.Prime.factorization_pos_of_dvd
-            hminFac hm_ne_zero hminFac_dvd
-          simp only [← hp_def] at this
-          exact this
-        -- m = p^e * (m / p^e)
-        have hdvd : p ^ e ∣ m := Nat.ordProj_dvd m p
-        have hm_eq : m = p ^ e * (m / p ^ e) := by
-          exact (Nat.mul_div_cancel' hdvd).symm
-        -- Define m' = m / p^e (the complementary factor)
-        set m' := m / p ^ e with hm'_def
-        have hm'_pos : 0 < m' :=
-          Nat.div_pos (Nat.le_of_dvd (by omega) hdvd) (Nat.pow_pos hminFac.pos)
-        have hm'_lt : m' < m := by
-          have hpe_ge2 : 2 ≤ p ^ e := by
-            calc p ^ e ≥ p ^ 1 := Nat.pow_le_pow_right (Nat.Prime.one_lt hminFac).le he_pos
-              _ = p := pow_one p
-              _ ≥ 2 := Nat.Prime.two_le hminFac
-          calc m' = 1 * m' := (one_mul _).symm
-            _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_right
-                (Nat.one_lt_pow he_pos.ne' (Nat.Prime.one_lt hminFac)) hm'_pos
-            _ = m := hm_eq.symm
-        -- Coprimality: gcd(p^e, m') = 1
-        have hcop : Nat.Coprime (p ^ e) m' := by
-          have := Nat.coprime_ordCompl hminFac hm_ne_zero
-          -- this : p.Coprime (m / p ^ m.factorization p) = p.Coprime m'
-          -- We need (p ^ e).Coprime m'
-          -- Since p.Coprime m', we have (p ^ e).Coprime m'
-          have hpcop : p.Coprime m' := this
-          exact hpcop.pow_left e
-        -- m' ≠ 1 because m is not a prime power
-        have hm'_ne_one : m' ≠ 1 := by
-          intro hm'_one
-          have hm_is_pe : m = p ^ e := by simp only [hm'_one, mul_one] at hm_eq; exact hm_eq
-          apply hpow
-          rw [isPrimePow_nat_iff]
-          exact ⟨p, e, hminFac, he_pos, hm_is_pe.symm⟩
-        have hm'_ge2 : 2 ≤ m' := by omega
-        -- Now split on whether p^e = 2 (i.e., p = 2 and e = 1)
-        by_cases h_pe_is_2 : p = 2 ∧ e = 1
-        · -- p^e = 2, so psi(2) = 0
-          obtain ⟨hp2, he1⟩ := h_pe_is_2
-          -- Show that m = 2 * m' and work with that
-          have hm_eq' : m = 2 * m' := by simp only [hp2, he1, pow_one] at hm_eq; exact hm_eq
-          have hcop' : Nat.Coprime 2 m' := by simp only [hp2, he1, pow_one] at hcop; exact hcop
-          -- m' ≠ 2 because m' is coprime to 2 (hence odd) and m' ≥ 2, so m' ≥ 3
-          have hm'_ne_2 : m' ≠ 2 := by
-            intro hm'_eq_2
-            have : Nat.Coprime 2 2 := by rw [hm'_eq_2] at hcop'; exact hcop'
-            rw [Nat.coprime_self] at this
-            norm_num at this
-          -- Apply IH to m'
-          have IH_m' := IH m' hm'_lt hm'_pos hm'_ne_2
-          -- psi(m) = psi(2 * m') = psi(2) + psi(m') = 0 + psi(m') = psi(m')
-          have hpsi_eq : Crystallographic.psi m = Crystallographic.psi m' := by
-            rw [hm_eq', Crystallographic.psi_coprime_add 2 m' (by omega) hm'_pos hcop']
-            simp only [Crystallographic.psi_two, zero_add]
+      · obtain ⟨rfl, rfl⟩ := h21; simp only [pow_one] at hm_gt2; omega
+      · exact primePow_mem_integerMatrixOrders_psi p k hp hk h21
+    · -- m is not a prime power: use factorization_split_lt
+      obtain ⟨p, e, m', hp, he_pos, hm_eq, hcop, hm'_gt_one, hm'_lt, _⟩ :=
+        factorization_split_lt (by omega : 2 < m) hpow
+      have hm'_pos : 0 < m' := by omega
+      have hm'_ne_one : m' ≠ 1 := by omega
+      have hm'_ge2 : 2 ≤ m' := by omega
+      -- Split on whether p^e = 2
+      by_cases h_pe_is_2 : p = 2 ∧ e = 1
+      · -- p^e = 2, so psi(2) = 0
+        obtain ⟨hp2, he1⟩ := h_pe_is_2
+        have hm_eq' : m = 2 * m' := by simp only [hp2, he1, pow_one] at hm_eq; omega
+        have hcop' : Nat.Coprime 2 m' := by simp only [hp2, he1, pow_one] at hcop; exact hcop
+        have hm'_ne_2 : m' ≠ 2 := by
+          intro hm'_eq_2; rw [hm'_eq_2] at hcop'; simp at hcop'
+        have IH_m' := IH m' hm'_lt hm'_pos hm'_ne_2
+        have hpsi_eq : Crystallographic.psi m = Crystallographic.psi m' := by
+          rw [hm_eq', Crystallographic.psi_coprime_add 2 m' (by omega) hm'_pos hcop']
+          simp only [Crystallographic.psi_two, zero_add]
+        rw [hpsi_eq]
+        -- m' is odd (coprime to 2) and >= 3
+        have hm'_odd : Odd m' := Nat.Coprime.odd_of_left hcop'
+        have hm'_ge3 : 3 ≤ m' := by omega
+        have hpsi_pos : 0 < Crystallographic.psi m' := psi_pos_of_odd_ge_three hm'_ge3 hm'_odd
+        haveI : NeZero (Crystallographic.psi m') := ⟨by omega⟩
+        obtain ⟨A, hA_ord, hA_pos⟩ := IH_m'
+        refine ⟨-A, ?_, by omega⟩
+        rw [orderOf_neg_of_odd_order m' hm'_odd A hA_ord, ← hm_eq']
+      · -- p^e ≠ 2
+        push_neg at h_pe_is_2
+        have h_not_21 : ¬(p = 2 ∧ e = 1) := fun ⟨hp2, he1⟩ => h_pe_is_2 hp2 he1
+        have IH_pe : p ^ e ∈ integerMatrixOrders (Crystallographic.psi (p ^ e)) :=
+          primePow_mem_integerMatrixOrders_psi p e hp he_pos h_not_21
+        by_cases hm'_eq_2 : m' = 2
+        · -- m' = 2, so m = p^e * 2 with p odd
+          have hcop_pe_2 : Nat.Coprime (p ^ e) 2 := by rw [hm'_eq_2] at hcop; exact hcop
+          have hpsi_eq : Crystallographic.psi m = Crystallographic.psi (p ^ e) := by
+            rw [← hm_eq, hm'_eq_2, Crystallographic.psi_coprime_add (p ^ e) 2
+              (Nat.pow_pos hp.pos) (by omega) hcop_pe_2]
+            simp only [Crystallographic.psi_two, add_zero]
           rw [hpsi_eq]
-          -- Need: m ∈ integerMatrixOrders (psi m'), i.e., 2 * m' ∈ integerMatrixOrders (psi m')
-          -- We have: m' ∈ integerMatrixOrders (psi m') from IH
-          -- Key insight: If A has order m' with m' odd, then -A has order 2 * m'.
-          obtain ⟨A, hA_ord, hA_pos⟩ := IH_m'
+          -- p^e is odd (p ≠ 2 since coprime to 2)
+          have hp_odd : p ≠ 2 := by
+            intro hp2; rw [hp2] at hcop_pe_2
+            simp only [Nat.coprime_pow_left_iff he_pos, Nat.coprime_self] at hcop_pe_2
+            norm_num at hcop_pe_2
+          have hpe_odd : Odd (p ^ e) := (Nat.Prime.odd_of_ne_two hp hp_odd).pow
+          have hpsi_pos : 0 < Crystallographic.psi (p ^ e) := by
+            simp only [psi_prime_pow p e hp he_pos, h_not_21, ite_false]
+            exact Nat.totient_pos.mpr (Nat.pow_pos hp.pos)
+          haveI : NeZero (Crystallographic.psi (p ^ e)) := ⟨by omega⟩
+          obtain ⟨A, hA_ord, hA_pos⟩ := IH_pe
           refine ⟨-A, ?_, by omega⟩
-          -- orderOf (-A) = 2 * m' = m
-          have hm'_odd : Odd m' := by
-            rw [Nat.odd_iff]
-            have h2ndvd : ¬(2 ∣ m') := fun h2dvd =>
-              Nat.not_lt.mpr (Nat.le_of_dvd (by omega) (Nat.dvd_gcd (dvd_refl 2) h2dvd))
-                (by rw [hcop'.gcd_eq_one]; norm_num)
-            omega
-          -- -A = (-1) * A, and -1 commutes with A
-          -- orderOf(-1) = 2 (in characteristic 0), orderOf(A) = m' (odd)
-          -- So orderOf(-A) = 2 * m' since gcd(2, m') = 1
-          have hA_ord_pos : 0 < orderOf A := by omega
-          -- Express -A as (-1) * A
-          have hneg_eq : -A = (-1 : Matrix (Fin (Crystallographic.psi m'))
-              (Fin (Crystallographic.psi m')) ℤ) * A := by simp
-          rw [hneg_eq]
-          -- -1 and A commute (everything commutes with -1)
-          have hcomm : Commute (-1 : Matrix (Fin (Crystallographic.psi m'))
-              (Fin (Crystallographic.psi m')) ℤ) A := Commute.neg_one_left A
-          -- First, we need to show that psi m' > 0 for m' odd, m' ≥ 3
-          have hm'_ge3 : 3 ≤ m' := by
-            -- m' is odd and m' ≥ 2, so m' ≥ 3
-            rcases hm'_odd with ⟨k, hk⟩
-            omega
-          -- For m' ≥ 3 odd, psi m' > 0 because m' has an odd prime factor
-          have hpsi_pos : 0 < Crystallographic.psi m' := by
-            have hm'_has_prime : ∃ q, q.Prime ∧ q ∣ m' := ⟨m'.minFac,
-              Nat.minFac_prime (by omega : m' ≠ 1), Nat.minFac_dvd m'⟩
-            obtain ⟨q, hq_prime, hq_dvd⟩ := hm'_has_prime
-            have hq_ge3 : 3 ≤ q := by
-              have hq2 : 2 ≤ q := hq_prime.two_le
-              have hq_ne2 : q ≠ 2 := by
-                intro hq2eq
-                subst hq2eq
-                have h2dvd : 2 ∣ m' := hq_dvd
-                have : 2 ∣ Nat.gcd 2 m' := Nat.dvd_gcd (dvd_refl 2) h2dvd
-                rw [hcop'.gcd_eq_one] at this
-                exact Nat.not_lt.mpr (Nat.le_of_dvd (by omega) this) (by norm_num : 1 < 2)
-              omega
-            have hq_in_support : q ∈ m'.factorization.support := by
-              rw [Finsupp.mem_support_iff]
-              exact (Nat.Prime.factorization_pos_of_dvd hq_prime (by omega) hq_dvd).ne'
-            have hcontrib : Crystallographic.psiPrimePow q (m'.factorization q) ≤
-                Crystallographic.psi m' :=
-              Crystallographic.psi_ge_psiPrimePow_of_mem_support (by omega) hq_in_support
-            have hcontrib_pos : 0 < Crystallographic.psiPrimePow q (m'.factorization q) := by
-              simp only [Crystallographic.psiPrimePow]
-              have hk_pos : 0 < m'.factorization q :=
-                Nat.Prime.factorization_pos_of_dvd hq_prime (by omega) hq_dvd
-              simp only [hk_pos.ne', ite_false]
-              have hq_ne2 : q ≠ 2 := by omega
-              simp only [hq_ne2, false_and, ite_false]
-              exact Nat.totient_pos.mpr (Nat.pow_pos hq_prime.pos)
-            omega
-          -- Now we have psi m' > 0, so the matrix ring is nontrivial
-          haveI : NeZero (Crystallographic.psi m') := ⟨by omega⟩
-          -- orderOf(-1) = 2 in Matrix n n ℤ for n > 0
-          have hord_neg1 : orderOf (-1 : Matrix (Fin (Crystallographic.psi m'))
-              (Fin (Crystallographic.psi m')) ℤ) = 2 := by
-            rw [orderOf_neg_one, ringChar_matrix_int]
-            simp
-          -- Coprimality of orders
-          have hord_cop : Nat.Coprime (orderOf (-1 : Matrix (Fin (Crystallographic.psi m'))
-              (Fin (Crystallographic.psi m')) ℤ)) (orderOf A) := by
-            rw [hord_neg1, hA_ord]
-            exact hcop'
-          -- Apply the product formula
-          rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
-          rw [hord_neg1, hA_ord, ← hm_eq']
-        · -- p^e ≠ 2, so psi(p^e) = totient(p^e) > 0
-          -- Use block diagonal construction
-          push_neg at h_pe_is_2
-          have h_not_21 : ¬(p = 2 ∧ e = 1) := fun ⟨hp2, he1⟩ => h_pe_is_2 hp2 he1
-          have IH_pe : p ^ e ∈ integerMatrixOrders (Crystallographic.psi (p ^ e)) :=
-            primePow_mem_integerMatrixOrders_psi p e hminFac he_pos h_not_21
-          -- Check if m' = 2 (special case: use -A trick instead of block diagonal)
-          by_cases hm'_eq_2 : m' = 2
-          · -- m' = 2, so m = p^e * 2 with p odd
-            -- psi(m) = psi(p^e * 2) = psi(p^e) + psi(2) = psi(p^e)
-            have hcop_pe_2 : Nat.Coprime (p ^ e) 2 := by rw [hm'_eq_2] at hcop; exact hcop
-            have hpsi_eq : Crystallographic.psi m = Crystallographic.psi (p ^ e) := by
-              rw [hm_eq, hm'_eq_2, Crystallographic.psi_coprime_add (p ^ e) 2
-                (Nat.pow_pos hminFac.pos) (by omega) hcop_pe_2]
-              simp only [Crystallographic.psi_two, add_zero]
-            rw [hpsi_eq]
-            -- Need: m = p^e * 2 ∈ integerMatrixOrders(psi(p^e))
-            -- We have: p^e ∈ integerMatrixOrders(psi(p^e)) from IH_pe
-            -- Key insight: If A has odd order p^e, then -A has order 2 * p^e = m
-            obtain ⟨A, hA_ord, hA_pos⟩ := IH_pe
-            refine ⟨-A, ?_, by omega⟩
-            -- p^e is odd because p ≠ 2 (since gcd(p^e, 2) = 1 by coprimality with m' = 2)
-            have hp_odd : p ≠ 2 := by
-              intro hp2
-              have h1 : Nat.Coprime (p ^ e) 2 := hcop_pe_2
-              rw [hp2] at h1
-              simp only [Nat.coprime_pow_left_iff he_pos, Nat.coprime_self] at h1
-              norm_num at h1
-            have hpe_odd : Odd (p ^ e) := by
-              have hp_odd' : Odd p := Nat.Prime.odd_of_ne_two hminFac hp_odd
-              exact hp_odd'.pow
-            -- Express -A as (-1) * A
-            have hneg_eq : -A = (-1 : Matrix (Fin (Crystallographic.psi (p ^ e)))
-                (Fin (Crystallographic.psi (p ^ e))) ℤ) * A := by simp
-            rw [hneg_eq]
-            -- -1 and A commute
-            have hcomm : Commute (-1 : Matrix (Fin (Crystallographic.psi (p ^ e)))
-                (Fin (Crystallographic.psi (p ^ e))) ℤ) A := Commute.neg_one_left A
-            -- psi(p^e) > 0 for p ≠ 2 or e ≠ 1, and we have ¬(p = 2 ∧ e = 1)
-            have hpsi_pos : 0 < Crystallographic.psi (p ^ e) := by
-              simp only [Crystallographic.psi_prime_pow p e hminFac he_pos, h_not_21, ite_false]
-              exact Nat.totient_pos.mpr (Nat.pow_pos hminFac.pos)
-            haveI : NeZero (Crystallographic.psi (p ^ e)) := ⟨by omega⟩
-            -- orderOf(-1) = 2
-            have hord_neg1 : orderOf (-1 : Matrix (Fin (Crystallographic.psi (p ^ e)))
-                (Fin (Crystallographic.psi (p ^ e))) ℤ) = 2 := by
-              rw [orderOf_neg_one, ringChar_matrix_int]
-              simp
-            -- Coprimality: gcd(2, p^e) = 1 since p is odd
-            have hcop_2_pe : Nat.Coprime 2 (p ^ e) := hcop_pe_2.symm
-            have hord_cop : Nat.Coprime (orderOf (-1 : Matrix (Fin (Crystallographic.psi (p ^ e)))
-                (Fin (Crystallographic.psi (p ^ e))) ℤ)) (orderOf A) := by
-              rw [hord_neg1, hA_ord]
-              exact hcop_2_pe
-            rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
-            rw [hord_neg1, hA_ord, hm_eq, hm'_eq_2, mul_comm]
-          · -- m' ≠ 2, so we can apply IH to m'
-            have IH_m' := IH m' hm'_lt hm'_pos hm'_eq_2
-            -- psi(m) = psi(p^e * m') = psi(p^e) + psi(m')
-            have hpsi_eq : Crystallographic.psi m =
-                Crystallographic.psi (p ^ e) + Crystallographic.psi m' := by
-              rw [hm_eq, Crystallographic.psi_coprime_add (p ^ e) m'
-                (Nat.pow_pos hminFac.pos) hm'_pos hcop]
-            rw [hpsi_eq]
-            -- m = p^e * m' ∈ integerMatrixOrders(psi(p^e) + psi(m'))
-            rw [hm_eq]
-            exact mul_mem_integerMatrixOrders_of_coprime IH_pe IH_m' hcop
+          rw [orderOf_neg_of_odd_order (p ^ e) hpe_odd A hA_ord, ← hm_eq, hm'_eq_2, mul_comm]
+        · -- m' ≠ 2, use block diagonal
+          have IH_m' := IH m' hm'_lt hm'_pos hm'_eq_2
+          have hpsi_eq : Crystallographic.psi m =
+              Crystallographic.psi (p ^ e) + Crystallographic.psi m' := by
+            rw [← hm_eq, Crystallographic.psi_coprime_add (p ^ e) m'
+              (Nat.pow_pos hp.pos) hm'_pos hcop]
+          rw [hpsi_eq, ← hm_eq]
+          exact mul_mem_integerMatrixOrders_of_coprime IH_pe IH_m' hcop
 
 /-- If psi(m) <= N, then there exists an N x N integer matrix with order m.
 

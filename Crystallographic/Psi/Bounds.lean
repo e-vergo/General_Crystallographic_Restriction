@@ -48,6 +48,113 @@ lemma psiPrimePow_le_totient (p k : ℕ) :
     simp [Nat.totient_prime Nat.prime_two]
   · exact le_refl _
 
+/-- Totient of a prime power is at least 2 unless it's (2,1). -/
+theorem totient_primePow_ge_two {p k : ℕ} (hp : p.Prime) (hk : 0 < k)
+    (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
+  rw [Nat.totient_prime_pow hp hk]
+  by_cases hp2 : p = 2
+  · -- p = 2 but k ≠ 1 (since ¬(p = 2 ∧ k = 1)), so k ≥ 2
+    have he_ge2 : 2 ≤ k := by omega
+    calc p ^ (k - 1) * (p - 1) = 2 ^ (k - 1) := by rw [hp2]; ring
+      _ ≥ 2 ^ 1 := Nat.pow_le_pow_right (by omega) (by omega : 1 ≤ k - 1)
+  · -- p ≥ 3
+    have hp_ge3 : 3 ≤ p := Nat.lt_of_le_of_ne hp.two_le (Ne.symm hp2)
+    calc p ^ (k - 1) * (p - 1) ≥ 1 * (p - 1) := Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hp.pos)
+      _ = p - 1 := one_mul _
+      _ ≥ 2 := by omega
+
+/-- For a, b ≥ 2, we have a + b ≤ a * b. -/
+theorem sum_le_prod_of_ge_two {a b : ℕ} (ha : 2 ≤ a) (hb : 2 ≤ b) : a + b ≤ a * b := by
+  -- Key: a ≤ b * (a - 1) when b ≥ 2 and a ≥ 2
+  -- Since 2*(a-1) ≥ a when a ≥ 2
+  have ha_pos : 0 < a := by omega
+  have key : a ≤ b * (a - 1) := by
+    calc a ≤ 2 * (a - 1) := by omega
+      _ ≤ b * (a - 1) := Nat.mul_le_mul_right _ hb
+  calc a + b ≤ b * (a - 1) + b := Nat.add_le_add_right key b
+    _ = b * (a - 1 + 1) := by ring
+    _ = b * a := by rw [Nat.sub_add_cancel (by omega : 1 ≤ a)]
+    _ = a * b := by ring
+
+/-- For m > 2 that is not a prime power, we can factor m = p^e * m' with:
+    - p is the minimal prime factor
+    - 0 < e = ord_p(m)
+    - p^e and m' are coprime
+    - 1 < m' < m
+    - p^e < m -/
+theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m) :
+    ∃ (p e m' : ℕ), p.Prime ∧ 0 < e ∧ p ^ e * m' = m ∧
+    (p ^ e).Coprime m' ∧ 1 < m' ∧ m' < m ∧ p ^ e < m := by
+  have hm_ne_zero : m ≠ 0 := by omega
+  have hm_ne_one : m ≠ 1 := by omega
+  have hm_pos : 0 < m := by omega
+  have hminFac_prime : m.minFac.Prime := Nat.minFac_prime hm_ne_one
+  set p := m.minFac
+  set e := m.factorization p
+  have he_pos : 0 < e := Nat.Prime.factorization_pos_of_dvd hminFac_prime hm_ne_zero (Nat.minFac_dvd m)
+  have hdvd : p ^ e ∣ m := Nat.ordProj_dvd m p
+  set m' := m / p ^ e
+  have hm'_pos : 0 < m' := Nat.div_pos (Nat.le_of_dvd hm_pos hdvd) (Nat.pow_pos hminFac_prime.pos)
+  have hm_eq : m = p ^ e * m' := (Nat.mul_div_cancel' hdvd).symm
+  have hcop : Nat.Coprime (p ^ e) m' := Nat.coprime_ordCompl hminFac_prime hm_ne_zero |>.pow_left e
+  -- m' ≠ 1 because m is not a prime power
+  have hm'_ne_one : m' ≠ 1 := by
+    intro hm'_one
+    apply h_not_pp
+    rw [isPrimePow_nat_iff]
+    exact ⟨p, e, hminFac_prime, he_pos, by rw [hm_eq, hm'_one, mul_one]⟩
+  have hm'_gt_one : 1 < m' := by omega
+  have hm'_lt : m' < m := by
+    have hpe_ge2 : 2 ≤ p ^ e := by
+      calc p ^ e ≥ p ^ 1 := Nat.pow_le_pow_right hminFac_prime.one_lt.le he_pos
+        _ = p := pow_one p
+        _ ≥ 2 := hminFac_prime.two_le
+    calc m' = 1 * m' := (one_mul _).symm
+      _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_right
+          (Nat.one_lt_pow he_pos.ne' hminFac_prime.one_lt) hm'_pos
+      _ = m := hm_eq.symm
+  have hpe_lt : p ^ e < m := by
+    calc p ^ e = p ^ e * 1 := (mul_one _).symm
+      _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_left hm'_gt_one (Nat.pow_pos hminFac_prime.pos)
+      _ = m := hm_eq.symm
+  exact ⟨p, e, m', hminFac_prime, he_pos, hm_eq.symm, hcop, hm'_gt_one, hm'_lt, hpe_lt⟩
+
+/-- For m odd and m >= 3, we have psi(m) > 0.
+This is because m has an odd prime factor q >= 3, which contributes phi(q^k) > 0 to psi. -/
+theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
+    0 < Crystallographic.psi m := by
+  -- m >= 3 implies m != 1, so minFac(m) is prime
+  have hm_ne_one : m ≠ 1 := by omega
+  have hm_ne_zero : m ≠ 0 := by omega
+  set q := m.minFac with hq_def
+  have hq_prime : q.Prime := Nat.minFac_prime hm_ne_one
+  have hq_dvd : q ∣ m := Nat.minFac_dvd m
+  -- m is odd, so minFac(m) != 2 (otherwise 2 would divide m)
+  have hq_ne2 : q ≠ 2 := by
+    intro hq2eq
+    rw [hq2eq] at hq_dvd
+    exact hm_odd.not_two_dvd_nat hq_dvd
+  -- Therefore minFac(m) >= 3
+  have hq_ge3 : 3 ≤ q := by
+    have hq2 : 2 ≤ q := hq_prime.two_le
+    omega
+  -- q is in the factorization support
+  have hq_in_support : q ∈ m.factorization.support := by
+    rw [Finsupp.mem_support_iff]
+    exact (Nat.Prime.factorization_pos_of_dvd hq_prime hm_ne_zero hq_dvd).ne'
+  -- psi(m) >= psiPrimePow(q, ord_q(m))
+  have hcontrib : Crystallographic.psiPrimePow q (m.factorization q) ≤
+      Crystallographic.psi m :=
+    Crystallographic.psi_ge_psiPrimePow_of_mem_support (by omega) hq_in_support
+  -- psiPrimePow(q, k) = totient(q^k) > 0 for q >= 3 (since q != 2 means (q, k) != (2, 1))
+  have hcontrib_pos : 0 < Crystallographic.psiPrimePow q (m.factorization q) := by
+    simp only [Crystallographic.psiPrimePow]
+    have hk_pos : 0 < m.factorization q :=
+      Nat.Prime.factorization_pos_of_dvd hq_prime hm_ne_zero hq_dvd
+    simp only [hk_pos.ne', ite_false]
+    simp only [hq_ne2, false_and, ite_false]
+    exact Nat.totient_pos.mpr (Nat.pow_pos hq_prime.pos)
+  omega
 
 /-! ## Forward direction: Order implies dimension bound -/
 
@@ -105,137 +212,37 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.tot
         · simp -- psi(2) = 0 ≤ totient(2)
         · exact le_refl _ -- psi(p^k) = totient(p^k) for other prime powers
       · -- m is not a prime power, so it has multiple distinct prime factors
-        -- Factor m as p^e * m' where p is the smallest prime factor
-        have hm_ne_one : m ≠ 1 := by omega
-        have hminFac_prime : m.minFac.Prime := Nat.minFac_prime hm_ne_one
-        set p := m.minFac
-        set e := m.factorization p
-        have he_pos : 0 < e := Nat.Prime.factorization_pos_of_dvd hminFac_prime (by omega)
-          (Nat.minFac_dvd m)
-        have hdvd : p ^ e ∣ m := Nat.ordProj_dvd m p
-        set m' := m / p ^ e
-        have hm'_pos : 0 < m' := Nat.div_pos (Nat.le_of_dvd hm hdvd) (Nat.pow_pos hminFac_prime.pos)
-        have hm_eq : m = p ^ e * m' := (Nat.mul_div_cancel' hdvd).symm
-        have hcop : Nat.Coprime (p ^ e) m' := Nat.coprime_ordCompl hminFac_prime (by omega)
-          |>.pow_left e
-        -- m' ≠ 1 because m is not a prime power
-        have hm'_ne_one : m' ≠ 1 := by
-          intro hm'_one
-          apply hpow
-          rw [isPrimePow_nat_iff]
-          exact ⟨p, e, hminFac_prime, he_pos, by rw [hm_eq, hm'_one, mul_one]⟩
-        have hm'_lt : m' < m := by
-          have hpe_ge2 : 2 ≤ p ^ e := by
-            calc p ^ e ≥ p ^ 1 := Nat.pow_le_pow_right hminFac_prime.one_lt.le he_pos
-              _ = p := pow_one p
-              _ ≥ 2 := hminFac_prime.two_le
-          calc m' = 1 * m' := (one_mul _).symm
-            _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_right
-                (Nat.one_lt_pow he_pos.ne' hminFac_prime.one_lt) hm'_pos
-            _ = m := hm_eq.symm
+        -- Factor m = p^e * m' using factorization_split_lt
+        obtain ⟨p, e, m', hp, he_pos, hm_eq, hcop, hm'_gt_one, hm'_lt, _⟩ :=
+          factorization_split_lt (by omega : 2 < m) hpow
+        have hm'_pos : 0 < m' := by omega
+        have hm'_ne_one : m' ≠ 1 := by omega
         -- psi and totient are additive/multiplicative on coprime factors
-        rw [hm_eq,
-            Crystallographic.psi_coprime_add _ _ (Nat.pow_pos hminFac_prime.pos) hm'_pos hcop,
+        rw [← hm_eq, Crystallographic.psi_coprime_add _ _ (Nat.pow_pos hp.pos) hm'_pos hcop,
             Nat.totient_mul hcop]
-        -- Now we need: psi(p^e) + psi(m') ≤ totient(p^e) * totient(m')
         -- By IH: psi(m') ≤ totient(m')
         have IH_m' : Crystallographic.psi m' ≤ Nat.totient m' := IH m' hm'_lt hm'_pos
         -- For the prime power part: psi(p^e) ≤ totient(p^e)
         have hpsi_pe : Crystallographic.psi (p ^ e) ≤ Nat.totient (p ^ e) := by
-          rw [Crystallographic.psi_prime_pow p e hminFac_prime he_pos]
+          rw [Crystallographic.psi_prime_pow p e hp he_pos]
           split_ifs <;> simp
-        -- Now show psi(p^e) + psi(m') ≤ totient(p^e) * totient(m')
-        -- This follows from: a + b ≤ a * b when a ≥ 1 and b ≥ 2, or when a = 0
-        -- Need to show: psi(p^e) + psi(m') ≤ totient(p^e) * totient(m')
-        -- Three cases:
-        -- 1. p = 2 and e = 1: psi(2) = 0, totient(2) = 1 → psi(m') ≤ totient(m')
-        -- 2. m' = 2: psi(2) = 0, totient(2) = 1 → psi(p^e) ≤ totient(p^e)
-        -- 3. Otherwise: both totients ≥ 2, use a + b ≤ a * b
+        -- Three cases based on whether p^e or m' equals 2
         by_cases h21 : p = 2 ∧ e = 1
-        · -- Case 1: p = 2 and e = 1: psi(2) = 0, totient(2) = 1
+        · -- Case 1: p^e = 2, so psi(2) = 0 and totient(2) = 1
           obtain ⟨hp2, he1⟩ := h21
-          have hpsi_2 : Crystallographic.psi (2 ^ 1) = 0 := by
-            simp only [pow_one, Crystallographic.psi_two]
-          have htot_2 : Nat.totient (2 ^ 1) = 1 := by
-            simp only [pow_one, Nat.totient_prime Nat.prime_two]
-          calc Crystallographic.psi (p ^ e) + Crystallographic.psi m'
-              = Crystallographic.psi (2 ^ 1) + Crystallographic.psi m' := by rw [hp2, he1]
-            _ = 0 + Crystallographic.psi m' := by rw [hpsi_2]
-            _ = Crystallographic.psi m' := by ring
-            _ ≤ Nat.totient m' := IH_m'
-            _ = 1 * Nat.totient m' := by ring
-            _ = Nat.totient (2 ^ 1) * Nat.totient m' := by rw [htot_2]
-            _ = Nat.totient (p ^ e) * Nat.totient m' := by rw [hp2, he1]
+          simp only [hp2, he1, pow_one, Crystallographic.psi_two, Nat.totient_two, zero_add, one_mul]
+          exact IH_m'
         · by_cases hm'2 : m' = 2
-          · -- Case 2: m' = 2: psi(2) = 0, totient(2) = 1
-            have hpsi_2 : Crystallographic.psi 2 = 0 := Crystallographic.psi_two
-            have htot_2 : Nat.totient 2 = 1 := Nat.totient_prime Nat.prime_two
+          · -- Case 2: m' = 2, so psi(2) = 0 and totient(2) = 1
+            simp only [hm'2, Crystallographic.psi_two, Nat.totient_two, add_zero, mul_one]
+            exact hpsi_pe
+          · -- Case 3: Neither is 2^1, so both totients >= 2
+            have htot_m'_ge2 : 2 ≤ Nat.totient m' :=
+              totient_ge_two_of_gt_two m' (by omega : 2 < m')
+            have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := totient_primePow_ge_two hp he_pos h21
             calc Crystallographic.psi (p ^ e) + Crystallographic.psi m'
-                = Crystallographic.psi (p ^ e) + Crystallographic.psi 2 := by rw [hm'2]
-              _ = Crystallographic.psi (p ^ e) + 0 := by rw [hpsi_2]
-              _ = Crystallographic.psi (p ^ e) := by ring
-              _ ≤ Nat.totient (p ^ e) := hpsi_pe
-              _ = Nat.totient (p ^ e) * 1 := by ring
-              _ = Nat.totient (p ^ e) * Nat.totient 2 := by rw [htot_2]
-              _ = Nat.totient (p ^ e) * Nat.totient m' := by rw [hm'2]
-          · -- Case 3: Neither is 2^1, so both totients ≥ 2
-            have htot_m'_ge2 : 2 ≤ Nat.totient m' := by
-              -- m' > 1 and m' ≠ 1, 2, so totient(m') ≥ 2
-              have hm'_ge3 : 3 ≤ m' := by
-                have hm'_ge2 : 2 ≤ m' := by omega
-                rcases Nat.eq_or_lt_of_le hm'_ge2 with h | h
-                · exact (hm'2 h.symm).elim
-                · omega
-              have htot_pos : 0 < Nat.totient m' := Nat.totient_pos.mpr hm'_pos
-              have hne1 : Nat.totient m' ≠ 1 := by
-                intro htot_eq1
-                have h12 := Nat.totient_eq_one_iff.mp htot_eq1
-                rcases h12 with h1 | h2
-                · exact hm'_ne_one h1
-                · exact hm'2 h2
-              omega
-            have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := by
-              rw [Nat.totient_prime_pow hminFac_prime he_pos]
-              by_cases hp2 : p = 2
-              · -- p = 2, but e ≠ 1 since ¬(p = 2 ∧ e = 1)
-                have he_ge2 : 2 ≤ e := by omega
-                calc p ^ (e - 1) * (p - 1) = 2 ^ (e - 1) * (2 - 1) := by rw [hp2]
-                  _ = 2 ^ (e - 1) := by ring
-                  _ ≥ 2 ^ 1 := Nat.pow_le_pow_right (by omega) (by omega : 1 ≤ e - 1)
-                  _ = 2 := by ring
-              · -- p ≥ 3
-                have hp_ge3 : 3 ≤ p := Nat.lt_of_le_of_ne hminFac_prime.two_le (Ne.symm hp2)
-                calc p ^ (e - 1) * (p - 1) ≥ 1 * (p - 1) :=
-                    Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hminFac_prime.pos)
-                  _ = p - 1 := one_mul _
-                  _ ≥ 3 - 1 := Nat.sub_le_sub_right hp_ge3 1
-                  _ = 2 := by norm_num
-            calc Crystallographic.psi (p ^ e) + Crystallographic.psi m'
-              ≤ Crystallographic.psi (p ^ e) + Nat.totient m' := Nat.add_le_add_left IH_m' _
-            _ ≤ Nat.totient (p ^ e) + Nat.totient m' := Nat.add_le_add_right hpsi_pe _
-            _ ≤ Nat.totient (p ^ e) * Nat.totient m' := by
-                -- Now we have a ≥ 2 and b ≥ 2, so a + b ≤ a * b
-                -- a + b ≤ a * b ⟺ a + b ≤ a * b ⟺ 1 ≤ a * (b - 1) + (1 - a) (rearranging)
-                -- Actually: a + b ≤ a * b ⟺ a ≤ a * b - b = (a - 1) * b ⟺ a ≤ (a - 1) * b
-                -- For b ≥ 2 and a ≥ 2: (a - 1) * b ≥ 1 * 2 = 2 ≥ a? No, a can be large.
-                -- Better: a + b ≤ a*b ⟺ a/b + 1 ≤ a ⟺ 1/b ≤ (a-1)/a ⟺ a ≤ b*(a-1)
-                -- Since b ≥ 2, b * (a - 1) ≥ 2 * (a - 1) = 2a - 2 ≥ a when a ≥ 2.
-                -- So the key is: for a ≥ 2 and b ≥ 2, 2a - 2 ≥ a, i.e., a ≥ 2. ✓
-                have key : Nat.totient (p ^ e) ≤ Nat.totient m' * (Nat.totient (p ^ e) - 1) := by
-                  calc Nat.totient (p ^ e) ≤ 2 * (Nat.totient (p ^ e) - 1) := by omega
-                    _ ≤ Nat.totient m' * (Nat.totient (p ^ e) - 1) :=
-                        Nat.mul_le_mul_right _ htot_m'_ge2
-                -- Now: a + b ≤ a * b ⟺ a ≤ a * (b - 1) ⟺ a ≤ (b - 1) * a
-                -- We have: a ≤ b * (a - 1) from key
-                -- Hmm, let me just be more direct
-                calc Nat.totient (p ^ e) + Nat.totient m'
-                    ≤ Nat.totient m' * (Nat.totient (p ^ e) - 1) + Nat.totient m' := by
-                      exact Nat.add_le_add_right key _
-                  _ = Nat.totient m' * ((Nat.totient (p ^ e) - 1) + 1) := by ring
-                  _ = Nat.totient m' * Nat.totient (p ^ e) := by
-                      congr 1
-                      omega
-                  _ = Nat.totient (p ^ e) * Nat.totient m' := by ring
+                ≤ Nat.totient (p ^ e) + Nat.totient m' := by omega
+              _ ≤ Nat.totient (p ^ e) * Nat.totient m' := sum_le_prod_of_ge_two htot_pe_ge2 htot_m'_ge2
 
 /-- Key lemma: For any S ⊆ m.divisors with lcm(S) = m, we have Σ_{d∈S} φ(d) ≥ psi(m).
 
@@ -458,29 +465,10 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
                   intro q hq
                   have hq_NT := Finset.mem_of_mem_filter q hq
                   have hq_supp := Finset.mem_of_mem_filter q hq_NT
-                  have hq_prime := Nat.prime_of_mem_primeFactors
-                    (Nat.support_factorization m ▸ hq_supp)
-                  have hk_pos : 0 < m.factorization q :=
-                    Finsupp.mem_support_iff.mp hq_supp |> Nat.pos_of_ne_zero
-                  have hqk_nontrivial : ¬(q = 2 ∧ m.factorization q = 1) :=
-                    (Finset.mem_filter.mp hq_NT).2
-                  -- φ(p^k) ≥ 2 when (p,k) ≠ (2,1) and k > 0
-                  rw [Nat.totient_prime_pow hq_prime hk_pos]
-                  by_cases h2 : q = 2
-                  · subst h2
-                    have hk_ge2 : 2 ≤ m.factorization 2 := by
-                      by_contra hlt; push_neg at hlt
-                      have hk1 : m.factorization 2 = 1 := by omega
-                      exact hqk_nontrivial ⟨rfl, hk1⟩
-                    calc 2 ^ (m.factorization 2 - 1) * (2 - 1)
-                        = 2 ^ (m.factorization 2 - 1) := by ring
-                      _ ≥ 2 ^ 1 := Nat.pow_le_pow_right (by omega) (by omega)
-                      _ = 2 := by ring
-                  · have hp3 : 3 ≤ q := Nat.lt_of_le_of_ne hq_prime.two_le (Ne.symm h2)
-                    calc q ^ (m.factorization q - 1) * (q - 1)
-                        ≥ 1 * (q - 1) := Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hq_prime.pos)
-                      _ = q - 1 := one_mul _
-                      _ ≥ 2 := by omega
+                  have hq_prime := Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq_supp)
+                  have hk_pos : 0 < m.factorization q := Finsupp.mem_support_iff.mp hq_supp |> Nat.pos_of_ne_zero
+                  have hqk_nontrivial : ¬(q = 2 ∧ m.factorization q = 1) := (Finset.mem_filter.mp hq_NT).2
+                  exact totient_primePow_ge_two hq_prime hk_pos hqk_nontrivial
                 -- Now show: ∑_{q∈fiber} φ(q^k) ≤ φ(d)
                 -- Use: φ(d) ≥ ∏_{q∈fiber} φ(q^k) ≥ ∑_{q∈fiber} φ(q^k)
                 -- The first inequality: since q^{ord_q(m)} | d for each q in fiber,
@@ -503,65 +491,13 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
                     exact (Nat.coprime_primes (h_fiber_primes q₁ hq₁)
                       (h_fiber_primes q₂ hq₂)).mpr hne
                   -- ∏_{q∈fiber} q^{ord_q(m)} divides d
-                  have h_prod_dvd : (∏ q ∈ fiber, q ^ m.factorization q) ∣ d := by
-                    -- Product of coprime divisors divides d
-                    -- Use suffices to abstract over the finset and its properties
-                    suffices h : ∀ (T : Finset ℕ),
-                        (∀ q ∈ T, q ^ m.factorization q ∣ d) →
-                        (∀ q₁ ∈ T, ∀ q₂ ∈ T, q₁ ≠ q₂ →
-                          (q₁ ^ m.factorization q₁).Coprime (q₂ ^ m.factorization q₂)) →
-                        (∏ q ∈ T, q ^ m.factorization q) ∣ d by
-                      exact h fiber h_fiber_dvd h_coprime
-                    intro T hT_dvd hT_coprime
-                    induction T using Finset.induction with
-                    | empty => simp
-                    | @insert q s' hq_notin IH =>
-                      rw [Finset.prod_insert hq_notin]
-                      have hq_dvd : q ^ m.factorization q ∣ d :=
-                        hT_dvd q (Finset.mem_insert_self q s')
-                      have hs'_dvd : (∏ r ∈ s', r ^ m.factorization r) ∣ d := by
-                        apply IH
-                        · intro r hr; exact hT_dvd r (Finset.mem_insert_of_mem hr)
-                        · intro q₁ hq₁ q₂ hq₂ hne
-                          exact hT_coprime q₁ (Finset.mem_insert_of_mem hq₁) q₂
-                            (Finset.mem_insert_of_mem hq₂) hne
-                      -- q^k and ∏ r^{k_r} are coprime
-                      have h_cop : (q ^ m.factorization q).Coprime
-                          (∏ r ∈ s', r ^ m.factorization r) := by
-                        apply Nat.Coprime.prod_right
-                        intro r hr
-                        have hne : q ≠ r := fun heq => hq_notin (heq ▸ hr)
-                        exact hT_coprime q (Finset.mem_insert_self q s') r
-                          (Finset.mem_insert_of_mem hr) hne
-                      exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs'_dvd
+                  have h_prod_dvd : (∏ q ∈ fiber, q ^ m.factorization q) ∣ d :=
+                    Finset.prod_coprime_dvd fiber (fun q => q ^ m.factorization q) d h_fiber_dvd h_coprime
                   -- φ(d) ≥ φ(∏_{q∈fiber} q^{ord_q(m)})
-                  -- First show: φ(∏ q^k) = ∏ φ(q^k) by induction using coprimality
+                  -- φ(∏ q^k) = ∏ φ(q^k) by coprimality
                   have h_totient_prod : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) =
-                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) := by
-                    suffices h : ∀ (T : Finset ℕ),
-                        (∀ q₁ ∈ T, ∀ q₂ ∈ T, q₁ ≠ q₂ →
-                          (q₁ ^ m.factorization q₁).Coprime (q₂ ^ m.factorization q₂)) →
-                        Nat.totient (∏ q ∈ T, q ^ m.factorization q) =
-                          ∏ q ∈ T, Nat.totient (q ^ m.factorization q) by
-                      exact h fiber h_coprime
-                    intro T hT_coprime
-                    induction T using Finset.induction with
-                    | empty => simp
-                    | @insert q s' hq_notin IH =>
-                      rw [Finset.prod_insert hq_notin, Finset.prod_insert hq_notin]
-                      have h_cop_q_s : (q ^ m.factorization q).Coprime
-                          (∏ r ∈ s', r ^ m.factorization r) := by
-                        apply Nat.Coprime.prod_right
-                        intro r hr
-                        have hne : q ≠ r := fun heq => hq_notin (heq ▸ hr)
-                        exact hT_coprime q (Finset.mem_insert_self q s') r
-                          (Finset.mem_insert_of_mem hr) hne
-                      rw [Nat.totient_mul h_cop_q_s]
-                      congr 1
-                      apply IH
-                      intro q₁ hq₁ q₂ hq₂ hne
-                      exact hT_coprime q₁ (Finset.mem_insert_of_mem hq₁) q₂
-                        (Finset.mem_insert_of_mem hq₂) hne
+                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
+                    Nat.totient_finset_prod_of_coprime fiber (fun q => q ^ m.factorization q) h_coprime
                   -- φ(n) | φ(d) when n | d, hence φ(n) ≤ φ(d)
                   have h_totient_ge_prod : ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤
                       Nat.totient d := by

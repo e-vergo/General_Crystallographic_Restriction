@@ -5,13 +5,20 @@ Authors: Eric Vergo
 -/
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Algebra.CharP.Two
 import Mathlib.Algebra.GCDMonoid.Finset
 import Mathlib.Algebra.GCDMonoid.Nat
 import Mathlib.Algebra.IsPrimePow
+import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Nat.Basic
 import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Data.Nat.GCD.BigOperators
+import Mathlib.Data.Nat.Totient
+import Mathlib.GroupTheory.OrderOfElement
 
 import Architect
+
+import Crystallographic.FiniteOrder.Basic
 
 /-!
 # Auxiliary Lemmas for Crystallographic Restriction
@@ -21,8 +28,8 @@ restriction theorem proof that could potentially be upstreamed to Mathlib.
 
 ## Main results
 
-* `Finset.sum_le_prod_of_all_ge_two` - For finsets where all values are ≥ 2, sum ≤ product
-* `orderOf_neg_eq_two_mul_of_odd` - Order of -A is 2 * order of A when order is odd
+* `Finset.sum_le_prod_of_all_ge_two` - For finsets where all values are >= 2, sum <= product
+* `orderOf_neg_of_odd_order` - If A has odd order k, then -A has order 2*k
 
 -/
 
@@ -127,5 +134,121 @@ lemma primePow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset
   have hpow_strict : p ^ (k - 1) < p ^ k :=
     Nat.pow_lt_pow_right hp.one_lt (Nat.sub_lt hk Nat.one_pos)
   omega
+
+/-! ### Euler's totient function -/
+
+/-- Euler's totient function is at least 2 for any n > 2. -/
+@[blueprint "lem:totient-ge-two"
+  (statement := /-- For $n > 2$, we have $\varphi(n) \geq 2$. -/)
+  (proof := /-- Since $n > 2$, we have $n \neq 1$ and $n \neq 2$.
+  By `Nat.totient_eq_one_iff`, $\varphi(n) = 1$ iff $n \in \{1, 2\}$.
+  Since $n \notin \{1, 2\}$, we have $\varphi(n) \neq 1$.
+  Also $\varphi(n) \neq 0$ since $n > 0$. Therefore $\varphi(n) \geq 2$. -/)]
+theorem totient_ge_two_of_gt_two (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n := by
+  have hn_pos : 0 < n := by omega
+  have hn_ne_one : n ≠ 1 := by omega
+  have hn_ne_two : n ≠ 2 := by omega
+  have htot_pos : 0 < Nat.totient n := Nat.totient_pos.mpr hn_pos
+  have htot_ne_one : Nat.totient n ≠ 1 := by
+    intro htot_eq1
+    have h12 := Nat.totient_eq_one_iff.mp htot_eq1
+    rcases h12 with h1 | h2
+    · exact hn_ne_one h1
+    · exact hn_ne_two h2
+  omega
+
+/-! ### Coprime product divisibility -/
+
+/-- If each f(a) divides d and they're pairwise coprime, then ∏ f(a) divides d. -/
+@[blueprint "lem:prod-coprime-dvd"
+  (statement := /-- If each $f(a)$ divides $d$ and the $f(a)$ are pairwise coprime,
+  then $\prod_{a \in S} f(a)$ divides $d$. -/)
+  (proof := /-- By Finset induction. Empty case: $1 \mid d$ trivially.
+  Insert case: we have $f(q) \mid d$ and $\prod_{s'} f(r) \mid d$ by IH.
+  Show $f(q)$ is coprime to $\prod_{s'} f(r)$ using `Nat.Coprime.prod_right`,
+  then apply `Nat.Coprime.mul_dvd_of_dvd_of_dvd`. -/)]
+theorem Finset.prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    (h_dvd : ∀ a ∈ S, f a ∣ d)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    (∏ a ∈ S, f a) ∣ d := by
+  induction S using Finset.induction with
+  | empty => simp
+  | @insert q s' hq_notin IH =>
+    rw [Finset.prod_insert hq_notin]
+    have hq_dvd : f q ∣ d := h_dvd q (Finset.mem_insert_self q s')
+    have hs'_dvd : (∏ r ∈ s', f r) ∣ d := by
+      apply IH
+      · intro r hr; exact h_dvd r (Finset.mem_insert_of_mem hr)
+      · intro a₁ ha₁ a₂ ha₂ hne
+        exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+          (Finset.mem_insert_of_mem ha₂) hne
+    have h_cop : (f q).Coprime (∏ r ∈ s', f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq => hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s') r
+        (Finset.mem_insert_of_mem hr) hne
+    exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs'_dvd
+
+/-! ### Totient and products -/
+
+/-- Totient distributes over products of pairwise coprime values. -/
+@[blueprint "lem:totient-prod-coprime"
+  (statement := /-- For pairwise coprime $\{f(a)\}_{a \in S}$, we have
+  $\varphi(\prod_{a \in S} f(a)) = \prod_{a \in S} \varphi(f(a))$. -/)
+  (proof := /-- By Finset induction. Empty case: $\varphi(1) = 1$ equals empty product.
+  Insert case: use $\varphi(ab) = \varphi(a)\varphi(b)$ for coprime $a, b$
+  (`Nat.totient_mul`), where coprimality follows from `Nat.Coprime.prod_right`. -/)]
+theorem Nat.totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
+  induction S using Finset.induction with
+  | empty => simp
+  | @insert q s' hq_notin IH =>
+    rw [Finset.prod_insert hq_notin, Finset.prod_insert hq_notin]
+    have h_cop_q_s : (f q).Coprime (∏ r ∈ s', f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq => hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s') r
+        (Finset.mem_insert_of_mem hr) hne
+    rw [Nat.totient_mul h_cop_q_s]
+    congr 1
+    apply IH
+    intro a₁ ha₁ a₂ ha₂ hne
+    exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+      (Finset.mem_insert_of_mem ha₂) hne
+
+/-! ### Matrix order for negation -/
+
+/-- If A has odd order k in a matrix ring over Z, then -A has order 2*k.
+This uses orderOf(-1) = 2 (in char 0), commutativity of -1 with A,
+and gcd(2, k) = 1 for odd k. -/
+@[blueprint "lem:orderOf-neg-of-odd-order"
+  (statement := /-- If $A$ has odd order $k$, then $-A$ has order $2k$. -/)
+  (proof := /-- We have $-A = (-1) \cdot A$ where $-1$ commutes with $A$.
+  In characteristic $0$, $\mathrm{ord}(-1) = 2$. Since $k$ is odd,
+  $\gcd(2, k) = 1$, so by the product formula for commuting elements with
+  coprime orders, $\mathrm{ord}(-A) = \mathrm{ord}(-1) \cdot \mathrm{ord}(A) = 2k$. -/)]
+theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
+    orderOf (-A) = 2 * k := by
+  -- Express -A as (-1) * A
+  have hneg_eq : -A = (-1 : Matrix (Fin n) (Fin n) ℤ) * A := by simp
+  rw [hneg_eq]
+  -- -1 and A commute
+  have hcomm : Commute (-1 : Matrix (Fin n) (Fin n) ℤ) A := Commute.neg_one_left A
+  -- orderOf(-1) = 2 in char 0
+  have hord_neg1 : orderOf (-1 : Matrix (Fin n) (Fin n) ℤ) = 2 := by
+    rw [orderOf_neg_one, ringChar_matrix_int]
+    simp
+  -- Coprimality: gcd(2, k) = 1 since k is odd
+  have hcop : Nat.Coprime 2 k := Nat.Coprime.symm (Odd.coprime_two_right hk_odd)
+  have hord_cop : Nat.Coprime (orderOf (-1 : Matrix (Fin n) (Fin n) ℤ)) (orderOf A) := by
+    rw [hord_neg1, hA_ord]
+    exact hcop
+  -- Apply the product formula
+  rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
+  rw [hord_neg1, hA_ord]
 
 end Crystallographic
