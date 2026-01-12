@@ -64,7 +64,10 @@ coefficients in the last column.
   on the subdiagonal and $-a_i$ in the last column:
   $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\ \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
   This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/)]
+  a canonical matrix realization for any monic polynomial. -/)
+  (proof := /-- Definition. The companion matrix construction ensures the characteristic polynomial
+  equals the input polynomial, making it a standard tool for realizing polynomials as
+  minimal polynomials of matrices. -/)]
 def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =>
@@ -75,14 +78,16 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
 /-! ### Basic properties -/
 
 @[blueprint "lem:companion-subdiag"
-  (statement := /-- Subdiagonal entries of $C(p)$ are $1$. \uses{companion-def} -/)]
+  (statement := /-- Subdiagonal entries of $C(p)$ are $1$. \uses{companion-def} -/)
+  (proof := /-- Direct from the definition: the $(i+1, i)$ entry is $1$ when $j + 1 = i$. -/)]
 lemma companion_subdiag (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i : Fin p.natDegree) (hi : i.val + 1 < p.natDegree) :
     companion p hp hn ⟨i.val + 1, hi⟩ i = 1 := by
   simp only [companion, Matrix.of_apply, if_true]
 
 @[blueprint "lem:companion-last-col"
-  (statement := /-- Last column of $C(p)$ contains $-a_i$. \uses{companion-def} -/)]
+  (statement := /-- Last column of $C(p)$ contains $-a_i$. \uses{companion-def} -/)
+  (proof := /-- Direct from the definition: the last column condition $j + 1 = n$ gives $-a_i$. -/)]
 lemma companion_last_col (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i : Fin p.natDegree) :
     companion p hp hn i ⟨p.natDegree - 1, Nat.sub_lt hn Nat.one_pos⟩ = -p.coeff i.val := by
@@ -508,7 +513,11 @@ column gives a recurrence matching the polynomial structure.
   $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
   along the first column. The key insight is that the minor structure reduces to smaller
   companion matrices, and the base case (degree 1) follows by direct computation.
-  \uses{companion-def} -/)]
+  \uses{companion-def} -/)
+  (proof := /-- By induction on the degree $n$. For the base case $n = 1$, direct computation gives
+  $\det(XI - C) = X + a_0$. For $n > 1$, expand along the first column: the $(1,1)$ minor
+  is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
+  term. The recurrence matches the polynomial coefficients. -/)]
 theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     (companion p hp hn).charpoly = p := by
   obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne'
@@ -577,7 +586,10 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
   (statement := /-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
   matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
   $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.
-  \uses{thm:companion-charpoly} -/)]
+  \uses{thm:companion-charpoly} -/)
+  (proof := /-- By Cayley-Hamilton, every matrix satisfies its characteristic polynomial.
+  Since $\chi_{C(p)} = p$ by the companion characteristic polynomial theorem,
+  we have $p(C(p)) = 0$. -/)]
 theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     aeval (companion p hp hn) p = 0 := by
   have h := aeval_self_charpoly (companion p hp hn)
@@ -589,7 +601,10 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
   (statement := /-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
   $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
   $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.
-  \uses{lem:companion-aeval-zero} -/)]
+  \uses{lem:companion-aeval-zero} -/)
+  (proof := /-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
+  Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
+  so $C(p)^m = I$. -/)]
 theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
     (companion p hp hn) ^ m = 1 := by

@@ -32,7 +32,11 @@ namespace Crystallographic
 
 /-- For a nonempty finset where all values of f are at least 2, we have sum f at most prod f. -/
 @[blueprint "lem:sum-le-prod"
-  (statement := /-- For a finset where all values $\geq 2$, the sum is at most the product. -/)]
+  (statement := /-- For a finset where all values $\geq 2$, the sum is at most the product. -/)
+  (proof := /-- By induction on the size of the finset. Base case: empty sum is $0 \leq 1$ (empty product).
+  Inductive step: if $\sum_{x \in s} f(x) \leq \prod_{x \in s} f(x)$ and $f(a) \geq 2$, then
+  $\sum_{x \in s \cup \{a\}} f(x) = f(a) + \sum_s f \leq f(a) \cdot \prod_s f \leq \prod_{s \cup \{a\}} f$
+  using $1 + y \leq 2y$ for $y \geq 1$ and $f(a) \geq 2$. -/)]
 lemma Finset.sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
     ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
@@ -60,7 +64,9 @@ lemma Finset.sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
 /-- The factorization of a finset lcm at any prime is at most the supremum. -/
 @[blueprint "lem:lcm-factorization-le-sup"
   (statement := /-- The factorization of $\mathrm{lcm}(S)$ at prime $q$ is bounded by
-  $\sup_{x \in S} v_q(x)$. -/)]
+  $\sup_{x \in S} v_q(x)$. -/)
+  (proof := /-- The $q$-adic valuation of $\mathrm{lcm}(S)$ is the maximum of $q$-adic valuations over elements of $S$.
+  This follows from the definition of lcm via factorization: $v_q(\mathrm{lcm}(S)) = \sup_{x \in S} v_q(x)$. -/)]
 lemma Finset.lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
     (S.lcm f).factorization q ≤ S.sup (fun x => (f x).factorization q) := by
@@ -91,7 +97,9 @@ lemma Finset.lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset 
 the prime power is in the finset. -/
 @[blueprint "lem:primePow-mem-of-lcm-eq"
   (statement := /-- If $\mathrm{lcm}(S) = p^k$ and all elements of $S$ divide $p^k$,
-  then $p^k \in S$. -/)]
+  then $p^k \in S$. -/)
+  (proof := /-- Since $\mathrm{lcm}(S) = p^k$ and all elements divide $p^k$, each element has form $p^j$ for some $j \leq k$.
+  Taking lcm over these powers gives $p^{\max_j} = p^k$, so some element must have $j = k$, meaning $p^k \in S$. -/)]
 lemma primePow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
     p ^ k ∈ S := by

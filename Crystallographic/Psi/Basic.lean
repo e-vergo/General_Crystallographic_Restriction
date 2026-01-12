@@ -56,7 +56,9 @@ blueprint_comment /--
 
   The special case $\psi_{\text{pp}}(2, 1) = 0$ reflects that $-I$ achieves order $2$ in any
   dimension $\geq 1$, so order $2$ does not require additional dimensions. For all other
-  prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/)]
+  prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/)
+  (proof := /-- Definition. Returns $\varphi(p^k)$ except for the special case $(p, k) = (2, 1)$
+  where it returns $0$, since order $2$ is achieved by $-I$ without dimension cost. -/)]
 def psiPrimePow (p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
@@ -81,22 +83,27 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
   $$\psi(m) = \sum_i \psi_{\text{pp}}(p_i, k_i) =
     \sum_{\substack{p^k \| m \\ (p,k) \neq (2,1)}} \varphi(p^k)$$
   This gives the minimum dimension needed to realize order $m$.
-  \uses{psiPrimePow-def} -/)]
+  \uses{psiPrimePow-def} -/)
+  (proof := /-- Definition. The sum ranges over prime power divisors $p^k \| m$, with each term
+  contributing $\psi_{pp}(p, k)$ to the total. -/)]
 def psi (m : ℕ) : ℕ :=
   m.factorization.sum fun p k => psiPrimePow p k
 
 /-- psi(0) = 0 by convention. -/
-@[blueprint "lem:psi-zero" (statement := /-- $\psi(0) = 0$. -/), simp]
+@[blueprint "lem:psi-zero" (statement := /-- $\psi(0) = 0$. -/)
+  (proof := /-- The factorization of $0$ is empty, giving sum zero. -/), simp]
 theorem psi_zero : psi 0 = 0 := by
   simp [psi, Nat.factorization_zero]
 
 /-- psi(1) = 0: The identity matrix has order 1 in any dimension. -/
-@[blueprint "lem:psi-one" (statement := /-- $\psi(1) = 0$. -/), simp]
+@[blueprint "lem:psi-one" (statement := /-- $\psi(1) = 0$. -/)
+  (proof := /-- The factorization of $1$ is empty, giving sum zero. -/), simp]
 theorem psi_one : psi 1 = 0 := by
   simp [psi, Nat.factorization_one]
 
 /-- psi(2) = 0: The negation of identity has order 2 in any dimension >= 1. -/
-@[blueprint "lem:psi-two" (statement := /-- $\psi(2) = 0$. -/), simp]
+@[blueprint "lem:psi-two" (statement := /-- $\psi(2) = 0$. -/)
+  (proof := /-- The factorization is $2^1$, and $\psi_{pp}(2,1) = 0$ by definition. -/), simp]
 theorem psi_two : psi 2 = 0 := by
   simp only [psi]
   rw [Nat.prime_two.factorization]
@@ -110,7 +117,9 @@ theorem psi_two : psi 2 = 0 := by
   For a prime power $p^k$, the factorization has a single term, so
   $\psi(p^k) = \psi_{\text{pp}}(p, k)$. This equals $\varphi(p^k) = p^{k-1}(p-1)$ except
   when $p = 2$ and $k = 1$.
-  \uses{psiPrimePow-def, psi-def} -/)]
+  \uses{psiPrimePow-def, psi-def} -/)
+  (proof := /-- For prime power $p^k$, the factorization has a single term, so
+  $\psi(p^k) = \psi_{pp}(p, k)$. This equals $\varphi(p^k)$ except when $p = 2, k = 1$. -/)]
 theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
     psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
   simp only [psi]
@@ -120,7 +129,8 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   simp only [ite_false]
 
 /-- psi(3) = 2 -/
-@[blueprint "lem:psi-three" (statement := /-- $\psi(3) = 2$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-three" (statement := /-- $\psi(3) = 2$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_three : psi 3 = 2 := by
   have h := psi_prime_pow 3 1 Nat.prime_three (by norm_num : 0 < 1)
   simp only [pow_one] at h
@@ -129,7 +139,8 @@ theorem psi_three : psi 3 = 2 := by
   rw [Nat.totient_prime Nat.prime_three]
 
 /-- psi(4) = 2 -/
-@[blueprint "lem:psi-four" (statement := /-- $\psi(4) = 2$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-four" (statement := /-- $\psi(4) = 2$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_four : psi 4 = 2 := by
   have h := psi_prime_pow 2 2 Nat.prime_two (by norm_num : 0 < 2)
   simp only [show (4 : ℕ) = 2 ^ 2 by norm_num] at h ⊢
@@ -139,7 +150,8 @@ theorem psi_four : psi 4 = 2 := by
   norm_num
 
 /-- psi(5) = 4 -/
-@[blueprint "lem:psi-five" (statement := /-- $\psi(5) = 4$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-five" (statement := /-- $\psi(5) = 4$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_five : psi 5 = 4 := by
   have hp : Nat.Prime 5 := by decide
   have h := psi_prime_pow 5 1 hp (by norm_num : 0 < 1)
@@ -149,7 +161,8 @@ theorem psi_five : psi 5 = 4 := by
   rw [Nat.totient_prime hp]
 
 /-- psi(7) = 6 -/
-@[blueprint "lem:psi-seven" (statement := /-- $\psi(7) = 6$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-seven" (statement := /-- $\psi(7) = 6$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_seven : psi 7 = 6 := by
   have hp : Nat.Prime 7 := by decide
   have h := psi_prime_pow 7 1 hp (by norm_num : 0 < 1)
@@ -159,7 +172,8 @@ theorem psi_seven : psi 7 = 6 := by
   rw [Nat.totient_prime hp]
 
 /-- psi(8) = 4 -/
-@[blueprint "lem:psi-eight" (statement := /-- $\psi(8) = 4$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-eight" (statement := /-- $\psi(8) = 4$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_eight : psi 8 = 4 := by
   have h := psi_prime_pow 2 3 Nat.prime_two (by norm_num : 0 < 3)
   simp only [show (8 : ℕ) = 2 ^ 3 by norm_num] at h ⊢
@@ -169,7 +183,8 @@ theorem psi_eight : psi 8 = 4 := by
   norm_num
 
 /-- psi(9) = 6 -/
-@[blueprint "lem:psi-nine" (statement := /-- $\psi(9) = 6$. \uses{lem:psi-prime-pow} -/), simp]
+@[blueprint "lem:psi-nine" (statement := /-- $\psi(9) = 6$. \uses{lem:psi-prime-pow} -/)
+  (proof := /-- Direct computation using the prime power formula. -/), simp]
 theorem psi_nine : psi 9 = 6 := by
   have h := psi_prime_pow 3 2 Nat.prime_three (by norm_num : 0 < 2)
   simp only [show (9 : ℕ) = 3 ^ 2 by norm_num] at h ⊢
@@ -182,7 +197,8 @@ theorem psi_nine : psi 9 = 6 := by
 
 If gcd(m, n) = 1, then m and n share no common prime factors. -/
 @[blueprint "lem:factorization-disjoint"
-  (statement := /-- Coprime numbers have disjoint factorization supports. -/)]
+  (statement := /-- Coprime numbers have disjoint factorization supports. -/)
+  (proof := /-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/)]
 lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
     Disjoint m.factorization.support n.factorization.support := by
   rw [Finset.disjoint_iff_ne]
@@ -208,7 +224,10 @@ factors of m and n are disjoint. -/
   $$\psi(mn) = \sum_{p^k \| mn} \psi_{\text{pp}}(p, k) =
     \sum_{p^k \| m} \psi_{\text{pp}}(p, k) + \sum_{p^k \| n} \psi_{\text{pp}}(p, k) =
     \psi(m) + \psi(n).$$
-  \uses{psi-def, lem:factorization-disjoint} -/)]
+  \uses{psi-def, lem:factorization-disjoint} -/)
+  (proof := /-- When $\gcd(m, n) = 1$, the factorizations of $m$ and $n$ are disjoint.
+  Each prime power in $mn$ comes from exactly one of $m$ or $n$, so the
+  $\psi$ contributions add. -/)]
 theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
@@ -238,21 +257,24 @@ theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) 
 
 /-- psi(6) = 2 -/
 @[blueprint "lem:psi-six"
-  (statement := /-- $\psi(6) = 2$. \uses{lem:psi-coprime-add, lem:psi-two, lem:psi-three} -/), simp]
+  (statement := /-- $\psi(6) = 2$. \uses{lem:psi-coprime-add, lem:psi-two, lem:psi-three} -/)
+  (proof := /-- Direct computation: $\psi(6) = \psi(2) + \psi(3) = 0 + 2 = 2$. -/), simp]
 theorem psi_six : psi 6 = 2 := by
   have h6 : (6 : ℕ) = 2 * 3 := by norm_num
   rw [h6, psi_coprime_add 2 3 (by norm_num) (by norm_num) (by decide)]
   simp
 
 /-- psi(10) = 4 -/
-@[blueprint "lem:psi-ten" (statement := /-- $\psi(10) = 4$. \uses{lem:psi-coprime-add} -/), simp]
+@[blueprint "lem:psi-ten" (statement := /-- $\psi(10) = 4$. \uses{lem:psi-coprime-add} -/)
+  (proof := /-- Direct computation: $\psi(10) = \psi(2) + \psi(5) = 0 + 4 = 4$. -/), simp]
 theorem psi_ten : psi 10 = 4 := by
   have h10 : (10 : ℕ) = 2 * 5 := by norm_num
   rw [h10, psi_coprime_add 2 5 (by norm_num) (by norm_num) (by decide)]
   simp
 
 /-- psi(12) = 4 -/
-@[blueprint "lem:psi-twelve" (statement := /-- $\psi(12) = 4$. \uses{lem:psi-coprime-add} -/), simp]
+@[blueprint "lem:psi-twelve" (statement := /-- $\psi(12) = 4$. \uses{lem:psi-coprime-add} -/)
+  (proof := /-- Direct computation: $\psi(12) = \psi(4) + \psi(3) = 2 + 2 = 4$. -/), simp]
 theorem psi_twelve : psi 12 = 4 := by
   have h12 : (12 : ℕ) = 4 * 3 := by norm_num
   rw [h12, psi_coprime_add 4 3 (by norm_num) (by norm_num) (by decide)]
@@ -264,7 +286,8 @@ theorem psi_twelve : psi 12 = 4 := by
 
 If p^k divides m exactly, then psi(m) >= psiPrimePow(p, k). -/
 @[blueprint "lem:psi-ge-psiPrimePow"
-  (statement := /-- $\psi(m) \geq \psi_{pp}(p, v_p(m))$ for each prime $p \mid m$. -/)]
+  (statement := /-- $\psi(m) \geq \psi_{pp}(p, v_p(m))$ for each prime $p \mid m$. -/)
+  (proof := /-- The sum $\psi(m)$ includes the term $\psi_{pp}(p, v_p(m))$, and all terms are non-negative. -/)]
 lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ} (_hm : 0 < m)
     (hp : p ∈ m.factorization.support) :
     psiPrimePow p (m.factorization p) ≤ psi m := by
@@ -279,7 +302,8 @@ lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ} (_hm : 0 < m)
 
 For p >= 5 and k >= 1, phi(p^k) = p^{k-1}(p-1) >= p - 1 >= 4. -/
 @[blueprint "lem:psiPrimePow-ge-four-large"
-  (statement := /-- For $p \geq 5$, $\psi_{pp}(p, k) \geq 4$. -/)]
+  (statement := /-- For $p \geq 5$, $\psi_{pp}(p, k) \geq 4$. -/)
+  (proof := /-- For $p \geq 5$ and $k \geq 1$, $\varphi(p^k) = p^{k-1}(p-1) \geq p - 1 \geq 4$. -/)]
 lemma psiPrimePow_ge_four_of_prime_ge_five {p k : ℕ} (hp : p.Prime) (hp5 : 5 ≤ p) (hk : 0 < k) :
     4 ≤ psiPrimePow p k := by
   simp only [psiPrimePow, hk.ne']
@@ -295,7 +319,8 @@ lemma psiPrimePow_ge_four_of_prime_ge_five {p k : ℕ} (hp : p.Prime) (hp5 : 5 �
 
 For k >= 3, phi(2^k) = 2^{k-1} >= 2^2 = 4. -/
 @[blueprint "lem:psiPrimePow-ge-four-two"
-  (statement := /-- For $k \geq 3$, $\psi_{pp}(2, k) \geq 4$. -/)]
+  (statement := /-- For $k \geq 3$, $\psi_{pp}(2, k) \geq 4$. -/)
+  (proof := /-- For $k \geq 3$, $\varphi(2^k) = 2^{k-1} \geq 2^2 = 4$. -/)]
 lemma psiPrimePow_ge_four_of_two_pow_ge_three {k : ℕ} (hk : 3 ≤ k) :
     4 ≤ psiPrimePow 2 k := by
   simp only [psiPrimePow]
@@ -312,7 +337,8 @@ lemma psiPrimePow_ge_four_of_two_pow_ge_three {k : ℕ} (hk : 3 ≤ k) :
 
 For k >= 2, phi(3^k) = 3^{k-1} * 2 >= 3 * 2 = 6. -/
 @[blueprint "lem:psiPrimePow-ge-six-three"
-  (statement := /-- For $k \geq 2$, $\psi_{pp}(3, k) \geq 6$. -/)]
+  (statement := /-- For $k \geq 2$, $\psi_{pp}(3, k) \geq 6$. -/)
+  (proof := /-- For $k \geq 2$, $\varphi(3^k) = 3^{k-1} \cdot 2 \geq 3 \cdot 2 = 6$. -/)]
 lemma psiPrimePow_ge_six_of_three_pow_ge_two {k : ℕ} (hk : 2 ≤ k) :
     6 ≤ psiPrimePow 3 k := by
   simp only [psiPrimePow]

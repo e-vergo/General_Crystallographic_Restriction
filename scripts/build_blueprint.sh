@@ -57,3 +57,5 @@ echo "Press Ctrl+C to stop the server."
 echo ""
 
 leanblueprint serve
+
+open -a Safari "http://localhost:8000"

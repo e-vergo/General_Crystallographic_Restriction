@@ -100,7 +100,12 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
   \item By the sum-totient lemma (applied to any $S$ with $\mathrm{lcm}(S) = m$),
         $\psi(m) \leq \sum_{d \in S} \varphi(d) = \deg(\mathrm{minpoly}) \leq \deg(\mathrm{charpoly}) = N$.
   \end{enumerate}
-  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} --/)]
+  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} --/)
+  (proof := /-- Let $A$ be an $N \times N$ integer matrix with $A^m = I$. The minimal polynomial $\mu_A$
+  over $\mathbb{Q}$ divides $X^m - 1$ and factors into cyclotomic polynomials $\Phi_d$ for
+  various $d \mid m$. Each factor contributes $\varphi(d)$ to $\deg(\mu_A) \leq N$.
+  Since distinct $\Phi_d$ are coprime and their lcm must be $m$, summing the totients
+  of appearing divisors gives $\psi(m) \leq N$. --/)]
 theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
     (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by
   -- Extract the matrix A with orderOf A = m

@@ -103,12 +103,12 @@
   \[ \psi (m) = \sum _i \psi _{pp}(p_i, k_i) \]
 </div>
 <h1 id="a0000000010">3.1 The Psi Function</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="psiPrimePow-def">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
+<div class="theorem_thmwrapper theorem-style-definition" id="psiPrimePow-def">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="definition_thmlabel">3.1.1</span>
+    <span class="theorem_thmlabel">3.1.1</span>
     <div class="thm_header_extras">
 
     
@@ -117,6 +117,9 @@
     <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0003.html#psiPrimePow-def">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
     
     
     
@@ -141,18 +144,30 @@
     
         </div>
   </div>
-  <div class="definition_thmcontent">
+  <div class="theorem_thmcontent">
   <p>  The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
 <p>The special case \(\psi _{\text{pp}}(2, 1) = 0\) reflects that \(-I\) achieves order \(2\) in any dimension \(\geq 1\), so order \(2\) does not require additional dimensions. For all other prime powers \(p^k\), we need \(\varphi (p^k)\) dimensions to achieve order \(p^k\). </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="psi-def">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
+<div class="proof_wrapper" id="a0000000018">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="definition_thmlabel">3.1.2</span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Definition. Returns \(\varphi (p^k)\) except for the special case \((p, k) = (2, 1)\) where it returns \(0\), since order \(2\) is achieved by \(-I\) without dimension cost. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="psi-def">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">3.1.2</span>
     <div class="thm_header_extras">
 
     
@@ -161,6 +176,9 @@
     <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0003.html#psi-def">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
     
     
     <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
@@ -175,7 +193,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
+          
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -205,13 +225,25 @@
     
         </div>
   </div>
-  <div class="definition_thmcontent">
-  <p>   The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+  <div class="theorem_thmcontent">
+  <p>  The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
 <p>For \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\): </p>
-<div class="displaymath" id="a0000000018">
+<div class="displaymath" id="a0000000020">
   \[ \psi (m) = \sum _i \psi _{\text{pp}}(p_i, k_i) = \sum _{\substack {p^k \|  m \\ (p,k) \neq (2,1)}} \varphi (p^k) \]
 </div>
 <p> This gives the minimum dimension needed to realize order \(m\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000019">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> Definition. The sum ranges over prime power divisors \(p^k \|  m\), with each term contributing \(\psi _{pp}(p, k)\) to the total. </p>
 
   </div>
 </div>
@@ -220,7 +252,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.1</span>
+    <span class="theorem_thmlabel">3.1.3</span>
     <div class="thm_header_extras">
 
     
@@ -230,7 +262,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-zero">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000021"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -246,9 +278,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -283,7 +315,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000019">
+<div class="proof_wrapper" id="a0000000021">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -291,7 +323,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> The factorization of \(0\) is empty, giving sum zero. </p>
 
   </div>
 </div>
@@ -300,7 +332,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.2</span>
+    <span class="theorem_thmlabel">3.1.4</span>
     <div class="thm_header_extras">
 
     
@@ -310,7 +342,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-one">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000020"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -326,9 +358,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -363,7 +395,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000020">
+<div class="proof_wrapper" id="a0000000022">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -371,7 +403,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> The factorization of \(1\) is empty, giving sum zero. </p>
 
   </div>
 </div>
@@ -380,7 +412,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.3</span>
+    <span class="theorem_thmlabel">3.1.5</span>
     <div class="thm_header_extras">
 
     
@@ -390,7 +422,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-two">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000021"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -406,9 +438,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -443,7 +475,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000021">
+<div class="proof_wrapper" id="a0000000023">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -451,7 +483,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> The factorization is \(2^1\), and \(\psi _{pp}(2,1) = 0\) by definition. </p>
 
   </div>
 </div>
@@ -460,7 +492,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.4</span>
+    <span class="theorem_thmlabel">3.1.6</span>
     <div class="thm_header_extras">
 
     
@@ -470,7 +502,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-prime-pow">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -486,11 +518,11 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -526,7 +558,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000022">
+<div class="proof_wrapper" id="a0000000024">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -534,7 +566,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> For prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{pp}(p, k)\). This equals \(\varphi (p^k)\) except when \(p = 2, k = 1\). </p>
 
   </div>
 </div>
@@ -543,7 +575,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.5</span>
+    <span class="theorem_thmlabel">3.1.7</span>
     <div class="thm_header_extras">
 
     
@@ -553,7 +585,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-three">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -569,9 +601,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -606,7 +638,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000023">
+<div class="proof_wrapper" id="a0000000025">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -614,7 +646,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -623,7 +655,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.6</span>
+    <span class="theorem_thmlabel">3.1.8</span>
     <div class="thm_header_extras">
 
     
@@ -633,7 +665,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-four">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -649,9 +681,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -686,7 +718,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000024">
+<div class="proof_wrapper" id="a0000000026">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -694,7 +726,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -703,7 +735,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.7</span>
+    <span class="theorem_thmlabel">3.1.9</span>
     <div class="thm_header_extras">
 
     
@@ -713,7 +745,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-five">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -729,9 +761,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -766,7 +798,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000025">
+<div class="proof_wrapper" id="a0000000027">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -774,7 +806,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -783,7 +815,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.8</span>
+    <span class="theorem_thmlabel">3.1.10</span>
     <div class="thm_header_extras">
 
     
@@ -793,7 +825,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-seven">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -809,9 +841,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -846,7 +878,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000026">
+<div class="proof_wrapper" id="a0000000028">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -854,7 +886,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -863,7 +895,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.9</span>
+    <span class="theorem_thmlabel">3.1.11</span>
     <div class="thm_header_extras">
 
     
@@ -873,7 +905,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-eight">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -889,9 +921,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -926,7 +958,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000027">
+<div class="proof_wrapper" id="a0000000029">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -934,7 +966,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -943,7 +975,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.10</span>
+    <span class="theorem_thmlabel">3.1.12</span>
     <div class="thm_header_extras">
 
     
@@ -953,7 +985,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-nine">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -969,9 +1001,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
         </ul>
     
@@ -1006,7 +1038,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000028">
+<div class="proof_wrapper" id="a0000000030">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1014,7 +1046,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation using the prime power formula. </p>
 
   </div>
 </div>
@@ -1023,7 +1055,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.11</span>
+    <span class="theorem_thmlabel">3.1.13</span>
     <div class="thm_header_extras">
 
     
@@ -1033,7 +1065,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:factorization-disjoint">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1064,7 +1096,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000029">
+<div class="proof_wrapper" id="a0000000031">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1072,7 +1104,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>If \(p\) divides both \(m\) and \(n\), then \(p \mid \gcd (m,n) = 1\), contradicting \(p\) prime. </p>
 
   </div>
 </div>
@@ -1081,7 +1113,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.12</span>
+    <span class="theorem_thmlabel">3.1.14</span>
     <div class="thm_header_extras">
 
     
@@ -1091,7 +1123,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-coprime-add">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1107,13 +1139,13 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#lem:factorization-disjoint">Theorem 3.1.11</a></li>
+          <li><a href="sect0003.html#lem:factorization-disjoint">Theorem 3.1.13</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
-          <li><a href="sect0003.html#lem:factorization-disjoint">Theorem 3.1.11</a></li>
+          <li><a href="sect0003.html#lem:factorization-disjoint">Theorem 3.1.13</a></li>
           
         </ul>
     
@@ -1146,14 +1178,14 @@
   <div class="theorem_thmcontent">
   <p>   \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
 <p>When \(\gcd (m, n) = 1\), the prime factorizations of \(m\) and \(n\) share no common primes, so </p>
-<div class="displaymath" id="a0000000031">
+<div class="displaymath" id="a0000000033">
   \[ \psi (mn) = \sum _{p^k \|  mn} \psi _{\text{pp}}(p, k) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k) + \sum _{p^k \|  n} \psi _{\text{pp}}(p, k) = \psi (m) + \psi (n). \]
 </div>
 
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000030">
+<div class="proof_wrapper" id="a0000000032">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1161,7 +1193,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> When \(\gcd (m, n) = 1\), the factorizations of \(m\) and \(n\) are disjoint. Each prime power in \(mn\) comes from exactly one of \(m\) or \(n\), so the \(\psi \) contributions add. </p>
 
   </div>
 </div>
@@ -1170,7 +1202,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.13</span>
+    <span class="theorem_thmlabel">3.1.15</span>
     <div class="thm_header_extras">
 
     
@@ -1180,7 +1212,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-six">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000034"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1196,17 +1228,17 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
-          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.3</a></li>
+          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.5</a></li>
           
-          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.5</a></li>
+          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.7</a></li>
           
-          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.3</a></li>
+          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.5</a></li>
           
-          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.5</a></li>
+          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.7</a></li>
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
         </ul>
     
@@ -1241,7 +1273,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000032">
+<div class="proof_wrapper" id="a0000000034">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1249,7 +1281,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation: \(\psi (6) = \psi (2) + \psi (3) = 0 + 2 = 2\). </p>
 
   </div>
 </div>
@@ -1258,7 +1290,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.14</span>
+    <span class="theorem_thmlabel">3.1.16</span>
     <div class="thm_header_extras">
 
     
@@ -1268,7 +1300,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-ten">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1284,13 +1316,13 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
-          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.3</a></li>
+          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.5</a></li>
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
-          <li><a href="sect0003.html#lem:psi-five">Theorem 3.1.7</a></li>
+          <li><a href="sect0003.html#lem:psi-five">Theorem 3.1.9</a></li>
           
         </ul>
     
@@ -1325,7 +1357,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000033">
+<div class="proof_wrapper" id="a0000000035">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1333,7 +1365,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation: \(\psi (10) = \psi (2) + \psi (5) = 0 + 4 = 4\). </p>
 
   </div>
 </div>
@@ -1342,7 +1374,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.15</span>
+    <span class="theorem_thmlabel">3.1.17</span>
     <div class="thm_header_extras">
 
     
@@ -1352,7 +1384,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-twelve">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000034"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1368,13 +1400,13 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
-          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.5</a></li>
+          <li><a href="sect0003.html#lem:psi-three">Theorem 3.1.7</a></li>
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
-          <li><a href="sect0003.html#lem:psi-four">Theorem 3.1.6</a></li>
+          <li><a href="sect0003.html#lem:psi-four">Theorem 3.1.8</a></li>
           
         </ul>
     
@@ -1409,7 +1441,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000034">
+<div class="proof_wrapper" id="a0000000036">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1417,7 +1449,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> Direct computation: \(\psi (12) = \psi (4) + \psi (3) = 2 + 2 = 4\). </p>
 
   </div>
 </div>
@@ -1426,7 +1458,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.16</span>
+    <span class="theorem_thmlabel">3.1.18</span>
     <div class="thm_header_extras">
 
     
@@ -1436,7 +1468,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-ge-psiPrimePow">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1452,9 +1484,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
         </ul>
     
@@ -1489,7 +1521,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000035">
+<div class="proof_wrapper" id="a0000000037">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1497,7 +1529,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>The sum \(\psi (m)\) includes the term \(\psi _{pp}(p, v_p(m))\), and all terms are non-negative. </p>
 
   </div>
 </div>
@@ -1506,7 +1538,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.17</span>
+    <span class="theorem_thmlabel">3.1.19</span>
     <div class="thm_header_extras">
 
     
@@ -1516,7 +1548,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psiPrimePow-ge-four-large">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000038"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1532,7 +1564,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -1567,7 +1599,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000036">
+<div class="proof_wrapper" id="a0000000038">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1575,7 +1607,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>For \(p \geq 5\) and \(k \geq 1\), \(\varphi (p^k) = p^{k-1}(p-1) \geq p - 1 \geq 4\). </p>
 
   </div>
 </div>
@@ -1584,7 +1616,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.18</span>
+    <span class="theorem_thmlabel">3.1.20</span>
     <div class="thm_header_extras">
 
     
@@ -1594,7 +1626,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psiPrimePow-ge-four-two">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1610,7 +1642,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -1645,7 +1677,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000037">
+<div class="proof_wrapper" id="a0000000039">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1653,7 +1685,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>For \(k \geq 3\), \(\varphi (2^k) = 2^{k-1} \geq 2^2 = 4\). </p>
 
   </div>
 </div>
@@ -1662,7 +1694,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.19</span>
+    <span class="theorem_thmlabel">3.1.21</span>
     <div class="thm_header_extras">
 
     
@@ -1672,7 +1704,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psiPrimePow-ge-six-three">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000038"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1688,7 +1720,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -1723,7 +1755,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000038">
+<div class="proof_wrapper" id="a0000000040">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1731,7 +1763,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>For \(k \geq 2\), \(\varphi (3^k) = 3^{k-1} \cdot 2 \geq 3 \cdot 2 = 6\). </p>
 
   </div>
 </div>
@@ -1740,7 +1772,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.20</span>
+    <span class="theorem_thmlabel">3.1.22</span>
     <div class="thm_header_extras">
 
     
@@ -1750,7 +1782,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psiPrimePow-le-totient">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1766,7 +1798,7 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
         </ul>
     
@@ -1801,7 +1833,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000039">
+<div class="proof_wrapper" id="a0000000041">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1809,7 +1841,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p>By definition, \(\psi _{pp}(p,k)\) equals \(\varphi (p^k)\) except when \((p,k) = (2,1)\), where it returns \(0 \leq 1 = \varphi (2)\). </p>
 
   </div>
 </div>
@@ -1818,7 +1850,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.21</span>
+    <span class="theorem_thmlabel">3.1.23</span>
     <div class="thm_header_extras">
 
     
@@ -1828,7 +1860,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:psi-le-totient">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000042"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1844,17 +1876,17 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
-          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.4</a></li>
+          <li><a href="sect0003.html#lem:psi-prime-pow">Theorem 3.1.6</a></li>
           
-          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.3</a></li>
+          <li><a href="sect0003.html#lem:psi-two">Theorem 3.1.5</a></li>
           
-          <li><a href="sect0003.html#lem:psi-one">Theorem 3.1.2</a></li>
+          <li><a href="sect0003.html#lem:psi-one">Theorem 3.1.4</a></li>
           
-          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.12</a></li>
+          <li><a href="sect0003.html#lem:psi-coprime-add">Theorem 3.1.14</a></li>
           
         </ul>
     
@@ -1902,7 +1934,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000040">
+<div class="proof_wrapper" id="a0000000042">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -1910,7 +1942,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> By strong induction on \(m\). For \(m = 1\): both sides are \(0\). For \(m {\gt} 1\): use coprime factorization \(m = a \cdot b\) with \(1 {\lt} a, b {\lt} m\). Then \(\psi (m) = \psi (a) + \psi (b) \leq \varphi (a) + \varphi (b) \leq \varphi (m)\) by the inductive hypothesis and multiplicativity of \(\varphi \). </p>
 
   </div>
 </div>
@@ -1919,7 +1951,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">3.1.22</span>
+    <span class="theorem_thmlabel">3.1.24</span>
     <div class="thm_header_extras">
 
     
@@ -1929,7 +1961,7 @@
 
     <a class="icon proof" href="sect0003.html#lem:sum-totient-ge-psi">#</a>
     
-    <a class="icon proof" href="sect0003.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0003.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1945,17 +1977,17 @@
         
         <ul class="uses">
           
-          <li><a href="sect0003.html#psi-def">Definition 3.1.2</a></li>
+          <li><a href="sect0003.html#psi-def">Theorem 3.1.2</a></li>
           
-          <li><a href="sect0003.html#lem:psi-le-totient">Theorem 3.1.21</a></li>
+          <li><a href="sect0003.html#lem:psi-le-totient">Theorem 3.1.23</a></li>
           
           <li><a href="sect0002.html#lem:lcm-factorization-le-sup">Theorem 2.0.2</a></li>
           
-          <li><a href="sect0003.html#psiPrimePow-def">Definition 3.1.1</a></li>
+          <li><a href="sect0003.html#psiPrimePow-def">Theorem 3.1.1</a></li>
           
-          <li><a href="sect0003.html#lem:psi-le-totient">Theorem 3.1.21</a></li>
+          <li><a href="sect0003.html#lem:psi-le-totient">Theorem 3.1.23</a></li>
           
-          <li><a href="sect0003.html#lem:psi-one">Theorem 3.1.2</a></li>
+          <li><a href="sect0003.html#lem:psi-one">Theorem 3.1.4</a></li>
           
           <li><a href="sect0002.html#lem:sum-le-prod">Theorem 2.0.1</a></li>
           
@@ -1995,7 +2027,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000041">
+<div class="proof_wrapper" id="a0000000043">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -2003,7 +2035,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  
+  <p> For each prime power \(p^k \|  m\), some \(d \in S\) must have \(p^k \mid d\) (since \(\text{lcm}(S) = m\)). The element with maximal \(p\)-valuation contributes at least \(\varphi (p^k) \geq \psi _{pp}(p, k)\). Summing over distinct prime powers and using non-negativity gives the bound. </p>
 
   </div>
 </div>

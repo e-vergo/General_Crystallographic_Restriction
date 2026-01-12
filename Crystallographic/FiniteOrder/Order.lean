@@ -32,7 +32,9 @@ Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both 
 and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 @[blueprint "thm:orderOf-blockDiag2"
   (statement := /-- $\mathrm{ord}(\mathrm{diag}(A, B)) = \mathrm{lcm}(\mathrm{ord}(A),
-  \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)]
+  \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)
+  (proof := /-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
+  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/)]
 theorem orderOf_blockDiag2 {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
@@ -55,7 +57,9 @@ theorem orderOf_blockDiag2 {M K : ℕ}
     then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
 @[blueprint "lem:lcm-mem-orders"
   (statement := /-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
-  \uses{thm:orderOf-blockDiag2} -/)]
+  \uses{thm:orderOf-blockDiag2} -/)
+  (proof := /-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
+  diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/)]
 theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
     Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
@@ -77,7 +81,9 @@ theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
     then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/
 @[blueprint "lem:mul-mem-orders-coprime"
   (statement := /-- Product of coprime achievable orders is achievable.
-  \uses{lem:lcm-mem-orders} -/)]
+  \uses{lem:lcm-mem-orders} -/)
+  (proof := /-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
+  follows from the lcm result. -/)]
 theorem mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
     (hcop : Nat.Coprime m₁ m₂) :

@@ -46,13 +46,16 @@ An integer `m` is in this set if there exists an N×N integer matrix `A` such th
   "integerMatrixOrders-def"
   (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
   with finite order. An integer $m$ is in this set if there exists an $N \times N$ integer matrix
-  $A$ with $\mathrm{ord}(A) = m$. -/)]
+  $A$ with $\mathrm{ord}(A) = m$. -/)
+  (proof := /-- Definition. The set collects all orders $m$ witnessed by some $N \times N$
+  integer matrix. -/)]
 def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
 /-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
 @[blueprint "lem:one-mem-orders"
-  (statement := /-- Order $1$ is achievable in any dimension. -/)]
+  (statement := /-- Order $1$ is achievable in any dimension. -/)
+  (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
 theorem one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N := by
   use 1
   constructor
@@ -81,7 +84,9 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
 
 /-- For N ≥ 1, the negation of the identity matrix has order 2. -/
 @[blueprint "lem:two-mem-orders"
-  (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)]
+  (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
+  (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
+  so it has order $2$. -/)]
 theorem two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N := by
   use -1
   constructor
@@ -170,7 +175,10 @@ for N x N matrices.
 The construction pads the M x M matrix with an identity block in the lower-right corner. -/
 @[blueprint "lem:orders-mono"
   (statement := /-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
-  \uses{integerMatrixOrders-def} -/)]
+  \uses{integerMatrixOrders-def} -/)
+  (proof := /-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
+  top-left block of an $N \times N$ matrix with identity in the bottom-right. The order is
+  preserved. -/)]
 theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     integerMatrixOrders M ⊆ integerMatrixOrders N := by
   intro m hm
@@ -197,7 +205,8 @@ then d ∈ integerMatrixOrders N.
 
 If A has order m and d | m, then A^{m/d} has order d. -/
 @[blueprint "lem:divisor-mem-orders"
-  (statement := /-- If $m \in \mathrm{Ord}_N$ and $d \mid m$, then $d \in \mathrm{Ord}_N$. -/)]
+  (statement := /-- If $m \in \mathrm{Ord}_N$ and $d \mid m$, then $d \in \mathrm{Ord}_N$. -/)
+  (proof := /-- If $A$ has order $m$ and $d \mid m$, then $A^{m/d}$ has order $d$. -/)]
 theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
     (hm : m ∈ integerMatrixOrders N) (hd : d ∣ m) (hd_pos : 0 < d) :
     d ∈ integerMatrixOrders N := by
@@ -213,7 +222,9 @@ theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
 
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
 @[blueprint "def:blockDiag2"
-  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
+  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)
+  (proof := /-- Definition. Block diagonal matrix with $A$ in top-left, $B$ in bottom-right,
+  zeros elsewhere. -/)]
 def blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ :=
   Matrix.fromBlocks A 0 0 B
@@ -233,7 +244,9 @@ lemma blockDiag2_mul {M K : ℕ}
 
 /-- Block diagonal is one iff both components are one. -/
 @[blueprint "lem:blockDiag2-eq-one"
-  (statement := /-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/)]
+  (statement := /-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/)
+  (proof := /-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
+  respective identities. -/)]
 lemma blockDiag2_eq_one_iff {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by
@@ -245,7 +258,9 @@ lemma blockDiag2_eq_one_iff {M K : ℕ}
 
 (blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/
 @[blueprint "lem:blockDiag2-pow"
-  (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)]
+  (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)
+  (proof := /-- By induction on $n$: the block structure is preserved under multiplication, and
+  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')$. -/)]
 lemma blockDiag2_pow {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) (k : ℕ) :
     (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by

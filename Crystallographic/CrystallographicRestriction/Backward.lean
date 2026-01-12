@@ -464,7 +464,12 @@ The construction uses companion matrices of cyclotomic polynomials.
   \item Pad with identity blocks to reach size $N \times N$ (padding does not change order).
   \end{enumerate}
   \uses{integerMatrixOrders-def, psi-def, companion-def, thm:companion-charpoly,
-        thm:companion-cycl-order, thm:mem-orders-totient} --/)]
+        thm:companion-cycl-order, thm:mem-orders-totient} --/)
+  (proof := /-- We construct a matrix of order $m$ in dimension $\psi(m)$ by taking block diagonals
+  of companion matrices for cyclotomic polynomials $\Phi_{p^k}$ of each prime power factor.
+  The companion matrix $C(\Phi_{p^k})$ has order exactly $p^k$ and size $\varphi(p^k)$.
+  Block diagonal matrices have order equal to the lcm of block orders, which equals $m$
+  for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/)]
 theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
     (hpsi : Crystallographic.psi m ≤ N) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N := by

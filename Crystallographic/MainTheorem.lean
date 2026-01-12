@@ -63,7 +63,10 @@ crystallographic groups. -/
   \textbf{Backward direction:} For each prime power $p^k$ (with $p \neq 2$ or $k \geq 2$),
   the companion matrix of $\Phi_{p^k}$ has size $\varphi(p^k)$ and order $p^k$. For general $m$,
   block diagonal combinations of these companion matrices achieve order $m$ in dimension $\psi(m)$.
-  \uses{thm:forward-direction, thm:backward-direction} --/)]
+  \uses{thm:forward-direction, thm:backward-direction} --/)
+  (proof := /-- The proof combines the forward and backward directions. The forward direction shows
+  that eigenvalue constraints force $\psi(m) \leq N$. The backward direction constructs explicit
+  matrices achieving each order using companion matrices of cyclotomic polynomials. --/)]
 theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N ↔ psi m ≤ N :=
   ⟨psi_le_of_mem_integerMatrixOrders N m hm,

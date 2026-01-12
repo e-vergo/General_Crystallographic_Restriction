@@ -36,7 +36,9 @@ namespace Crystallographic
 
 /-- psiPrimePow is always at most totient. -/
 @[blueprint "lem:psiPrimePow-le-totient"
-  (statement := /-- $\psi_{pp}(p, k) \leq \varphi(p^k)$. -/)]
+  (statement := /-- $\psi_{pp}(p, k) \leq \varphi(p^k)$. -/)
+  (proof := /-- By definition, $\psi_{pp}(p,k)$ equals $\varphi(p^k)$ except when $(p,k) = (2,1)$,
+  where it returns $0 \leq 1 = \varphi(2)$. -/)]
 lemma psiPrimePow_le_totient (p k : ℕ) :
     Crystallographic.psiPrimePow p k ≤ Nat.totient (p ^ k) := by
   simp only [Crystallographic.psiPrimePow]
@@ -75,7 +77,11 @@ Key cases:
   \item For general composite without $2^1$ factor:
         each $\varphi(p^k) \geq 2$, so sum $\leq$ product
   \end{itemize}
-  \uses{psi-def, psiPrimePow-def} --/)]
+  \uses{psi-def, psiPrimePow-def} --/)
+  (proof := /-- By strong induction on $m$. For $m = 1$: both sides are $0$. For $m > 1$:
+  use coprime factorization $m = a \cdot b$ with $1 < a, b < m$. Then
+  $\psi(m) = \psi(a) + \psi(b) \leq \varphi(a) + \varphi(b) \leq \varphi(m)$
+  by the inductive hypothesis and multiplicativity of $\varphi$. -/)]
 lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.totient m := by
   -- Strong induction on m
   induction m using Nat.strong_induction_on with
@@ -250,7 +256,11 @@ The proof proceeds by showing that any other choice of S either:
   $\psi_{\text{pp}}(p, k)$. This is the combinatorial heart of the forward direction.
   The minimum sum is achieved when $S$ consists of one prime power for each distinct prime
   in $m$'s factorization, giving exactly $\psi(m)$.
-  \uses{psi-def, lem:psi-le-totient} --/)]
+  \uses{psi-def, lem:psi-le-totient} --/)
+  (proof := /-- For each prime power $p^k \| m$, some $d \in S$ must have $p^k \mid d$
+  (since $\text{lcm}(S) = m$). The element with maximal $p$-valuation contributes
+  at least $\varphi(p^k) \geq \psi_{pp}(p, k)$. Summing over distinct prime powers
+  and using non-negativity gives the bound. -/)]
 lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     Crystallographic.psi m ≤ ∑ d ∈ S, Nat.totient d := by

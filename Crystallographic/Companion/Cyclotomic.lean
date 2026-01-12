@@ -35,7 +35,9 @@ open Matrix Polynomial
 @[blueprint "lem:companion-cycl-pow"
   (statement := /-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
   $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply \texttt{companion\_pow\_eq\_one\_of\_dvd}.
-  \uses{thm:companion-pow-dvd} -/)]
+  \uses{thm:companion-pow-dvd} -/)
+  (proof := /-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
+  the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/)]
 theorem companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
@@ -47,7 +49,10 @@ theorem companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
   because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
   for $d < m$, then $\Phi_m$ would divide $X^d - 1$, contradicting that primitive $m$-th
   roots of unity are not $d$-th roots of unity for $d < m$.
-  \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/)]
+  \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/)
+  (proof := /-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
+  For the lower bound: if $C(\Phi_m)^d = I$ for $d < m$, then $\Phi_m \mid X^d - 1$,
+  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/)]
 theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
@@ -207,7 +212,9 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
   (statement := /-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
   $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
   with integer entries, and has order exactly $m$ by \texttt{companion\_cyclotomic\_orderOf}.
-  \uses{thm:companion-cycl-order} -/)]
+  \uses{thm:companion-cycl-order} -/)
+  (proof := /-- The companion matrix $C(\Phi_m)$ witnesses the membership: it is an integer matrix
+  of dimension $\deg(\Phi_m) = \varphi(m)$ with multiplicative order exactly $m$. -/)]
 theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
@@ -220,7 +227,9 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
   (statement := /-- For $m \geq 2$, $m \in \mathrm{Ord}_{\varphi(m)}$. This is the key
   existence result: for every $m \geq 2$, there exists an integer matrix of dimension
   $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.
-  \uses{thm:companion-cycl-mem} -/)]
+  \uses{thm:companion-cycl-mem} -/)
+  (proof := /-- Apply the cyclotomic companion membership theorem after noting that
+  $\deg(\Phi_m) = \varphi(m)$. -/)]
 theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
     m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
   have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
