@@ -79,16 +79,33 @@ Your fundamental purpose is relentless pursuit of truth through disciplined, unc
   - Check `lean_local_search` for project-specific lemmas before writing duplicates
   - Use `lean_state_search` and `lean_hammer_premise` when stuck on a goal
 
+  **Lean Architecht Use**
+  - This project uses a tool called lean architect. it is described by:  "LeanArchitect is a tool for generating the blueprint data of a Lean project directly from Lean. The blueprint is a high-level plan of a Lean project, consisting of a series of nodes (theorems and definitions) and the dependency relations between them. The purpose of LeanArchitect is to make it easier to write the blueprint by generating blueprint data directly from Lean. Start by annotating definitions and theorems in Lean with the @[blueprint] tag. They will then be exported to LaTeX, which you may then put in the blueprint."
+  - The tag options are:
+    - @[blueprint
+  "latex-label"             -- The LaTeX label to use for the node (default: Lean name)
+  (statement := /-- ... -/) -- The statement of the node in LaTeX
+  (hasProof := true)        -- If the node has a proof part (default: true if the node is a theorem)
+  (proof := /-- ... -/)     -- The proof of the node in LaTeX (default: the docstrings in proof tactics)
+  (uses := [a, "b"])        -- The dependencies of the node, as Lean constants or LaTeX labels (default: inferred)
+  (proofUses := [a, "b"])   -- The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred)
+  (title := /-- Title -/)   -- The title of the node in LaTeX
+  (notReady := true)        -- Whether the node is not ready
+  (discussion := 123)       -- The discussion issue number of the node
+  (latexEnv := "lemma")     -- The LaTeX environment to use for the node (default: "theorem" or "definition")
+]
+
+
   **Anti-Patterns to Avoid:**
   - Writing progress summaries or documentation markdown (wastes tokens, becomes stale)
   - Skipping intermediate diagnostic messages checks (fail fast on type errors)
   - Batching multiple changes before testing (harder to isolate failures)
   - giving up on a proof because it is getting tedious/complicated or any other form of difficult and saying "I'll leave this as a sorry for now" all proofs need to be completed eventually so 'moving on and coming back' does you no good.
-  - **CRITICAL** Using axioms, assertions, trivial statements, or any other type of proof writing that deviates from having a complete, airtight proof fully formalized. This is never, under any circumstance acceptable. Never do it, ask if it's ok, or suggest it.
-- never run 'lake clean'.
-- do not discuss or estimate timelines, only plan and think in terms of tasks and order in which they need to be accomplished. not hot long it will take.
-- do not discuss how difficult a task is unless explicitly asked
-- never use lake clean
-- never use the `lean_run_code` tool available in the MCP. it is token inefficient.
-- never use emojis
--
+  - **CRITICAL** Using axioms, assertions, trivial statements, or any other type of proof writing that deviates from having a complete, airtight proof full formalized. This is never, under any circumstance acceptable. Never do it, ask if it's ok, or suggest it.
+  - never run 'lake clean'.
+  - do not discuss or estimate timelines, only plan and think in terms of tasks and order in which they need to be accomplished. not hot long it will take.
+  - do not discuss how difficult a task is unless explicitly asked
+  - never use lake clean
+  - never use the `lean_run_code` tool available in the MCP. it is token inefficient.
+  - never use emojis
+

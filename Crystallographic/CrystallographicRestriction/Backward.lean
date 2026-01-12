@@ -46,33 +46,33 @@ open Matrix Polynomial
 /-! ## Permutation matrix infrastructure -/
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
-lemma permMatrix_one' {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
+lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
     (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
   ext i j
   simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_apply, Equiv.toPEquiv_apply,
     PEquiv.toMatrix_apply, one_apply, Option.mem_def, Option.some.injEq]
 
 /-- Permutation matrices compose: (σ * τ).permMatrix = τ.permMatrix * σ.permMatrix -/
-lemma permMatrix_mul' {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ τ : Equiv.Perm n) :
     (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by
   simp only [Equiv.Perm.permMatrix]
   rw [Equiv.Perm.mul_def, Equiv.toPEquiv_trans, PEquiv.toMatrix_trans]
 
 /-- Permutation matrices power correctly: (σ^k).permMatrix = (σ.permMatrix)^k -/
-lemma permMatrix_pow' {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ : Equiv.Perm n) (k : ℕ) :
     (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
   induction k with
-  | zero => simp only [pow_zero]; exact permMatrix_one'
+  | zero => simp only [pow_zero]; exact permMatrix_one
   | succ k ih =>
-    rw [pow_succ, pow_succ, permMatrix_mul', ih]
+    rw [pow_succ, pow_succ, permMatrix_mul, ih]
     -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
     -- Use SemiconjBy or direct equality - both sides are equal
     exact (Commute.pow_self (σ.permMatrix R) k).eq.symm
 
 /-- Permutation matrix is identity iff permutation is identity. -/
-lemma permMatrix_eq_one_iff' {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     σ.permMatrix R = 1 ↔ σ = 1 := by
   constructor
@@ -91,34 +91,34 @@ lemma permMatrix_eq_one_iff' {n : Type*} [DecidableEq n] [Fintype n] {R : Type*}
       have h1 : (1 : R) = if x = σ x then 1 else 0 := hx
       rw [if_neg (ne_comm.mpr hσx)] at h1
       exact one_ne_zero h1
-  · intro h; rw [h]; exact permMatrix_one'
+  · intro h; rw [h]; exact permMatrix_one
 
 /-- Order of permutation matrix equals order of permutation. -/
 @[blueprint "lem:orderOf-permMatrix"
-  (statement := /-- $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$ for permutation matrix. -/)]
-lemma orderOf_permMatrix' {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+  (statement := /-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/)]
+lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     orderOf (σ.permMatrix R) = orderOf σ := by
   rcases Nat.eq_zero_or_pos (orderOf σ) with hord | hord
   · -- σ has infinite order (orderOf σ = 0)
     rw [hord, orderOf_eq_zero_iff']
     intro k hk heq
-    have h1 : (σ ^ k).permMatrix R = 1 := by rw [permMatrix_pow']; exact heq
-    rw [permMatrix_eq_one_iff'] at h1
+    have h1 : (σ ^ k).permMatrix R = 1 := by rw [permMatrix_pow]; exact heq
+    rw [permMatrix_eq_one_iff] at h1
     exact (orderOf_eq_zero_iff'.mp hord) k hk h1
   · -- σ has finite order
     rw [orderOf_eq_iff hord]
     constructor
-    · rw [← permMatrix_pow', pow_orderOf_eq_one]; exact permMatrix_one'
+    · rw [← permMatrix_pow, pow_orderOf_eq_one]; exact permMatrix_one
     · intro k hk_lt hk_pos heq
-      have hk' : (σ ^ k).permMatrix R = 1 := by rw [permMatrix_pow']; exact heq
-      rw [permMatrix_eq_one_iff'] at hk'
+      have hk' : (σ ^ k).permMatrix R = 1 := by rw [permMatrix_pow]; exact heq
+      rw [permMatrix_eq_one_iff] at hk'
       have hdvd : orderOf σ ∣ k := orderOf_dvd_of_pow_eq_one hk'
       exact Nat.not_lt.mpr (Nat.le_of_dvd hk_pos hdvd) hk_lt
 
 /-- The finRotate permutation has order n for n at least 2. -/
 @[blueprint "lem:orderOf-finRotate"
-  (statement := /-- $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/)]
+  (statement := /-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/)]
 lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := by
   have hcycle := isCycle_finRotate_of_le hn
   have hord := Equiv.Perm.IsCycle.orderOf hcycle
@@ -128,7 +128,7 @@ lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := 
 /-- finRotate permutation matrix has order n for n >= 2. -/
 lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
     orderOf ((finRotate n).permMatrix ℤ) = n := by
-  rw [orderOf_permMatrix', orderOf_finRotate n hn]
+  rw [orderOf_permMatrix, orderOf_finRotate n hn]
 
 /-- Order n is achievable by an n x n integer matrix for n at least 2. -/
 @[blueprint "lem:mem-integerMatrixOrders-self"
@@ -155,7 +155,7 @@ lemma order_two_achievable (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
 
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
-  (statement := /-- $p^k \in \mathrm{Ord}_{\psi(p^k)}$ for prime powers with $p$ odd or $k \geq 2$.
+  (statement := /-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
   -/)]
 theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 < k)
     (hpk : ¬(p = 2 ∧ k = 1)) :

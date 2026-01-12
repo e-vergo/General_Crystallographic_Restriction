@@ -35,20 +35,14 @@ namespace Crystallographic
 
 open Matrix
 
-blueprint_comment /--
-\section{Integer Matrix Orders}
--/
-
 /-- The set of possible orders for N×N integer matrices with finite order.
 An integer `m` is in this set if there exists an N×N integer matrix `A` such that
 `orderOf A = m` and `m > 0` (equivalently, `A` has finite order). -/
 @[blueprint
   "integerMatrixOrders-def"
   (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
-  with finite order. An integer $m$ is in this set if there exists an $N \times N$ integer matrix
-  $A$ with $\mathrm{ord}(A) = m$. -/)
-  (proof := /-- Definition. The set collects all orders $m$ witnessed by some $N \times N$
-  integer matrix. -/)]
+  with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
+  $A$ with order $m$. -/)]
 def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
@@ -56,7 +50,7 @@ def integerMatrixOrders (N : ℕ) : Set ℕ :=
 @[blueprint "lem:one-mem-orders"
   (statement := /-- Order $1$ is achievable in any dimension. -/)
   (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
-theorem one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N := by
+lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N := by
   use 1
   constructor
   · exact orderOf_one
@@ -87,7 +81,7 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
   (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
   (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
   so it has order $2$. -/)]
-theorem two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N := by
+lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N := by
   use -1
   constructor
   · rw [orderOf_neg_one, ringChar_matrix_int, if_neg (by norm_num : (0 : ℕ) ≠ 2)]
@@ -113,16 +107,17 @@ lemma embedMatrixSum_mul {M K : ℕ} (A B : Matrix (Fin M) (Fin M) ℤ) :
   simp
 
 /-- The embedding is a monoid homomorphism. -/
-def embedMatrixSumHom (M K : ℕ) :
+def embedMatrixSum.monoidHom (M K : ℕ) :
     Matrix (Fin M) (Fin M) ℤ →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ where
   toFun := embedMatrixSum
   map_one' := embedMatrixSum_one
   map_mul' := embedMatrixSum_mul
 
 /-- The embedding is injective. -/
-lemma embedMatrixSumHom_injective (M K : ℕ) : Function.Injective (embedMatrixSumHom M K) := by
+lemma embedMatrixSum.monoidHom_injective (M K : ℕ) :
+    Function.Injective (embedMatrixSum.monoidHom M K) := by
   intro A B hAB
-  simp only [embedMatrixSumHom, MonoidHom.coe_mk, OneHom.coe_mk] at hAB
+  simp only [embedMatrixSum.monoidHom, MonoidHom.coe_mk, OneHom.coe_mk] at hAB
   ext i j
   have h := congrFun (congrFun hAB (Sum.inl i)) (Sum.inl j)
   simp only [embedMatrixSum, fromBlocks_apply₁₁] at h
@@ -131,7 +126,7 @@ lemma embedMatrixSumHom_injective (M K : ℕ) : Function.Injective (embedMatrixS
 /-- The embedding preserves order. -/
 lemma orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
     orderOf (embedMatrixSum (K := K) A) = orderOf A :=
-  orderOf_injective (embedMatrixSumHom M K) (embedMatrixSumHom_injective M K) A
+  orderOf_injective (embedMatrixSum.monoidHom M K) (embedMatrixSum.monoidHom_injective M K) A
 
 /-- Alternative set of orders using Sum-indexed matrices for convenience.
 
@@ -200,31 +195,11 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
   · exact hA_pos
 
-/-- Divisibility: if m ∈ integerMatrixOrders N and d | m with d > 0,
-then d ∈ integerMatrixOrders N.
-
-If A has order m and d | m, then A^{m/d} has order d. -/
-@[blueprint "lem:divisor-mem-orders"
-  (statement := /-- If $m \in \mathrm{Ord}_N$ and $d \mid m$, then $d \in \mathrm{Ord}_N$. -/)
-  (proof := /-- If $A$ has order $m$ and $d \mid m$, then $A^{m/d}$ has order $d$. -/)]
-theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
-    (hm : m ∈ integerMatrixOrders N) (hd : d ∣ m) (hd_pos : 0 < d) :
-    d ∈ integerMatrixOrders N := by
-  simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
-  obtain ⟨A, hA_ord, hA_pos⟩ := hm
-  use A ^ (m / d)
-  constructor
-  · rw [← hA_ord]
-    exact orderOf_pow_orderOf_div (ne_of_gt (hA_ord.symm ▸ hA_pos)) (hA_ord.symm ▸ hd)
-  · exact hd_pos
-
 /-! ## Block diagonal matrix infrastructure -/
 
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
 @[blueprint "def:blockDiag2"
-  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)
-  (proof := /-- Definition. Block diagonal matrix with $A$ in top-left, $B$ in bottom-right,
-  zeros elsewhere. -/)]
+  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
 def blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ :=
   Matrix.fromBlocks A 0 0 B

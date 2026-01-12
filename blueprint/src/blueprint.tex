@@ -9,6 +9,7 @@
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{corollary}{Corollary}[section]
+\newtheorem{auxlemma}{Lemma}[section]
 
 \title{Crystallographic Restriction Theorem}
 
@@ -20,26 +21,81 @@
 
 \chapter{Introduction}
 
-The \emph{Crystallographic Restriction Theorem} characterizes exactly which rotation orders
-are achievable by integer matrices. Specifically, an $N \times N$ integer matrix can have
-finite order $m$ if and only if $\psi(m) \leq N$, where $\psi$ is a function based on
-Euler's totient function.
+The \emph{Crystallographic Restriction Theorem} characterizes exactly which orders can be
+achieved by integer matrices of a given dimension. For an $N \times N$ matrix $M$ with
+integer entries, we say $M$ has \emph{finite order} $m$ if $M^m = I$ and $m$ is the smallest
+such positive integer. The theorem provides a complete answer to the question: which values
+of $m$ can occur as orders of $N \times N$ integer matrices?
 
-\chapter{Supporting Lemmas}
+\medskip
 
-\inputleanmodule{Crystallographic.Lemmas}
+\noindent\textbf{Main Theorem.} \textit{An $N \times N$ integer matrix can have finite order $m$
+if and only if $\psi(m) \leq N$, where $\psi$ is defined below.}
+
+\medskip
+
+The function $\psi$ measures the ``arithmetic complexity'' of $m$ in terms of Euler's
+totient function $\varphi$. For a prime power $p^k$, we define the \emph{prime power
+contribution}:
+\[
+\psi_{\mathrm{pp}}(p, k) =
+\begin{cases}
+0 & \text{if } p = 2 \text{ and } k = 1, \\
+\varphi(p^k) & \text{otherwise}.
+\end{cases}
+\]
+The special case $\psi_{\mathrm{pp}}(2, 1) = 0$ reflects the fact that order 2 can be achieved
+by the $0 \times 0$ empty matrix (or equivalently, $-I$ achieves order 2 without increasing
+dimension). For a general positive integer $m$ with prime factorization
+$m = \prod_{i} p_i^{k_i}$, we define:
+\[
+\psi(m) = \sum_{i} \psi_{\mathrm{pp}}(p_i, k_i).
+\]
+
+\medskip
+
+\noindent\textbf{Proof Strategy.}
+The proof splits naturally into two directions.
+
+\textit{Forward direction ($m \in \mathrm{Ord}_N \Rightarrow \psi(m) \leq N$):}
+If $M$ is an $N \times N$ integer matrix with order $m$, then $M$ satisfies
+$M^m = I$, so its minimal polynomial divides $X^m - 1$. Since $M$ has exact order $m$,
+the $m$-th cyclotomic polynomial $\Phi_m$ divides the minimal polynomial, and hence divides
+the characteristic polynomial of $M$. By the degree constraint,
+$\deg(\chi_M) = N \geq \deg(\Phi_m) = \varphi(m) \geq \psi(m)$.
+
+\textit{Backward direction ($\psi(m) \leq N \Rightarrow m \in \mathrm{Ord}_N$):}
+We construct an integer matrix of order $m$ with dimension exactly $\psi(m)$, which can
+then be embedded into any larger dimension. The construction uses companion matrices of
+cyclotomic polynomials. For a prime power $p^k$ with $\psi_{\mathrm{pp}}(p, k) > 0$,
+the companion matrix of $\Phi_{p^k}$ is a $\varphi(p^k) \times \varphi(p^k)$ integer matrix
+with order $p^k$. For composite $m$, we combine companion matrices for each prime power
+factor in a block diagonal arrangement. The coprimality of orders ensures the combined
+matrix has order $\mathrm{lcm}$ of the individual orders, which equals $m$.
+
+\medskip
+
+This formalization follows the approach of Bamberg, Cairns, and Kilminster~\cite{BCK2003},
+who characterized achievable orders in arbitrary dimension using the $\psi$ function.
+
+\begin{thebibliography}{1}
+\bibitem{BCK2003}
+J.~Bamberg, G.~Cairns, and D.~Kilminster.
+\newblock The crystallographic restriction, permutations, and {G}oldbach's conjecture.
+\newblock \textit{Amer. Math. Monthly}, 110(3):202--209, 2003.
+\end{thebibliography}
 
 \chapter{The Psi Function}
 
 The $\psi$ function measures the ``arithmetic complexity'' of a positive integer $m$.
 For a prime power $p^k$, we define:
 \begin{itemize}
-\item $\psi_{pp}(p,k) = \varphi(p^k)$ for $p$ odd or $k \geq 2$
-\item $\psi_{pp}(2,1) = 0$
+\item $\psi_{\mathrm{pp}}(p,k) = \varphi(p^k)$ for $p$ odd or $k \geq 2$
+\item $\psi_{\mathrm{pp}}(2,1) = 0$
 \end{itemize}
 
 For a general integer $m$ with prime factorization $m = \prod_i p_i^{k_i}$, we have:
-$$\psi(m) = \sum_i \psi_{pp}(p_i, k_i)$$
+$$\psi(m) = \sum_i \psi_{\mathrm{pp}}(p_i, k_i)$$
 
 \inputleanmodule{Crystallographic.Psi.Basic}
 \inputleanmodule{Crystallographic.Psi.Bounds}
@@ -58,16 +114,22 @@ Companion matrices provide a key construction for achieving orders via cyclotomi
 \inputleanmodule{Crystallographic.Companion}
 \inputleanmodule{Crystallographic.Companion.Cyclotomic}
 
-\chapter{The Crystallographic Restriction}
+\chapter{The Crystallographic Restriction Theorem}
 
 The proof splits into two directions: showing $\psi(m) \leq N$ is necessary (forward)
 and sufficient (backward) for $m \in \mathrm{Ord}_N$.
 
 \inputleanmodule{Crystallographic.CrystallographicRestriction.Forward}
 \inputleanmodule{Crystallographic.CrystallographicRestriction.Backward}
-
-\chapter{Main Theorem}
-
 \inputleanmodule{Crystallographic.MainTheorem}
+
+\appendix
+\chapter{Auxiliary Lemmas}
+
+This appendix collects technical lemmas used throughout the proof.
+These are general-purpose results about finite sets, coprime products,
+Euler's totient function, and matrix orders that support the main arguments.
+
+\inputleanmodule{Crystallographic.Lemmas}
 
 \end{document}

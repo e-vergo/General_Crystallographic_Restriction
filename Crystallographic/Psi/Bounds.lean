@@ -34,20 +34,6 @@ namespace Crystallographic
 
 /-! ## Helper lemmas for the forward direction -/
 
-/-- psiPrimePow is always at most totient. -/
-@[blueprint "lem:psiPrimePow-le-totient"
-  (statement := /-- $\psi_{pp}(p, k) \leq \varphi(p^k)$. -/)
-  (proof := /-- By definition, $\psi_{pp}(p,k)$ equals $\varphi(p^k)$ except when $(p,k) = (2,1)$,
-  where it returns $0 \leq 1 = \varphi(2)$. -/)]
-lemma psiPrimePow_le_totient (p k : ℕ) :
-    Crystallographic.psiPrimePow p k ≤ Nat.totient (p ^ k) := by
-  simp only [Crystallographic.psiPrimePow]
-  split_ifs with hk h2
-  · simp [hk]
-  · obtain ⟨rfl, rfl⟩ := h2
-    simp [Nat.totient_prime Nat.prime_two]
-  · exact le_refl _
-
 /-- Totient of a prime power is at least 2 unless it's (2,1). -/
 theorem totient_primePow_ge_two {p k : ℕ} (hp : p.Prime) (hk : 0 < k)
     (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
@@ -169,6 +155,7 @@ Key cases:
 - m = 2 * odd (with odd > 1): psi(m) = psi(odd) ≤ totient(odd) = totient(m)
 - m = composite without 2^1 factor: each φ(p^k) ≥ 2, so sum ≤ product -/
 @[blueprint "lem:psi-le-totient"
+  (latexEnv := "auxlemma")
   (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
 
   We prove $\psi(m) \leq \varphi(m)$ by strong induction on $m$. The key observation is that
@@ -254,19 +241,20 @@ The proof proceeds by showing that any other choice of S either:
 2. Uses a composite element d covering multiple prime powers, which costs
    φ(d) = Π φ(p^k) ≥ Σ φ(p^k) when each φ(p^k) ≥ 2. -/
 @[blueprint "lem:sum-totient-ge-psi"
+  (latexEnv := "auxlemma")
   (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
 
-  For a finite set $S$ of divisors of $m$ with $\text{lcm}(S) = m$, we have
-  $\sum_{d \in S} \varphi(d) \geq \psi(m)$. This follows from the factorization structure:
+  For a finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$, we have
+  $\sum_{d \in S} \varphi(d) \geq \psi(m)$. This follows from the prime factorization structure:
   each prime power $p^k \| m$ must appear in some $d \in S$, contributing at least
-  $\psi_{\text{pp}}(p, k)$. This is the combinatorial heart of the forward direction.
+  $\psi_{\mathrm{pp}}(p, k)$. This is the combinatorial heart of the forward direction.
   The minimum sum is achieved when $S$ consists of one prime power for each distinct prime
-  in $m$'s factorization, giving exactly $\psi(m)$.
+  in $m$'s prime factorization, giving exactly $\psi(m)$.
   \uses{psi-def, lem:psi-le-totient} --/)
   (proof := /-- For each prime power $p^k \| m$, some $d \in S$ must have $p^k \mid d$
-  (since $\text{lcm}(S) = m$). The element with maximal $p$-valuation contributes
-  at least $\varphi(p^k) \geq \psi_{pp}(p, k)$. Summing over distinct prime powers
+  (since $\mathrm{lcm}(S) = m$). The element with maximal $p$-valuation contributes
+  at least $\varphi(p^k) \geq \psi_{\mathrm{pp}}(p, k)$. Summing over distinct prime powers
   and using non-negativity gives the bound. -/)]
 lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :

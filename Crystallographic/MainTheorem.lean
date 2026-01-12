@@ -36,10 +36,6 @@ The psi function is defined as:
 
 namespace Crystallographic
 
-blueprint_comment /--
-\section{Main Theorem}
--/
-
 /-- **The Crystallographic Restriction Theorem:**
 An N×N integer matrix can have finite order m if and only if psi(m) ≤ N.
 

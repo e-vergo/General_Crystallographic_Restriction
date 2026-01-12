@@ -39,10 +39,6 @@ open Matrix Polynomial
 
 variable {R : Type*} [CommRing R]
 
-blueprint_comment /--
-\section{Companion Matrices}
--/
-
 /-- The companion matrix of a monic polynomial p of degree n.
 
 For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
@@ -64,10 +60,7 @@ coefficients in the last column.
   on the subdiagonal and $-a_i$ in the last column:
   $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\ \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
   This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/)
-  (proof := /-- Definition. The companion matrix construction ensures the characteristic polynomial
-  equals the input polynomial, making it a standard tool for realizing polynomials as
-  minimal polynomials of matrices. -/)]
+  a canonical matrix realization for any monic polynomial. -/)]
 def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =>
@@ -75,28 +68,7 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
     else if j.val + 1 = p.natDegree then -p.coeff i.val
     else 0
 
-/-! ### Basic properties -/
 
-@[blueprint "lem:companion-subdiag"
-  (statement := /-- Subdiagonal entries of $C(p)$ are $1$. \uses{companion-def} -/)
-  (proof := /-- Direct from the definition: the $(i+1, i)$ entry is $1$ when $j + 1 = i$. -/)]
-lemma companion_subdiag (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
-    (i : Fin p.natDegree) (hi : i.val + 1 < p.natDegree) :
-    companion p hp hn ⟨i.val + 1, hi⟩ i = 1 := by
-  simp only [companion, Matrix.of_apply, if_true]
-
-@[blueprint "lem:companion-last-col"
-  (statement := /-- Last column of $C(p)$ contains $-a_i$. \uses{companion-def} -/)
-  (proof := /-- Direct from the definition: the last column condition $j + 1 = n$ gives $-a_i$. -/)]
-lemma companion_last_col (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
-    (i : Fin p.natDegree) :
-    companion p hp hn i ⟨p.natDegree - 1, Nat.sub_lt hn Nat.one_pos⟩ = -p.coeff i.val := by
-  simp only [companion, Matrix.of_apply]
-  have hj : (p.natDegree - 1) + 1 = p.natDegree := Nat.sub_add_cancel hn
-  simp only [hj, ↓reduceIte]
-  split_ifs with h
-  · omega
-  · rfl
 
 /-! ### Characteristic polynomial -/
 

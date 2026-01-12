@@ -56,6 +56,7 @@ echo ""
 echo "Press Ctrl+C to stop the server."
 echo ""
 
-leanblueprint serve
+# Open browser after a short delay (in background)
+(sleep 2 && open "http://localhost:8000") &
 
-open -a Safari "http://localhost:8000"
+leanblueprint serve

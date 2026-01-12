@@ -38,7 +38,7 @@ open Matrix Polynomial
   \uses{thm:companion-pow-dvd} -/)
   (proof := /-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
   the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/)]
-theorem companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
+lemma companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
   apply companion_pow_eq_one_of_dvd
