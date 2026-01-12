@@ -45,6 +45,9 @@ jobs:
           lake build :blueprint
           cd blueprint && leanblueprint pdf && leanblueprint web
 
+      - name: Build docs
+        run: lake -Kdoc=on build Crystallographic:docs
+
       - name: Prepare Pages artifact
         run: |
           mkdir -p _site
@@ -88,9 +91,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
-      - name: Build docs
-        run: lake -Kdoc=on build Crystallographic:docs
 
   deploy:
     needs: build
