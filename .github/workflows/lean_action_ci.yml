@@ -1,14 +1,105 @@
-name: Lean Action CI
+name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
+
+# Sets permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v5
-      - uses: leanprover/lean-action@v1
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Get Mathlib cache
+        run: lake exe cache get
+
+      - name: Build project
+        run: lake build
+
+      - name: Build docs
+        run: lake -Kdoc=on build Crystallographic:docs
+
+      - name: Install blueprint dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra
+          pip install leanblueprint
+
+      - name: Build blueprint
+        run: |
+          lake build :blueprint
+          cd blueprint && leanblueprint pdf && leanblueprint web
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site
+          # Copy doc-gen4 output
+          cp -r .lake/build/doc _site/docs
+          # Copy blueprint web
+          cp -r blueprint/web _site/blueprint
+          # Copy blueprint PDF
+          cp blueprint/print/print.pdf _site/blueprint/
+          # Create index page
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Crystallographic Restriction Theorem</title>
+            <meta charset="utf-8">
+            <style>
+              body { font-family: sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              h1 { color: #333; }
+              ul { list-style-type: none; padding: 0; }
+              li { margin: 15px 0; }
+              a { color: #0066cc; text-decoration: none; font-size: 1.2em; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>Crystallographic Restriction Theorem</h1>
+            <p>Formal verification of the crystallographic restriction theorem in Lean 4.</p>
+            <ul>
+              <li><a href="docs/">API Documentation (doc-gen4)</a></li>
+              <li><a href="blueprint/">Mathematical Blueprint</a></li>
+              <li><a href="blueprint/dep_graph_document.html">Dependency Graph</a></li>
+              <li><a href="blueprint/print.pdf">Blueprint PDF</a></li>
+            </ul>
+            <p><a href="https://github.com/Eric-Vergo/General_Crystallographic_Restriction">GitHub Repository</a></p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
