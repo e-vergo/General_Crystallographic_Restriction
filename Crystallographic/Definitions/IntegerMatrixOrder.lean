@@ -3,10 +3,9 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
--- import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
--- import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.Algebra.CharP.Two
 import Mathlib.Data.Matrix.Block
+import Architect
 
 /-!
 # Orders of Integer Matrices
@@ -29,15 +28,28 @@ and proves basic properties about this set.
 
 We work with `Matrix (Fin N) (Fin N) ℤ` and use Mathlib's `orderOf` which returns 0 for
 elements of infinite order. We require `0 < m` to ensure we're talking about finite orders.
+
+## References
+
+* Sasse, R. (2020). "Crystallographic Groups"
 -/
 
 namespace Crystallographic
 
 open Matrix
 
+blueprint_comment /--
+\section{Integer Matrix Orders}
+-/
+
 /-- The set of possible orders for N×N integer matrices with finite order.
 An integer `m` is in this set if there exists an N×N integer matrix `A` such that
 `orderOf A = m` and `m > 0` (equivalently, `A` has finite order). -/
+@[blueprint
+  "integerMatrixOrders-def"
+  (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
+  with finite order. An integer $m$ is in this set if there exists an $N \times N$ integer matrix
+  $A$ with $\mathrm{ord}(A) = m$. -/)]
 def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
@@ -115,7 +127,10 @@ lemma orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
     orderOf (embedMatrixSum (K := K) A) = orderOf A :=
   orderOf_injective (embedMatrixSumHom M K) (embedMatrixSumHom_injective M K) A
 
-/-- Alternative set of orders using Sum-indexed matrices for convenience. -/
+/-- Alternative set of orders using Sum-indexed matrices for convenience.
+
+This is equivalent to integerMatrixOrders (M + K) but uses Sum types for indexing,
+which simplifies working with block diagonal matrices. -/
 def integerMatrixOrdersSum (M K : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ, orderOf A = m ∧ 0 < m}
 
@@ -130,10 +145,15 @@ theorem integerMatrixOrders_subset_sum (M K : ℕ) :
   · rw [orderOf_embedMatrixSum_eq, hA_ord]
   · exact hA_pos
 
-/-- The equivalence between Fin (M + K) and Fin M ⊕ Fin K -/
+/-- The equivalence between Fin (M + K) and Fin M ⊕ Fin K.
+
+This is the standard bijection used to convert between Fin-indexed and Sum-indexed matrices. -/
 def finSumEquiv (M K : ℕ) : Fin (M + K) ≃ Fin M ⊕ Fin K := finSumFinEquiv.symm
 
-/-- Reindexing defines a monoid isomorphism. -/
+/-- Reindexing defines a monoid isomorphism.
+
+Given an equivalence e : m ≃ n between index types, this provides an isomorphism
+between the corresponding matrix monoids that preserves multiplication. -/
 def reindexMonoidEquiv {m n : Type*} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
     (e : m ≃ n) : Matrix m m ℤ ≃* Matrix n n ℤ where
   toFun A := A.submatrix e.symm e.symm
@@ -143,8 +163,10 @@ def reindexMonoidEquiv {m n : Type*} [Fintype m] [Fintype n] [DecidableEq m] [De
   map_mul' A B := by
     simp only [← submatrix_mul_equiv (M := A) (N := B) (e₁ := e.symm) (e₂ := e.symm)]
 
-/-- Monotonicity: if M ≤ N, then any order achievable for M×M matrices is also achievable
-for N×N matrices. -/
+/-- Monotonicity: if M <= N, then any order achievable for M x M matrices is also achievable
+for N x N matrices.
+
+The construction pads the M x M matrix with an identity block in the lower-right corner. -/
 theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     integerMatrixOrders M ⊆ integerMatrixOrders N := by
   intro m hm
@@ -166,8 +188,10 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
     rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
   · exact hA_pos
 
-/-- Divisibility: if m ∈ integerMatrixOrders N and d ∣ m with d > 0,
-then d ∈ integerMatrixOrders N. -/
+/-- Divisibility: if m ∈ integerMatrixOrders N and d | m with d > 0,
+then d ∈ integerMatrixOrders N.
+
+If A has order m and d | m, then A^{m/d} has order d. -/
 theorem divisor_mem_integerMatrixOrders {N : ℕ} {m d : ℕ}
     (hm : m ∈ integerMatrixOrders N) (hd : d ∣ m) (hd_pos : 0 < d) :
     d ∈ integerMatrixOrders N := by
@@ -207,14 +231,19 @@ lemma blockDiag2_eq_one_iff {M K : ℕ}
   simp only [blockDiag2, Matrix.fromBlocks_inj]
   tauto
 
-/-- Power of block diagonal. -/
+/-- Power of block diagonal distributes to each block.
+
+(blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/
 lemma blockDiag2_pow {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) (k : ℕ) :
     (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by
   simp only [blockDiag2]
   exact Matrix.fromBlocks_diagonal_pow A B k
 
-/-- Order of block diagonal is lcm of orders. -/
+/-- Order of block diagonal is lcm of orders.
+
+Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
+and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 theorem orderOf_blockDiag2 {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by

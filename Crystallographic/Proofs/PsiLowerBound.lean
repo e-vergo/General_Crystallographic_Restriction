@@ -3,11 +3,14 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Crystallographic.Definitions.Psi
-import Mathlib.Data.Nat.Totient
-import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Algebra.BigOperators.Finprod
+import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.GCD.BigOperators
+import Mathlib.Data.Nat.Totient
+
+import Architect
+
+import Crystallographic.Definitions.Psi
 
 /-!
 # Psi Lower Bound Lemmas
@@ -20,6 +23,10 @@ which are used in the forward direction of the crystallographic restriction theo
 * `psiPrimePow_le_totient` - psiPrimePow is always <= totient
 * `psi_le_totient` - psi(m) <= totient(m) for all m >= 1
 * `sum_totient_ge_psi_of_lcm_eq` - For any S with lcm(S) = m, sum of totients >= psi(m)
+
+## References
+
+* Sasse, R. (2020). "Crystallographic Groups"
 -/
 
 namespace Crystallographic
@@ -49,6 +56,17 @@ Key cases:
 - m = prime power p^k: psi = totient (except psi(2) = 0 ≤ 1 = totient(2))
 - m = 2 * odd (with odd > 1): psi(m) = psi(odd) ≤ totient(odd) = totient(m)
 - m = composite without 2^1 factor: each φ(p^k) ≥ 2, so sum ≤ product -/
+@[blueprint "lem:psi-le-totient"
+  (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
+
+  The proof proceeds by strong induction on $m$:
+  \begin{itemize}
+  \item For $m = 1$: $\psi(1) = 0 \leq 1 = \varphi(1)$
+  \item For prime powers $p^k$: $\psi(p^k) = \varphi(p^k)$ (with the exception $\psi(2) = 0$)
+  \item For composite $m = 2 \cdot \text{odd}$: $\psi(m) = \psi(\text{odd}) \leq \varphi(\text{odd}) = \varphi(m)$
+  \item For general composite without $2^1$ factor: each $\varphi(p^k) \geq 2$, so sum $\leq$ product
+  \end{itemize}
+  \uses{psi-def, psiPrimePow-def} --/)]
 lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.totient m := by
   -- Strong induction on m
   induction m using Nat.strong_induction_on with
@@ -213,6 +231,13 @@ The proof proceeds by showing that any other choice of S either:
 1. Includes redundant elements (increasing the sum), or
 2. Uses a composite element d covering multiple prime powers, which costs
    φ(d) = Π φ(p^k) ≥ Σ φ(p^k) when each φ(p^k) ≥ 2. -/
+@[blueprint "lem:sum-totient-ge-psi"
+  (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
+  we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
+
+  This is the combinatorial heart of the forward direction. The minimum sum is achieved when
+  $S$ consists of one prime power for each distinct prime in $m$'s factorization, giving exactly $\psi(m)$.
+  \uses{psi-def, lem:psi-le-totient} --/)]
 lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     Crystallographic.psi m ≤ ∑ d ∈ S, Nat.totient d := by

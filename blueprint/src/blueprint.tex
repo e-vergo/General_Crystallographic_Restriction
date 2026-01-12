@@ -1,0 +1,73 @@
+\input{../../.lake/build/blueprint/library/Crystallographic}
+
+\usepackage{amsmath, amsthm}
+\usepackage{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{sublemma}{Sublemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{remark}{Remark}[section]
+
+\title{Crystallographic Restriction Theorem}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\begin{document}
+\maketitle
+
+\chapter{Introduction}
+
+The \emph{Crystallographic Restriction Theorem} characterizes exactly which rotation orders
+are achievable by integer matrices. Specifically, an $N \times N$ integer matrix can have
+finite order $m$ if and only if $\psi(m) \leq N$, where $\psi$ is a function based on
+Euler's totient function.
+
+The project repository is \url{https://github.com/your-username/General_Crystallographic_Restriction}.
+
+\chapter{The Psi Function and Main Definitions}
+
+The main theorem requires the definition of the $\psi$ function, which measures the
+``arithmetic complexity'' of a positive integer $m$. For a prime power $p^k$, we define:
+\begin{itemize}
+\item $\psi_{pp}(p,k) = \varphi(p^k)$ for $p$ odd or $k \geq 2$
+\item $\psi_{pp}(2,1) = 0$
+\end{itemize}
+
+For a general integer $m$ with prime factorization $m = \prod_i p_i^{k_i}$, we have:
+$$\psi(m) = \sum_i \psi_{pp}(p_i, k_i)$$
+
+\inputleanmodule{Crystallographic.Definitions.Psi}
+
+\chapter{Integer Matrix Orders}
+
+\inputleanmodule{Crystallographic.Definitions.IntegerMatrixOrder}
+
+\chapter{The Main Theorem}
+
+\inputleanmodule{Crystallographic.MainTheorem}
+
+\chapter{Companion Matrices}
+
+\inputleanmodule{Crystallographic.Definitions.CompanionMatrix}
+\inputleanmodule{Crystallographic.Proofs.CompanionMatrix}
+
+\chapter{Lower Bound on Psi}
+
+\inputleanmodule{Crystallographic.Proofs.PsiLowerBound}
+
+\chapter{Rotation Matrices}
+
+\inputleanmodule{Crystallographic.Definitions.RotationMatrices}
+\inputleanmodule{Crystallographic.Proofs.RotationMatrices}
+
+\chapter{Crystallographic Restriction Proof}
+
+\inputleanmodule{Crystallographic.Proofs.CrystallographicRestriction}
+\inputleanmodule{Crystallographic.ProofOfMainTheorem}
+
+\end{document}

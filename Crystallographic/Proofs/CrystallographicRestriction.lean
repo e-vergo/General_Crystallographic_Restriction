@@ -3,17 +3,20 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Crystallographic.Definitions.Psi
-import Crystallographic.Definitions.IntegerMatrixOrder
-import Crystallographic.Proofs.RotationMatrices
-import Crystallographic.Proofs.CompanionMatrix
-import Crystallographic.Proofs.PsiLowerBound
+import Mathlib.GroupTheory.Perm.Fin
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
+import Mathlib.LinearAlgebra.Matrix.Permutation
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
-import Mathlib.LinearAlgebra.Matrix.Permutation
-import Mathlib.GroupTheory.Perm.Fin
+
+import Architect
+
+import Crystallographic.Definitions.IntegerMatrixOrder
+import Crystallographic.Definitions.Psi
+import Crystallographic.Proofs.CompanionMatrix
+import Crystallographic.Proofs.PsiLowerBound
+import Crystallographic.Proofs.RotationMatrices
 
 /-!
 # The Crystallographic Restriction Theorem (General Dimension)
@@ -86,6 +89,19 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
 5. By sum_totient_ge_psi_of_lcm_eq, the sum of φ(d) >= psi(m)
 6. Therefore psi(m) <= deg(minpoly) <= deg(charpoly) = N
 -/
+@[blueprint "thm:forward-direction"
+  (statement := /-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
+
+  \textbf{Proof outline:}
+  \begin{enumerate}
+  \item Let $A$ be an $N \times N$ integer matrix with $\mathrm{ord}(A) = m$.
+  \item The minimal polynomial of $A$ divides $X^m - 1$.
+  \item Since $\mathrm{ord}(A) = m$, the minimal polynomial is the lcm of cyclotomic
+        polynomials $\Phi_d$ for divisors $d$ of $m$ with $\mathrm{lcm}\{d\} = m$.
+  \item The degree of each $\Phi_d$ is $\varphi(d)$.
+  \item By the sum-totient lemma, $\psi(m) \leq \sum_d \varphi(d) \leq \deg(\mathrm{minpoly}) \leq N$.
+  \end{enumerate}
+  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} --/)]
 theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
     (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by
   -- Extract the matrix A with orderOf A = m
@@ -642,6 +658,22 @@ The construction uses companion matrices of cyclotomic polynomials.
    - Total size is sum of phi(p_i^{k_i}) = psi(m)
 5. Pad with identity blocks to reach size N x N
 -/
+@[blueprint "thm:backward-direction"
+  (statement := /-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
+
+  \textbf{Proof by explicit construction:}
+  \begin{enumerate}
+  \item For $m = 1$: Use the identity matrix.
+  \item For $m = 2$: Use $-I$ (negation of identity).
+  \item For prime power $p^k$ with $p$ odd or $k \geq 2$:
+        Use the companion matrix of the cyclotomic polynomial $\Phi_{p^k}$,
+        which has size $\varphi(p^k) = \psi(p^k)$.
+  \item For $m = 3, 4, 6$: Use explicit $2 \times 2$ rotation matrices.
+  \item For general $m = \prod p_i^{k_i}$: Take block diagonal of companion matrices.
+  \item Pad with identity blocks to reach size $N \times N$.
+  \end{enumerate}
+  \uses{integerMatrixOrders-def, psi-def, companion-def, thm:companion-charpoly,
+        thm:order3-achievable, thm:order4-achievable, thm:order6-achievable} --/)]
 theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
     (hpsi : Crystallographic.psi m ≤ N) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N := by

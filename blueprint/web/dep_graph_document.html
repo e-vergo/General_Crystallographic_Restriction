@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dependency graph</title>
+  <meta name="generator" content="plasTeX" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/theme-blue.css" />
+  <link rel="stylesheet" href="styles/dep_graph.css" />
+  
+  <script type="text/x-mathjax-config">
+  
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  
+  </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">  </script>
+
+
+<link rel="stylesheet" href="styles/style.css" />
+
+</head>
+
+<body>
+<header>
+  <a class="toc" href="index.html">Home</a>
+  <h1 id="doc_title">Dependencies</h1>
+</header>
+<div class="wrapper">
+<div class="content">
+  <div id="Legend">
+    <span id="legend_title" class="title">Legend
+    <div class="btn">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+    </div></span> 
+    <dl class="legend">
+      
+      <dt>Boxes</dt><dd>definitions</dd>
+      
+      <dt>Ellipses</dt><dd>theorems and lemmas</dd>
+      
+      <dt>Blue border</dt><dd>the <em>statement</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Orange border</dt><dd>the <em>statement</em> of this result is not ready to be formalized; the blueprint needs more work</dd>
+      
+      <dt>Blue background</dt><dd>the <em>proof</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Green border</dt><dd>the <em>statement</em> of this result is formalized</dd>
+      
+      <dt>Green background</dt><dd>the <em>proof</em> of this result is formalized</dd>
+      
+      <dt>Dark green background</dt><dd>the <em>proof</em> of this result and all its ancestors are formalized</dd>
+      
+      <dt>Dark green border</dt><dd>this is in Mathlib</dd>
+      
+    </dl>
+  </div>
+    <div id="graph"></div>
+<div id="statements">
+
+    
+    <div class="dep-modal-container" id="companion-def_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="companion-def" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">5.1.1</span></div>
+    <div class="thm_thmcontent"><p>  The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#companion-def">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:rotation-matrix-3_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:rotation-matrix-3" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">7.0.2</span></div>
+    <div class="thm_thmcontent"><p>  The \(120°\) rotation matrix in hexagonal coordinates \(R_3 = \begin{pmatrix}  0 
+
+&  -1 
+
+\\ 1 
+
+&  -1 
+
+\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(3\). - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#def:rotation-matrix-3">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix3">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:rotation-matrix-4_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:rotation-matrix-4" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">7.0.1</span></div>
+    <div class="thm_thmcontent"><p>  The \(90°\) rotation matrix \(R_4 = \begin{pmatrix}  0 
+
+&  -1 
+
+\\ 1 
+
+&  0 
+
+\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(4\). - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#def:rotation-matrix-4">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix4">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:rotation-matrix-6_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:rotation-matrix-6" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">7.0.3</span></div>
+    <div class="thm_thmcontent"><p>  The \(60°\) rotation matrix in hexagonal coordinates \(R_6 = \begin{pmatrix}  1 
+
+&  -1 
+
+\\ 1 
+
+&  0 
+
+\end{pmatrix}\) is a \(2 \times 2\) integer matrix with multiplicative order \(6\). - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#def:rotation-matrix-6">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.rotationMatrix6">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="integerMatrixOrders-def_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="integerMatrixOrders-def" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.1.1</span></div>
+    <div class="thm_thmcontent"><p>  The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. An integer \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with \(\mathrm{ord}(A) = m\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#integerMatrixOrders-def">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:psi-le-totient_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-le-totient" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.1</span></div>
+    <div class="thm_thmcontent"><p>   For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+<p>The proof proceeds by strong induction on \(m\): </p>
+<ul class="itemize">
+  <li><p>For \(m = 1\): \(\psi (1) = 0 \leq 1 = \varphi (1)\) </p>
+</li>
+  <li><p>For prime powers \(p^k\): \(\psi (p^k) = \varphi (p^k)\) (with the exception \(\psi (2) = 0\)) </p>
+</li>
+  <li><p>For composite \(m = 2 \cdot \text{odd}\): \(\psi (m) = \psi (\text{odd}) \leq \varphi (\text{odd}) = \varphi (m)\) </p>
+</li>
+  <li><p>For general composite without \(2^1\) factor: each \(\varphi (p^k) \geq 2\), so sum \(\leq \) product </p>
+</li>
+</ul>
+<p>  - </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:psi-le-totient">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_le_totient">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sum-totient-ge-psi_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sum-totient-ge-psi" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.0.2</span></div>
+    <div class="thm_thmcontent"><p>   For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
+<p>This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s factorization, giving exactly \(\psi (m)\).  - </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:sum-totient-ge-psi">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.sum_totient_ge_psi_of_lcm_eq">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="psi-def_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="psi-def" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.1.2</span></div>
+    <div class="thm_thmcontent"><p>   The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#psi-def">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="psiPrimePow-def_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="psiPrimePow-def" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.1.1</span></div>
+    <div class="thm_thmcontent"><p>  The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#psiPrimePow-def">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psiPrimePow">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:backward-direction_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:backward-direction" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">8.0.2</span></div>
+    <div class="thm_thmcontent"><p>   <b class="bfseries">Backward Direction:</b> If \(\psi (m) \leq N\), then \(m \in \mathrm{Ord}_N\). </p>
+<p><b class="bfseries">Proof by explicit construction:</b> </p>
+<ol class="enumerate">
+  <li><p>For \(m = 1\): Use the identity matrix. </p>
+</li>
+  <li><p>For \(m = 2\): Use \(-I\) (negation of identity). </p>
+</li>
+  <li><p>For prime power \(p^k\) with \(p\) odd or \(k \geq 2\): Use the companion matrix of the cyclotomic polynomial \(\Phi _{p^k}\), which has size \(\varphi (p^k) = \psi (p^k)\). </p>
+</li>
+  <li><p>For \(m = 3, 4, 6\): Use explicit \(2 \times 2\) rotation matrices. </p>
+</li>
+  <li><p>For general \(m = \prod p_i^{k_i}\): Take block diagonal of companion matrices. </p>
+</li>
+  <li><p>Pad with identity blocks to reach size \(N \times N\). </p>
+</li>
+</ol>
+<p>  - </p>
+</div>
+
+    <a class="latex_link" href="sect0008.html#thm:backward-direction">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mem_integerMatrixOrders_of_psi_le">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:companion-charpoly_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:companion-charpoly" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.1.1</span></div>
+    <div class="thm_thmcontent"><p>   The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:companion-charpoly">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.companion_charpoly">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:crystallographic-restriction_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:crystallographic-restriction" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">4.1.1</span></div>
+    <div class="thm_thmcontent"><p>   The crystallographic restriction theorem: an \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:crystallographic-restriction">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.StatementOfTheorem">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:forward-direction_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:forward-direction" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">8.0.1</span></div>
+    <div class="thm_thmcontent"><p>   <b class="bfseries">Forward Direction:</b> If \(m \in \mathrm{Ord}_N\), then \(\psi (m) \leq N\). </p>
+<p><b class="bfseries">Proof outline:</b> </p>
+<ol class="enumerate">
+  <li><p>Let \(A\) be an \(N \times N\) integer matrix with \(\mathrm{ord}(A) = m\). </p>
+</li>
+  <li><p>The minimal polynomial of \(A\) divides \(X^m - 1\). </p>
+</li>
+  <li><p>Since \(\mathrm{ord}(A) = m\), the minimal polynomial is the lcm of cyclotomic polynomials \(\Phi _d\) for divisors \(d\) of \(m\) with \(\mathrm{lcm}\{ d\}  = m\). </p>
+</li>
+  <li><p>The degree of each \(\Phi _d\) is \(\varphi (d)\). </p>
+</li>
+  <li><p>By the sum-totient lemma, \(\psi (m) \leq \sum _d \varphi (d) \leq \deg (\mathrm{minpoly}) \leq N\). </p>
+</li>
+</ol>
+<p>  - </p>
+</div>
+
+    <a class="latex_link" href="sect0008.html#thm:forward-direction">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.psi_le_of_mem_integerMatrixOrders">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:main-theorem_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:main-theorem" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">8.0.3</span></div>
+    <div class="thm_thmcontent"><p>   <b class="bfseries">The Crystallographic Restriction Theorem:</b> An \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
+<p>Equivalently: \(m \in \mathrm{Ord}_N \iff \psi (m) \leq N\). </p>
+<p>This theorem completely characterizes which rotation orders are achievable by integer matrices in each dimension.  - </p>
+</div>
+
+    <a class="latex_link" href="sect0008.html#thm:main-theorem">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mainTheorem">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:order3-achievable_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:order3-achievable" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">7.0.1</span></div>
+    <div class="thm_thmcontent"><p>   Order \(3\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_3\).  - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#thm:order3-achievable">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.three_mem_integerMatrixOrders_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:order4-achievable_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:order4-achievable" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">7.0.2</span></div>
+    <div class="thm_thmcontent"><p>   Order \(4\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_4\).  - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#thm:order4-achievable">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.four_mem_integerMatrixOrders_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:order6-achievable_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:order6-achievable" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">7.0.3</span></div>
+    <div class="thm_thmcontent"><p>   Order \(6\) is achievable by a \(2 \times 2\) integer matrix. The witness is the rotation matrix \(R_6\).  - </p>
+</div>
+
+    <a class="latex_link" href="sect0007.html#thm:order6-achievable">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.six_mem_integerMatrixOrders_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+</div>
+</div> <!-- content -->
+</div> <!-- wrapper -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+
+<script src="js/d3.min.js"></script>
+<script src="js/hpcc.min.js"></script>
+<script src="js/d3-graphviz.js"></script>
+
+<script type="text/javascript">
+const graphContainer = d3.select("#graph");
+const width = graphContainer.node().clientWidth;
+const height = graphContainer.node().clientHeight;
+
+
+graphContainer.graphviz({useWorker: true})
+    .width(width)
+    .height(height)
+    .fit(true)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"psiPrimePow-def"	[color=green,		fillcolor="#B0ECA3",		label="psiPrimePow-def",		shape=box,		style=filled];	"psi-def"	[color=green,		fillcolor="#B0ECA3",		label="psi-def",		shape=box,		style=filled];	"psiPrimePow-def" -> "psi-def"	[style=dashed];	"thm:backward-direction"	[color=green,		fillcolor="#1CAC78",		label="backward-direction",		shape=ellipse,		style=filled];	"psi-def" -> "thm:backward-direction"	[style=dashed];	"lem:psi-le-totient"	[color=green,		fillcolor="#1CAC78",		label="psi-le-totient",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-le-totient"	[style=dashed];	"thm:crystallographic-restriction"	[color=green,		fillcolor="#B0ECA3",		label="crystallographic-restriction",		shape=box,		style=filled];	"psi-def" -> "thm:crystallographic-restriction"	[style=dashed];	"lem:sum-totient-ge-psi"	[color=green,		fillcolor="#1CAC78",		label="sum-totient-ge-psi",		shape=ellipse,		style=filled];	"thm:forward-direction"	[color=green,		fillcolor="#1CAC78",		label="forward-direction",		shape=ellipse,		style=filled];	"lem:sum-totient-ge-psi" -> "thm:forward-direction"	[style=dashed];	"thm:main-theorem"	[color=green,		fillcolor="#1CAC78",		label="main-theorem",		shape=ellipse,		style=filled];	"thm:forward-direction" -> "thm:main-theorem"	[style=dashed];	"thm:backward-direction" -> "thm:main-theorem"	[style=dashed];	"lem:psi-le-totient" -> "lem:sum-totient-ge-psi"	[style=dashed];	"def:rotation-matrix-4"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-4",		shape=box,		style=filled];	"thm:order4-achievable"	[color=green,		fillcolor="#1CAC78",		label="order4-achievable",		shape=ellipse,		style=filled];	"def:rotation-matrix-4" -> "thm:order4-achievable"	[style=dashed];	"thm:order4-achievable" -> "thm:backward-direction"	[style=dashed];	"thm:order6-achievable"	[color=green,		fillcolor="#1CAC78",		label="order6-achievable",		shape=ellipse,		style=filled];	"thm:order6-achievable" -> "thm:backward-direction"	[style=dashed];	"integerMatrixOrders-def"	[color=green,		fillcolor="#B0ECA3",		label="integerMatrixOrders-def",		shape=box,		style=filled];	"integerMatrixOrders-def" -> "thm:forward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "thm:backward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "thm:crystallographic-restriction"	[style=dashed];	"companion-def"	[color=green,		fillcolor="#B0ECA3",		label="companion-def",		shape=box,		style=filled];	"thm:companion-charpoly"	[color=green,		fillcolor="#1CAC78",		label="companion-charpoly",		shape=ellipse,		style=filled];	"companion-def" -> "thm:companion-charpoly"	[style=dashed];	"thm:companion-charpoly" -> "thm:backward-direction"	[style=dashed];	"def:rotation-matrix-3"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-3",		shape=box,		style=filled];	"thm:order3-achievable"	[color=green,		fillcolor="#1CAC78",		label="order3-achievable",		shape=ellipse,		style=filled];	"def:rotation-matrix-3" -> "thm:order3-achievable"	[style=dashed];	"thm:order3-achievable" -> "thm:backward-direction"	[style=dashed];	"def:rotation-matrix-6"	[color=green,		fillcolor="#B0ECA3",		label="rotation-matrix-6",		shape=box,		style=filled];	"def:rotation-matrix-6" -> "thm:order6-achievable"	[style=dashed];}`)
+    .on("end", interactive);
+
+latexLabelEscaper = function(label) {
+  return label.replace(/\./g, '\\.').replace(/:/g, '\\:')
+}
+
+clickNode = function() {
+  $("#statements div").hide()
+  var node_id = $('text', this).text();
+  $('.thm').hide();
+  $('#'+latexLabelEscaper(node_id)).show().children().show();
+}
+function interactive() {
+    $("span#legend_title").on("click", function () {
+           $(this).siblings('dl').toggle();
+        })
+
+    d3.selectAll('.node')
+        .attr('pointer-events', 'fill')
+        .on('click', function () {
+           var title = d3.select(this).selectAll('title').text().trim();
+           $('#statements > div').hide()
+           $('.thm').hide();
+           $('#'+latexLabelEscaper(title)+'_modal').show().children().show().children().show();
+           $('#statements').show()
+        });
+
+    d3.selectAll('.dep-closebtn').on('click', function() {
+        var modal =
+            d3.select(this).node().parentNode.parentNode.parentNode ;
+        d3.select(modal).style('display', 'none');
+    });
+}
+
+</script>
+
+</body>
+</html>

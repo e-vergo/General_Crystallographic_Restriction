@@ -3,8 +3,9 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Crystallographic.Definitions.Psi
 import Crystallographic.Definitions.IntegerMatrixOrder
+import Crystallographic.Definitions.Psi
+import Architect
 
 /-!
 # The Crystallographic Restriction Theorem - Statement
@@ -28,11 +29,19 @@ The psi function is defined as:
 
 namespace Crystallographic
 
+blueprint_comment /--
+\section{Main Theorem}
+-/
+
 /-- The crystallographic restriction theorem states that an N×N integer matrix
 can have finite order m if and only if psi(m) ≤ N.
 
 This characterizes exactly which rotation orders are possible in N-dimensional
 crystallographic groups. -/
+@[blueprint
+  "thm:crystallographic-restriction"
+  (statement := /-- The crystallographic restriction theorem: an $N \times N$ integer matrix
+  can have finite order $m$ if and only if $\psi(m) \leq N$. -/)]
 def StatementOfTheorem : Prop :=
   ∀ N m : ℕ, 0 < m → (m = 1 ∨ 0 < N) → (m ∈ integerMatrixOrders N ↔ psi m ≤ N)
 

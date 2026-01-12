@@ -3,8 +3,9 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Mathlib.Data.Nat.Totient
 import Mathlib.Data.Nat.Factorization.Basic
+import Mathlib.Data.Nat.Totient
+import Architect
 
 /-!
 # The psi function for the crystallographic restriction theorem
@@ -32,19 +33,32 @@ an N×N integer matrix can have a given order m.
 |--------|---|---|---|---|---|---|---|---|---|----|----|
 | psi(m) | 0 | 0 | 2 | 2 | 4 | 2 | 6 | 4 | 6 | 4  | 4  |
 
+## References
+
+* Sasse, R. (2020). "Crystallographic Groups"
 -/
 
 namespace Crystallographic
 
 open Nat Finsupp
 
+blueprint_comment /--
+\section{The Psi Function}
+-/
+
 /-- Helper function that computes the contribution of a single prime power p^k to psi.
     Returns 0 if k = 0, returns 0 if p = 2 and k = 1, otherwise returns phi(p^k). -/
+@[blueprint
+  "psiPrimePow-def"
+  (statement := /-- The function $\psi_{\text{pp}}(p, k)$ computes the contribution of a single
+  prime power $p^k$ to $\psi$. Returns $0$ if $k = 0$ or if $p = 2$ and $k = 1$,
+  otherwise returns $\varphi(p^k)$. -/)]
 def psiPrimePow (p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
   else Nat.totient (p ^ k)
 
+/-- psiPrimePow at exponent 0 is always 0. -/
 lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
   simp [psiPrimePow]
 
@@ -53,15 +67,22 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
 
     Defined as the sum over prime power factors: if m = prod p_i^{k_i}, then
     psi(m) = sum_i (if p_i = 2 and k_i = 1 then 0 else phi(p_i^{k_i})) -/
+@[blueprint
+  "psi-def"
+  (statement := /-- The psi function $\psi(m) = \sum_{p^k \| m} \psi_{\text{pp}}(p, k)$,
+  which gives the minimum dimension $N$ such that an $N \times N$ integer matrix can have order $m$. -/)]
 def psi (m : ℕ) : ℕ :=
   m.factorization.sum fun p k => psiPrimePow p k
 
+/-- psi(0) = 0 by convention. -/
 @[simp] theorem psi_zero : psi 0 = 0 := by
   simp [psi, Nat.factorization_zero]
 
+/-- psi(1) = 0: The identity matrix has order 1 in any dimension. -/
 @[simp] theorem psi_one : psi 1 = 0 := by
   simp [psi, Nat.factorization_one]
 
+/-- psi(2) = 0: The negation of identity has order 2 in any dimension >= 1. -/
 @[simp] theorem psi_two : psi 2 = 0 := by
   simp only [psi]
   rw [Nat.prime_two.factorization]
@@ -130,7 +151,9 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   rw [Nat.totient_prime_pow Nat.prime_three (by norm_num : 0 < 2)]
   norm_num
 
-/-- The supports of factorizations of coprime numbers are disjoint -/
+/-- The supports of factorizations of coprime numbers are disjoint.
+
+If gcd(m, n) = 1, then m and n share no common prime factors. -/
 lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
     Disjoint m.factorization.support n.factorization.support := by
   rw [Finset.disjoint_iff_ne]
@@ -144,7 +167,11 @@ lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
   rw [Nat.Coprime.gcd_eq_one h] at this
   exact Nat.Prime.not_dvd_one hp_prime this
 
-/-- psi is additive on coprime factors -/
+/-- psi is additive on coprime factors.
+
+For coprime m and n, psi(m * n) = psi(m) + psi(n). This follows from the
+factorization m * n = prod(p_i^{k_i}) * prod(q_j^{l_j}) where the prime
+factors of m and n are disjoint. -/
 theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
@@ -192,8 +219,9 @@ theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) 
 
 /-! ## Bounds on psi contributions -/
 
-/-- If m is positive and has a prime factor p in its support, then
-    psi(m) >= psiPrimePow(p, m.factorization p) -/
+/-- psi(m) is at least the contribution from any single prime power factor.
+
+If p^k divides m exactly, then psi(m) >= psiPrimePow(p, k). -/
 lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ} (_hm : 0 < m)
     (hp : p ∈ m.factorization.support) :
     psiPrimePow p (m.factorization p) ≤ psi m := by
@@ -204,7 +232,9 @@ lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ} (_hm : 0 < m)
     split_ifs <;> omega
   exact Finset.single_le_sum hnonneg hp
 
-/-- psiPrimePow for odd primes p >= 5 gives at least 4 -/
+/-- psiPrimePow for primes p >= 5 gives at least 4.
+
+For p >= 5 and k >= 1, phi(p^k) = p^{k-1}(p-1) >= p - 1 >= 4. -/
 lemma psiPrimePow_ge_four_of_prime_ge_five {p k : ℕ} (hp : p.Prime) (hp5 : 5 ≤ p) (hk : 0 < k) :
     4 ≤ psiPrimePow p k := by
   simp only [psiPrimePow, hk.ne']
@@ -216,7 +246,9 @@ lemma psiPrimePow_ge_four_of_prime_ge_five {p k : ℕ} (hp : p.Prime) (hp5 : 5 �
   have hpk : p ^ (k - 1) * (p - 1) ≥ p - 1 := Nat.le_mul_of_pos_left (p - 1) hpow_pos
   omega
 
-/-- psiPrimePow for 2^k with k >= 3 gives at least 4 -/
+/-- psiPrimePow for 2^k with k >= 3 gives at least 4.
+
+For k >= 3, phi(2^k) = 2^{k-1} >= 2^2 = 4. -/
 lemma psiPrimePow_ge_four_of_two_pow_ge_three {k : ℕ} (hk : 3 ≤ k) :
     4 ≤ psiPrimePow 2 k := by
   simp only [psiPrimePow]
@@ -229,7 +261,9 @@ lemma psiPrimePow_ge_four_of_two_pow_ge_three {k : ℕ} (hk : 3 ≤ k) :
     _ ≥ 2 ^ 2 := Nat.pow_le_pow_right (by omega) hge2
     _ = 4 := by norm_num
 
-/-- psiPrimePow for 3^k with k >= 2 gives at least 6 -/
+/-- psiPrimePow for 3^k with k >= 2 gives at least 6.
+
+For k >= 2, phi(3^k) = 3^{k-1} * 2 >= 3 * 2 = 6. -/
 lemma psiPrimePow_ge_six_of_three_pow_ge_two {k : ℕ} (hk : 2 ≤ k) :
     6 ≤ psiPrimePow 3 k := by
   simp only [psiPrimePow]
