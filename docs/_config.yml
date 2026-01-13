@@ -1,8 +1,7 @@
 title: Crystallographic Restriction Theorem
 description: Formal verification of the crystallographic restriction theorem in Lean 4
-remote_theme: pages-themes/cayman@v0.2.0
+theme: jekyll-theme-cayman
 plugins:
-  - jekyll-remote-theme
   - jekyll-seo-tag
 
 # GitHub repository info
