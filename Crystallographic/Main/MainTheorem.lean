@@ -4,11 +4,10 @@ Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
-
+import Crystallographic.CrystallographicRestriction.Backward
+import Crystallographic.CrystallographicRestriction.Forward
 import Crystallographic.FiniteOrder.Basic
 import Crystallographic.Psi.Basic
-import Crystallographic.CrystallographicRestriction.Forward
-import Crystallographic.CrystallographicRestriction.Backward
 
 /-!
 # The Crystallographic Restriction Theorem

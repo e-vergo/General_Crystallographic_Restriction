@@ -3,9 +3,9 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.Totient
-import Architect
 
 /-!
 # The psi function for the crystallographic restriction theorem
@@ -118,7 +118,6 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   simp only [ite_false]
 
 /-- psi(3) = 2 -/
-@[simp]
 theorem psi_three : psi 3 = 2 := by
   have h := psi_prime_pow 3 1 Nat.prime_three (by norm_num : 0 < 1)
   simp only [pow_one] at h
@@ -127,7 +126,6 @@ theorem psi_three : psi 3 = 2 := by
   rw [Nat.totient_prime Nat.prime_three]
 
 /-- psi(4) = 2 -/
-@[simp]
 theorem psi_four : psi 4 = 2 := by
   have h := psi_prime_pow 2 2 Nat.prime_two (by norm_num : 0 < 2)
   simp only [show (4 : ℕ) = 2 ^ 2 by norm_num] at h ⊢
@@ -137,7 +135,6 @@ theorem psi_four : psi 4 = 2 := by
   norm_num
 
 /-- psi(5) = 4 -/
-@[simp]
 theorem psi_five : psi 5 = 4 := by
   have hp : Nat.Prime 5 := by decide
   have h := psi_prime_pow 5 1 hp (by norm_num : 0 < 1)
@@ -147,7 +144,6 @@ theorem psi_five : psi 5 = 4 := by
   rw [Nat.totient_prime hp]
 
 /-- psi(7) = 6 -/
-@[simp]
 theorem psi_seven : psi 7 = 6 := by
   have hp : Nat.Prime 7 := by decide
   have h := psi_prime_pow 7 1 hp (by norm_num : 0 < 1)
@@ -157,7 +153,6 @@ theorem psi_seven : psi 7 = 6 := by
   rw [Nat.totient_prime hp]
 
 /-- psi(8) = 4 -/
-@[simp]
 theorem psi_eight : psi 8 = 4 := by
   have h := psi_prime_pow 2 3 Nat.prime_two (by norm_num : 0 < 3)
   simp only [show (8 : ℕ) = 2 ^ 3 by norm_num] at h ⊢
@@ -167,7 +162,6 @@ theorem psi_eight : psi 8 = 4 := by
   norm_num
 
 /-- psi(9) = 6 -/
-@[simp]
 theorem psi_nine : psi 9 = 6 := by
   have h := psi_prime_pow 3 2 Nat.prime_three (by norm_num : 0 < 2)
   simp only [show (9 : ℕ) = 3 ^ 2 by norm_num] at h ⊢
@@ -239,25 +233,22 @@ theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) 
     simp [this]
 
 /-- psi(6) = 2 -/
-@[simp]
 theorem psi_six : psi 6 = 2 := by
   have h6 : (6 : ℕ) = 2 * 3 := by norm_num
   rw [h6, psi_coprime_add 2 3 (by norm_num) (by norm_num) (by decide)]
-  simp
+  rw [psi_two, psi_three]
 
 /-- psi(10) = 4 -/
-@[simp]
 theorem psi_ten : psi 10 = 4 := by
   have h10 : (10 : ℕ) = 2 * 5 := by norm_num
   rw [h10, psi_coprime_add 2 5 (by norm_num) (by norm_num) (by decide)]
-  simp
+  rw [psi_two, psi_five]
 
 /-- psi(12) = 4 -/
-@[simp]
 theorem psi_twelve : psi 12 = 4 := by
   have h12 : (12 : ℕ) = 4 * 3 := by norm_num
   rw [h12, psi_coprime_add 4 3 (by norm_num) (by norm_num) (by decide)]
-  simp
+  rw [psi_four, psi_three]
 
 /-! ## Bounds on psi contributions -/
 

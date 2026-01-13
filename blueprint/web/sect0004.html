@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Integer Matrix Orders</title>
-<link rel="next" href="sect0005.html" title="Companion Matrices" />
-<link rel="prev" href="sect0003.html" title="The Psi Function" />
+<title>Companion Matrices</title>
+<link rel="next" href="sect0005.html" title="The Crystallographic Restriction Theorem" />
+<link rel="prev" href="sect0003.html" title="Integer Matrix Orders" />
 <link rel="up" href="index.html" title="Crystallographic Restriction Theorem" />
 <link rel="stylesheet" href="styles/theme-blue.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
@@ -36,50 +36,19 @@
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Supporting Lemmas</span></a>
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The Psi Function</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">The Psi Function</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0003.html#a0000000010"><span class="toc_ref">3.1</span> <span class="toc_entry">The Psi Function</span></a>
- </li>
-
-  </ul>
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Integer Matrix Orders</span></a>
  </li>
 <li class=" active current">
-  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Integer Matrix Orders</span></a>
-  <span class="expand-toc">▼</span>
-  <ul class="sub-toc-1 active">
-     <li class="">
-  <a href="sect0004.html#a0000000011"><span class="toc_ref">4.1</span> <span class="toc_entry">Integer Matrix Orders</span></a>
- </li>
-
-  </ul>
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Companion Matrices</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Companion Matrices</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0005.html#a0000000012"><span class="toc_ref">5.1</span> <span class="toc_entry">Companion Matrices</span></a>
- </li>
-
-  </ul>
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">The Crystallographic Restriction Theorem</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The Crystallographic Restriction</span></a>
- </li>
-<li class="">
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Main Theorem</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0007.html#a0000000013"><span class="toc_ref">7.1</span> <span class="toc_entry">Main Theorem</span></a>
- </li>
-
-  </ul>
+  <a href="sect0006.html"><span class="toc_ref">A</span> <span class="toc_entry">Auxiliary Lemmas</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -90,15 +59,15 @@
 
 
 <div class="main-text">
-<h1 id="a0000000005">4 Integer Matrix Orders</h1>
-<p>We define the set \(\mathrm{Ord}_N\) of achievable orders for \(N \times N\) integer matrices. </p>
-<h1 id="a0000000011">4.1 Integer Matrix Orders</h1>
-<div class="theorem_thmwrapper theorem-style-definition" id="integerMatrixOrders-def">
+<h1 id="a0000000005">4 Companion Matrices</h1>
+<p>Companion matrices provide a key construction for achieving orders via cyclotomic polynomials. </p>
+
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-cycl-pow">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.1.1</span>
+    <span class="theorem_thmlabel">4.0.1</span>
     <div class="thm_header_extras">
 
     
@@ -106,9 +75,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#integerMatrixOrders-def">#</a>
+    <a class="icon proof" href="sect0004.html#lem:companion-cycl-pow">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000047"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -124,7 +93,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.integerMatrixOrders" class="lean_decl">Crystallographic.integerMatrixOrders</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_pow_eq_one" class="lean_decl">Crystallographic.companion_cyclotomic_pow_eq_one</a></li>
           
         </ul>
     
@@ -135,11 +104,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>  The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. An integer \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with \(\mathrm{ord}(A) = m\). </p>
+  <p>   \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000047">
+<div class="proof_wrapper" id="a0000000028">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -147,16 +116,16 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Definition. The set collects all orders \(m\) witnessed by some \(N \times N\) integer matrix. </p>
+  <p> Since \(\Phi _m \mid X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply the general companion power theorem to conclude \(C(\Phi _m)^m = I\). </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:one-mem-orders">
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-cycl-order">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.1.2</span>
+    <span class="theorem_thmlabel">4.0.2</span>
     <div class="thm_header_extras">
 
     
@@ -164,87 +133,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#lem:one-mem-orders">#</a>
+    <a class="icon proof" href="sect0004.html#thm:companion-cycl-order">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000048"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#integerMatrixOrders-def">Theorem 4.1.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.one_mem_integerMatrixOrders" class="lean_decl">Crystallographic.one_mem_integerMatrixOrders</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   Order \(1\) is achievable in any dimension. </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000048">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>The identity matrix \(I\) has order \(1\) in any dimension. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:two-mem-orders">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.3</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:two-mem-orders">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000049"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -260,7 +151,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#integerMatrixOrders-def">Theorem 4.1.1</a></li>
+          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.1</a></li>
+          
+          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.1</a></li>
           
         </ul>
     
@@ -280,7 +173,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.two_mem_integerMatrixOrders" class="lean_decl">Crystallographic.two_mem_integerMatrixOrders</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_orderOf" class="lean_decl">Crystallographic.companion_cyclotomic_orderOf</a></li>
           
         </ul>
     
@@ -291,11 +184,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   Order \(2\) is achievable for \(N \geq 1\). </p>
+  <p>   \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000049">
+<div class="proof_wrapper" id="a0000000029">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -303,16 +196,16 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>The matrix \(-I\) satisfies \((-I)^2 = I\) and \(-I \neq I\) for \(N \geq 1\), so it has order \(2\). </p>
+  <p> The order is at most \(m\) since \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\). For the lower bound: if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m \mid X^d - 1\), but this contradicts that primitive \(m\)-th roots of unity are not \(d\)-th roots. </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:orders-mono">
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-cycl-mem">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.1.4</span>
+    <span class="theorem_thmlabel">4.0.3</span>
     <div class="thm_header_extras">
 
     
@@ -320,9 +213,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#lem:orders-mono">#</a>
+    <a class="icon proof" href="sect0004.html#thm:companion-cycl-mem">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000050"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -338,7 +231,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#integerMatrixOrders-def">Theorem 4.1.1</a></li>
+          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.2</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.2</a></li>
           
         </ul>
     
@@ -358,7 +253,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.integerMatrixOrders_mono" class="lean_decl">Crystallographic.integerMatrixOrders_mono</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_mem_integerMatrixOrders" class="lean_decl">Crystallographic.companion_cyclotomic_mem_integerMatrixOrders</a></li>
           
         </ul>
     
@@ -369,11 +264,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+  <p>   \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000050">
+<div class="proof_wrapper" id="a0000000030">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -381,16 +276,16 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Given \(M \leq N\) and \(A \in M_M(\mathbb {Z})\) with order \(m\), embed \(A\) as the top-left block of an \(N \times N\) matrix with identity in the bottom-right. The order is preserved. </p>
+  <p> The companion matrix \(C(\Phi _m)\) witnesses the membership: it is an integer matrix of dimension \(\deg (\Phi _m) = \varphi (m)\) with multiplicative order exactly \(m\). </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:divisor-mem-orders">
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:mem-orders-totient">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.1.5</span>
+    <span class="theorem_thmlabel">4.0.4</span>
     <div class="thm_header_extras">
 
     
@@ -398,9 +293,9 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#lem:divisor-mem-orders">#</a>
+    <a class="icon proof" href="sect0004.html#thm:mem-orders-totient">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000051"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -416,7 +311,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#integerMatrixOrders-def">Theorem 4.1.1</a></li>
+          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.3</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.3</a></li>
           
         </ul>
     
@@ -436,7 +333,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.divisor_mem_integerMatrixOrders" class="lean_decl">Crystallographic.divisor_mem_integerMatrixOrders</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.mem_integerMatrixOrders_totient" class="lean_decl">Crystallographic.mem_integerMatrixOrders_totient</a></li>
           
         </ul>
     
@@ -447,11 +344,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   If \(m \in \mathrm{Ord}_N\) and \(d \mid m\), then \(d \in \mathrm{Ord}_N\). </p>
+  <p>   For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000051">
+<div class="proof_wrapper" id="a0000000031">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -459,465 +356,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>If \(A\) has order \(m\) and \(d \mid m\), then \(A^{m/d}\) has order \(d\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="def:blockDiag2">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.6</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#def:blockDiag2">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000052"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2" class="lean_decl">Crystallographic.blockDiag2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>  Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000052">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Definition. Block diagonal matrix with \(A\) in top-left, \(B\) in bottom-right, zeros elsewhere. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:blockDiag2-eq-one">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.7</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:blockDiag2-eq-one">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000053"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#def:blockDiag2">Theorem 4.1.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2_eq_one_iff" class="lean_decl">Crystallographic.blockDiag2_eq_one_iff</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000053">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>The block diagonal matrix equals \(I\) iff both diagonal blocks equal their respective identities. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:blockDiag2-pow">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.8</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:blockDiag2-pow">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000054"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#def:blockDiag2">Theorem 4.1.6</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.blockDiag2_pow" class="lean_decl">Crystallographic.blockDiag2_pow</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000054">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By induction on \(n\): the block structure is preserved under multiplication, and \(\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="thm:orderOf-blockDiag2">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.9</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#thm:orderOf-blockDiag2">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000055"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#def:blockDiag2">Theorem 4.1.6</a></li>
-          
-          <li><a href="sect0004.html#lem:blockDiag2-pow">Theorem 4.1.8</a></li>
-          
-          <li><a href="sect0004.html#lem:blockDiag2-eq-one">Theorem 4.1.7</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.orderOf_blockDiag2" class="lean_decl">Crystallographic.orderOf_blockDiag2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   \(\mathrm{ord}(\mathrm{diag}(A, B)) = \mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000055">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>The order is the least \(n\) such that \(A^n = I\) and \(B^n = I\), which is exactly \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:lcm-mem-orders">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.10</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:lcm-mem-orders">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000056"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#thm:orderOf-blockDiag2">Theorem 4.1.9</a></li>
-          
-          <li><a href="sect0004.html#def:blockDiag2">Theorem 4.1.6</a></li>
-          
-          <li><a href="sect0004.html#thm:orderOf-blockDiag2">Theorem 4.1.9</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.lcm_mem_integerMatrixOrders" class="lean_decl">Crystallographic.lcm_mem_integerMatrixOrders</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000056">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> Given matrices \(A, B\) achieving orders \(m_1, m_2\) in dimensions \(M, K\), the block diagonal \(\mathrm{diag}(A, B)\) has order \(\mathrm{lcm}(m_1, m_2)\) in dimension \(M + K\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:mul-mem-orders-coprime">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">4.1.11</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:mul-mem-orders-coprime">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000057"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0004.html#lem:lcm-mem-orders">Theorem 4.1.10</a></li>
-          
-          <li><a href="sect0004.html#lem:lcm-mem-orders">Theorem 4.1.10</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.mul_mem_integerMatrixOrders_of_coprime" class="lean_decl">Crystallographic.mul_mem_integerMatrixOrders_of_coprime</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   Product of coprime achievable orders is achievable.  </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000057">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> For coprime \(m_1, m_2\), we have \(\mathrm{lcm}(m_1, m_2) = m_1 m_2\), so this follows from the lcm result. </p>
+  <p> Apply the cyclotomic companion membership theorem after noting that \(\deg (\Phi _m) = \varphi (m)\). </p>
 
   </div>
 </div>
@@ -932,11 +371,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0003.html" title="The Psi Function"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0003.html" title="Integer Matrix Orders"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Crystallographic Restriction Theorem"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0005.html" title="Companion Matrices"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0005.html" title="The Crystallographic Restriction Theorem"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

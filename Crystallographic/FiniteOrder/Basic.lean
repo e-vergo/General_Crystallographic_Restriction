@@ -3,9 +3,9 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.Algebra.CharP.Two
 import Mathlib.Data.Matrix.Block
-import Architect
 
 /-!
 # Orders of Integer Matrices
@@ -146,11 +146,6 @@ theorem integerMatrixOrders_subset_sum (M K : ℕ) :
   · rw [orderOf_embedMatrixSum_eq, hA_ord]
   · exact hA_pos
 
-/-- The equivalence between Fin (M + K) and Fin M ⊕ Fin K.
-
-This is the standard bijection used to convert between Fin-indexed and Sum-indexed matrices. -/
-def finSumEquiv (M K : ℕ) : Fin (M + K) ≃ Fin M ⊕ Fin K := finSumFinEquiv.symm
-
 /-- Reindexing defines a monoid isomorphism.
 
 Given an equivalence e : m ≃ n between index types, this provides an isomorphism
@@ -185,7 +180,7 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
   -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
   let A' : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ := embedMatrixSum A
   -- Then reindex to Fin N using the equivalence
-  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ (finSumEquiv M K)
+  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ finSumFinEquiv.symm
   let A'' : Matrix (Fin N) (Fin N) ℤ := (reindexMonoidEquiv e).symm A'
   use A''
   constructor

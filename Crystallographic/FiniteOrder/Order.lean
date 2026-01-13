@@ -3,6 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Crystallographic.FiniteOrder.Basic
 
 /-!
@@ -68,7 +69,7 @@ theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
   -- Construct block diagonal matrix
   let C := blockDiag2 A B
   -- Reindex from Sum to Fin (M + K)
-  let e : Fin (M + K) ≃ Fin M ⊕ Fin K := (finSumEquiv M K)
+  let e : Fin (M + K) ≃ Fin M ⊕ Fin K := finSumFinEquiv.symm
   let C' : Matrix (Fin (M + K)) (Fin (M + K)) ℤ := (reindexMonoidEquiv e).symm C
   use C'
   constructor

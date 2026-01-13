@@ -3,6 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.Algebra.Polynomial.Degree.Definitions
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Matrix.Block
@@ -10,7 +11,6 @@ import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
-import Architect
 
 /-!
 # Companion Matrices

@@ -3,11 +3,11 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
-
-import Crystallographic.Companion
+import Crystallographic.Companion.Basic
 import Crystallographic.FiniteOrder.Basic
 
 /-!

@@ -3,19 +3,17 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.GroupTheory.Perm.Fin
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.LinearAlgebra.Matrix.Permutation
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
-
-import Architect
-
+import Crystallographic.Companion.Cyclotomic
 import Crystallographic.FiniteOrder.Order
 import Crystallographic.Psi.Basic
 import Crystallographic.Psi.Bounds
-import Crystallographic.Companion.Cyclotomic
 
 /-!
 # The Crystallographic Restriction Theorem - Backward Direction
@@ -44,6 +42,8 @@ namespace Crystallographic
 open Matrix Polynomial
 
 /-! ## Permutation matrix infrastructure -/
+
+namespace Equiv.Perm
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
 lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
@@ -95,7 +95,10 @@ lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} 
 
 /-- Order of permutation matrix equals order of permutation. -/
 @[blueprint "lem:orderOf-permMatrix"
-  (statement := /-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/)]
+  (statement := /-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/)
+  (proof := /-- Since $P_{\sigma^k} = P_\sigma^k$ and $P_\sigma = I \iff \sigma = \mathrm{id}$, the order
+  of $P_\sigma$ equals the order of $\sigma$. The key is that the permutation matrix map preserves
+  powers and is injective on the group of permutation matrices. -/)]
 lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     orderOf (σ.permMatrix R) = orderOf σ := by
@@ -118,7 +121,9 @@ lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Se
 
 /-- The finRotate permutation has order n for n at least 2. -/
 @[blueprint "lem:orderOf-finRotate"
-  (statement := /-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/)]
+  (statement := /-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/)
+  (proof := /-- The $\mathrm{finRotate}(n)$ permutation is an $n$-cycle with full support $\mathrm{Fin}\ n$.
+  By the cycle order theorem, the order of a cycle equals its length, which is $n$. -/)]
 lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := by
   have hcycle := isCycle_finRotate_of_le hn
   have hord := Equiv.Perm.IsCycle.orderOf hcycle
@@ -130,33 +135,41 @@ lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
     orderOf ((finRotate n).permMatrix ℤ) = n := by
   rw [orderOf_permMatrix, orderOf_finRotate n hn]
 
+end Equiv.Perm
+
 /-- Order n is achievable by an n x n integer matrix for n at least 2. -/
 @[blueprint "lem:mem-integerMatrixOrders-self"
-  (statement := /-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/)]
+  (statement := /-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/)
+  (proof := /-- The permutation matrix $P_{\mathrm{finRotate}(m)}$ is an $m \times m$ integer matrix
+  with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/)]
 lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatrixOrders n := by
   use (finRotate n).permMatrix ℤ
   constructor
-  · exact orderOf_permMatrix_finRotate n hn
+  · exact Equiv.Perm.orderOf_permMatrix_finRotate n hn
   · omega
 
 /-! ## Backward direction: Dimension bound implies order is achievable -/
 
 /-- Helper: The identity matrix has order 1, contributing dimension 0. -/
 @[blueprint "lem:order-one-achievable"
-  (statement := /-- Order 1 is achievable: $1 \in \mathrm{Ord}_N$ for any $N$. -/)]
+  (statement := /-- Order 1 is achievable: $1 \in \mathrm{Ord}_N$ for any $N$. -/)
+  (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
 lemma order_one_achievable (N : ℕ) : 1 ∈ integerMatrixOrders N :=
   one_mem_integerMatrixOrders N
 
 /-- Helper: The negation of identity has order 2, contributing dimension 0 for N at least 1. -/
 @[blueprint "lem:order-two-achievable"
-  (statement := /-- Order 2 is achievable: $2 \in \mathrm{Ord}_N$ for $N \geq 1$. -/)]
+  (statement := /-- Order 2 is achievable: $2 \in \mathrm{Ord}_N$ for $N \geq 1$. -/)
+  (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$, so it has order $2$. -/)]
 lemma order_two_achievable (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
   two_mem_integerMatrixOrders N
 
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
   (statement := /-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
-  -/)]
+  -/)
+  (proof := /-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
+  has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/)]
 theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 < k)
     (hpk : ¬(p = 2 ∧ k = 1)) :
     p ^ k ∈ integerMatrixOrders (Crystallographic.psi (p ^ k)) := by
@@ -173,21 +186,20 @@ theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 
       _ ≥ 2 := hp_ge2
   exact Crystallographic.mem_integerMatrixOrders_totient (p ^ k) hpk_ge2
 
-/-- Main construction: Every m >= 1 with m ≠ 2 belongs to integerMatrixOrders(psi(m)).
+/-- Every `m >= 1` with `m ≠ 2` belongs to `integerMatrixOrders (psi m)`.
 
-The proof uses strong induction on m:
-- m = 1: psi(1) = 0, use identity matrix
-- m = 2: EXCLUDED - psi(2) = 0 but 2 ∉ integerMatrixOrders(0)
-- m = p^k prime power (p != 2 or k != 1): use companion matrix
-- m composite: factor as p^e * m' with coprime parts, apply IH and block diagonal
+The proof uses strong induction on `m`:
+- `m = 1`: `psi 1 = 0`, use identity matrix
+- `m = 2`: EXCLUDED - `psi 2 = 0` but `2 ∉ integerMatrixOrders 0`
+- `m = p^k` prime power (p ≠ 2 or k ≠ 1): use companion matrix
+- `m` composite: factor as `p^e * m'` with coprime parts, apply IH and block diagonal
 
-Note: For m = 2, psi(2) = 0 means no additional dimension is needed, but there's
-no 0×0 integer matrix with order 2. The crystallographic restriction theorem
-handles m = 2 separately using the hypothesis hNm : m = 1 ∨ 0 < N.
+Note: For `m = 2`, `psi 2 = 0` means no additional dimension is needed, but there is
+no 0x0 integer matrix with order 2. The crystallographic restriction theorem
+handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 < N`.
 
 This theorem is used to complete the backward direction of the crystallographic
-restriction theorem: if psi(m) <= N, then m ∈ integerMatrixOrders(N).
--/
+restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
 theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
     m ∈ integerMatrixOrders (Crystallographic.psi m) := by
   -- Use strong induction on m

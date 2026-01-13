@@ -3,15 +3,13 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.Algebra.BigOperators.Finprod
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.GCD.BigOperators
 import Mathlib.Data.Nat.Totient
-
-import Architect
-
+import Crystallographic.Main.Lemmas
 import Crystallographic.Psi.Basic
-import Crystallographic.Lemmas
 
 /-!
 # Psi Lower Bound Lemmas
@@ -77,7 +75,8 @@ theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m
   have hminFac_prime : m.minFac.Prime := Nat.minFac_prime hm_ne_one
   set p := m.minFac
   set e := m.factorization p
-  have he_pos : 0 < e := Nat.Prime.factorization_pos_of_dvd hminFac_prime hm_ne_zero (Nat.minFac_dvd m)
+  have he_pos : 0 < e :=
+    Nat.Prime.factorization_pos_of_dvd hminFac_prime hm_ne_zero (Nat.minFac_dvd m)
   have hdvd : p ^ e ∣ m := Nat.ordProj_dvd m p
   set m' := m / p ^ e
   have hm'_pos : 0 < m' := Nat.div_pos (Nat.le_of_dvd hm_pos hdvd) (Nat.pow_pos hminFac_prime.pos)
@@ -217,7 +216,8 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.tot
         by_cases h21 : p = 2 ∧ e = 1
         · -- Case 1: p^e = 2, so psi(2) = 0 and totient(2) = 1
           obtain ⟨hp2, he1⟩ := h21
-          simp only [hp2, he1, pow_one, Crystallographic.psi_two, Nat.totient_two, zero_add, one_mul]
+          simp only [hp2, he1, pow_one, Crystallographic.psi_two, Nat.totient_two, zero_add,
+            one_mul]
           exact IH_m'
         · by_cases hm'2 : m' = 2
           · -- Case 2: m' = 2, so psi(2) = 0 and totient(2) = 1
@@ -229,7 +229,87 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : Crystallographic.psi m ≤ Nat.tot
             have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := totient_primePow_ge_two hp he_pos h21
             calc Crystallographic.psi (p ^ e) + Crystallographic.psi m'
                 ≤ Nat.totient (p ^ e) + Nat.totient m' := by omega
-              _ ≤ Nat.totient (p ^ e) * Nat.totient m' := sum_le_prod_of_ge_two htot_pe_ge2 htot_m'_ge2
+              _ ≤ Nat.totient (p ^ e) * Nat.totient m' :=
+                sum_le_prod_of_ge_two htot_pe_ge2 htot_m'_ge2
+
+/-- For a finite set S of divisors of m with lcm(S) = m, each prime power p^k || m
+is achieved by some element d ∈ S (meaning p^k | d).
+
+This is the key combinatorial observation: if no element of S had p^k dividing it,
+then the lcm could only have p-valuation less than k, contradicting lcm(S) = m. -/
+lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
+    (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
+    ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
+  intro q hq
+  have hq_prime := Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq)
+  by_contra hall
+  push_neg at hall
+  -- All d ∈ S have q^{ord_q(m)} not dividing d
+  have hall' : ∀ d ∈ S, d.factorization q < m.factorization q := by
+    intro d hd
+    have hndvd := hall d hd
+    have hdvd : d ∣ m := hS_sub d hd
+    have hd_pos : 0 < d := Nat.pos_of_dvd_of_pos hdvd hm
+    by_contra hge
+    push_neg at hge
+    have := (hq_prime.pow_dvd_iff_le_factorization hd_pos.ne').mpr hge
+    exact hndvd this
+  -- lcm(S).factorization q = sup of d.factorization q, which is < m.factorization q
+  -- This contradicts hS_lcm since lcm(S) = m requires matching factorizations.
+  have hne_zero : S.lcm id ≠ 0 := by rw [hS_lcm]; exact hm.ne'
+  have hk_pos : 0 < m.factorization q := Finsupp.mem_support_iff.mp hq |> Nat.pos_of_ne_zero
+  have hfact_q : (S.lcm id).factorization q < m.factorization q := by
+    -- Show: (S.lcm id).factorization q ≤ S.sup (d.factorization q) < m.factorization q
+    have hsup_lt : S.sup (fun d => d.factorization q) < m.factorization q :=
+      Finset.sup_lt_iff hk_pos |>.mpr (fun d hd => hall' d hd)
+    -- Use extracted lemma for lcm factorization bound
+    have hS_ne_zero : ∀ d ∈ S, d ≠ 0 := fun d hd =>
+      (Nat.pos_of_dvd_of_pos (hS_sub d hd) hm).ne'
+    exact lt_of_le_of_lt (Finset.lcm_factorization_le_sup S id q hS_ne_zero) hsup_lt
+  rw [hS_lcm] at hfact_q
+  omega
+
+/-- For a fiber of primes mapping to the same element d, the sum of φ(q^k) over the fiber
+is bounded by φ(d).
+
+The key insight: if q₁^{k₁}, q₂^{k₂}, ... all divide d with distinct primes qᵢ,
+then their product also divides d. By multiplicativity of φ and the inequality
+∑ aᵢ ≤ ∏ aᵢ when all aᵢ ≥ 2, we get the bound. -/
+lemma fiber_totient_sum_le_totient {m d : ℕ} (hd_pos : 0 < d)
+    (fiber : Finset ℕ)
+    (h_fiber_primes : ∀ q ∈ fiber, q.Prime)
+    (h_fiber_dvd : ∀ q ∈ fiber, q ^ m.factorization q ∣ d)
+    (h_fiber_ge2 : ∀ q ∈ fiber, 2 ≤ Nat.totient (q ^ m.factorization q)) :
+    ∑ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤ Nat.totient d := by
+  by_cases h_fiber_empty : fiber = ∅
+  · rw [h_fiber_empty, Finset.sum_empty]
+    exact Nat.zero_le _
+  · have h_fiber_nonempty : fiber.Nonempty := Finset.nonempty_of_ne_empty h_fiber_empty
+    -- The primes in fiber are pairwise coprime
+    have h_coprime : ∀ q₁ ∈ fiber, ∀ q₂ ∈ fiber, q₁ ≠ q₂ →
+        (q₁ ^ m.factorization q₁).Coprime (q₂ ^ m.factorization q₂) := by
+      intro q₁ hq₁ q₂ hq₂ hne
+      apply Nat.Coprime.pow
+      exact (Nat.coprime_primes (h_fiber_primes q₁ hq₁) (h_fiber_primes q₂ hq₂)).mpr hne
+    -- ∏_{q∈fiber} q^{ord_q(m)} divides d
+    have h_prod_dvd : (∏ q ∈ fiber, q ^ m.factorization q) ∣ d :=
+      Finset.prod_coprime_dvd fiber (fun q => q ^ m.factorization q) d h_fiber_dvd h_coprime
+    -- φ(∏ q^k) = ∏ φ(q^k) by coprimality
+    have h_totient_prod : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) =
+        ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
+      Nat.totient_finset_prod_of_coprime fiber (fun q => q ^ m.factorization q) h_coprime
+    -- φ(n) | φ(d) when n | d, hence φ(n) ≤ φ(d)
+    have h_totient_ge_prod : ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤ Nat.totient d := by
+      rw [← h_totient_prod]
+      have h_dvd : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) ∣ Nat.totient d :=
+        Nat.totient_dvd_of_dvd h_prod_dvd
+      have h_pos : 0 < Nat.totient d := Nat.totient_pos.mpr hd_pos
+      exact Nat.le_of_dvd h_pos h_dvd
+    -- ∏ ≥ ∑ when all factors ≥ 2
+    have h_prod_ge_sum : ∑ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤
+        ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
+      Finset.sum_le_prod_of_all_ge_two fiber _ h_fiber_ge2
+    exact le_trans h_prod_ge_sum h_totient_ge_prod
 
 /-- Key lemma: For any S ⊆ m.divisors with lcm(S) = m, we have Σ_{d∈S} φ(d) ≥ psi(m).
 
@@ -316,70 +396,8 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
       have hS_lcm' : S.lcm id = p ^ k := hm_eq ▸ hS_lcm
       exact hm_in_S (hm_eq ▸ Crystallographic.primePow_mem_of_lcm_eq hp hk S hS_sub' hS_lcm')
     · -- m is not a prime power, so it has ≥ 2 distinct prime factors
-      -- Factor m = a * b with coprime a, b > 1
-      -- Use psi(m) = psi(a) + psi(b) and recursion
-      have hm_ne_zero : m ≠ 0 := hm.ne'
-      have hminFac : m.minFac.Prime := Nat.minFac_prime (by omega : m ≠ 1)
-      have hminFac_dvd : m.minFac ∣ m := Nat.minFac_dvd m
-      set p := m.minFac with hp_def
-      set e := m.factorization p with he_def
-      have he_pos : 0 < e := Nat.Prime.factorization_pos_of_dvd hminFac hm_ne_zero hminFac_dvd
-      have hdvd_pe : p ^ e ∣ m := Nat.ordProj_dvd m p
-      set m' := m / p ^ e with hm'_def
-      have hm'_pos : 0 < m' := Nat.div_pos (Nat.le_of_dvd hm hdvd_pe) (Nat.pow_pos hminFac.pos)
-      have hm_eq : m = p ^ e * m' := (Nat.mul_div_cancel' hdvd_pe).symm
-      have hcop : Nat.Coprime (p ^ e) m' := Nat.coprime_ordCompl hminFac hm_ne_zero |>.pow_left e
-      -- m' ≠ 1 because m is not a prime power
-      have hm'_ne_one : m' ≠ 1 := by
-        intro hm'_one
-        apply hpow
-        rw [isPrimePow_nat_iff]
-        exact ⟨p, e, hminFac, he_pos, by rw [hm_eq, hm'_one, mul_one]⟩
-      have hm'_lt : m' < m := by
-        have hpe_ge2 : 2 ≤ p ^ e := by
-          calc p ^ e ≥ p ^ 1 := Nat.pow_le_pow_right (Nat.Prime.one_lt hminFac).le he_pos
-            _ = p := pow_one p
-            _ ≥ 2 := Nat.Prime.two_le hminFac
-        calc m' = 1 * m' := (one_mul _).symm
-          _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_right
-              (Nat.one_lt_pow he_pos.ne' (Nat.Prime.one_lt hminFac)) hm'_pos
-          _ = m := hm_eq.symm
-      have hpe_lt : p ^ e < m := by
-        have hm'_ge2 : 2 ≤ m' := by omega
-        calc p ^ e = p ^ e * 1 := (mul_one _).symm
-          _ < p ^ e * m' := Nat.mul_lt_mul_of_pos_left (by omega) (Nat.pow_pos hminFac.pos)
-          _ = m := hm_eq.symm
-
-      have h_achieves : ∀ q ∈ m.factorization.support,
-          ∃ d ∈ S, q ^ m.factorization q ∣ d := by
-        intro q hq
-        have hq_prime := Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq)
-        by_contra hall
-        push_neg at hall
-        -- All d ∈ S have q^{ord_q(m)} not dividing d
-        have hall' : ∀ d ∈ S, d.factorization q < m.factorization q := by
-          intro d hd
-          have hndvd := hall d hd
-          have hdvd : d ∣ m := hS_sub d hd
-          have hd_pos : 0 < d := Nat.pos_of_dvd_of_pos hdvd hm
-          by_contra hge
-          push_neg at hge
-          have := (hq_prime.pow_dvd_iff_le_factorization hd_pos.ne').mpr hge
-          exact hndvd this
-        -- lcm(S).factorization q = sup of d.factorization q, which is < m.factorization q
-        -- This contradicts hS_lcm since lcm(S) = m requires matching factorizations.
-        have hne_zero : S.lcm id ≠ 0 := by rw [hS_lcm]; exact hm.ne'
-        have hk_pos : 0 < m.factorization q := Finsupp.mem_support_iff.mp hq |> Nat.pos_of_ne_zero
-        have hfact_q : (S.lcm id).factorization q < m.factorization q := by
-          -- Show: (S.lcm id).factorization q ≤ S.sup (d.factorization q) < m.factorization q
-          have hsup_lt : S.sup (fun d => d.factorization q) < m.factorization q :=
-            Finset.sup_lt_iff hk_pos |>.mpr (fun d hd => hall' d hd)
-          -- Use extracted lemma for lcm factorization bound
-          have hS_ne_zero : ∀ d ∈ S, d ≠ 0 := fun d hd =>
-            (Nat.pos_of_dvd_of_pos (hS_sub d hd) hm).ne'
-          exact lt_of_le_of_lt (Finset.lcm_factorization_le_sup S id q hS_ne_zero) hsup_lt
-        rw [hS_lcm] at hfact_q
-        omega
+      -- Use helper lemma: each prime power p^k || m is achieved by some d ∈ S
+      have h_achieves := primePow_achieved_of_lcm_eq hm S hS_sub hS_lcm
       calc Crystallographic.psi m
         -- psi(m) = sum over nontrivial primes of φ(p^{ord_p(m)})
           = (m.factorization.support.filter (fun q => ¬(q = 2 ∧ m.factorization q = 1))).sum
@@ -433,72 +451,32 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
               _ ≤ ∑ d ∈ S, Nat.totient d := by
                 apply Finset.sum_le_sum
                 intro d hd
-                -- For this d, bound the fiber sum by φ(d)
-                -- The fiber consists of q ∈ NT where achiever q = d
+                -- For this d, bound the fiber sum by φ(d) using helper lemma
                 let fiber := NT.filter (fun q => achiever q = d)
-                -- For each q in fiber, q^{ord_q(m)} | d (by achiever property)
+                -- Establish hypotheses for the helper lemma
                 have h_fiber_dvd : ∀ q ∈ fiber, q ^ m.factorization q ∣ d := by
                   intro q hq
                   have hq_NT : q ∈ NT := Finset.mem_of_mem_filter q hq
                   have hq_eq : achiever q = d := (Finset.mem_filter.mp hq).2
                   rw [← hq_eq]
                   exact (h_achiever q hq_NT).2
-                -- The fiber elements are distinct primes
                 have h_fiber_primes : ∀ q ∈ fiber, q.Prime := by
                   intro q hq
                   have hq_supp := Finset.mem_of_mem_filter q (Finset.mem_of_mem_filter q hq)
                   exact Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq_supp)
-                -- The fiber elements have totients ≥ 2 (nontrivial condition)
                 have h_fiber_ge2 : ∀ q ∈ fiber, 2 ≤ Nat.totient (q ^ m.factorization q) := by
                   intro q hq
                   have hq_NT := Finset.mem_of_mem_filter q hq
                   have hq_supp := Finset.mem_of_mem_filter q hq_NT
-                  have hq_prime := Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq_supp)
-                  have hk_pos : 0 < m.factorization q := Finsupp.mem_support_iff.mp hq_supp |> Nat.pos_of_ne_zero
-                  have hqk_nontrivial : ¬(q = 2 ∧ m.factorization q = 1) := (Finset.mem_filter.mp hq_NT).2
+                  have hq_prime :=
+                    Nat.prime_of_mem_primeFactors (Nat.support_factorization m ▸ hq_supp)
+                  have hk_pos : 0 < m.factorization q :=
+                    Finsupp.mem_support_iff.mp hq_supp |> Nat.pos_of_ne_zero
+                  have hqk_nontrivial : ¬(q = 2 ∧ m.factorization q = 1) :=
+                    (Finset.mem_filter.mp hq_NT).2
                   exact totient_primePow_ge_two hq_prime hk_pos hqk_nontrivial
-                -- Now show: ∑_{q∈fiber} φ(q^k) ≤ φ(d)
-                -- Use: φ(d) ≥ ∏_{q∈fiber} φ(q^k) ≥ ∑_{q∈fiber} φ(q^k)
-                -- The first inequality: since q^{ord_q(m)} | d for each q in fiber,
-                -- and these are distinct primes, ∏_{q∈fiber} q^{ord_q(m)} | d.
-                -- Hence φ(d) ≥ φ(∏_{q∈fiber} q^k) = ∏_{q∈fiber} φ(q^k).
-                -- The second: ∏ ≥ ∑ when all factors ≥ 2.
-                by_cases h_fiber_empty : fiber = ∅
-                · -- Empty fiber: the sum over fiber is 0, which is ≤ φ(d)
-                  -- The sum is over `NT with achiever q = d` which equals `fiber`
-                  have h_eq : NT.filter (fun q => achiever q = d) = fiber := rfl
-                  rw [h_eq, h_fiber_empty, Finset.sum_empty]
-                  exact Nat.zero_le _
-                · have h_fiber_nonempty : fiber.Nonempty :=
-                    Finset.nonempty_of_ne_empty h_fiber_empty
-                  -- The primes in fiber are pairwise coprime
-                  have h_coprime : ∀ q₁ ∈ fiber, ∀ q₂ ∈ fiber, q₁ ≠ q₂ →
-                      (q₁ ^ m.factorization q₁).Coprime (q₂ ^ m.factorization q₂) := by
-                    intro q₁ hq₁ q₂ hq₂ hne
-                    apply Nat.Coprime.pow
-                    exact (Nat.coprime_primes (h_fiber_primes q₁ hq₁)
-                      (h_fiber_primes q₂ hq₂)).mpr hne
-                  -- ∏_{q∈fiber} q^{ord_q(m)} divides d
-                  have h_prod_dvd : (∏ q ∈ fiber, q ^ m.factorization q) ∣ d :=
-                    Finset.prod_coprime_dvd fiber (fun q => q ^ m.factorization q) d h_fiber_dvd h_coprime
-                  -- φ(d) ≥ φ(∏_{q∈fiber} q^{ord_q(m)})
-                  -- φ(∏ q^k) = ∏ φ(q^k) by coprimality
-                  have h_totient_prod : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) =
-                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
-                    Nat.totient_finset_prod_of_coprime fiber (fun q => q ^ m.factorization q) h_coprime
-                  -- φ(n) | φ(d) when n | d, hence φ(n) ≤ φ(d)
-                  have h_totient_ge_prod : ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤
-                      Nat.totient d := by
-                    rw [← h_totient_prod]
-                    have h_dvd : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) ∣
-                        Nat.totient d := Nat.totient_dvd_of_dvd h_prod_dvd
-                    have h_pos : 0 < Nat.totient d := Nat.totient_pos.mpr (hS_pos d hd)
-                    exact Nat.le_of_dvd h_pos h_dvd
-                  -- ∏ ≥ ∑ when all factors ≥ 2
-                  have h_prod_ge_sum : ∑ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤
-                      ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
-                    Finset.sum_le_prod_of_all_ge_two fiber _ h_fiber_ge2
-                  exact le_trans h_prod_ge_sum h_totient_ge_prod
+                exact fiber_totient_sum_le_totient (hS_pos d hd) fiber
+                  h_fiber_primes h_fiber_dvd h_fiber_ge2
 
 
 end Crystallographic

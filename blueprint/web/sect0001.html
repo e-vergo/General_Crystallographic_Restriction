@@ -13,7 +13,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction</title>
-<link rel="next" href="sect0002.html" title="Supporting Lemmas" />
+<link rel="next" href="sect0002.html" title="The Psi Function" />
 <link rel="prev" href="index.html" title="Crystallographic Restriction Theorem" />
 <link rel="up" href="index.html" title="Crystallographic Restriction Theorem" />
 <link rel="stylesheet" href="styles/theme-blue.css" />
@@ -36,50 +36,19 @@
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Supporting Lemmas</span></a>
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The Psi Function</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">The Psi Function</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0003.html#a0000000010"><span class="toc_ref">3.1</span> <span class="toc_entry">The Psi Function</span></a>
- </li>
-
-  </ul>
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Integer Matrix Orders</span></a>
  </li>
 <li class="">
-  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Integer Matrix Orders</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0004.html#a0000000011"><span class="toc_ref">4.1</span> <span class="toc_entry">Integer Matrix Orders</span></a>
- </li>
-
-  </ul>
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Companion Matrices</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Companion Matrices</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0005.html#a0000000012"><span class="toc_ref">5.1</span> <span class="toc_entry">Companion Matrices</span></a>
- </li>
-
-  </ul>
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">The Crystallographic Restriction Theorem</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The Crystallographic Restriction</span></a>
- </li>
-<li class="">
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Main Theorem</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0007.html#a0000000013"><span class="toc_ref">7.1</span> <span class="toc_entry">Main Theorem</span></a>
- </li>
-
-  </ul>
+  <a href="sect0006.html"><span class="toc_ref">A</span> <span class="toc_entry">Auxiliary Lemmas</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -91,7 +60,33 @@
 
 <div class="main-text">
 <h1 id="a0000000002">1 Introduction</h1>
-<p>The <em>Crystallographic Restriction Theorem</em> characterizes exactly which rotation orders are achievable by integer matrices. Specifically, an \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\), where \(\psi \) is a function based on Euler’s totient function. </p>
+<p>The <em>Crystallographic Restriction Theorem</em> characterizes exactly which orders can be achieved by integer matrices of a given dimension. For an \(N \times N\) matrix \(M\) with integer entries, we say \(M\) has <em>finite order</em> \(m\) if \(M^m = I\) and \(m\) is the smallest such positive integer. The theorem provides a complete answer to the question: which values of \(m\) can occur as orders of \(N \times N\) integer matrices? </p>
+
+<p><b class="bfseries">Main Theorem.</b> <i class="itshape">An \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\), where \(\psi \) is defined below.</i> </p>
+
+<p>The function \(\psi \) measures the “arithmetic complexity” of \(m\) in terms of Euler’s totient function \(\varphi \). For a prime power \(p^k\), we define the <em>prime power contribution</em>: </p>
+<div class="displaymath" id="a0000000009">
+  \[  \psi _{\mathrm{pp}}(p, k) = \begin{cases}  0 &  \text{if } p = 2 \text{ and } k = 1, \\ \varphi (p^k) &  \text{otherwise}. \end{cases}  \]
+</div>
+<p> The special case \(\psi _{\mathrm{pp}}(2, 1) = 0\) reflects the fact that order 2 can be achieved by the \(0 \times 0\) empty matrix (or equivalently, \(-I\) achieves order 2 without increasing dimension). For a general positive integer \(m\) with prime factorization \(m = \prod _{i} p_i^{k_i}\), we define: </p>
+<div class="displaymath" id="a0000000010">
+  \[  \psi (m) = \sum _{i} \psi _{\mathrm{pp}}(p_i, k_i).  \]
+</div>
+
+<p><b class="bfseries">Proof Strategy.</b> The proof splits naturally into two directions. </p>
+<p><i class="itshape">Forward direction (\(m \in \mathrm{Ord}_N \Rightarrow \psi (m) \leq N\)):</i> If \(M\) is an \(N \times N\) integer matrix with order \(m\), then \(M\) satisfies \(M^m = I\), so its minimal polynomial divides \(X^m - 1\). Since \(M\) has exact order \(m\), the \(m\)-th cyclotomic polynomial \(\Phi _m\) divides the minimal polynomial, and hence divides the characteristic polynomial of \(M\). By the degree constraint, \(\deg (\chi _M) = N \geq \deg (\Phi _m) = \varphi (m) \geq \psi (m)\). </p>
+<p><i class="itshape">Backward direction (\(\psi (m) \leq N \Rightarrow m \in \mathrm{Ord}_N\)):</i> We construct an integer matrix of order \(m\) with dimension exactly \(\psi (m)\), which can then be embedded into any larger dimension. The construction uses companion matrices of cyclotomic polynomials. For a prime power \(p^k\) with \(\psi _{\mathrm{pp}}(p, k) {\gt} 0\), the companion matrix of \(\Phi _{p^k}\) is a \(\varphi (p^k) \times \varphi (p^k)\) integer matrix with order \(p^k\). For composite \(m\), we combine companion matrices for each prime power factor in a block diagonal arrangement. The coprimality of orders ensures the combined matrix has order \(\mathrm{lcm}\) of the individual orders, which equals \(m\). </p>
+
+<p>This formalization follows the approach of Bamberg, Cairns, and Kilminster&#160;<span class="cite">
+	[
+	<a href="sect0001.html#BCK2003" >1</a>
+	]
+</span>, who characterized achievable orders in arbitrary dimension using the \(\psi \) function. </p>
+<dl class="bibliography">
+  <dt><a name="BCK2003">1</a></dt>
+  <dd><p>J.&#160;Bamberg, G.&#160;Cairns, and D.&#160;Kilminster. The crystallographic restriction, permutations, and Goldbach’s conjecture. <i class="itshape">Amer. Math. Monthly</i>, 110(3):202–209, 2003. </p>
+</dd>
+</dl>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -107,7 +102,7 @@
 </a>
   <a href="index.html" title="Crystallographic Restriction Theorem"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0002.html" title="Supporting Lemmas"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0002.html" title="The Psi Function"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

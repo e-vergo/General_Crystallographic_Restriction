@@ -3,15 +3,13 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.GroupTheory.Perm.Fin
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.LinearAlgebra.Matrix.Permutation
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
-
-import Architect
-
 import Crystallographic.FiniteOrder.Order
 import Crystallographic.Psi.Basic
 import Crystallographic.Psi.Bounds
@@ -46,7 +44,11 @@ open Matrix Polynomial
 /-- If each cyclotomic polynomial in a finset divides a target polynomial,
 then their product also divides the target. -/
 @[blueprint "lem:cyclotomic-finset-product-dvd"
-  (statement := /-- If $\Phi_d \mid f$ for all $d \in S$, then $\prod_{d \in S} \Phi_d \mid f$. -/)]
+  (statement := /-- If $\Phi_d \mid f$ for all $d \in S$, then $\prod_{d \in S} \Phi_d \mid f$. -/)
+  (proof := /-- By induction on $S$. The empty product divides everything. For the insert case,
+  use that cyclotomic polynomials with distinct indices are coprime over $\mathbb{Q}$, so
+  $\Phi_d$ is coprime to $\prod_{x \in s} \Phi_x$ when $d \notin s$. Then apply coprime
+  divisibility: if $a, b$ are coprime and both divide $f$, then $ab \mid f$. -/)]
 lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
     (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
     (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by

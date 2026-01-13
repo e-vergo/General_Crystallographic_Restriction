@@ -3,21 +3,19 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under MIT license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
+import Architect
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Algebra.CharP.Two
 import Mathlib.Algebra.GCDMonoid.Finset
 import Mathlib.Algebra.GCDMonoid.Nat
 import Mathlib.Algebra.IsPrimePow
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Nat.Basic
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.GCD.BigOperators
 import Mathlib.Data.Nat.Totient
 import Mathlib.GroupTheory.OrderOfElement
-
-import Architect
-
 import Crystallographic.FiniteOrder.Basic
 
 /-!

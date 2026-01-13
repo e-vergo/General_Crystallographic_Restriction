@@ -1,2 +1,2 @@
 -- Root file for Crystallographic library
-import Crystallographic.MainTheorem
+import Crystallographic.Main.MainTheorem

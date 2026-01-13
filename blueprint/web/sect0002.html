@@ -12,8 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Supporting Lemmas</title>
-<link rel="next" href="sect0003.html" title="The Psi Function" />
+<title>The Psi Function</title>
+<link rel="next" href="sect0003.html" title="Integer Matrix Orders" />
 <link rel="prev" href="sect0001.html" title="Introduction" />
 <link rel="up" href="index.html" title="Crystallographic Restriction Theorem" />
 <link rel="stylesheet" href="styles/theme-blue.css" />
@@ -36,50 +36,19 @@
   <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
  </li>
 <li class=" active current">
-  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Supporting Lemmas</span></a>
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">The Psi Function</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">The Psi Function</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0003.html#a0000000010"><span class="toc_ref">3.1</span> <span class="toc_entry">The Psi Function</span></a>
- </li>
-
-  </ul>
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Integer Matrix Orders</span></a>
  </li>
 <li class="">
-  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Integer Matrix Orders</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0004.html#a0000000011"><span class="toc_ref">4.1</span> <span class="toc_entry">Integer Matrix Orders</span></a>
- </li>
-
-  </ul>
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Companion Matrices</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Companion Matrices</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0005.html#a0000000012"><span class="toc_ref">5.1</span> <span class="toc_entry">Companion Matrices</span></a>
- </li>
-
-  </ul>
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">The Crystallographic Restriction Theorem</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html"><span class="toc_ref">6</span> <span class="toc_entry">The Crystallographic Restriction</span></a>
- </li>
-<li class="">
-  <a href="sect0007.html"><span class="toc_ref">7</span> <span class="toc_entry">Main Theorem</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
-     <li class="">
-  <a href="sect0007.html#a0000000013"><span class="toc_ref">7.1</span> <span class="toc_entry">Main Theorem</span></a>
- </li>
-
-  </ul>
+  <a href="sect0006.html"><span class="toc_ref">A</span> <span class="toc_entry">Auxiliary Lemmas</span></a>
  </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
@@ -90,8 +59,131 @@
 
 
 <div class="main-text">
-<h1 id="a0000000003">2 Supporting Lemmas</h1>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:sum-le-prod">
+<h1 id="a0000000003">2 The Psi Function</h1>
+<p>The \(\psi \) function measures the “arithmetic complexity” of a positive integer \(m\). For a prime power \(p^k\), we define: </p>
+<ul class="itemize">
+  <li><p>\(\psi _{\mathrm{pp}}(p,k) = \varphi (p^k)\) for \(p\) odd or \(k \geq 2\) </p>
+</li>
+  <li><p>\(\psi _{\mathrm{pp}}(2,1) = 0\) </p>
+</li>
+</ul>
+<p>For a general integer \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\), we have: </p>
+<div class="displaymath" id="a0000000011">
+  \[ \psi (m) = \sum _i \psi _{\mathrm{pp}}(p_i, k_i) \]
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="psiPrimePow-def">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.0.1</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#psiPrimePow-def">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psiPrimePow" class="lean_decl">Crystallographic.psiPrimePow</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
+<p>The special case \(\psi _{\text{pp}}(2, 1) = 0\) reflects that \(-I\) achieves order \(2\) in any dimension \(\geq 1\), so order \(2\) does not require additional dimensions. For all other prime powers \(p^k\), we need \(\varphi (p^k)\) dimensions to achieve order \(p^k\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="psi-def">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.0.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#psi-def">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi" class="lean_decl">Crystallographic.psi</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+<p>For \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\): </p>
+<div class="displaymath" id="a0000000012">
+  \[ \psi (m) = \sum _i \psi _{\text{pp}}(p_i, k_i) = \sum _{\substack {p^k \|  m \\ (p,k) \neq (2,1)}} \varphi (p^k) \]
+</div>
+<p> This gives the minimum dimension needed to realize order \(m\).  </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-prime-pow">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -104,7 +196,90 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:sum-le-prod">#</a>
+    <a class="icon proof" href="sect0002.html#lem:psi-prime-pow">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000013"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_prime_pow" class="lean_decl">Crystallographic.psi_prime_pow</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
+<p>For a prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{\text{pp}}(p, k)\). This equals \(\varphi (p^k) = p^{k-1}(p-1)\) except when \(p = 2\) and \(k = 1\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000013">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> For prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{pp}(p, k)\). This equals \(\varphi (p^k)\) except when \(p = 2, k = 1\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:factorization-disjoint">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:factorization-disjoint">#</a>
     
     <a class="icon proof" href="sect0002.html#a0000000014"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
@@ -122,7 +297,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Finset.sum_le_prod_of_all_ge_two" class="lean_decl">Crystallographic.Finset.sum_le_prod_of_all_ge_two</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.factorization_support_disjoint" class="lean_decl">Crystallographic.factorization_support_disjoint</a></li>
           
         </ul>
     
@@ -133,7 +308,7 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>  For a finset where all values \(\geq 2\), the sum is at most the product. </p>
+  <p>  Coprime numbers have disjoint prime factorization supports. </p>
 
   </div>
 </div>
@@ -145,69 +320,11 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>By induction on the size of the finset. Base case: empty sum is \(0 \leq 1\) (empty product). Inductive step: if \(\sum _{x \in s} f(x) \leq \prod _{x \in s} f(x)\) and \(f(a) \geq 2\), then \(\sum _{x \in s \cup \{ a\} } f(x) = f(a) + \sum _s f \leq f(a) \cdot \prod _s f \leq \prod _{s \cup \{ a\} } f\) using \(1 + y \leq 2y\) for \(y \geq 1\) and \(f(a) \geq 2\). </p>
+  <p>If \(p\) divides both \(m\) and \(n\), then \(p \mid \gcd (m,n) = 1\), contradicting \(p\) prime. </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:lcm-factorization-le-sup">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.2</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0002.html#lem:lcm-factorization-le-sup">#</a>
-    
-    <a class="icon proof" href="sect0002.html#a0000000015"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Finset.lcm_factorization_le_sup" class="lean_decl">Crystallographic.Finset.lcm_factorization_le_sup</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>  The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000015">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>The \(q\)-adic valuation of \(\mathrm{lcm}(S)\) is the maximum of \(q\)-adic valuations over elements of \(S\). This follows from the definition of lcm via factorization: \(v_q(\mathrm{lcm}(S)) = \sup _{x \in S} v_q(x)\). </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:primePow-mem-of-lcm-eq">
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-coprime-add">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -220,11 +337,37 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:primePow-mem-of-lcm-eq">#</a>
+    <a class="icon proof" href="sect0002.html#lem:psi-coprime-add">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000016"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000015"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#lem:factorization-disjoint">Theorem 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:factorization-disjoint">Theorem 2.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
     
     
     <button class="modal lean">L∃∀N</button>
@@ -238,7 +381,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.primePow_mem_of_lcm_eq" class="lean_decl">Crystallographic.primePow_mem_of_lcm_eq</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_coprime_add" class="lean_decl">Crystallographic.psi_coprime_add</a></li>
           
         </ul>
     
@@ -249,11 +392,16 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>  If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
+  <p>   \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
+<p>When \(\gcd (m, n) = 1\), the prime factorizations of \(m\) and \(n\) share no common primes, so </p>
+<div class="displaymath" id="a0000000016">
+  \[ \psi (mn) = \sum _{p^k \|  mn} \psi _{\text{pp}}(p, k) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k) + \sum _{p^k \|  n} \psi _{\text{pp}}(p, k) = \psi (m) + \psi (n). \]
+</div>
+
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000016">
+<div class="proof_wrapper" id="a0000000015">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -261,11 +409,11 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Since \(\mathrm{lcm}(S) = p^k\) and all elements divide \(p^k\), each element has form \(p^j\) for some \(j \leq k\). Taking lcm over these powers gives \(p^{\max _j} = p^k\), so some element must have \(j = k\), meaning \(p^k \in S\). </p>
+  <p> When \(\gcd (m, n) = 1\), the factorizations of \(m\) and \(n\) are disjoint. Each prime power in \(mn\) comes from exactly one of \(m\) or \(n\), so the \(\psi \) contributions add. </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:totient-ge-two">
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-ge-psiPrimePow">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -278,11 +426,33 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:totient-ge-two">#</a>
+    <a class="icon proof" href="sect0002.html#lem:psi-ge-psiPrimePow">#</a>
     
     <a class="icon proof" href="sect0002.html#a0000000017"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
     
     
     <button class="modal lean">L∃∀N</button>
@@ -296,7 +466,7 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.totient_ge_two_of_gt_two" class="lean_decl">Crystallographic.totient_ge_two_of_gt_two</a></li>
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_ge_psiPrimePow_of_mem_support" class="lean_decl">Crystallographic.psi_ge_psiPrimePow_of_mem_support</a></li>
           
         </ul>
     
@@ -307,7 +477,7 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>  For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
+  <p>   \(\psi (m) \geq \psi _{\mathrm{pp}}(p, v_p(m))\) for each prime \(p \mid m\). </p>
 
   </div>
 </div>
@@ -319,16 +489,16 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Since \(n {\gt} 2\), we have \(n \neq 1\) and \(n \neq 2\). By ‘Nat.totient_eq_one_iff‘, \(\varphi (n) = 1\) iff \(n \in \{ 1, 2\} \). Since \(n \notin \{ 1, 2\} \), we have \(\varphi (n) \neq 1\). Also \(\varphi (n) \neq 0\) since \(n {\gt} 0\). Therefore \(\varphi (n) \geq 2\). </p>
+  <p>The sum \(\psi (m)\) includes the term \(\psi _{\mathrm{pp}}(p, v_p(m))\), and all terms are non-negative. </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:prod-coprime-dvd">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="auxlemma_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
+  <div class="auxlemma_thmheading">
+    <span class="auxlemma_thmcaption">
+    Lemma
     </span>
-    <span class="theorem_thmlabel">2.0.5</span>
+    <span class="auxlemma_thmlabel">2.0.1</span>
     <div class="thm_header_extras">
 
     
@@ -336,11 +506,33 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:prod-coprime-dvd">#</a>
+    <a class="icon proof" href="sect0002.html#lem:psi-le-totient">#</a>
     
     <a class="icon proof" href="sect0002.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
     
     
     <button class="modal lean">L∃∀N</button>
@@ -354,8 +546,6 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Finset.prod_coprime_dvd" class="lean_decl">Crystallographic.Finset.prod_coprime_dvd</a></li>
-          
         </ul>
     
       </div>
@@ -364,8 +554,21 @@
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>  If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
+  <div class="auxlemma_thmcontent">
+  <p>   For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+<p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
+<p>The proof proceeds by strong induction on \(m\): </p>
+<ul class="itemize">
+  <li><p>For \(m = 1\): \(\psi (1) = 0 \leq 1 = \varphi (1)\) </p>
+</li>
+  <li><p>For prime powers \(p^k\): \(\psi (p^k) = \varphi (p^k)\) (with the exception \(\psi (2) = 0\)) </p>
+</li>
+  <li><p>For composite \(m = 2 \cdot \text{odd}\): \(\psi (m) = \psi (\text{odd}) \leq \varphi (\text{odd}) = \varphi (m)\) </p>
+</li>
+  <li><p>For general composite without \(2^1\) factor: each \(\varphi (p^k) \geq 2\), so sum \(\leq \) product </p>
+</li>
+</ul>
+<p>  - </p>
 
   </div>
 </div>
@@ -377,16 +580,16 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>By Finset induction. Empty case: \(1 \mid d\) trivially. Insert case: we have \(f(q) \mid d\) and \(\prod _{s'} f(r) \mid d\) by IH. Show \(f(q)\) is coprime to \(\prod _{s'} f(r)\) using ‘Nat.Coprime.prod_right‘, then apply ‘Nat.Coprime.mul_dvd_of_dvd_of_dvd‘. </p>
+  <p> By strong induction on \(m\). For \(m = 1\): both sides are \(0\). For \(m {\gt} 1\): use coprime factorization \(m = a \cdot b\) with \(1 {\lt} a, b {\lt} m\). Then \(\psi (m) = \psi (a) + \psi (b) \leq \varphi (a) + \varphi (b) \leq \varphi (m)\) by the inductive hypothesis and multiplicativity of \(\varphi \). </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:totient-prod-coprime">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="auxlemma_thmwrapper theorem-style-definition" id="lem:sum-totient-ge-psi">
+  <div class="auxlemma_thmheading">
+    <span class="auxlemma_thmcaption">
+    Lemma
     </span>
-    <span class="theorem_thmlabel">2.0.6</span>
+    <span class="auxlemma_thmlabel">2.0.2</span>
     <div class="thm_header_extras">
 
     
@@ -394,11 +597,33 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:totient-prod-coprime">#</a>
+    <a class="icon proof" href="sect0002.html#lem:sum-totient-ge-psi">#</a>
     
     <a class="icon proof" href="sect0002.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-le-totient">Lemma 2.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
     
     
     <button class="modal lean">L∃∀N</button>
@@ -412,8 +637,6 @@
         
         <ul class="uses">
           
-          <li><a href="https://leanprover-community.github.io/mathlib4_docs/find/#doc/Crystallographic.Nat.totient_finset_prod_of_coprime" class="lean_decl">Crystallographic.Nat.totient_finset_prod_of_coprime</a></li>
-          
         </ul>
     
       </div>
@@ -422,8 +645,9 @@
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>  For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
+  <div class="auxlemma_thmcontent">
+  <p>   For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
+<p>For a finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the prime factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\mathrm{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s prime factorization, giving exactly \(\psi (m)\).  - </p>
 
   </div>
 </div>
@@ -435,7 +659,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>By Finset induction. Empty case: \(\varphi (1) = 1\) equals empty product. Insert case: use \(\varphi (ab) = \varphi (a)\varphi (b)\) for coprime \(a, b\) (‘Nat.totient_mul‘), where coprimality follows from ‘Nat.Coprime.prod_right‘. </p>
+  <p> For each prime power \(p^k \|  m\), some \(d \in S\) must have \(p^k \mid d\) (since \(\mathrm{lcm}(S) = m\)). The element with maximal \(p\)-valuation contributes at least \(\varphi (p^k) \geq \psi _{\mathrm{pp}}(p, k)\). Summing over distinct prime powers and using non-negativity gives the bound. </p>
 
   </div>
 </div>
@@ -454,7 +678,7 @@
 </a>
   <a href="index.html" title="Crystallographic Restriction Theorem"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0003.html" title="The Psi Function"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0003.html" title="Integer Matrix Orders"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

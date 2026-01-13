@@ -1,6 +1,6 @@
 # Crystallographic Restriction Theorem
 
-A formal verification in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which rotation orders are achievable by integer matrices in arbitrary dimension.
+A formal verification in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which rotation orders are achievable by integer matrices in arbitrary dimension. All proofs are complete with no `sorry` statements.
 
 ## Main Result
 
@@ -13,7 +13,7 @@ theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0
 
 ## The Psi Function
 
-The function `psi : N -> N` determines the minimum dimension required to realize a given order:
+The function `psi : ℕ → ℕ` determines the minimum dimension required to realize a given order:
 
 - `psi(1) = 0`
 - `psi(2) = 0`
@@ -26,25 +26,44 @@ The special case for 2^1 reflects that -I has order 2 in any dimension >= 1.
 |--------|---|---|---|---|---|---|---|---|---|----|----|
 | psi(m) | 0 | 0 | 2 | 2 | 4 | 2 | 6 | 4 | 6 | 4  | 4  |
 
+## Proof Strategy
+
+The proof splits into two directions:
+
+**Forward direction** (`m ∈ Ord_N => psi(m) <= N`): If an N x N integer matrix M has order m, then M^m = I, so its minimal polynomial divides X^m - 1. Since M has exact order m, the m-th cyclotomic polynomial divides the minimal polynomial. The degree constraint forces psi(m) <= N.
+
+**Backward direction** (`psi(m) <= N => m ∈ Ord_N`): We construct integer matrices achieving each order using companion matrices of cyclotomic polynomials. For a prime power p^k, the companion matrix of the p^k-th cyclotomic polynomial has size phi(p^k) and order p^k. For composite m, block diagonal combinations achieve order m in dimension psi(m).
+
 ## Project Structure
 
 ```
 Crystallographic/
-  MainTheorem.lean                     -- Main theorem statement and proof
-  Psi/
-    Basic.lean                         -- Definition of the psi function
-    Bounds.lean                        -- Bounds on psi values
-  FiniteOrder/
-    Basic.lean                         -- Integer matrix orders definition
-    Order.lean                         -- Order properties
-  Companion/
-    Cyclotomic.lean                    -- Companion matrices of cyclotomic polynomials
-  CrystallographicRestriction/
-    Forward.lean                       -- Forward direction: order m implies psi(m) <= N
-    Backward.lean                      -- Backward direction: psi(m) <= N implies order m achievable
-  Companion.lean                       -- Companion matrix infrastructure
-  Lemmas.lean                          -- Supporting lemmas
+├── Main/
+│   ├── MainTheorem.lean       -- Main theorem statement and proof
+│   └── Lemmas.lean            -- Supporting lemmas
+├── Psi/
+│   ├── Basic.lean             -- Definition of the psi function
+│   └── Bounds.lean            -- Bounds on psi values
+├── FiniteOrder/
+│   ├── Basic.lean             -- Integer matrix orders definition
+│   └── Order.lean             -- Order properties
+├── Companion/
+│   ├── Basic.lean             -- Companion matrix infrastructure
+│   └── Cyclotomic.lean        -- Companion matrices of cyclotomic polynomials
+└── CrystallographicRestriction/
+    ├── Forward.lean           -- Forward direction proof
+    └── Backward.lean          -- Backward direction proof
 ```
+
+## Blueprint
+
+A detailed proof blueprint with dependency graphs is available in the `blueprint/` directory. Build it with:
+
+```bash
+cd blueprint && lualatex print/print.tex
+```
+
+The blueprint is generated using [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect), which extracts proof structure directly from the Lean formalization.
 
 ## Building
 
@@ -54,7 +73,9 @@ lake build
 
 ## Dependencies
 
+- Lean 4 (toolchain specified in `lean-toolchain`)
 - Mathlib v4.26.0
+- LeanArchitect v4.26.0
 
 ## Author
 
@@ -66,4 +87,4 @@ MIT License
 
 ## References
 
-- Sasse, R. (2020). "Crystallographic Groups"
+- Bamberg, J., Cairns, G., and Kilminster, D. (2003). "The crystallographic restriction, permutations, and Goldbach's conjecture." *Amer. Math. Monthly*, 110(3):202-209.
