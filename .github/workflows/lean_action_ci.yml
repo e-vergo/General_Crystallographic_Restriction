@@ -48,24 +48,11 @@ jobs:
       - name: Build docs
         run: lake -Kdoc=on build Crystallographic:docs
 
-      - name: Setup Ruby for Jekyll
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-          working-directory: docs
-
-      - name: Build Jekyll site
+      - name: Assemble site
         run: |
-          cd docs
-          bundle exec jekyll build --destination ../_site
-          cd ..
-
-      - name: Add docs and blueprint to site
-        run: |
-          # Copy doc-gen4 output
+          mkdir -p _site
+          cp docs/index.html _site/
           cp -r .lake/build/doc _site/docs
-          # Copy blueprint web
           cp -r blueprint/web _site/blueprint
 
       - name: Upload Pages artifact
