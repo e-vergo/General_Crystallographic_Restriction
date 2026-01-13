@@ -3,6 +3,7 @@ description: Formal verification of the crystallographic restriction theorem in 
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
 
 # GitHub repository info
 repository: e-vergo/General_Crystallographic_Restriction
