@@ -63,6 +63,70 @@
 <div id="statements">
 
     
+    <div class="dep-modal-container" id="companion-def_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="companion-def" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">4.0.1</span></div>
+    <div class="thm_thmcontent"><p>  The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
+<div class="displaymath" id="a0000000028">
+  \[ C(p) = \begin{pmatrix}  0 
+
+&  0 
+
+&  \cdots 
+
+&  -a_0 
+
+\\ 1 
+
+&  0 
+
+&  \cdots 
+
+&  -a_1 
+
+\\ \vdots 
+
+&  \ddots 
+
+& &  \vdots 
+
+\\ 0 
+
+&  \cdots 
+
+&  1 
+
+&  -a_{n-1} 
+
+\end{pmatrix} \]
+</div>
+<p> This construction produces a matrix whose characteristic polynomial equals \(p\), providing a canonical matrix realization for any monic polynomial. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#companion-def">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="def:blockDiag2_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -183,6 +247,36 @@
 
 
     
+    <div class="dep-modal-container" id="lem:companion-aeval-zero_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:companion-aeval-zero" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.2</span></div>
+    <div class="thm_thmcontent"><p>   \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:companion-aeval-zero">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_aeval_eq_zero">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:companion-cycl-pow_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -194,7 +288,7 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">4.0.1</span></div>
+      <span class="theorem_thmlabel">4.0.4</span></div>
     <div class="thm_thmcontent"><p>   \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
 </div>
 
@@ -262,6 +356,36 @@
     
     
   <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.factorization_support_disjoint">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:lcm-factorization-le-sup_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:lcm-factorization-le-sup" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.2</span></div>
+    <div class="thm_thmcontent"><p>  The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:lcm-factorization-le-sup">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Finset.lcm_factorization_le_sup">Lean</a>
     
     
   
@@ -483,6 +607,36 @@
 
 
     
+    <div class="dep-modal-container" id="lem:orderOf-neg-of-odd-order_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:orderOf-neg-of-odd-order" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.7</span></div>
+    <div class="thm_thmcontent"><p>  If \(A\) has odd order \(k\), then \(-A\) has order \(2k\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:orderOf-neg-of-odd-order">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.orderOf_neg_of_odd_order">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:orderOf-permMatrix_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -532,6 +686,66 @@
     
     
   <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.integerMatrixOrders_mono">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:primePow-mem-of-lcm-eq_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:primePow-mem-of-lcm-eq" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.3</span></div>
+    <div class="thm_thmcontent"><p>  If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:primePow-mem-of-lcm-eq">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.primePow_mem_of_lcm_eq">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:prod-coprime-dvd_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:prod-coprime-dvd" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.5</span></div>
+    <div class="thm_thmcontent"><p>  If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:prod-coprime-dvd">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Finset.prod_coprime_dvd">Lean</a>
     
     
   
@@ -608,6 +822,49 @@
 
 
     
+    <div class="dep-modal-container" id="lem:psi-le-totient_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:psi-le-totient" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.5</span></div>
+    <div class="thm_thmcontent"><p>   For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+<p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
+<p>The proof proceeds by strong induction on \(m\): </p>
+<ul class="itemize">
+  <li><p>For \(m = 1\): \(\psi (1) = 0 \leq 1 = \varphi (1)\) </p>
+</li>
+  <li><p>For prime powers \(p^k\): \(\psi (p^k) = \varphi (p^k)\) (with the exception \(\psi (2) = 0\)) </p>
+</li>
+  <li><p>For composite \(m = 2 \cdot \text{odd}\): \(\psi (m) = \psi (\text{odd}) \leq \varphi (\text{odd}) = \varphi (m)\) </p>
+</li>
+  <li><p>For general composite without \(2^1\) factor: each \(\varphi (p^k) \geq 2\), so sum \(\leq \) product </p>
+</li>
+</ul>
+<p>  - </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:psi-le-totient">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_le_totient">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="lem:psi-prime-pow_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -628,6 +885,127 @@
     
     
   <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_prime_pow">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sum-le-prod_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sum-le-prod" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.1</span></div>
+    <div class="thm_thmcontent"><p>  For a finite set where all values \(\geq 2\), the sum is at most the product. </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:sum-le-prod">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Finset.sum_le_prod_of_all_ge_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:sum-totient-ge-psi_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:sum-totient-ge-psi" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.6</span></div>
+    <div class="thm_thmcontent"><p>   For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
+<p>For a finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the prime factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\mathrm{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s prime factorization, giving exactly \(\psi (m)\).  - </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:sum-totient-ge-psi">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.sum_totient_ge_psi_of_lcm_eq">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:totient-ge-two_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:totient-ge-two" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.4</span></div>
+    <div class="thm_thmcontent"><p>  For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:totient-ge-two">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.totient_ge_two_of_gt_two">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:totient-prod-coprime_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:totient-prod-coprime" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">A.0.6</span></div>
+    <div class="thm_thmcontent"><p>  For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
+</div>
+
+    <a class="latex_link" href="sect0006.html#lem:totient-prod-coprime">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Nat.totient_finset_prod_of_coprime">Lean</a>
     
     
   
@@ -784,6 +1162,36 @@
 
 
     
+    <div class="dep-modal-container" id="thm:companion-charpoly_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:companion-charpoly" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.1</span></div>
+    <div class="thm_thmcontent"><p>   The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:companion-charpoly">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_charpoly">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="thm:companion-cycl-mem_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -795,7 +1203,7 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">4.0.3</span></div>
+      <span class="theorem_thmlabel">4.0.6</span></div>
     <div class="thm_thmcontent"><p>   \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
 </div>
 
@@ -825,7 +1233,7 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">4.0.2</span></div>
+      <span class="theorem_thmlabel">4.0.5</span></div>
     <div class="thm_thmcontent"><p>   \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
 </div>
 
@@ -833,6 +1241,36 @@
     
     
   <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_orderOf">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:companion-pow-dvd_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:companion-pow-dvd" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.3</span></div>
+    <div class="thm_thmcontent"><p>   If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:companion-pow-dvd">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_pow_eq_one_of_dvd">Lean</a>
     
     
   
@@ -891,6 +1329,40 @@
 
 
     
+    <div class="dep-modal-container" id="thm:main-theorem_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:main-theorem" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">5.0.10</span></div>
+    <div class="thm_thmcontent"><p>   <b class="bfseries">The Crystallographic Restriction Theorem:</b> An \(N \times N\) integer matrix can have finite order \(m\) if and only if \(\psi (m) \leq N\). </p>
+<p>Equivalently: \(m \in \mathrm{Ord}_N \iff \psi (m) \leq N\). </p>
+<p>This theorem completely characterizes which rotation orders are achievable by integer matrices in each dimension. The function \(\psi \) is defined as: \(\psi (1) = \psi (2) = 0\), and for other \(m\), \(\psi (m) = \sum _{p^k \|  m, p \neq 2 \text{ or } k \geq 2} \varphi (p^k)\). </p>
+<p><b class="bfseries">Forward direction:</b> If \(A \in \mathbb {Z}^{N \times N}\) has order \(m\), the minimal polynomial of \(A\) over \(\mathbb {Q}\) divides \(X^m - 1\) and must include cyclotomic factors \(\Phi _d\) for divisors \(d\) whose lcm equals \(m\). The sum of \(\varphi (d)\) over these divisors is at least \(\psi (m)\), and this sum bounds the degree of the minimal polynomial, which is at most \(N\). </p>
+<p><b class="bfseries">Backward direction:</b> For each prime power \(p^k\) (with \(p \neq 2\) or \(k \geq 2\)), the companion matrix of \(\Phi _{p^k}\) has size \(\varphi (p^k)\) and order \(p^k\). For general \(m\), block diagonal combinations of these companion matrices achieve order \(m\) in dimension \(\psi (m)\). - </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:main-theorem">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.crystallographic_restriction">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="thm:mem-orders-totient_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -902,7 +1374,7 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">4.0.4</span></div>
+      <span class="theorem_thmlabel">4.0.7</span></div>
     <div class="thm_thmcontent"><p>   For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
 </div>
 
@@ -997,7 +1469,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"psiPrimePow-def"	[color=green,		fillcolor="#B0ECA3",		label="psiPrimePow-def",		shape=box,		style=filled];	"psi-def"	[color=green,		fillcolor="#B0ECA3",		label="psi-def",		shape=box,		style=filled];	"psiPrimePow-def" -> "psi-def"	[style=dashed];	"lem:psi-coprime-add"	[color=green,		fillcolor="#1CAC78",		label="psi-coprime-add",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-coprime-add"	[style=dashed];	"lem:psi-prime-pow"	[color=green,		fillcolor="#1CAC78",		label="psi-prime-pow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-prime-pow"	[style=dashed];	"lem:psi-ge-psiPrimePow"	[color=green,		fillcolor="#1CAC78",		label="psi-ge-psiPrimePow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-ge-psiPrimePow"	[style=dashed];	"thm:forward-direction"	[color=green,		fillcolor="#9CEC8B",		label="forward-direction",		shape=ellipse,		style=filled];	"psi-def" -> "thm:forward-direction"	[style=dashed];	"thm:backward-direction"	[color=green,		fillcolor="#1CAC78",		label="backward-direction",		shape=ellipse,		style=filled];	"lem:psi-coprime-add" -> "thm:backward-direction";	"thm:primePow-mem-integerMatrixOrders-psi"	[color=green,		fillcolor="#1CAC78",		label="primePow-mem-integerMatrixOrders-psi",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "thm:primePow-mem-integerMatrixOrders-psi";	"thm:primePow-mem-integerMatrixOrders-psi" -> "thm:backward-direction";	"lem:psi-ge-psiPrimePow" -> "thm:backward-direction";	"lem:blockDiag2-eq-one"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-eq-one",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2"	[color=green,		fillcolor="#1CAC78",		label="orderOf-blockDiag2",		shape=ellipse,		style=filled];	"lem:blockDiag2-eq-one" -> "thm:orderOf-blockDiag2"	[style=dashed];	"lem:lcm-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="lcm-mem-orders",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2" -> "lem:lcm-mem-orders"	[style=dashed];	"lem:mul-mem-orders-coprime"	[color=green,		fillcolor="#1CAC78",		label="mul-mem-orders-coprime",		shape=ellipse,		style=filled];	"lem:lcm-mem-orders" -> "lem:mul-mem-orders-coprime"	[style=dashed];	"thm:companion-cycl-mem"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-mem",		shape=ellipse,		style=filled];	"thm:mem-orders-totient"	[color=green,		fillcolor="#1CAC78",		label="mem-orders-totient",		shape=ellipse,		style=filled];	"thm:companion-cycl-mem" -> "thm:mem-orders-totient"	[style=dashed];	"thm:mem-orders-totient" -> "thm:primePow-mem-integerMatrixOrders-psi";	"lem:blockDiag2-pow"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-pow",		shape=ellipse,		style=filled];	"lem:blockDiag2-pow" -> "thm:orderOf-blockDiag2"	[style=dashed];	"lem:mul-mem-orders-coprime" -> "thm:backward-direction";	"lem:companion-cycl-pow"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-pow",		shape=ellipse,		style=filled];	"thm:companion-cycl-order"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-order",		shape=ellipse,		style=filled];	"lem:companion-cycl-pow" -> "thm:companion-cycl-order"	[style=dashed];	"thm:companion-cycl-order" -> "thm:companion-cycl-mem"	[style=dashed];	"lem:order-two-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-two-achievable",		shape=ellipse,		style=filled];	"lem:order-two-achievable" -> "thm:backward-direction";	"integerMatrixOrders-def"	[color=green,		fillcolor="#B0ECA3",		label="integerMatrixOrders-def",		shape=box,		style=filled];	"integerMatrixOrders-def" -> "thm:primePow-mem-integerMatrixOrders-psi"	[style=dashed];	"integerMatrixOrders-def" -> "thm:forward-direction"	[style=dashed];	"lem:two-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="two-mem-orders",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:two-mem-orders"	[style=dashed];	"lem:one-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="one-mem-orders",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:one-mem-orders"	[style=dashed];	"lem:orders-mono"	[color=green,		fillcolor="#1CAC78",		label="orders-mono",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:orders-mono"	[style=dashed];	"lem:mem-integerMatrixOrders-self"	[color=green,		fillcolor="#1CAC78",		label="mem-integerMatrixOrders-self",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:mem-integerMatrixOrders-self"	[style=dashed];	"lem:two-mem-orders" -> "lem:order-two-achievable";	"lem:order-one-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-one-achievable",		shape=ellipse,		style=filled];	"lem:one-mem-orders" -> "lem:order-one-achievable";	"lem:orders-mono" -> "thm:backward-direction";	"lem:mem-integerMatrixOrders-self" -> "thm:backward-direction";	"lem:order-one-achievable" -> "thm:backward-direction";	"def:blockDiag2"	[color=green,		fillcolor="#B0ECA3",		label=blockDiag2,		shape=box,		style=filled];	"def:blockDiag2" -> "lem:blockDiag2-eq-one"	[style=dashed];	"def:blockDiag2" -> "lem:blockDiag2-pow"	[style=dashed];	"lem:factorization-disjoint"	[color=green,		fillcolor="#1CAC78",		label="factorization-disjoint",		shape=ellipse,		style=filled];	"lem:factorization-disjoint" -> "lem:psi-coprime-add"	[style=dashed];	"lem:cyclotomic-finset-product-dvd"	[color=green,		fillcolor="#1CAC78",		label="cyclotomic-finset-product-dvd",		shape=ellipse,		style=filled];	"lem:cyclotomic-finset-product-dvd" -> "thm:forward-direction";	"lem:orderOf-permMatrix"	[color=green,		fillcolor="#1CAC78",		label="orderOf-permMatrix",		shape=ellipse,		style=filled];	"lem:orderOf-permMatrix" -> "lem:mem-integerMatrixOrders-self";	"lem:orderOf-finRotate"	[color=green,		fillcolor="#1CAC78",		label="orderOf-finRotate",		shape=ellipse,		style=filled];	"lem:orderOf-finRotate" -> "lem:mem-integerMatrixOrders-self";}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"psiPrimePow-def"	[color=green,		fillcolor="#B0ECA3",		label="psiPrimePow-def",		shape=box,		style=filled];	"psi-def"	[color=green,		fillcolor="#B0ECA3",		label="psi-def",		shape=box,		style=filled];	"psiPrimePow-def" -> "psi-def"	[style=dashed];	"lem:psi-coprime-add"	[color=green,		fillcolor="#1CAC78",		label="psi-coprime-add",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-coprime-add"	[style=dashed];	"lem:psi-prime-pow"	[color=green,		fillcolor="#1CAC78",		label="psi-prime-pow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-prime-pow"	[style=dashed];	"lem:psi-ge-psiPrimePow"	[color=green,		fillcolor="#1CAC78",		label="psi-ge-psiPrimePow",		shape=ellipse,		style=filled];	"psi-def" -> "lem:psi-ge-psiPrimePow"	[style=dashed];	"thm:backward-direction"	[color=green,		fillcolor="#1CAC78",		label="backward-direction",		shape=ellipse,		style=filled];	"lem:psi-coprime-add" -> "thm:backward-direction";	"lem:psi-le-totient"	[color=green,		fillcolor="#1CAC78",		label="psi-le-totient",		shape=ellipse,		style=filled];	"lem:psi-coprime-add" -> "lem:psi-le-totient";	"thm:main-theorem"	[color=green,		fillcolor="#1CAC78",		label="main-theorem",		shape=ellipse,		style=filled];	"thm:backward-direction" -> "thm:main-theorem";	"lem:sum-totient-ge-psi"	[color=green,		fillcolor="#1CAC78",		label="sum-totient-ge-psi",		shape=ellipse,		style=filled];	"lem:psi-le-totient" -> "lem:sum-totient-ge-psi"	[style=dashed];	"lem:psi-prime-pow" -> "lem:psi-le-totient";	"thm:primePow-mem-integerMatrixOrders-psi"	[color=green,		fillcolor="#1CAC78",		label="primePow-mem-integerMatrixOrders-psi",		shape=ellipse,		style=filled];	"lem:psi-prime-pow" -> "thm:primePow-mem-integerMatrixOrders-psi";	"thm:primePow-mem-integerMatrixOrders-psi" -> "thm:backward-direction";	"lem:psi-ge-psiPrimePow" -> "thm:backward-direction";	"thm:forward-direction"	[color=green,		fillcolor="#1CAC78",		label="forward-direction",		shape=ellipse,		style=filled];	"lem:sum-totient-ge-psi" -> "thm:forward-direction"	[style=dashed];	"thm:forward-direction" -> "thm:main-theorem";	"lem:cyclotomic-finset-product-dvd"	[color=green,		fillcolor="#1CAC78",		label="cyclotomic-finset-product-dvd",		shape=ellipse,		style=filled];	"lem:cyclotomic-finset-product-dvd" -> "thm:forward-direction";	"lem:orderOf-permMatrix"	[color=green,		fillcolor="#1CAC78",		label="orderOf-permMatrix",		shape=ellipse,		style=filled];	"lem:mem-integerMatrixOrders-self"	[color=green,		fillcolor="#1CAC78",		label="mem-integerMatrixOrders-self",		shape=ellipse,		style=filled];	"lem:orderOf-permMatrix" -> "lem:mem-integerMatrixOrders-self";	"lem:mem-integerMatrixOrders-self" -> "thm:backward-direction";	"lem:order-two-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-two-achievable",		shape=ellipse,		style=filled];	"lem:order-two-achievable" -> "thm:backward-direction";	"lem:prod-coprime-dvd"	[color=green,		fillcolor="#1CAC78",		label="prod-coprime-dvd",		shape=ellipse,		style=filled];	"lem:prod-coprime-dvd" -> "lem:sum-totient-ge-psi";	"lem:mul-mem-orders-coprime"	[color=green,		fillcolor="#1CAC78",		label="mul-mem-orders-coprime",		shape=ellipse,		style=filled];	"lem:mul-mem-orders-coprime" -> "thm:backward-direction";	"lem:one-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="one-mem-orders",		shape=ellipse,		style=filled];	"lem:order-one-achievable"	[color=green,		fillcolor="#1CAC78",		label="order-one-achievable",		shape=ellipse,		style=filled];	"lem:one-mem-orders" -> "lem:order-one-achievable";	"lem:order-one-achievable" -> "thm:backward-direction";	"lem:orders-mono"	[color=green,		fillcolor="#1CAC78",		label="orders-mono",		shape=ellipse,		style=filled];	"lem:orders-mono" -> "thm:backward-direction";	"lem:blockDiag2-eq-one"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-eq-one",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2"	[color=green,		fillcolor="#1CAC78",		label="orderOf-blockDiag2",		shape=ellipse,		style=filled];	"lem:blockDiag2-eq-one" -> "thm:orderOf-blockDiag2"	[style=dashed];	"lem:lcm-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="lcm-mem-orders",		shape=ellipse,		style=filled];	"thm:orderOf-blockDiag2" -> "lem:lcm-mem-orders"	[style=dashed];	"lem:lcm-mem-orders" -> "lem:mul-mem-orders-coprime"	[style=dashed];	"lem:totient-prod-coprime"	[color=green,		fillcolor="#1CAC78",		label="totient-prod-coprime",		shape=ellipse,		style=filled];	"lem:totient-prod-coprime" -> "lem:sum-totient-ge-psi";	"thm:companion-pow-dvd"	[color=green,		fillcolor="#1CAC78",		label="companion-pow-dvd",		shape=ellipse,		style=filled];	"lem:companion-cycl-pow"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-pow",		shape=ellipse,		style=filled];	"thm:companion-pow-dvd" -> "lem:companion-cycl-pow"	[style=dashed];	"thm:companion-cycl-order"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-order",		shape=ellipse,		style=filled];	"lem:companion-cycl-pow" -> "thm:companion-cycl-order"	[style=dashed];	"thm:companion-cycl-mem"	[color=green,		fillcolor="#1CAC78",		label="companion-cycl-mem",		shape=ellipse,		style=filled];	"thm:companion-cycl-order" -> "thm:companion-cycl-mem"	[style=dashed];	"thm:mem-orders-totient"	[color=green,		fillcolor="#1CAC78",		label="mem-orders-totient",		shape=ellipse,		style=filled];	"thm:mem-orders-totient" -> "thm:primePow-mem-integerMatrixOrders-psi";	"integerMatrixOrders-def"	[color=green,		fillcolor="#B0ECA3",		label="integerMatrixOrders-def",		shape=box,		style=filled];	"integerMatrixOrders-def" -> "thm:primePow-mem-integerMatrixOrders-psi"	[style=dashed];	"integerMatrixOrders-def" -> "thm:forward-direction"	[style=dashed];	"integerMatrixOrders-def" -> "lem:mem-integerMatrixOrders-self"	[style=dashed];	"integerMatrixOrders-def" -> "lem:one-mem-orders"	[style=dashed];	"integerMatrixOrders-def" -> "lem:orders-mono"	[style=dashed];	"lem:two-mem-orders"	[color=green,		fillcolor="#1CAC78",		label="two-mem-orders",		shape=ellipse,		style=filled];	"integerMatrixOrders-def" -> "lem:two-mem-orders"	[style=dashed];	"lem:two-mem-orders" -> "lem:order-two-achievable";	"lem:totient-ge-two"	[color=green,		fillcolor="#1CAC78",		label="totient-ge-two",		shape=ellipse,		style=filled];	"lem:totient-ge-two" -> "lem:psi-le-totient";	"lem:orderOf-neg-of-odd-order"	[color=green,		fillcolor="#1CAC78",		label="orderOf-neg-of-odd-order",		shape=ellipse,		style=filled];	"lem:orderOf-neg-of-odd-order" -> "thm:backward-direction";	"def:blockDiag2"	[color=green,		fillcolor="#B0ECA3",		label=blockDiag2,		shape=box,		style=filled];	"def:blockDiag2" -> "lem:blockDiag2-eq-one"	[style=dashed];	"lem:blockDiag2-pow"	[color=green,		fillcolor="#1CAC78",		label="blockDiag2-pow",		shape=ellipse,		style=filled];	"def:blockDiag2" -> "lem:blockDiag2-pow"	[style=dashed];	"lem:blockDiag2-pow" -> "thm:orderOf-blockDiag2"	[style=dashed];	"thm:companion-cycl-mem" -> "thm:mem-orders-totient"	[style=dashed];	"lem:sum-le-prod"	[color=green,		fillcolor="#1CAC78",		label="sum-le-prod",		shape=ellipse,		style=filled];	"lem:sum-le-prod" -> "lem:sum-totient-ge-psi";	"companion-def"	[color=green,		fillcolor="#B0ECA3",		label="companion-def",		shape=box,		style=filled];	"thm:companion-charpoly"	[color=green,		fillcolor="#1CAC78",		label="companion-charpoly",		shape=ellipse,		style=filled];	"companion-def" -> "thm:companion-charpoly"	[style=dashed];	"lem:companion-aeval-zero"	[color=green,		fillcolor="#1CAC78",		label="companion-aeval-zero",		shape=ellipse,		style=filled];	"thm:companion-charpoly" -> "lem:companion-aeval-zero"	[style=dashed];	"lem:companion-aeval-zero" -> "thm:companion-pow-dvd"	[style=dashed];	"lem:factorization-disjoint"	[color=green,		fillcolor="#1CAC78",		label="factorization-disjoint",		shape=ellipse,		style=filled];	"lem:factorization-disjoint" -> "lem:psi-coprime-add"	[style=dashed];	"lem:orderOf-finRotate"	[color=green,		fillcolor="#1CAC78",		label="orderOf-finRotate",		shape=ellipse,		style=filled];	"lem:orderOf-finRotate" -> "lem:mem-integerMatrixOrders-self";	"lem:lcm-factorization-le-sup"	[color=green,		fillcolor="#1CAC78",		label="lcm-factorization-le-sup",		shape=ellipse,		style=filled];	"lem:lcm-factorization-le-sup" -> "lem:sum-totient-ge-psi";	"lem:primePow-mem-of-lcm-eq"	[color=green,		fillcolor="#1CAC78",		label="primePow-mem-of-lcm-eq",		shape=ellipse,		style=filled];	"lem:primePow-mem-of-lcm-eq" -> "lem:sum-totient-ge-psi";}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {

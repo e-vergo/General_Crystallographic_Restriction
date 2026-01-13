@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -35,6 +35,10 @@ if psi(m) <= N, then there exists an N x N integer matrix with order m.
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+crystallographic restriction, backward direction, companion matrix, cyclotomic, permutation matrix
 -/
 
 namespace Crystallographic
@@ -46,6 +50,7 @@ open Matrix Polynomial
 namespace Equiv.Perm
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
+@[simp]
 lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
     (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
   ext i j

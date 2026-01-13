@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -26,6 +26,10 @@ which are used in the forward direction of the crystallographic restriction theo
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+crystallographic restriction, psi function, totient, lower bound, prime factorization
 -/
 
 namespace Crystallographic
@@ -130,7 +134,7 @@ theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
   -- psi(m) >= psiPrimePow(q, ord_q(m))
   have hcontrib : Crystallographic.psiPrimePow q (m.factorization q) ≤
       Crystallographic.psi m :=
-    Crystallographic.psi_ge_psiPrimePow_of_mem_support (by omega) hq_in_support
+    Crystallographic.psi_ge_psiPrimePow_of_mem_support hq_in_support
   -- psiPrimePow(q, k) = totient(q^k) > 0 for q >= 3 (since q != 2 means (q, k) != (2, 1))
   have hcontrib_pos : 0 < Crystallographic.psiPrimePow q (m.factorization q) := by
     simp only [Crystallographic.psiPrimePow]
@@ -154,7 +158,6 @@ Key cases:
 - m = 2 * odd (with odd > 1): psi(m) = psi(odd) ≤ totient(odd) = totient(m)
 - m = composite without 2^1 factor: each φ(p^k) ≥ 2, so sum ≤ product -/
 @[blueprint "lem:psi-le-totient"
-  (latexEnv := "auxlemma")
   (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
 
   We prove $\psi(m) \leq \varphi(m)$ by strong induction on $m$. The key observation is that
@@ -299,7 +302,8 @@ lemma fiber_totient_sum_le_totient {m d : ℕ} (hd_pos : 0 < d)
         ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) :=
       Nat.totient_finset_prod_of_coprime fiber (fun q => q ^ m.factorization q) h_coprime
     -- φ(n) | φ(d) when n | d, hence φ(n) ≤ φ(d)
-    have h_totient_ge_prod : ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤ Nat.totient d := by
+    have h_totient_ge_prod :
+        ∏ q ∈ fiber, Nat.totient (q ^ m.factorization q) ≤ Nat.totient d := by
       rw [← h_totient_prod]
       have h_dvd : Nat.totient (∏ q ∈ fiber, q ^ m.factorization q) ∣ Nat.totient d :=
         Nat.totient_dvd_of_dvd h_prod_dvd
@@ -321,7 +325,6 @@ The proof proceeds by showing that any other choice of S either:
 2. Uses a composite element d covering multiple prime powers, which costs
    φ(d) = Π φ(p^k) ≥ Σ φ(p^k) when each φ(p^k) ≥ 2. -/
 @[blueprint "lem:sum-totient-ge-psi"
-  (latexEnv := "auxlemma")
   (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
 

@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -35,6 +35,10 @@ if an N x N integer matrix has finite order m, then psi(m) <= N.
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+crystallographic restriction, forward direction, minimal polynomial, eigenvalue, cyclotomic
 -/
 
 namespace Crystallographic
@@ -94,16 +98,19 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
   \begin{enumerate}
   \item Let $A$ be an $N \times N$ integer matrix with $\mathrm{ord}(A) = m$.
   \item The minimal polynomial of $A$ over $\mathbb{Q}$ divides $X^m - 1 = \prod_{d \mid m} \Phi_d$.
-  \item Since $\Phi_d$ are irreducible and pairwise coprime over $\mathbb{Q}$, the minimal polynomial
+  \item Since $\Phi_d$ are irreducible and pairwise coprime over $\mathbb{Q}$, the minimal
+        polynomial
         equals $\prod_{d \in S} \Phi_d$ for some $S \subseteq \mathrm{divisors}(m)$.
   \item The condition $\mathrm{ord}(A) = m$ forces $\mathrm{lcm}(S) = m$: if $\mathrm{lcm}(S) < m$,
         then $A^{\mathrm{lcm}(S)} = I$, contradicting $\mathrm{ord}(A) = m$.
   \item The degree of the minimal polynomial is $\sum_{d \in S} \varphi(d)$.
   \item By the sum-totient lemma (applied to any $S$ with $\mathrm{lcm}(S) = m$),
-        $\psi(m) \leq \sum_{d \in S} \varphi(d) = \deg(\mathrm{minpoly}) \leq \deg(\mathrm{charpoly}) = N$.
+        $\psi(m) \leq \sum_{d \in S} \varphi(d) = \deg(\mathrm{minpoly})
+        \leq \deg(\mathrm{charpoly}) = N$.
   \end{enumerate}
-  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} --/)
-  (proof := /-- Let $A$ be an $N \times N$ integer matrix with $A^m = I$. The minimal polynomial $\mu_A$
+  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} -/)
+  (proof := /-- Let $A$ be an $N \times N$ integer matrix with $A^m = I$. The minimal polynomial
+  $\mu_A$
   over $\mathbb{Q}$ divides $X^m - 1$ and factors into cyclotomic polynomials $\Phi_d$ for
   various $d \mid m$. Each factor contributes $\varphi(d)$ to $\deg(\mu_A) \leq N$.
   Since distinct $\Phi_d$ are coprime and their lcm must be $m$, summing the totients

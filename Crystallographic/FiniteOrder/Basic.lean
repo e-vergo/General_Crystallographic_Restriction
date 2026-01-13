@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -29,6 +29,10 @@ and proves basic properties about this set.
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+integer matrix, finite order, matrix order, block diagonal, embedding
 -/
 
 namespace Crystallographic
@@ -94,6 +98,7 @@ def embedMatrixSum {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
   Matrix.fromBlocks A 0 0 1
 
 /-- The embedded identity is identity. -/
+@[simp]
 lemma embedMatrixSum_one {M K : ℕ} :
     embedMatrixSum (1 : Matrix (Fin M) (Fin M) ℤ) =
     (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ) := by
@@ -200,6 +205,7 @@ def blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) 
   Matrix.fromBlocks A 0 0 B
 
 /-- Block diagonal of identity matrices is the identity. -/
+@[simp]
 lemma blockDiag2_one {M K : ℕ} :
     blockDiag2 (1 : Matrix (Fin M) (Fin M) ℤ) (1 : Matrix (Fin K) (Fin K) ℤ) =
     (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ) :=
@@ -210,7 +216,7 @@ lemma blockDiag2_mul {M K : ℕ}
     (A A' : Matrix (Fin M) (Fin M) ℤ) (B B' : Matrix (Fin K) (Fin K) ℤ) :
     blockDiag2 (A * A') (B * B') = blockDiag2 A B * blockDiag2 A' B' := by
   simp only [blockDiag2, Matrix.fromBlocks_multiply]
-  congr 1 <;> simp
+  congr 1 <;> simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]
 
 /-- Block diagonal is one iff both components are one. -/
 @[blueprint "lem:blockDiag2-eq-one"

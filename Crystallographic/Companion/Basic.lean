@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -31,6 +31,10 @@ This file defines the companion matrix of a monic polynomial and proves its key 
 
 * Standard linear algebra texts on companion matrices
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+companion matrix, characteristic polynomial, monic polynomial, matrix order
 -/
 
 namespace Crystallographic
@@ -58,7 +62,8 @@ coefficients in the last column.
   (statement := /-- The companion matrix $C(p)$ of a monic polynomial
   $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
   on the subdiagonal and $-a_i$ in the last column:
-  $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\ \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
+  $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\
+  \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
   This construction produces a matrix whose characteristic polynomial equals $p$, providing
   a canonical matrix realization for any monic polynomial. -/)]
 def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
@@ -67,8 +72,6 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
     if j.val + 1 = i.val then 1
     else if j.val + 1 = p.natDegree then -p.coeff i.val
     else 0
-
-
 
 /-! ### Characteristic polynomial -/
 

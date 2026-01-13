@@ -61,8 +61,84 @@
 <div class="main-text">
 <h1 id="a0000000005">4 Companion Matrices</h1>
 <p>Companion matrices provide a key construction for achieving orders via cyclotomic polynomials. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="companion-def">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">4.0.1</span>
+    <div class="thm_header_extras">
 
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-cycl-pow">
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#companion-def">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion" class="lean_decl">Crystallographic.companion</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
+<div class="displaymath" id="a0000000028">
+  \[ C(p) = \begin{pmatrix}  0 
+
+&  0 
+
+&  \cdots 
+
+&  -a_0 
+
+\\ 1 
+
+&  0 
+
+&  \cdots 
+
+&  -a_1 
+
+\\ \vdots 
+
+&  \ddots 
+
+& &  \vdots 
+
+\\ 0 
+
+&  \cdots 
+
+&  1 
+
+&  -a_{n-1} 
+
+\end{pmatrix} \]
+</div>
+<p> This construction produces a matrix whose characteristic polynomial equals \(p\), providing a canonical matrix realization for any monic polynomial. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-charpoly">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -75,11 +151,271 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#lem:companion-cycl-pow">#</a>
+    <a class="icon proof" href="sect0004.html#thm:companion-charpoly">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#companion-def">Definition 4.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_charpoly" class="lean_decl">Crystallographic.companion_charpoly</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000029">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By induction on the degree \(n\). For the base case \(n = 1\), direct computation gives \(\det (XI - C) = X + a_0\). For \(n {\gt} 1\), expand along the first column: the \((1,1)\) minor is the companion matrix of lower degree, and the \((2,1)\) minor contributes the constant term. The recurrence matches the polynomial coefficients. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-aeval-zero">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">4.0.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:companion-aeval-zero">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-charpoly">Theorem 4.0.1</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-charpoly">Theorem 4.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_aeval_eq_zero" class="lean_decl">Crystallographic.companion_aeval_eq_zero</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000030">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By Cayley-Hamilton, every matrix satisfies its characteristic polynomial. Since \(\chi _{C(p)} = p\) by the companion characteristic polynomial theorem, we have \(p(C(p)) = 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-pow-dvd">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">4.0.3</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:companion-pow-dvd">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
+          
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_pow_eq_one_of_dvd" class="lean_decl">Crystallographic.companion_pow_eq_one_of_dvd</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000031">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some polynomial \(q\). Evaluating at \(C(p)\): \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0\), so \(C(p)^m = I\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-cycl-pow">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">4.0.4</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:companion-cycl-pow">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-pow-dvd">Theorem 4.0.3</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-pow-dvd">Theorem 4.0.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
     
     
     <button class="modal lean">L∃∀N</button>
@@ -108,7 +444,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000028">
+<div class="proof_wrapper" id="a0000000032">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -125,7 +461,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.0.2</span>
+    <span class="theorem_thmlabel">4.0.5</span>
     <div class="thm_header_extras">
 
     
@@ -135,7 +471,7 @@
 
     <a class="icon proof" href="sect0004.html#thm:companion-cycl-order">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -151,9 +487,15 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.1</a></li>
+          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.4</a></li>
           
-          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.1</a></li>
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-charpoly">Theorem 4.0.1</a></li>
+          
+          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.4</a></li>
+          
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
           
         </ul>
     
@@ -188,7 +530,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000029">
+<div class="proof_wrapper" id="a0000000033">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -205,7 +547,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.0.3</span>
+    <span class="theorem_thmlabel">4.0.6</span>
     <div class="thm_header_extras">
 
     
@@ -215,7 +557,7 @@
 
     <a class="icon proof" href="sect0004.html#thm:companion-cycl-mem">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000034"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -231,9 +573,11 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.2</a></li>
+          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.5</a></li>
           
-          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.2</a></li>
+          <li><a href="sect0004.html#companion-def">Definition 4.0.1</a></li>
+          
+          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.5</a></li>
           
         </ul>
     
@@ -268,7 +612,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000030">
+<div class="proof_wrapper" id="a0000000034">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -285,7 +629,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">4.0.4</span>
+    <span class="theorem_thmlabel">4.0.7</span>
     <div class="thm_header_extras">
 
     
@@ -295,7 +639,7 @@
 
     <a class="icon proof" href="sect0004.html#thm:mem-orders-totient">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0004.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -311,9 +655,9 @@
         
         <ul class="uses">
           
-          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.3</a></li>
+          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.6</a></li>
           
-          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.3</a></li>
+          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.6</a></li>
           
         </ul>
     
@@ -348,7 +692,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000031">
+<div class="proof_wrapper" id="a0000000035">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof

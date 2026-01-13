@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -21,6 +21,10 @@ of the blocks, and uses this to prove closure properties of `integerMatrixOrders
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+block diagonal, matrix order, lcm, coprime, integer matrix
 -/
 
 namespace Crystallographic
@@ -61,7 +65,7 @@ theorem orderOf_blockDiag2 {M K : ℕ}
   \uses{thm:orderOf-blockDiag2} -/)
   (proof := /-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
   diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/)]
-theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
+lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
     Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
   obtain ⟨A, hA_ord, hA_pos⟩ := h₁
@@ -85,7 +89,7 @@ theorem lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
   \uses{lem:lcm-mem-orders} -/)
   (proof := /-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
   follows from the lcm result. -/)]
-theorem mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
+lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
     (hcop : Nat.Coprime m₁ m₂) :
     m₁ * m₂ ∈ integerMatrixOrders (M + K) := by

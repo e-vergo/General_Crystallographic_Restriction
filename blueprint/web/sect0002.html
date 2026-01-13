@@ -493,12 +493,12 @@
 
   </div>
 </div>
-<div class="auxlemma_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
-  <div class="auxlemma_thmheading">
-    <span class="auxlemma_thmcaption">
-    Lemma
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="auxlemma_thmlabel">2.0.1</span>
+    <span class="theorem_thmlabel">2.0.5</span>
     <div class="thm_header_extras">
 
     
@@ -528,6 +528,14 @@
           
           <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
           
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0006.html#lem:totient-ge-two">Theorem A.0.4</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-prime-pow">Theorem 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-coprime-add">Theorem 2.0.3</a></li>
+          
         </ul>
     
       </div>
@@ -546,6 +554,8 @@
         
         <ul class="uses">
           
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_le_totient" class="lean_decl">Crystallographic.psi_le_totient</a></li>
+          
         </ul>
     
       </div>
@@ -554,7 +564,7 @@
     
         </div>
   </div>
-  <div class="auxlemma_thmcontent">
+  <div class="theorem_thmcontent">
   <p>   For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
 <p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
 <p>The proof proceeds by strong induction on \(m\): </p>
@@ -584,12 +594,12 @@
 
   </div>
 </div>
-<div class="auxlemma_thmwrapper theorem-style-definition" id="lem:sum-totient-ge-psi">
-  <div class="auxlemma_thmheading">
-    <span class="auxlemma_thmcaption">
-    Lemma
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:sum-totient-ge-psi">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="auxlemma_thmlabel">2.0.2</span>
+    <span class="theorem_thmlabel">2.0.6</span>
     <div class="thm_header_extras">
 
     
@@ -617,7 +627,21 @@
           
           <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
           
-          <li><a href="sect0002.html#lem:psi-le-totient">Lemma 2.0.1</a></li>
+          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.5</a></li>
+          
+          <li><a href="sect0006.html#lem:lcm-factorization-le-sup">Theorem A.0.2</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.5</a></li>
+          
+          <li><a href="sect0006.html#lem:sum-le-prod">Theorem A.0.1</a></li>
+          
+          <li><a href="sect0006.html#lem:primePow-mem-of-lcm-eq">Theorem A.0.3</a></li>
+          
+          <li><a href="sect0006.html#lem:totient-prod-coprime">Theorem A.0.6</a></li>
+          
+          <li><a href="sect0006.html#lem:prod-coprime-dvd">Theorem A.0.5</a></li>
           
         </ul>
     
@@ -637,6 +661,8 @@
         
         <ul class="uses">
           
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.sum_totient_ge_psi_of_lcm_eq" class="lean_decl">Crystallographic.sum_totient_ge_psi_of_lcm_eq</a></li>
+          
         </ul>
     
       </div>
@@ -645,7 +671,7 @@
     
         </div>
   </div>
-  <div class="auxlemma_thmcontent">
+  <div class="theorem_thmcontent">
   <p>   For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
 <p>For a finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the prime factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\mathrm{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s prime factorization, giving exactly \(\psi (m)\).  - </p>
 

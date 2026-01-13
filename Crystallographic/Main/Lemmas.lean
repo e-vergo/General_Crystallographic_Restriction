@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -29,6 +29,9 @@ restriction theorem proof that could potentially be upstreamed to Mathlib.
 * `Finset.sum_le_prod_of_all_ge_two` - For finsets where all values are >= 2, sum <= product
 * `orderOf_neg_of_odd_order` - If A has odd order k, then -A has order 2*k
 
+## Tags
+
+auxiliary lemmas, totient, coprime, prime power, matrix order, finset
 -/
 
 namespace Crystallographic
@@ -43,7 +46,6 @@ we have `a + b ≤ a * b`, which extends by induction to finite products.
 
 For upstreaming to Mathlib, this should be placed in `Mathlib.Algebra.Order.BigOperators.Group.Finset`. -/
 @[blueprint "lem:sum-le-prod"
-  (latexEnv := "auxlemma")
   (statement := /-- For a finite set where all values $\geq 2$, the sum is at most the product. -/)
   (proof := /-- By induction on the size of the finite set. Base case: empty sum is $0 \leq 1$ (empty product).
   Inductive step: if $\sum_{x \in s} f(x) \leq \prod_{x \in s} f(x)$ and $f(a) \geq 2$, then
@@ -75,7 +77,6 @@ lemma Finset.sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
 
 /-- The factorization of a finset lcm at any prime is at most the supremum. -/
 @[blueprint "lem:lcm-factorization-le-sup"
-  (latexEnv := "auxlemma")
   (statement := /-- The factorization of $\mathrm{lcm}(S)$ at prime $q$ is bounded by
   $\sup_{x \in S} v_q(x)$. -/)
   (proof := /-- The $q$-adic valuation of $\mathrm{lcm}(S)$ is the maximum of $q$-adic valuations over elements of $S$.
@@ -109,7 +110,6 @@ lemma Finset.lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset 
 /-- For a prime power, if a finset of divisors has lcm equal to the prime power, then
 the prime power is in the finset. -/
 @[blueprint "lem:primePow-mem-of-lcm-eq"
-  (latexEnv := "auxlemma")
   (statement := /-- If $\mathrm{lcm}(S) = p^k$ and all elements of $S$ divide $p^k$,
   then $p^k \in S$. -/)
   (proof := /-- Since $\mathrm{lcm}(S) = p^k$ and all elements divide $p^k$, each element has form $p^j$ for some $j \leq k$.
@@ -146,7 +146,6 @@ lemma primePow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset
 
 /-- Euler's totient function is at least 2 for any n > 2. -/
 @[blueprint "lem:totient-ge-two"
-  (latexEnv := "auxlemma")
   (statement := /-- For $n > 2$, we have $\varphi(n) \geq 2$. -/)
   (proof := /-- Since $n > 2$, we have $n \neq 1$ and $n \neq 2$.
   By the fact that $\varphi(n) = 1$ if and only if $n \in \{1, 2\}$,
@@ -169,7 +168,6 @@ theorem totient_ge_two_of_gt_two (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n :=
 
 /-- If each f(a) divides d and they're pairwise coprime, then ∏ f(a) divides d. -/
 @[blueprint "lem:prod-coprime-dvd"
-  (latexEnv := "auxlemma")
   (statement := /-- If each $f(a)$ divides $d$ and the $f(a)$ are pairwise coprime,
   then $\prod_{a \in S} f(a)$ divides $d$. -/)
   (proof := /-- By induction on the finite set. Empty case: $1 \mid d$ trivially.
@@ -210,7 +208,6 @@ the binary `Nat.totient_mul`.
 
 For upstreaming to Mathlib, this should be placed in `Mathlib.Data.Nat.Totient`. -/
 @[blueprint "lem:totient-prod-coprime"
-  (latexEnv := "auxlemma")
   (statement := /-- For pairwise coprime $\{f(a)\}_{a \in S}$, we have
   $\varphi(\prod_{a \in S} f(a)) = \prod_{a \in S} \varphi(f(a))$. -/)
   (proof := /-- By induction on the finite set. Empty case: $\varphi(1) = 1$ equals empty product.
@@ -242,7 +239,6 @@ theorem Nat.totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Fi
 This uses orderOf(-1) = 2 (in char 0), commutativity of -1 with A,
 and gcd(2, k) = 1 for odd k. -/
 @[blueprint "lem:orderOf-neg-of-odd-order"
-  (latexEnv := "auxlemma")
   (statement := /-- If $A$ has odd order $k$, then $-A$ has order $2k$. -/)
   (proof := /-- We have $-A = (-1) \cdot A$ where $-1$ commutes with $A$.
   In characteristic $0$, the order of $-1$ is $2$. Since $k$ is odd,

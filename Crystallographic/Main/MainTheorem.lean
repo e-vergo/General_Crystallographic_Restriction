@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -31,6 +31,10 @@ The psi function is defined as:
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+crystallographic restriction, psi function, integer matrix, finite order, main theorem
 -/
 
 namespace Crystallographic
@@ -48,17 +52,20 @@ crystallographic groups. -/
 
   This theorem completely characterizes which rotation orders are achievable by
   integer matrices in each dimension. The function $\psi$ is defined as:
-  $\psi(1) = \psi(2) = 0$, and for other $m$, $\psi(m) = \sum_{p^k \| m, p \neq 2 \text{ or } k \geq 2} \varphi(p^k)$.
+  $\psi(1) = \psi(2) = 0$, and for other $m$,
+  $\psi(m) = \sum_{p^k \| m, p \neq 2 \text{ or } k \geq 2} \varphi(p^k)$.
 
-  \textbf{Forward direction:} If $A \in \mathbb{Z}^{N \times N}$ has order $m$, the minimal polynomial
+  \textbf{Forward direction:} If $A \in \mathbb{Z}^{N \times N}$ has order $m$, the minimal
+  polynomial
   of $A$ over $\mathbb{Q}$ divides $X^m - 1$ and must include cyclotomic factors $\Phi_d$ for
-  divisors $d$ whose lcm equals $m$. The sum of $\varphi(d)$ over these divisors is at least $\psi(m)$,
+  divisors $d$ whose lcm equals $m$. The sum of $\varphi(d)$ over these divisors is at least
+  $\psi(m)$,
   and this sum bounds the degree of the minimal polynomial, which is at most $N$.
 
   \textbf{Backward direction:} For each prime power $p^k$ (with $p \neq 2$ or $k \geq 2$),
   the companion matrix of $\Phi_{p^k}$ has size $\varphi(p^k)$ and order $p^k$. For general $m$,
-  block diagonal combinations of these companion matrices achieve order $m$ in dimension $\psi(m)$.
-  \uses{thm:forward-direction, thm:backward-direction} --/)
+  block diagonal combinations of these companion matrices achieve order $m$ in dimension
+  $\psi(m)$. --/)
   (proof := /-- The proof combines the forward and backward directions. The forward direction shows
   that eigenvalue constraints force $\psi(m) \leq N$. The backward direction constructs explicit
   matrices achieving each order using companion matrices of cyclotomic polynomials. --/)]

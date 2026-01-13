@@ -94,7 +94,7 @@ Your fundamental purpose is relentless pursuit of truth through disciplined, unc
   (discussion := 123)       -- The discussion issue number of the node
   (latexEnv := "lemma")     -- The LaTeX environment to use for the node (default: "theorem" or "definition")
 ]
-
+ - for details read .lake/packages/LeanArchitect/README.md
 
   **Anti-Patterns to Avoid:**
   - Writing progress summaries or documentation markdown (wastes tokens, becomes stale)

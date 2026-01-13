@@ -1,0 +1,14 @@
+title: Crystallographic Restriction Theorem
+description: Formal verification of the crystallographic restriction theorem in Lean 4
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
+# GitHub repository info
+repository: e-vergo/General_Crystallographic_Restriction
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Eric Vergo. All rights reserved.
-Released under MIT license as described in the file LICENSE.
+Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
 import Architect
@@ -26,6 +26,10 @@ which are essential for the crystallographic restriction theorem.
 ## References
 
 * Sasse, R. (2020). "Crystallographic Groups"
+
+## Tags
+
+cyclotomic polynomial, companion matrix, integer matrix, finite order, roots of unity
 -/
 
 namespace Crystallographic
@@ -34,11 +38,12 @@ open Matrix Polynomial
 
 @[blueprint "lem:companion-cycl-pow"
   (statement := /-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
-  $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply \texttt{companion\_pow\_eq\_one\_of\_dvd}.
+  $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
+  \texttt{companion\_pow\_eq\_one\_of\_dvd}.
   \uses{thm:companion-pow-dvd} -/)
   (proof := /-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
   the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/)]
-lemma companion_cyclotomic_pow_eq_one (m : ℕ) (_hm : 0 < m)
+lemma companion_cyclotomic_pow_eq_one (m : ℕ)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
   apply companion_pow_eq_one_of_dvd
@@ -62,7 +67,7 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
   rw [orderOf_eq_iff hm_pos]
   constructor
   · -- A^m = 1
-    exact companion_cyclotomic_pow_eq_one m hm_pos hn
+    exact companion_cyclotomic_pow_eq_one m hn
   · -- For k < m, 0 < k -> A^k != 1
     intro k hk hk_pos hAk
     -- If A^k = 1, then aeval A (X^k - 1) = 0
@@ -73,14 +78,14 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     have hcycl_zero : aeval A (cyclotomic m ℤ) = 0 :=
       companion_aeval_eq_zero (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
     -- Map everything to Q and work there
-    -- Let A_Q be the matrix over Q
-    let A_Q := A.map (algebraMap ℤ ℚ)
-    -- Both polynomials annihilate A_Q
-    have haeval_Q_zero : aeval A_Q ((X ^ k - 1 : ℤ[X]).map (algebraMap ℤ ℚ)) = 0 := by
-      have : A_Q = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
+    -- Let AQ be the matrix over Q
+    let AQ := A.map (algebraMap ℤ ℚ)
+    -- Both polynomials annihilate AQ
+    have haeval_Q_zero : aeval AQ ((X ^ k - 1 : ℤ[X]).map (algebraMap ℤ ℚ)) = 0 := by
+      have : AQ = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
       rw [this, aeval_map_algebraMap, aeval_algHom_apply, haeval_zero, map_zero]
-    have hcycl_Q_zero : aeval A_Q ((cyclotomic m ℤ).map (algebraMap ℤ ℚ)) = 0 := by
-      have : A_Q = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
+    have hcycl_Q_zero : aeval AQ ((cyclotomic m ℤ).map (algebraMap ℤ ℚ)) = 0 := by
+      have : AQ = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
       rw [this, aeval_map_algebraMap, aeval_algHom_apply, hcycl_zero, map_zero]
     -- Simplify the mapped polynomials
     simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_one]
@@ -90,34 +95,34 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
       have h1 : algebraMap ℤ ℚ = Int.castRingHom ℚ := rfl
       rw [h1, map_cyclotomic_int]
     rw [hmap_eq] at hcycl_Q_zero
-    -- minpoly Q A_Q divides both X^k - 1 and cyclotomic m Q
-    have hdvd1 : minpoly ℚ A_Q ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ A_Q haeval_Q_zero
-    have hdvd2 : minpoly ℚ A_Q ∣ cyclotomic m ℚ := minpoly.dvd ℚ A_Q hcycl_Q_zero
+    -- minpoly Q AQ divides both X^k - 1 and cyclotomic m Q
+    have hdvd1 : minpoly ℚ AQ ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ AQ haeval_Q_zero
+    have hdvd2 : minpoly ℚ AQ ∣ cyclotomic m ℚ := minpoly.dvd ℚ AQ hcycl_Q_zero
     -- minpoly divides charpoly, and charpoly = cyclotomic m Q
-    have hcharpoly : A_Q.charpoly = cyclotomic m ℚ := by
+    have hcharpoly : AQ.charpoly = cyclotomic m ℚ := by
       -- charpoly(A.map f) = (charpoly A).map f for ring homs
-      have h1 : A_Q.charpoly = (A.charpoly).map (algebraMap ℤ ℚ) := by
+      have h1 : AQ.charpoly = (A.charpoly).map (algebraMap ℤ ℚ) := by
         rw [Matrix.charpoly_map]
       rw [h1, companion_charpoly, hmap_eq]
     -- cyclotomic m Q is irreducible over Q
     have hirr : Irreducible (cyclotomic m ℚ) := cyclotomic.irreducible_rat hm_pos
     -- Since minpoly | cyclotomic (irreducible), minpoly = 1 or minpoly = cyclotomic
-    -- But minpoly has degree >= 1 (A_Q is not in Q), so minpoly = cyclotomic m Q (up to unit)
-    have hminpoly_eq : minpoly ℚ A_Q = cyclotomic m ℚ := by
-      have hdvd := Matrix.minpoly_dvd_charpoly A_Q
+    -- But minpoly has degree >= 1 (AQ is not in Q), so minpoly = cyclotomic m Q (up to unit)
+    have hminpoly_eq : minpoly ℚ AQ = cyclotomic m ℚ := by
+      have hdvd := Matrix.minpoly_dvd_charpoly AQ
       rw [hcharpoly] at hdvd
       -- minpoly | cyclotomic, cyclotomic irreducible
       -- By Irreducible.dvd_iff: minpoly | cycl <-> IsUnit minpoly or Associated cycl minpoly
       rcases hirr.dvd_iff.mp hdvd with hunit | hassoc
-      · -- minpoly is unit, impossible since minpoly is monic and evaluates to zero at A_Q
+      · -- minpoly is unit, impossible since minpoly is monic and evaluates to zero at AQ
         exfalso
         -- If minpoly is a unit, it must be a constant polynomial
         -- But minpoly is monic, so it would have to be 1
-        -- But aeval A_Q (minpoly) = 0, so 1 = 0, contradiction
-        have hmonic := minpoly.monic (Matrix.isIntegral A_Q)
-        have haeval_minpoly := minpoly.aeval ℚ A_Q
+        -- But aeval AQ (minpoly) = 0, so 1 = 0, contradiction
+        have hmonic := minpoly.monic (Matrix.isIntegral AQ)
+        have haeval_minpoly := minpoly.aeval ℚ AQ
         -- For a unit polynomial over a field to be monic, it must equal 1
-        have hunit_eq : minpoly ℚ A_Q = 1 := by
+        have hunit_eq : minpoly ℚ AQ = 1 := by
           rcases Polynomial.isUnit_iff.mp hunit with ⟨c, hc, heq⟩
           rw [← heq] at hmonic
           -- Monic (C c) means leadingCoeff (C c) = 1
@@ -145,7 +150,7 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
           exact one_ne_zero this
         exact h1ne0 haeval_minpoly
       · -- Associated cyclotomic minpoly, so they're equal since both are monic
-        have hmonic1 := minpoly.monic (Matrix.isIntegral A_Q)
+        have hmonic1 := minpoly.monic (Matrix.isIntegral AQ)
         have hmonic2 := cyclotomic.monic m ℚ
         exact eq_of_monic_of_associated hmonic1 hmonic2 hassoc.symm
     -- So cyclotomic m Q | X^k - 1
