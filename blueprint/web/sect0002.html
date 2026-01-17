@@ -117,35 +117,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Helper function that computes the contribution of a single prime power p^k to psi.
-    Returns 0 if k = 0, returns 0 if p = 2 and k = 1, otherwise returns phi(p^k). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;psiPrimePow-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The function $\psi_{\text{pp}}(p, k)$ computes the contribution of a single
-  prime power $p^k$ to $\psi$. Returns $0$ if $k = 0$ or if $p = 2$ and $k = 1$,
-  otherwise returns $\varphi(p^k)$.
-
-  The special case $\psi_{\text{pp}}(2, 1) = 0$ reflects that $-I$ achieves order $2$ in any
-  dimension $\geq 1$, so order $2$ does not require additional dimensions. For all other
-  prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
   <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -268,41 +240,8 @@ that `c` is true/false.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The psi function for crystallographic restriction.
-    psi(m) is the minimum dimension N such that an N×N integer matrix can have order m.
-
-    Defined as the sum over prime power factors: if m = prod p_i^{k_i}, then
-    psi(m) = sum_i (if p_i = 2 and k_i = 1 then 0 else phi(p_i^{k_i})) -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;psi-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The psi function $\psi(m) = \sum_{p^k \| m} \psi_{\text{pp}}(p, k)$,
-  which gives the minimum dimension $N$ such that an $N \times N$ integer matrix
-  can have order $m$.
-
-  For $m$ with prime factorization $m = \prod_i p_i^{k_i}$:
-  $$\psi(m) = \sum_i \psi_{\text{pp}}(p_i, k_i) =
-    \sum_{\substack{p^k \| m \\ (p,k) \neq (2,1)}} \varphi(p^k)$$
-  This gives the minimum dimension needed to realize order $m$.
-  \uses{psiPrimePow-def} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
-  <span class="lean-text">m.factorization.sum</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `psiPrimePow`"><span class="lean-text">psiPrimePow</span></span> <span class="lean-text">p</span> <span class="lean-text">k</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
+  <span class="lean-text">m.factorization.sum</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">=&gt;</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">p</span> <span class="lean-text">k</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
   m.factorization.sum fun p k =&gt; psiPrimePow p k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L70-L87" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>

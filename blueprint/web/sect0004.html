@@ -140,56 +140,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The companion matrix of a monic polynomial p of degree n.
-
-For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
-```
-[0  0  0  ...  0  -a_0    ]
-[1  0  0  ...  0  -a_1    ]
-[0  1  0  ...  0  -a_2    ]
-[        ...              ]
-[0  0  0  ...  1  -a_{n-1}]
-```
-
-The matrix has 1s on the subdiagonal and the negatives of the polynomial
-coefficients in the last column.
--/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;companion-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(p)$ of a monic polynomial
-  $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
-  on the subdiagonal and $-a_i$ in the last column:
-  $$C(p) = \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; -a_1 \\
-  \vdots &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; \cdots &amp; 1 &amp; -a_{n-1} \end{pmatrix}$$
-  This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
   <span class="lean-text">Matrix.of</span> <span class="lean-keyword">fun</span> <span class="lean-text">i</span> <span class="lean-text">j</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
@@ -205,13 +157,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is
-  highlights
-due to the absence of the instance above
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">1</span></span>
+">then</span> <span class="lean-text">1</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -226,21 +172,14 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-text">p.natDegree</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
 `[Decidable c]` argument synthesized by typeclass inference which actually
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">-</span><span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.coeff</span> <span class="lean-text">i.val</span></span></span>
+">then</span> <span class="lean-text">-</span><span class="lean-text">p.coeff</span> <span class="lean-text">i.val</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -248,13 +187,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is
-  highlights
-due to the absence of the instance above
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">0</span></span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
+">else</span> <span class="lean-text">0</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =&gt;
     if j.val + 1 = i.val then 1
