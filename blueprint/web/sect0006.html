@@ -120,7 +120,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]</span></code><code class="lean-proof-body"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
     ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
   induction s using Finset.induction with
@@ -206,7 +206,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
     (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by
   induction S using Finset.induction with
@@ -294,7 +294,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
     p ^ k ∈ S := by
   by_contra hm_not_in
@@ -386,7 +386,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by
   have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
   have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
   omega</span></code></pre>
@@ -455,7 +455,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
     (h_dvd : ∀ a ∈ S, f a ∣ d)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     (∏ a ∈ S, f a) ∣ d := by
@@ -542,7 +542,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
   induction S using Finset.induction with
@@ -626,7 +626,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)</span></code><code class="lean-proof-body"><span class="lean-plain">{n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
     (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
     orderOf (-A) = 2 * k := by
   -- Express -A as (-1) * A

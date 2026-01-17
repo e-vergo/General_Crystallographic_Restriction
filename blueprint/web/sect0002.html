@@ -117,7 +117,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
   else Nat.totient (p ^ k)</span></code></pre>
@@ -195,7 +195,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psi (m : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">def psi (m : ℕ) : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psi (m : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
   m.factorization.sum fun p k =&gt; psiPrimePow p k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L86-L86" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -286,7 +286,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
     psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
   simp only [psi]
   rw [hp.factorization_pow]
@@ -357,7 +357,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m n : ℕ} (h : m.Coprime n) :
     Disjoint m.factorization.support n.factorization.support :=
   Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L167-L167" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -456,7 +456,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">(m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
   rw [Nat.factorization_mul (Nat.pos_iff_ne_zero.mp hm) (Nat.pos_iff_ne_zero.mp hn)]
@@ -559,7 +559,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}</span></code><code class="lean-proof-body"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}</span></code><code class="lean-proof-body"><span class="lean-plain">{m p : ℕ}
     (hp : p ∈ m.factorization.support) :
     psiPrimePow p (m.factorization p) ≤ psi m := by
   simp only [psi, Finsupp.sum]
@@ -634,7 +634,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
     (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
   rw [Nat.totient_prime_pow hp hk]
   by_cases hp2 : p = 2
@@ -708,7 +708,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
     ∃ (p e m&#x27; : ℕ), p.Prime ∧ 0 &lt; e ∧ p ^ e * m&#x27; = m ∧
     (p ^ e).Coprime m&#x27; ∧ 1 &lt; m&#x27; ∧ m&#x27; &lt; m ∧ p ^ e &lt; m := by
   have hm_ne_zero : m ≠ 0 := by omega
@@ -837,7 +837,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
     0 &lt; psi m := by
   -- m &gt;= 3 implies m != 1, so minFac(m) is prime
   have hm_ne_one : m ≠ 1 := by omega
@@ -982,7 +982,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by</span></code><code class="lean-proof-body"><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by
   -- Strong induction on m
   induction m using Nat.strong_induction_on with
   | _ m IH =&gt;
@@ -1123,7 +1123,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
   intro q hq
@@ -1220,7 +1220,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
     S.Nonempty := by
   by_contra h
   rw [Finset.not_nonempty_iff_eq_empty] at h
@@ -1312,7 +1312,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
     (hS_lcm_ge2 : 2 ≤ S.lcm id) : ∃ d ∈ S, 1 &lt; d := by
   by_contra hall_le1
   push_neg at hall_le1
@@ -1440,7 +1440,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     psi m ≤ ∑ d ∈ S, Nat.totient d := by
   -- If m ∈ S, apply helper lemma directly

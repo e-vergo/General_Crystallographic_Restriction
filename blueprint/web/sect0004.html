@@ -140,7 +140,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =&gt;
     if j.val + 1 = i.val then 1
@@ -230,7 +230,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
     (companion p hp hn).charpoly = p := by
   obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
   induction n generalizing p with
@@ -339,7 +339,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
     aeval (companion p hp hn) p = 0 := by
   have h := aeval_self_charpoly (companion p hp hn)
   rwa [companion_charpoly p hp hn] at h</span></code></pre>
@@ -430,7 +430,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
     (companion p hp hn) ^ m = 1 := by
   -- From hdvd, get q such that X^m - 1 = p * q
@@ -535,7 +535,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
     (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
   apply companion_pow_eq_one_of_dvd
@@ -631,7 +631,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
     orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
   let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
@@ -743,7 +743,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
     m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
   use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
@@ -837,7 +837,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m) :
     m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
   have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
   have htot_pos : 0 &lt; Nat.totient m := Nat.totient_pos.mpr (by omega)
