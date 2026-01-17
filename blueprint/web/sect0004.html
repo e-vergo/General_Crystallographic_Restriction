@@ -236,9 +236,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    (companion p hp hn).charpoly = p := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    (companion p hp hn).charpoly = p := by
-  obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
+    (companion p hp hn).charpoly = p := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
   induction n generalizing p with
   | zero =&gt; exact companion_charpoly_of_natDegree_one p hp hn hn_eq
   | succ m IH =&gt;
@@ -346,9 +344,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    aeval (companion p hp hn) p = 0 := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    aeval (companion p hp hn) p = 0 := by
-  have h := aeval_self_charpoly (companion p hp hn)
+    aeval (companion p hp hn) p = 0 := by</span></code><code class="lean-proof-body"><span class="lean-plain">have h := aeval_self_charpoly (companion p hp hn)
   rwa [companion_charpoly p hp hn] at h</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -439,10 +435,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
-    (companion p hp hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
-    (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
-    (companion p hp hn) ^ m = 1 := by
-  -- From hdvd, get q such that X^m - 1 = p * q
+    (companion p hp hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- From hdvd, get q such that X^m - 1 = p * q
   obtain ⟨q, hq⟩ := hdvd
   -- Let A = companion p
   let A := companion p hp hn
@@ -546,10 +539,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
-  apply companion_pow_eq_one_of_dvd
+    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">apply companion_pow_eq_one_of_dvd
   exact cyclotomic.dvd_X_pow_sub_one m ℤ</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -644,10 +634,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
-  let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
+    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
   have hm_pos : 0 &lt; m := Nat.lt_of_lt_of_le (by norm_num : 0 &lt; 2) hm
   rw [orderOf_eq_iff hm_pos]
   constructor
@@ -758,10 +745,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
-  use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
+    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by</span></code><code class="lean-proof-body"><span class="lean-plain">use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
   constructor
   · exact companion_cyclotomic_orderOf m hm hn
   · omega</span></code></pre>
@@ -853,9 +837,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
-    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 2 ≤ m) :
-    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
-  have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
+    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
   have htot_pos : 0 &lt; Nat.totient m := Nat.totient_pos.mpr (by omega)
   have hn : 0 &lt; (cyclotomic m ℤ).natDegree := by omega
   rw [← hdeg]

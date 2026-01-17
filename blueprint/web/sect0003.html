@@ -370,9 +370,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
-    integerMatrixOrders M ⊆ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M N : ℕ} (hMN : M ≤ N) :
-    integerMatrixOrders M ⊆ integerMatrixOrders N := by
-  intro m hm
+    integerMatrixOrders M ⊆ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">intro m hm
   simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
   obtain ⟨A, hA_ord, hA_pos⟩ := hm
   -- N = M + (N - M)
@@ -625,10 +623,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
     (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Semiring R]
-    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by
-  simp only [blockDiag2, Matrix.fromBlocks_multiply]
+    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2, Matrix.fromBlocks_multiply]
   congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -803,10 +798,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R] [One R]
-    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by
-  rw [← blockDiag2_one]
+    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← blockDiag2_one]
   simp only [blockDiag2, Matrix.fromBlocks_inj]
   tauto</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -896,10 +888,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
-    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Semiring R]
-    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
-    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by
-  simp only [blockDiag2]
+    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2]
   exact Matrix.fromBlocks_diagonal_pow A B k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -994,10 +983,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_blockDiag2 {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
-    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ}
-    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
-    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
-  have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
+    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
     Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
   rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
       orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]</span></code></pre>
@@ -1092,10 +1078,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
-    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
-    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
-  obtain ⟨A, hA_ord, hA_pos⟩ := h₁
+    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨A, hA_ord, hA_pos⟩ := h₁
   obtain ⟨B, hB_ord, hB_pos⟩ := h₂
   refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
   rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]</span></code></pre>
@@ -1189,11 +1172,7 @@
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
     (hcop : Nat.Coprime m₁ m₂) :
-    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
-    (hcop : Nat.Coprime m₁ m₂) :
-    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by
-  rw [← hcop.lcm_eq_mul]
+    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← hcop.lcm_eq_mul]
   exact lcm_mem_integerMatrixOrders h₁ h₂</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>

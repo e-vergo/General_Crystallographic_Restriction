@@ -122,9 +122,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
-    (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
-    (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by
-  let A_Q := A.map (algebraMap ℤ ℚ)
+    (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">let A_Q := A.map (algebraMap ℤ ℚ)
   -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
   have haeval : aeval A_Q (X ^ k - 1 : ℚ[X]) = 0 := by
     obtain ⟨q, hq⟩ := hdvd
@@ -204,9 +202,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_dvd_X_pow_sub_one_of_pow_eq_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
-    (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
-    (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by
-  apply minpoly.dvd
+    (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">apply minpoly.dvd
   simp only [map_sub, map_pow, aeval_X, map_one]
   rw [← Matrix.map_pow, hpow,
     Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _), sub_self]</span></code></pre>
@@ -277,10 +273,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
     (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
-    (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by</span></code><code class="lean-proof-body"><span class="lean-plain">{target : ℚ[X]} (S : Finset ℕ)
-    (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
-    (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by
-  induction S using Finset.induction with
+    (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
   | empty =&gt; simp only [Finset.prod_empty, one_dvd]
   | @insert d s hd_notin IH =&gt;
     rw [Finset.prod_insert hd_notin]
@@ -381,12 +374,7 @@
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
     (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
     (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
-    minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
-    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
-    (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
-    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
-    minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ ∏ d ∈ S, cyclotomic d ℚ := by
-  let A_Q := A.map (algebraMap ℤ ℚ)
+    minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">let A_Q := A.map (algebraMap ℤ ℚ)
   -- Key: {x ∈ m.divisors | x ∈ S} = S since S ⊆ m.divisors
   have hS_eq : m.divisors.filter (· ∈ S) = S := by
     ext d
@@ -502,12 +490,7 @@
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m)
     (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
     ∃ S : Finset ℕ, (∀ d ∈ S, d ∣ m) ∧
-      minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
-    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m)
-    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
-    ∃ S : Finset ℕ, (∀ d ∈ S, d ∣ m) ∧
-      minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ := by
-  classical
+      minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">classical
   let A_Q := A.map (algebraMap ℤ ℚ)
   let S := m.divisors.filter (fun d =&gt; cyclotomic d ℚ ∣ minpoly ℚ A_Q)
   have hS_sub : S ⊆ m.divisors := Finset.filter_subset _ _
@@ -621,12 +604,7 @@
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (hA_ord : orderOf A = m)
     (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)
     (hminpoly_eq_prod : minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ) :
-    S.lcm id = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
-    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (hA_ord : orderOf A = m)
-    (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)
-    (hminpoly_eq_prod : minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ) :
-    S.lcm id = m := by
-  let A_Q := A.map (algebraMap ℤ ℚ)
+    S.lcm id = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">let A_Q := A.map (algebraMap ℤ ℚ)
   -- If lcm(S) &lt; m, then minpoly | X^{lcm(S)} - 1, so A^{lcm(S)} = 1
   -- This contradicts orderOf A = m
   by_contra hne
@@ -783,9 +761,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 &lt; m)
-    (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
-    (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by
-  -- Extract the matrix A with orderOf A = m
+    (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- Extract the matrix A with orderOf A = m
   obtain ⟨A, hA_ord, _⟩ := hord
   -- Handle the case N = 0 separately
   rcases Nat.eq_zero_or_pos N with rfl | hN_pos
@@ -891,9 +867,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
-    (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
-    (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
-  simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_def, Equiv.toPEquiv_refl, PEquiv.toMatrix_refl]</span></code></pre>
+    (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_def, Equiv.toPEquiv_refl, PEquiv.toMatrix_refl]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L67-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -961,10 +935,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ τ : Equiv.Perm n) :
-    (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
-    (σ τ : Equiv.Perm n) :
-    (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by
-  simp only [Equiv.Perm.permMatrix]
+    (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [Equiv.Perm.permMatrix]
   rw [Equiv.Perm.mul_def, Equiv.toPEquiv_trans, PEquiv.toMatrix_trans]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L76-L86" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -1059,10 +1030,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ : Equiv.Perm n) (k : ℕ) :
-    (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
-    (σ : Equiv.Perm n) (k : ℕ) :
-    (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
-  induction k with
+    (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction k with
   | zero =&gt; simp [permMatrix_one]
   | succ k ih =&gt;
     rw [pow_succ, pow_succ, permMatrix_mul, ih]
@@ -1158,10 +1126,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
-    σ.permMatrix R = 1 ↔ σ = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
-    [Nontrivial R] (σ : Equiv.Perm n) :
-    σ.permMatrix R = 1 ↔ σ = 1 := by
-  constructor
+    σ.permMatrix R = 1 ↔ σ = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">constructor
   · intro h
     ext x
     have hx := congrFun (congrFun h x) (σ x)
@@ -1245,10 +1210,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
-    orderOf (σ.permMatrix R) = orderOf σ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
-    [Nontrivial R] (σ : Equiv.Perm n) :
-    orderOf (σ.permMatrix R) = orderOf σ := by
-  rcases Nat.eq_zero_or_pos (orderOf σ) with hord | hord
+    orderOf (σ.permMatrix R) = orderOf σ := by</span></code><code class="lean-proof-body"><span class="lean-plain">rcases Nat.eq_zero_or_pos (orderOf σ) with hord | hord
   · -- σ has infinite order (orderOf σ = 0)
     rw [hord, orderOf_eq_zero_iff&#x27;]
     intro k hk heq
@@ -1329,8 +1291,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := by
-  have hcycle := isCycle_finRotate_of_le hn
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hcycle := isCycle_finRotate_of_le hn
   have hord := Equiv.Perm.IsCycle.orderOf hcycle
   have hsupp := support_finRotate_of_le hn
   rw [hord, hsupp, Finset.card_univ, Fintype.card_fin]</span></code></pre>
@@ -1426,9 +1387,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
-    orderOf ((finRotate n).permMatrix ℤ) = n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 ≤ n) :
-    orderOf ((finRotate n).permMatrix ℤ) = n := by
-  rw [orderOf_permMatrix, orderOf_finRotate n hn]</span></code></pre>
+    orderOf ((finRotate n).permMatrix ℤ) = n := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [orderOf_permMatrix, orderOf_finRotate n hn]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L170-L178" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1516,8 +1475,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatrixOrders n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatrixOrders n := by
-  use (finRotate n).permMatrix ℤ
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatrixOrders n := by</span></code><code class="lean-proof-body"><span class="lean-plain">use (finRotate n).permMatrix ℤ
   constructor
   · exact Equiv.Perm.orderOf_permMatrix_finRotate n hn
   · omega</span></code></pre>
@@ -1614,10 +1572,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)
     (hpk : ¬(p = 2 ∧ k = 1)) :
-    p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)
-    (hpk : ¬(p = 2 ∧ k = 1)) :
-    p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by
-  -- psi(p^k) = totient(p^k) for this case
+    p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- psi(p^k) = totient(p^k) for this case
   have hpsi_eq : psi (p ^ k) = Nat.totient (p ^ k) := by
     rw [psi_prime_pow p k hp hk]
     simp only [hpk, ite_false]
@@ -1735,9 +1690,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :
-    m ∈ integerMatrixOrders (psi m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :
-    m ∈ integerMatrixOrders (psi m) := by
-  -- Use strong induction on m
+    m ∈ integerMatrixOrders (psi m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- Use strong induction on m
   induction m using Nat.strong_induction_on with
   | _ m IH =&gt;
   -- Case: m = 1
@@ -1911,10 +1864,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 &lt; m)
     (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 &lt; N) :
-    m ∈ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
-    (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 &lt; N) :
-    m ∈ integerMatrixOrders N := by
-  -- Handle base cases m = 1, 2
+    m ∈ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- Handle base cases m = 1, 2
   rcases Nat.lt_trichotomy m 2 with hm_lt2 | rfl | hm_gt2
   · -- m &lt; 2 and 0 &lt; m, so m = 1
     interval_cases m

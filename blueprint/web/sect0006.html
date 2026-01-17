@@ -122,10 +122,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
-    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α]
-    (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
-    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
-  induction s using Finset.induction with
+    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction s using Finset.induction with
   | empty =&gt; simp
   | @insert a s&#x27; ha IH =&gt;
     rw [Finset.sum_insert ha, Finset.prod_insert ha]
@@ -210,10 +207,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
-    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
-    (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
-    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by
-  induction S using Finset.induction with
+    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
   | empty =&gt;
     simp only [Finset.lcm_empty, Nat.factorization_one, Finsupp.coe_zero, Pi.zero_apply,
       Finset.sup_empty, bot_eq_zero, le_refl]
@@ -300,10 +294,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
-    p ^ k ∈ S := by</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
-    (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
-    p ^ k ∈ S := by
-  by_contra hm_not_in
+    p ^ k ∈ S := by</span></code><code class="lean-proof-body"><span class="lean-plain">by_contra hm_not_in
   -- All elements of S are proper divisors of p^k, so they divide p^(k-1)
   have hall_lt : ∀ d ∈ S, d &lt; p ^ k := fun d hd =&gt;
     Nat.lt_of_le_of_ne (Nat.le_of_dvd (Nat.pow_pos hp.pos) (hS_sub d hd))
@@ -392,8 +383,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by
-  have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
   have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
   omega</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L155-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -464,11 +454,7 @@
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
     (h_dvd : ∀ a ∈ S, f a ∣ d)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    (∏ a ∈ S, f a) ∣ d := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
-    (h_dvd : ∀ a ∈ S, f a ∣ d)
-    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    (∏ a ∈ S, f a) ∣ d := by
-  induction S using Finset.induction with
+    (∏ a ∈ S, f a) ∣ d := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
   | empty =&gt; simp
   | @insert q s&#x27; hq_notin IH =&gt;
     rw [Finset.prod_insert hq_notin]
@@ -553,10 +539,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
-    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
-  induction S using Finset.induction with
+    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
   | empty =&gt; simp
   | @insert q s&#x27; hq_notin IH =&gt;
     rw [Finset.prod_insert hq_notin, Finset.prod_insert hq_notin]
@@ -639,10 +622,7 @@
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
     (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
-    orderOf (-A) = 2 * k := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
-    (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
-    orderOf (-A) = 2 * k := by
-  -- Express -A as (-1) * A
+    orderOf (-A) = 2 * k := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- Express -A as (-1) * A
   have hneg_eq : -A = (-1 : Matrix (Fin n) (Fin n) ℤ) * A := by simp
   rw [hneg_eq]
   -- -1 and A commute
