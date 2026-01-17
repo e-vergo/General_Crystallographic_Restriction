@@ -111,7 +111,7 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>   The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
+    <p>    The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
 <p>The special case \(\psi _{\text{pp}}(2, 1) = 0\) reflects that \(-I\) achieves order \(2\) in any dimension \(\geq 1\), so order \(2\) does not require additional dimensions. For all other prime powers \(p^k\), we need \(\varphi (p^k)\) dimensions to achieve order \(p^k\). </p>
 
     </div>
@@ -185,7 +185,7 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>    The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+    <p>     The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
 <p>For \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\): </p>
 <div class="displaymath" id="a0000000012">
   \[ \psi (m) = \sum _i \psi _{\text{pp}}(p_i, k_i) = \sum _{\substack {p^k \|  m \\ (p,k) \neq (2,1)}} \varphi (p^k) \]
@@ -268,7 +268,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
+    <p>     For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
 <p>For a prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{\text{pp}}(p, k)\). This equals \(\varphi (p^k) = p^{k-1}(p-1)\) except when \(p = 2\) and \(k = 1\).  </p>
 
     </div>
@@ -335,7 +335,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   Coprime numbers have disjoint prime factorization supports. </p>
+    <p>    Coprime numbers have disjoint prime factorization supports. </p>
 
     </div>
   </div>
@@ -428,7 +428,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
+    <p>     \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
 <p>When \(\gcd (m, n) = 1\), the prime factorizations of \(m\) and \(n\) share no common primes, so </p>
 <div class="displaymath" id="a0000000016">
   \[ \psi (mn) = \sum _{p^k \|  mn} \psi _{\text{pp}}(p, k) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k) + \sum _{p^k \|  n} \psi _{\text{pp}}(p, k) = \psi (m) + \psi (n). \]
@@ -521,7 +521,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    \(\psi (m) \geq \psi _{\mathrm{pp}}(p, v_p(m))\) for each prime \(p \mid m\). </p>
+    <p>     \(\psi (m) \geq \psi _{\mathrm{pp}}(p, v_p(m))\) for each prime \(p \mid m\). </p>
 
     </div>
   </div>
@@ -588,7 +588,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   For any prime power \(p^k {\gt} 2\), we have \(2 \leq \varphi (p^k)\). </p>
+    <p>    For any prime power \(p^k {\gt} 2\), we have \(2 \leq \varphi (p^k)\). </p>
 <p>Specifically, \(\varphi (p^k) = p^{k-1}(p-1) \geq 2\) unless \((p, k) = (2, 1)\), in which case \(\varphi (2) = 1\). This bound is essential for showing that sums of totients are bounded by products when factors are coprime.  - </p>
 
     </div>
@@ -655,7 +655,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   A composite number \(m {\gt} 2\) that is not a prime power can be written as \(m = p^e \cdot m'\) where \(p\) is prime, \(e {\gt} 0\), \(\gcd (p^e, m') = 1\), and both \(p^e {\lt} m\) and \(1 {\lt} m' {\lt} m\). </p>
+    <p>    A composite number \(m {\gt} 2\) that is not a prime power can be written as \(m = p^e \cdot m'\) where \(p\) is prime, \(e {\gt} 0\), \(\gcd (p^e, m') = 1\), and both \(p^e {\lt} m\) and \(1 {\lt} m' {\lt} m\). </p>
 <p>This decomposition is essential for strong induction proofs on composite numbers: it provides strictly smaller coprime factors to which the inductive hypothesis applies.  - </p>
 
     </div>
@@ -749,7 +749,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For odd \(m \geq 3\), we have \(\psi (m) {\gt} 0\). </p>
+    <p>     For odd \(m \geq 3\), we have \(\psi (m) {\gt} 0\). </p>
 <p>Since \(m \geq 3\) and \(m\) is odd, \(m\) has a prime factor \(q \geq 3\) (specifically, \(q = \mathrm{minFac}(m)\)). The prime power \(q^{\nu _q(m)}\) contributes \(\psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\) to \(\psi (m)\), since \((q, \nu _q(m)) \neq (2, 1)\).  - </p>
 
     </div>
@@ -850,7 +850,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+    <p>     For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
 <p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
 <p>The proof proceeds by strong induction on \(m\): </p>
 <ul class="itemize">
@@ -950,7 +950,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   If \(S\) is a finite set of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), then for each prime \(q\) dividing \(m\), some element \(d \in S\) is divisible by \(q^{\nu _q(m)}\). </p>
+    <p>    If \(S\) is a finite set of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), then for each prime \(q\) dividing \(m\), some element \(d \in S\) is divisible by \(q^{\nu _q(m)}\). </p>
 <p>In other words, the full \(q\)-power component of \(m\) must be "achieved" by some element of \(S\). This is the key combinatorial fact ensuring that \(\psi (m) \leq \sum _{d \in S} \varphi (d)\).  - </p>
 
     </div>
@@ -1018,7 +1018,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   If \(\mathrm{lcm}(S) \geq 2\) for a finite set \(S\) of natural numbers, then \(S\) is nonempty. </p>
+    <p>    If \(\mathrm{lcm}(S) \geq 2\) for a finite set \(S\) of natural numbers, then \(S\) is nonempty. </p>
 <p>This follows immediately from the fact that \(\mathrm{lcm}(\emptyset ) = 1\) by convention.  - </p>
 
     </div>
@@ -1105,7 +1105,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>   If \(S\) is a finite set of positive integers with \(\mathrm{lcm}(S) \geq 2\), then some element \(d \in S\) satisfies \(d {\gt} 1\). </p>
+    <p>    If \(S\) is a finite set of positive integers with \(\mathrm{lcm}(S) \geq 2\), then some element \(d \in S\) satisfies \(d {\gt} 1\). </p>
 <p>This is because \(\mathrm{lcm}\) of a set where all elements equal \(1\) would be \(1\).  - </p>
 
     </div>
@@ -1220,7 +1220,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
+    <p>     For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
 <p>For a finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the prime factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\mathrm{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s prime factorization, giving exactly \(\psi (m)\).  - </p>
 
     </div>
