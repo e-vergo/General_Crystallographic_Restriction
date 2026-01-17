@@ -493,7 +493,7 @@
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:two-le-totient-prime-pow">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -506,9 +506,212 @@
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0002.html#lem:psi-le-totient">#</a>
+    <a class="icon proof" href="sect0002.html#lem:two-le-totient-prime-pow">#</a>
     
     <a class="icon proof" href="sect0002.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.two_le_totient_primePow" class="lean_decl">Crystallographic.two_le_totient_primePow</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  For any prime power \(p^k {\gt} 2\), we have \(2 \leq \varphi (p^k)\). </p>
+<p>Specifically, \(\varphi (p^k) = p^{k-1}(p-1) \geq 2\) unless \((p, k) = (2, 1)\), in which case \(\varphi (2) = 1\). This bound is essential for showing that sums of totients are bounded by products when factors are coprime.  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000018">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By cases on \(p = 2\): if \(p \neq 2\), then \(p \geq 3\) so \(\varphi (p^k) = p^{k-1}(p-1) \geq 1 \cdot 2 = 2\). If \(p = 2\) and \(k \geq 2\), then \(\varphi (2^k) = 2^{k-1} \geq 2\). The case \((2, 1)\) is excluded by hypothesis. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:factorization-split-lt">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.6</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:factorization-split-lt">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.factorization_split_lt" class="lean_decl">Crystallographic.factorization_split_lt</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  A composite number \(m {\gt} 2\) that is not a prime power can be written as \(m = p^e \cdot m'\) where \(p\) is prime, \(e {\gt} 0\), \(\gcd (p^e, m') = 1\), and both \(p^e {\lt} m\) and \(1 {\lt} m' {\lt} m\). </p>
+<p>This decomposition is essential for strong induction proofs on composite numbers: it provides strictly smaller coprime factors to which the inductive hypothesis applies.  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000019">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Take \(p = \mathrm{minFac}(m)\) and \(e = \nu _p(m)\), the \(p\)-adic valuation. Then \(m' = m / p^e\) is coprime to \(p^e\) (disjoint prime support). Since \(m\) is not a prime power, \(m' \neq 1\). The bounds \(p^e {\lt} m\) and \(m' {\lt} m\) follow from \(m' {\gt} 1\) and \(p^e \geq 2\) respectively. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-pos-of-odd">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.7</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:psi-pos-of-odd">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000020"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-ge-psiPrimePow">Theorem 2.0.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.psi_pos_of_odd_ge_three" class="lean_decl">Crystallographic.psi_pos_of_odd_ge_three</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For odd \(m \geq 3\), we have \(\psi (m) {\gt} 0\). </p>
+<p>Since \(m \geq 3\) and \(m\) is odd, \(m\) has a prime factor \(q \geq 3\) (specifically, \(q = \mathrm{minFac}(m)\)). The prime power \(q^{\nu _q(m)}\) contributes \(\psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\) to \(\psi (m)\), since \((q, \nu _q(m)) \neq (2, 1)\).  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000020">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> The minimal prime factor \(q = \mathrm{minFac}(m)\) satisfies \(q \geq 3\) (since \(2 \nmid m\)). Thus \((q, \nu _q(m))\) is a nontrivial pair, and \(\psi (m) \geq \psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:psi-le-totient">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000021"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -532,7 +735,11 @@
           
           <li><a href="sect0006.html#lem:totient-ge-two">Theorem A.0.4</a></li>
           
+          <li><a href="sect0002.html#lem:two-le-totient-prime-pow">Theorem 2.0.5</a></li>
+          
           <li><a href="sect0002.html#lem:psi-prime-pow">Theorem 2.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:factorization-split-lt">Theorem 2.0.6</a></li>
           
           <li><a href="sect0002.html#lem:psi-coprime-add">Theorem 2.0.3</a></li>
           
@@ -582,7 +789,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000018">
+<div class="proof_wrapper" id="a0000000021">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -594,12 +801,231 @@
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:prime-pow-achieved-of-lcm-eq">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.9</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:prime-pow-achieved-of-lcm-eq">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#lem:lcm-factorization-le-sup">Theorem A.0.2</a></li>
+          
+          <li><a href="sect0006.html#lem:lcm-factorization-le-sup">Theorem A.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.primePow_achieved_of_lcm_eq" class="lean_decl">Crystallographic.primePow_achieved_of_lcm_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(S\) is a finite set of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), then for each prime \(q\) dividing \(m\), some element \(d \in S\) is divisible by \(q^{\nu _q(m)}\). </p>
+<p>In other words, the full \(q\)-power component of \(m\) must be "achieved" by some element of \(S\). This is the key combinatorial fact ensuring that \(\psi (m) \leq \sum _{d \in S} \varphi (d)\).  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000022">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By contradiction: if all \(d \in S\) have \(\nu _q(d) {\lt} \nu _q(m)\), then \(\nu _q(\mathrm{lcm}(S)) = \sup _{d \in S} \nu _q(d) {\lt} \nu _q(m)\), contradicting \(\mathrm{lcm}(S) = m\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:finset-nonempty-of-two-le-lcm">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.10</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:finset-nonempty-of-two-le-lcm">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Finset.nonempty_of_two_le_lcm" class="lean_decl">Crystallographic.Finset.nonempty_of_two_le_lcm</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(\mathrm{lcm}(S) \geq 2\) for a finite set \(S\) of natural numbers, then \(S\) is nonempty. </p>
+<p>This follows immediately from the fact that \(\mathrm{lcm}(\emptyset ) = 1\) by convention.  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000023">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By contradiction: if \(S = \emptyset \), then \(\mathrm{lcm}(S) = 1 {\lt} 2\), contradicting the hypothesis. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:finset-exists-one-lt-of-two-le-lcm">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.0.11</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#lem:finset-exists-one-lt-of-two-le-lcm">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#lem:finset-nonempty-of-two-le-lcm">Theorem 2.0.10</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Finset.exists_one_lt_of_two_le_lcm" class="lean_decl">Crystallographic.Finset.exists_one_lt_of_two_le_lcm</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(S\) is a finite set of positive integers with \(\mathrm{lcm}(S) \geq 2\), then some element \(d \in S\) satisfies \(d {\gt} 1\). </p>
+<p>This is because \(\mathrm{lcm}\) of a set where all elements equal \(1\) would be \(1\).  - </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000024">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By contradiction: if all \(d \in S\) satisfy \(d \leq 1\), then since all \(d {\gt} 0\) we have \(d = 1\) for all \(d \in S\). Thus \(\mathrm{lcm}(S) = 1 {\lt} 2\), a contradiction. </p>
+
+  </div>
+</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:sum-totient-ge-psi">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">2.0.6</span>
+    <span class="theorem_thmlabel">2.0.12</span>
     <div class="thm_header_extras">
 
     
@@ -609,7 +1035,7 @@
 
     <a class="icon proof" href="sect0002.html#lem:sum-totient-ge-psi">#</a>
     
-    <a class="icon proof" href="sect0002.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0002.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -627,15 +1053,27 @@
           
           <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
           
-          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.5</a></li>
+          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.8</a></li>
           
-          <li><a href="sect0006.html#lem:lcm-factorization-le-sup">Theorem A.0.2</a></li>
+          <li><a href="sect0002.html#lem:finset-nonempty-of-two-le-lcm">Theorem 2.0.10</a></li>
+          
+          <li><a href="sect0002.html#lem:finset-exists-one-lt-of-two-le-lcm">Theorem 2.0.11</a></li>
+          
+          <li><a href="sect0002.html#lem:prime-pow-achieved-of-lcm-eq">Theorem 2.0.9</a></li>
+          
+          <li><a href="sect0002.html#lem:finset-exists-one-lt-of-two-le-lcm">Theorem 2.0.11</a></li>
           
           <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
           
-          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.5</a></li>
+          <li><a href="sect0002.html#lem:psi-le-totient">Theorem 2.0.8</a></li>
+          
+          <li><a href="sect0002.html#lem:two-le-totient-prime-pow">Theorem 2.0.5</a></li>
+          
+          <li><a href="sect0002.html#lem:finset-nonempty-of-two-le-lcm">Theorem 2.0.10</a></li>
           
           <li><a href="sect0006.html#lem:sum-le-prod">Theorem A.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:prime-pow-achieved-of-lcm-eq">Theorem 2.0.9</a></li>
           
           <li><a href="sect0006.html#lem:primePow-mem-of-lcm-eq">Theorem A.0.3</a></li>
           
@@ -677,7 +1115,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000019">
+<div class="proof_wrapper" id="a0000000025">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof

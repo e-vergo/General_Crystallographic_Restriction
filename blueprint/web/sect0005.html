@@ -61,7 +61,7 @@
 <div class="main-text">
 <h1 id="a0000000006">5 The Crystallographic Restriction Theorem</h1>
 <p>The proof splits into two directions: showing \(\psi (m) \leq N\) is necessary (forward) and sufficient (backward) for \(m \in \mathrm{Ord}_N\). </p>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:cyclotomic-finset-product-dvd">
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:pow-eq-one-of-minpoly-dvd">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
@@ -74,9 +74,125 @@
         </div>
     <div class="thm_header_hidden_extras">
 
+    <a class="icon proof" href="sect0005.html#lem:pow-eq-one-of-minpoly-dvd">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000044"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Matrix.pow_eq_one_of_minpoly_dvd_X_pow_sub_one" class="lean_decl">Matrix.pow_eq_one_of_minpoly_dvd_X_pow_sub_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(\mu _A \mid X^k - 1\), then \(A^k = I\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000044">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The polynomial \(X^k - 1\) annihilates \(A\) (since the minimal polynomial does), meaning \(A^k - I = 0\). Transfer this identity from \(\mathbb {Q}\) back to \(\mathbb {Z}\) via the injectivity of \(\mathbb {Z} \to \mathbb {Q}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:minpoly-dvd-X-pow-sub-one">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:minpoly-dvd-X-pow-sub-one">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000045"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Matrix.minpoly_dvd_X_pow_sub_one_of_pow_eq_one" class="lean_decl">Matrix.minpoly_dvd_X_pow_sub_one_of_pow_eq_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(A^m = I\), then \(\mu _A \mid X^m - 1\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000045">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>The polynomial \(X^m - 1\) annihilates \(A\) since \((A_{\mathbb {Q}})^m - I = 0\). The minimal polynomial divides any annihilating polynomial by definition. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:cyclotomic-finset-product-dvd">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.3</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
     <a class="icon proof" href="sect0005.html#lem:cyclotomic-finset-product-dvd">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000046"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -107,7 +223,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000036">
+<div class="proof_wrapper" id="a0000000046">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -119,12 +235,258 @@
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:minpoly-dvd-prod-cyclotomic">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.4</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:minpoly-dvd-prod-cyclotomic">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000047"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:cyclotomic-finset-product-dvd">Theorem 5.0.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one" class="lean_decl">Crystallographic.minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(\mu _A \mid X^m - 1\) and \(S = \{ d \mid m : \Phi _d \mid \mu _A\} \), then \(\mu _A \mid \prod _{d \in S} \Phi _d\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000047">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Split \(X^m - 1 = (\prod _{d \in S} \Phi _d) \cdot (\prod _{d \notin S} \Phi _d)\). Since \(\Phi _d\) is irreducible and does not divide \(\mu _A\) for \(d \notin S\), we have \(\gcd (\mu _A, \Phi _d) = 1\). Thus \(\mu _A\) is coprime to \(\prod _{d \notin S} \Phi _d\). Since \(\mu _A \mid X^m - 1\), it must divide \(\prod _{d \in S} \Phi _d\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:minpoly-eq-prod-cyclotomic">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.5</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:minpoly-eq-prod-cyclotomic">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000048"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:minpoly-dvd-prod-cyclotomic">Theorem 5.0.4</a></li>
+          
+          <li><a href="sect0005.html#lem:cyclotomic-finset-product-dvd">Theorem 5.0.3</a></li>
+          
+          <li><a href="sect0005.html#lem:cyclotomic-finset-product-dvd">Theorem 5.0.3</a></li>
+          
+          <li><a href="sect0005.html#lem:minpoly-dvd-prod-cyclotomic">Theorem 5.0.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one" class="lean_decl">Crystallographic.minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(\mu _A \mid X^m - 1\), then there exists \(S \subseteq \mathrm{divisors}(m)\) such that \(\mu _A = \prod _{d \in S} \Phi _d\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000048">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> Let \(S = \{ d \mid m : \Phi _d \mid \mu _A\} \). By the previous lemma, \(\mu _A \mid \prod _{d \in S} \Phi _d\). Conversely, by definition of \(S\), each \(\Phi _d\) for \(d \in S\) divides \(\mu _A\), so their coprime product divides \(\mu _A\). Mutual divisibility of monic polynomials implies equality. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:cyclotomic-divisors-lcm-eq">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.6</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:cyclotomic-divisors-lcm-eq">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000049"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:minpoly-eq-prod-cyclotomic">Theorem 5.0.5</a></li>
+          
+          <li><a href="sect0005.html#lem:pow-eq-one-of-minpoly-dvd">Theorem 5.0.1</a></li>
+          
+          <li><a href="sect0005.html#lem:cyclotomic-finset-product-dvd">Theorem 5.0.3</a></li>
+          
+          <li><a href="sect0005.html#lem:pow-eq-one-of-minpoly-dvd">Theorem 5.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.cyclotomic_divisors_lcm_eq_of_orderOf" class="lean_decl">Crystallographic.cyclotomic_divisors_lcm_eq_of_orderOf</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  If \(\mathrm{ord}(A) = m\) and \(\mu _A = \prod _{d \in S} \Phi _d\) with \(S \subseteq \mathrm{divisors}(m)\), then \(\mathrm{lcm}(S) = m\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000049">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> Suppose \(\ell = \mathrm{lcm}(S) {\lt} m\). Then \(\mu _A = \prod _{d \in S} \Phi _d\) divides \(\prod _{d \mid \ell } \Phi _d = X^\ell - 1\), since each \(d \in S\) divides \(\ell \). By the transfer lemma, \(A^\ell = I\). But this contradicts \(\mathrm{ord}(A) = m {\gt} \ell \). </p>
+
+  </div>
+</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:forward-direction">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.2</span>
+    <span class="theorem_thmlabel">5.0.7</span>
     <div class="thm_header_extras">
 
     
@@ -134,7 +496,7 @@
 
     <a class="icon proof" href="sect0005.html#thm:forward-direction">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000050"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -154,13 +516,17 @@
           
           <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
           
-          <li><a href="sect0002.html#lem:sum-totient-ge-psi">Theorem 2.0.6</a></li>
+          <li><a href="sect0002.html#lem:sum-totient-ge-psi">Theorem 2.0.12</a></li>
           
-          <li><a href="sect0005.html#lem:cyclotomic-finset-product-dvd">Theorem 5.0.1</a></li>
+          <li><a href="sect0005.html#lem:minpoly-eq-prod-cyclotomic">Theorem 5.0.5</a></li>
           
           <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
           
-          <li><a href="sect0002.html#lem:sum-totient-ge-psi">Theorem 2.0.6</a></li>
+          <li><a href="sect0005.html#lem:cyclotomic-divisors-lcm-eq">Theorem 5.0.6</a></li>
+          
+          <li><a href="sect0002.html#lem:sum-totient-ge-psi">Theorem 2.0.12</a></li>
+          
+          <li><a href="sect0005.html#lem:minpoly-dvd-X-pow-sub-one">Theorem 5.0.2</a></li>
           
         </ul>
     
@@ -212,7 +578,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000037">
+<div class="proof_wrapper" id="a0000000050">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -224,12 +590,292 @@
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:permMatrix-one">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:permMatrix-one">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000051"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Equiv.Perm.permMatrix_one" class="lean_decl">Crystallographic.Equiv.Perm.permMatrix_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  The permutation matrix of the identity is the identity matrix: \(P_{\mathrm{id}} = I\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000051">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Direct computation using \(\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}\) and \(\mathrm{toMatrix}(\mathrm{refl}) = I\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:permMatrix-mul">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.9</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:permMatrix-mul">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000052"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Equiv.Perm.permMatrix_mul" class="lean_decl">Crystallographic.Equiv.Perm.permMatrix_mul</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Permutation matrices satisfy \(P_{\sigma \cdot \tau } = P_\tau \cdot P_\sigma \) (contravariant homomorphism). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000052">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Follows from \(\mathrm{toPEquiv}(\sigma \circ \tau ) = \mathrm{toPEquiv}(\tau ) \cdot \mathrm{toPEquiv}(\sigma )\) and the corresponding property for partial equivalence matrices. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:permMatrix-pow">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.10</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:permMatrix-pow">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000053"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:permMatrix-one">Theorem 5.0.8</a></li>
+          
+          <li><a href="sect0005.html#lem:permMatrix-mul">Theorem 5.0.9</a></li>
+          
+          <li><a href="sect0005.html#lem:permMatrix-one">Theorem 5.0.8</a></li>
+          
+          <li><a href="sect0005.html#lem:permMatrix-mul">Theorem 5.0.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Equiv.Perm.permMatrix_pow" class="lean_decl">Crystallographic.Equiv.Perm.permMatrix_pow</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  Powers of permutation matrices satisfy \(P_{\sigma ^k} = P_\sigma ^k\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000053">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By induction on \(k\): the base case uses \(P_{\mathrm{id}} = I\), and the inductive step uses \(P_{\sigma \cdot \tau } = P_\tau \cdot P_\sigma \) together with commutativity of powers. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:permMatrix-eq-one-iff">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.11</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:permMatrix-eq-one-iff">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000054"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:permMatrix-one">Theorem 5.0.8</a></li>
+          
+          <li><a href="sect0005.html#lem:permMatrix-one">Theorem 5.0.8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Equiv.Perm.permMatrix_eq_one_iff" class="lean_decl">Crystallographic.Equiv.Perm.permMatrix_eq_one_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  \(P_\sigma = I\) if and only if \(\sigma = \mathrm{id}\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000054">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> The forward direction shows that if \(P_\sigma = I\) then for each \(x\), the entry \((P_\sigma )_{x, \sigma (x)} = 1\) forces \(\sigma (x) = x\). The reverse is immediate from \(P_{\mathrm{id}} = I\). </p>
+
+  </div>
+</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:orderOf-permMatrix">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.3</span>
+    <span class="theorem_thmlabel">5.0.12</span>
     <div class="thm_header_extras">
 
     
@@ -239,7 +885,7 @@
 
     <a class="icon proof" href="sect0005.html#lem:orderOf-permMatrix">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000038"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000055"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -270,7 +916,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000038">
+<div class="proof_wrapper" id="a0000000055">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -278,7 +924,7 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>Since \(P_{\sigma ^k} = P_\sigma ^k\) and \(P_\sigma = I \iff \sigma = \mathrm{id}\), the order of \(P_\sigma \) equals the order of \(\sigma \). The key is that the permutation matrix map preserves powers and is injective on the group of permutation matrices. </p>
+  <p> Since \(P_{\sigma ^k} = P_\sigma ^k\) and \(P_\sigma = I \iff \sigma = \mathrm{id}\), the order of \(P_\sigma \) equals the order of \(\sigma \). The key is that the permutation matrix map preserves powers and is injective on the group of permutation matrices. </p>
 
   </div>
 </div>
@@ -287,7 +933,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.4</span>
+    <span class="theorem_thmlabel">5.0.13</span>
     <div class="thm_header_extras">
 
     
@@ -297,7 +943,7 @@
 
     <a class="icon proof" href="sect0005.html#lem:orderOf-finRotate">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000056"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -328,7 +974,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000039">
+<div class="proof_wrapper" id="a0000000056">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -340,12 +986,96 @@
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-definition" id="lem:orderOf-permMatrix-finRotate">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.14</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#lem:orderOf-permMatrix-finRotate">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000057"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#lem:orderOf-permMatrix">Theorem 5.0.12</a></li>
+          
+          <li><a href="sect0005.html#lem:orderOf-finRotate">Theorem 5.0.13</a></li>
+          
+          <li><a href="sect0005.html#lem:orderOf-finRotate">Theorem 5.0.13</a></li>
+          
+          <li><a href="sect0005.html#lem:orderOf-permMatrix">Theorem 5.0.12</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.Equiv.Perm.orderOf_permMatrix_finRotate" class="lean_decl">Crystallographic.Equiv.Perm.orderOf_permMatrix_finRotate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  The permutation matrix of \(\mathrm{finRotate}(n)\) has order \(n\) over \(\mathbb {Z}\).  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000057">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> Combines the order-preservation property \(\mathrm{ord}(P_\sigma ) = \mathrm{ord}(\sigma )\) with \(\mathrm{ord}(\mathrm{finRotate}(n)) = n\). </p>
+
+  </div>
+</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:mem-integerMatrixOrders-self">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.5</span>
+    <span class="theorem_thmlabel">5.0.15</span>
     <div class="thm_header_extras">
 
     
@@ -355,7 +1085,7 @@
 
     <a class="icon proof" href="sect0005.html#lem:mem-integerMatrixOrders-self">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000058"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -373,9 +1103,7 @@
           
           <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.0.1</a></li>
           
-          <li><a href="sect0005.html#lem:orderOf-finRotate">Theorem 5.0.4</a></li>
-          
-          <li><a href="sect0005.html#lem:orderOf-permMatrix">Theorem 5.0.3</a></li>
+          <li><a href="sect0005.html#lem:orderOf-permMatrix-finRotate">Theorem 5.0.14</a></li>
           
         </ul>
     
@@ -410,7 +1138,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000040">
+<div class="proof_wrapper" id="a0000000058">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -422,172 +1150,12 @@
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:order-one-achievable">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">5.0.6</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0005.html#lem:order-one-achievable">#</a>
-    
-    <a class="icon proof" href="sect0005.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.0.1</a></li>
-          
-          <li><a href="sect0003.html#lem:one-mem-orders">Theorem 3.0.1</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.order_one_achievable" class="lean_decl">Crystallographic.order_one_achievable</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   Order 1 is achievable: \(1 \in \mathrm{Ord}_N\) for any \(N\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000041">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> The identity matrix \(I\) has order \(1\) in any dimension. </p>
-
-  </div>
-</div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:order-two-achievable">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">5.0.7</span>
-    <div class="thm_header_extras">
-
-    
-    ✓
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0005.html#lem:order-two-achievable">#</a>
-    
-    <a class="icon proof" href="sect0005.html#a0000000042"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
-</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Uses</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.0.1</a></li>
-          
-          <li><a href="sect0003.html#lem:two-mem-orders">Theorem 3.0.2</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-    
-    <button class="modal lean">L∃∀N</button>
-        <div class="modal-container">
-      <div class="modal-content">
-        <header>
-          <h1>Lean declarations</h1>
-          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
-</button>
-        </header>
-        
-        <ul class="uses">
-          
-          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.order_two_achievable" class="lean_decl">Crystallographic.order_two_achievable</a></li>
-          
-        </ul>
-    
-      </div>
-    </div>
-
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p>   Order 2 is achievable: \(2 \in \mathrm{Ord}_N\) for \(N \geq 1\). </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000042">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> The matrix \(-I\) satisfies \((-I)^2 = I\) and \(-I \neq I\) for \(N \geq 1\), so it has order \(2\). </p>
-
-  </div>
-</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:primePow-mem-integerMatrixOrders-psi">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.8</span>
+    <span class="theorem_thmlabel">5.0.16</span>
     <div class="thm_header_extras">
 
     
@@ -597,7 +1165,7 @@
 
     <a class="icon proof" href="sect0005.html#thm:primePow-mem-integerMatrixOrders-psi">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000059"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -654,7 +1222,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000043">
+<div class="proof_wrapper" id="a0000000059">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -666,12 +1234,110 @@
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-definition" id="thm:mem-integerMatrixOrders-psi">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.0.17</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:mem-integerMatrixOrders-psi">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000060"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#thm:primePow-mem-integerMatrixOrders-psi">Theorem 5.0.16</a></li>
+          
+          <li><a href="sect0002.html#psi-def">Definition 2.0.2</a></li>
+          
+          <li><a href="sect0003.html#lem:one-mem-orders">Theorem 3.0.1</a></li>
+          
+          <li><a href="sect0006.html#lem:orderOf-neg-of-odd-order">Theorem A.0.7</a></li>
+          
+          <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
+          
+          <li><a href="sect0003.html#lem:mul-mem-orders-coprime">Theorem 3.0.10</a></li>
+          
+          <li><a href="sect0005.html#thm:primePow-mem-integerMatrixOrders-psi">Theorem 5.0.16</a></li>
+          
+          <li><a href="sect0002.html#lem:factorization-split-lt">Theorem 2.0.6</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-coprime-add">Theorem 2.0.3</a></li>
+          
+          <li><a href="sect0003.html#lem:one-mem-orders">Theorem 3.0.1</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-pos-of-odd">Theorem 2.0.7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.mem_integerMatrixOrders_psi" class="lean_decl">Crystallographic.mem_integerMatrixOrders_psi</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For \(m \geq 1\) with \(m \neq 2\), we have \(m \in \mathrm{Ord}_{\psi (m)}\). The construction achieves order \(m\) using exactly \(\psi (m)\) dimensions via block diagonal matrices of cyclotomic companion matrices.  </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000060">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By strong induction on \(m\). For \(m = 1\), the identity achieves order 1 in dimension \(\psi (1) = 0\). For prime powers \(p^k\) (excluding \(2^1\)), the companion matrix of \(\Phi _{p^k}\) has order \(p^k\) in dimension \(\varphi (p^k) = \psi (p^k)\). For composite \(m = p^e \cdot m'\) with coprime factors, we use block diagonal of matrices achieving orders \(p^e\) and \(m'\) from the induction hypothesis, with dimension \(\psi (p^e) + \psi (m') = \psi (m)\) by additivity of \(\psi \) on coprime factors. For \(m = 2 \cdot m'\) with \(m'\) odd, negating the order-\(m'\) matrix doubles the order without changing dimension. </p>
+
+  </div>
+</div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:backward-direction">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.9</span>
+    <span class="theorem_thmlabel">5.0.18</span>
     <div class="thm_header_extras">
 
     
@@ -681,7 +1347,7 @@
 
     <a class="icon proof" href="sect0005.html#thm:backward-direction">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000044"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000061"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -709,33 +1375,25 @@
           
           <li><a href="sect0004.html#thm:mem-orders-totient">Theorem 4.0.7</a></li>
           
-          <li><a href="sect0006.html#lem:orderOf-neg-of-odd-order">Theorem A.0.7</a></li>
-          
-          <li><a href="sect0003.html#lem:mul-mem-orders-coprime">Theorem 3.0.8</a></li>
-          
-          <li><a href="sect0003.html#lem:orders-mono">Theorem 3.0.3</a></li>
-          
-          <li><a href="sect0002.html#lem:psi-ge-psiPrimePow">Theorem 2.0.4</a></li>
-          
-          <li><a href="sect0005.html#lem:order-one-achievable">Theorem 5.0.6</a></li>
-          
-          <li><a href="sect0005.html#lem:mem-integerMatrixOrders-self">Theorem 5.0.5</a></li>
-          
-          <li><a href="sect0002.html#lem:psi-coprime-add">Theorem 2.0.3</a></li>
-          
           <li><a href="sect0002.html#psiPrimePow-def">Definition 2.0.1</a></li>
           
-          <li><a href="sect0005.html#lem:order-two-achievable">Theorem 5.0.7</a></li>
-          
-          <li><a href="sect0005.html#thm:primePow-mem-integerMatrixOrders-psi">Theorem 5.0.8</a></li>
+          <li><a href="sect0003.html#lem:orders-mono">Theorem 3.0.3</a></li>
           
           <li><a href="sect0002.html#lem:psi-prime-pow">Theorem 2.0.1</a></li>
           
           <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.6</a></li>
           
+          <li><a href="sect0005.html#thm:mem-integerMatrixOrders-psi">Theorem 5.0.17</a></li>
+          
+          <li><a href="sect0005.html#lem:mem-integerMatrixOrders-self">Theorem 5.0.15</a></li>
+          
+          <li><a href="sect0002.html#lem:psi-coprime-add">Theorem 2.0.3</a></li>
+          
           <li><a href="sect0004.html#thm:mem-orders-totient">Theorem 4.0.7</a></li>
           
           <li><a href="sect0003.html#lem:one-mem-orders">Theorem 3.0.1</a></li>
+          
+          <li><a href="sect0003.html#lem:two-mem-orders">Theorem 3.0.2</a></li>
           
         </ul>
     
@@ -789,7 +1447,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000044">
+<div class="proof_wrapper" id="a0000000061">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -806,7 +1464,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">5.0.10</span>
+    <span class="theorem_thmlabel">5.0.19</span>
     <div class="thm_header_extras">
 
     
@@ -816,7 +1474,7 @@
 
     <a class="icon proof" href="sect0005.html#thm:main-theorem">#</a>
     
-    <a class="icon proof" href="sect0005.html#a0000000045"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0005.html#a0000000062"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -836,9 +1494,9 @@
           
           <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.0.1</a></li>
           
-          <li><a href="sect0005.html#thm:backward-direction">Theorem 5.0.9</a></li>
+          <li><a href="sect0005.html#thm:backward-direction">Theorem 5.0.18</a></li>
           
-          <li><a href="sect0005.html#thm:forward-direction">Theorem 5.0.2</a></li>
+          <li><a href="sect0005.html#thm:forward-direction">Theorem 5.0.7</a></li>
           
         </ul>
     
@@ -877,7 +1535,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000045">
+<div class="proof_wrapper" id="a0000000062">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
