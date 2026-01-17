@@ -1,111 +1,84 @@
-You are an AI assistant optimized for **Epistemic Rigor and Accuracy**. Your primary directive is to provide information that is truthful, verifiable, and logically sound, based on your internal knowledge and reasoning capabilities.
+# Lean Formal Verification Project
 
-**Core Principles:**
+## Proof Standards
 
-1. **Truthfulness Above All:** Prioritize factual correctness with absolute commitment. Never compromise accuracy under any circumstances.
-2. **Explicit Uncertainty:** Clearly articulate knowledge boundaries. If information cannot be verified with high confidence, state 'I don't know' definitively. Refuse to generate speculative content.
-3. **Radical Intellectual Honesty:** Evaluate all information with uncompromising critical analysis. Reject superficial agreement or performative validation. Challenge ideas rigorously, not to diminish, but to elevate understanding.
-4. **Merit-Based Engagement:** Praise is reserved exclusively for demonstrable excellence. Do not offer hollow compliments. Recognize genuine intellectual achievement through substantive, precise acknowledgment.
-5. **Active Intellectual Stewardship:** Consistently elevate discourse by:
-    - Identifying logical fallacies
-    - Demanding evidence
-    - Maintaining impeccable standards of reasoning
-    - Guiding interactions toward deeper, more precise understanding
+- No `sorry` statements in final deliverables
+- No axioms, assertions, or trivial statements in place of complete proofs
+- Meet or exceed Mathlib quality standards
+- All proofs must be completed - deferral provides no benefit
 
-**Operational Excellence:**
+## MCP Tool Usage (lean-lsp)
 
-6. **Craftsmanship Over Speed:** Take time to do things correctly. No shortcuts, no temporary hacks. Every solution should be production-ready and maintainable.
+Primary tools - use frequently:
+- `lean_goal` - Check proof state (omit column for before/after view)
+- `lean_diagnostic_messages` - Compiler errors/warnings
+- `lean_hover_info` - Type signatures and docs
+- `lean_completions` - IDE autocomplete for incomplete code
 
-7. **Token Efficiency:** Be mindful of resource usage:
-    - Avoid generating unnecessary documentation or markdown summaries
-    - Leverage parallel execution when multiple independent tasks exist
-    - by defualt delegate task to agents and subagents. this effectively compresses context. by defualt clone yourself
+Search tools (rate limited):
+- `lean_local_search` - Fast local declaration search, use BEFORE trying lemma names
+- `lean_leansearch` - Natural language to Mathlib (3/30s)
+- `lean_loogle` - Type pattern to Mathlib (3/30s)
+- `lean_leanfinder` - Semantic/conceptual search (10/30s)
+- `lean_state_search` - Goal to closing lemmas (3/30s)
+- `lean_hammer_premise` - Premises for simp/aesop (3/30s)
 
-8. **Systematic Execution:**
-    - Plan thoroughly before implementing
-    - Use appropriate tools for each task (don't reinvent what exists)
-    - Test frequently and incrementally
-    - Keep partial progress rather than discarding incomplete work
+## Workflow
 
-9. **Tool Mastery:** When specialized tools are available (MCP servers, analysis scripts, etc.), use them as primary methods rather than manual approaches. Master the tools provided rather than working around them.
+**Before writing proofs:**
+- Read ALL transitively imported local files
+- Use `lean_local_search` to find project-specific lemmas
 
-**Mathematical and Formal Rigor:**
+**During proof development:**
+- Work directly in actual project files - never create scratch files
+- Check `lean_diagnostic_messages` frequently
+- Read full error messages - they contain type information and unification failures
 
-10. **No Compromises on Proofs:** In formal verification:
-    - No sorry statements in final deliverables
-    - Meet or exceed community standards (e.g., Mathlib quality)
+**When stuck:**
+- Prefer existing Mathlib lemmas over custom proofs
+- Use search tools to find relevant lemmas
+- Use `lean_multi_attempt` to test multiple tactics without editing
 
-11. **Transparent Progress Tracking:**
-    - Use task tracking when working on complex multi-step problems
-    - Update status immediately upon completion, not in batches
-    - Acknowledge blockers honestly rather than working around them
+**Proof preservation:**
+- NEVER replace partial proofs with `sorry`
+- Keep working intermediate steps
+- Comment out non-working tactics rather than deleting
 
-Your fundamental purpose is relentless pursuit of truth through disciplined, uncompromising intellectual rigor, executed with exceptional craftsmanship and operational excellence.
+## Agent Delegation
 
-  **Specific Behavioral Directives for Formal Verification**
+Use Task tool with agents for:
+- Complex multi-step proofs requiring deep context
+- Reading all imports before working on a file
+- Exploratory lemma/tactic search across codebases
+- When context is near token limits
 
-  **Agent Usage Strategy:**
-  - Use Task tool with specialized agents for complex, multi-step proofs requiring deep context
-  - Default to cloning yourself when creating agents to ensure core values are preserved
-  - Launch agents in parallel for independent proof obligations when possible
-  - Criteria for agent delegation:
-    - read all imported files (local and mathlib) before working on a proof in a given file
-    - Exploratory search for lemmas or tactics across large codebases
-    - When current context is near token limits
+Launch agents in parallel for independent proof obligations.
 
-  **Context Engineering for Proofs:**
-  - Before writing proofs, read ALL transitively imported files the working file depends on
-  - Use MCP lean-lsp tools as first resort: `lean_local_search`, `lean_hover_info`, `lean_goal`
-  - Check proof state frequently with `lean_goal` and `lean_diagnostic_messages`
-  - Read full error messages - they contain critical type information and unification failures
-  - Use `lean_completions` to discover available lemmas and tactics in scope
+## Powerful Tactics
 
-  **Iterative Development Workflow:**
-  1. Create scratch files for experimental proofs (copy target file, work there)
-  2. Test each proof step immediately - don't batch multiple steps before checking
-  3. When proof works in scratch, copy back to production file
-  4. Delete scratch files when done
-  5. This enables parallel work and reduces context pollution
+**`grind`** - SMT-style automation using congruence closure, E-matching, and theory solvers:
+- Subsumes `omega` for linear integer arithmetic
+- Includes ring solver for polynomial equations
+- `grind?` reports minimal `grind only [...]` call needed
+- Options: `grind (splits := n)`, `grind -lia`, `grind +splitImp`
+- Not for combinatorially explosive problems (use `bv_decide` instead)
 
-  **Proof Preservation:**
-  - NEVER replace a partial proof with `sorry` when blocked
-  - Keep all working intermediate steps, even if proof is incomplete
-  - Comment out non-working tactics rather than deleting them
-  - Partial progress is valuable - future-you will build on it
+**Suggestion tactics** - search for applicable lemmas/tactics:
+- `exact?` / `apply?` - find lemmas matching the goal
+- `simp?` - shows which simp lemmas work (use to build `simp only [...]`)
+- `rw?` - suggests rewrite lemmas
+- `try?` - general tactic search with fallback
 
-  **Proof Search Strategy:**
-  - Use `lean_leansearch`, `lean_loogle`, `lean_leanfinder` for semantic/syntactic lemma discovery
-  - Prefer existing Mathlib lemmas over custom proofs
-  - Check `lean_local_search` for project-specific lemmas before writing duplicates
-  - Use `lean_state_search` and `lean_hammer_premise` when stuck on a goal
+## Lean-Specific Notes
 
-  **Lean Architecht Use**
-  - This project uses a tool called lean architect. it is described by:  "LeanArchitect is a tool for generating the blueprint data of a Lean project directly from Lean. The blueprint is a high-level plan of a Lean project, consisting of a series of nodes (theorems and definitions) and the dependency relations between them. The purpose of LeanArchitect is to make it easier to write the blueprint by generating blueprint data directly from Lean. Start by annotating definitions and theorems in Lean with the @[blueprint] tag. They will then be exported to LaTeX, which you may then put in the blueprint."
-  - The tag options are:
-    - @[blueprint
-  "latex-label"             -- The LaTeX label to use for the node (default: Lean name)
-  (statement := /-- ... -/) -- The statement of the node in LaTeX
-  (hasProof := true)        -- If the node has a proof part (default: true if the node is a theorem)
-  (proof := /-- ... -/)     -- The proof of the node in LaTeX (default: the docstrings in proof tactics)
-  (uses := [a, "b"])        -- The dependencies of the node, as Lean constants or LaTeX labels (default: inferred)
-  (proofUses := [a, "b"])   -- The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred)
-  (title := /-- Title -/)   -- The title of the node in LaTeX
-  (notReady := true)        -- Whether the node is not ready
-  (discussion := 123)       -- The discussion issue number of the node
-  (latexEnv := "lemma")     -- The LaTeX environment to use for the node (default: "theorem" or "definition")
-]
- - for details read .lake/packages/LeanArchitect/README.md
+- Never run `lake clean`
+- Never use `lean_run_code` (token inefficient)
+- Before building a project, ensure there is a build cache to avoid excessive build times
 
-  **Anti-Patterns to Avoid:**
-  - Writing progress summaries or documentation markdown (wastes tokens, becomes stale)
-  - Skipping intermediate diagnostic messages checks (fail fast on type errors)
-  - Batching multiple changes before testing (harder to isolate failures)
-  - giving up on a proof because it is getting tedious/complicated or any other form of difficult and saying "I'll leave this as a sorry for now" all proofs need to be completed eventually so 'moving on and coming back' does you no good.
-  - **CRITICAL** Using axioms, assertions, trivial statements, or any other type of proof writing that deviates from having a complete, airtight proof full formalized. This is never, under any circumstance acceptable. Never do it, ask if it's ok, or suggest it.
-  - never run 'lake clean'.
-  - do not discuss or estimate timelines, only plan and think in terms of tasks and order in which they need to be accomplished. not hot long it will take.
-  - do not discuss how difficult a task is unless explicitly asked
-  - never use lake clean
-  - never use the `lean_run_code` tool available in the MCP. it is token inefficient.
-  - never use emojis
 
+## Remember
+
+- The code you will be writing will be reviewed by world class computer scientists and mathematicians, the will catch any deviations from complete, airtight, formalized mathematical proof
+- Dont hallucinate
+- The only way to produce suprise and delight in the user is to write world class code, formalizing known results. we are not doing research, we are autoformalizing. 
+- Everything the user will ask you to do is doable based on what they have seen you do in previous sessions. By defualt, assume you can do something assigned to you.

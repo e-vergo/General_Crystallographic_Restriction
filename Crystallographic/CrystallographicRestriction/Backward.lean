@@ -45,7 +45,13 @@ namespace Crystallographic
 
 open Matrix Polynomial
 
-/-! ## Permutation matrix infrastructure -/
+/-! ## Permutation matrix infrastructure
+
+The following lemmas about permutation matrices are not in Mathlib as of May 2025.
+They build on `PEquiv.toMatrix_refl`, `PEquiv.toMatrix_trans`, `Equiv.toPEquiv_refl`,
+and `Equiv.toPEquiv_trans` from Mathlib. These could be contributed to
+`Mathlib.LinearAlgebra.Matrix.Permutation`.
+-/
 
 namespace Equiv.Perm
 
@@ -53,9 +59,7 @@ namespace Equiv.Perm
 @[simp]
 lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
     (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
-  ext i j
-  simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_apply, Equiv.toPEquiv_apply,
-    PEquiv.toMatrix_apply, one_apply, Option.mem_def, Option.some.injEq]
+  simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_def, Equiv.toPEquiv_refl, PEquiv.toMatrix_refl]
 
 /-- Permutation matrices compose: (σ * τ).permMatrix = τ.permMatrix * σ.permMatrix -/
 lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
@@ -69,7 +73,7 @@ lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
     (σ : Equiv.Perm n) (k : ℕ) :
     (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
   induction k with
-  | zero => simp only [pow_zero]; exact permMatrix_one
+  | zero => simp [permMatrix_one]
   | succ k ih =>
     rw [pow_succ, pow_succ, permMatrix_mul, ih]
     -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
@@ -177,10 +181,10 @@ lemma order_two_achievable (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
   has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/)]
 theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 < k)
     (hpk : ¬(p = 2 ∧ k = 1)) :
-    p ^ k ∈ integerMatrixOrders (Crystallographic.psi (p ^ k)) := by
+    p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by
   -- psi(p^k) = totient(p^k) for this case
-  have hpsi_eq : Crystallographic.psi (p ^ k) = Nat.totient (p ^ k) := by
-    rw [Crystallographic.psi_prime_pow p k hp hk]
+  have hpsi_eq : psi (p ^ k) = Nat.totient (p ^ k) := by
+    rw [psi_prime_pow p k hp hk]
     simp only [hpk, ite_false]
   rw [hpsi_eq]
   -- Use companion matrix lemma
@@ -189,7 +193,78 @@ theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 
     calc p ^ k ≥ p ^ 1 := Nat.pow_le_pow_right (Nat.le_of_lt hp.one_lt) hk
       _ = p := pow_one p
       _ ≥ 2 := hp_ge2
-  exact Crystallographic.mem_integerMatrixOrders_totient (p ^ k) hpk_ge2
+  exact mem_integerMatrixOrders_totient (p ^ k) hpk_ge2
+
+/-- Derives oddness, non-equality to 2, and lower bound from coprimality to 2. -/
+private lemma odd_ne_two_ge_three_of_coprime_two {m' : ℕ} (hcop : Nat.Coprime 2 m') (hm'_ge2 : 2 ≤ m') :
+    Odd m' ∧ m' ≠ 2 ∧ 3 ≤ m' := by
+  have hm'_odd : Odd m' := Nat.Coprime.odd_of_left hcop
+  have hm'_ne_2 : m' ≠ 2 := fun h => by rw [h] at hcop; simp at hcop
+  exact ⟨hm'_odd, hm'_ne_2, by omega⟩
+
+/-- Shows `2 * m' ∈ integerMatrixOrders (psi (2 * m'))` for odd `m' >= 3`.
+Uses the fact that negating an odd-order matrix doubles its order without changing dimension. -/
+private lemma mem_integerMatrixOrders_psi_2_times_odd (m' : ℕ) (hm'_pos : 0 < m')
+    (hm'_odd : Odd m') (hm'_ge3 : 3 ≤ m')
+    (IH_m' : m' ∈ integerMatrixOrders (psi m')) :
+    2 * m' ∈ integerMatrixOrders (psi (2 * m')) := by
+  have hcop : Nat.Coprime 2 m' := Nat.Coprime.symm (Odd.coprime_two_right hm'_odd)
+  have hpsi_eq : psi (2 * m') = psi m' := by
+    rw [psi_coprime_add 2 m' (by omega) hm'_pos hcop]
+    simp only [psi_two, zero_add]
+  rw [hpsi_eq]
+  have hpsi_pos : 0 < psi m' := psi_pos_of_odd_ge_three hm'_ge3 hm'_odd
+  haveI : NeZero (psi m') := ⟨by omega⟩
+  obtain ⟨A, hA_ord, hA_pos⟩ := IH_m'
+  refine ⟨-A, ?_, by omega⟩
+  rw [orderOf_neg_of_odd_order m' hm'_odd A hA_ord]
+
+/-- Shows `k * 2 ∈ integerMatrixOrders (psi (k * 2))` for odd `k >= 3`.
+Symmetric version of `mem_integerMatrixOrders_psi_2_times_odd` with factor of 2 on the right. -/
+private lemma mem_integerMatrixOrders_psi_odd_times_2 (k : ℕ) (hk_pos : 0 < k)
+    (hk_odd : Odd k) (hk_ge3 : 3 ≤ k)
+    (IH_k : k ∈ integerMatrixOrders (psi k)) :
+    k * 2 ∈ integerMatrixOrders (psi (k * 2)) := by
+  have hcop : Nat.Coprime k 2 := Odd.coprime_two_right hk_odd
+  have hpsi_eq : psi (k * 2) = psi k := by
+    rw [psi_coprime_add k 2 hk_pos (by omega) hcop]
+    simp only [psi_two, add_zero]
+  rw [hpsi_eq]
+  have hpsi_pos : 0 < psi k := psi_pos_of_odd_ge_three hk_ge3 hk_odd
+  haveI : NeZero (psi k) := ⟨by omega⟩
+  obtain ⟨A, hA_ord, hA_pos⟩ := IH_k
+  refine ⟨-A, ?_, by omega⟩
+  rw [orderOf_neg_of_odd_order k hk_odd A hA_ord, mul_comm]
+
+/-- Derives that a prime power coprime to 2 is odd and at least 3. -/
+private lemma primePow_odd_ge_three_of_coprime_two {p e : ℕ} (hp : p.Prime) (he_pos : 0 < e)
+    (hcop : Nat.Coprime (p ^ e) 2) : Odd (p ^ e) ∧ 3 ≤ p ^ e := by
+  have hp_odd : p ≠ 2 := by
+    intro hp2; rw [hp2] at hcop
+    simp only [Nat.coprime_pow_left_iff he_pos, Nat.coprime_self] at hcop
+    norm_num at hcop
+  have hp_ge3 : 3 ≤ p := by
+    rcases hp.two_le.lt_or_eq with h | h
+    · exact h
+    · omega
+  constructor
+  · exact (Nat.Prime.odd_of_ne_two hp hp_odd).pow
+  · calc p ^ e ≥ p ^ 1 := Nat.pow_le_pow_right (by omega) he_pos
+      _ = p := pow_one p
+      _ ≥ 3 := hp_ge3
+
+/-- Shows `p^e * m' ∈ integerMatrixOrders (psi (p^e * m'))` via block diagonal construction.
+Combines IH results for coprime factors using additivity of psi. -/
+private lemma mem_integerMatrixOrders_psi_composite (p e m' : ℕ)
+    (hp : p.Prime) (hm'_pos : 0 < m') (hcop : Nat.Coprime (p ^ e) m')
+    (IH_pe : p ^ e ∈ integerMatrixOrders (psi (p ^ e)))
+    (IH_m' : m' ∈ integerMatrixOrders (psi m')) :
+    p ^ e * m' ∈ integerMatrixOrders (psi (p ^ e * m')) := by
+  have hpsi_eq : psi (p ^ e * m') =
+      psi (p ^ e) + psi m' := by
+    rw [psi_coprime_add (p ^ e) m' (Nat.pow_pos hp.pos) hm'_pos hcop]
+  rw [hpsi_eq]
+  exact mul_mem_integerMatrixOrders_of_coprime IH_pe IH_m' hcop
 
 /-- Every `m >= 1` with `m ≠ 2` belongs to `integerMatrixOrders (psi m)`.
 
@@ -206,17 +281,14 @@ handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 < N`.
 This theorem is used to complete the backward direction of the crystallographic
 restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
 theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
-    m ∈ integerMatrixOrders (Crystallographic.psi m) := by
+    m ∈ integerMatrixOrders (psi m) := by
   -- Use strong induction on m
   induction m using Nat.strong_induction_on with
   | _ m IH =>
-  -- Case analysis on m
-  rcases Nat.lt_trichotomy m 1 with hm_lt | rfl | hm_gt
-  · omega -- m < 1 contradicts hm : 0 < m
-  · -- m = 1: psi(1) = 0, use identity matrix
-    simp only [Crystallographic.psi_one]
-    exact one_mem_integerMatrixOrders 0
-  · -- m > 1, i.e., m >= 2
+  -- Case: m = 1
+  rcases (Nat.one_le_iff_ne_zero.mpr hm.ne').eq_or_lt' with rfl | hm_gt1
+  · simp only [psi_one]; exact one_mem_integerMatrixOrders 0
+  · -- Case: m > 1, i.e., m >= 2
     have hm_gt2 : 2 < m := by omega
     -- Check if m is a prime power
     by_cases hpow : IsPrimePow m
@@ -228,66 +300,71 @@ theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
       · obtain ⟨rfl, rfl⟩ := h21; simp only [pow_one] at hm_gt2; omega
       · exact primePow_mem_integerMatrixOrders_psi p k hp hk h21
     · -- m is not a prime power: use factorization_split_lt
-      obtain ⟨p, e, m', hp, he_pos, hm_eq, hcop, hm'_gt_one, hm'_lt, _⟩ :=
+      obtain ⟨p, e, m', hp, he_pos, hm_eq, hcop, _, hm'_lt, _⟩ :=
         factorization_split_lt (by omega : 2 < m) hpow
-      have hm'_pos : 0 < m' := by omega
-      have hm'_ne_one : m' ≠ 1 := by omega
-      have hm'_ge2 : 2 ≤ m' := by omega
-      -- Split on whether p^e = 2
       by_cases h_pe_is_2 : p = 2 ∧ e = 1
-      · -- p^e = 2, so psi(2) = 0
-        obtain ⟨hp2, he1⟩ := h_pe_is_2
-        have hm_eq' : m = 2 * m' := by simp only [hp2, he1, pow_one] at hm_eq; omega
-        have hcop' : Nat.Coprime 2 m' := by simp only [hp2, he1, pow_one] at hcop; exact hcop
-        have hm'_ne_2 : m' ≠ 2 := by
-          intro hm'_eq_2; rw [hm'_eq_2] at hcop'; simp at hcop'
-        have IH_m' := IH m' hm'_lt hm'_pos hm'_ne_2
-        have hpsi_eq : Crystallographic.psi m = Crystallographic.psi m' := by
-          rw [hm_eq', Crystallographic.psi_coprime_add 2 m' (by omega) hm'_pos hcop']
-          simp only [Crystallographic.psi_two, zero_add]
-        rw [hpsi_eq]
-        -- m' is odd (coprime to 2) and >= 3
-        have hm'_odd : Odd m' := Nat.Coprime.odd_of_left hcop'
-        have hm'_ge3 : 3 ≤ m' := by omega
-        have hpsi_pos : 0 < Crystallographic.psi m' := psi_pos_of_odd_ge_three hm'_ge3 hm'_odd
-        haveI : NeZero (Crystallographic.psi m') := ⟨by omega⟩
-        obtain ⟨A, hA_ord, hA_pos⟩ := IH_m'
-        refine ⟨-A, ?_, by omega⟩
-        rw [orderOf_neg_of_odd_order m' hm'_odd A hA_ord, ← hm_eq']
-      · -- p^e ≠ 2
-        push_neg at h_pe_is_2
-        have h_not_21 : ¬(p = 2 ∧ e = 1) := fun ⟨hp2, he1⟩ => h_pe_is_2 hp2 he1
-        have IH_pe : p ^ e ∈ integerMatrixOrders (Crystallographic.psi (p ^ e)) :=
-          primePow_mem_integerMatrixOrders_psi p e hp he_pos h_not_21
-        by_cases hm'_eq_2 : m' = 2
-        · -- m' = 2, so m = p^e * 2 with p odd
-          have hcop_pe_2 : Nat.Coprime (p ^ e) 2 := by rw [hm'_eq_2] at hcop; exact hcop
-          have hpsi_eq : Crystallographic.psi m = Crystallographic.psi (p ^ e) := by
-            rw [← hm_eq, hm'_eq_2, Crystallographic.psi_coprime_add (p ^ e) 2
-              (Nat.pow_pos hp.pos) (by omega) hcop_pe_2]
-            simp only [Crystallographic.psi_two, add_zero]
-          rw [hpsi_eq]
-          -- p^e is odd (p ≠ 2 since coprime to 2)
-          have hp_odd : p ≠ 2 := by
-            intro hp2; rw [hp2] at hcop_pe_2
-            simp only [Nat.coprime_pow_left_iff he_pos, Nat.coprime_self] at hcop_pe_2
-            norm_num at hcop_pe_2
-          have hpe_odd : Odd (p ^ e) := (Nat.Prime.odd_of_ne_two hp hp_odd).pow
-          have hpsi_pos : 0 < Crystallographic.psi (p ^ e) := by
-            simp only [psi_prime_pow p e hp he_pos, h_not_21, ite_false]
-            exact Nat.totient_pos.mpr (Nat.pow_pos hp.pos)
-          haveI : NeZero (Crystallographic.psi (p ^ e)) := ⟨by omega⟩
-          obtain ⟨A, hA_ord, hA_pos⟩ := IH_pe
-          refine ⟨-A, ?_, by omega⟩
-          rw [orderOf_neg_of_odd_order (p ^ e) hpe_odd A hA_ord, ← hm_eq, hm'_eq_2, mul_comm]
-        · -- m' ≠ 2, use block diagonal
-          have IH_m' := IH m' hm'_lt hm'_pos hm'_eq_2
-          have hpsi_eq : Crystallographic.psi m =
-              Crystallographic.psi (p ^ e) + Crystallographic.psi m' := by
-            rw [← hm_eq, Crystallographic.psi_coprime_add (p ^ e) m'
-              (Nat.pow_pos hp.pos) hm'_pos hcop]
-          rw [hpsi_eq, ← hm_eq]
-          exact mul_mem_integerMatrixOrders_of_coprime IH_pe IH_m' hcop
+      · -- p^e = 2, so m = 2 * m' with m' odd
+        have hcop' : Nat.Coprime 2 m' := by simp only [h_pe_is_2.1, h_pe_is_2.2, pow_one] at hcop ⊢; exact hcop
+        have ⟨hm'_odd, hm'_ne_2, hm'_ge3⟩ := odd_ne_two_ge_three_of_coprime_two hcop' (by omega)
+        rw [show m = 2 * m' by simp only [h_pe_is_2.1, h_pe_is_2.2, pow_one] at hm_eq; omega]
+        exact mem_integerMatrixOrders_psi_2_times_odd m' (by omega) hm'_odd hm'_ge3
+          (IH m' hm'_lt (by omega) hm'_ne_2)
+      · by_cases hm'_eq_2 : m' = 2
+        · -- m' = 2, so m = p^e * 2 with p^e odd
+          have ⟨hpe_odd, hpe_ge3⟩ := primePow_odd_ge_three_of_coprime_two hp he_pos (hm'_eq_2 ▸ hcop)
+          rw [← hm_eq, hm'_eq_2]
+          exact mem_integerMatrixOrders_psi_odd_times_2 (p ^ e) (Nat.pow_pos hp.pos) hpe_odd hpe_ge3
+            (primePow_mem_integerMatrixOrders_psi p e hp he_pos h_pe_is_2)
+        · -- Neither is 2, use block diagonal construction
+          rw [← hm_eq]
+          exact mem_integerMatrixOrders_psi_composite p e m' hp (by omega) hcop
+            (primePow_mem_integerMatrixOrders_psi p e hp he_pos h_pe_is_2)
+            (IH m' hm'_lt (by omega) hm'_eq_2)
+
+/-- Helper for small cases: if m ∈ {3, 4, 6} and psi(m) ≤ N, then m ∈ integerMatrixOrders N. -/
+private lemma mem_integerMatrixOrders_small (m N : ℕ) (hm : m ∈ ({3, 4, 6} : Finset ℕ))
+    (hpsi : psi m ≤ N) : m ∈ integerMatrixOrders N := by
+  fin_cases hm
+  · -- m = 3: psi(3) = 2
+    have hN2 : 2 ≤ N := by simp only [psi_three] at hpsi; omega
+    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 3 (by omega))
+  · -- m = 4: psi(4) = 2
+    have hN2 : 2 ≤ N := by simp only [psi_four] at hpsi; omega
+    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 4 (by omega))
+  · -- m = 6: psi(6) = 2
+    have hN2 : 2 ≤ N := by simp only [psi_six] at hpsi; omega
+    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 6 (by omega))
+
+/-- Helper for m = 5: psi(5) = 4, so if 4 ≤ N, then 5 ∈ integerMatrixOrders N. -/
+private lemma mem_integerMatrixOrders_five (N : ℕ) (hpsi : psi 5 ≤ N) :
+    5 ∈ integerMatrixOrders N := by
+  have hdeg : (Polynomial.cyclotomic 5 ℤ).natDegree = 4 := by
+    rw [Polynomial.natDegree_cyclotomic]
+    simp only [Nat.totient_prime Nat.prime_five]
+  have hn : 0 < (Polynomial.cyclotomic 5 ℤ).natDegree := by omega
+  have hmem : 5 ∈ integerMatrixOrders (Polynomial.cyclotomic 5 ℤ).natDegree :=
+    companion_cyclotomic_mem_integerMatrixOrders 5 (by omega) hn
+  rw [hdeg] at hmem
+  have hN4 : 4 ≤ N := by simp only [psi_five] at hpsi; omega
+  exact integerMatrixOrders_mono hN4 hmem
+
+/-- Helper for m > 6: general case using companion matrices or psi construction. -/
+private lemma mem_integerMatrixOrders_of_psi_le_large (m N : ℕ) (hm : 6 < m)
+    (hpsi : psi m ≤ N) : m ∈ integerMatrixOrders N := by
+  have hdeg : (Polynomial.cyclotomic m ℤ).natDegree = Nat.totient m :=
+    Polynomial.natDegree_cyclotomic m ℤ
+  have htot_pos : 0 < Nat.totient m := Nat.totient_pos.mpr (by omega : 0 < m)
+  have hn : 0 < (Polynomial.cyclotomic m ℤ).natDegree := by omega
+  -- Check if totient(m) ≤ N
+  by_cases htot : Nat.totient m ≤ N
+  · -- Case: totient(m) ≤ N, companion matrix works
+    have hmem : m ∈ integerMatrixOrders (Polynomial.cyclotomic m ℤ).natDegree :=
+      companion_cyclotomic_mem_integerMatrixOrders m (by omega) hn
+    rw [hdeg] at hmem
+    exact integerMatrixOrders_mono htot hmem
+  · -- Case: psi(m) ≤ N < totient(m), use block diagonal construction via psi
+    have hmem := mem_integerMatrixOrders_psi m (by omega) (by omega)
+    exact integerMatrixOrders_mono hpsi hmem
 
 /-- If psi(m) <= N, then there exists an N x N integer matrix with order m.
 
@@ -336,110 +413,40 @@ The construction uses companion matrices of cyclotomic polynomials.
   Block diagonal matrices have order equal to the lcm of block orders, which equals $m$
   for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/)]
 theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
-    (hpsi : Crystallographic.psi m ≤ N) (hNm : m = 1 ∨ 0 < N) :
+    (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N := by
-  -- We construct a matrix of size psi(m) with order m, then embed into N x N
-  -- The cases m = 1 and m = 2 are handled separately (psi = 0)
-  -- For other cases, we use companion matrices of cyclotomic polynomials
-  --
-  -- Key facts needed:
-  -- 1. Companion matrix of monic polynomial p has characteristic polynomial p
-  -- 2. Cyclotomic polynomial Phi_m is monic with integer coefficients
-  -- 3. Companion matrix of Phi_m has order m
-  -- 4. Block diagonal of matrices preserves order (for coprime orders: lcm)
-  --
-  -- Handle the base cases
-  rcases Nat.lt_trichotomy m 1 with hm_lt | rfl | hm_gt
-  -- Case m < 1, i.e., m = 0 (contradicts hm)
-  · omega
-  -- Case m = 1
-  · exact order_one_achievable N
-  -- Case m > 1, i.e., m >= 2
-  · rcases Nat.lt_trichotomy m 2 with hm_lt2 | rfl | hm_gt2
-    -- Case m < 2, but m > 1, contradiction
-    · omega
-    -- Case m = 2
-    · rcases Nat.eq_zero_or_pos N with rfl | hN_pos
-      · -- N = 0 case: The hypothesis hNm : m = 1 ∨ 0 < N becomes 2 = 1 ∨ 0 < 0
-        -- Both disjuncts are false, giving a contradiction
-        rcases hNm with h | h <;> omega
-      · haveI : NeZero N := ⟨Nat.pos_iff_ne_zero.mp hN_pos⟩
-        exact order_two_achievable N
-    -- Case m > 2, i.e., m >= 3
-    · -- Strategy: Either use permutation matrix if m <= N,
-      -- or use companion matrices of cyclotomic polynomials
-      by_cases hle : m ≤ N
-      -- Case m <= N: use permutation matrix of finRotate m
-      · have hm2 : 2 ≤ m := by omega
-        exact integerMatrixOrders_mono hle (mem_integerMatrixOrders_self m hm2)
-      -- Case m > N: use companion matrices of cyclotomic polynomials
-      · push_neg at hle
-        -- For m >= 3 with psi(m) <= N < m, we use companion matrices.
-        -- Since φ(m) >= psi(m), we have m ∈ integerMatrixOrders(φ(m)),
-        -- and by monotonicity m ∈ integerMatrixOrders(N) when psi(m) <= N.
-        --
-        -- Handle small cases explicitly, then general case
-        rcases Nat.lt_trichotomy m 3 with hm_lt3 | rfl | hm_gt3
-        · omega -- m < 3 but m > 2, contradiction
-        · -- m = 3: psi(3) = 2 = φ(3), use companion of Φ_3
-          have hN2 : 2 ≤ N := by simp only [Crystallographic.psi_three] at hpsi; omega
-          exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 3 (by omega))
-        · rcases Nat.lt_trichotomy m 4 with hm_lt4 | rfl | hm_gt4
-          · omega -- 3 < m < 4, impossible for naturals
-          · -- m = 4: psi(4) = 2 = φ(4), use companion of Φ_4
-            have hN2 : 2 ≤ N := by simp only [Crystallographic.psi_four] at hpsi; omega
-            exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 4 (by omega))
-          · rcases Nat.lt_trichotomy m 6 with hm_lt6 | rfl | hm_gt6
-            · -- m = 5 (the only natural between 4 and 6)
-              -- psi(5) = 4, need 4x4 matrix with order 5
-              -- Use companion matrix of Φ_5 = X^4 + X^3 + X^2 + X + 1
-              interval_cases m
-              -- Now m = 5
-              -- psi(5) = 4, so N >= 4 and N < 5, hence N = 4
-              have hN4 : N = 4 := by simp only [Crystallographic.psi_five] at hpsi; omega
-              rw [hN4]
-              -- Need: 5 ∈ integerMatrixOrders 4
-              -- Use companion_cyclotomic_mem_integerMatrixOrders
-              -- natDegree (cyclotomic 5 ℤ) = φ(5) = 4
-              have hdeg : (Polynomial.cyclotomic 5 ℤ).natDegree = 4 := by
-                rw [Polynomial.natDegree_cyclotomic]
-                simp only [Nat.totient_prime Nat.prime_five]
-              have hn : 0 < (Polynomial.cyclotomic 5 ℤ).natDegree := by omega
-              rw [← hdeg]
-              exact Crystallographic.companion_cyclotomic_mem_integerMatrixOrders 5 (by omega) hn
-            · -- m = 6: psi(6) = 2 = φ(6), use companion of Φ_6
-              have hN2 : 2 ≤ N := by simp only [Crystallographic.psi_six] at hpsi; omega
-              exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 6 (by omega))
-            · -- m > 6: General case
-              -- For m > 6 with psi(m) ≤ N < m, we use companion matrices
-              -- of cyclotomic polynomials.
-              --
-              -- Key facts:
-              -- - cyclotomic m ℤ has degree totient(m) > 0 for m >= 1
-              -- - companion(cyclotomic m ℤ) has dimension totient(m) and order m
-              -- - So m ∈ integerMatrixOrders(totient(m))
-              -- - By monotonicity, if totient(m) ≤ N, then m ∈ integerMatrixOrders(N)
-              --
-              -- Two cases:
-              -- 1. totient(m) ≤ N: use companion matrix directly
-              -- 2. psi(m) ≤ N < totient(m): need block diagonal construction
-              --    (This happens for composite m where psi < totient, like m=15,20,...)
-              --
-              -- For case 1 (which covers all prime powers, m = 2 * odd_prime_power,
-              -- and many other cases), the proof proceeds as follows:
-              have hdeg : (Polynomial.cyclotomic m ℤ).natDegree = Nat.totient m := by
-                exact Polynomial.natDegree_cyclotomic m ℤ
-              have htot_pos : 0 < Nat.totient m := Nat.totient_pos.mpr (by omega : 0 < m)
-              have hn : 0 < (Polynomial.cyclotomic m ℤ).natDegree := by omega
-              -- Check if totient(m) ≤ N
-              by_cases htot : Nat.totient m ≤ N
-              · -- Case: totient(m) ≤ N, companion matrix works
-                have hmem : m ∈ integerMatrixOrders (Polynomial.cyclotomic m ℤ).natDegree :=
-                  Crystallographic.companion_cyclotomic_mem_integerMatrixOrders m (by omega) hn
-                rw [hdeg] at hmem
-                exact integerMatrixOrders_mono htot hmem
-              · push_neg at htot
-                have hmem := mem_integerMatrixOrders_psi m (by omega) (by omega)
-                exact integerMatrixOrders_mono hpsi hmem
+  -- Handle base cases m = 1, 2
+  rcases Nat.lt_trichotomy m 2 with hm_lt2 | rfl | hm_gt2
+  · -- m < 2 and 0 < m, so m = 1
+    interval_cases m
+    exact order_one_achievable N
+  · -- m = 2: use -I, need N > 0
+    cases hNm with
+    | inl h => omega
+    | inr hN_pos =>
+      haveI : NeZero N := ⟨Nat.pos_iff_ne_zero.mp hN_pos⟩
+      exact order_two_achievable N
+  · -- m > 2, i.e., m >= 3
+    -- If m ≤ N, use permutation matrix directly
+    by_cases hle : m ≤ N
+    · exact integerMatrixOrders_mono hle (mem_integerMatrixOrders_self m (by omega))
+    · -- m > N: need companion matrices
+      push_neg at hle
+      -- Case split on m
+      rcases Nat.lt_trichotomy m 5 with hm_lt5 | rfl | hm_gt5
+      · -- m ∈ {3, 4}: use small case helper
+        have hm34 : m ∈ ({3, 4, 6} : Finset ℕ) := by
+          simp only [Finset.mem_insert, Finset.mem_singleton]
+          omega
+        exact mem_integerMatrixOrders_small m N hm34 hpsi
+      · -- m = 5
+        exact mem_integerMatrixOrders_five N hpsi
+      · -- m > 5
+        rcases Nat.lt_trichotomy m 6 with hm_lt6 | rfl | hm_gt6
+        · omega -- impossible: 5 < m < 6
+        · -- m = 6
+          exact mem_integerMatrixOrders_small 6 N (by simp) hpsi
+        · -- m > 6: general case
+          exact mem_integerMatrixOrders_of_psi_le_large m N hm_gt6 hpsi
 
 end Crystallographic

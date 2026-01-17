@@ -63,6 +63,7 @@ def psiPrimePow (p k : ℕ) : ℕ :=
   else Nat.totient (p ^ k)
 
 /-- psiPrimePow at exponent 0 is always 0. -/
+@[simp]
 lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
   simp [psiPrimePow]
 
@@ -118,15 +119,14 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   simp only [psi]
   rw [hp.factorization_pow]
   rw [Finsupp.sum_single_index (psiPrimePow_zero p)]
-  simp only [psiPrimePow, hk.ne']
-  simp only [ite_false]
+  simp only [psiPrimePow, hk.ne', ite_false]
 
 /-- `psi 3 = 2` -/
 theorem psi_three : psi 3 = 2 := by
   have h := psi_prime_pow 3 1 Nat.prime_three (by norm_num : 0 < 1)
   simp only [pow_one] at h
   rw [h]
-  simp only [show (3 : ℕ) ≠ 2 by decide, false_and, ite_false]
+  simp only [(by decide : (3 : ℕ) ≠ 2), false_and, ite_false]
   rw [Nat.totient_prime Nat.prime_three]
 
 /-- `psi 4 = 2` -/
@@ -134,7 +134,7 @@ theorem psi_four : psi 4 = 2 := by
   have h := psi_prime_pow 2 2 Nat.prime_two (by norm_num : 0 < 2)
   simp only [show (4 : ℕ) = 2 ^ 2 by norm_num] at h ⊢
   rw [h]
-  simp only [show (2 : ℕ) ≠ 1 by decide, and_false, ite_false]
+  simp only [(by decide : (2 : ℕ) ≠ 1), and_false, ite_false]
   rw [Nat.totient_prime_pow Nat.prime_two (by norm_num : 0 < 2)]
   norm_num
 
@@ -144,7 +144,7 @@ theorem psi_five : psi 5 = 4 := by
   have h := psi_prime_pow 5 1 hp (by norm_num : 0 < 1)
   simp only [pow_one] at h
   rw [h]
-  simp only [show (5 : ℕ) ≠ 2 by decide, false_and, ite_false]
+  simp only [(by decide : (5 : ℕ) ≠ 2), false_and, ite_false]
   rw [Nat.totient_prime hp]
 
 /-- `psi 7 = 6` -/
@@ -153,7 +153,7 @@ theorem psi_seven : psi 7 = 6 := by
   have h := psi_prime_pow 7 1 hp (by norm_num : 0 < 1)
   simp only [pow_one] at h
   rw [h]
-  simp only [show (7 : ℕ) ≠ 2 by decide, false_and, ite_false]
+  simp only [(by decide : (7 : ℕ) ≠ 2), false_and, ite_false]
   rw [Nat.totient_prime hp]
 
 /-- `psi 8 = 4` -/
@@ -161,7 +161,7 @@ theorem psi_eight : psi 8 = 4 := by
   have h := psi_prime_pow 2 3 Nat.prime_two (by norm_num : 0 < 3)
   simp only [show (8 : ℕ) = 2 ^ 3 by norm_num] at h ⊢
   rw [h]
-  simp only [show (3 : ℕ) ≠ 1 by decide, and_false, ite_false]
+  simp only [(by decide : (3 : ℕ) ≠ 1), and_false, ite_false]
   rw [Nat.totient_prime_pow Nat.prime_two (by norm_num : 0 < 3)]
   norm_num
 
@@ -170,7 +170,7 @@ theorem psi_nine : psi 9 = 6 := by
   have h := psi_prime_pow 3 2 Nat.prime_three (by norm_num : 0 < 2)
   simp only [show (9 : ℕ) = 3 ^ 2 by norm_num] at h ⊢
   rw [h]
-  simp only [show (3 : ℕ) ≠ 2 by decide, false_and, ite_false]
+  simp only [(by decide : (3 : ℕ) ≠ 2), false_and, ite_false]
   rw [Nat.totient_prime_pow Nat.prime_three (by norm_num : 0 < 2)]
   norm_num
 
@@ -182,16 +182,8 @@ If gcd(m, n) = 1, then m and n share no common prime factors. -/
   (proof := /-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/)]
 lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
     Disjoint m.factorization.support n.factorization.support := by
-  rw [Finset.disjoint_iff_ne]
-  intro p hp q hq hpq
-  rw [Nat.support_factorization, Nat.mem_primeFactors] at hp hq
-  subst hpq
-  have hdvd_m : p ∣ m := hp.2.1
-  have hdvd_n : p ∣ n := hq.2.1
-  have hp_prime := hp.1
-  have : p ∣ m.gcd n := Nat.dvd_gcd hdvd_m hdvd_n
-  rw [Nat.Coprime.gcd_eq_one h] at this
-  exact Nat.Prime.not_dvd_one hp_prime this
+  simp only [Nat.support_factorization]
+  exact h.disjoint_primeFactors
 
 /-- `psi` is additive on coprime factors.
 

@@ -43,19 +43,10 @@ and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 theorem orderOf_blockDiag2 {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
-  -- The order of (A, B) in the product monoid is lcm(orderOf A, orderOf B)
-  -- We show blockDiag2 induces an injective monoid hom from the product
-  let φ : Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ →*
-      Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ :=
-    { toFun := fun p => blockDiag2 p.1 p.2
-      map_one' := blockDiag2_one
-      map_mul' := fun p q => blockDiag2_mul _ _ _ _ }
-  have hinj : Function.Injective φ := by
-    intro p q hpq
-    have h1 := Matrix.fromBlocks_inj.mp hpq
-    exact Prod.ext h1.1 h1.2.2.2
-  have hφ : φ (A, B) = blockDiag2 A B := rfl
-  rw [← hφ, orderOf_injective φ hinj (A, B), Prod.orderOf]
+  have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =>
+    Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
+  rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
+      orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]
 
 /-- Block diagonal construction for integer matrix orders.
     If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
@@ -70,17 +61,8 @@ lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
     Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
   obtain ⟨A, hA_ord, hA_pos⟩ := h₁
   obtain ⟨B, hB_ord, hB_pos⟩ := h₂
-  -- Construct block diagonal matrix
-  let C := blockDiag2 A B
-  -- Reindex from Sum to Fin (M + K)
-  let e : Fin (M + K) ≃ Fin M ⊕ Fin K := finSumFinEquiv.symm
-  let C' : Matrix (Fin (M + K)) (Fin (M + K)) ℤ := (reindexMonoidEquiv e).symm C
-  use C'
-  constructor
-  · have h1 : orderOf C' = orderOf C :=
-      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm C
-    rw [h1, orderOf_blockDiag2, hA_ord, hB_ord]
-  · exact Nat.lcm_pos hA_pos hB_pos
+  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
+  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]
 
 /-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
     then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/

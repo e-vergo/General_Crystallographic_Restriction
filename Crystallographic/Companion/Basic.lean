@@ -75,8 +75,10 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
 
 /-! ### Characteristic polynomial -/
 
-/-- Auxiliary lemma for companion_charpoly: expresses the charmatrix structure. -/
-private lemma companion_charmatrix (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+/-- The charmatrix of a companion matrix has a specific structure: diagonal entries are
+`X` (or `X + C(p.coeff i)` in the last column), subdiagonal entries are `-1`,
+last column entries are `C(p.coeff i)`, and all other entries are `0`. -/
+lemma companion_charmatrix_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i j : Fin p.natDegree) :
     charmatrix (companion p hp hn) i j =
       if i = j then
@@ -112,11 +114,9 @@ private lemma companion_charmatrix (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegr
 
 /-! ### Helper lemmas for companion_charpoly -/
 
-/-- Base case for companion_charpoly: For a monic polynomial of degree 1,
-the characteristic polynomial of its companion matrix equals the polynomial.
-
-For degree 1, both p and charpoly are X + C(p.coeff 0). -/
-private lemma companion_charpoly_base_case (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+/-- For a monic polynomial of degree 1, the characteristic polynomial of its companion
+matrix equals the polynomial. Both sides equal `X + C(p.coeff 0)`. -/
+lemma companion_charpoly_of_natDegree_one (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (hdeg : p.natDegree = 1) : (companion p hp hn).charpoly = p := by
   -- p = X + C(p.coeff 0) since p is monic of degree 1
   have hp_eq : p = X + Polynomial.C (p.coeff 0) := by
@@ -143,7 +143,7 @@ private lemma companion_charpoly_base_case (p : R[X]) (hp : p.Monic) (hn : 0 < p
       exact ⟨⟨0, by omega⟩, fun i => Fin.ext (by omega)⟩
     rw [Matrix.det_unique]
     -- The (0,0) entry of charmatrix is X + C(p.coeff 0)
-    simp only [companion_charmatrix, hdeg]
+    simp only [companion_charmatrix_apply, hdeg]
     -- default has value 0 and default + 1 = 1 = p.natDegree by hdeg
     simp only [↓reduceIte]
     have hdefault_val : (default : Fin p.natDegree).val = 0 := by
@@ -154,13 +154,9 @@ private lemma companion_charpoly_base_case (p : R[X]) (hp : p.Monic) (hn : 0 < p
   rw [h_det, hp_eq]
   simp
 
-/-- Column structure of the charmatrix for Laplace expansion.
-
-For the charmatrix A of companion(p) where p has degree m+2:
-- A 0 0 = X (first diagonal entry)
-- A 1 0 = -1 (subdiagonal entry)
-- A i 0 = 0 for i ≥ 2 (zeros below subdiagonal) -/
-private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+/-- The first column of the charmatrix of a companion matrix has `X` at position `(0,0)`,
+`-1` at position `(1,0)`, and `0` at all positions `(i,0)` for `i >= 2`. -/
+lemma companion_charmatrix_col_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
     (hA_def : A = (companion p hp hn).charmatrix.submatrix
@@ -174,7 +170,7 @@ private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn :
   constructor
   · -- A 0 0 = X
     rw [hA_col0]
-    simp only [companion_charmatrix]
+    simp only [companion_charmatrix_apply]
     simp only [↓reduceIte]
     have h1 : (Fin.cast hdeg.symm (0 : Fin (m + 2))).val + 1 ≠ p.natDegree := by
       simp only [Fin.val_cast, Fin.val_zero, hdeg]; omega
@@ -182,7 +178,7 @@ private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn :
   constructor
   · -- A 1 0 = -1
     rw [hA_col0]
-    simp only [companion_charmatrix]
+    simp only [companion_charmatrix_apply]
     have hcast1 : (Fin.cast hdeg.symm (1 : Fin (m + 2))).val = 1 := by simp
     have hcast0 : (Fin.cast hdeg.symm (0 : Fin (m + 2))).val = 0 := by simp
     have hne : (Fin.cast hdeg.symm (1 : Fin (m + 2))) ≠ Fin.cast hdeg.symm 0 := by
@@ -191,7 +187,7 @@ private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn :
   · -- A i 0 = 0 for i ≥ 2
     intro i hi
     rw [hA_col0]
-    simp only [companion_charmatrix]
+    simp only [companion_charmatrix_apply]
     have hcast_i : (Fin.cast hdeg.symm i).val = i.val := by simp
     have hcast0 : (Fin.cast hdeg.symm (0 : Fin (m + 2))).val = 0 := by simp
     have hne : Fin.cast hdeg.symm i ≠ Fin.cast hdeg.symm 0 := by
@@ -202,144 +198,243 @@ private lemma companion_charmatrix_col_structure (p : R[X]) (hp : p.Monic) (hn :
     have h2 : ¬((0 : ℕ) + 1 = p.natDegree) := by omega
     simp only [h2, ↓reduceIte]
 
-/-- Determinant of minor10 equals C(p.coeff 0).
+/-- In the minor obtained by deleting row 1 and column 0 from the charmatrix,
+row 0 is zero except at the last position, where it equals `C(p.coeff 0)`. -/
+lemma companion_charmatrix_minor10_row0 (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+    (m : ℕ) (hdeg : p.natDegree = m + 2)
+    (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
+    (j : Fin (m + 1)) :
+    A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ 0 j =
+      if j.val = m then Polynomial.C (p.coeff 0) else 0 := by
+  change A (Fin.succAbove 1 0) (Fin.succ j) = _
+  have h0 : Fin.succAbove (1 : Fin (m + 2)) 0 = 0 := rfl
+  rw [h0, hA_def]
+  change (companion p hp hn).charmatrix (Fin.cast hdeg.symm 0)
+      (Fin.cast hdeg.symm (Fin.succ j)) = _
+  rw [companion_charmatrix_apply]
+  have hne : ¬(Fin.cast hdeg.symm 0 = Fin.cast hdeg.symm (Fin.succ j)) := by
+    simp only [Fin.ext_iff, Fin.val_cast, Fin.val_zero, Fin.val_succ]; omega
+  have hsubdiag : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 = (Fin.cast hdeg.symm 0).val) := by
+    simp only [Fin.val_cast, Fin.val_zero, Fin.val_succ]; omega
+  have hlast : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree ↔ j.val = m := by
+    simp only [Fin.val_cast, Fin.val_succ, hdeg]; omega
+  simp only [hne, hsubdiag, ↓reduceIte]
+  by_cases hj : j.val = m
+  · have hcond : (Fin.succ j).val + 1 = p.natDegree := by simp only [Fin.val_succ, hj, hdeg]
+    simp only [hcond, ↓reduceIte, hj, Fin.val_cast, Fin.val_zero]
+  · have hcond : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree) := mt hlast.mp hj
+    simp only [hcond, ↓reduceIte, hj]
 
-In the Laplace expansion of charmatrix(companion p), the minor obtained by
-deleting row 1 and column 0 has determinant (-1)^m * C(p.coeff 0) * (-1)^m = C(p.coeff 0).
-This minor is an upper triangular matrix with -1 on the diagonal (except row 0). -/
-private lemma companion_charpoly_minor10_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+/-- The subminor obtained by further deleting row 0 and column m from the (1,0)-minor
+has entries `-1` on the diagonal, `X` on the superdiagonal, and `0` elsewhere. -/
+lemma companion_charmatrix_subminor_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+    (m : ℕ) (hdeg : p.natDegree = m + 2)
+    (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
+    (jm : Fin (m + 1)) (hjm : jm = ⟨m, by omega⟩)
+    (i j : Fin m) :
+    (A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ).submatrix Fin.succ jm.succAbove i j =
+      if j.val = i.val then -1 else if j.val = i.val + 1 then X else 0 := by
+  change A (Fin.succAbove 1 (Fin.succ i)) (Fin.succ (jm.succAbove j)) = _
+  rw [hA_def]
+  have hsuccAbove1 : (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)).val = i.val + 2 := by
+    simp [Fin.succAbove, Fin.succ, Fin.castSucc]
+  have hsuccAboveM : (jm.succAbove j).val = j.val := by
+    have hj : j.val < m := j.isLt
+    simp only [Fin.succAbove, hjm, Fin.castSucc, Fin.lt_def, Fin.val_castAdd, hj, ↓reduceIte]
+  have hsucc_succAbove : (Fin.succ (jm.succAbove j)).val = j.val + 1 := by
+    simp [Fin.succ, hsuccAboveM]
+  change (companion p hp hn).charmatrix
+      (Fin.cast hdeg.symm (Fin.succAbove 1 (Fin.succ i)))
+      (Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))) = _
+  rw [companion_charmatrix_apply]
+  have hrow_val : (Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val =
+      i.val + 2 := by simp only [Fin.val_cast, hsuccAbove1]
+  have hcol_val : (Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))).val = j.val + 1 := by
+    simp only [Fin.val_cast, hsucc_succAbove]
+  have hdiag : (Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
+      Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))) ↔ j.val = i.val + 1 := by
+    simp only [Fin.ext_iff, hrow_val, hcol_val]; omega
+  have hsubdiag : (Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))).val + 1 =
+      (Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val ↔
+      j.val = i.val := by simp only [hrow_val, hcol_val]; omega
+  have hlastcol : ¬((Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))).val + 1 = p.natDegree) := by
+    simp only [hcol_val, hdeg]; have hj : j.val < m := j.isLt; omega
+  by_cases hij : j.val = i.val
+  · have hne : ¬(Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
+        Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))) := by rw [hdiag]; omega
+    simp only [hne, ↓reduceIte, hsubdiag.mpr hij, hij]
+  · by_cases hji1 : j.val = i.val + 1
+    · have heq : Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
+          Fin.cast hdeg.symm (Fin.succ (jm.succAbove j)) := hdiag.mpr hji1
+      have hne_ji : ¬(i.val + 1 = i.val) := by omega
+      simp only [heq, hlastcol, ↓reduceIte, hji1, hne_ji]
+    · have hne : ¬(Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
+          Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))) := by rw [hdiag]; exact hji1
+      have hnsub : ¬((Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))).val + 1 =
+          (Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val) := by
+        rw [hsubdiag]; exact hij
+      simp only [hne, hnsub, hlastcol, ↓reduceIte, hij, hji1]
+
+/-- The subminor (obtained by deleting row 0 and column m from the (1,0)-minor) is upper
+triangular with `-1` on the diagonal, so its determinant equals `(-1)^m`. -/
+lemma companion_charmatrix_subminor_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+    (m : ℕ) (hdeg : p.natDegree = m + 2)
+    (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
+    (jm : Fin (m + 1)) (hjm : jm = ⟨m, by omega⟩) :
+    ((A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ).submatrix Fin.succ jm.succAbove).det =
+      (-1) ^ m := by
+  let S := (A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ).submatrix Fin.succ jm.succAbove
+  have hS_entry : ∀ i j : Fin m, S i j =
+      if j.val = i.val then -1 else if j.val = i.val + 1 then X else 0 :=
+    companion_charmatrix_subminor_apply p hp hn m hdeg A hA_def jm hjm
+  have hS_tri : S.BlockTriangular id := by
+    intro i j hij
+    simp only [hS_entry]
+    have hij' : j.val < i.val := hij
+    have hne1 : j.val ≠ i.val := ne_of_lt hij'
+    have hne2 : j.val ≠ i.val + 1 := by omega
+    simp only [hne1, hne2, ↓reduceIte]
+  rw [Matrix.det_of_upperTriangular hS_tri]
+  simp only [hS_entry, ↓reduceIte, Finset.prod_const, Finset.card_fin]
+
+/-- The determinant of the (1,0)-minor of the charmatrix equals `C(p.coeff 0)`.
+This follows from Laplace expansion along row 0, where only the last column entry is nonzero. -/
+lemma companion_charmatrix_minor10_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
     (hA_def : A = (companion p hp hn).charmatrix.submatrix
         (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)) :
     (A.submatrix (1 : Fin (m + 2)).succAbove Fin.succ).det = Polynomial.C (p.coeff 0) := by
   let minor10 := A.submatrix (Fin.succAbove (1 : Fin (m + 2))) Fin.succ
-  -- First, establish the first row structure
   have hrow0 : ∀ j : Fin (m + 1), minor10 0 j =
-      if j.val = m then Polynomial.C (p.coeff 0) else 0 := by
-    intro j
-    change A (Fin.succAbove 1 0) (Fin.succ j) = _
-    have h0 : Fin.succAbove (1 : Fin (m + 2)) 0 = 0 := rfl
-    rw [h0, hA_def]
-    change (companion p hp hn).charmatrix (Fin.cast hdeg.symm 0)
-        (Fin.cast hdeg.symm (Fin.succ j)) = _
-    rw [companion_charmatrix]
-    have hne : ¬(Fin.cast hdeg.symm 0 = Fin.cast hdeg.symm (Fin.succ j)) := by
-      simp only [Fin.ext_iff, Fin.val_cast, Fin.val_zero, Fin.val_succ]; omega
-    have hsubdiag : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 =
-        (Fin.cast hdeg.symm 0).val) := by
-      simp only [Fin.val_cast, Fin.val_zero, Fin.val_succ]; omega
-    have hlast : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree ↔ j.val = m := by
-      simp only [Fin.val_cast, Fin.val_succ, hdeg]; omega
-    simp only [hne, hsubdiag, ↓reduceIte]
-    by_cases hj : j.val = m
-    · have hcond : (Fin.succ j).val + 1 = p.natDegree := by
-        simp only [Fin.val_succ, hj, hdeg]
-      simp only [hcond, ↓reduceIte, hj, Fin.val_cast, Fin.val_zero]
-    · have hcond : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree) := mt hlast.mp hj
-      simp only [hcond, ↓reduceIte, hj]
-  -- Now use Laplace expansion along row 0
+      if j.val = m then Polynomial.C (p.coeff 0) else 0 :=
+    companion_charmatrix_minor10_row0 p hp hn m hdeg A hA_def
+  -- Laplace expansion along row 0 reduces to single term at j = m
   rw [Matrix.det_succ_row_zero]
-  have hm_lt : m < m + 1 := by omega
-  let jm : Fin (m + 1) := ⟨m, hm_lt⟩
+  let jm : Fin (m + 1) := ⟨m, by omega⟩
   have hsum_eq : ∑ j : Fin (m + 1), (-1) ^ j.val * minor10 0 j *
       (minor10.submatrix Fin.succ j.succAbove).det =
-      (-1) ^ m * Polynomial.C (p.coeff 0) *
-      (minor10.submatrix Fin.succ jm.succAbove).det := by
+      (-1) ^ m * Polynomial.C (p.coeff 0) * (minor10.submatrix Fin.succ jm.succAbove).det := by
     rw [Finset.sum_eq_single jm]
     · simp only [hrow0, jm]; simp
     · intro j _ hj
-      simp only [hrow0]
-      have hj' : j.val ≠ m := by intro heq; apply hj; ext; exact heq
-      simp only [hj', ↓reduceIte, mul_zero, zero_mul]
+      have hj' : j.val ≠ m := fun heq => hj (Fin.ext heq)
+      simp only [hrow0, hj', ↓reduceIte, mul_zero, zero_mul]
     · intro h; exact (h (Finset.mem_univ jm)).elim
-  rw [hsum_eq]
-  have hsubminor_det : (minor10.submatrix Fin.succ jm.succAbove).det = (-1) ^ m := by
-    let S := minor10.submatrix Fin.succ jm.succAbove
-    have hS_entry : ∀ i j : Fin m, S i j =
-        if j.val = i.val then -1
-        else if j.val = i.val + 1 then X
-        else 0 := by
-      intro i j
-      change minor10 (Fin.succ i) (jm.succAbove j) = _
-      change A (Fin.succAbove 1 (Fin.succ i)) (Fin.succ (jm.succAbove j)) = _
-      rw [hA_def]
-      have hsuccAbove1 : (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)).val = i.val + 2 := by
-        simp [Fin.succAbove, Fin.succ, Fin.castSucc]
-      have hsuccAboveM : ∀ k : Fin m, (Fin.succAbove jm k).val = k.val := by
-        intro k
-        have hk : k.val < m := k.isLt
-        simp only [Fin.succAbove, jm, Fin.castSucc, Fin.lt_def]
-        simp only [Fin.val_castAdd, hk, ↓reduceIte]
-      have hsucc_succAbove : (Fin.succ (Fin.succAbove jm j)).val = j.val + 1 := by
-        simp [Fin.succ, hsuccAboveM j]
-      change (companion p hp hn).charmatrix
-          (Fin.cast hdeg.symm (Fin.succAbove 1 (Fin.succ i)))
-          (Fin.cast hdeg.symm (Fin.succ (jm.succAbove j))) = _
-      rw [companion_charmatrix]
-      have hrow_val : (Fin.cast hdeg.symm
-          (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val = i.val + 2 := by
-        simp only [Fin.val_cast, hsuccAbove1]
-      have hcol_val : (Fin.cast hdeg.symm
-          (Fin.succ (Fin.succAbove jm j))).val = j.val + 1 := by
-        simp only [Fin.val_cast, hsucc_succAbove]
-      have hdiag : (Fin.cast hdeg.symm
-          (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
-          Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))) ↔ j.val = i.val + 1 := by
-        simp only [Fin.ext_iff, hrow_val, hcol_val]; omega
-      have hsubdiag : (Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))).val + 1 =
-          (Fin.cast hdeg.symm
-          (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val ↔ j.val = i.val := by
-        simp only [hrow_val, hcol_val]; omega
-      have hlastcol : ¬((Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))).val + 1
-          = p.natDegree) := by
-        simp only [hcol_val, hdeg]
-        have hj : j.val < m := j.isLt
-        omega
-      by_cases hij : j.val = i.val
-      · have hne : ¬(Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
-            Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))) := by
-          rw [hdiag]; omega
-        simp only [hne, ↓reduceIte, hsubdiag.mpr hij, hij]
-      · by_cases hji1 : j.val = i.val + 1
-        · have heq : Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
-              Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j)) := hdiag.mpr hji1
-          have hnotlast : ¬((Fin.cast hdeg.symm
-              (Fin.succ (Fin.succAbove jm j))).val + 1 = p.natDegree) := by
-            simp only [hcol_val, hdeg]
-            have hj : j.val < m := j.isLt
-            omega
-          have hne_ji : ¬(i.val + 1 = i.val) := by omega
-          simp only [heq, hnotlast, ↓reduceIte, hji1, hne_ji]
-        · have hne : ¬(Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i)) =
-              Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))) := by
-            rw [hdiag]; exact hji1
-          have hnsub : ¬((Fin.cast hdeg.symm (Fin.succ (Fin.succAbove jm j))).val + 1 =
-              (Fin.cast hdeg.symm (Fin.succAbove (1 : Fin (m + 2)) (Fin.succ i))).val) := by
-            rw [hsubdiag]; exact hij
-          simp only [hne, hnsub, hlastcol, ↓reduceIte, hij, hji1]
-    have hS_tri : S.BlockTriangular id := by
-      intro i j hij
-      simp only [hS_entry]
-      have hij' : j.val < i.val := hij
-      have hne1 : j.val ≠ i.val := ne_of_lt hij'
-      have hne2 : j.val ≠ i.val + 1 := by omega
-      simp only [hne1, hne2, ↓reduceIte]
-    rw [Matrix.det_of_upperTriangular hS_tri]
-    simp only [hS_entry, ↓reduceIte]
-    rw [Finset.prod_const, Finset.card_fin]
-  rw [hsubminor_det]
+  rw [hsum_eq, companion_charmatrix_subminor_det p hp hn m hdeg A hA_def jm rfl]
+  -- Simplify (-1)^m * C(p.coeff 0) * (-1)^m = C(p.coeff 0)
   have h_pow : ((-1 : R[X]) ^ (m * 2)) = 1 := by
-    rw [mul_comm, pow_mul]
-    simp only [neg_one_sq, one_pow]
-  ring_nf
-  simp only [h_pow, mul_one]
+    rw [mul_comm, pow_mul]; simp only [neg_one_sq, one_pow]
+  ring_nf; simp only [h_pow, mul_one]
 
-/-- Determinant of minor00 equals p.divX via the induction hypothesis.
+/-- Auxiliary structure bundling index condition equivalences for the (0,0)-minor entry lemma.
+These conditions relate entries of the charmatrix of companion(p) to those of companion(p.divX). -/
+structure CompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = m + 2)
+    (hdivX_deg : p.divX.natDegree = m + 1) (i j : Fin (m + 1)) where
+  /-- Row index in A -/
+  row_A : (Fin.cast hdeg.symm (Fin.succAbove (0 : Fin (m + 2)) i)).val = i.val + 1
+  /-- Column index in A -/
+  col_A : (Fin.cast hdeg.symm (Fin.succ j)).val = j.val + 1
+  /-- Row index in B -/
+  row_B : (Fin.cast hdivX_deg.symm i).val = i.val
+  /-- Column index in B -/
+  col_B : (Fin.cast hdivX_deg.symm j).val = j.val
+  /-- Diagonal condition for A -/
+  diag_A : (Fin.cast hdeg.symm (Fin.succAbove 0 i) = Fin.cast hdeg.symm (Fin.succ j)) ↔ i = j
+  /-- Diagonal condition for B -/
+  diag_B : (Fin.cast hdivX_deg.symm i = Fin.cast hdivX_deg.symm j) ↔ i = j
+  /-- Last column condition for diagonal in A -/
+  lastcol_diag_A : (Fin.cast hdeg.symm (Fin.succ i)).val + 1 = p.natDegree ↔ i.val = m
+  /-- Last column condition for diagonal in B -/
+  lastcol_diag_B : (Fin.cast hdivX_deg.symm i).val + 1 = p.divX.natDegree ↔ i.val = m
+  /-- Subdiagonal condition for A -/
+  subdiag_A : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 =
+      (Fin.cast hdeg.symm (Fin.succAbove 0 i)).val ↔ j.val + 1 = i.val
+  /-- Subdiagonal condition for B -/
+  subdiag_B : (Fin.cast hdivX_deg.symm j).val + 1 = (Fin.cast hdivX_deg.symm i).val ↔
+      j.val + 1 = i.val
+  /-- Last column condition for A -/
+  lastcol_A : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree ↔ j.val = m
+  /-- Last column condition for B -/
+  lastcol_B : (Fin.cast hdivX_deg.symm j).val + 1 = p.divX.natDegree ↔ j.val = m
 
-In the Laplace expansion, the minor obtained by deleting row 0 and column 0
-has determinant equal to p.divX, because it equals charmatrix(companion(p.divX)). -/
-private lemma companion_charpoly_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+/-- Constructs the index condition bundle for the (0,0)-minor entry lemma. -/
+def mkCompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = m + 2)
+    (hdivX_deg : p.divX.natDegree = m + 1) (i j : Fin (m + 1)) :
+    CompanionMinor00IndexConds m p hdeg hdivX_deg i j where
+  row_A := by simp [Fin.succAbove]
+  col_A := by simp
+  row_B := by simp
+  col_B := by simp
+  diag_A := by
+    have hrow : (Fin.cast hdeg.symm (Fin.succAbove (0 : Fin (m + 2)) i)).val = i.val + 1 := by
+      simp [Fin.succAbove]
+    have hcol : (Fin.cast hdeg.symm (Fin.succ j)).val = j.val + 1 := by simp
+    simp only [Fin.ext_iff, hrow, hcol]; omega
+  diag_B := by simp only [Fin.ext_iff, Fin.val_cast]
+  lastcol_diag_A := by simp only [Fin.val_cast, Fin.val_succ, hdeg]; omega
+  lastcol_diag_B := by simp only [Fin.val_cast, hdivX_deg]; omega
+  subdiag_A := by
+    have hrow : (Fin.cast hdeg.symm (Fin.succAbove (0 : Fin (m + 2)) i)).val = i.val + 1 := by
+      simp [Fin.succAbove]
+    have hcol : (Fin.cast hdeg.symm (Fin.succ j)).val = j.val + 1 := by simp
+    simp only [hcol, hrow]; omega
+  subdiag_B := by simp only [Fin.val_cast]
+  lastcol_A := by simp only [Fin.val_cast, Fin.val_succ, hdeg]; omega
+  lastcol_B := by simp only [Fin.val_cast, hdivX_deg]; omega
+
+/-- The (0,0)-minor of the charmatrix of companion(p) equals the charmatrix of companion(p.divX),
+entry by entry (after appropriate index translations). This enables the inductive step
+in proving that the characteristic polynomial of a companion matrix equals the original polynomial. -/
+lemma companion_charmatrix_minor00_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
+    (m : ℕ) (hdeg : p.natDegree = m + 2)
+    (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
+    (hA_def : A = (companion p hp hn).charmatrix.submatrix
+        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm))
+    (hdivX_deg : p.divX.natDegree = m + 1)
+    (hdivX_monic : p.divX.Monic)
+    (hdivX_pos : 0 < p.divX.natDegree) :
+    ∀ i j : Fin (m + 1),
+      A (Fin.succAbove (0 : Fin (m + 2)) i) (Fin.succ j) =
+      (companion p.divX hdivX_monic hdivX_pos).charmatrix
+        (Fin.cast hdivX_deg.symm i) (Fin.cast hdivX_deg.symm j) := by
+  intro i j
+  rw [hA_def, Matrix.submatrix_apply, companion_charmatrix_apply, companion_charmatrix_apply]
+  -- Get all index conditions from the bundle
+  let c := mkCompanionMinor00IndexConds m p hdeg hdivX_deg i j
+  -- Coefficient relation
+  have hcoeff : p.coeff (i.val + 1) = p.divX.coeff i.val := by rw [Polynomial.coeff_divX]
+  -- Case analysis using bundled conditions
+  by_cases hij : i = j
+  · -- Diagonal case
+    subst hij
+    have hcond_A : Fin.cast hdeg.symm (Fin.succAbove 0 i) = Fin.cast hdeg.symm (Fin.succ i) :=
+      c.diag_A.mpr rfl
+    simp only [hcond_A, ↓reduceIte]
+    by_cases hlast : i.val = m
+    · simp only [c.lastcol_diag_A.mpr hlast, c.lastcol_diag_B.mpr hlast, ↓reduceIte]
+      congr 1; simp only [Fin.val_cast, Fin.val_succ, hcoeff]
+    · simp only [mt c.lastcol_diag_A.mp hlast, mt c.lastcol_diag_B.mp hlast, ↓reduceIte]
+  · -- Off-diagonal case
+    simp only [mt c.diag_A.mp hij, mt c.diag_B.mp hij, ↓reduceIte]
+    by_cases hsubdiag : j.val + 1 = i.val
+    · simp only [c.subdiag_A.mpr hsubdiag, c.subdiag_B.mpr hsubdiag, ↓reduceIte]
+    · simp only [mt c.subdiag_A.mp hsubdiag, mt c.subdiag_B.mp hsubdiag, ↓reduceIte]
+      by_cases hlastcol : j.val = m
+      · simp only [c.lastcol_A.mpr hlastcol, c.lastcol_B.mpr hlastcol, ↓reduceIte, c.row_A,
+          c.row_B, hcoeff]
+      · simp only [mt c.lastcol_A.mp hlastcol, mt c.lastcol_B.mp hlastcol, ↓reduceIte]
+
+/-- The determinant of the (0,0)-minor of the charmatrix equals `p.divX`.
+This follows because the minor equals the charmatrix of companion(p.divX), and we
+apply the induction hypothesis for the characteristic polynomial theorem. -/
+lemma companion_charmatrix_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
     (hA_def : A = (companion p hp hn).charmatrix.submatrix
@@ -347,6 +442,7 @@ private lemma companion_charpoly_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 <
     (IH : ∀ (q : R[X]) (hq : q.Monic) (hq_pos : 0 < q.natDegree), q.natDegree = m + 1 →
       (companion q hq hq_pos).charpoly = q) :
     (A.submatrix (0 : Fin (m + 2)).succAbove Fin.succ).det = p.divX := by
+  -- Establish facts about p.divX
   have hdivX_deg : p.divX.natDegree = m + 1 := by
     rw [Polynomial.natDegree_divX_eq_natDegree_tsub_one, hdeg]; rfl
   have hdivX_monic : p.divX.Monic := by
@@ -357,107 +453,12 @@ private lemma companion_charpoly_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 <
     rw [h]
     exact hp.coeff_natDegree
   have hdivX_pos : 0 < p.divX.natDegree := by omega
+  -- Apply the induction hypothesis
   have hIH := IH p.divX hdivX_monic hdivX_pos hdivX_deg
   rw [Matrix.charpoly] at hIH
-  have hminor_entry : ∀ i j : Fin (m + 1),
-      A (Fin.succAbove (0 : Fin (m + 2)) i) (Fin.succ j) =
-      (companion p.divX hdivX_monic hdivX_pos).charmatrix
-        (Fin.cast hdivX_deg.symm i) (Fin.cast hdivX_deg.symm j) := by
-    intro i j
-    have hsuccAbove0 : (Fin.succAbove (0 : Fin (m + 2)) i).val = i.val + 1 := by
-      simp [Fin.succAbove]
-    rw [hA_def]
-    simp only [Matrix.submatrix_apply]
-    rw [companion_charmatrix, companion_charmatrix]
-    have hrow_A : (Fin.cast hdeg.symm (Fin.succAbove (0 : Fin (m + 2)) i)).val = i.val + 1 := by
-      simp only [Fin.val_cast, hsuccAbove0]
-    have hcol_A : (Fin.cast hdeg.symm (Fin.succ j)).val = j.val + 1 := by simp
-    have hrow_B : (Fin.cast hdivX_deg.symm i).val = i.val := by simp
-    have hcol_B : (Fin.cast hdivX_deg.symm j).val = j.val := by simp
-    have hdiag_A : (Fin.cast hdeg.symm (Fin.succAbove 0 i) =
-        Fin.cast hdeg.symm (Fin.succ j)) ↔ i = j := by
-      simp only [Fin.ext_iff, hrow_A, hcol_A]
-      constructor <;> (intro h; omega)
-    have hdiag_B : (Fin.cast hdivX_deg.symm i = Fin.cast hdivX_deg.symm j) ↔ i = j := by
-      constructor
-      · intro h
-        have hv : (Fin.cast hdivX_deg.symm i).val = (Fin.cast hdivX_deg.symm j).val := by rw [h]
-        simp only [Fin.val_cast] at hv
-        exact Fin.ext hv
-      · intro h; exact congrArg _ h
-    have hlastrow_A : (Fin.cast hdeg.symm (Fin.succAbove 0 i)).val + 1 = p.natDegree ↔
-        i.val = m := by
-      simp only [hrow_A, hdeg]; omega
-    have hlastrow_B : (Fin.cast hdivX_deg.symm i).val + 1 = p.divX.natDegree ↔
-        i.val = m := by
-      simp only [hrow_B, hdivX_deg]; omega
-    have hlastcol_diag_A : (Fin.cast hdeg.symm (Fin.succ i)).val + 1 = p.natDegree ↔
-        i.val = m := by
-      simp only [Fin.val_cast, Fin.val_succ, hdeg]; omega
-    have hlastcol_diag_B : (Fin.cast hdivX_deg.symm i).val + 1 = p.divX.natDegree ↔
-        i.val = m := by
-      simp only [hrow_B, hdivX_deg]; omega
-    have hsubdiag_A : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 =
-        (Fin.cast hdeg.symm (Fin.succAbove 0 i)).val ↔ j.val + 1 = i.val := by
-      simp only [hcol_A, hrow_A]; omega
-    have hsubdiag_B : (Fin.cast hdivX_deg.symm j).val + 1 =
-        (Fin.cast hdivX_deg.symm i).val ↔ j.val + 1 = i.val := by
-      simp only [hcol_B, hrow_B]
-    have hlastcol_A : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree ↔
-        j.val = m := by
-      simp only [hcol_A, hdeg]; omega
-    have hlastcol_B : (Fin.cast hdivX_deg.symm j).val + 1 = p.divX.natDegree ↔
-        j.val = m := by
-      simp only [hcol_B, hdivX_deg]; omega
-    have hcoeff : p.coeff (i.val + 1) = p.divX.coeff i.val := by
-      rw [Polynomial.coeff_divX]
-    have hcoeff_j : p.coeff (j.val + 1) = p.divX.coeff j.val := by
-      rw [Polynomial.coeff_divX]
-    by_cases hij : i = j
-    · subst hij
-      have hcond_A : Fin.cast hdeg.symm (Fin.succAbove 0 i) = Fin.cast hdeg.symm (Fin.succ i) :=
-        hdiag_A.mpr rfl
-      simp only [hcond_A, ↓reduceIte]
-      by_cases hlast : i.val = m
-      · have hcond1 : (Fin.cast hdeg.symm (Fin.succ i)).val + 1 = p.natDegree :=
-          hlastcol_diag_A.mpr hlast
-        have hcond2 : (Fin.cast hdivX_deg.symm i).val + 1 = p.divX.natDegree :=
-          hlastcol_diag_B.mpr hlast
-        simp only [hcond1, hcond2, ↓reduceIte]
-        congr 1
-        simp only [Fin.val_cast, Fin.val_succ, hcoeff]
-      · have hcond1 : ¬((Fin.cast hdeg.symm (Fin.succ i)).val + 1 = p.natDegree) :=
-          mt hlastcol_diag_A.mp hlast
-        have hcond2 : ¬((Fin.cast hdivX_deg.symm i).val + 1 = p.divX.natDegree) :=
-          mt hlastcol_diag_B.mp hlast
-        simp only [hcond1, hcond2, ↓reduceIte]
-    · have hcond_ne : ¬(Fin.cast hdeg.symm (Fin.succAbove 0 i) =
-          Fin.cast hdeg.symm (Fin.succ j)) := mt hdiag_A.mp hij
-      have hcond_ne' : ¬(Fin.cast hdivX_deg.symm i = Fin.cast hdivX_deg.symm j) :=
-        mt hdiag_B.mp hij
-      simp only [hcond_ne, hcond_ne', ↓reduceIte]
-      by_cases hsubdiag : j.val + 1 = i.val
-      · have hcond1 : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 =
-            (Fin.cast hdeg.symm (Fin.succAbove 0 i)).val := hsubdiag_A.mpr hsubdiag
-        have hcond2 : (Fin.cast hdivX_deg.symm j).val + 1 =
-            (Fin.cast hdivX_deg.symm i).val := hsubdiag_B.mpr hsubdiag
-        simp only [hcond1, hcond2, ↓reduceIte]
-      · have hcond1 : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 =
-            (Fin.cast hdeg.symm (Fin.succAbove 0 i)).val) := mt hsubdiag_A.mp hsubdiag
-        have hcond2 : ¬((Fin.cast hdivX_deg.symm j).val + 1 =
-            (Fin.cast hdivX_deg.symm i).val) := mt hsubdiag_B.mp hsubdiag
-        simp only [hcond1, hcond2, ↓reduceIte]
-        by_cases hlastcol : j.val = m
-        · have hcond3 : (Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree :=
-            hlastcol_A.mpr hlastcol
-          have hcond4 : (Fin.cast hdivX_deg.symm j).val + 1 = p.divX.natDegree :=
-            hlastcol_B.mpr hlastcol
-          simp only [hcond3, hcond4, ↓reduceIte, hrow_A, hrow_B, hcoeff]
-        · have hcond3 : ¬((Fin.cast hdeg.symm (Fin.succ j)).val + 1 = p.natDegree) :=
-            mt hlastcol_A.mp hlastcol
-          have hcond4 : ¬((Fin.cast hdivX_deg.symm j).val + 1 = p.divX.natDegree) :=
-            mt hlastcol_B.mp hlastcol
-          simp only [hcond3, hcond4, ↓reduceIte]
+  -- Use the entry equality lemma to establish matrix equality
+  have hminor_entry := companion_charmatrix_minor00_apply p hp hn m hdeg A hA_def
+      hdivX_deg hdivX_monic hdivX_pos
   have hminor_eq : A.submatrix (Fin.succAbove (0 : Fin (m + 2))) Fin.succ =
       (companion p.divX hdivX_monic hdivX_pos).charmatrix.submatrix
       (Fin.cast hdivX_deg.symm) (Fin.cast hdivX_deg.symm) := by
@@ -466,12 +467,43 @@ private lemma companion_charpoly_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 <
     simp only [Matrix.submatrix_apply]
     exact hminor_entry i j
   rw [hminor_eq]
+  -- Show the submatrix determinant equals the full determinant
   have heq : (companion p.divX hdivX_monic hdivX_pos).charmatrix.submatrix
       (Fin.cast hdivX_deg.symm) (Fin.cast hdivX_deg.symm) =
       (companion p.divX hdivX_monic hdivX_pos).charmatrix.submatrix
       (finCongr hdivX_deg.symm) (finCongr hdivX_deg.symm) := by rfl
   rw [heq, Matrix.det_submatrix_equiv_self (finCongr hdivX_deg.symm)]
   exact hIH
+
+/-- The Laplace expansion of a matrix along column 0 reduces to two terms when only
+entries at rows 0 and 1 are nonzero. This applies to the charmatrix of companion matrices
+because entries `A i 0 = 0` for all `i >= 2`. -/
+lemma companion_charmatrix_laplace_col_zero (m : ℕ)
+    (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
+    (hA00 : A 0 0 = X) (hA10 : A 1 0 = -1)
+    (hA_other : ∀ i : Fin (m + 2), 2 ≤ i.val → A i 0 = 0) :
+    ∑ i : Fin (m + 2), (-1) ^ (i : ℕ) * A i 0 * (A.submatrix i.succAbove Fin.succ).det =
+    X * (A.submatrix (0 : Fin (m + 2)).succAbove Fin.succ).det +
+    (A.submatrix (1 : Fin (m + 2)).succAbove Fin.succ).det := by
+  rw [Finset.sum_eq_add_sum_diff_singleton (Finset.mem_univ 0)]
+  have h1_mem : (1 : Fin (m + 2)) ∈ Finset.univ \ {0} := by
+    simp only [Finset.mem_sdiff, Finset.mem_univ, Finset.mem_singleton, true_and]
+    exact Fin.ne_of_val_ne (by omega : (1 : ℕ) ≠ 0)
+  rw [Finset.sum_eq_add_sum_diff_singleton h1_mem]
+  have hrest : ∑ x ∈ ((Finset.univ : Finset (Fin (m + 2))) \ {0}) \ {1},
+      (-1) ^ (x : ℕ) * A x 0 * (A.submatrix x.succAbove Fin.succ).det = 0 := by
+    apply Finset.sum_eq_zero
+    intro i hi
+    simp only [Finset.mem_sdiff, Finset.mem_univ, Finset.mem_singleton, true_and] at hi
+    have hi2 : 2 ≤ i.val := by
+      have ⟨hne0, hne1⟩ := hi
+      have hne0' : i.val ≠ 0 := fun h => hne0 (Fin.ext h)
+      have hne1' : i.val ≠ 1 := fun h => hne1 (Fin.ext h)
+      omega
+    rw [hA_other i hi2]; ring
+  rw [hrest, add_zero]
+  simp only [Fin.val_zero, Fin.val_one, hA00, hA10, pow_zero, one_mul, pow_one, mul_neg, mul_one,
+    neg_neg]
 
 /-- The characteristic polynomial of the companion matrix equals the original polynomial.
 
@@ -497,7 +529,7 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     (companion p hp hn).charpoly = p := by
   obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne'
   induction n generalizing p with
-  | zero => exact companion_charpoly_base_case p hp hn hn_eq
+  | zero => exact companion_charpoly_of_natDegree_one p hp hn hn_eq
   | succ m IH =>
     have hdeg : p.natDegree = m + 2 := hn_eq
     let A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X] :=
@@ -510,54 +542,15 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
         ext i j; simp only [Matrix.submatrix_apply]; rfl
       rw [heq, Matrix.det_submatrix_equiv_self]
     rw [Matrix.charpoly, ← hA_det, Matrix.det_succ_column_zero]
-    -- Get column structure from helper lemma
-    obtain ⟨hA00, hA10, hA_other⟩ := companion_charmatrix_col_structure p hp hn m hdeg A hA_def
-    -- Simplify the sum to just two terms
-    have hsum :
-        ∑ i : Fin (m + 2), (-1) ^ (i : ℕ) * A i 0 * (A.submatrix i.succAbove Fin.succ).det =
-        (-1) ^ (0 : ℕ) * A 0 0 * (A.submatrix (0 : Fin (m + 2)).succAbove Fin.succ).det +
-        (-1) ^ (1 : ℕ) * A 1 0 *
-          (A.submatrix (1 : Fin (m + 2)).succAbove Fin.succ).det := by
-      rw [Finset.sum_eq_add_sum_diff_singleton (Finset.mem_univ 0)]
-      have h1_mem : (1 : Fin (m + 2)) ∈ Finset.univ \ {0} := by
-        simp only [Finset.mem_sdiff, Finset.mem_univ, Finset.mem_singleton, true_and]
-        exact Fin.ne_of_val_ne (by omega : (1 : ℕ) ≠ 0)
-      rw [Finset.sum_eq_add_sum_diff_singleton h1_mem]
-      have hrest : ∑ x ∈ ((Finset.univ : Finset (Fin (m + 2))) \ {0}) \ {1},
-          (-1) ^ (x : ℕ) * A x 0 * (A.submatrix x.succAbove Fin.succ).det = 0 := by
-        apply Finset.sum_eq_zero
-        intro i hi
-        simp only [Finset.mem_sdiff, Finset.mem_univ, Finset.mem_singleton, true_and] at hi
-        have hi2 : 2 ≤ i.val := by
-          have ⟨hne0, hne1⟩ := hi
-          have hne0' : i.val ≠ 0 := fun h => hne0 (Fin.ext h)
-          have hne1' : i.val ≠ 1 := fun h => hne1 (Fin.ext h)
-          omega
-        rw [hA_other i hi2]; ring
-      rw [hrest, add_zero]
-      simp only [Fin.val_zero, Fin.val_one]
-    rw [hsum, hA00, hA10]
-    simp only [pow_zero, one_mul, pow_one, mul_neg, mul_one, neg_neg]
-    -- Express p in terms of divX
-    have hp_eq : p = X * p.divX + Polynomial.C (p.coeff 0) := by
-      rw [Polynomial.ext_iff]
-      intro k
-      simp only [Polynomial.coeff_add, Polynomial.coeff_C]
-      rcases k with _ | k
-      · simp [Polynomial.divX]
-      · have hk_ne : k + 1 ≠ 0 := Nat.succ_ne_zero k
-        simp only [hk_ne, ↓reduceIte, add_zero, Polynomial.coeff_X_mul, Polynomial.coeff_divX]
-    rw [hp_eq]
-    congr 1
-    · -- X * det(minor00) = X * p.divX
-      congr 1
-      exact companion_charpoly_minor00_det p hp hn m hdeg A hA_def IH
-    · -- det(minor10) = C(p.coeff 0)
-      exact companion_charpoly_minor10_det p hp hn m hdeg A hA_def
+    -- Get column structure and apply Laplace simplification
+    obtain ⟨hA00, hA10, hA_other⟩ := companion_charmatrix_col_zero p hp hn m hdeg A hA_def
+    rw [companion_charmatrix_laplace_col_zero m A hA00 hA10 hA_other, ← Polynomial.X_mul_divX_add p,
+      companion_charmatrix_minor00_det p hp hn m hdeg A hA_def IH,
+      companion_charmatrix_minor10_det p hp hn m hdeg A hA_def]
 
 /-! ### Polynomial evaluation -/
 
-@[blueprint "lem:companion-aeval-zero"
+@[simp, blueprint "lem:companion-aeval-zero"
   (statement := /-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
   matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
   $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.

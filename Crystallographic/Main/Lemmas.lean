@@ -34,9 +34,9 @@ restriction theorem proof that could potentially be upstreamed to Mathlib.
 auxiliary lemmas, totient, coprime, prime power, matrix order, finset
 -/
 
-namespace Crystallographic
-
 /-! ### Finset sum/product inequalities -/
+
+namespace Finset
 
 /-- For a finset where all values of `f` are at least 2, the sum is bounded above by the product.
 
@@ -51,7 +51,7 @@ For upstreaming to Mathlib, this should be placed in `Mathlib.Algebra.Order.BigO
   Inductive step: if $\sum_{x \in s} f(x) \leq \prod_{x \in s} f(x)$ and $f(a) \geq 2$, then
   $\sum_{x \in s \cup \{a\}} f(x) = f(a) + \sum_s f \leq f(a) \cdot \prod_s f \leq \prod_{s \cup \{a\}} f$
   using $1 + y \leq 2y$ for $y \geq 1$ and $f(a) \geq 2$. -/)]
-lemma Finset.sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
+lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
     ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
   induction s using Finset.induction with
@@ -81,7 +81,7 @@ lemma Finset.sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
   $\sup_{x \in S} v_q(x)$. -/)
   (proof := /-- The $q$-adic valuation of $\mathrm{lcm}(S)$ is the maximum of $q$-adic valuations over elements of $S$.
   This follows from the definition of lcm via factorization: $v_q(\mathrm{lcm}(S)) = \sup_{x \in S} v_q(x)$. -/)]
-lemma Finset.lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
     (S.lcm f).factorization q ≤ S.sup (fun x => (f x).factorization q) := by
   induction S using Finset.induction with
@@ -105,16 +105,24 @@ lemma Finset.lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset 
       · have hIH := IH (fun x hx => hS_ne_zero x (Finset.mem_insert_of_mem hx))
         exact le_trans hIH le_sup_right
 
+end Finset
+
+namespace Crystallographic
+
 /-! ### Prime power divisor lemmas -/
 
-/-- For a prime power, if a finset of divisors has lcm equal to the prime power, then
-the prime power is in the finset. -/
+/-- For a prime power `p^k`, if a finset `S` of divisors of `p^k` has lcm equal to `p^k`,
+then `p^k` must be an element of `S`.
+
+The proof proceeds by contradiction: if `p^k ∉ S`, then every element of `S` is a proper
+divisor of `p^k`, hence divides `p^(k-1)`. But then `lcm(S) ∣ p^(k-1) < p^k`, contradicting
+that `lcm(S) = p^k`. -/
 @[blueprint "lem:primePow-mem-of-lcm-eq"
   (statement := /-- If $\mathrm{lcm}(S) = p^k$ and all elements of $S$ divide $p^k$,
   then $p^k \in S$. -/)
   (proof := /-- Since $\mathrm{lcm}(S) = p^k$ and all elements divide $p^k$, each element has form $p^j$ for some $j \leq k$.
   Taking lcm over these powers gives $p^{\max_j} = p^k$, so some element must have $j = k$, meaning $p^k \in S$. -/)]
-lemma primePow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset ℕ)
+lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
     p ^ k ∈ S := by
   by_contra hm_not_in
@@ -151,20 +159,16 @@ lemma primePow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset
   By the fact that $\varphi(n) = 1$ if and only if $n \in \{1, 2\}$,
   we conclude that $\varphi(n) \neq 1$.
   Also $\varphi(n) \neq 0$ since $n > 0$. Therefore $\varphi(n) \geq 2$. -/)]
-theorem totient_ge_two_of_gt_two (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n := by
-  have hn_pos : 0 < n := by omega
-  have hn_ne_one : n ≠ 1 := by omega
-  have hn_ne_two : n ≠ 2 := by omega
-  have htot_pos : 0 < Nat.totient n := Nat.totient_pos.mpr hn_pos
-  have htot_ne_one : Nat.totient n ≠ 1 := by
-    intro htot_eq1
-    have h12 := Nat.totient_eq_one_iff.mp htot_eq1
-    rcases h12 with h1 | h2
-    · exact hn_ne_one h1
-    · exact hn_ne_two h2
+theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n := by
+  have hpos := Nat.totient_pos.mpr (by omega : 0 < n)
+  have hne_one := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
   omega
 
+end Crystallographic
+
 /-! ### Coprime product divisibility -/
+
+namespace Finset
 
 /-- If each f(a) divides d and they're pairwise coprime, then ∏ f(a) divides d. -/
 @[blueprint "lem:prod-coprime-dvd"
@@ -174,7 +178,7 @@ theorem totient_ge_two_of_gt_two (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n :=
   Insert case: we have $f(q) \mid d$ and $\prod_{s'} f(r) \mid d$ by IH.
   Show $f(q)$ is coprime to $\prod_{s'} f(r)$ using `Nat.Coprime.prod_right`,
   then apply `Nat.Coprime.mul_dvd_of_dvd_of_dvd`. -/)]
-theorem Finset.prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
     (h_dvd : ∀ a ∈ S, f a ∣ d)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     (∏ a ∈ S, f a) ∣ d := by
@@ -197,7 +201,11 @@ theorem Finset.prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f
         (Finset.mem_insert_of_mem hr) hne
     exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs'_dvd
 
+end Finset
+
 /-! ### Totient and products -/
+
+namespace Nat
 
 /-- Euler's totient function distributes over products of pairwise coprime values.
 
@@ -213,7 +221,7 @@ For upstreaming to Mathlib, this should be placed in `Mathlib.Data.Nat.Totient`.
   (proof := /-- By induction on the finite set. Empty case: $\varphi(1) = 1$ equals empty product.
   Insert case: use $\varphi(ab) = \varphi(a)\varphi(b)$ for coprime $a, b$
   (`Nat.totient_mul`), where coprimality follows from `Nat.Coprime.prod_right`. -/)]
-theorem Nat.totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
   induction S using Finset.induction with
@@ -232,6 +240,10 @@ theorem Nat.totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Fi
     intro a₁ ha₁ a₂ ha₂ hne
     exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
       (Finset.mem_insert_of_mem ha₂) hne
+
+end Nat
+
+namespace Crystallographic
 
 /-! ### Matrix order for negation -/
 

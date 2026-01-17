@@ -41,6 +41,47 @@ if an N x N integer matrix has finite order m, then psi(m) <= N.
 crystallographic restriction, forward direction, minimal polynomial, eigenvalue, cyclotomic
 -/
 
+namespace Matrix
+
+open Polynomial
+
+/-- If the minimal polynomial of an integer matrix A divides X^k - 1, then A^k = 1.
+This transfers the polynomial identity back to the matrix via the ring homomorphism. -/
+lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
+    (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by
+  let A_Q := A.map (algebraMap ℤ ℚ)
+  -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
+  have haeval : aeval A_Q (X ^ k - 1 : ℚ[X]) = 0 := by
+    obtain ⟨q, hq⟩ := hdvd
+    rw [hq, map_mul, minpoly.aeval, zero_mul]
+  -- This means A_Q^k = 1
+  simp only [map_sub, map_pow, aeval_X, map_one, sub_eq_zero] at haeval
+  -- Transfer back to A via injectivity
+  have hinj : Function.Injective
+      (Matrix.map · (algebraMap ℤ ℚ) :
+        Matrix (Fin N) (Fin N) ℤ → Matrix (Fin N) (Fin N) ℚ) := by
+    intro M₁ M₂ heq
+    ext i j
+    have h := congrFun (congrFun heq i) j
+    simp only [Matrix.map_apply] at h
+    exact (algebraMap ℤ ℚ).injective_int h
+  apply hinj
+  change (A ^ k).map (algebraMap ℤ ℚ) =
+    (1 : Matrix (Fin N) (Fin N) ℤ).map (algebraMap ℤ ℚ)
+  rw [Matrix.map_pow, Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _)]
+  exact haeval
+
+/-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
+This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/
+lemma minpoly_dvd_X_pow_sub_one_of_pow_eq_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
+    (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by
+  apply minpoly.dvd
+  simp only [map_sub, map_pow, aeval_X, map_one]
+  rw [← Matrix.map_pow, hpow,
+    Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _), sub_self]
+
+end Matrix
+
 namespace Crystallographic
 
 open Matrix Polynomial
@@ -68,6 +109,125 @@ lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
       intro x hx
       exact cyclotomic.isCoprime_rat (fun heq => hd_notin (heq ▸ hx))
     exact hcop.mul_dvd hdvd_d hdvd_prod
+
+/-- For a divisor d not in the cyclotomic divisor set S of the minimal polynomial,
+the cyclotomic polynomial Φ_d is coprime to the minimal polynomial. -/
+lemma cyclotomic_coprime_minpoly_of_not_mem {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (d : ℕ) (hd_pos : 0 < d)
+    (hndvd : ¬cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ))) :
+    IsCoprime (cyclotomic d ℚ) (minpoly ℚ (A.map (algebraMap ℤ ℚ))) :=
+  (cyclotomic.irreducible_rat hd_pos).coprime_iff_not_dvd.mpr hndvd
+
+/-- If the minimal polynomial divides X^m - 1, then it divides the product of cyclotomic
+polynomials for divisors d where Φ_d divides the minimal polynomial.
+
+The proof uses coprimality: minpoly is coprime to Φ_d when Φ_d does not divide it
+(since Φ_d is irreducible), hence minpoly is coprime to the product of such Φ_d.
+Since X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d) and minpoly divides the LHS while
+being coprime to the second factor, it must divide the first factor. -/
+lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
+    (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
+    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
+    minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ ∏ d ∈ S, cyclotomic d ℚ := by
+  let A_Q := A.map (algebraMap ℤ ℚ)
+  -- Key: {x ∈ m.divisors | x ∈ S} = S since S ⊆ m.divisors
+  have hS_eq : m.divisors.filter (· ∈ S) = S := by
+    ext d
+    simp only [Finset.mem_filter]
+    exact ⟨fun ⟨_, hd⟩ => hd, fun hd => ⟨hS_sub hd, hd⟩⟩
+  -- minpoly is coprime to the product of cyclotomics NOT in S
+  have hcoprime_with_complement : IsCoprime (minpoly ℚ A_Q)
+      (∏ d ∈ m.divisors.filter (· ∉ S), cyclotomic d ℚ) :=
+    IsCoprime.prod_right fun d hd => by
+      have hd_div := (Finset.mem_filter.mp hd).1
+      have hd_not_in_S := (Finset.mem_filter.mp hd).2
+      have hndvd : ¬cyclotomic d ℚ ∣ minpoly ℚ A_Q := fun hdvd =>
+        hd_not_in_S ((hS_def d hd_div).mpr hdvd)
+      exact (cyclotomic_coprime_minpoly_of_not_mem A d (Nat.pos_of_mem_divisors hd_div) hndvd).symm
+  -- Split X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d)
+  have hprod_split : ∏ d ∈ m.divisors, cyclotomic d ℚ =
+      (∏ d ∈ S, cyclotomic d ℚ) * (∏ d ∈ m.divisors.filter (· ∉ S), cyclotomic d ℚ) := by
+    rw [← Finset.prod_filter_mul_prod_filter_not m.divisors (· ∈ S), hS_eq]
+  rw [← prod_cyclotomic_eq_X_pow_sub_one hm, hprod_split] at hminpoly_dvd
+  exact hcoprime_with_complement.dvd_of_dvd_mul_right hminpoly_dvd
+
+/-- For a polynomial that divides X^m - 1, we can characterize it as a product of cyclotomic
+polynomials. Specifically, S = {d ∈ divisors(m) | Φ_d ∣ p} gives minpoly = ∏_{d∈S} Φ_d
+when p is monic and irreducible factors are coprime. -/
+lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m)
+    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
+    ∃ S : Finset ℕ, (∀ d ∈ S, d ∣ m) ∧
+      minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ := by
+  classical
+  let A_Q := A.map (algebraMap ℤ ℚ)
+  let S := m.divisors.filter (fun d => cyclotomic d ℚ ∣ minpoly ℚ A_Q)
+  have hS_sub : S ⊆ m.divisors := Finset.filter_subset _ _
+  have hS_dvd : ∀ d ∈ S, d ∣ m := fun d hd =>
+    (Nat.mem_divisors.mp (Finset.mem_filter.mp hd).1).1
+  have hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ A_Q := fun d hd =>
+    ⟨fun hS => (Finset.mem_filter.mp hS).2, fun hdvd => Finset.mem_filter.mpr ⟨hd, hdvd⟩⟩
+  -- minpoly ∣ ∏_{d∈S} Φ_d (by coprimality argument)
+  have hminpoly_dvd_prod : minpoly ℚ A_Q ∣ ∏ d ∈ S, cyclotomic d ℚ :=
+    minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one A m hm S hS_sub hS_def hminpoly_dvd
+  -- ∏_{d∈S} Φ_d ∣ minpoly (by definition of S)
+  have hprod_dvd_minpoly : (∏ d ∈ S, cyclotomic d ℚ) ∣ minpoly ℚ A_Q :=
+    cyclotomic_finset_product_dvd S (fun d hd => (Finset.mem_filter.mp hd).2)
+  -- Equality by mutual divisibility of monic polynomials
+  exact ⟨S, hS_dvd, Polynomial.eq_of_monic_of_associated
+    (minpoly.monic (Matrix.isIntegral A_Q))
+    (Polynomial.monic_prod_of_monic _ _ (fun d _ => cyclotomic.monic d ℚ))
+    (associated_of_dvd_dvd hminpoly_dvd_prod hprod_dvd_minpoly)⟩
+
+/-- If A has order m and minpoly = ∏_{d∈S} Φ_d where S ⊆ divisors(m),
+then S.lcm id = m. This is the key lemma: if lcm(S) < m, then A^{lcm(S)} = 1,
+contradicting that A has exact order m. -/
+lemma cyclotomic_divisors_lcm_eq_of_orderOf {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m) (hA_ord : orderOf A = m)
+    (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)
+    (hminpoly_eq_prod : minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ) :
+    S.lcm id = m := by
+  let A_Q := A.map (algebraMap ℤ ℚ)
+  -- If lcm(S) < m, then minpoly | X^{lcm(S)} - 1, so A^{lcm(S)} = 1
+  -- This contradicts orderOf A = m
+  by_contra hne
+  have hlcm_dvd_m : S.lcm id ∣ m := Finset.lcm_dvd (fun d hd => hS_sub d hd)
+  have hlcm_le : S.lcm id ≤ m := Nat.le_of_dvd hm hlcm_dvd_m
+  have hlcm_lt : S.lcm id < m := Nat.lt_of_le_of_ne hlcm_le hne
+  -- minpoly | ∏_{d|lcm(S)} Φ_d = X^{lcm(S)} - 1
+  have hlcm_pos : 0 < S.lcm id := by
+    by_cases hS_empty : S = ∅
+    · -- If S = ∅, then minpoly = 1 (empty product), contradiction since
+      -- minpoly has positive degree
+      simp only [hS_empty, Finset.prod_empty] at hminpoly_eq_prod
+      have hdeg := minpoly.natDegree_pos (Matrix.isIntegral A_Q)
+      rw [hminpoly_eq_prod, natDegree_one] at hdeg
+      omega
+    · have hne_zero : S.lcm id ≠ 0 := Finset.lcm_ne_zero_iff.mpr fun d hd =>
+        (Nat.pos_of_mem_divisors (Nat.mem_divisors.mpr ⟨hS_sub d hd, hm.ne'⟩)).ne'
+      exact Nat.pos_of_ne_zero hne_zero
+  -- Helper: X^d - 1 | X^n - 1 when d | n
+  have X_pow_sub_one_dvd : ∀ (d n : ℕ), d ∣ n → (X ^ d - 1 : ℚ[X]) ∣ X ^ n - 1 := by
+    intro d n hdvd
+    obtain ⟨k, hk⟩ := hdvd
+    rw [hk]
+    exact pow_one_sub_dvd_pow_mul_sub_one X d k
+  have hminpoly_dvd_lcm : minpoly ℚ A_Q ∣ X ^ (S.lcm id) - 1 := by
+    rw [hminpoly_eq_prod]
+    apply cyclotomic_finset_product_dvd
+    intro d hd
+    have hd_dvd_lcm : d ∣ S.lcm id := Finset.dvd_lcm hd
+    calc cyclotomic d ℚ ∣ X ^ d - 1 := cyclotomic.dvd_X_pow_sub_one d ℚ
+      _ ∣ X ^ (S.lcm id) - 1 := X_pow_sub_one_dvd d (S.lcm id) hd_dvd_lcm
+  -- Therefore A^{lcm(S)} = 1
+  have hpow_lcm : A ^ (S.lcm id) = 1 :=
+    Matrix.pow_eq_one_of_minpoly_dvd_X_pow_sub_one A (S.lcm id) hminpoly_dvd_lcm
+  -- But orderOf A = m > lcm(S), so orderOf A | lcm(S) is false
+  have hord_dvd := orderOf_dvd_of_pow_eq_one hpow_lcm
+  rw [hA_ord] at hord_dvd
+  have := Nat.le_of_dvd hlcm_pos hord_dvd
+  omega
 
 /-- If an N x N integer matrix has finite order m, then psi(m) <= N.
 
@@ -123,16 +283,14 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
   rcases Nat.eq_zero_or_pos N with rfl | hN_pos
   · -- N = 0: The only 0×0 matrix is empty, with order 1
     haveI : IsEmpty (Fin 0) := Fin.isEmpty
-    -- Any two 0×0 matrices are equal since there are no indices
     have hA_eq_1 : A = 1 := Matrix.ext fun i => Fin.elim0 i
     rw [hA_eq_1, orderOf_one] at hA_ord
     subst hA_ord
     simp [Crystallographic.psi_one]
-  · -- N > 0: Use psi ≤ φ ≤ N via minimal polynomial degree bounds
+  · -- N > 0: Use psi ≤ deg(minpoly) ≤ deg(charpoly) = N
     haveI : NeZero N := ⟨Nat.pos_iff_ne_zero.mp hN_pos⟩
     let A_Q := A.map (algebraMap ℤ ℚ)
-    -- The minimal polynomial over ℚ is the key object
-    -- Its degree satisfies: psi(m) ≤ deg(minpoly) ≤ deg(charpoly) = N
+    -- The minimal polynomial degree is at most N
     have hminpoly_deg_le : (minpoly ℚ A_Q).natDegree ≤ N := by
       have hdvd := Matrix.minpoly_dvd_charpoly A_Q
       have hne : A_Q.charpoly ≠ 0 := (Matrix.charpoly_monic A_Q).ne_zero
@@ -142,144 +300,18 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
         _ = N := Fintype.card_fin N
     -- minpoly | X^m - 1 since A^m = 1
     have hpow : A ^ m = 1 := by rw [← hA_ord]; exact pow_orderOf_eq_one A
-    have pow_eq_one_of_minpoly_dvd : ∀ k : ℕ, minpoly ℚ A_Q ∣ X ^ k - 1 → A ^ k = 1 := by
-      intro k hdvd
-      -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
-      have haeval : aeval A_Q (X ^ k - 1 : ℚ[X]) = 0 := by
-        obtain ⟨q, hq⟩ := hdvd
-        rw [hq, map_mul, minpoly.aeval, zero_mul]
-      -- This means A_Q^k = 1
-      simp only [map_sub, map_pow, aeval_X, map_one, sub_eq_zero] at haeval
-      -- Transfer back to A via injectivity
-      have hinj : Function.Injective
-          (Matrix.map · (algebraMap ℤ ℚ) :
-            Matrix (Fin N) (Fin N) ℤ → Matrix (Fin N) (Fin N) ℚ) := by
-        intro M₁ M₂ heq
-        ext i j
-        have h := congrFun (congrFun heq i) j
-        simp only [Matrix.map_apply] at h
-        exact (algebraMap ℤ ℚ).injective_int h
-      apply hinj
-      change (A ^ k).map (algebraMap ℤ ℚ) =
-        (1 : Matrix (Fin N) (Fin N) ℤ).map (algebraMap ℤ ℚ)
-      rw [Matrix.map_pow, Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _)]
-      exact haeval
-    -- The minimal polynomial divides X^m - 1 = ∏_{d|m} Φ_d
-    have hminpoly_dvd : minpoly ℚ A_Q ∣ X ^ m - 1 := by
-      apply minpoly.dvd
-      simp only [map_sub, map_pow, aeval_X, map_one]
-      rw [← Matrix.map_pow, hpow,
-        Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _), sub_self]
-    -- The key algebraic fact: minpoly = ∏_{d∈S} Φ_d for some S ⊆ divisors(m),
-    -- and lcm(S) = m.
-    -- The degree equals ∑_{d∈S} φ(d) ≥ psi(m) by sum_totient_ge_psi_of_lcm_eq.
-    --
-    -- We prove this by showing that the set S of divisors d where Φ_d | minpoly has:
-    -- 1. minpoly = ∏_{d∈S} Φ_d (since cyclotomics are irreducible and pairwise coprime)
-    -- 2. lcm(S) = m (since otherwise orderOf A < m)
-    --
-    -- Define S = {d ∈ divisors(m) | Φ_d ∣ minpoly ℚ A_Q}
-    classical
-    let S : Finset ℕ := m.divisors.filter (fun d => cyclotomic d ℚ ∣ minpoly ℚ A_Q)
-    -- Every element of S divides m
-    have hS_sub : ∀ d ∈ S, d ∣ m := by
-      intro d hd
-      have hd' := Finset.mem_filter.mp hd
-      exact Nat.mem_divisors.mp hd'.1 |>.1
-    -- The minpoly is the product of Φ_d for d ∈ S (by unique factorization)
-    -- First, show that minpoly ∣ ∏_{d∈S} Φ_d
-    have hminpoly_dvd_prod : minpoly ℚ A_Q ∣ ∏ d ∈ S, cyclotomic d ℚ := by
-      have hcoprime_outside : ∀ d ∈ m.divisors, d ∉ S →
-          IsCoprime (cyclotomic d ℚ) (minpoly ℚ A_Q) := by
-        intro d hd hd_not_in_S
-        have hd_pos : 0 < d := Nat.pos_of_mem_divisors hd
-        have hirr : Irreducible (cyclotomic d ℚ) := cyclotomic.irreducible_rat hd_pos
-        have hndvd : ¬(cyclotomic d ℚ ∣ minpoly ℚ A_Q) := by
-          intro hdvd
-          apply hd_not_in_S
-          exact Finset.mem_filter.mpr ⟨hd, hdvd⟩
-        -- Since Φ_d is irreducible and doesn't divide minpoly, they're coprime
-        exact (EuclideanDomain.dvd_or_coprime _ _ hirr).resolve_left hndvd
-      -- minpoly | ∏_{d|m} Φ_d = ∏_{d∈S} Φ_d * ∏_{d∉S} Φ_d
-      -- and minpoly is coprime with ∏_{d∉S} Φ_d (since coprime with each factor)
-      -- so minpoly | ∏_{d∈S} Φ_d
-      have hprod_split : ∏ d ∈ m.divisors, cyclotomic d ℚ =
-          (∏ d ∈ S, cyclotomic d ℚ) *
-          (∏ d ∈ m.divisors.filter (· ∉ S), cyclotomic d ℚ) := by
-        rw [← Finset.prod_filter_mul_prod_filter_not m.divisors (· ∈ S)]
-        -- Need to show {x ∈ m.divisors | x ∈ S} = S
-        -- Since S = m.divisors.filter _, S ⊆ m.divisors, so this holds
-        have hS_eq : m.divisors.filter (· ∈ S) = S := by
-          ext d
-          simp only [Finset.mem_filter]
-          constructor
-          · intro ⟨_, hd⟩; exact hd
-          · intro hd; exact ⟨Finset.mem_filter.mp hd |>.1, hd⟩
-        rw [hS_eq]
-      have hcoprime_with_complement : IsCoprime (minpoly ℚ A_Q)
-          (∏ d ∈ m.divisors.filter (· ∉ S), cyclotomic d ℚ) := by
-        apply IsCoprime.prod_right
-        intro d hd
-        have hd_in_div : d ∈ m.divisors := Finset.mem_of_mem_filter d hd
-        have hd_not_in_S : d ∉ S := (Finset.mem_filter.mp hd).2
-        exact (hcoprime_outside d hd_in_div hd_not_in_S).symm
-      rw [← prod_cyclotomic_eq_X_pow_sub_one hm, hprod_split] at hminpoly_dvd
-      exact hcoprime_with_complement.dvd_of_dvd_mul_right hminpoly_dvd
-    -- Conversely, ∏_{d∈S} Φ_d ∣ minpoly (by definition of S and coprimality)
-    have hprod_dvd_minpoly : (∏ d ∈ S, cyclotomic d ℚ) ∣ minpoly ℚ A_Q :=
-      cyclotomic_finset_product_dvd S (fun d hd => (Finset.mem_filter.mp hd).2)
-    -- Therefore minpoly = ∏_{d∈S} Φ_d (up to units, but both are monic)
-    have hminpoly_eq_prod : minpoly ℚ A_Q = ∏ d ∈ S, cyclotomic d ℚ := by
-      apply Polynomial.eq_of_monic_of_associated
-      · exact minpoly.monic (Matrix.isIntegral A_Q)
-      · exact Polynomial.monic_prod_of_monic _ _ (fun d _ => cyclotomic.monic d ℚ)
-      · exact associated_of_dvd_dvd hminpoly_dvd_prod hprod_dvd_minpoly
-    -- Now show lcm(S) = m
-    have hS_lcm : S.lcm id = m := by
-      -- If lcm(S) < m, then minpoly | X^{lcm(S)} - 1, so A^{lcm(S)} = 1
-      -- This contradicts orderOf A = m
-      by_contra hne
-      have hlcm_dvd_m : S.lcm id ∣ m := Finset.lcm_dvd (fun d hd => hS_sub d hd)
-      have hlcm_le : S.lcm id ≤ m := Nat.le_of_dvd hm hlcm_dvd_m
-      have hlcm_lt : S.lcm id < m := Nat.lt_of_le_of_ne hlcm_le hne
-      -- minpoly | ∏_{d|lcm(S)} Φ_d = X^{lcm(S)} - 1
-      have hlcm_pos : 0 < S.lcm id := by
-        by_cases hS_empty : S = ∅
-        · -- If S = ∅, then minpoly = 1 (empty product), contradiction since
-          -- minpoly has positive degree
-          simp only [hS_empty, Finset.prod_empty] at hminpoly_eq_prod
-          have hdeg := minpoly.natDegree_pos (Matrix.isIntegral A_Q)
-          rw [hminpoly_eq_prod, natDegree_one] at hdeg
-          omega
-        · have hne_zero : S.lcm id ≠ 0 := Finset.lcm_ne_zero_iff.mpr fun d hd =>
-            (Nat.pos_of_mem_divisors (Nat.mem_divisors.mpr ⟨hS_sub d hd, hm.ne'⟩)).ne'
-          exact Nat.pos_of_ne_zero hne_zero
-      -- Helper: X^d - 1 | X^n - 1 when d | n
-      have X_pow_sub_one_dvd : ∀ (d n : ℕ), d ∣ n → (X ^ d - 1 : ℚ[X]) ∣ X ^ n - 1 := by
-        intro d n hdvd
-        obtain ⟨k, hk⟩ := hdvd
-        rw [hk]
-        exact pow_one_sub_dvd_pow_mul_sub_one X d k
-      have hminpoly_dvd_lcm : minpoly ℚ A_Q ∣ X ^ (S.lcm id) - 1 := by
-        rw [hminpoly_eq_prod]
-        apply cyclotomic_finset_product_dvd
-        intro d hd
-        have hd_dvd_lcm : d ∣ S.lcm id := Finset.dvd_lcm hd
-        calc cyclotomic d ℚ ∣ X ^ d - 1 := cyclotomic.dvd_X_pow_sub_one d ℚ
-          _ ∣ X ^ (S.lcm id) - 1 := X_pow_sub_one_dvd d (S.lcm id) hd_dvd_lcm
-      -- Therefore A^{lcm(S)} = 1
-      have hpow_lcm : A ^ (S.lcm id) = 1 := pow_eq_one_of_minpoly_dvd (S.lcm id) hminpoly_dvd_lcm
-      -- But orderOf A = m > lcm(S), so orderOf A | lcm(S) is false
-      have hord_dvd := orderOf_dvd_of_pow_eq_one hpow_lcm
-      rw [hA_ord] at hord_dvd
-      have := Nat.le_of_dvd hlcm_pos hord_dvd
-      omega
-    -- Now compute the degree
+    have hminpoly_dvd : minpoly ℚ A_Q ∣ X ^ m - 1 :=
+      Matrix.minpoly_dvd_X_pow_sub_one_of_pow_eq_one A m hpow
+    -- Get S and the product decomposition from helper lemma
+    obtain ⟨S, hS_sub, hminpoly_eq_prod⟩ :=
+      minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one A m hm hminpoly_dvd
+    -- The lcm of S equals m (otherwise order would be smaller)
+    have hS_lcm : S.lcm id = m :=
+      cyclotomic_divisors_lcm_eq_of_orderOf A m hm hA_ord S hS_sub hminpoly_eq_prod
+    -- Compute the degree as sum of totients
     have hdeg_eq : (minpoly ℚ A_Q).natDegree = ∑ d ∈ S, Nat.totient d := by
-      rw [hminpoly_eq_prod, Polynomial.natDegree_prod _ _ (fun d hd => cyclotomic_ne_zero d ℚ)]
-      apply Finset.sum_congr rfl
-      intro d hd
-      exact natDegree_cyclotomic d ℚ
+      rw [hminpoly_eq_prod, Polynomial.natDegree_prod _ _ (fun d _ => cyclotomic_ne_zero d ℚ)]
+      exact Finset.sum_congr rfl (fun d _ => natDegree_cyclotomic d ℚ)
     -- Apply sum_totient_ge_psi_of_lcm_eq
     calc Crystallographic.psi m ≤ ∑ d ∈ S, Nat.totient d :=
         sum_totient_ge_psi_of_lcm_eq m hm S hS_sub hS_lcm

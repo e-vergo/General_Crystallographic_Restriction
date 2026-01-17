@@ -49,6 +49,86 @@ lemma companion_cyclotomic_pow_eq_one (m : ℕ)
   apply companion_pow_eq_one_of_dvd
   exact cyclotomic.dvd_X_pow_sub_one m ℤ
 
+/-- For the companion matrix of cyclotomic m ℤ, the minimal polynomial over ℚ equals cyclotomic m ℚ.
+This uses that minpoly | charpoly = cyclotomic, and cyclotomic is monic irreducible over ℚ. -/
+lemma companion_cyclotomic_minpoly (m : ℕ) (hm_pos : 0 < m)
+    (hn : 0 < (cyclotomic m ℤ).natDegree) :
+    let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
+    let AQ := A.map (algebraMap ℤ ℚ)
+    minpoly ℚ AQ = cyclotomic m ℚ := by
+  intro A AQ
+  -- minpoly divides charpoly, and charpoly = cyclotomic m Q
+  have hcharpoly : AQ.charpoly = cyclotomic m ℚ := by
+    have h1 : AQ.charpoly = (A.charpoly).map (algebraMap ℤ ℚ) := by
+      rw [Matrix.charpoly_map]
+    have hmap_eq : (cyclotomic m ℤ).map (algebraMap ℤ ℚ) = cyclotomic m ℚ := by
+      have h : algebraMap ℤ ℚ = Int.castRingHom ℚ := rfl
+      rw [h, map_cyclotomic_int]
+    rw [h1, companion_charpoly, hmap_eq]
+  -- cyclotomic m Q is irreducible over Q
+  have hirr : Irreducible (cyclotomic m ℚ) := cyclotomic.irreducible_rat hm_pos
+  have hdvd := Matrix.minpoly_dvd_charpoly AQ
+  rw [hcharpoly] at hdvd
+  -- minpoly | cyclotomic, cyclotomic irreducible
+  -- By Irreducible.dvd_iff: minpoly | cycl <-> IsUnit minpoly or Associated cycl minpoly
+  rcases hirr.dvd_iff.mp hdvd with hunit | hassoc
+  · -- minpoly is unit, impossible since minpoly ≠ 1
+    haveI : Nonempty (Fin (cyclotomic m ℤ).natDegree) := ⟨⟨0, hn⟩⟩
+    exact (minpoly.ne_one ℚ AQ ((minpoly.monic (Matrix.isIntegral AQ)).eq_one_of_isUnit hunit)).elim
+  · -- Associated cyclotomic minpoly, so they're equal since both are monic
+    have hmonic1 := minpoly.monic (Matrix.isIntegral AQ)
+    have hmonic2 := cyclotomic.monic m ℚ
+    exact eq_of_monic_of_associated hmonic1 hmonic2 hassoc.symm
+
+/-- A divisor cannot be strictly greater than a positive number. -/
+lemma Nat.not_dvd_of_pos_of_lt {m k : ℕ} (hk_pos : 0 < k) (hk_lt : k < m) : ¬m ∣ k := by
+  intro hdvd
+  exact Nat.not_lt.mpr (Nat.le_of_dvd hk_pos hdvd) hk_lt
+
+/-- If cyclotomic m ℚ divides X^k - 1 for 0 < k, then m ∣ k.
+This uses the factorization X^k - 1 = ∏_{d|k} Φ_d and that cyclotomic polynomials
+are coprime for different indices. -/
+lemma dvd_of_cyclotomic_dvd_X_pow_sub_one (m k : ℕ) (hm_pos : 0 < m)
+    (hk_pos : 0 < k) (hdvd : cyclotomic m ℚ ∣ (X ^ k - 1 : ℚ[X])) :
+    m ∣ k := by
+  -- cyclotomic m Q is irreducible over Q
+  have hirr : Irreducible (cyclotomic m ℚ) := cyclotomic.irreducible_rat hm_pos
+  -- Use that X^k - 1 = prod_{d | k} cyclotomic d
+  rw [← prod_cyclotomic_eq_X_pow_sub_one hk_pos ℚ] at hdvd
+  -- cyclotomic m Q divides the product prod_{d | k} cyclotomic d Q
+  -- Since cyclotomic polynomials are pairwise coprime (for different indices),
+  -- and cyclotomic m is irreducible, it must equal one of the factors
+  by_contra hndvd
+  have hm_notin : m ∉ k.divisors := by
+    simp only [Nat.mem_divisors]
+    push_neg
+    intro hd
+    -- If m | k then m <= k (since k > 0), but k < m, contradiction
+    have hle : m ≤ k := Nat.le_of_dvd hk_pos hd
+    omega
+  -- cyclotomic m | prod_{d | k} cyclotomic d, but m notin k.divisors
+  -- This is impossible because cyclotomics for different indices are coprime
+  -- If p is irreducible and divides a product of pairwise coprime terms,
+  -- it must divide one of them
+  have hex : ∃ d ∈ k.divisors, cyclotomic m ℚ ∣ cyclotomic d ℚ := by
+    have huf := UniqueFactorizationMonoid.irreducible_iff_prime.mp hirr
+    exact Prime.exists_mem_finset_dvd huf hdvd
+  obtain ⟨d, hd_mem, hdvd_d⟩ := hex
+  -- cyclotomic m | cyclotomic d, both monic irreducible, so they're equal
+  -- Since cyclotomic is injective on indices (over CharZero), m = d
+  have heq : m = d := by
+    have hirr_d : Irreducible (cyclotomic d ℚ) := by
+      have hd_pos : 0 < d := Nat.pos_of_mem_divisors hd_mem
+      exact cyclotomic.irreducible_rat hd_pos
+    -- Two monic irreducible polynomials where one divides the other must be equal
+    have hmonic_m := cyclotomic.monic m ℚ
+    have hmonic_d := cyclotomic.monic d ℚ
+    have hassoc : Associated (cyclotomic m ℚ) (cyclotomic d ℚ) :=
+      associated_of_dvd_dvd hdvd_d (hirr.dvd_symm hirr_d hdvd_d)
+    exact cyclotomic_injective (eq_of_monic_of_associated hmonic_m hmonic_d hassoc)
+  rw [heq] at hm_notin
+  exact hm_notin hd_mem
+
 @[blueprint "thm:companion-cycl-order"
   (statement := /-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
   because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
@@ -74,142 +154,21 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     have haeval_zero : aeval A (X ^ k - (1 : ℤ[X])) = 0 := by
       simp only [map_sub, map_pow, aeval_X, map_one]
       rw [hAk, sub_self]
-    -- We also have aeval A (cyclotomic m Z) = 0
-    have hcycl_zero : aeval A (cyclotomic m ℤ) = 0 :=
-      companion_aeval_eq_zero (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-    -- Map everything to Q and work there
-    -- Let AQ be the matrix over Q
+    -- Map to Q and work there
     let AQ := A.map (algebraMap ℤ ℚ)
-    -- Both polynomials annihilate AQ
     have haeval_Q_zero : aeval AQ ((X ^ k - 1 : ℤ[X]).map (algebraMap ℤ ℚ)) = 0 := by
       have : AQ = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
       rw [this, aeval_map_algebraMap, aeval_algHom_apply, haeval_zero, map_zero]
-    have hcycl_Q_zero : aeval AQ ((cyclotomic m ℤ).map (algebraMap ℤ ℚ)) = 0 := by
-      have : AQ = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
-      rw [this, aeval_map_algebraMap, aeval_algHom_apply, hcycl_zero, map_zero]
-    -- Simplify the mapped polynomials
     simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_one]
       at haeval_Q_zero
-    -- Convert algebraMap Z Q to Int.castRingHom Q for map_cyclotomic_int
-    have hmap_eq : (cyclotomic m ℤ).map (algebraMap ℤ ℚ) = cyclotomic m ℚ := by
-      have h1 : algebraMap ℤ ℚ = Int.castRingHom ℚ := rfl
-      rw [h1, map_cyclotomic_int]
-    rw [hmap_eq] at hcycl_Q_zero
-    -- minpoly Q AQ divides both X^k - 1 and cyclotomic m Q
+    -- minpoly Q AQ divides X^k - 1
     have hdvd1 : minpoly ℚ AQ ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ AQ haeval_Q_zero
-    have hdvd2 : minpoly ℚ AQ ∣ cyclotomic m ℚ := minpoly.dvd ℚ AQ hcycl_Q_zero
-    -- minpoly divides charpoly, and charpoly = cyclotomic m Q
-    have hcharpoly : AQ.charpoly = cyclotomic m ℚ := by
-      -- charpoly(A.map f) = (charpoly A).map f for ring homs
-      have h1 : AQ.charpoly = (A.charpoly).map (algebraMap ℤ ℚ) := by
-        rw [Matrix.charpoly_map]
-      rw [h1, companion_charpoly, hmap_eq]
-    -- cyclotomic m Q is irreducible over Q
-    have hirr : Irreducible (cyclotomic m ℚ) := cyclotomic.irreducible_rat hm_pos
-    -- Since minpoly | cyclotomic (irreducible), minpoly = 1 or minpoly = cyclotomic
-    -- But minpoly has degree >= 1 (AQ is not in Q), so minpoly = cyclotomic m Q (up to unit)
-    have hminpoly_eq : minpoly ℚ AQ = cyclotomic m ℚ := by
-      have hdvd := Matrix.minpoly_dvd_charpoly AQ
-      rw [hcharpoly] at hdvd
-      -- minpoly | cyclotomic, cyclotomic irreducible
-      -- By Irreducible.dvd_iff: minpoly | cycl <-> IsUnit minpoly or Associated cycl minpoly
-      rcases hirr.dvd_iff.mp hdvd with hunit | hassoc
-      · -- minpoly is unit, impossible since minpoly is monic and evaluates to zero at AQ
-        exfalso
-        -- If minpoly is a unit, it must be a constant polynomial
-        -- But minpoly is monic, so it would have to be 1
-        -- But aeval AQ (minpoly) = 0, so 1 = 0, contradiction
-        have hmonic := minpoly.monic (Matrix.isIntegral AQ)
-        have haeval_minpoly := minpoly.aeval ℚ AQ
-        -- For a unit polynomial over a field to be monic, it must equal 1
-        have hunit_eq : minpoly ℚ AQ = 1 := by
-          rcases Polynomial.isUnit_iff.mp hunit with ⟨c, hc, heq⟩
-          rw [← heq] at hmonic
-          -- Monic (C c) means leadingCoeff (C c) = 1
-          -- For nonzero c, leadingCoeff (C c) = c
-          -- So c = 1
-          have hc_one : c = 1 := by
-            unfold Polynomial.Monic at hmonic
-            simp only [Polynomial.leadingCoeff_C] at hmonic
-            exact hmonic
-          simp [← heq, hc_one]
-        rw [hunit_eq] at haeval_minpoly
-        simp only [Polynomial.aeval_one] at haeval_minpoly
-        -- haeval_minpoly : (1 : Matrix _ _ Q) = 0, which is false
-        -- The matrix ring is nontrivial since the dimension is positive
-        haveI : Nonempty (Fin (cyclotomic m ℤ).natDegree) := ⟨⟨0, hn⟩⟩
-        -- (1 : Matrix n n R) (i, i) = 1 != 0 for nontrivial R
-        have h1ne0 : (1 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-            (Fin (cyclotomic m ℤ).natDegree) ℚ) ≠ 0 := by
-          intro h0
-          have : (1 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-              (Fin (cyclotomic m ℤ).natDegree) ℚ) ⟨0, hn⟩ ⟨0, hn⟩ =
-              (0 : Matrix (Fin (cyclotomic m ℤ).natDegree)
-              (Fin (cyclotomic m ℤ).natDegree) ℚ) ⟨0, hn⟩ ⟨0, hn⟩ := by rw [h0]
-          simp only [Matrix.one_apply_eq, Matrix.zero_apply] at this
-          exact one_ne_zero this
-        exact h1ne0 haeval_minpoly
-      · -- Associated cyclotomic minpoly, so they're equal since both are monic
-        have hmonic1 := minpoly.monic (Matrix.isIntegral AQ)
-        have hmonic2 := cyclotomic.monic m ℚ
-        exact eq_of_monic_of_associated hmonic1 hmonic2 hassoc.symm
+    -- Use helper lemma: minpoly = cyclotomic m Q
+    have hminpoly_eq : minpoly ℚ AQ = cyclotomic m ℚ := companion_cyclotomic_minpoly m hm_pos hn
     -- So cyclotomic m Q | X^k - 1
     rw [hminpoly_eq] at hdvd1
-    -- But cyclotomic m only divides X^n - 1 when m | n
-    -- X^k - 1 = prod_{d | k} cyclotomic d Q
-    -- So cyclotomic m | X^k - 1 iff m in k.divisors iff m | k
-    have hm_dvd_k : m ∣ k := by
-      -- Use that X^k - 1 = prod_{d | k} cyclotomic d
-      rw [← prod_cyclotomic_eq_X_pow_sub_one hk_pos ℚ] at hdvd1
-      -- cyclotomic m Q divides the product prod_{d | k} cyclotomic d Q
-      -- Since cyclotomic polynomials are pairwise coprime (for different indices),
-      -- and cyclotomic m is irreducible, it must equal one of the factors
-      -- i.e., m in k.divisors
-      have hcoprime : ∀ i j : ℕ, i ∈ k.divisors → j ∈ k.divisors → i ≠ j →
-          IsCoprime (cyclotomic i ℚ) (cyclotomic j ℚ) := by
-        intro i j _ _ hij
-        exact cyclotomic.isCoprime_rat hij
-      -- cyclotomic m is irreducible
-      -- If it divides a product of coprimes, it must divide one factor
-      -- Use Finset.prod_dvd_of_isUnit_of_dvd or similar
-      by_contra hndvd
-      have hm_notin : m ∉ k.divisors := by
-        simp only [Nat.mem_divisors]
-        push_neg
-        intro hd
-        -- If m | k then m <= k (since k > 0), but k < m, contradiction
-        have hle : m ≤ k := Nat.le_of_dvd hk_pos hd
-        omega
-      -- cyclotomic m | prod_{d | k} cyclotomic d, but m notin k.divisors
-      -- This is impossible because cyclotomics for different indices are coprime
-      have : cyclotomic m ℚ ∣ ∏ d ∈ k.divisors, cyclotomic d ℚ := hdvd1
-      -- If p is irreducible and divides a product of pairwise coprime terms,
-      -- it must divide one of them
-      have hex : ∃ d ∈ k.divisors, cyclotomic m ℚ ∣ cyclotomic d ℚ := by
-        -- Use the fact that irreducible dividing product of coprime terms
-        -- means it divides one of them
-        -- This follows from unique factorization
-        have huf := UniqueFactorizationMonoid.irreducible_iff_prime.mp hirr
-        exact Prime.exists_mem_finset_dvd huf this
-      obtain ⟨d, hd_mem, hdvd_d⟩ := hex
-      -- cyclotomic m | cyclotomic d, both monic irreducible, so they're equal
-      -- Since cyclotomic is injective on indices (over CharZero), m = d
-      have heq : m = d := by
-        have hirr_d : Irreducible (cyclotomic d ℚ) := by
-          have hd_pos : 0 < d := Nat.pos_of_mem_divisors hd_mem
-          exact cyclotomic.irreducible_rat hd_pos
-        -- Two monic irreducible polynomials where one divides the other must be equal
-        have hmonic_m := cyclotomic.monic m ℚ
-        have hmonic_d := cyclotomic.monic d ℚ
-        have hassoc : Associated (cyclotomic m ℚ) (cyclotomic d ℚ) :=
-          associated_of_dvd_dvd hdvd_d (hirr.dvd_symm hirr_d hdvd_d)
-        exact cyclotomic_injective (eq_of_monic_of_associated hmonic_m hmonic_d hassoc)
-      rw [heq] at hm_notin
-      exact hm_notin hd_mem
-    -- m | k and 0 < k < m is a contradiction
-    have : k < m := hk
-    have : m ≤ k := Nat.le_of_dvd hk_pos hm_dvd_k
-    omega
+    -- Use helper lemma: cyclotomic m | X^k - 1 implies m | k (contradiction since k < m)
+    exact Nat.not_dvd_of_pos_of_lt hk_pos hk (dvd_of_cyclotomic_dvd_X_pow_sub_one m k hm_pos hk_pos hdvd1)
 
 /-! ### Integer matrix membership -/
 
