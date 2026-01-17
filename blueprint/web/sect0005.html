@@ -121,7 +121,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
+    (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
     (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by
   let A_Q := A.map (algebraMap ℤ ℚ)
   -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
@@ -137,7 +138,7 @@
     (1 : Matrix (Fin N) (Fin N) ℤ).map (algebraMap ℤ ℚ)
   rw [Matrix.map_pow, Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _)]
   exact haeval</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L56-L56" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L48-L71" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -202,13 +203,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_dvd_X_pow_sub_one_of_pow_eq_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_dvd_X_pow_sub_one_of_pow_eq_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
+    (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
     (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by
   apply minpoly.dvd
   simp only [map_sub, map_pow, aeval_X, map_one]
   rw [← Matrix.map_pow, hpow,
     Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _), sub_self]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L80-L80" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L73-L85" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -273,7 +275,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{target : ℚ[X]} (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
+    (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
+    (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by</span></code><code class="lean-proof-body"><span class="lean-plain">{target : ℚ[X]} (S : Finset ℕ)
     (hdvd_each : ∀ d ∈ S, cyclotomic d ℚ ∣ target) :
     (∏ d ∈ S, cyclotomic d ℚ) ∣ target := by
   induction S using Finset.induction with
@@ -288,7 +292,7 @@
       intro x hx
       exact cyclotomic.isCoprime_rat (fun heq =&gt; hd_notin (heq ▸ hx))
     exact hcop.mul_dvd hdvd_d hdvd_prod</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L101-L101" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L93-L115" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -373,7 +377,11 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
+    (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
+    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
+    minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
     (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
     (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
@@ -399,7 +407,7 @@
     rw [← Finset.prod_filter_mul_prod_filter_not m.divisors (· ∈ S), hS_eq]
   rw [← prod_cyclotomic_eq_X_pow_sub_one hm, hprod_split] at hminpoly_dvd
   exact hcoprime_with_complement.dvd_of_dvd_mul_right hminpoly_dvd</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L140-L140" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L125-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -490,7 +498,11 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m)
+    (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
+    ∃ S : Finset ℕ, (∀ d ∈ S, d ∣ m) ∧
+      minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m)
     (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
     ∃ S : Finset ℕ, (∀ d ∈ S, d ∣ m) ∧
@@ -514,7 +526,7 @@
     (minpoly.monic (Matrix.isIntegral A_Q))
     (Polynomial.monic_prod_of_monic _ _ (fun d _ =&gt; cyclotomic.monic d ℚ))
     (associated_of_dvd_dvd hminpoly_dvd_prod hprod_dvd_minpoly)⟩</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L178-L178" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L167-L201" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -605,7 +617,11 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma cyclotomic_divisors_lcm_eq_of_orderOf {N : ℕ} [NeZero N]</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma cyclotomic_divisors_lcm_eq_of_orderOf {N : ℕ} [NeZero N]
+    (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (hA_ord : orderOf A = m)
+    (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)
+    (hminpoly_eq_prod : minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ) :
+    S.lcm id = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">{N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 &lt; m) (hA_ord : orderOf A = m)
     (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)
     (hminpoly_eq_prod : minpoly ℚ (A.map (algebraMap ℤ ℚ)) = ∏ d ∈ S, cyclotomic d ℚ) :
@@ -650,7 +666,7 @@
   rw [hA_ord] at hord_dvd
   have := Nat.le_of_dvd hlcm_pos hord_dvd
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L213-L213" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L203-L257" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -766,7 +782,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 &lt; m)</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 &lt; m)
+    (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
     (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by
   -- Extract the matrix A with orderOf A = m
   obtain ⟨A, hA_ord, _⟩ := hord
@@ -808,7 +825,7 @@
         sum_totient_ge_psi_of_lcm_eq m hm S hS_sub hS_lcm
       _ = (minpoly ℚ A_Q).natDegree := hdeg_eq.symm
       _ ≤ N := hminpoly_deg_le</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L305-L305" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L259-L346" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -873,10 +890,11 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
+    (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
     (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
   simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_def, Equiv.toPEquiv_refl, PEquiv.toMatrix_refl]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L72-L72" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L67-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -941,12 +959,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    (σ τ : Equiv.Perm n) :
+    (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ τ : Equiv.Perm n) :
     (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by
   simp only [Equiv.Perm.permMatrix]
   rw [Equiv.Perm.mul_def, Equiv.toPEquiv_trans, PEquiv.toMatrix_trans]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L82-L82" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L76-L86" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1037,7 +1057,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    (σ : Equiv.Perm n) (k : ℕ) :
+    (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ : Equiv.Perm n) (k : ℕ) :
     (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
   induction k with
@@ -1047,7 +1069,7 @@
     -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
     -- Use SemiconjBy or direct equality - both sides are equal
     exact (Commute.pow_self (σ.permMatrix R) k).eq.symm</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L94-L94" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L88-L103" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1134,7 +1156,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    [Nontrivial R] (σ : Equiv.Perm n) :
+    σ.permMatrix R = 1 ↔ σ = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     σ.permMatrix R = 1 ↔ σ = 1 := by
   constructor
@@ -1154,7 +1178,7 @@
       rw [if_neg (ne_comm.mpr hσx)] at h1
       exact one_ne_zero h1
   · intro h; rw [h]; exact permMatrix_one</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L112-L112" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L105-L131" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1219,7 +1243,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
+    [Nontrivial R] (σ : Equiv.Perm n) :
+    orderOf (σ.permMatrix R) = orderOf σ := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     orderOf (σ.permMatrix R) = orderOf σ := by
   rcases Nat.eq_zero_or_pos (orderOf σ) with hord | hord
@@ -1238,7 +1264,7 @@
       rw [permMatrix_eq_one_iff] at hk&#x27;
       have hdvd : orderOf σ ∣ k := orderOf_dvd_of_pow_eq_one hk&#x27;
       exact Nat.not_lt.mpr (Nat.le_of_dvd hk_pos hdvd) hk_lt</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L139-L139" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L133-L157" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1308,7 +1334,7 @@
   have hord := Equiv.Perm.IsCycle.orderOf hcycle
   have hsupp := support_finRotate_of_le hn
   rw [hord, hsupp, Finset.card_univ, Fintype.card_fin]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L164-L164" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L159-L168" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1399,10 +1425,11 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 ≤ n) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
+    orderOf ((finRotate n).permMatrix ℤ) = n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(n : ℕ) (hn : 2 ≤ n) :
     orderOf ((finRotate n).permMatrix ℤ) = n := by
   rw [orderOf_permMatrix, orderOf_finRotate n hn]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L176-L176" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L170-L178" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1494,7 +1521,7 @@
   constructor
   · exact Equiv.Perm.orderOf_permMatrix_finRotate n hn
   · omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L187-L187" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L182-L191" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1585,7 +1612,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)
+    (hpk : ¬(p = 2 ∧ k = 1)) :
+    p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k)
     (hpk : ¬(p = 2 ∧ k = 1)) :
     p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by
   -- psi(p^k) = totient(p^k) for this case
@@ -1600,7 +1629,7 @@
       _ = p := pow_one p
       _ ≥ 2 := hp_ge2
   exact mem_integerMatrixOrders_totient (p ^ k) hpk_ge2</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L201-L201" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L195-L215" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1705,7 +1734,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :
+    m ∈ integerMatrixOrders (psi m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (hm2 : m ≠ 2) :
     m ∈ integerMatrixOrders (psi m) := by
   -- Use strong induction on m
   induction m using Nat.strong_induction_on with
@@ -1745,7 +1775,7 @@
           exact mem_integerMatrixOrders_psi_composite p e m&#x27; hp (by omega) hcop
             (primePow_mem_integerMatrixOrders_psi p e hp he_pos h_pe_is_2)
             (IH m&#x27; hm&#x27;_lt (by omega) hm&#x27;_eq_2)</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L321-L321" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L295-L360" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1879,7 +1909,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 &lt; m)</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 &lt; m)
+    (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 &lt; N) :
+    m ∈ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m)
     (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 &lt; N) :
     m ∈ integerMatrixOrders N := by
   -- Handle base cases m = 1, 2
@@ -1915,7 +1947,7 @@
           exact mem_integerMatrixOrders_small 6 N (by simp) hpsi
         · -- m &gt; 6: general case
           exact mem_integerMatrixOrders_of_psi_le_large m N hm_gt6 hpsi</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L450-L450" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L404-L485" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -2010,11 +2042,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem crystallographic_restriction (N m : ℕ) (hm : 0 &lt; m) (hNm : m = 1 ∨ 0 &lt; N) :</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m) (hNm : m = 1 ∨ 0 &lt; N) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem crystallographic_restriction (N m : ℕ) (hm : 0 &lt; m) (hNm : m = 1 ∨ 0 &lt; N) :
+    m ∈ integerMatrixOrders N ↔ psi m ≤ N :=
+  ⟨psi_le_of_mem_integerMatrixOrders N m hm,
+   fun hpsi =&gt; mem_integerMatrixOrders_of_psi_le N m hm hpsi hNm⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N m : ℕ) (hm : 0 &lt; m) (hNm : m = 1 ∨ 0 &lt; N) :
     m ∈ integerMatrixOrders N ↔ psi m ≤ N :=
   ⟨psi_le_of_mem_integerMatrixOrders N m hm,
    fun hpsi =&gt; mem_integerMatrixOrders_of_psi_le N m hm hpsi hNm⟩</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/MainTheorem.lean#L72-L72" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/MainTheorem.lean#L42-L75" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>

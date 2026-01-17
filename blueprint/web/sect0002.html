@@ -117,11 +117,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=
+  if k = 0 then 0
+  else if p = 2 ∧ k = 1 then 0
+  else Nat.totient (p ^ k)</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
   else Nat.totient (p ^ k)</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L60-L60" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L49-L63" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -195,9 +198,10 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psi (m : ℕ) : ℕ :=</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psi (m : ℕ) : ℕ :=
+  m.factorization.sum fun p k =&gt; psiPrimePow p k</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
   m.factorization.sum fun p k =&gt; psiPrimePow p k</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L86-L86" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L70-L87" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -286,13 +290,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
+    psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
     psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
   simp only [psi]
   rw [hp.factorization_pow]
   rw [Finsupp.sum_single_index (psiPrimePow_zero p)]
   simp only [psiPrimePow, hk.ne&#x27;, ite_false]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L117-L117" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L107-L122" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -357,10 +362,12 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m n : ℕ} (h : m.Coprime n) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
+    Disjoint m.factorization.support n.factorization.support :=
+  Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</span></code><code class="lean-proof-body"><span class="lean-plain">{m n : ℕ} (h : m.Coprime n) :
     Disjoint m.factorization.support n.factorization.support :=
   Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L167-L167" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L161-L169" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -456,7 +463,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">(m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
+    psi (m * n) = psi m + psi n := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
   rw [Nat.factorization_mul (Nat.pos_iff_ne_zero.mp hm) (Nat.pos_iff_ne_zero.mp hn)]
@@ -472,7 +480,7 @@
     intro p hp
     congr 1
     rw [Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L193-L193" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L177-L208" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -559,7 +567,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}</span></code><code class="lean-proof-body"><span class="lean-plain">{m p : ℕ}
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}
+    (hp : p ∈ m.factorization.support) :
+    psiPrimePow p (m.factorization p) ≤ psi m := by</span></code><code class="lean-proof-body"><span class="lean-plain">{m p : ℕ}
     (hp : p ∈ m.factorization.support) :
     psiPrimePow p (m.factorization p) ≤ psi m := by
   simp only [psi, Finsupp.sum]
@@ -568,7 +578,7 @@
     simp only [psiPrimePow]
     split_ifs &lt;;&gt; omega
   exact Finset.single_le_sum hnonneg hp</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L236-L236" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L230-L244" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -634,7 +644,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
+    (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
     (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
   rw [Nat.totient_prime_pow hp hk]
   by_cases hp2 : p = 2
@@ -642,7 +653,7 @@
   · have hp3 : 3 ≤ p := Nat.lt_of_le_of_ne hp.two_le (Ne.symm hp2)
     calc p ^ (k - 1) * (p - 1) ≥ 1 * (p - 1) := Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hp.pos)
       _ ≥ 2 := by omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L49-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L39-L56" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -708,7 +719,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
+    ∃ (p e m&#x27; : ℕ), p.Prime ∧ 0 &lt; e ∧ p ^ e * m&#x27; = m ∧
+    (p ^ e).Coprime m&#x27; ∧ 1 &lt; m&#x27; ∧ m&#x27; &lt; m ∧ p ^ e &lt; m := by</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
     ∃ (p e m&#x27; : ℕ), p.Prime ∧ 0 &lt; e ∧ p ^ e * m&#x27; = m ∧
     (p ^ e).Coprime m&#x27; ∧ 1 &lt; m&#x27; ∧ m&#x27; &lt; m ∧ p ^ e &lt; m := by
   have hm_ne_zero : m ≠ 0 := by omega
@@ -745,7 +758,7 @@
       _ &lt; p ^ e * m&#x27; := Nat.mul_lt_mul_of_pos_left hm&#x27;_gt_one (Nat.pow_pos hminFac_prime.pos)
       _ = m := hm_eq.symm
   exact ⟨p, e, m&#x27;, hminFac_prime, he_pos, hm_eq.symm, hcop, hm&#x27;_gt_one, hm&#x27;_lt, hpe_lt⟩</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L83-L83" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L71-L119" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -837,7 +850,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
+    0 &lt; psi m := by</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
     0 &lt; psi m := by
   -- m &gt;= 3 implies m != 1, so minFac(m) is prime
   have hm_ne_one : m ≠ 1 := by omega
@@ -870,7 +884,7 @@
     simp only [hq_ne2, false_and, ite_false]
     exact Nat.totient_pos.mpr (Nat.pow_pos hq_prime.pos)
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L132-L132" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L121-L164" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1035,7 +1049,7 @@
               two_le_totient_of_two_lt m&#x27; (by omega : 2 &lt; m&#x27;)
             have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := two_le_totient_primePow hp he_pos h21
             exact psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m&#x27; htot_pe_ge2 htot_m&#x27;_ge2</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L199-L199" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L168-L251" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1123,7 +1137,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
+    (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
+    ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by</span></code><code class="lean-proof-body"><span class="lean-plain">{m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
   intro q hq
@@ -1154,7 +1170,7 @@
     exact lt_of_le_of_lt (Finset.lcm_factorization_le_sup S id q hS_ne_zero) hsup_lt
   rw [hS_lcm] at hfact_q
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L263-L263" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L253-L293" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1220,13 +1236,14 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
+    S.Nonempty := by</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
     S.Nonempty := by
   by_contra h
   rw [Finset.not_nonempty_iff_eq_empty] at h
   simp only [h, Finset.lcm_empty] at hS_lcm_ge2
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L426-L426" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L418-L431" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1312,7 +1329,8 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
+    (hS_lcm_ge2 : 2 ≤ S.lcm id) : ∃ d ∈ S, 1 &lt; d := by</span></code><code class="lean-proof-body"><span class="lean-plain">{S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
     (hS_lcm_ge2 : 2 ≤ S.lcm id) : ∃ d ∈ S, 1 &lt; d := by
   by_contra hall_le1
   push_neg at hall_le1
@@ -1326,7 +1344,7 @@
     intro d hd
     simp only [id_eq, hall_eq1 d hd, Nat.one_dvd]
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L442-L442" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L433-L455" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -1440,7 +1458,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
+    (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
+    psi m ≤ ∑ d ∈ S, Nat.totient d := by</span></code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     psi m ≤ ∑ d ∈ S, Nat.totient d := by
   -- If m ∈ S, apply helper lemma directly
@@ -1484,7 +1504,7 @@
             psi_eq_sum_nontrivial_totients m
         _ ≤ ∑ d ∈ S, Nat.totient d :=
             sum_nontrivial_totients_le_sum_totients S hS_pos achiever h_achiever_mem h_achiever_dvd</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L481-L481" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L457-L524" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>

@@ -120,7 +120,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
+    (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
+    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
     ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
   induction s using Finset.induction with
@@ -141,7 +143,7 @@
       calc f a + ∑ x ∈ s&#x27;, f x
           ≤ f a + ∏ x ∈ s&#x27;, f x := by omega
         _ ≤ f a * ∏ x ∈ s&#x27;, f x := Nat.add_le_mul h2_a h2_prod</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L54-L54" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L41-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -206,7 +208,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
+    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
     (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by
   induction S using Finset.induction with
@@ -229,7 +233,7 @@
       · exact le_sup_left
       · have hIH := IH (fun x hx =&gt; hS_ne_zero x (Finset.mem_insert_of_mem hx))
         exact le_trans hIH le_sup_right</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L84-L84" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L78-L106" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -294,7 +298,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
+    (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
+    p ^ k ∈ S := by</span></code><code class="lean-proof-body"><span class="lean-plain">{p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
     p ^ k ∈ S := by
   by_contra hm_not_in
@@ -321,7 +327,7 @@
   have hpow_strict : p ^ (k - 1) &lt; p ^ k :=
     Nat.pow_lt_pow_right hp.one_lt (Nat.sub_lt hk Nat.one_pos)
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L125-L125" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L114-L151" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -390,7 +396,7 @@
   have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
   have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
   omega</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L162-L162" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L155-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -455,7 +461,10 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    (h_dvd : ∀ a ∈ S, f a ∣ d)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    (∏ a ∈ S, f a) ∣ d := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
     (h_dvd : ∀ a ∈ S, f a ∣ d)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     (∏ a ∈ S, f a) ∣ d := by
@@ -477,7 +486,7 @@
       exact h_coprime q (Finset.mem_insert_self q s&#x27;) r
         (Finset.mem_insert_of_mem hr) hne
     exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs&#x27;_dvd</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L181-L181" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L173-L202" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -542,7 +551,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by</span></code><code class="lean-proof-body"><span class="lean-plain">{α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
   induction S using Finset.induction with
@@ -561,7 +572,7 @@
     intro a₁ ha₁ a₂ ha₂ hne
     exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
       (Finset.mem_insert_of_mem ha₂) hne</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L224-L224" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L210-L242" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
@@ -626,7 +637,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)</span></code><code class="lean-proof-body"><span class="lean-plain">{n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
+    orderOf (-A) = 2 * k := by</span></code><code class="lean-proof-body"><span class="lean-plain">{n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
     (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
     orderOf (-A) = 2 * k := by
   -- Express -A as (-1) * A
@@ -646,7 +659,7 @@
   -- Apply the product formula
   rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
   rw [hord_neg1, hA_ord]</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L259-L259" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L250-L278" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
