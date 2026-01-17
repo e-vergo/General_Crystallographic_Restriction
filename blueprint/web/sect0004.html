@@ -140,9 +140,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> companion <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>_hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>_hn : <span class="lean-number">0</span> < p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> companion <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>_hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>_hn : <span class="lean-number">0</span> &lt; p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R :=
-  Matrix.of <span class="lean-keyword">fun</span> i j =>
+  Matrix.of <span class="lean-keyword">fun</span> i j =&gt;
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -278,7 +278,7 @@ that `c` is true/false.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_charpoly <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_charpoly <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     <span class="lean-bracket-<span class="lean-number">1</span>">(</span>companion p hp hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.charpoly = p :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
@@ -295,7 +295,7 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>n, hn_eq<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> : <span class="lean-operator">∃</span> n, p.natDegree = n + <span class="lean-number">1</span> := Nat.exists_eq_succ_of_ne_zero hn.ne'
+">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>n, hn_eq<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> : <span class="lean-operator">∃</span> n, p.natDegree = n + <span class="lean-number">1</span> := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
 producing one goal for each constructor of the inductive type,
@@ -323,9 +323,9 @@ You can use `with` to provide the variables names for each constructor.
 ">induction</span> n <span class="lean-keyword">generalizing</span> p <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
 then a list of alternatives.
 ">with</span>
-  | zero => <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+  | zero =&gt; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> companion_charpoly_of_natDegree_one p hp hn hn_eq
-  | succ m IH =>
+  | succ m IH =&gt;
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -633,7 +633,7 @@ If `type` is omitted, `:= proof` is required.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_aeval_eq_zero <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_aeval_eq_zero <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     aeval <span class="lean-bracket-<span class="lean-number">1</span>">(</span>companion p hp hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span> p = <span class="lean-number">0</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -781,7 +781,7 @@ hypotheses or the goal. It can have one of the forms:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_pow_eq_one_of_dvd <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_pow_eq_one_of_dvd <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p : R<span class="lean-bracket-<span class="lean-number">1</span>">[</span>X<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Monic<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; p.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
     <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hdvd : p ∣ X ^ m - <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     <span class="lean-bracket-<span class="lean-number">1</span>">(</span>companion p hp hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ^ m = <span class="lean-number">1</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-comment">-- From hdvd, get q such that X^m - <span class="lean-number">1</span> = p * q</span>
@@ -1057,7 +1057,7 @@ hypotheses or the goal. It can have one of the forms:
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> companion_cyclotomic_pow_eq_one <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     <span class="lean-bracket-<span class="lean-number">1</span>">(</span>companion <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic.monic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ^ m = <span class="lean-number">1</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
 If it succeeds, then the tactic returns as many subgoals as the number of premises that
@@ -1185,7 +1185,7 @@ and first-order unification with dependent types.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_cyclotomic_orderOf <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">2</span> <span class="lean-operator">≤</span> m<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     orderOf <span class="lean-bracket-<span class="lean-number">1</span>">(</span>companion <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic.monic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -1239,11 +1239,11 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hm_pos : <span class="lean-number">0</span> < m := Nat.lt_of_lt_of_le <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
+">have</span> hm_pos : <span class="lean-number">0</span> &lt; m := Nat.lt_of_lt_of_le <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
 over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
 and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
 numerical expressions. It also has a relatively simple primality prover.
-">norm_num</span> : <span class="lean-number">0</span> < <span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm
+">norm_num</span> : <span class="lean-number">0</span> &lt; <span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>orderOf_eq_iff hm_pos<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
   <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
@@ -1610,7 +1610,7 @@ hypotheses or the goal. It can have one of the forms:
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> companion_cyclotomic_mem_integerMatrixOrders <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">2</span> <span class="lean-operator">≤</span> m<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> < <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
     m <span class="lean-operator">∈</span> Crystallographic.integerMatrixOrders <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
 `refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
@@ -1849,7 +1849,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> htot_pos : <span class="lean-number">0</span> < Nat.totient m := Nat.totient_pos.mpr <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">have</span> htot_pos : <span class="lean-number">0</span> &lt; Nat.totient m := Nat.totient_pos.mpr <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -1904,7 +1904,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hn : <span class="lean-number">0</span> < <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">have</span> hn : <span class="lean-number">0</span> &lt; <span class="lean-bracket-<span class="lean-number">1</span>">(</span>cyclotomic m ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.natDegree := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.

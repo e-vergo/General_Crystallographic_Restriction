@@ -107,7 +107,7 @@
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> integerMatrixOrders <span class="lean-bracket-<span class="lean-number">1</span>">(</span>N : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> : Set ℕ :=
-  <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m | <span class="lean-operator">∃</span> A : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ, orderOf A = m <span class="lean-operator">∧</span> <span class="lean-number">0</span> < m<span class="lean-bracket-<span class="lean-number">1</span>">}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
+  <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m | <span class="lean-operator">∃</span> A : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ, orderOf A = m <span class="lean-operator">∧</span> <span class="lean-number">0</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -562,7 +562,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hN : N = M + K := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.add_sub_cancel' hMN<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm
+">have</span> hN : N = M + K := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.add_sub_cancel&#x27; hMN<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm
   <span class="lean-comment">-- First embed A into <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span>-indexed matrix</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -589,7 +589,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * The `let` tactic is preferred for data (non-propositions).
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
-">let</span> A' : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ := embedMatrixSum A
+">let</span> A&#x27; : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ := embedMatrixSum A
   <span class="lean-comment">-- Then reindex to Fin N using the equivalence</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -642,7 +642,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * The `let` tactic is preferred for data (non-propositions).
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
-">let</span> A'' : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A'
+">let</span> A&#x27;&#x27; : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin N<span class="lean-bracket-<span class="lean-number">1</span>">)</span> ℤ := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A&#x27;
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
 `refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
 then trying to close goals associated to the placeholders with a configurable discharger (rather
@@ -679,7 +679,7 @@ These tactics take an optional discharger to handle remaining explicit `Prop` co
 By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
 To turn off the discharger and keep all goals, use `(discharger := skip)`.
 To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
-">use</span> A''
+">use</span> A&#x27;&#x27;
   <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
 the first matching constructor, or else fails.
 ">constructor</span>
@@ -701,7 +701,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>A''<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>A&#x27;&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -728,8 +728,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> h1 : orderOf <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A'<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = orderOf A' :=
-      MulEquiv.orderOf_eq <span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A'
+">have</span> h1 : orderOf <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = orderOf A&#x27; :=
+      MulEquiv.orderOf_eq <span class="lean-bracket-<span class="lean-number">1</span>">(</span>reindexMonoidEquiv e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm A&#x27;
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>h1, orderOf_embedMatrixSum_eq, hA_ord<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
   <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
@@ -1017,8 +1017,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> blockDiag2_mul <span class="lean-bracket-<span class="lean-number">1</span>">{</span>M K : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Semiring R<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>A A' : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>B B' : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
-    blockDiag2 <span class="lean-bracket-<span class="lean-number">1</span>">(</span>A * A'<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>B * B'<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = blockDiag2 A B * blockDiag2 A' B' :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>A A&#x27; : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>B B&#x27; : Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    blockDiag2 <span class="lean-bracket-<span class="lean-number">1</span>">(</span>A * A&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>B * B&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -1044,7 +1044,7 @@ This is useful when `congr` is too aggressive in breaking down the goal.
 For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
 `congr` produces the goals `⊢ x = y` and `⊢ y = x`,
 while `congr 2` produces the intended `⊢ x + y = y + x`.
-">congr</span> <span class="lean-number">1</span> <;> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+">congr</span> <span class="lean-number">1</span> &lt;;&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -1165,9 +1165,9 @@ non-dependent hypotheses. It has many variants:
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Semiring R<span class="lean-bracket-<span class="lean-number">1</span>">]</span> :
     Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R <span class="lean-operator">×</span> Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R <span class="lean-operator">→</span>*
     Matrix <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-<span class="lean-number">1</span>">)</span> R <span class="lean-keyword">where</span>
-  toFun := <span class="lean-keyword">fun</span> p => blockDiag2 p.<span class="lean-number">1</span> p.<span class="lean-number">2</span>
-  map_one' := blockDiag2_one
-  map_mul' := <span class="lean-keyword">fun</span> _ _ => blockDiag2_mul _ _ _ _</code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
+  toFun := <span class="lean-keyword">fun</span> p =&gt; blockDiag2 p.<span class="lean-number">1</span> p.<span class="lean-number">2</span>
+  map_one&#x27; := blockDiag2_one
+  map_mul&#x27; := <span class="lean-keyword">fun</span> _ _ =&gt; blockDiag2_mul _ _ _ _</code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
   toFun := fun p =&gt; blockDiag2 p.1 p.2
@@ -1572,7 +1572,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hinj : Function.Injective <span class="lean-bracket-<span class="lean-number">1</span>">(</span>blockDiag2.prodMonoidHom M K ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := <span class="lean-keyword">fun</span> p q hpq =>
+">have</span> hinj : Function.Injective <span class="lean-bracket-<span class="lean-number">1</span>">(</span>blockDiag2.prodMonoidHom M K ℤ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := <span class="lean-keyword">fun</span> p q hpq =&gt;
     Prod.ext <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Matrix.fromBlocks_inj.mp hpq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.<span class="lean-number">1</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Matrix.fromBlocks_inj.mp hpq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span><span class="lean-keyword">show</span> blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ <span class="lean-bracket-<span class="lean-number">1</span>">(</span>A, B<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-keyword">from</span> rfl,
