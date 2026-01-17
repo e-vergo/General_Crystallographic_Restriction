@@ -120,37 +120,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For a finset where all values of `f` are at least 2, the sum is bounded above by the product.
-
-This is useful in combinatorial arguments where one wants to show that a sum of terms
-(each at least 2) cannot exceed their product. The key insight is that for `a, b ≥ 2`,
-we have `a + b ≤ a * b`, which extends by induction to finite products.
-
-For upstreaming to Mathlib, this should be placed in `Mathlib.Algebra.Order.BigOperators.Group.Finset`. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:sum-le-prod&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For a finite set where all values $\geq 2$, the sum is at most the product. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on the size of the finite set. Base case: empty sum is $0 \leq 1$ (empty product).
-  Inductive step: if $\sum_{x \in s} f(x) \leq \prod_{x \in s} f(x)$ and $f(a) \geq 2$, then
-  $\sum_{x \in s \cup \{a\}} f(x) = f(a) + \sum_s f \leq f(a) \cdot \prod_s f \leq \prod_{s \cup \{a\}} f$
-  using $1 + y \leq 2y$ for $y \geq 1$ and $f(a) \geq 2$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">sum_le_prod_of_all_ge_two</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">sum_le_prod_of_all_ge_two</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">α</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">s</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">α</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">:</span> <span class="lean-text">α</span> <span class="lean-text">→</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hf</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">x</span> <span class="lean-text">∈</span> <span class="lean-text">s</span><span class="lean-text">,</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">f</span> <span class="lean-text">x</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">∑</span> <span class="lean-text">x</span> <span class="lean-text">∈</span> <span class="lean-text">s</span><span class="lean-text">,</span> <span class="lean-text">f</span> <span class="lean-text">x</span> <span class="lean-text">≤</span> <span class="lean-text">∏</span> <span class="lean-text">x</span> <span class="lean-text">∈</span> <span class="lean-text">s</span><span class="lean-text">,</span> <span class="lean-text">f</span> <span class="lean-text">x</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -568,30 +538,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The factorization of a finset lcm at any prime is at most the supremum. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:lcm-factorization-le-sup&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The factorization of $\mathrm{lcm}(S)$ at prime $q$ is bounded by
-  $\sup_{x \in S} v_q(x)$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The $q$-adic valuation of $\mathrm{lcm}(S)$ is the maximum of $q$-adic valuations over elements of $S$.
-  This follows from the definition of lcm via factorization: $v_q(\mathrm{lcm}(S)) = \sup_{x \in S} v_q(x)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">lcm_factorization_le_sup</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">lcm_factorization_le_sup</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">α</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">α</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">:</span> <span class="lean-text">α</span> <span class="lean-text">→</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">q</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_ne_zero</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">x</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">f</span> <span class="lean-text">x</span> <span class="lean-text">≠</span> <span class="lean-text">0</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">f</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">factorization</span> <span class="lean-text">q</span> <span class="lean-text">≤</span> <span class="lean-text">S.sup</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">x</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">x</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">factorization</span> <span class="lean-text">q</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -909,35 +856,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For a prime power `p^k`, if a finset `S` of divisors of `p^k` has lcm equal to `p^k`,
-then `p^k` must be an element of `S`.
-
-The proof proceeds by contradiction: if `p^k ∉ S`, then every element of `S` is a proper
-divisor of `p^k`, hence divides `p^(k-1)`. But then `lcm(S) ∣ p^(k-1) &lt; p^k`, contradicting
-that `lcm(S) = p^k`. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:primePow-mem-of-lcm-eq&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\mathrm{lcm}(S) = p^k$ and all elements of $S$ divide $p^k$,
-  then $p^k \in S$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $\mathrm{lcm}(S) = p^k$ and all elements divide $p^k$, each element has form $p^j$ for some $j \leq k$.
-  Taking lcm over these powers gives $p^{\max_j} = p^k$, so some element must have $j = k$, meaning $p^k \in S$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">Finset.prime_pow_mem_of_lcm_eq</span> <span class="lean-text">{</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">Finset.prime_pow_mem_of_lcm_eq</span> <span class="lean-text">{</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_lcm</span> <span class="lean-text">:</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
@@ -1438,31 +1357,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Euler&#x27;s totient function is at least 2 for any n &gt; 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:totient-ge-two&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For $n &gt; 2$, we have $\varphi(n) \geq 2$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $n &gt; 2$, we have $n \neq 1$ and $n \neq 2$.
-  By the fact that $\varphi(n) = 1$ if and only if $n \in \{1, 2\}$,
-  we conclude that $\varphi(n) \neq 1$.
-  Also $\varphi(n) \neq 0$ since $n &gt; 0$. Therefore $\varphi(n) \geq 2$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">two_le_totient_of_two_lt</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">&lt;</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">two_le_totient_of_two_lt</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">&lt;</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1667,32 +1562,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If each f(a) divides d and they&#x27;re pairwise coprime, then ∏ f(a) divides d. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:prod-coprime-dvd&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If each $f(a)$ divides $d$ and the $f(a)$ are pairwise coprime,
-  then $\prod_{a \in S} f(a)$ divides $d$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on the finite set. Empty case: $1 \mid d$ trivially.
-  Insert case: we have $f(q) \mid d$ and $\prod_{s&#x27;} f(r) \mid d$ by IH.
-  Show $f(q)$ is coprime to $\prod_{s&#x27;} f(r)$ using `Nat.Coprime.prod_right`,
-  then apply `Nat.Coprime.mul_dvd_of_dvd_of_dvd`. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">prod_coprime_dvd</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">prod_coprime_dvd</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">α</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">α</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">:</span> <span class="lean-text">α</span> <span class="lean-text">→</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">d</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">h_dvd</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">a</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">f</span> <span class="lean-text">a</span> <span class="lean-text">∣</span> <span class="lean-text">d</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">h_coprime</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">a₁</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">∀</span> <span class="lean-text">a₂</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">a₁</span> <span class="lean-text">≠</span> <span class="lean-text">a₂</span> <span class="lean-text">→</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">a₁</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">Coprime</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">a₂</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -2010,38 +1880,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Euler&#x27;s totient function distributes over products of pairwise coprime values.
-
-This generalizes `Nat.totient_mul` from binary products to arbitrary finite products.
-The proof proceeds by induction: at each step, we use that the new element is coprime
-to the product of the previous elements (via `Nat.Coprime.prod_right`), then apply
-the binary `Nat.totient_mul`.
-
-For upstreaming to Mathlib, this should be placed in `Mathlib.Data.Nat.Totient`. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:totient-prod-coprime&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For pairwise coprime $\{f(a)\}_{a \in S}$, we have
-  $\varphi(\prod_{a \in S} f(a)) = \prod_{a \in S} \varphi(f(a))$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on the finite set. Empty case: $\varphi(1) = 1$ equals empty product.
-  Insert case: use $\varphi(ab) = \varphi(a)\varphi(b)$ for coprime $a, b$
-  (`Nat.totient_mul`), where coprimality follows from `Nat.Coprime.prod_right`. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">totient_finset_prod_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">totient_finset_prod_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">α</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">α</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">α</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">:</span> <span class="lean-text">α</span> <span class="lean-text">→</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">h_coprime</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">a₁</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">∀</span> <span class="lean-text">a₂</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">a₁</span> <span class="lean-text">≠</span> <span class="lean-text">a₂</span> <span class="lean-text">→</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">a₁</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">Coprime</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">a₂</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">a</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">f</span> <span class="lean-text">a</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">a</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">f</span> <span class="lean-text">a</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -2288,33 +2127,7 @@ be a `let` or function type.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If A has odd order k in a matrix ring over Z, then -A has order 2*k.
-This uses orderOf(-1) = 2 (in char 0), commutativity of -1 with A,
-and gcd(2, k) = 1 for odd k. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orderOf-neg-of-odd-order&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $A$ has odd order $k$, then $-A$ has order $2k$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- We have $-A = (-1) \cdot A$ where $-1$ commutes with $A$.
-  In characteristic $0$, the order of $-1$ is $2$. Since $k$ is odd,
-  $\gcd(2, k) = 1$, so by the product formula for commuting elements with
-  coprime orders, the order of $-A$ equals the order of $-1$ times the order of $A$, which is $2k$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_neg_of_odd_order</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk_odd</span> <span class="lean-text">:</span> <span class="lean-text">Odd</span> <span class="lean-text">k</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_neg_of_odd_order</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk_odd</span> <span class="lean-text">:</span> <span class="lean-text">Odd</span> <span class="lean-text">k</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hA_ord</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">-</span><span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">*</span> <span class="lean-text">k</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Express -A as (-1) * A

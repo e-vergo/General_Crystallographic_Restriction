@@ -106,32 +106,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The set of possible orders for N×N integer matrices with finite order.
-An integer `m` is in this set if there exists an N×N integer matrix `A` such that
-`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;integerMatrixOrders-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
-  with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
-  $A$ with order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">|</span> <span class="lean-text">∃</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">,</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -217,28 +192,7 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:one-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Order $1$ is achievable in any dimension. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The identity matrix $I$ has order $1$ in any dimension. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">1</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">1</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">⟨</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-text">orderOf_one</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
 over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
 and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
@@ -329,29 +283,7 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For N ≥ 1, the negation of the identity matrix has order 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:two-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Order $2$ is achievable for $N \geq 1$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
-  so it has order $2$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">two_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">two_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">⟨</span><span class="lean-text">-</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_neg_one</span><span class="lean-text">,</span> <span class="lean-text">ringChar_matrix_int</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
@@ -461,34 +393,7 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Monotonicity: if M &lt;= N, then any order achievable for M x M matrices is also achievable
-for N x N matrices.
-
-The construction pads the M x M matrix with an identity block in the lower-right corner. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orders-mono&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
-  \uses{integerMatrixOrders-def} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
-  top-left block of an $N \times N$ matrix with identity in the bottom-right. The order is
-  preserved. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">integerMatrixOrders_mono</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hMN</span> <span class="lean-text">:</span> <span class="lean-text">M</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">integerMatrixOrders_mono</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hMN</span> <span class="lean-text">:</span> <span class="lean-text">M</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span> <span class="lean-text">⊆</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
@@ -829,27 +734,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;def:blockDiag2&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
@@ -938,75 +823,7 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal of identity matrices is the identity. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Immediate from the definition of block diagonal and the identity matrix. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_one</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_one</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
     <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">=</span>
     <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
@@ -1096,77 +913,7 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal preserves multiplication. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-mul&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(AA&#x27;, BB&#x27;) = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;)$.
-  \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Block multiplication respects the diagonal structure since off-diagonal blocks
-  are zero. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">B&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">*</span> <span class="lean-text">A&#x27;</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">B&#x27;</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">B&#x27;</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -1288,28 +1035,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;def:blockDiag2-prodMonoidHom&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
-  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">×</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">→*</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-keyword">where</span>
@@ -1402,29 +1128,7 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal is one iff both components are one. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-eq-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
-  respective identities. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∧</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -1543,31 +1247,7 @@ is designed for that purpose.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Power of block diagonal distributes to each block.
-
-(blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-pow&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on $n$: the block structure is preserved under multiplication, and
-  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;) = \mathrm{diag}(AA&#x27;, BB&#x27;)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_pow</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_pow</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -1683,33 +1363,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Order of block diagonal is lcm of orders.
-
-Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
-and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:orderOf-blockDiag2&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
-  \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
-  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.lcm</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -1832,32 +1486,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal construction for integer matrix orders.
-    If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:lcm-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
-  \uses{thm:orderOf-blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
-  diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
     <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">Nat.lcm</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
@@ -1985,31 +1614,7 @@ are converted into new goals, using the hole&#x27;s name, if any, as the goal ca
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:mul-mem-orders-coprime&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Product of coprime achievable orders is achievable.
-  \uses{lem:lcm-mem-orders} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
-  follows from the lcm result. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">mul_mem_integerMatrixOrders_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">mul_mem_integerMatrixOrders_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
     <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hcop</span> <span class="lean-text">:</span> <span class="lean-text">Nat.Coprime</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m₁</span> <span class="lean-text">*</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>

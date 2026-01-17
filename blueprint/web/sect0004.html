@@ -140,47 +140,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The companion matrix of a monic polynomial p of degree n.
-
-For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
-```
-[0  0  0  ...  0  -a_0    ]
-[1  0  0  ...  0  -a_1    ]
-[0  1  0  ...  0  -a_2    ]
-[        ...              ]
-[0  0  0  ...  1  -a_{n-1}]
-```
-
-The matrix has 1s on the subdiagonal and the negatives of the polynomial
-coefficients in the last column.
--/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;companion-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(p)$ of a monic polynomial
-  $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
-  on the subdiagonal and $-a_i$ in the last column:
-  $$C(p) = \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; -a_1 \\
-  \vdots &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; \cdots &amp; 1 &amp; -a_{n-1} \end{pmatrix}$$
-  This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">Matrix.of</span> <span class="lean-keyword">fun</span> <span class="lean-text">i</span> <span class="lean-text">j</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
@@ -312,44 +272,7 @@ that `c` is true/false.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The characteristic polynomial of the companion matrix equals the original polynomial.
-
-This is the fundamental property of companion matrices: they are constructed precisely
-so that their characteristic polynomial matches the given monic polynomial.
-
-The proof proceeds by strong induction on the degree n. For degree 1, direct computation
-shows both sides equal X + C(a_0). For degree n+1, Laplace expansion along the first
-column gives a recurrence matching the polynomial structure.
--/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;thm:companion-charpoly&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
-  $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
-  along the first column. The key insight is that the minor structure reduces to smaller
-  companion matrices, and the base case (degree 1) follows by direct computation.
-  \uses{companion-def} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on the degree $n$. For the base case $n = 1$, direct computation gives
-  $\det(XI - C) = X + a_0$. For $n &gt; 1$, expand along the first column: the $(1,1)$ minor
-  is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
-  term. The recurrence matches the polynomial coefficients. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_charpoly</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_charpoly</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charpoly</span> <span class="lean-text">=</span> <span class="lean-text">p</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
@@ -680,79 +603,7 @@ If `type` is omitted, `:= proof` is required.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:companion-aeval-zero&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
-  matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
-  $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.
-  \uses{thm:companion-charpoly} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By Cayley-Hamilton, every matrix satisfies its characteristic polynomial.
-  Since $\chi_{C(p)} = p$ by the companion characteristic polynomial theorem,
-  we have $p(C(p)) = 0$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_aeval_eq_zero</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_aeval_eq_zero</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">aeval</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -876,32 +727,7 @@ hypotheses or the goal. It can have one of the forms:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:companion-pow-dvd&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
-  $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
-  $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.
-  \uses{lem:companion-aeval-zero} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
-  Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
-  so $C(p)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">p</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- From hdvd, get q such that X^m - 1 = p * q
@@ -1152,31 +978,7 @@ hypotheses or the goal. It can have one of the forms:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:companion-cycl-pow&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
-  $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
-  \texttt{companion\_pow\_eq\_one\_of\_dvd}.
-  \uses{thm:companion-pow-dvd} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
-  the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
@@ -1280,33 +1082,7 @@ and first-order unification with dependent types.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:companion-cycl-order&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
-  because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
-  for $d &lt; m$, then $\Phi_m$ would divide $X^d - 1$, contradicting that primitive $m$-th
-  roots of unity are not $d$-th roots of unity for $d &lt; m$.
-  \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
-  For the lower bound: if $C(\Phi_m)^d = I$ for $d &lt; m$, then $\Phi_m \mid X^d - 1$,
-  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_orderOf</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_orderOf</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
@@ -1707,31 +1483,7 @@ hypotheses or the goal. It can have one of the forms:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:companion-cycl-mem&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
-  $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
-  with integer entries, and has order exactly $m$ by \texttt{companion\_cyclotomic\_orderOf}.
-  \uses{thm:companion-cycl-order} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(\Phi_m)$ witnesses the membership: it is an integer matrix
-  of dimension $\deg(\Phi_m) = \varphi(m)$ with multiplicative order exactly $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
@@ -1892,31 +1644,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:mem-orders-totient&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For $m \geq 2$, $m \in \mathrm{Ord}_{\varphi(m)}$. This is the key
-  existence result: for every $m \geq 2$, there exists an integer matrix of dimension
-  $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.
-  \uses{thm:companion-cycl-mem} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Apply the cyclotomic companion membership theorem after noting that
-  $\deg(\Phi_m) = \varphi(m)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_totient</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_totient</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">Nat.totient</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.

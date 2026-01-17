@@ -121,32 +121,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If the minimal polynomial of an integer matrix A divides X^k - 1, then A^k = 1.
-This transfers the polynomial identity back to the matrix via the ring homomorphism. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:pow-eq-one-of-minpoly-dvd&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\mu_A \mid X^k - 1$, then $A^k = I$.
-  \uses{def:minpoly} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The polynomial $X^k - 1$ annihilates $A$ (since the minimal polynomial does),
-  meaning $A^k - I = 0$. Transfer this identity from $\mathbb{Q}$ back to $\mathbb{Z}$ via
-  the injectivity of $\mathbb{Z} \to \mathbb{Q}$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">pow_eq_one_of_minpoly_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">pow_eq_one_of_minpoly_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -358,31 +333,7 @@ and first-order unification with dependent types.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
-This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:minpoly-dvd-X-pow-sub-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $A^m = I$, then $\mu_A \mid X^m - 1$.
-  \uses{def:minpoly} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The polynomial $X^m - 1$ annihilates $A$ since $(A_{\mathbb{Q}})^m - I = 0$.
-  The minimal polynomial divides any annihilating polynomial by definition. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_X_pow_sub_one_of_pow_eq_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_X_pow_sub_one_of_pow_eq_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpow</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
 If it succeeds, then the tactic returns as many subgoals as the number of premises that
@@ -479,32 +430,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If each cyclotomic polynomial in a finset divides a target polynomial,
-then their product also divides the target. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:cyclotomic-finset-product-dvd&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\Phi_d \mid f$ for all $d \in S$, then $\prod_{d \in S} \Phi_d \mid f$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on $S$. The empty product divides everything. For the insert case,
-  use that cyclotomic polynomials with distinct indices are coprime over $\mathbb{Q}$, so
-  $\Phi_d$ is coprime to $\prod_{x \in s} \Phi_x$ when $d \notin s$. Then apply coprime
-  divisibility: if $a, b$ are coprime and both divide $f$, then $ab \mid f$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_finset_product_dvd</span> <span class="lean-text">{</span><span class="lean-text">target</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_finset_product_dvd</span> <span class="lean-text">{</span><span class="lean-text">target</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hdvd_each</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">target</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">target</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
@@ -757,39 +683,7 @@ be a `let` or function type.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If the minimal polynomial divides X^m - 1, then it divides the product of cyclotomic
-polynomials for divisors d where Φ_d divides the minimal polynomial.
-
-The proof uses coprimality: minpoly is coprime to Φ_d when Φ_d does not divide it
-(since Φ_d is irreducible), hence minpoly is coprime to the product of such Φ_d.
-Since X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d) and minpoly divides the LHS while
-being coprime to the second factor, it must divide the first factor. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:minpoly-dvd-prod-cyclotomic&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\mu_A \mid X^m - 1$ and $S = \{d \mid m : \Phi_d \mid \mu_A\}$,
-  then $\mu_A \mid \prod_{d \in S} \Phi_d$.
-  \uses{def:minpoly, lem:cyclotomic-finset-product-dvd} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Split $X^m - 1 = (\prod_{d \in S} \Phi_d) \cdot (\prod_{d \notin S} \Phi_d)$.
-  Since $\Phi_d$ is irreducible and does not divide $\mu_A$ for $d \notin S$, we have
-  $\gcd(\mu_A, \Phi_d) = 1$. Thus $\mu_A$ is coprime to $\prod_{d \notin S} \Phi_d$.
-  Since $\mu_A \mid X^m - 1$, it must divide $\prod_{d \in S} \Phi_d$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">S</span> <span class="lean-text">⊆</span> <span class="lean-text">m.divisors</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hminpoly_dvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -1129,35 +1023,7 @@ hypotheses or the goal. It can have one of the forms:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For a polynomial that divides X^m - 1, we can characterize it as a product of cyclotomic
-polynomials. Specifically, S = {d ∈ divisors(m) | Φ_d ∣ p} gives minpoly = ∏_{d∈S} Φ_d
-when p is monic and irreducible factors are coprime. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:minpoly-eq-prod-cyclotomic&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\mu_A \mid X^m - 1$, then there exists $S \subseteq \mathrm{divisors}(m)$
-  such that $\mu_A = \prod_{d \in S} \Phi_d$.
-  \uses{def:minpoly, lem:minpoly-dvd-prod-cyclotomic, lem:cyclotomic-finset-product-dvd} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Let $S = \{d \mid m : \Phi_d \mid \mu_A\}$. By the previous lemma,
-  $\mu_A \mid \prod_{d \in S} \Phi_d$. Conversely, by definition of $S$, each $\Phi_d$ for
-  $d \in S$ divides $\mu_A$, so their coprime product divides $\mu_A$. Mutual divisibility
-  of monic polynomials implies equality. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hminpoly_dvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">∃</span> <span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">,</span> <span class="lean-text">(</span><span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">∧</span>
@@ -1458,34 +1324,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If A has order m and minpoly = ∏_{d∈S} Φ_d where S ⊆ divisors(m),
-then S.lcm id = m. This is the key lemma: if lcm(S) &lt; m, then A^{lcm(S)} = 1,
-contradicting that A has exact order m. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:cyclotomic-divisors-lcm-eq&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $\mathrm{ord}(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$ with
-  $S \subseteq \mathrm{divisors}(m)$, then $\mathrm{lcm}(S) = m$.
-  \uses{lem:minpoly-eq-prod-cyclotomic, lem:pow-eq-one-of-minpoly-dvd} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Suppose $\ell = \mathrm{lcm}(S) &lt; m$. Then $\mu_A = \prod_{d \in S} \Phi_d$
-  divides $\prod_{d \mid \ell} \Phi_d = X^\ell - 1$, since each $d \in S$ divides $\ell$.
-  By the transfer lemma, $A^\ell = I$. But this contradicts $\mathrm{ord}(A) = m &gt; \ell$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_divisors_lcm_eq_of_orderOf</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_divisors_lcm_eq_of_orderOf</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hA_ord</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hminpoly_eq_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -2188,70 +2027,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If an N x N integer matrix has finite order m, then psi(m) &lt;= N.
-
-This is the forward direction of the crystallographic restriction theorem.
-The proof uses eigenvalue theory: primitive m-th roots of unity must appear
-as eigenvalues, and their algebraic degree constrains the matrix dimension.
-
-**Proof outline:**
-1. An integer matrix A with A^m = 1 has minimal polynomial dividing X^m - 1
-2. If orderOf A = m, then the minimal polynomial is lcm of cyclotomic polynomials
-   Φ_d for some divisors d of m with lcm(d) = m
-3. The primitive m-th roots have minimal polynomial Phi_m (the cyclotomic polynomial)
-4. These eigenvalues require dimension &gt;= phi(d) for each d in the set
-5. By sum_totient_ge_psi_of_lcm_eq, the sum of φ(d) &gt;= psi(m)
-6. Therefore psi(m) &lt;= deg(minpoly) &lt;= deg(charpoly) = N
--/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:forward-direction&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
-
-  \textbf{Mathematical context:}
-  The key insight is that integer matrices with finite order have constrained eigenvalues:
-  if $A^m = I$, all eigenvalues are $m$-th roots of unity. The minimal polynomial over $\mathbb{Q}$
-  factors into cyclotomic polynomials $\Phi_d$ for various divisors $d$ of $m$. The requirement
-  that $\mathrm{ord}(A) = m$ (not some proper divisor) forces the set of cyclotomic factors to
-  have $\mathrm{lcm} = m$, which constrains the total degree.
-
-  \textbf{Proof outline:}
-  \begin{enumerate}
-  \item Let $A$ be an $N \times N$ integer matrix with $\mathrm{ord}(A) = m$.
-  \item The minimal polynomial of $A$ over $\mathbb{Q}$ divides $X^m - 1 = \prod_{d \mid m} \Phi_d$.
-  \item Since $\Phi_d$ are irreducible and pairwise coprime over $\mathbb{Q}$, the minimal
-        polynomial
-        equals $\prod_{d \in S} \Phi_d$ for some $S \subseteq \mathrm{divisors}(m)$.
-  \item The condition $\mathrm{ord}(A) = m$ forces $\mathrm{lcm}(S) = m$: if $\mathrm{lcm}(S) &lt; m$,
-        then $A^{\mathrm{lcm}(S)} = I$, contradicting $\mathrm{ord}(A) = m$.
-  \item The degree of the minimal polynomial is $\sum_{d \in S} \varphi(d)$.
-  \item By the sum-totient lemma (applied to any $S$ with $\mathrm{lcm}(S) = m$),
-        $\psi(m) \leq \sum_{d \in S} \varphi(d) = \deg(\mathrm{minpoly})
-        \leq \deg(\mathrm{charpoly}) = N$.
-  \end{enumerate}
-  \uses{integerMatrixOrders-def, psi-def, lem:sum-totient-ge-psi} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Let $A$ be an $N \times N$ integer matrix with $A^m = I$. The minimal polynomial
-  $\mu_A$
-  over $\mathbb{Q}$ divides $X^m - 1$ and factors into cyclotomic polynomials $\Phi_d$ for
-  various $d \mid m$. Each factor contributes $\varphi(d)$ to $\deg(\mu_A) \leq N$.
-  Since distinct $\Phi_d$ are coprime and their lcm must be $m$, summing the totients
-  of appearing divisors gives $\psi(m) \leq N$. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hord</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Crystallographic.psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Extract the matrix A with orderOf A = m
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
@@ -2770,76 +2546,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The permutation matrix of the identity permutation is the identity matrix. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:permMatrix-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The permutation matrix of the identity is the identity matrix: $P_{\mathrm{id}} = I$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Direct computation using $\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}$ and
-  $\mathrm{toMatrix}(\mathrm{refl}) = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_one</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_one</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">n</span> <span class="lean-text">n</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
@@ -2927,30 +2634,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Permutation matrices compose: (σ * τ).permMatrix = τ.permMatrix * σ.permMatrix -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:permMatrix-mul&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Permutation matrices satisfy $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$
-  (contravariant homomorphism). -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Follows from $\mathrm{toPEquiv}(\sigma \circ \tau) = \mathrm{toPEquiv}(\tau) \cdot \mathrm{toPEquiv}(\sigma)$
-  and the corresponding property for partial equivalence matrices. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_mul</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_mul</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">τ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -3067,30 +2751,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Permutation matrices power correctly: (σ^k).permMatrix = (σ.permMatrix)^k -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:permMatrix-pow&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Powers of permutation matrices satisfy $P_{\sigma^k} = P_\sigma^k$.
-  \uses{lem:permMatrix-one, lem:permMatrix-mul} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on $k$: the base case uses $P_{\mathrm{id}} = I$, and the inductive
-  step uses $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$ together with commutativity of powers. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_pow</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_pow</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -3235,31 +2896,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Permutation matrix is identity iff permutation is identity. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:permMatrix-eq-one-iff&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $P_\sigma = I$ if and only if $\sigma = \mathrm{id}$.
-  \uses{lem:permMatrix-one} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The forward direction shows that if $P_\sigma = I$ then for each $x$, the entry
-  $(P_\sigma)_{x, \sigma(x)} = 1$ forces $\sigma(x) = x$. The reverse is immediate from
-  $P_{\mathrm{id}} = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">[</span><span class="lean-text">Nontrivial</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -3513,30 +3150,7 @@ be a `let` or function type.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Order of permutation matrix equals order of permutation. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orderOf-permMatrix&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $P_{\sigma^k} = P_\sigma^k$ and $P_\sigma = I \iff \sigma = \mathrm{id}$, the order
-  of $P_\sigma$ equals the order of $\sigma$. The key is that the permutation matrix map preserves
-  powers and is injective on the group of permutation matrices. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">[</span><span class="lean-text">Nontrivial</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
@@ -3811,29 +3425,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The finRotate permutation has order n for n at least 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orderOf-finRotate&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The $\mathrm{finRotate}(n)$ permutation is an $n$-cycle with full support $\mathrm{Fin}\ n$.
-  By the cycle order theorem, the order of a cycle equals its length, which is $n$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4008,30 +3600,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- finRotate permutation matrix has order n for n &gt;= 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orderOf-permMatrix-finRotate&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The permutation matrix of $\mathrm{finRotate}(n)$ has order $n$ over $\mathbb{Z}$.
-  \uses{lem:orderOf-permMatrix, lem:orderOf-finRotate} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Combines the order-preservation property $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$
-  with $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_permMatrix</span><span class="lean-text">,</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">n</span> <span class="lean-text">hn</span><span class="lean-text">]</span></code></pre>
@@ -4122,29 +3691,7 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Order n is achievable by an n x n integer matrix for n at least 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:mem-integerMatrixOrders-self&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The permutation matrix $P_{\mathrm{finRotate}(m)}$ is an $m \times m$ integer matrix
-  with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">mem_integerMatrixOrders_self</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">n</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-text">mem_integerMatrixOrders_self</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">n</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
 `refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
 then trying to close goals associated to the placeholders with a configurable discharger (rather
@@ -4307,30 +3854,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:primePow-mem-integerMatrixOrders-psi&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
-  -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
-  has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpk</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- psi(p^k) = totient(p^k) for this case
@@ -4583,50 +4107,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Every `m &gt;= 1` with `m ≠ 2` belongs to `integerMatrixOrders (psi m)`.
-
-The proof uses strong induction on `m`:
-- `m = 1`: `psi 1 = 0`, use identity matrix
-- `m = 2`: EXCLUDED - `psi 2 = 0` but `2 ∉ integerMatrixOrders 0`
-- `m = p^k` prime power (p ≠ 2 or k ≠ 1): use companion matrix
-- `m` composite: factor as `p^e * m&#x27;` with coprime parts, apply IH and block diagonal
-
-Note: For `m = 2`, `psi 2 = 0` means no additional dimension is needed, but there is
-no 0x0 integer matrix with order 2. The crystallographic restriction theorem
-handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 &lt; N`.
-
-This theorem is used to complete the backward direction of the crystallographic
-restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:mem-integerMatrixOrders-psi&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For $m \geq 1$ with $m \neq 2$, we have $m \in \mathrm{Ord}_{\psi(m)}$.
-  The construction achieves order $m$ using exactly $\psi(m)$ dimensions via block diagonal
-  matrices of cyclotomic companion matrices.
-  \uses{thm:primePow-mem-integerMatrixOrders-psi, psi-def, lem:one-mem-orders} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By strong induction on $m$. For $m = 1$, the identity achieves order 1 in
-  dimension $\psi(1) = 0$. For prime powers $p^k$ (excluding $2^1$), the companion matrix
-  of $\Phi_{p^k}$ has order $p^k$ in dimension $\varphi(p^k) = \psi(p^k)$. For composite
-  $m = p^e \cdot m&#x27;$ with coprime factors, we use block diagonal of matrices achieving
-  orders $p^e$ and $m&#x27;$ from the induction hypothesis, with dimension $\psi(p^e) + \psi(m&#x27;)
-  = \psi(m)$ by additivity of $\psi$ on coprime factors. For $m = 2 \cdot m&#x27;$ with $m&#x27;$ odd,
-  negating the order-$m&#x27;$ matrix doubles the order without changing dimension. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm2</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≠</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm2</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≠</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Use strong induction on m
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
@@ -5392,70 +4873,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- If psi(m) &lt;= N, then there exists an N x N integer matrix with order m.
-
-This is the backward direction of the crystallographic restriction theorem.
-The construction uses companion matrices of cyclotomic polynomials.
-
-**Construction outline:**
-1. For m = 1: use identity matrix (psi(1) = 0)
-2. For m = 2: use -I (psi(2) = 0)
-3. For prime power p^k with p odd or k &gt;= 2:
-   - Use companion matrix of Phi_{p^k} (cyclotomic polynomial)
-   - This has size phi(p^k) x phi(p^k) = psi(p^k) and order p^k
-4. For general m = prod p_i^{k_i}:
-   - Take block diagonal of companion matrices for each prime power factor
-   - Total size is sum of phi(p_i^{k_i}) = psi(m)
-5. Pad with identity blocks to reach size N x N
--/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:backward-direction&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
-
-  \textbf{Mathematical context:}
-  The companion matrix of a monic polynomial $p(X)$ has $p(X)$ as both its characteristic
-  and minimal polynomial. For the cyclotomic polynomial $\Phi_m$, the companion matrix $C_m$
-  satisfies $\Phi_m(C_m) = 0$, so $C_m^m = I$, and since $\Phi_m$ is minimal (irreducible over
-  $\mathbb{Q}$ and dividing $X^m - 1$ but not $X^k - 1$ for $k &lt; m$), we get $\mathrm{ord}(C_m) = m$.
-  The key optimization in the $\psi$ function is that $\psi(2) = 0$: order 2 is achieved by $-I$
-  in any dimension, so we do not need to ``pay&#x27;&#x27; $\varphi(2) = 1$ for the factor of 2.
-
-  \textbf{Proof by explicit construction:}
-  \begin{enumerate}
-  \item For $m = 1$: Use the identity matrix (any dimension).
-  \item For $m = 2$: Use $-I$ (dimension $\geq 1$), achieving order 2 without adding to $\psi$.
-  \item For odd prime power $p^k$: The companion matrix of $\Phi_{p^k}$ has size $\varphi(p^k)$.
-  \item For $2^k$ with $k \geq 2$: The companion matrix of $\Phi_{2^k}$ has size $\varphi(2^k) = 2^{k-1}$.
-  \item For $m = 2m&#x27;$ with $m&#x27;$ odd: If $A$ has order $m&#x27;$, then $-A$ has order $2m&#x27;$ (same dimension).
-  \item For general $m = \prod p_i^{k_i}$: Block diagonal of companion matrices for $p_i^{k_i}$
-        with $p_i \neq 2$ or $k_i \geq 2$. The orders combine via $\mathrm{lcm}$ (which equals
-        the product for coprime factors), giving total order $m$ in dimension $\psi(m)$.
-  \item Pad with identity blocks to reach size $N \times N$ (padding does not change order).
-  \end{enumerate}
-  \uses{integerMatrixOrders-def, psi-def, companion-def, thm:companion-charpoly,
-        thm:companion-cycl-order, thm:mem-orders-totient} --/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- We construct a matrix of order $m$ in dimension $\psi(m)$ by taking block diagonals
-  of companion matrices for cyclotomic polynomials $\Phi_{p^k}$ of each prime power factor.
-  The companion matrix $C(\Phi_{p^k})$ has order exactly $p^k$ and size $\varphi(p^k)$.
-  Block diagonal matrices have order equal to the lcm of block orders, which equals $m$
-  for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpsi</span> <span class="lean-text">:</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Handle base cases m = 1, 2
@@ -5964,54 +5382,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- **The Crystallographic Restriction Theorem:**
-An N×N integer matrix can have finite order m if and only if psi(m) ≤ N.
-
-This characterizes exactly which rotation orders are possible in N-dimensional
-crystallographic groups. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:main-theorem&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- \textbf{The Crystallographic Restriction Theorem:}
-  An $N \times N$ integer matrix can have finite order $m$ if and only if $\psi(m) \leq N$.
-
-  Equivalently: $m \in \mathrm{Ord}_N \iff \psi(m) \leq N$.
-
-  This theorem completely characterizes which rotation orders are achievable by
-  integer matrices in each dimension. The function $\psi$ is defined as:
-  $\psi(1) = \psi(2) = 0$, and for other $m$,
-  $\psi(m) = \sum_{p^k \| m, p \neq 2 \text{ or } k \geq 2} \varphi(p^k)$.
-
-  \textbf{Forward direction:} If $A \in \mathbb{Z}^{N \times N}$ has order $m$, the minimal
-  polynomial
-  of $A$ over $\mathbb{Q}$ divides $X^m - 1$ and must include cyclotomic factors $\Phi_d$ for
-  divisors $d$ whose lcm equals $m$. The sum of $\varphi(d)$ over these divisors is at least
-  $\psi(m)$,
-  and this sum bounds the degree of the minimal polynomial, which is at most $N$.
-
-  \textbf{Backward direction:} For each prime power $p^k$ (with $p \neq 2$ or $k \geq 2$),
-  the companion matrix of $\Phi_{p^k}$ has size $\varphi(p^k)$ and order $p^k$. For general $m$,
-  block diagonal combinations of these companion matrices achieve order $m$ in dimension
-  $\psi(m)$. --/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The proof combines the forward and backward directions. The forward direction shows
-  that eigenvalue constraints force $\psi(m) \leq N$. The backward direction constructs explicit
-  matrices achieving each order using companion matrices of cyclotomic polynomials. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">crystallographic_restriction</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">crystallographic_restriction</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">↔</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">⟨</span><span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span><span class="lean-text">,</span>
    <span class="lean-keyword">fun</span> <span class="lean-text">hpsi</span> <span class="lean-text">=&gt;</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hpsi</span> <span class="lean-text">hNm</span><span class="lean-text">⟩</span></code></pre>
