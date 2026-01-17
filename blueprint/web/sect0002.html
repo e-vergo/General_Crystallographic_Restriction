@@ -379,7 +379,7 @@ non-dependent hypotheses. It has many variants:
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-1">[</span>hp.factorization_pow<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-1">[</span>Finsupp.sum_single_index <span class="lean-bracket-1">(</span>psiPrimePow_zero p<span class="lean-bracket-1">)</span><span class="lean-bracket-1">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.sum_single_index <span class="lean-bracket-2">(</span>psiPrimePow_zero p<span class="lean-bracket-2">)</span><span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -633,7 +633,7 @@ non-dependent hypotheses. It has many variants:
   other hypotheses.
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psi, Finsupp.sum<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-1">[</span>Nat.factorization_mul <span class="lean-bracket-1">(</span>Nat.pos_iff_ne_zero.mp hm<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Nat.pos_iff_ne_zero.mp hn<span class="lean-bracket-1">)</span><span class="lean-bracket-1">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Nat.factorization_mul <span class="lean-bracket-2">(</span>Nat.pos_iff_ne_zero.mp hm<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Nat.pos_iff_ne_zero.mp hn<span class="lean-bracket-2">)</span><span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1081,7 +1081,7 @@ Currently, all of these are on by default.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> two_le_totient_primePow <span class="lean-bracket-1">{</span>p k : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hp : p.Prime<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-1">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-1">)</span><span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-bracket-1">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-2">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-1">[</span>Nat.totient_prime_pow hp hk<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
@@ -1789,7 +1789,7 @@ and first-order unification with dependent types.
 ">rw</span> <span class="lean-bracket-1">[</span>isPrimePow_nat_iff<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-bracket-1">⟨</span>p, e, hminFac_prime, he_pos, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-1">[</span>hm_eq, hm&#x27;_one, mul_one<span class="lean-bracket-1">]</span><span class="lean-bracket-1">⟩</span>
+">rw</span> <span class="lean-bracket-2">[</span>hm_eq, hm&#x27;_one, mul_one<span class="lean-bracket-2">]</span><span class="lean-bracket-1">⟩</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3316,7 +3316,7 @@ Currently, all of these are on by default.
 ">omega</span>
         <span class="lean-comment">-- psi and totient are additive/multiplicative on coprime factors</span>
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> hm_eq, psi_coprime_add _ _ <span class="lean-bracket-1">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-1">)</span> hm&#x27;_pos hcop,
+">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> hm_eq, psi_coprime_add _ _ <span class="lean-bracket-2">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-2">)</span> hm&#x27;_pos hcop,
             Nat.totient_mul hcop<span class="lean-bracket-1">]</span>
         <span class="lean-comment">-- By IH: psi</span><span class="lean-bracket-1">(</span>m&#x27;<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-1">(</span>m&#x27;<span class="lean-bracket-1">)</span>
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -4097,7 +4097,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> hS_ne_zero : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d <span class="lean-operator">≠</span> <span class="lean-number">0</span> := <span class="lean-keyword">fun</span> d hd =&gt;
-      <span class="lean-bracket-1">(</span>Nat.pos_of_dvd_of_pos <span class="lean-bracket-1">(</span>hS_sub d hd<span class="lean-bracket-1">)</span> hm<span class="lean-bracket-1">)</span>.ne&#x27;
+      <span class="lean-bracket-1">(</span>Nat.pos_of_dvd_of_pos <span class="lean-bracket-2">(</span>hS_sub d hd<span class="lean-bracket-2">)</span> hm<span class="lean-bracket-1">)</span>.ne&#x27;
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> lt_of_le_of_lt <span class="lean-bracket-1">(</span>Finset.lcm_factorization_le_sup S id q hS_ne_zero<span class="lean-bracket-1">)</span> hsup_lt
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
@@ -5067,7 +5067,7 @@ If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-bracket-1">⟨</span>p, k, hp, hk, hm_eq<span class="lean-bracket-1">⟩</span> := hpow
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> hm_in_S <span class="lean-bracket-1">(</span>hm_eq ▸ Finset.prime_pow_mem_of_lcm_eq hp hk S
-        <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> d hd =&gt; hm_eq ▸ hS_sub d hd<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm_eq ▸ hS_lcm<span class="lean-bracket-1">)</span><span class="lean-bracket-1">)</span>
+        <span class="lean-bracket-2">(</span><span class="lean-keyword">fun</span> d hd =&gt; hm_eq ▸ hS_sub d hd<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>hm_eq ▸ hS_lcm<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
     <span class="lean-operator">·</span> <span class="lean-comment">-- m is not a prime power: use achiever function approach</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
