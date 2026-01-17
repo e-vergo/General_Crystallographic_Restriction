@@ -117,7 +117,7 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> psiPrimePow <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p k : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> psiPrimePow <span class="lean-bracket-1">(</span>p k : ℕ<span class="lean-bracket-1">)</span> : ℕ :=
   <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -162,7 +162,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ k<span class="lean-bracket-<span class="lean-number">1</span>">)</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) : ℕ :=
+">else</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span></code><code class="lean-proof-body"><span class="lean-plain">(p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
   else Nat.totient (p ^ k)</span></code></pre>
@@ -241,7 +241,7 @@ that `c` is true/false.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> psi <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> : ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> psi <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> : ℕ :=
   m.factorization.sum <span class="lean-keyword">fun</span> p k =&gt; psiPrimePow p k</code><code class="lean-proof-body"><span class="lean-plain">(m : ℕ) : ℕ :=
   m.factorization.sum fun p k =&gt; psiPrimePow p k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L70-L87" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -334,8 +334,8 @@ that `c` is true/false.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_prime_pow <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p k : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Prime<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
-    psi <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_prime_pow <span class="lean-bracket-1">(</span>p k : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hp : p.Prime<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-1">)</span> :
+    psi <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> = <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
 `[Decidable c]` argument synthesized by typeclass inference which actually
@@ -356,7 +356,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">else</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -375,11 +375,11 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psi<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hp.factorization_pow<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>hp.factorization_pow<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finsupp.sum_single_index <span class="lean-bracket-<span class="lean-number">1</span>">(</span>psiPrimePow_zero p<span class="lean-bracket-<span class="lean-number">1</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.sum_single_index <span class="lean-bracket-1">(</span>psiPrimePow_zero p<span class="lean-bracket-1">)</span><span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -398,7 +398,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psiPrimePow, hk.ne&#x27;, ite_false<span class="lean-bracket-<span class="lean-number">1</span>">]</span></code></pre>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psiPrimePow, hk.ne&#x27;, ite_false<span class="lean-bracket-1">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L107-L122" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -488,7 +488,7 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> factorization_support_disjoint <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m n : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h : m.Coprime n<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> factorization_support_disjoint <span class="lean-bracket-1">{</span>m n : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>h : m.Coprime n<span class="lean-bracket-1">)</span> :
     Disjoint m.factorization.support n.factorization.support :=</code><code class="lean-proof-body">
   Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L161-L169" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -611,8 +611,8 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_coprime_add <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m n : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hn : <span class="lean-number">0</span> &lt; n<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h : m.Coprime n<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
-    psi <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m * n<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = psi m + psi n :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_coprime_add <span class="lean-bracket-1">(</span>m n : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hn : <span class="lean-number">0</span> &lt; n<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h : m.Coprime n<span class="lean-bracket-1">)</span> :
+    psi <span class="lean-bracket-1">(</span>m * n<span class="lean-bracket-1">)</span> = psi m + psi n :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -631,9 +631,9 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi, Finsupp.sum<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psi, Finsupp.sum<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Nat.factorization_mul <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pos_iff_ne_zero.mp hm<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pos_iff_ne_zero.mp hn<span class="lean-bracket-<span class="lean-number">1</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Nat.factorization_mul <span class="lean-bracket-1">(</span>Nat.pos_iff_ne_zero.mp hm<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Nat.pos_iff_ne_zero.mp hn<span class="lean-bracket-1">)</span><span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -662,9 +662,9 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> hdisj := factorization_support_disjoint h
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finsupp.support_add_eq hdisj<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.support_add_eq hdisj<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finset.sum_union hdisj<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finset.sum_union hdisj<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
 The optional parameter is the depth of the recursive applications.
 This is useful when `congr` is too aggressive in breaking down the goal.
@@ -710,7 +710,7 @@ For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
 while `congr 2` produces the intended `⊢ x + y = y + x`.
 ">congr</span> <span class="lean-number">1</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj hp, add_zero<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj hp, add_zero<span class="lean-bracket-1">]</span>
   <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
 If it succeeds, then the tactic returns as many subgoals as the number of premises that
 have not been fixed by type inference or type class resolution.
@@ -749,7 +749,7 @@ For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
 while `congr 2` produces the intended `⊢ x + y = y + x`.
 ">congr</span> <span class="lean-number">1</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add<span class="lean-bracket-<span class="lean-number">1</span>">]</span></code></pre>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add<span class="lean-bracket-1">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L177-L208" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -861,9 +861,9 @@ while `congr 2` produces the intended `⊢ x + y = y + x`.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_ge_psiPrimePow_of_mem_support <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m p : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p <span class="lean-operator">∈</span> m.factorization.support<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
-    psiPrimePow p <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m.factorization p<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≤</span> psi m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_ge_psiPrimePow_of_mem_support <span class="lean-bracket-1">{</span>m p : ℕ<span class="lean-bracket-1">}</span>
+    <span class="lean-bracket-1">(</span>hp : p <span class="lean-operator">∈</span> m.factorization.support<span class="lean-bracket-1">)</span> :
+    psiPrimePow p <span class="lean-bracket-1">(</span>m.factorization p<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> psi m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -882,7 +882,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi, Finsupp.sum<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psi, Finsupp.sum<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -909,7 +909,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hnonneg : <span class="lean-operator">∀</span> i <span class="lean-operator">∈</span> m.factorization.support, <span class="lean-number">0</span> <span class="lean-operator">≤</span> psiPrimePow i <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m.factorization i<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> hnonneg : <span class="lean-operator">∀</span> i <span class="lean-operator">∈</span> m.factorization.support, <span class="lean-number">0</span> <span class="lean-operator">≤</span> psiPrimePow i <span class="lean-bracket-1">(</span>m.factorization i<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -950,7 +950,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psiPrimePow<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psiPrimePow<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="Splits all if-then-else-expressions into multiple goals.
 Given a goal of the form `g (if p then x else y)`, `split_ifs` will produce
 two goals: `p ⊢ g x` and `¬p ⊢ g y`.
@@ -1080,10 +1080,10 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> two_le_totient_primePow <span class="lean-bracket-<span class="lean-number">1</span>">{</span>p k : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hp : p.Prime<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-<span class="lean-number">1</span>">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> two_le_totient_primePow <span class="lean-bracket-1">{</span>p k : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hp : p.Prime<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-1">)</span>
+    <span class="lean-bracket-1">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-1">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-1">)</span><span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Nat.totient_prime_pow hp hk<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Nat.totient_prime_pow hp hk<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> hp2 : p = <span class="lean-number">2</span>
   <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="This is a &quot;finishing&quot; tactic modification of `simp`. It has two forms.
@@ -1098,7 +1098,7 @@ more robust under changes to the simp lemma set.
 * `simpa [rules, ⋯]` will simplify the goal and the type of a
 hypothesis `this` if present in the context, then try to close the goal using
 the `assumption` tactic.
-">simpa</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hp2<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword">using</span> Nat.pow_le_pow_right <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">simpa</span> <span class="lean-bracket-1">[</span>hp2<span class="lean-bracket-1">]</span> <span class="lean-keyword">using</span> Nat.pow_le_pow_right <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -1126,7 +1126,7 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">omega</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -1154,7 +1154,7 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span> : <span class="lean-number">1</span> <span class="lean-operator">≤</span> k - <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">omega</span> : <span class="lean-number">1</span> <span class="lean-operator">≤</span> k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span>
   <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1181,7 +1181,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hp3 : <span class="lean-number">3</span> <span class="lean-operator">≤</span> p := Nat.lt_of_le_of_ne hp.two_le <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Ne.symm hp2<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">have</span> hp3 : <span class="lean-number">3</span> <span class="lean-operator">≤</span> p := Nat.lt_of_le_of_ne hp.two_le <span class="lean-bracket-1">(</span>Ne.symm hp2<span class="lean-bracket-1">)</span>
     <span class="lean-keyword" data-docs="Step-wise reasoning over transitive relations.
 ```
 calc
@@ -1216,7 +1216,7 @@ calc abc
 See [Theorem Proving in Lean 4][tpil4] for more information.
 
 [tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
-">calc</span> p ^ <span class="lean-bracket-<span class="lean-number">1</span>">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> * <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p - <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≥</span> <span class="lean-number">1</span> * <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p - <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> := Nat.mul_le_mul_right _ <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.one_le_pow _ _ hp.pos<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">calc</span> p ^ <span class="lean-bracket-1">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> * <span class="lean-bracket-1">(</span>p - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> <span class="lean-operator">≥</span> <span class="lean-number">1</span> * <span class="lean-bracket-1">(</span>p - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> := Nat.mul_le_mul_right _ <span class="lean-bracket-1">(</span>Nat.one_le_pow _ _ hp.pos<span class="lean-bracket-1">)</span>
       _ <span class="lean-operator">≥</span> <span class="lean-number">2</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
@@ -1336,9 +1336,9 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> factorization_split_lt <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">2</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h_not_pp : <span class="lean-operator">¬</span>IsPrimePow m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
-    <span class="lean-operator">∃</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p e m&#x27; : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>, p.Prime <span class="lean-operator">∧</span> <span class="lean-number">0</span> &lt; e <span class="lean-operator">∧</span> p ^ e * m&#x27; = m <span class="lean-operator">∧</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ e<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.Coprime m&#x27; <span class="lean-operator">∧</span> <span class="lean-number">1</span> &lt; m&#x27; <span class="lean-operator">∧</span> m&#x27; &lt; m <span class="lean-operator">∧</span> p ^ e &lt; m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> factorization_split_lt <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">2</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h_not_pp : <span class="lean-operator">¬</span>IsPrimePow m<span class="lean-bracket-1">)</span> :
+    <span class="lean-operator">∃</span> <span class="lean-bracket-1">(</span>p e m&#x27; : ℕ<span class="lean-bracket-1">)</span>, p.Prime <span class="lean-operator">∧</span> <span class="lean-number">0</span> &lt; e <span class="lean-operator">∧</span> p ^ e * m&#x27; = m <span class="lean-operator">∧</span>
+    <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span>.Coprime m&#x27; <span class="lean-operator">∧</span> <span class="lean-number">1</span> &lt; m&#x27; <span class="lean-operator">∧</span> m&#x27; &lt; m <span class="lean-operator">∧</span> p ^ e &lt; m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1598,7 +1598,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> he_pos : <span class="lean-number">0</span> &lt; e :=
-    Nat.Prime.factorization_pos_of_dvd hminFac_prime hm_ne_zero <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.minFac_dvd m<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+    Nat.Prime.factorization_pos_of_dvd hminFac_prime hm_ne_zero <span class="lean-bracket-1">(</span>Nat.minFac_dvd m<span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1672,7 +1672,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hm&#x27;_pos : <span class="lean-number">0</span> &lt; m&#x27; := Nat.div_pos <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.le_of_dvd hm_pos hdvd<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pow_pos hminFac_prime.pos<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">have</span> hm&#x27;_pos : <span class="lean-number">0</span> &lt; m&#x27; := Nat.div_pos <span class="lean-bracket-1">(</span>Nat.le_of_dvd hm_pos hdvd<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Nat.pow_pos hminFac_prime.pos<span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1699,7 +1699,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hm_eq : m = p ^ e * m&#x27; := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.mul_div_cancel&#x27; hdvd<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm
+">have</span> hm_eq : m = p ^ e * m&#x27; := <span class="lean-bracket-1">(</span>Nat.mul_div_cancel&#x27; hdvd<span class="lean-bracket-1">)</span>.symm
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1726,7 +1726,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hcop : Nat.Coprime <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ e<span class="lean-bracket-<span class="lean-number">1</span>">)</span> m&#x27; := Nat.coprime_ordCompl hminFac_prime hm_ne_zero |&gt;.pow_left e
+">have</span> hcop : Nat.Coprime <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span> m&#x27; := Nat.coprime_ordCompl hminFac_prime hm_ne_zero |&gt;.pow_left e
   <span class="lean-comment">-- m&#x27; <span class="lean-operator">≠</span> <span class="lean-number">1</span> because m is not a prime power</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -1786,10 +1786,10 @@ The `apply` tactic uses higher-order pattern matching, type class resolution,
 and first-order unification with dependent types.
 ">apply</span> h_not_pp
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>isPrimePow_nat_iff<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>isPrimePow_nat_iff<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>p, e, hminFac_prime, he_pos, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hm_eq, hm&#x27;_one, mul_one<span class="lean-bracket-<span class="lean-number">1</span>">]</span><span class="lean-bracket-<span class="lean-number">1</span>">⟩</span>
+">exact</span> <span class="lean-bracket-1">⟨</span>p, e, hminFac_prime, he_pos, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-bracket-1">[</span>hm_eq, hm&#x27;_one, mul_one<span class="lean-bracket-1">]</span><span class="lean-bracket-1">⟩</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1970,9 +1970,9 @@ calc abc
 See [Theorem Proving in Lean 4][tpil4] for more information.
 
 [tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
-">calc</span> m&#x27; = <span class="lean-number">1</span> * m&#x27; := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>one_mul _<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm
+">calc</span> m&#x27; = <span class="lean-number">1</span> * m&#x27; := <span class="lean-bracket-1">(</span>one_mul _<span class="lean-bracket-1">)</span>.symm
       _ &lt; p ^ e * m&#x27; := Nat.mul_lt_mul_of_pos_right
-          <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.one_lt_pow he_pos.ne&#x27; hminFac_prime.one_lt<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm&#x27;_pos
+          <span class="lean-bracket-1">(</span>Nat.one_lt_pow he_pos.ne&#x27; hminFac_prime.one_lt<span class="lean-bracket-1">)</span> hm&#x27;_pos
       _ = m := hm_eq.symm
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -2035,11 +2035,11 @@ calc abc
 See [Theorem Proving in Lean 4][tpil4] for more information.
 
 [tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
-">calc</span> p ^ e = p ^ e * <span class="lean-number">1</span> := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>mul_one _<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.symm
-      _ &lt; p ^ e * m&#x27; := Nat.mul_lt_mul_of_pos_left hm&#x27;_gt_one <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pow_pos hminFac_prime.pos<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">calc</span> p ^ e = p ^ e * <span class="lean-number">1</span> := <span class="lean-bracket-1">(</span>mul_one _<span class="lean-bracket-1">)</span>.symm
+      _ &lt; p ^ e * m&#x27; := Nat.mul_lt_mul_of_pos_left hm&#x27;_gt_one <span class="lean-bracket-1">(</span>Nat.pow_pos hminFac_prime.pos<span class="lean-bracket-1">)</span>
       _ = m := hm_eq.symm
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>p, e, m&#x27;, hminFac_prime, he_pos, hm_eq.symm, hcop, hm&#x27;_gt_one, hm&#x27;_lt, hpe_lt<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span></code></pre>
+">exact</span> <span class="lean-bracket-1">⟨</span>p, e, m&#x27;, hminFac_prime, he_pos, hm_eq.symm, hcop, hm&#x27;_gt_one, hm&#x27;_lt, hpe_lt<span class="lean-bracket-1">⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L71-L119" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -2156,9 +2156,9 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_pos_of_odd_ge_three <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">3</span> <span class="lean-operator">≤</span> m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm_odd : Odd m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_pos_of_odd_ge_three <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">3</span> <span class="lean-operator">≤</span> m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm_odd : Odd m<span class="lean-bracket-1">)</span> :
     <span class="lean-number">0</span> &lt; psi m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-comment">-- m &gt;= <span class="lean-number">3</span> implies m != <span class="lean-number">1</span>, so minFac<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> is prime</span>
+  <span class="lean-comment">-- m &gt;= <span class="lean-number">3</span> implies m != <span class="lean-number">1</span>, so minFac</span><span class="lean-bracket-1">(</span>m<span class="lean-bracket-1">)</span> is prime
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2343,7 +2343,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> hq_dvd : q ∣ m := Nat.minFac_dvd m
-  <span class="lean-comment">-- m is odd, so minFac<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> != <span class="lean-number">2</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>otherwise <span class="lean-number">2</span> would divide m<span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+  <span class="lean-comment">-- m is odd, so minFac</span><span class="lean-bracket-1">(</span>m<span class="lean-bracket-1">)</span> != <span class="lean-number">2</span> <span class="lean-bracket-1">(</span>otherwise <span class="lean-number">2</span> would divide m<span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2394,7 +2394,7 @@ be a `let` or function type.
   ```
 ">intro</span> hq2eq
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hq2eq<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-bracket-1">[</span>hq2eq<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -2404,7 +2404,7 @@ hypotheses or the goal. It can have one of the forms:
 ">at</span> hq_dvd
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> hm_odd.not_two_dvd_nat hq_dvd
-  <span class="lean-comment">-- Therefore minFac<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &gt;= <span class="lean-number">3</span></span>
+  <span class="lean-comment">-- Therefore minFac</span><span class="lean-bracket-1">(</span>m<span class="lean-bracket-1">)</span> &gt;= <span class="lean-number">3</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2517,10 +2517,10 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> hq_in_support : q <span class="lean-operator">∈</span> m.factorization.support := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finsupp.mem_support_iff<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>Finsupp.mem_support_iff<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.Prime.factorization_pos_of_dvd hq_prime hm_ne_zero hq_dvd<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.ne&#x27;
-  <span class="lean-comment">-- psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &gt;= psiPrimePow<span class="lean-bracket-<span class="lean-number">1</span>">(</span>q, ord_q<span class="lean-bracket-<span class="lean-number">2</span>">(</span>m<span class="lean-bracket-<span class="lean-number">2</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+">exact</span> <span class="lean-bracket-1">(</span>Nat.Prime.factorization_pos_of_dvd hq_prime hm_ne_zero hq_dvd<span class="lean-bracket-1">)</span>.ne&#x27;
+  <span class="lean-comment">-- psi</span><span class="lean-bracket-1">(</span>m<span class="lean-bracket-1">)</span> &gt;= psiPrimePow<span class="lean-bracket-1">(</span>q, ord_q<span class="lean-bracket-2">(</span>m<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2547,9 +2547,9 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hcontrib : psiPrimePow q <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m.factorization q<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≤</span> psi m :=
+">have</span> hcontrib : psiPrimePow q <span class="lean-bracket-1">(</span>m.factorization q<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> psi m :=
     psi_ge_psiPrimePow_of_mem_support hq_in_support
-  <span class="lean-comment">-- psiPrimePow<span class="lean-bracket-<span class="lean-number">1</span>">(</span>q, k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span>q^k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &gt; <span class="lean-number">0</span> for q &gt;= <span class="lean-number">3</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>since q != <span class="lean-number">2</span> means <span class="lean-bracket-<span class="lean-number">2</span>">(</span>q, k<span class="lean-bracket-<span class="lean-number">2</span>">)</span> != <span class="lean-bracket-<span class="lean-number">2</span>">(</span><span class="lean-number">2</span>, <span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">2</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+  <span class="lean-comment">-- psiPrimePow</span><span class="lean-bracket-1">(</span>q, k<span class="lean-bracket-1">)</span> = totient<span class="lean-bracket-1">(</span>q^k<span class="lean-bracket-1">)</span> &gt; <span class="lean-number">0</span> for q &gt;= <span class="lean-number">3</span> <span class="lean-bracket-1">(</span>since q != <span class="lean-number">2</span> means <span class="lean-bracket-2">(</span>q, k<span class="lean-bracket-2">)</span> != <span class="lean-bracket-2">(</span><span class="lean-number">2</span>, <span class="lean-number">1</span><span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2576,7 +2576,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hcontrib_pos : <span class="lean-number">0</span> &lt; psiPrimePow q <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m.factorization q<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> hcontrib_pos : <span class="lean-number">0</span> &lt; psiPrimePow q <span class="lean-bracket-1">(</span>m.factorization q<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -2595,7 +2595,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psiPrimePow<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>psiPrimePow<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2642,7 +2642,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hk_pos.ne&#x27;, ite_false<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>hk_pos.ne&#x27;, ite_false<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -2661,9 +2661,9 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hq_ne2, false_and, ite_false<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>hq_ne2, false_and, ite_false<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> Nat.totient_pos.mpr <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pow_pos hq_prime.pos<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">exact</span> Nat.totient_pos.mpr <span class="lean-bracket-1">(</span>Nat.pow_pos hq_prime.pos<span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
@@ -2829,7 +2829,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_le_totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> : psi m <span class="lean-operator">≤</span> Nat.totient m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_le_totient <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> : psi m <span class="lean-operator">≤</span> Nat.totient m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-comment">-- Strong induction on m</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
@@ -2949,7 +2949,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi_one<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-comment">-- m = <span class="lean-number">1</span></span>
+">simp</span> <span class="lean-bracket-1">[</span>psi_one<span class="lean-bracket-1">]</span> <span class="lean-comment">-- m = <span class="lean-number">1</span></span>
   <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -3039,7 +3039,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi_two<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-comment">-- m = <span class="lean-number">2</span></span>
+">simp</span> <span class="lean-bracket-1">[</span>psi_two<span class="lean-bracket-1">]</span> <span class="lean-comment">-- m = <span class="lean-number">2</span></span>
     <span class="lean-operator">·</span> <span class="lean-comment">-- m <span class="lean-operator">≥</span> <span class="lean-number">3</span></span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -3101,7 +3101,7 @@ Currently, all of these are on by default.
 ">by_cases</span> hpow : IsPrimePow m
       <span class="lean-operator">·</span> <span class="lean-comment">-- m is a prime power p^k</span>
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>isPrimePow_nat_iff<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-bracket-1">[</span>isPrimePow_nat_iff<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -3124,9 +3124,9 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>p, k, hp, hk, rfl<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> := hpow
+">obtain</span> <span class="lean-bracket-1">⟨</span>p, k, hp, hk, rfl<span class="lean-bracket-1">⟩</span> := hpow
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi_prime_pow p k hp hk<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>psi_prime_pow p k hp hk<span class="lean-bracket-1">]</span>
         <span class="lean-keyword" data-docs="Splits all if-then-else-expressions into multiple goals.
 Given a goal of the form `g (if p then x else y)`, `split_ifs` will produce
 two goals: `p ⊢ g x` and `¬p ⊢ g y`.
@@ -3154,9 +3154,9 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-comment">-- psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">0</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+">simp</span> <span class="lean-comment">-- psi</span><span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span> = <span class="lean-number">0</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span>
         <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> le_refl _ <span class="lean-comment">-- psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span>p^k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span>p^k<span class="lean-bracket-<span class="lean-number">1</span>">)</span> for other prime powers</span>
+">exact</span> le_refl _ <span class="lean-comment">-- psi</span><span class="lean-bracket-1">(</span>p^k<span class="lean-bracket-1">)</span> = totient<span class="lean-bracket-1">(</span>p^k<span class="lean-bracket-1">)</span> for other prime powers
       <span class="lean-operator">·</span> <span class="lean-comment">-- m is not a prime power, so it has multiple distinct prime factors</span>
         <span class="lean-comment">-- Factor m = p^e * m&#x27; using factorization_split_lt</span>
         <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
@@ -3174,8 +3174,8 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>p, e, m&#x27;, hp, he_pos, hm_eq, hcop, hm&#x27;_gt_one, hm&#x27;_lt, _<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> :=
-          factorization_split_lt <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">obtain</span> <span class="lean-bracket-1">⟨</span>p, e, m&#x27;, hp, he_pos, hm_eq, hcop, hm&#x27;_gt_one, hm&#x27;_lt, _<span class="lean-bracket-1">⟩</span> :=
+          factorization_split_lt <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -3203,7 +3203,7 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span> : <span class="lean-number">2</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hpow
+">omega</span> : <span class="lean-number">2</span> &lt; m<span class="lean-bracket-1">)</span> hpow
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3316,9 +3316,9 @@ Currently, all of these are on by default.
 ">omega</span>
         <span class="lean-comment">-- psi and totient are additive/multiplicative on coprime factors</span>
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span><span class="lean-operator">←</span> hm_eq, psi_coprime_add _ _ <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm&#x27;_pos hcop,
-            Nat.totient_mul hcop<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
-        <span class="lean-comment">-- By IH: psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span>m&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> hm_eq, psi_coprime_add _ _ <span class="lean-bracket-1">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-1">)</span> hm&#x27;_pos hcop,
+            Nat.totient_mul hcop<span class="lean-bracket-1">]</span>
+        <span class="lean-comment">-- By IH: psi</span><span class="lean-bracket-1">(</span>m&#x27;<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-1">(</span>m&#x27;<span class="lean-bracket-1">)</span>
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3346,7 +3346,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> IH_m&#x27; : psi m&#x27; <span class="lean-operator">≤</span> Nat.totient m&#x27; := IH m&#x27; hm&#x27;_lt hm&#x27;_pos
-        <span class="lean-comment">-- For the prime power part: psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span>p^e<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span>p^e<span class="lean-bracket-<span class="lean-number">1</span>">)</span></span>
+        <span class="lean-comment">-- For the prime power part: psi</span><span class="lean-bracket-1">(</span>p^e<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> totient<span class="lean-bracket-1">(</span>p^e<span class="lean-bracket-1">)</span>
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3373,9 +3373,9 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hpsi_pe : psi <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ e<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ e<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> hpsi_pe : psi <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
           <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>psi_prime_pow p e hp he_pos<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">rw</span> <span class="lean-bracket-1">[</span>psi_prime_pow p e hp he_pos<span class="lean-bracket-1">]</span>
           <span class="lean-keyword" data-docs="Splits all if-then-else-expressions into multiple goals.
 Given a goal of the form `g (if p then x else y)`, `split_ifs` will produce
 two goals: `p ⊢ g x` and `¬p ⊢ g y`.
@@ -3406,7 +3406,7 @@ non-dependent hypotheses. It has many variants:
         <span class="lean-comment">-- Three cases based on whether p^e or m&#x27; equals <span class="lean-number">2</span></span>
         <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> h21 : p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> e = <span class="lean-number">1</span>
-        <span class="lean-operator">·</span> <span class="lean-comment">-- Case <span class="lean-number">1</span>: p^e = <span class="lean-number">2</span>, so psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">0</span> and totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">1</span></span>
+        <span class="lean-operator">·</span> <span class="lean-comment">-- Case <span class="lean-number">1</span>: p^e = <span class="lean-number">2</span>, so psi</span><span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span> = <span class="lean-number">0</span> and totient<span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span> = <span class="lean-number">1</span>
           <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -3422,7 +3422,7 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>hp2, he1<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> := h21
+">obtain</span> <span class="lean-bracket-1">⟨</span>hp2, he1<span class="lean-bracket-1">⟩</span> := h21
           <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -3441,13 +3441,13 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hp2, he1, pow_one, psi_two, Nat.totient_two, zero_add,
-            one_mul<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>hp2, he1, pow_one, psi_two, Nat.totient_two, zero_add,
+            one_mul<span class="lean-bracket-1">]</span>
           <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> IH_m&#x27;
         <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> hm&#x27;<span class="lean-number">2</span> : m&#x27; = <span class="lean-number">2</span>
-          <span class="lean-operator">·</span> <span class="lean-comment">-- Case <span class="lean-number">2</span>: m&#x27; = <span class="lean-number">2</span>, so psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">0</span> and totient<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">2</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">1</span></span>
+          <span class="lean-operator">·</span> <span class="lean-comment">-- Case <span class="lean-number">2</span>: m&#x27; = <span class="lean-number">2</span>, so psi</span><span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span> = <span class="lean-number">0</span> and totient<span class="lean-bracket-1">(</span><span class="lean-number">2</span><span class="lean-bracket-1">)</span> = <span class="lean-number">1</span>
             <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -3466,7 +3466,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hm&#x27;<span class="lean-number">2</span>, psi_two, Nat.totient_two, add_zero, mul_one<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>hm&#x27;<span class="lean-number">2</span>, psi_two, Nat.totient_two, add_zero, mul_one<span class="lean-bracket-1">]</span>
             <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> hpsi_pe
           <span class="lean-operator">·</span> <span class="lean-comment">-- Case <span class="lean-number">3</span>: Neither is <span class="lean-number">2</span>^<span class="lean-number">1</span>, so both totients &gt;= <span class="lean-number">2</span></span>
@@ -3497,7 +3497,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> htot_m&#x27;_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient m&#x27; :=
-              two_le_totient_of_two_lt m&#x27; <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+              two_le_totient_of_two_lt m&#x27; <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -3525,7 +3525,7 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span> : <span class="lean-number">2</span> &lt; m&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">omega</span> : <span class="lean-number">2</span> &lt; m&#x27;<span class="lean-bracket-1">)</span>
             <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3552,7 +3552,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> htot_pe_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>p ^ e<span class="lean-bracket-<span class="lean-number">1</span>">)</span> := two_le_totient_primePow hp he_pos h21
+">have</span> htot_pe_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span> := two_le_totient_primePow hp he_pos h21
             <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m&#x27; htot_pe_ge2 htot_m&#x27;_ge2</code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L168-L251" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -3667,8 +3667,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> primePow_achieved_of_lcm_eq <span class="lean-bracket-<span class="lean-number">1</span>">{</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>S : Finset ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> primePow_achieved_of_lcm_eq <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>S : Finset ℕ<span class="lean-bracket-1">)</span>
+    <span class="lean-bracket-1">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-1">)</span> :
     <span class="lean-operator">∀</span> q <span class="lean-operator">∈</span> m.factorization.support, <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, q ^ m.factorization q ∣ d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
@@ -3718,7 +3718,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hq_prime := Nat.prime_of_mem_primeFactors <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.support_factorization m ▸ hq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">have</span> hq_prime := Nat.prime_of_mem_primeFactors <span class="lean-bracket-1">(</span>Nat.support_factorization m ▸ hq<span class="lean-bracket-1">)</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -3757,7 +3757,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
 * `at *`: target all hypotheses and the goal
 ">at</span> hall
-  <span class="lean-comment">-- All d <span class="lean-operator">∈</span> S have q^<span class="lean-bracket-<span class="lean-number">1</span>">{</span>ord_q<span class="lean-bracket-<span class="lean-number">2</span>">(</span>m<span class="lean-bracket-<span class="lean-number">2</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">}</span> not dividing d</span>
+  <span class="lean-comment">-- All d <span class="lean-operator">∈</span> S have q^</span><span class="lean-bracket-1">{</span>ord_q<span class="lean-bracket-2">(</span>m<span class="lean-bracket-2">)</span><span class="lean-bracket-1">}</span> not dividing d
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3952,11 +3952,11 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> := <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hq_prime.pow_dvd_iff_le_factorization hd_pos.ne&#x27;<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.mpr hge
+">have</span> := <span class="lean-bracket-1">(</span>hq_prime.pow_dvd_iff_le_factorization hd_pos.ne&#x27;<span class="lean-bracket-1">)</span>.mpr hge
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> hndvd this
-  <span class="lean-comment">-- lcm<span class="lean-bracket-<span class="lean-number">1</span>">(</span>S<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.factorization q = sup of d.factorization q, which is &lt; m.factorization q</span>
-  <span class="lean-comment">-- This contradicts hS_lcm since lcm<span class="lean-bracket-<span class="lean-number">1</span>">(</span>S<span class="lean-bracket-<span class="lean-number">1</span>">)</span> = m requires matching factorizations.</span>
+  <span class="lean-comment">-- lcm</span><span class="lean-bracket-1">(</span>S<span class="lean-bracket-1">)</span>.factorization q = sup of d.factorization q, which is &lt; m.factorization q
+  <span class="lean-comment">-- This contradicts hS_lcm since lcm</span><span class="lean-bracket-1">(</span>S<span class="lean-bracket-1">)</span> = m requires matching factorizations.
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3984,7 +3984,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> hne_zero : S.lcm id <span class="lean-operator">≠</span> <span class="lean-number">0</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hS_lcm<span class="lean-bracket-<span class="lean-number">1</span>">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">rw</span> <span class="lean-bracket-1">[</span>hS_lcm<span class="lean-bracket-1">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> hm.ne&#x27;
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -4039,8 +4039,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hfact_q : <span class="lean-bracket-<span class="lean-number">1</span>">(</span>S.lcm id<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.factorization q &lt; m.factorization q := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-    <span class="lean-comment">-- Show: <span class="lean-bracket-<span class="lean-number">1</span>">(</span>S.lcm id<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.factorization q <span class="lean-operator">≤</span> S.sup <span class="lean-bracket-<span class="lean-number">1</span>">(</span>d.factorization q<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &lt; m.factorization q</span>
+">have</span> hfact_q : <span class="lean-bracket-1">(</span>S.lcm id<span class="lean-bracket-1">)</span>.factorization q &lt; m.factorization q := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-comment">-- Show: </span><span class="lean-bracket-1">(</span>S.lcm id<span class="lean-bracket-1">)</span>.factorization q <span class="lean-operator">≤</span> S.sup <span class="lean-bracket-1">(</span>d.factorization q<span class="lean-bracket-1">)</span> &lt; m.factorization q
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4067,8 +4067,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hsup_lt : S.sup <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword">fun</span> d =&gt; d.factorization q<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &lt; m.factorization q :=
-      Finset.sup_lt_iff hk_pos |&gt;.mpr <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword">fun</span> d hd =&gt; hall&#x27; d hd<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">have</span> hsup_lt : S.sup <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> d =&gt; d.factorization q<span class="lean-bracket-1">)</span> &lt; m.factorization q :=
+      Finset.sup_lt_iff hk_pos |&gt;.mpr <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> d hd =&gt; hall&#x27; d hd<span class="lean-bracket-1">)</span>
     <span class="lean-comment">-- Use extracted lemma for lcm factorization bound</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -4097,11 +4097,11 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> hS_ne_zero : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d <span class="lean-operator">≠</span> <span class="lean-number">0</span> := <span class="lean-keyword">fun</span> d hd =&gt;
-      <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Nat.pos_of_dvd_of_pos <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_sub d hd<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.ne&#x27;
+      <span class="lean-bracket-1">(</span>Nat.pos_of_dvd_of_pos <span class="lean-bracket-1">(</span>hS_sub d hd<span class="lean-bracket-1">)</span> hm<span class="lean-bracket-1">)</span>.ne&#x27;
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> lt_of_le_of_lt <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Finset.lcm_factorization_le_sup S id q hS_ne_zero<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hsup_lt
+">exact</span> lt_of_le_of_lt <span class="lean-bracket-1">(</span>Finset.lcm_factorization_le_sup S id q hS_ne_zero<span class="lean-bracket-1">)</span> hsup_lt
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hS_lcm<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-bracket-1">[</span>hS_lcm<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -4228,7 +4228,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.nonempty_of_two_le_lcm <span class="lean-bracket-<span class="lean-number">1</span>">{</span>S : Finset ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.nonempty_of_two_le_lcm <span class="lean-bracket-1">{</span>S : Finset ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-1">)</span> :
     S.Nonempty :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
@@ -4237,7 +4237,7 @@ introducing a hypothesis `h : ¬p` and proving `False`.
 * If `h` is omitted, the introduced variable will be called `this`.
 ">by_contra</span> h
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>Finset.not_nonempty_iff_eq_empty<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-bracket-1">[</span>Finset.not_nonempty_iff_eq_empty<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -4263,7 +4263,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>h, Finset.lcm_empty<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>h, Finset.lcm_empty<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -4410,8 +4410,8 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.exists_one_lt_of_two_le_lcm <span class="lean-bracket-<span class="lean-number">1</span>">{</span>S : Finset ℕ<span class="lean-bracket-<span class="lean-number">1</span>">}</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_pos : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">0</span> &lt; d<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-<span class="lean-number">1</span>">)</span> : <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">1</span> &lt; d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.exists_one_lt_of_two_le_lcm <span class="lean-bracket-1">{</span>S : Finset ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hS_pos : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">0</span> &lt; d<span class="lean-bracket-1">)</span>
+    <span class="lean-bracket-1">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-1">)</span> : <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">1</span> &lt; d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -4643,7 +4643,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>id_eq, hall_eq1 d hd, Nat.one_dvd<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>id_eq, hall_eq1 d hd, Nat.one_dvd<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
@@ -4811,8 +4811,8 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> sum_totient_ge_psi_of_lcm_eq <span class="lean-bracket-<span class="lean-number">1</span>">(</span>m : ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>S : Finset ℕ<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
-    <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> sum_totient_ge_psi_of_lcm_eq <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>S : Finset ℕ<span class="lean-bracket-1">)</span>
+    <span class="lean-bracket-1">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-1">)</span> :
     psi m <span class="lean-operator">≤</span> <span class="lean-operator">∑</span> d <span class="lean-operator">∈</span> S, Nat.totient d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-comment">-- If m <span class="lean-operator">∈</span> S, apply helper lemma directly</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
@@ -4848,7 +4848,7 @@ You can use `with` to provide the variables names for each constructor.
 then a list of alternatives.
 ">with</span>
     | _ m IH =&gt;
-    <span class="lean-comment">-- For m = <span class="lean-number">1</span>: psi<span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-number">1</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span> = <span class="lean-number">0</span> <span class="lean-operator">≤</span> any sum</span>
+    <span class="lean-comment">-- For m = <span class="lean-number">1</span>: psi</span><span class="lean-bracket-1">(</span><span class="lean-number">1</span><span class="lean-bracket-1">)</span> = <span class="lean-number">0</span> <span class="lean-operator">≤</span> any sum
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> hm_eq1 : m = <span class="lean-number">1</span>
     <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
@@ -4869,7 +4869,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>hm_eq1, psi_one, Nat.zero_le<span class="lean-bracket-<span class="lean-number">1</span>">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>hm_eq1, psi_one, Nat.zero_le<span class="lean-bracket-1">]</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4978,8 +4978,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> hS_pos : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">0</span> &lt; d := <span class="lean-keyword">fun</span> d hd =&gt; Nat.pos_of_dvd_of_pos <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hS_sub d hd<span class="lean-bracket-<span class="lean-number">1</span>">)</span> hm
-    <span class="lean-comment">-- S is nonempty since lcm<span class="lean-bracket-<span class="lean-number">1</span>">(</span>S<span class="lean-bracket-<span class="lean-number">1</span>">)</span> &gt;= <span class="lean-number">2</span></span>
+">have</span> hS_pos : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">0</span> &lt; d := <span class="lean-keyword">fun</span> d hd =&gt; Nat.pos_of_dvd_of_pos <span class="lean-bracket-1">(</span>hS_sub d hd<span class="lean-bracket-1">)</span> hm
+    <span class="lean-comment">-- S is nonempty since lcm</span><span class="lean-bracket-1">(</span>S<span class="lean-bracket-1">)</span> &gt;= <span class="lean-number">2</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5041,7 +5041,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     <span class="lean-operator">·</span> <span class="lean-comment">-- m is a prime power p^k: contradiction since p^k must be in S</span>
       <span class="lean-keyword" data-docs="`exfalso` converts a goal `⊢ tgt` into `⊢ False` by applying `False.elim`. ">exfalso</span>
       <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>isPrimePow_nat_iff<span class="lean-bracket-<span class="lean-number">1</span>">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-bracket-1">[</span>isPrimePow_nat_iff<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -5064,10 +5064,10 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-bracket-<span class="lean-number">1</span>">⟨</span>p, k, hp, hk, hm_eq<span class="lean-bracket-<span class="lean-number">1</span>">⟩</span> := hpow
+">obtain</span> <span class="lean-bracket-1">⟨</span>p, k, hp, hk, hm_eq<span class="lean-bracket-1">⟩</span> := hpow
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> hm_in_S <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm_eq ▸ Finset.prime_pow_mem_of_lcm_eq hp hk S
-        <span class="lean-bracket-<span class="lean-number">1</span>">(</span><span class="lean-keyword">fun</span> d hd =&gt; hm_eq ▸ hS_sub d hd<span class="lean-bracket-<span class="lean-number">1</span>">)</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>hm_eq ▸ hS_lcm<span class="lean-bracket-<span class="lean-number">1</span>">)</span><span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+">exact</span> hm_in_S <span class="lean-bracket-1">(</span>hm_eq ▸ Finset.prime_pow_mem_of_lcm_eq hp hk S
+        <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> d hd =&gt; hm_eq ▸ hS_sub d hd<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm_eq ▸ hS_lcm<span class="lean-bracket-1">)</span><span class="lean-bracket-1">)</span>
     <span class="lean-operator">·</span> <span class="lean-comment">-- m is not a prime power: use achiever function approach</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -5123,7 +5123,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> h_ach : <span class="lean-operator">∀</span> q <span class="lean-operator">∈</span> nontrivialPrimes m, <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, q ^ m.factorization q ∣ d := <span class="lean-keyword">fun</span> q hq =&gt;
-        h_achieves q <span class="lean-bracket-<span class="lean-number">1</span>">(</span>Finset.mem_of_mem_filter q hq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>
+        h_achieves q <span class="lean-bracket-1">(</span>Finset.mem_of_mem_filter q hq<span class="lean-bracket-1">)</span>
       <span class="lean-comment">-- Construct achiever function and prove its properties</span>
       <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -5175,7 +5175,7 @@ avoid a bounds check, so you can write `if h : i &lt; arr.size then arr.get i h 
 to avoid the bounds check inside the if branch. (Of course in this case we have only
 lifted the check into an explicit `if`, but we could also use this proof multiple times
 or derive `i &lt; arr.size` from some other proposition that we are checking in the `if`.)
-">then</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h_ach q hq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.choose <span class="lean-keyword" data-docs="&quot;Dependent&quot; if-then-else, normally written via the notation `if h : c then t(h) else e(h)`,
+">then</span> <span class="lean-bracket-1">(</span>h_ach q hq<span class="lean-bracket-1">)</span>.choose <span class="lean-keyword" data-docs="&quot;Dependent&quot; if-then-else, normally written via the notation `if h : c then t(h) else e(h)`,
 is sugar for `dite c (fun h =&gt; t(h)) (fun h =&gt; e(h))`, and it is the same as
 `if c then t else e` except that `t` is allowed to depend on a proof `h : c`,
 and `e` can depend on `h : ¬c`. (Both branches use the same name for the hypothesis,
@@ -5233,8 +5233,8 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>achiever, dif_pos hq<span class="lean-bracket-<span class="lean-number">1</span>">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h_ach q hq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.choose_spec.<span class="lean-number">1</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>achiever, dif_pos hq<span class="lean-bracket-1">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-bracket-1">(</span>h_ach q hq<span class="lean-bracket-1">)</span>.choose_spec.<span class="lean-number">1</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5280,8 +5280,8 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-<span class="lean-number">1</span>">[</span>achiever, dif_pos hq<span class="lean-bracket-<span class="lean-number">1</span>">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-bracket-<span class="lean-number">1</span>">(</span>h_ach q hq<span class="lean-bracket-<span class="lean-number">1</span>">)</span>.choose_spec.<span class="lean-number">2</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>achiever, dif_pos hq<span class="lean-bracket-1">]</span>; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-bracket-1">(</span>h_ach q hq<span class="lean-bracket-1">)</span>.choose_spec.<span class="lean-number">2</span>
       <span class="lean-comment">-- Apply the fiberwise bound</span>
       <span class="lean-keyword" data-docs="Step-wise reasoning over transitive relations.
 ```
@@ -5318,7 +5318,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
 
 [tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
 ">calc</span> psi m
-          = <span class="lean-operator">∑</span> q <span class="lean-operator">∈</span> nontrivialPrimes m, Nat.totient <span class="lean-bracket-<span class="lean-number">1</span>">(</span>q ^ m.factorization q<span class="lean-bracket-<span class="lean-number">1</span>">)</span> :=
+          = <span class="lean-operator">∑</span> q <span class="lean-operator">∈</span> nontrivialPrimes m, Nat.totient <span class="lean-bracket-1">(</span>q ^ m.factorization q<span class="lean-bracket-1">)</span> :=
             psi_eq_sum_nontrivial_totients m
         _ <span class="lean-operator">≤</span> <span class="lean-operator">∑</span> d <span class="lean-operator">∈</span> S, Nat.totient d :=
             sum_nontrivial_totients_le_sum_totients S hS_pos achiever h_achiever_mem h_achiever_dvd</code></pre>
