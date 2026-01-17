@@ -272,6 +272,25 @@ and first-order unification with dependent types.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:pow-eq-one-of-minpoly-dvd');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:minpoly-dvd-X-pow-sub-one">
   <div class="sbs-latex-column">
@@ -369,6 +388,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:minpoly-dvd-X-pow-sub-one');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:cyclotomic-finset-product-dvd">
   <div class="sbs-latex-column">
@@ -602,6 +640,25 @@ be a `let` or function type.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:cyclotomic-finset-product-dvd');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:minpoly-dvd-prod-cyclotomic">
   <div class="sbs-latex-column">
@@ -936,6 +993,25 @@ hypotheses or the goal. It can have one of the forms:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:minpoly-dvd-prod-cyclotomic');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:minpoly-eq-prod-cyclotomic">
   <div class="sbs-latex-column">
@@ -1237,6 +1313,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:minpoly-eq-prod-cyclotomic');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:cyclotomic-divisors-lcm-eq">
   <div class="sbs-latex-column">
@@ -1915,6 +2010,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:cyclotomic-divisors-lcm-eq');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:forward-direction">
   <div class="sbs-latex-column">
@@ -2485,6 +2599,25 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('thm:forward-direction');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:permMatrix-one">
   <div class="sbs-latex-column">
@@ -2573,6 +2706,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:permMatrix-one');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:permMatrix-mul">
   <div class="sbs-latex-column">
@@ -2664,6 +2816,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:permMatrix-mul');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:permMatrix-pow">
   <div class="sbs-latex-column">
@@ -2813,6 +2984,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:permMatrix-pow');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:permMatrix-eq-one-iff">
   <div class="sbs-latex-column">
@@ -3089,6 +3279,25 @@ be a `let` or function type.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:permMatrix-eq-one-iff');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orderOf-permMatrix">
   <div class="sbs-latex-column">
@@ -3364,6 +3573,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:orderOf-permMatrix');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orderOf-finRotate">
   <div class="sbs-latex-column">
@@ -3513,6 +3741,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:orderOf-finRotate');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orderOf-permMatrix-finRotate">
   <div class="sbs-latex-column">
@@ -3608,6 +3855,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:orderOf-permMatrix-finRotate');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:mem-integerMatrixOrders-self">
   <div class="sbs-latex-column">
@@ -3767,6 +4033,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:mem-integerMatrixOrders-self');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:primePow-mem-integerMatrixOrders-psi">
   <div class="sbs-latex-column">
@@ -4006,6 +4291,25 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('thm:primePow-mem-integerMatrixOrders-psi');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:mem-integerMatrixOrders-psi">
   <div class="sbs-latex-column">
@@ -4743,6 +5047,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('thm:mem-integerMatrixOrders-psi');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:backward-direction">
   <div class="sbs-latex-column">
@@ -5291,6 +5614,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('thm:backward-direction');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:main-theorem">
   <div class="sbs-latex-column">
@@ -5390,6 +5732,25 @@ non-dependent hypotheses. It has many variants:
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('thm:main-theorem');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 
 

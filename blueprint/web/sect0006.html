@@ -477,6 +477,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:sum-le-prod');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:lcm-factorization-le-sup">
   <div class="sbs-latex-column">
@@ -795,6 +814,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:lcm-factorization-le-sup');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:primePow-mem-of-lcm-eq">
   <div class="sbs-latex-column">
@@ -1296,6 +1334,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:primePow-mem-of-lcm-eq');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:totient-ge-two">
   <div class="sbs-latex-column">
@@ -1501,6 +1558,25 @@ Currently, all of these are on by default.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:totient-ge-two');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:prod-coprime-dvd">
   <div class="sbs-latex-column">
@@ -1819,6 +1895,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:prod-coprime-dvd');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:totient-prod-coprime">
   <div class="sbs-latex-column">
@@ -2066,6 +2161,25 @@ be a `let` or function type.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:totient-prod-coprime');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orderOf-neg-of-odd-order">
   <div class="sbs-latex-column">
@@ -2323,6 +2437,25 @@ The tactic supports all the same syntax variants and options as the `have` term.
 </a>
   </div>
 </div>
+<script>
+(function() {
+  var container = document.getElementById('lem:orderOf-neg-of-odd-order');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+    }, 50);
+  });
+})();
+</script>
+
 
 
 </div> <!--main-text -->

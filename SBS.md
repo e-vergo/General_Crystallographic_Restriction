@@ -1,6 +1,6 @@
 # Side-by-Side Lean Code Display for Blueprint
 
-This document describes the architecture for displaying Lean source code side-by-side with LaTeX theorem statements in the leanblueprint HTML output, including SubVerso semantic syntax highlighting.
+This document describes the architecture for displaying Lean source code side-by-side with LaTeX theorem statements in the leanblueprint HTML output, including SubVerso semantic syntax highlighting. This document is meant to capture the repo at a moment in time and provide a one-stop-shop for LLMs to get up to speed on the project. It is not meant to capture development history.
 
 ## Overview
 
@@ -15,238 +15,145 @@ The feature involves three repositories:
 
 ```
 Lean Source Code (@[blueprint] attributes)
-    ↓
+    |
 LeanArchitect extracts declarations with --highlight flag
-    ↓
+    |
 Highlighting.lean re-elaborates source with withInfoTreeContext
-    ↓
+    |
 SubVerso's highlightIncludingUnparsed produces Highlighted JSON
-    ↓
-Output.lean emits \leansource{base64_json} and \leanposition{...} INSIDE environments
-    ↓
-plasTeX parses .tex → Node objects with userdata (leansource_base64, leanposition)
-    ↓
+    |
+Basic.lean: splitAtDefinitionAssign() splits at := for theorems with proofs
+    |
+Output.lean emits:
+  - \leansignaturesource{base64_json}  (signature up to :=)
+  - \leanproofsource{base64_json}      (proof body after :=)
+  - \leanposition{...} and \leanproofposition{...}
+    |
+plasTeX parses .tex -> Node objects with userdata
+    |
 blueprint.py processes nodes:
-  - If leansource_base64 present: render_highlighted_base64() → lean_source_html
-  - Fallback: read source file → lean_signature_html, lean_proof_html (plain text)
-    ↓
+  - If leansignature_base64 present: render_highlighted_base64() -> lean_signature_html
+  - If leanproof_base64 present: render_highlighted_base64() -> lean_proof_html
+  - Fallback: read source file, clean_lean_source() -> plain text HTML
+    |
 Thms.jinja2s template renders sbs-container grid layout
-    ↓
+    |
 HTML with .sbs-latex-column and .sbs-lean-column side by side
 ```
 
-### Critical Implementation Details
+### Code Splitting Logic
 
-#### 1. plasTeX Parent Node Assignment
+The `splitAtDefinitionAssign` function in `Basic.lean` handles splitting highlighted code:
 
-**plasTeX's `self.parentNode` during command parsing depends on where the command appears in the LaTeX source.**
+1. **Strip @[blueprint] prefix**: The function always removes any prefix before the definition keyword (def/theorem/lemma/abbrev/instance/example), stripping attributes like `@[blueprint ...]`.
 
-```latex
-% WRONG - parentNode is the SECTION, not the definition:
-\begin{definition}
-...content...
-\end{definition}
-\leanposition{...}
+2. **Find the definition keyword**: Scans tokens for `def`, `theorem`, `lemma`, `abbrev`, `instance`, or `example`.
 
-% CORRECT - parentNode is the definition:
-\begin{definition}
-\leanposition{...}
-...content...
-\end{definition}
-```
+3. **Find `:=` at bracket depth 0**: After the definition keyword, tracks bracket depth `()[]{}` and finds the `:=` token when depth is 0.
 
-This is why `Output.lean` emits `\leanposition{}` and `\leansource{}` as part of `addLatex` (which goes inside the environment).
+4. **Split behavior**:
+   - If `node.proof.isSome` (theorem with proof): Splits at `:=`, returning `(signature, body)` where signature includes `:=`.
+   - If `node.proof.isNone` (definition without proof section): Returns full code from def keyword with no body split.
 
-#### 2. SubVerso Highlighting via Re-elaboration
+### SubVerso Highlighting
 
-SubVerso requires properly contextualized info trees. A previous approach of capturing info trees during a linter phase caused panics ("unexpected contextless node") because info trees lacked proper `.context` wrappers.
+SubVerso produces semantic highlighting by re-elaborating source code:
 
-The solution follows the Verso (Lean 4 reference manual) pattern:
-1. Parse the declaration source text
-2. Re-elaborate each command wrapped in `withInfoTreeContext`
-3. Capture the resulting info trees
-4. Pass to `highlightIncludingUnparsed` in a proper TermElabM context
+1. `computeHighlighting` extracts the declaration source from the file using position ranges.
+2. `highlightSource` re-elaborates the source with `withInfoTreeContext` to capture proper info trees.
+3. `highlightIncludingUnparsed` produces a `Highlighted` JSON structure with token kinds.
 
-```lean
--- From Highlighting.lean
-def runCommand (act : CommandElabM Unit) (stx : Syntax) (ctx : Command.Context)
-    (state : Command.State) : IO Command.State := do
-  let act' := withInfoTreeContext
-    (mkInfoTree := pure ∘ InfoTree.node (.ofCommandInfo {elaborator := `Architect.highlight, stx}))
-    act
-  match ← EIO.toIO' <| (act' ctx).run state with
-  | .ok ((), state') => return state'
-  | .error e => throw <| IO.userError s!"Command elaboration failed: {← e.toMessageData.toString}"
-```
+The `Highlighted` type contains:
+- `token`: Semantic tokens with `kind` (keyword, const, var, string, etc.) and `content`
+- `text`: Plain text
+- `seq`: Sequences of highlighted nodes
+- `span`: Spans with attached messages (errors/warnings/info)
+- `tactics`: Tactic blocks with goal information
 
-#### 3. Proof Toggle Synchronization
+### Proof Toggle Synchronization
 
-The LaTeX proof is rendered inside `.sbs-latex-column` via `{{ obj }}`. JavaScript syncs the Lean proof body visibility with the LaTeX proof toggle:
+When the LaTeX proof toggle (expand-proof icon) is clicked, JavaScript syncs the Lean proof body visibility:
 
 ```javascript
-// From Thms.jinja2s sbs-script
-document.querySelectorAll('.expand-proof').forEach(function(toggle) {
-  toggle.addEventListener('click', function() {
-    var wrapper = toggle.closest('.sbs-container');
-    if (wrapper) {
-      var proofBody = wrapper.querySelector('.lean-proof-body');
-      if (proofBody) {
-        // Check icon state AFTER plastex.js toggles it
-        setTimeout(function() {
-          var icon = toggle.textContent || toggle.innerText;
-          // ▼ = expanded → show Lean proof; ▶ = collapsed → hide
-          proofBody.style.display = (icon.trim() === '▼') ? 'inline' : 'none';
-        }, 50);
-      }
-    }
-  });
+// From Thms.jinja2s - inline script per theorem
+proofHeading.addEventListener('click', function() {
+  setTimeout(function() {
+    var icon = container.querySelector('.expand-proof');
+    var isExpanded = icon && icon.textContent.trim() === '▼';
+    leanProofBody.style.display = isExpanded ? 'inline' : 'none';
+  }, 50);
 });
 ```
 
-## File Structure
+The `setTimeout` delay allows plastex.js to toggle the icon before we read its state.
+
+## Key Files
 
 ### LeanArchitect
 
-#### lakefile.lean
-```lean
-require subverso from git
-  "https://github.com/leanprover/subverso"
-
-/-- A facet to extract the blueprint for a module. -/
-module_facet blueprint (mod : Module) : Unit := do
-  buildModuleBlueprint mod "tex" #["--highlight"]  -- Enables SubVerso highlighting
-```
-
-#### Main.lean
-```lean
-def singleCmd := `[Cli|
-  single VIA runSingleCmd;
-  FLAGS:
-    j, json; "Output JSON instead of LaTeX."
-    h, highlight; "Compute SubVerso syntax highlighting for Lean code."
-    b, build : String; "Build directory."
-    o, options : String; "LeanOptions in JSON to pass to running the module."
-  ARGS:
-    module : String; "The module to extract the blueprint for."
-]
-```
-
-#### Architect/Highlighting.lean
-Core SubVerso integration following the Verso pattern:
-- `highlightSource`: Re-elaborates source with `withInfoTreeContext`, returns `Highlighted`
-- `runHighlighting`: Runs `highlightIncludingUnparsed` in TermElabM context
-- `runCommand`: Wraps command elaboration to capture contextualized info trees
-
 #### Architect/Basic.lean
-```lean
-structure NodeWithPos extends Node where
-  hasLean : Bool
-  location : Option DeclarationLocation
-  proofLocation : Option DeclarationRange := none
-  file : Option System.FilePath
-  highlightedCode : Option SubVerso.Highlighting.Highlighted := none
-
-def computeHighlighting (file : System.FilePath) (range : DeclarationRange)
-    (env : Environment) (opts : Options := {}) : IO (Option SubVerso.Highlighting.Highlighted)
-
-def Node.toNodeWithPos (node : Node) (computeHighlight : Bool := false) : CoreM NodeWithPos
-```
+Core data structures and highlighting logic:
+- `NodeWithPos`: Extended node with `highlightedSignature` and `highlightedProofBody` fields
+- `splitAtDefinitionAssign`: Bracket-aware splitting at `:=` token
+- `computeHighlighting`: Extracts source and runs SubVerso highlighting
+- `Node.toNodeWithPos`: Converts node with optional highlighting computation
 
 #### Architect/Output.lean
-```lean
-def NodeWithPos.toLatex (node : NodeWithPos) : m Latex := do
-  -- ... build addLatex ...
+LaTeX emission:
+- `NodeWithPos.toLatex`: Emits `\leansignaturesource{}` and `\leanproofsource{}` as base64-encoded SubVerso JSON
+- Commands emitted INSIDE the LaTeX environment so plasTeX attaches userdata to correct node
 
-  -- Emit INSIDE the environment so plasTeX attaches to correct node
-  if let (some file, some location) := (node.file, node.location) then
-    let positionStr := s!"{file}|{location.range.pos.line}|..."
-    addLatex := addLatex ++ "\\leanposition{" ++ positionStr ++ "}\n"
-  if let some hl := node.highlightedCode then
-    let jsonStr := (toJson hl).compress
-    let base64Json := stringToBase64 jsonStr
-    addLatex := addLatex ++ "\\leansource{" ++ base64Json ++ "}\n"
-```
+#### Architect/Highlighting.lean
+SubVerso integration following the Verso pattern:
+- `highlightSource`: Re-elaborates source with `withInfoTreeContext`
+- `runCommand`: Wraps command elaboration to capture contextualized info trees
 
 ### leanblueprint
 
 #### leanblueprint/subverso_render.py
-Converts SubVerso `Highlighted` JSON to HTML with CSS classes:
-```python
-def render_highlighted(highlighted_json: str) -> str:
-    """Convert SubVerso Highlighted JSON to HTML."""
-
-def _token_class(kind: Any) -> str:
-    """Map SubVerso Token.Kind to CSS class."""
-    # Returns: lean-keyword, lean-const, lean-var, lean-string, etc.
-```
+Converts SubVerso `Highlighted` JSON to HTML:
+- `render_highlighted_base64()`: Decodes base64, parses JSON, renders to HTML
+- `_render_node()`: Recursively renders tokens, text, sequences, spans, tactics
+- `_token_class()`: Maps token kinds to CSS classes (lean-keyword, lean-const, lean-var, etc.)
+- `_token_data_attrs()`: Extracts data attributes for hover info
 
 #### leanblueprint/Packages/blueprint.py
-plasTeX command classes:
-```python
-class leansource(Command):
-    r"""\leansource{base64_encoded_json}"""
-    args = 'source:str'
-    def digest(self, tokens):
-        Command.digest(self, tokens)
-        self.parentNode.setUserData('leansource_base64', self.attributes['source'])
-
-class leanposition(Command):
-    r"""\leanposition{file|startLine|startCol|endLine|endCol}"""
-    # Sets leanposition userdata dict
-```
-
-Processing in `make_lean_data()`:
-```python
-# If SubVerso highlighting available:
-if node.userdata.get('leansource_base64'):
-    node.userdata['lean_source_html'] = render_highlighted_base64(
-        node.userdata['leansource_base64']
-    )
-
-# Fallback: read source file directly
-if not node.userdata.get('lean_signature_html'):
-    # Read file, split signature/proof, HTML escape
-    node.userdata['lean_signature_html'] = f'<span class="lean-plain">{escaped}</span>'
-```
+plasTeX command classes and post-parse processing:
+- `leansignaturesource`: Stores base64-encoded signature JSON in `leansignature_base64` userdata
+- `leanproofsource`: Stores base64-encoded proof JSON in `leanproof_base64` userdata
+- `leanposition`: Stores file path and line/column range
+- `make_lean_data()`: Post-parse callback that:
+  - Renders SubVerso JSON to HTML via `render_highlighted_base64()`
+  - Falls back to reading source file with `clean_lean_source()` for plain text
+  - Builds GitHub permalinks from position data
 
 #### leanblueprint/Packages/renderer_templates/Thms.jinja2s
+Jinja2 template for theorem environments:
 ```jinja2
 <div class="{{ obj.thmName }}_thmwrapper sbs-container" id="{{ obj.id }}">
   <div class="sbs-latex-column">
-    <div class="{{ obj.thmName }}_thmheading">...</div>
-    <div class="{{ obj.thmName }}_thmcontent">{{ obj }}</div>
+    {# LaTeX theorem content and proof #}
   </div>
   {% if obj.userdata.lean_signature_html %}
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature">{{ obj.userdata.lean_signature_html | safe }}</code>{% if obj.userdata.lean_proof_html %}<code class="lean-proof-body">{{ obj.userdata.lean_proof_html | safe }}</code>{% endif %}</pre>
-    {% if obj.userdata.lean_github_permalink %}
-    <a href="{{ obj.userdata.lean_github_permalink }}" class="lean-github-hover" target="_blank">GitHub</a>
-    {% endif %}
+    <pre class="lean-code">
+      <code class="lean-signature">{{ obj.userdata.lean_signature_html | safe }}</code>
+      {% if obj.userdata.lean_proof_html %}
+      <code class="lean-proof-body">{{ obj.userdata.lean_proof_html | safe }}</code>
+      {% endif %}
+    </pre>
   </div>
   {% endif %}
 </div>
 ```
 
+Inline JavaScript handles proof toggle sync for each theorem with a proof.
+
 #### leanblueprint/static/blueprint.css
-```css
-.sbs-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.lean-proof-body {
-  display: none;  /* Shown via JS when proof toggle expanded */
-}
-
-/* SubVerso syntax highlighting */
-.lean-keyword { color: #8959a8; font-weight: bold; }
-.lean-const { color: #4271ae; }
-.lean-var { color: #c82829; }
-.lean-string { color: #718c00; }
-/* ... etc */
-```
+CSS styling:
+- `.sbs-container`: Grid layout with two columns
+- `.lean-proof-body`: Initially `display: none`, shown via JS when proof expanded
+- SubVerso syntax highlighting classes: `.lean-keyword`, `.lean-const`, `.lean-var`, etc.
 
 ## Build Process
 
@@ -254,37 +161,6 @@ The `scripts/build_blueprint.sh` executes:
 1. Build LeanArchitect (`lake build`)
 2. Build project and blueprint data (`lake build :blueprint` - uses `--highlight` flag)
 3. Run leanblueprint (`leanblueprint pdf && leanblueprint web`)
-
-## Current Challenge
-
-**Symptom**: Lean code displays as plain text without syntax highlighting. The HTML shows `class="lean-plain"` instead of SubVerso classes like `lean-keyword`, `lean-const`.
-
-**Root Cause**: The `computeHighlighting` function in `Basic.lean` extracts just the declaration source from the file, but SubVerso's re-elaboration needs the source to be parseable as standalone Lean code. A bare declaration without imports/namespace context fails to parse, so `computeHighlighting` catches the exception and returns `none`, causing no `\leansource{}` to be emitted.
-
-**The Chain**:
-1. `--highlight` flag is passed ✓
-2. `Node.toNodeWithPos` is called with `computeHighlight := true` ✓
-3. `computeHighlighting` extracts source text from file ✓
-4. `highlightSource` attempts to re-elaborate the extracted text
-5. Re-elaboration fails because the extracted text (e.g., `theorem foo : ...`) lacks imports
-6. Exception caught, returns `none`
-7. `node.highlightedCode` is `none`, so `\leansource{}` is not emitted
-8. Python fallback reads source file as plain text with `class="lean-plain"`
-
-**Potential Solutions**:
-
-1. **Pass full file content**: Instead of extracting just the declaration range, pass the entire file to SubVerso. This preserves all imports and context.
-
-2. **Construct minimal valid source**: Prepend the necessary imports to the extracted declaration:
-   ```lean
-   def mkMinimalSource (imports : Array Name) (declText : String) : String :=
-     let importLines := imports.map (fun n => s!"import {n}") |>.toList |> "\n".intercalate
-     s!"{importLines}\n\n{declText}"
-   ```
-
-3. **Use different SubVerso API**: SubVerso may have APIs that work with existing info trees rather than requiring re-elaboration.
-
-4. **Cache during compilation**: Capture highlighted output during initial elaboration when the full context is available (the original linter approach), but ensure proper info tree context wrapping.
 
 ## Configuration
 
@@ -314,9 +190,9 @@ pipx install leanblueprint
 
 ## Debugging
 
-### Check if \leansource appears in .tex output
+### Check if SubVerso highlighting is working
 ```bash
-grep -r "leansource" .lake/build/blueprint/module/
+grep -r "leansignaturesource" .lake/build/blueprint/module/
 ```
 If empty, SubVerso highlighting is failing silently.
 
@@ -324,14 +200,8 @@ If empty, SubVerso highlighting is failing silently.
 ```bash
 grep -o 'class="[^"]*lean[^"]*"' blueprint/web/sect0004.html | sort -u
 ```
-- `lean-plain` = fallback path (no highlighting)
+- `lean-plain` = fallback path (no SubVerso highlighting)
 - `lean-keyword`, `lean-const`, etc. = SubVerso highlighting working
-
-### Check leanblueprint installation
-```bash
-pipx list | grep leanblueprint
-pip show leanblueprint | grep Location
-```
 
 ### Force full rebuild
 ```bash
@@ -340,18 +210,12 @@ lake build :blueprint
 cd blueprint && leanblueprint web
 ```
 
-### Test SubVerso highlighting manually
-Add debug output to `computeHighlighting` in `Basic.lean`:
-```lean
-def computeHighlighting ... := do
-  try
-    let contents ← IO.FS.readFile file
-    -- ... extract source ...
-    IO.eprintln s!"Attempting to highlight: {source.take 100}..."
-    let (hl, msgs) ← highlightSource source env opts file.toString
-    IO.eprintln s!"Highlighting succeeded"
-    return some hl
-  catch e =>
-    IO.eprintln s!"Highlighting failed: {e}"
-    return none
-```
+## Known Issues / TODOs
+
+1. **Proof toggle timing**: The 50ms setTimeout in the JavaScript is a workaround for plastex.js async icon toggling. A MutationObserver approach is also included in `sbs-script` for more robust handling.
+
+2. **Fallback path**: When SubVerso highlighting fails (e.g., due to parsing issues), the fallback reads the source file and uses `clean_lean_source()` to strip docstrings and `@[...]` attributes. This produces plain text without semantic highlighting.
+
+3. **GitHub permalink branch**: Currently hardcoded to `main` branch. Could be made configurable.
+
+4. **Universe levels and tactics**: SubVerso captures hover information and goal states for tactics, but these are not yet fully exposed in the HTML rendering (they're stored as `data-*` attributes and hidden goal displays).
