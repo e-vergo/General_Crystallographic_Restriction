@@ -103,30 +103,49 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For a finite set where all values \(\geq 2\), the sum is at most the product. </p>
+    <p>     For a finite set where all values \(\geq 2\), the sum is at most the product. </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000063">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By induction on the size of the finite set. Base case: empty sum is \(0 \leq 1\) (empty product). Inductive step: if \(\sum _{x \in s} f(x) \leq \prod _{x \in s} f(x)\) and \(f(a) \geq 2\), then \(\sum _{x \in s \cup \{ a\} } f(x) = f(a) + \sum _s f \leq f(a) \cdot \prod _s f \leq \prod _{s \cup \{ a\} } f\) using \(1 + y \leq 2y\) for \(y \geq 1\) and \(f(a) \geq 2\). </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]</span></code><code class="lean-proof-body"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
     (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
-    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L41-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by
+  induction s using Finset.induction with
+  | empty =&gt; simp
+  | @insert a s&#x27; ha IH =&gt;
+    rw [Finset.sum_insert ha, Finset.prod_insert ha]
+    have h2_a : 2 ≤ f a := hf a (Finset.mem_insert_self a s&#x27;)
+    by_cases hs_empty : s&#x27; = ∅
+    · simp [hs_empty]
+    · have hs_nonempty : s&#x27;.Nonempty := Finset.nonempty_of_ne_empty hs_empty
+      have hs&#x27;_ge2 : ∀ x ∈ s&#x27;, 2 ≤ f x := fun x hx =&gt; hf x (Finset.mem_insert_of_mem hx)
+      have h2_prod : 2 ≤ ∏ x ∈ s&#x27;, f x := by
+        obtain ⟨b, hb⟩ := hs_nonempty
+        have h1 : ∀ x ∈ s&#x27;, 1 ≤ f x := fun x hx =&gt; Nat.one_le_of_lt (hs&#x27;_ge2 x hx)
+        calc ∏ x ∈ s&#x27;, f x ≥ f b := Finset.single_le_prod&#x27; h1 hb
+          _ ≥ 2 := hs&#x27;_ge2 b hb
+      have IH&#x27; := IH hs&#x27;_ge2
+      calc f a + ∑ x ∈ s&#x27;, f x
+          ≤ f a + ∏ x ∈ s&#x27;, f x := by omega
+        _ ≤ f a * ∏ x ∈ s&#x27;, f x := Nat.add_le_mul h2_a h2_prod</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L54-L54" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000063">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By induction on the size of the finite set. Base case: empty sum is \(0 \leq 1\) (empty product). Inductive step: if \(\sum _{x \in s} f(x) \leq \prod _{x \in s} f(x)\) and \(f(a) \geq 2\), then \(\sum _{x \in s \cup \{ a\} } f(x) = f(a) + \sum _s f \leq f(a) \cdot \prod _s f \leq \prod _{s \cup \{ a\} } f\) using \(1 + y \leq 2y\) for \(y \geq 1\) and \(f(a) \geq 2\). </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:lcm-factorization-le-sup">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -170,30 +189,51 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
+    <p>     The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000064">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The \(q\)-adic valuation of \(\mathrm{lcm}(S)\) is the maximum of \(q\)-adic valuations over elements of \(S\). This follows from the definition of lcm via factorization: \(v_q(\mathrm{lcm}(S)) = \sup _{x \in S} v_q(x)\). </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
-    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L78-L106" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by
+  induction S using Finset.induction with
+  | empty =&gt;
+    simp only [Finset.lcm_empty, Nat.factorization_one, Finsupp.coe_zero, Pi.zero_apply,
+      Finset.sup_empty, bot_eq_zero, le_refl]
+  | @insert a s&#x27; ha IH =&gt;
+    simp only [Finset.lcm_insert, Finset.sup_insert]
+    by_cases hs&#x27;_empty : s&#x27; = ∅
+    · simp [hs&#x27;_empty]
+    · have hs&#x27;_ne_zero : s&#x27;.lcm f ≠ 0 := by
+        rw [ne_eq, Finset.lcm_eq_zero_iff]
+        push_neg
+        intro x hx
+        exact hS_ne_zero x (Finset.mem_insert_of_mem hx)
+      have ha_ne_zero : f a ≠ 0 := hS_ne_zero a (Finset.mem_insert_self a s&#x27;)
+      rw [lcm_eq_nat_lcm, Nat.factorization_lcm ha_ne_zero hs&#x27;_ne_zero]
+      simp only [Finsupp.sup_apply, sup_le_iff]
+      constructor
+      · exact le_sup_left
+      · have hIH := IH (fun x hx =&gt; hS_ne_zero x (Finset.mem_insert_of_mem hx))
+        exact le_trans hIH le_sup_right</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L84-L84" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000064">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>The \(q\)-adic valuation of \(\mathrm{lcm}(S)\) is the maximum of \(q\)-adic valuations over elements of \(S\). This follows from the definition of lcm via factorization: \(v_q(\mathrm{lcm}(S)) = \sup _{x \in S} v_q(x)\). </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:primePow-mem-of-lcm-eq">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -237,30 +277,55 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
+    <p>     If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000065">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Since \(\mathrm{lcm}(S) = p^k\) and all elements divide \(p^k\), each element has form \(p^j\) for some \(j \leq k\). Taking lcm over these powers gives \(p^{\max _j} = p^k\), so some element must have \(j = k\), meaning \(p^k \in S\). </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
-    p ^ k ∈ S := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L114-L151" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    p ^ k ∈ S := by
+  by_contra hm_not_in
+  -- All elements of S are proper divisors of p^k, so they divide p^(k-1)
+  have hall_lt : ∀ d ∈ S, d &lt; p ^ k := fun d hd =&gt;
+    Nat.lt_of_le_of_ne (Nat.le_of_dvd (Nat.pow_pos hp.pos) (hS_sub d hd))
+      (fun heq =&gt; hm_not_in (heq ▸ hd))
+  have hall_le : ∀ d ∈ S, d ∣ p ^ (k - 1) := by
+    intro d hd
+    have hdvd := hS_sub d hd
+    have hd_lt := hall_lt d hd
+    have hpr : Prime p := Nat.Prime.prime hp
+    rw [dvd_prime_pow hpr] at hdvd
+    obtain ⟨j, _, hassoc⟩ := hdvd
+    have hd_eq := associated_iff_eq.mp hassoc
+    rw [hd_eq] at hd_lt
+    have hj_lt : j &lt; k := (Nat.pow_lt_pow_iff_right hp.one_lt).mp hd_lt
+    have hj_le : j ≤ k - 1 := Nat.lt_succ_iff.mp (by omega)
+    rw [hd_eq]
+    exact Nat.pow_dvd_pow p hj_le
+  have hlcm_le : S.lcm id ∣ p ^ (k - 1) := Finset.lcm_dvd_iff.mpr (fun d hd =&gt; hall_le d hd)
+  rw [hS_lcm] at hlcm_le
+  have hle : p ^ k ≤ p ^ (k - 1) := Nat.le_of_dvd (Nat.pow_pos hp.pos) hlcm_le
+  have hpow_strict : p ^ (k - 1) &lt; p ^ k :=
+    Nat.pow_lt_pow_right hp.one_lt (Nat.sub_lt hk Nat.one_pos)
+  omega</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L125-L125" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000065">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Since \(\mathrm{lcm}(S) = p^k\) and all elements divide \(p^k\), each element has form \(p^j\) for some \(j \leq k\). Taking lcm over these powers gives \(p^{\max _j} = p^k\), so some element must have \(j = k\), meaning \(p^k \in S\). </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:totient-ge-two">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -304,28 +369,32 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
+    <p>     For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000066">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Since \(n {\gt} 2\), we have \(n \neq 1\) and \(n \neq 2\). By the fact that \(\varphi (n) = 1\) if and only if \(n \in \{ 1, 2\} \), we conclude that \(\varphi (n) \neq 1\). Also \(\varphi (n) \neq 0\) since \(n {\gt} 0\). Therefore \(\varphi (n) \geq 2\). </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L155-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by
+  have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
+  have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
+  omega</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L162-L162" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000066">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>Since \(n {\gt} 2\), we have \(n \neq 1\) and \(n \neq 2\). By the fact that \(\varphi (n) = 1\) if and only if \(n \in \{ 1, 2\} \), we conclude that \(\varphi (n) \neq 1\). Also \(\varphi (n) \neq 0\) since \(n {\gt} 0\). Therefore \(\varphi (n) \geq 2\). </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:prod-coprime-dvd">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -369,31 +438,50 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
+    <p>     If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000067">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By induction on the finite set. Empty case: \(1 \mid d\) trivially. Insert case: we have \(f(q) \mid d\) and \(\prod _{s'} f(r) \mid d\) by IH. Show \(f(q)\) is coprime to \(\prod _{s'} f(r)\) using ‘Nat.Coprime.prod_right‘, then apply ‘Nat.Coprime.mul_dvd_of_dvd_of_dvd‘. </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
     (h_dvd : ∀ a ∈ S, f a ∣ d)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    (∏ a ∈ S, f a) ∣ d := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L173-L202" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    (∏ a ∈ S, f a) ∣ d := by
+  induction S using Finset.induction with
+  | empty =&gt; simp
+  | @insert q s&#x27; hq_notin IH =&gt;
+    rw [Finset.prod_insert hq_notin]
+    have hq_dvd : f q ∣ d := h_dvd q (Finset.mem_insert_self q s&#x27;)
+    have hs&#x27;_dvd : (∏ r ∈ s&#x27;, f r) ∣ d := by
+      apply IH
+      · intro r hr; exact h_dvd r (Finset.mem_insert_of_mem hr)
+      · intro a₁ ha₁ a₂ ha₂ hne
+        exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+          (Finset.mem_insert_of_mem ha₂) hne
+    have h_cop : (f q).Coprime (∏ r ∈ s&#x27;, f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq =&gt; hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s&#x27;) r
+        (Finset.mem_insert_of_mem hr) hne
+    exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs&#x27;_dvd</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L181-L181" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000067">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By induction on the finite set. Empty case: \(1 \mid d\) trivially. Insert case: we have \(f(q) \mid d\) and \(\prod _{s'} f(r) \mid d\) by IH. Show \(f(q)\) is coprime to \(\prod _{s'} f(r)\) using ‘Nat.Coprime.prod_right‘, then apply ‘Nat.Coprime.mul_dvd_of_dvd_of_dvd‘. </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:totient-prod-coprime">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -437,30 +525,47 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
+    <p>     For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000068">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By induction on the finite set. Empty case: \(\varphi (1) = 1\) equals empty product. Insert case: use \(\varphi (ab) = \varphi (a)\varphi (b)\) for coprime \(a, b\) (‘Nat.totient_mul‘), where coprimality follows from ‘Nat.Coprime.prod_right‘. </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
-    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L210-L242" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
+  induction S using Finset.induction with
+  | empty =&gt; simp
+  | @insert q s&#x27; hq_notin IH =&gt;
+    rw [Finset.prod_insert hq_notin, Finset.prod_insert hq_notin]
+    have h_cop_q_s : (f q).Coprime (∏ r ∈ s&#x27;, f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq =&gt; hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s&#x27;) r
+        (Finset.mem_insert_of_mem hr) hne
+    rw [Nat.totient_mul h_cop_q_s]
+    congr 1
+    apply IH
+    intro a₁ ha₁ a₂ ha₂ hne
+    exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+      (Finset.mem_insert_of_mem ha₂) hne</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L224-L224" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000068">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By induction on the finite set. Empty case: \(\varphi (1) = 1\) equals empty product. Insert case: use \(\varphi (ab) = \varphi (a)\varphi (b)\) for coprime \(a, b\) (‘Nat.totient_mul‘), where coprimality follows from ‘Nat.Coprime.prod_right‘. </p>
 
-  </div>
-</div>
 <div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orderOf-neg-of-odd-order">
   <div class="sbs-latex-column">
     <div class="theorem_thmheading">
@@ -504,30 +609,48 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>    If \(A\) has odd order \(k\), then \(-A\) has order \(2k\). </p>
+    <p>     If \(A\) has odd order \(k\), then \(-A\) has order \(2k\). </p>
 
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000069">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>We have \(-A = (-1) \cdot A\) where \(-1\) commutes with \(A\). In characteristic \(0\), the order of \(-1\) is \(2\). Since \(k\) is odd, \(\gcd (2, k) = 1\), so by the product formula for commuting elements with coprime orders, the order of \(-A\) equals the order of \(-1\) times the order of \(A\), which is \(2k\). </p>
+
+      </div>
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
     (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
-    orderOf (-A) = 2 * k := by</span></code></pre>
-    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L250-L278" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+    orderOf (-A) = 2 * k := by
+  -- Express -A as (-1) * A
+  have hneg_eq : -A = (-1 : Matrix (Fin n) (Fin n) ℤ) * A := by simp
+  rw [hneg_eq]
+  -- -1 and A commute
+  have hcomm : Commute (-1 : Matrix (Fin n) (Fin n) ℤ) A := Commute.neg_one_left A
+  -- orderOf(-1) = 2 in char 0
+  have hord_neg1 : orderOf (-1 : Matrix (Fin n) (Fin n) ℤ) = 2 := by
+    rw [orderOf_neg_one, ringChar_matrix_int]
+    simp
+  -- Coprimality: gcd(2, k) = 1 since k is odd
+  have hcop : Nat.Coprime 2 k := Nat.Coprime.symm (Odd.coprime_two_right hk_odd)
+  have hord_cop : Nat.Coprime (orderOf (-1 : Matrix (Fin n) (Fin n) ℤ)) (orderOf A) := by
+    rw [hord_neg1, hA_ord]
+    exact hcop
+  -- Apply the product formula
+  rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
+  rw [hord_neg1, hA_ord]</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L259-L259" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000069">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>We have \(-A = (-1) \cdot A\) where \(-1\) commutes with \(A\). In characteristic \(0\), the order of \(-1\) is \(2\). Since \(k\) is odd, \(\gcd (2, k) = 1\), so by the product formula for commuting elements with coprime orders, the order of \(-A\) equals the order of \(-1\) times the order of \(A\), which is \(2k\). </p>
 
-  </div>
-</div>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
