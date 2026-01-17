@@ -71,18 +71,19 @@
 <div class="displaymath" id="a0000000011">
   \[ \psi (m) = \sum _i \psi _{\mathrm{pp}}(p_i, k_i) \]
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="psiPrimePow-def">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.0.1</span>
-    <div class="thm_header_extras">
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="psiPrimePow-def">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.0.1</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#psiPrimePow-def">#</a>
     
@@ -107,40 +108,33 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="definition_thmcontent">
-      <p>   The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>   The function \(\psi _{\text{pp}}(p, k)\) computes the contribution of a single prime power \(p^k\) to \(\psi \). Returns \(0\) if \(k = 0\) or if \(p = 2\) and \(k = 1\), otherwise returns \(\varphi (p^k)\). </p>
 <p>The special case \(\psi _{\text{pp}}(2, 1) = 0\) reflects that \(-I\) achieves order \(2\) in any dimension \(\geq 1\), so order \(2\) does not require additional dimensions. For all other prime powers \(p^k\), we need \(\varphi (p^k)\) dimensions to achieve order \(p^k\). </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L60-L60" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=</span></code></pre>
-      </div>
     </div>
   </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psiPrimePow (p k : ℕ) : ℕ :=</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L60-L60" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="psi-def">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
-    </span>
-    <span class="definition_thmlabel">2.0.2</span>
-    <div class="thm_header_extras">
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="psi-def">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2.0.2</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#psi-def">#</a>
     
@@ -185,44 +179,37 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="definition_thmcontent">
-      <p>    The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>    The psi function \(\psi (m) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k)\), which gives the minimum dimension \(N\) such that an \(N \times N\) integer matrix can have order \(m\). </p>
 <p>For \(m\) with prime factorization \(m = \prod _i p_i^{k_i}\): </p>
 <div class="displaymath" id="a0000000012">
   \[ \psi (m) = \sum _i \psi _{\text{pp}}(p_i, k_i) = \sum _{\substack {p^k \|  m \\ (p,k) \neq (2,1)}} \varphi (p^k) \]
 </div>
 <p> This gives the minimum dimension needed to realize order \(m\).  </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L86-L86" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">def psi (m : ℕ) : ℕ :=</span></code></pre>
-      </div>
     </div>
   </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def psi (m : ℕ) : ℕ :=</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L86-L86" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-prime-pow">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.1</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:psi-prime-pow">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.1</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:psi-prime-pow">#</a>
     
@@ -274,26 +261,23 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     For prime \(p\) and \(k {\gt} 0\): \(\psi (p^k) = \varphi (p^k)\) unless \(p = 2, k = 1\). </p>
 <p>For a prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{\text{pp}}(p, k)\). This equals \(\varphi (p^k) = p^{k-1}(p-1)\) except when \(p = 2\) and \(k = 1\).  </p>
 
-      </div>
     </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L117-L117" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
+    psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
+  simp only [psi]
+  rw [hp.factorization_pow]
+  rw [Finsupp.sum_single_index (psiPrimePow_zero p)]
+  simp only [psiPrimePow, hk.ne&#x27;, ite_false]</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L117-L117" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000013">
@@ -303,38 +287,24 @@
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> For prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{pp}(p, k)\). This equals \(\varphi (p^k)\) except when \(p = 2, k = 1\). </p>
+  <div class="proof_content">
+  <p> For prime power \(p^k\), the factorization has a single term, so \(\psi (p^k) = \psi _{pp}(p, k)\). This equals \(\varphi (p^k)\) except when \(p = 2, k = 1\). </p>
 
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 &lt; k) :
-    psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
-  simp only [psi]
-  rw [hp.factorization_pow]
-  rw [Finsupp.sum_single_index (psiPrimePow_zero p)]
-  simp only [psiPrimePow, hk.ne&#x27;, ite_false]</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:factorization-disjoint">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.2</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:factorization-disjoint">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.2</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:factorization-disjoint">#</a>
     
@@ -362,25 +332,19 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    Coprime numbers have disjoint prime factorization supports. </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    Coprime numbers have disjoint prime factorization supports. </p>
 
-      </div>
     </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L167-L167" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
+    Disjoint m.factorization.support n.factorization.support :=
+  Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L167-L167" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000014">
@@ -390,35 +354,24 @@
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>If \(p\) divides both \(m\) and \(n\), then \(p \mid \gcd (m,n) = 1\), contradicting \(p\) prime. </p>
+  <div class="proof_content">
+  <p>If \(p\) divides both \(m\) and \(n\), then \(p \mid \gcd (m,n) = 1\), contradicting \(p\) prime. </p>
 
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
-    Disjoint m.factorization.support n.factorization.support :=
-  Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-coprime-add">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.3</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:psi-coprime-add">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.3</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:psi-coprime-add">#</a>
     
@@ -472,50 +425,20 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     \(\psi (mn) = \psi (m) + \psi (n)\) for coprime \(m, n\). </p>
 <p>When \(\gcd (m, n) = 1\), the prime factorizations of \(m\) and \(n\) share no common primes, so </p>
 <div class="displaymath" id="a0000000016">
   \[ \psi (mn) = \sum _{p^k \|  mn} \psi _{\text{pp}}(p, k) = \sum _{p^k \|  m} \psi _{\text{pp}}(p, k) + \sum _{p^k \|  n} \psi _{\text{pp}}(p, k) = \psi (m) + \psi (n). \]
 </div>
 
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L193-L193" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000015">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> When \(\gcd (m, n) = 1\), the factorizations of \(m\) and \(n\) are disjoint. Each prime power in \(mn\) comes from exactly one of \(m\) or \(n\), so the \(\psi \) contributions add. </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_coprime_add (m n : ℕ) (hm : 0 &lt; m) (hn : 0 &lt; n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
   rw [Nat.factorization_mul (Nat.pos_iff_ne_zero.mp hm) (Nat.pos_iff_ne_zero.mp hn)]
@@ -531,22 +454,35 @@
     intro p hp
     congr 1
     rw [Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add]</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L193-L193" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-ge-psiPrimePow">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000015">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.4</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> When \(\gcd (m, n) = 1\), the factorizations of \(m\) and \(n\) are disjoint. Each prime power in \(mn\) comes from exactly one of \(m\) or \(n\), so the \(\psi \) contributions add. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:psi-ge-psiPrimePow">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.4</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:psi-ge-psiPrimePow">#</a>
     
@@ -596,25 +532,25 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     \(\psi (m) \geq \psi _{\mathrm{pp}}(p, v_p(m))\) for each prime \(p \mid m\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     \(\psi (m) \geq \psi _{\mathrm{pp}}(p, v_p(m))\) for each prime \(p \mid m\). </p>
 
-      </div>
     </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L236-L236" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}</span></code><code class="lean-proof-body"><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}
+    (hp : p ∈ m.factorization.support) :
+    psiPrimePow p (m.factorization p) ≤ psi m := by
+  simp only [psi, Finsupp.sum]
+  have hnonneg : ∀ i ∈ m.factorization.support, 0 ≤ psiPrimePow i (m.factorization i) := by
+    intro i _
+    simp only [psiPrimePow]
+    split_ifs &lt;;&gt; omega
+  exact Finset.single_le_sum hnonneg hp</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L236-L236" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000017">
@@ -624,41 +560,24 @@
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>The sum \(\psi (m)\) includes the term \(\psi _{\mathrm{pp}}(p, v_p(m))\), and all terms are non-negative. </p>
+  <div class="proof_content">
+  <p>The sum \(\psi (m)\) includes the term \(\psi _{\mathrm{pp}}(p, v_p(m))\), and all terms are non-negative. </p>
 
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}
-    (hp : p ∈ m.factorization.support) :
-    psiPrimePow p (m.factorization p) ≤ psi m := by
-  simp only [psi, Finsupp.sum]
-  have hnonneg : ∀ i ∈ m.factorization.support, 0 ≤ psiPrimePow i (m.factorization i) := by
-    intro i _
-    simp only [psiPrimePow]
-    split_ifs &lt;;&gt; omega
-  exact Finset.single_le_sum hnonneg hp</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:two-le-totient-prime-pow">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.5</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:two-le-totient-prime-pow">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.5</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:two-le-totient-prime-pow">#</a>
     
@@ -686,26 +605,25 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    For any prime power \(p^k {\gt} 2\), we have \(2 \leq \varphi (p^k)\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    For any prime power \(p^k {\gt} 2\), we have \(2 \leq \varphi (p^k)\). </p>
 <p>Specifically, \(\varphi (p^k) = p^{k-1}(p-1) \geq 2\) unless \((p, k) = (2, 1)\), in which case \(\varphi (2) = 1\). This bound is essential for showing that sums of totients are bounded by products when factors are coprime.  - </p>
 
-      </div>
     </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L49-L49" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)</span></code><code class="lean-proof-body"><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
+    (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
+  rw [Nat.totient_prime_pow hp hk]
+  by_cases hp2 : p = 2
+  · simpa [hp2] using Nat.pow_le_pow_right (by omega) (by omega : 1 ≤ k - 1)
+  · have hp3 : 3 ≤ p := Nat.lt_of_le_of_ne hp.two_le (Ne.symm hp2)
+    calc p ^ (k - 1) * (p - 1) ≥ 1 * (p - 1) := Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hp.pos)
+      _ ≥ 2 := by omega</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L49-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000018">
@@ -715,40 +633,24 @@
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>By cases on \(p = 2\): if \(p \neq 2\), then \(p \geq 3\) so \(\varphi (p^k) = p^{k-1}(p-1) \geq 1 \cdot 2 = 2\). If \(p = 2\) and \(k \geq 2\), then \(\varphi (2^k) = 2^{k-1} \geq 2\). The case \((2, 1)\) is excluded by hypothesis. </p>
+  <div class="proof_content">
+  <p>By cases on \(p = 2\): if \(p \neq 2\), then \(p \geq 3\) so \(\varphi (p^k) = p^{k-1}(p-1) \geq 1 \cdot 2 = 2\). If \(p = 2\) and \(k \geq 2\), then \(\varphi (2^k) = 2^{k-1} \geq 2\). The case \((2, 1)\) is excluded by hypothesis. </p>
 
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k)
-    (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
-  rw [Nat.totient_prime_pow hp hk]
-  by_cases hp2 : p = 2
-  · simpa [hp2] using Nat.pow_le_pow_right (by omega) (by omega : 1 ≤ k - 1)
-  · have hp3 : 3 ≤ p := Nat.lt_of_le_of_ne hp.two_le (Ne.symm hp2)
-    calc p ^ (k - 1) * (p - 1) ≥ 1 * (p - 1) := Nat.mul_le_mul_right _ (Nat.one_le_pow _ _ hp.pos)
-      _ ≥ 2 := by omega</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:factorization-split-lt">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.6</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:factorization-split-lt">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.6</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:factorization-split-lt">#</a>
     
@@ -776,46 +678,16 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    A composite number \(m {\gt} 2\) that is not a prime power can be written as \(m = p^e \cdot m'\) where \(p\) is prime, \(e {\gt} 0\), \(\gcd (p^e, m') = 1\), and both \(p^e {\lt} m\) and \(1 {\lt} m' {\lt} m\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    A composite number \(m {\gt} 2\) that is not a prime power can be written as \(m = p^e \cdot m'\) where \(p\) is prime, \(e {\gt} 0\), \(\gcd (p^e, m') = 1\), and both \(p^e {\lt} m\) and \(1 {\lt} m' {\lt} m\). </p>
 <p>This decomposition is essential for strong induction proofs on composite numbers: it provides strictly smaller coprime factors to which the inductive hypothesis applies.  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L83-L83" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000019">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>Take \(p = \mathrm{minFac}(m)\) and \(e = \nu _p(m)\), the \(p\)-adic valuation. Then \(m' = m / p^e\) is coprime to \(p^e\) (disjoint prime support). Since \(m\) is not a prime power, \(m' \neq 1\). The bounds \(p^e {\lt} m\) and \(m' {\lt} m\) follow from \(m' {\gt} 1\) and \(p^e \geq 2\) respectively. </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem factorization_split_lt {m : ℕ} (hm : 2 &lt; m) (h_not_pp : ¬IsPrimePow m) :
     ∃ (p e m&#x27; : ℕ), p.Prime ∧ 0 &lt; e ∧ p ^ e * m&#x27; = m ∧
     (p ^ e).Coprime m&#x27; ∧ 1 &lt; m&#x27; ∧ m&#x27; &lt; m ∧ p ^ e &lt; m := by
   have hm_ne_zero : m ≠ 0 := by omega
@@ -852,22 +724,35 @@
       _ &lt; p ^ e * m&#x27; := Nat.mul_lt_mul_of_pos_left hm&#x27;_gt_one (Nat.pow_pos hminFac_prime.pos)
       _ = m := hm_eq.symm
   exact ⟨p, e, m&#x27;, hminFac_prime, he_pos, hm_eq.symm, hcop, hm&#x27;_gt_one, hm&#x27;_lt, hpe_lt⟩</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L83-L83" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-pos-of-odd">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000019">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.7</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Take \(p = \mathrm{minFac}(m)\) and \(e = \nu _p(m)\), the \(p\)-adic valuation. Then \(m' = m / p^e\) is coprime to \(p^e\) (disjoint prime support). Since \(m\) is not a prime power, \(m' \neq 1\). The bounds \(p^e {\lt} m\) and \(m' {\lt} m\) follow from \(m' {\gt} 1\) and \(p^e \geq 2\) respectively. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:psi-pos-of-odd">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.7</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:psi-pos-of-odd">#</a>
     
@@ -921,46 +806,16 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     For odd \(m \geq 3\), we have \(\psi (m) {\gt} 0\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     For odd \(m \geq 3\), we have \(\psi (m) {\gt} 0\). </p>
 <p>Since \(m \geq 3\) and \(m\) is odd, \(m\) has a prime factor \(q \geq 3\) (specifically, \(q = \mathrm{minFac}(m)\)). The prime power \(q^{\nu _q(m)}\) contributes \(\psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\) to \(\psi (m)\), since \((q, \nu _q(m)) \neq (2, 1)\).  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L132-L132" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000020">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> The minimal prime factor \(q = \mathrm{minFac}(m)\) satisfies \(q \geq 3\) (since \(2 \nmid m\)). Thus \((q, \nu _q(m))\) is a nontrivial pair, and \(\psi (m) \geq \psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\). </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :</span></code><code class="lean-proof-body"><span class="lean-plain">theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
     0 &lt; psi m := by
   -- m &gt;= 3 implies m != 1, so minFac(m) is prime
   have hm_ne_one : m ≠ 1 := by omega
@@ -993,22 +848,35 @@
     simp only [hq_ne2, false_and, ite_false]
     exact Nat.totient_pos.mpr (Nat.pow_pos hq_prime.pos)
   omega</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L132-L132" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:psi-le-totient">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000020">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.8</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> The minimal prime factor \(q = \mathrm{minFac}(m)\) satisfies \(q \geq 3\) (since \(2 \nmid m\)). Thus \((q, \nu _q(m))\) is a nontrivial pair, and \(\psi (m) \geq \psi _{\mathrm{pp}}(q, \nu _q(m)) = \varphi (q^{\nu _q(m)}) {\gt} 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:psi-le-totient">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.8</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:psi-le-totient">#</a>
     
@@ -1070,12 +938,10 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     For all \(m \geq 1\), we have \(\psi (m) \leq \varphi (m)\). </p>
 <p>We prove \(\psi (m) \leq \varphi (m)\) by strong induction on \(m\). The key observation is that \(\psi \) excludes the contribution from \((2, 1)\), while \(\varphi \) includes \(\varphi (2) = 1\), so \(\psi \leq \varphi \) with equality when \(2 \nmid m\) or \(4 \mid m\). </p>
 <p>The proof proceeds by strong induction on \(m\): </p>
 <ul class="itemize">
@@ -1090,38 +956,10 @@
 </ul>
 <p>  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L199-L199" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000021">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> By strong induction on \(m\). For \(m = 1\): both sides are \(0\). For \(m {\gt} 1\): use coprime factorization \(m = a \cdot b\) with \(1 {\lt} a, b {\lt} m\). Then \(\psi (m) = \psi (a) + \psi (b) \leq \varphi (a) + \varphi (b) \leq \varphi (m)\) by the inductive hypothesis and multiplicativity of \(\varphi \). </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by</span></code><code class="lean-proof-body"><span class="lean-plain">lemma psi_le_totient (m : ℕ) (hm : 0 &lt; m) : psi m ≤ Nat.totient m := by
   -- Strong induction on m
   induction m using Nat.strong_induction_on with
   | _ m IH =&gt;
@@ -1174,22 +1012,35 @@
               two_le_totient_of_two_lt m&#x27; (by omega : 2 &lt; m&#x27;)
             have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := two_le_totient_primePow hp he_pos h21
             exact psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m&#x27; htot_pe_ge2 htot_m&#x27;_ge2</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L199-L199" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:prime-pow-achieved-of-lcm-eq">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000021">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.9</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By strong induction on \(m\). For \(m = 1\): both sides are \(0\). For \(m {\gt} 1\): use coprime factorization \(m = a \cdot b\) with \(1 {\lt} a, b {\lt} m\). Then \(\psi (m) = \psi (a) + \psi (b) \leq \varphi (a) + \varphi (b) \leq \varphi (m)\) by the inductive hypothesis and multiplicativity of \(\varphi \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:prime-pow-achieved-of-lcm-eq">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.9</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:prime-pow-achieved-of-lcm-eq">#</a>
     
@@ -1239,46 +1090,16 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    If \(S\) is a finite set of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), then for each prime \(q\) dividing \(m\), some element \(d \in S\) is divisible by \(q^{\nu _q(m)}\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    If \(S\) is a finite set of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), then for each prime \(q\) dividing \(m\), some element \(d \in S\) is divisible by \(q^{\nu _q(m)}\). </p>
 <p>In other words, the full \(q\)-power component of \(m\) must be "achieved" by some element of \(S\). This is the key combinatorial fact ensuring that \(\psi (m) \leq \sum _{d \in S} \varphi (d)\).  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L263-L263" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000022">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> By contradiction: if all \(d \in S\) have \(\nu _q(d) {\lt} \nu _q(m)\), then \(\nu _q(\mathrm{lcm}(S)) = \sup _{d \in S} \nu _q(d) {\lt} \nu _q(m)\), contradicting \(\mathrm{lcm}(S) = m\). </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
   intro q hq
@@ -1309,22 +1130,35 @@
     exact lt_of_le_of_lt (Finset.lcm_factorization_le_sup S id q hS_ne_zero) hsup_lt
   rw [hS_lcm] at hfact_q
   omega</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L263-L263" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:finset-nonempty-of-two-le-lcm">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000022">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.10</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> By contradiction: if all \(d \in S\) have \(\nu _q(d) {\lt} \nu _q(m)\), then \(\nu _q(\mathrm{lcm}(S)) = \sup _{d \in S} \nu _q(d) {\lt} \nu _q(m)\), contradicting \(\mathrm{lcm}(S) = m\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:finset-nonempty-of-two-le-lcm">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.10</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:finset-nonempty-of-two-le-lcm">#</a>
     
@@ -1352,26 +1186,23 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    If \(\mathrm{lcm}(S) \geq 2\) for a finite set \(S\) of natural numbers, then \(S\) is nonempty. </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    If \(\mathrm{lcm}(S) \geq 2\) for a finite set \(S\) of natural numbers, then \(S\) is nonempty. </p>
 <p>This follows immediately from the fact that \(\mathrm{lcm}(\emptyset ) = 1\) by convention.  - </p>
 
-      </div>
     </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L426-L426" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
+    S.Nonempty := by
+  by_contra h
+  rw [Finset.not_nonempty_iff_eq_empty] at h
+  simp only [h, Finset.lcm_empty] at hS_lcm_ge2
+  omega</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L426-L426" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000023">
@@ -1381,38 +1212,24 @@
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>By contradiction: if \(S = \emptyset \), then \(\mathrm{lcm}(S) = 1 {\lt} 2\), contradicting the hypothesis. </p>
+  <div class="proof_content">
+  <p>By contradiction: if \(S = \emptyset \), then \(\mathrm{lcm}(S) = 1 {\lt} 2\), contradicting the hypothesis. </p>
 
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
-    S.Nonempty := by
-  by_contra h
-  rw [Finset.not_nonempty_iff_eq_empty] at h
-  simp only [h, Finset.lcm_empty] at hS_lcm_ge2
-  omega</span></code></pre>
-      </div>
-    </div>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:finset-exists-one-lt-of-two-le-lcm">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">2.0.11</span>
-    <div class="thm_header_extras">
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:finset-exists-one-lt-of-two-le-lcm">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.11</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:finset-exists-one-lt-of-two-le-lcm">#</a>
     
@@ -1460,46 +1277,16 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>    If \(S\) is a finite set of positive integers with \(\mathrm{lcm}(S) \geq 2\), then some element \(d \in S\) satisfies \(d {\gt} 1\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>    If \(S\) is a finite set of positive integers with \(\mathrm{lcm}(S) \geq 2\), then some element \(d \in S\) satisfies \(d {\gt} 1\). </p>
 <p>This is because \(\mathrm{lcm}\) of a set where all elements equal \(1\) would be \(1\).  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L442-L442" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000024">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p>By contradiction: if all \(d \in S\) satisfy \(d \leq 1\), then since all \(d {\gt} 0\) we have \(d = 1\) for all \(d \in S\). Thus \(\mathrm{lcm}(S) = 1 {\lt} 2\), a contradiction. </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 &lt; d)
     (hS_lcm_ge2 : 2 ≤ S.lcm id) : ∃ d ∈ S, 1 &lt; d := by
   by_contra hall_le1
   push_neg at hall_le1
@@ -1513,22 +1300,35 @@
     intro d hd
     simp only [id_eq, hall_eq1 d hd, Nat.one_dvd]
   omega</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L442-L442" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-definition" id="lem:sum-totient-ge-psi">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="proof_wrapper" id="a0000000024">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
     </span>
-    <span class="theorem_thmlabel">2.0.12</span>
-    <div class="thm_header_extras">
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>By contradiction: if all \(d \in S\) satisfy \(d \leq 1\), then since all \(d {\gt} 0\) we have \(d = 1\) for all \(d \in S\). Thus \(\mathrm{lcm}(S) = 1 {\lt} 2\), a contradiction. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:sum-totient-ge-psi">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">2.0.12</span>
+      <div class="thm_header_extras">
 
     
     ✓
-        </div>
-    <div class="thm_header_hidden_extras">
+          </div>
+      <div class="thm_header_hidden_extras">
 
     <a class="icon proof" href="sect0002.html#lem:sum-totient-ge-psi">#</a>
     
@@ -1604,46 +1404,16 @@
     </div>
 
     
-        </div>
-  </div>
-  <div class="sbs-statement-grid">
-    <div class="sbs-latex-cell">
-      <div class="theorem_thmcontent">
-      <p>     For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>     For any finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\psi (m) \leq \sum _{d \in S} \varphi (d)\). </p>
 <p>For a finite set \(S\) of divisors of \(m\) with \(\mathrm{lcm}(S) = m\), we have \(\sum _{d \in S} \varphi (d) \geq \psi (m)\). This follows from the prime factorization structure: each prime power \(p^k \|  m\) must appear in some \(d \in S\), contributing at least \(\psi _{\mathrm{pp}}(p, k)\). This is the combinatorial heart of the forward direction. The minimum sum is achieved when \(S\) consists of one prime power for each distinct prime in \(m\)’s prime factorization, giving exactly \(\psi (m)\).  - </p>
 
-      </div>
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean</span>
-          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L481-L481" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
-</a>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)</span></code></pre>
-      </div>
     </div>
   </div>
-</div>
-<div class="proof_wrapper" id="a0000000025">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content sbs-proof-grid">
-    <div class="sbs-latex-cell">
-    <p> For each prime power \(p^k \|  m\), some \(d \in S\) must have \(p^k \mid d\) (since \(\mathrm{lcm}(S) = m\)). The element with maximal \(p\)-valuation contributes at least \(\varphi (p^k) \geq \psi _{\mathrm{pp}}(p, k)\). Summing over distinct prime powers and using non-negativity gives the bound. </p>
-
-    </div>
-    <div class="sbs-lean-cell">
-      <div class="lean-source-panel">
-        <div class="lean-source-header">
-          <span class="lean-source-title">Lean Proof</span>
-        </div>
-        <pre class="lean-code"><code><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)</span></code><code class="lean-proof-body"><span class="lean-plain">lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 &lt; m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     psi m ≤ ∑ d ∈ S, Nat.totient d := by
   -- If m ∈ S, apply helper lemma directly
@@ -1687,8 +1457,20 @@
             psi_eq_sum_nontrivial_totients m
         _ ≤ ∑ d ∈ S, Nat.totient d :=
             sum_nontrivial_totients_le_sum_totients S hS_pos achiever h_achiever_mem h_achiever_dvd</span></code></pre>
-      </div>
-    </div>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L481-L481" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000025">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> For each prime power \(p^k \|  m\), some \(d \in S\) must have \(p^k \mid d\) (since \(\mathrm{lcm}(S) = m\)). The element with maximal \(p\)-valuation contributes at least \(\varphi (p^k) \geq \psi _{\mathrm{pp}}(p, k)\). Summing over distinct prime powers and using non-negativity gives the bound. </p>
+
   </div>
 </div>
 
