@@ -149,7 +149,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
-  -- If minpoly | X^k - 1, then aeval A_Q (X^k - 1) = 0
+  <span class="lean-comment">-- If minpoly | X^k - <span class="lean-number">1</span>, then aeval A_Q <span class="lean-bracket">(</span>X^k - <span class="lean-number">1</span><span class="lean-bracket">)</span> = <span class="lean-number">0</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -195,7 +195,7 @@ If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">q</span><span class="lean-text">,</span> <span class="lean-text">hq</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hdvd</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hq</span><span class="lean-text">,</span> <span class="lean-text">map_mul</span><span class="lean-text">,</span> <span class="lean-text">minpoly.aeval</span><span class="lean-text">,</span> <span class="lean-text">zero_mul</span><span class="lean-text">]</span>
-  -- This means A_Q^k = 1
+  <span class="lean-comment">-- This means A_Q^k = <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -222,7 +222,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
 * `at *`: target all hypotheses and the goal
 ">at</span> <span class="lean-text">haeval</span>
-  -- Transfer back to A via injectivity
+  <span class="lean-comment">-- Transfer back to A via injectivity</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -786,7 +786,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
-  -- Key: {x ∈ m.divisors | x ∈ S} = S since S ⊆ m.divisors
+  <span class="lean-comment">-- Key: <span class="lean-bracket">{</span>x <span class="lean-operator">∈</span> m.divisors | x <span class="lean-operator">∈</span> S<span class="lean-bracket">}</span> = S since S <span class="lean-operator">⊆</span> m.divisors</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -848,7 +848,7 @@ non-dependent hypotheses. It has many variants:
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Finset.mem_filter</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">⟨</span><span class="lean-keyword">fun</span> <span class="lean-text">⟨</span><span class="lean-text">_</span><span class="lean-text">,</span> <span class="lean-text">hd</span><span class="lean-text">⟩</span> <span class="lean-text">=&gt;</span> <span class="lean-text">hd</span><span class="lean-text">,</span> <span class="lean-keyword">fun</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">⟨</span><span class="lean-text">hS_sub</span> <span class="lean-text">hd</span><span class="lean-text">,</span> <span class="lean-text">hd</span><span class="lean-text">⟩</span><span class="lean-text">⟩</span>
-  -- minpoly is coprime to the product of cyclotomics NOT in S
+  <span class="lean-comment">-- minpoly is coprime to the product of cyclotomics NOT in S</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -962,7 +962,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
         <span class="lean-text">hd_not_in_S</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">hS_def</span> <span class="lean-text">d</span> <span class="lean-text">hd_div</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">mpr</span> <span class="lean-text">hdvd</span><span class="lean-text">)</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic_coprime_minpoly_of_not_mem</span> <span class="lean-text">A</span> <span class="lean-text">d</span> <span class="lean-text">(</span><span class="lean-text">Nat.pos_of_mem_divisors</span> <span class="lean-text">hd_div</span><span class="lean-text">)</span> <span class="lean-text">hndvd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span>
-  -- Split X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d)
+  <span class="lean-comment">-- Split X^m - <span class="lean-number">1</span> = <span class="lean-bracket">(</span><span class="lean-operator">∏</span>_<span class="lean-bracket">{</span>d<span class="lean-operator">∈</span>S<span class="lean-bracket">}</span> Φ_d<span class="lean-bracket">)</span> * <span class="lean-bracket">(</span><span class="lean-operator">∏</span>_<span class="lean-bracket">{</span>d<span class="lean-operator">∉</span>S<span class="lean-bracket">}</span> Φ_d<span class="lean-bracket">)</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1265,7 +1265,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span>
     <span class="lean-text">⟨</span><span class="lean-keyword">fun</span> <span class="lean-text">hS</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">Finset.mem_filter.mp</span> <span class="lean-text">hS</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">,</span> <span class="lean-keyword">fun</span> <span class="lean-text">hdvd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">Finset.mem_filter.mpr</span> <span class="lean-text">⟨</span><span class="lean-text">hd</span><span class="lean-text">,</span> <span class="lean-text">hdvd</span><span class="lean-text">⟩</span><span class="lean-text">⟩</span>
-  -- minpoly ∣ ∏_{d∈S} Φ_d (by coprimality argument)
+  <span class="lean-comment">-- minpoly ∣ <span class="lean-operator">∏</span>_<span class="lean-bracket">{</span>d<span class="lean-operator">∈</span>S<span class="lean-bracket">}</span> Φ_d <span class="lean-bracket">(</span>by coprimality argument<span class="lean-bracket">)</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1294,7 +1294,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hminpoly_dvd_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">:=</span>
     <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hS_def</span> <span class="lean-text">hminpoly_dvd</span>
-  -- ∏_{d∈S} Φ_d ∣ minpoly (by definition of S)
+  <span class="lean-comment">-- <span class="lean-operator">∏</span>_<span class="lean-bracket">{</span>d<span class="lean-operator">∈</span>S<span class="lean-bracket">}</span> Φ_d ∣ minpoly <span class="lean-bracket">(</span>by definition of S<span class="lean-bracket">)</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1323,7 +1323,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hprod_dvd_minpoly</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span>
     <span class="lean-text">cyclotomic_finset_product_dvd</span> <span class="lean-text">S</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">Finset.mem_filter.mp</span> <span class="lean-text">hd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">)</span>
-  -- Equality by mutual divisibility of monic polynomials
+  <span class="lean-comment">-- Equality by mutual divisibility of monic polynomials</span>
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">⟨</span><span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">hS_dvd</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.eq_of_monic_of_associated</span>
     <span class="lean-text">(</span><span class="lean-text">minpoly.monic</span> <span class="lean-text">(</span><span class="lean-text">Matrix.isIntegral</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span><span class="lean-text">)</span>
@@ -1475,8 +1475,8 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
-  -- If lcm(S) &lt; m, then minpoly | X^{lcm(S)} - 1, so A^{lcm(S)} = 1
-  -- This contradicts orderOf A = m
+  <span class="lean-comment">-- If lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span> &lt; m, then minpoly | X^<span class="lean-bracket">{</span>lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span><span class="lean-bracket">}</span> - <span class="lean-number">1</span>, so A^<span class="lean-bracket">{</span>lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span><span class="lean-bracket">}</span> = <span class="lean-number">1</span></span>
+  <span class="lean-comment">-- This contradicts orderOf A = m</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -1564,7 +1564,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hlcm_lt</span> <span class="lean-text">:</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.lt_of_le_of_ne</span> <span class="lean-text">hlcm_le</span> <span class="lean-text">hne</span>
-  -- minpoly | ∏_{d|lcm(S)} Φ_d = X^{lcm(S)} - 1
+  <span class="lean-comment">-- minpoly | <span class="lean-operator">∏</span>_<span class="lean-bracket">{</span>d|lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span><span class="lean-bracket">}</span> Φ_d = X^<span class="lean-bracket">{</span>lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span><span class="lean-bracket">}</span> - <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1594,8 +1594,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
 ">have</span> <span class="lean-text">hlcm_pos</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hS_empty</span> <span class="lean-text">:</span> <span class="lean-text">S</span> <span class="lean-text">=</span> <span class="lean-text">∅</span>
-    <span class="lean-text">·</span> -- If S = ∅, then minpoly = 1 (empty product), contradiction since
-      -- minpoly has positive degree
+    <span class="lean-text">·</span> <span class="lean-comment">-- If S = <span class="lean-operator">∅</span>, then minpoly = <span class="lean-number">1</span> <span class="lean-bracket">(</span>empty product<span class="lean-bracket">)</span>, contradiction since</span>
+      <span class="lean-comment">-- minpoly has positive degree</span>
       <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -1717,7 +1717,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
         <span class="lean-text">(</span><span class="lean-text">Nat.pos_of_mem_divisors</span> <span class="lean-text">(</span><span class="lean-text">Nat.mem_divisors.mpr</span> <span class="lean-text">⟨</span><span class="lean-text">hS_sub</span> <span class="lean-text">d</span> <span class="lean-text">hd</span><span class="lean-text">,</span> <span class="lean-text">hm.ne&#x27;</span><span class="lean-text">⟩</span><span class="lean-text">)</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">ne&#x27;</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">Nat.pos_of_ne_zero</span> <span class="lean-text">hne_zero</span>
-  -- Helper: X^d - 1 | X^n - 1 when d | n
+  <span class="lean-comment">-- Helper: X^d - <span class="lean-number">1</span> | X^n - <span class="lean-number">1</span> when d | n</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1909,7 +1909,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
 [tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
 ">calc</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">d</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-text">cyclotomic.dvd_X_pow_sub_one</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span>
       <span class="lean-text">_</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-text">X_pow_sub_one_dvd</span> <span class="lean-text">d</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">hd_dvd_lcm</span>
-  -- Therefore A^{lcm(S)} = 1
+  <span class="lean-comment">-- Therefore A^<span class="lean-bracket">{</span>lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span><span class="lean-bracket">}</span> = <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1938,7 +1938,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hpow_lcm</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span>
     <span class="lean-text">Matrix.pow_eq_one_of_minpoly_dvd_X_pow_sub_one</span> <span class="lean-text">A</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">hminpoly_dvd_lcm</span>
-  -- But orderOf A = m &gt; lcm(S), so orderOf A | lcm(S) is false
+  <span class="lean-comment">-- But orderOf A = m &gt; lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span>, so orderOf A | lcm<span class="lean-bracket">(</span>S<span class="lean-bracket">)</span> is false</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2173,7 +2173,7 @@ Currently, all of these are on by default.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hord</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Crystallographic.psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- Extract the matrix A with orderOf A = m
+  <span class="lean-comment">-- Extract the matrix A with orderOf A = m</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -2190,7 +2190,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">,</span> <span class="lean-text">_</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hord</span>
-  -- Handle the case N = 0 separately
+  <span class="lean-comment">-- Handle the case N = <span class="lean-number">0</span> separately</span>
   <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -2233,7 +2233,7 @@ matching on the constructor `quot.mk`.
 `rcases h : e with PAT` will do the same as `rcases e with PAT` with the exception that an
 assumption `h : e = PAT` will be added to the context.
 ">rcases</span> <span class="lean-text">Nat.eq_zero_or_pos</span> <span class="lean-text">N</span> <span class="lean-keyword">with</span> <span class="lean-text">rfl</span> <span class="lean-text">|</span> <span class="lean-text">hN_pos</span>
-  <span class="lean-text">·</span> -- N = 0: The only 0×0 matrix is empty, with order 1
+  <span class="lean-text">·</span> <span class="lean-comment">-- N = <span class="lean-number">0</span>: The only <span class="lean-number">0</span><span class="lean-operator">×</span><span class="lean-number">0</span> matrix is empty, with order <span class="lean-number">1</span></span>
     <span class="lean-keyword" data-docs="`haveI` behaves like `have`, but inlines the value instead of producing a `have` term. ">haveI</span> <span class="lean-text">:</span> <span class="lean-text">IsEmpty</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">0</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-text">Fin.isEmpty</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -2301,7 +2301,7 @@ non-dependent hypotheses. It has many variants:
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
 ">simp</span> <span class="lean-text">[</span><span class="lean-text">Crystallographic.psi_one</span><span class="lean-text">]</span>
-  <span class="lean-text">·</span> -- N &gt; 0: Use psi ≤ deg(minpoly) ≤ deg(charpoly) = N
+  <span class="lean-text">·</span> <span class="lean-comment">-- N &gt; <span class="lean-number">0</span>: Use psi <span class="lean-operator">≤</span> deg<span class="lean-bracket">(</span>minpoly<span class="lean-bracket">)</span> <span class="lean-operator">≤</span> deg<span class="lean-bracket">(</span>charpoly<span class="lean-bracket">)</span> = N</span>
     <span class="lean-keyword" data-docs="`haveI` behaves like `have`, but inlines the value instead of producing a `have` term. ">haveI</span> <span class="lean-text">:</span> <span class="lean-text">NeZero</span> <span class="lean-text">N</span> <span class="lean-text">:=</span> <span class="lean-text">⟨</span><span class="lean-text">Nat.pos_iff_ne_zero.mp</span> <span class="lean-text">hN_pos</span><span class="lean-text">⟩</span>
     <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
@@ -2329,7 +2329,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
-    -- The minimal polynomial degree is at most N
+    <span class="lean-comment">-- The minimal polynomial degree is at most N</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2449,7 +2449,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
           <span class="lean-text">Polynomial.natDegree_le_of_dvd</span> <span class="lean-text">hdvd</span> <span class="lean-text">hne</span>
         <span class="lean-text">_</span> <span class="lean-text">=</span> <span class="lean-text">Fintype.card</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-text">Matrix.charpoly_natDegree_eq_dim</span> <span class="lean-text">A_Q</span>
         <span class="lean-text">_</span> <span class="lean-text">=</span> <span class="lean-text">N</span> <span class="lean-text">:=</span> <span class="lean-text">Fintype.card_fin</span> <span class="lean-text">N</span>
-    -- minpoly | X^m - 1 since A^m = 1
+    <span class="lean-comment">-- minpoly | X^m - <span class="lean-number">1</span> since A^m = <span class="lean-number">1</span></span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2507,7 +2507,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hminpoly_dvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span>
       <span class="lean-text">Matrix.minpoly_dvd_X_pow_sub_one_of_pow_eq_one</span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hpow</span>
-    -- Get S and the product decomposition from helper lemma
+    <span class="lean-comment">-- Get S and the product decomposition from helper lemma</span>
     <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -2525,7 +2525,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">hS_sub</span><span class="lean-text">,</span> <span class="lean-text">hminpoly_eq_prod</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span>
       <span class="lean-text">minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hminpoly_dvd</span>
-    -- The lcm of S equals m (otherwise order would be smaller)
+    <span class="lean-comment">-- The lcm of S equals m <span class="lean-bracket">(</span>otherwise order would be smaller<span class="lean-bracket">)</span></span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2554,7 +2554,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hS_lcm</span> <span class="lean-text">:</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span>
       <span class="lean-text">cyclotomic_divisors_lcm_eq_of_orderOf</span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hA_ord</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hminpoly_eq_prod</span>
-    -- Compute the degree as sum of totients
+    <span class="lean-comment">-- Compute the degree as sum of totients</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2586,7 +2586,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hminpoly_eq_prod</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.natDegree_prod</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-text">cyclotomic_ne_zero</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">]</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">Finset.sum_congr</span> <span class="lean-text">rfl</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-text">natDegree_cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
-    -- Apply sum_totient_ge_psi_of_lcm_eq
+    <span class="lean-comment">-- Apply sum_totient_ge_psi_of_lcm_eq</span>
     <span class="lean-keyword" data-docs="Step-wise reasoning over transitive relations.
 ```
 calc
@@ -3021,8 +3021,8 @@ non-dependent hypotheses. It has many variants:
   <span class="lean-text">|</span> <span class="lean-text">succ</span> <span class="lean-text">k</span> <span class="lean-text">ih</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-text">permMatrix_mul</span><span class="lean-text">,</span> <span class="lean-text">ih</span><span class="lean-text">]</span>
-    -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
-    -- Use SemiconjBy or direct equality - both sides are equal
+    <span class="lean-comment">-- Goal: σ.permMatrix * <span class="lean-bracket">(</span>σ.permMatrix<span class="lean-bracket">)</span>^k = <span class="lean-bracket">(</span>σ.permMatrix<span class="lean-bracket">)</span>^k * σ.permMatrix</span>
+    <span class="lean-comment">-- Use SemiconjBy or direct equality - both sides are equal</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">(</span><span class="lean-text">Commute.pow_self</span> <span class="lean-text">(</span><span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">eq.symm</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L88-L103" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -3238,10 +3238,10 @@ hypotheses or the goal. It can have one of the forms:
     <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">hσx</span>
     <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exfalso` converts a goal `⊢ tgt` into `⊢ False` by applying `False.elim`. ">exfalso</span>
-      -- hx says: if σ (σ x) = σ x then 1 else 0 = if x = σ x then 1 else 0
-      -- After simp, lhs simplifies using σ (σ x) = σ x ↔ σ x = x (by injectivity)
-      -- which is true since Option.mem_def
-      -- rhs: x = σ x is false by hσx
+      <span class="lean-comment">-- hx says: if σ <span class="lean-bracket">(</span>σ x<span class="lean-bracket">)</span> = σ x then <span class="lean-number">1</span> else <span class="lean-number">0</span> = if x = σ x then <span class="lean-number">1</span> else <span class="lean-number">0</span></span>
+      <span class="lean-comment">-- After simp, lhs simplifies using σ <span class="lean-bracket">(</span>σ x<span class="lean-bracket">)</span> = σ x <span class="lean-operator">↔</span> σ x = x <span class="lean-bracket">(</span>by injectivity<span class="lean-bracket">)</span></span>
+      <span class="lean-comment">-- which is true since Option.mem_def</span>
+      <span class="lean-comment">-- rhs: x = σ x is false by hσx</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -3461,7 +3461,7 @@ matching on the constructor `quot.mk`.
 `rcases h : e with PAT` will do the same as `rcases e with PAT` with the exception that an
 assumption `h : e = PAT` will be added to the context.
 ">rcases</span> <span class="lean-text">Nat.eq_zero_or_pos</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">σ</span><span class="lean-text">)</span> <span class="lean-keyword">with</span> <span class="lean-text">hord</span> <span class="lean-text">|</span> <span class="lean-text">hord</span>
-  <span class="lean-text">·</span> -- σ has infinite order (orderOf σ = 0)
+  <span class="lean-text">·</span> <span class="lean-comment">-- σ has infinite order <span class="lean-bracket">(</span>orderOf σ = <span class="lean-number">0</span><span class="lean-bracket">)</span></span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hord</span><span class="lean-text">,</span> <span class="lean-text">orderOf_eq_zero_iff&#x27;</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
@@ -3526,7 +3526,7 @@ hypotheses or the goal. It can have one of the forms:
 ">at</span> <span class="lean-text">h1</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">(</span><span class="lean-text">orderOf_eq_zero_iff&#x27;.mp</span> <span class="lean-text">hord</span><span class="lean-text">)</span> <span class="lean-text">k</span> <span class="lean-text">hk</span> <span class="lean-text">h1</span>
-  <span class="lean-text">·</span> -- σ has finite order
+  <span class="lean-text">·</span> <span class="lean-comment">-- σ has finite order</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_eq_iff</span> <span class="lean-text">hord</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
@@ -4217,7 +4217,7 @@ Currently, all of these are on by default.
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpk</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- psi(p^k) = totient(p^k) for this case
+  <span class="lean-comment">-- psi<span class="lean-bracket">(</span>p^k<span class="lean-bracket">)</span> = totient<span class="lean-bracket">(</span>p^k<span class="lean-bracket">)</span> for this case</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4268,7 +4268,7 @@ non-dependent hypotheses. It has many variants:
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">hpk</span><span class="lean-text">,</span> <span class="lean-text">ite_false</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hpsi_eq</span><span class="lean-text">]</span>
-  -- Use companion matrix lemma
+  <span class="lean-comment">-- Use companion matrix lemma</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4493,7 +4493,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm2</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≠</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- Use strong induction on m
+  <span class="lean-comment">-- Use strong induction on m</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
 producing one goal for each constructor of the inductive type,
@@ -4522,7 +4522,7 @@ You can use `with` to provide the variables names for each constructor.
 then a list of alternatives.
 ">with</span>
   <span class="lean-text">|</span> <span class="lean-text">_</span> <span class="lean-text">m</span> <span class="lean-text">IH</span> <span class="lean-text">=&gt;</span>
-  -- Case: m = 1
+  <span class="lean-comment">-- Case: m = <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -4585,7 +4585,7 @@ non-dependent hypotheses. It has many variants:
   other hypotheses.
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">psi_one</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">0</span>
-  <span class="lean-text">·</span> -- Case: m &gt; 1, i.e., m &gt;= 2
+  <span class="lean-text">·</span> <span class="lean-comment">-- Case: m &gt; <span class="lean-number">1</span>, i.e., m &gt;= <span class="lean-number">2</span></span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4641,10 +4641,10 @@ can be used to:
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
 ">omega</span>
-    -- Check if m is a prime power
+    <span class="lean-comment">-- Check if m is a prime power</span>
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hpow</span> <span class="lean-text">:</span> <span class="lean-text">IsPrimePow</span> <span class="lean-text">m</span>
-    <span class="lean-text">·</span> -- m is a prime power p^k
+    <span class="lean-text">·</span> <span class="lean-comment">-- m is a prime power p^k</span>
       <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">isPrimePow_nat_iff</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
@@ -4754,7 +4754,7 @@ Currently, all of these are on by default.
 ">omega</span>
       <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span> <span class="lean-text">h21</span>
-    <span class="lean-text">·</span> -- m is not a prime power: use factorization_split_lt
+    <span class="lean-text">·</span> <span class="lean-comment">-- m is not a prime power: use factorization_split_lt</span>
       <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -4802,7 +4802,7 @@ Currently, all of these are on by default.
 ">omega</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">hpow</span>
       <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">h_pe_is_2</span> <span class="lean-text">:</span> <span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">e</span> <span class="lean-text">=</span> <span class="lean-text">1</span>
-      <span class="lean-text">·</span> -- p^e = 2, so m = 2 * m&#x27; with m&#x27; odd
+      <span class="lean-text">·</span> <span class="lean-comment">-- p^e = <span class="lean-number">2</span>, so m = <span class="lean-number">2</span> * m&#x27; with m&#x27; odd</span>
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5027,7 +5027,7 @@ Currently, all of these are on by default.
 ">omega</span><span class="lean-text">)</span> <span class="lean-text">hm&#x27;_ne_2</span><span class="lean-text">)</span>
       <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hm&#x27;_eq_2</span> <span class="lean-text">:</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">=</span> <span class="lean-text">2</span>
-        <span class="lean-text">·</span> -- m&#x27; = 2, so m = p^e * 2 with p^e odd
+        <span class="lean-text">·</span> <span class="lean-comment">-- m&#x27; = <span class="lean-number">2</span>, so m = p^e * <span class="lean-number">2</span> with p^e odd</span>
           <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5060,7 +5060,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">mem_integerMatrixOrders_psi_odd_times_2</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Nat.pow_pos</span> <span class="lean-text">hp.pos</span><span class="lean-text">)</span> <span class="lean-text">hpe_odd</span> <span class="lean-text">hpe_ge3</span>
             <span class="lean-text">(</span><span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">p</span> <span class="lean-text">e</span> <span class="lean-text">hp</span> <span class="lean-text">he_pos</span> <span class="lean-text">h_pe_is_2</span><span class="lean-text">)</span>
-        <span class="lean-text">·</span> -- Neither is 2, use block diagonal construction
+        <span class="lean-text">·</span> <span class="lean-comment">-- Neither is <span class="lean-number">2</span>, use block diagonal construction</span>
           <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hm_eq</span><span class="lean-text">]</span>
           <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
@@ -5284,7 +5284,7 @@ Currently, all of these are on by default.
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpsi</span> <span class="lean-text">:</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- Handle base cases m = 1, 2
+  <span class="lean-comment">-- Handle base cases m = <span class="lean-number">1</span>, <span class="lean-number">2</span></span>
   <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -5327,7 +5327,7 @@ matching on the constructor `quot.mk`.
 `rcases h : e with PAT` will do the same as `rcases e with PAT` with the exception that an
 assumption `h : e = PAT` will be added to the context.
 ">rcases</span> <span class="lean-text">Nat.lt_trichotomy</span> <span class="lean-text">m</span> <span class="lean-text">2</span> <span class="lean-keyword">with</span> <span class="lean-text">hm_lt2</span> <span class="lean-text">|</span> <span class="lean-text">rfl</span> <span class="lean-text">|</span> <span class="lean-text">hm_gt2</span>
-  <span class="lean-text">·</span> -- m &lt; 2 and 0 &lt; m, so m = 1
+  <span class="lean-text">·</span> <span class="lean-comment">-- m &lt; <span class="lean-number">2</span> and <span class="lean-number">0</span> &lt; m, so m = <span class="lean-number">1</span></span>
     <span class="lean-keyword" data-docs="`interval_cases n` searches for upper and lower bounds on a variable `n`,
 and if bounds are found,
 splits into separate cases for each possible value of `n`.
@@ -5350,7 +5350,7 @@ as `interval_cases h : n` or `interval_cases h : n using hl, hu`.
 ">interval_cases</span> <span class="lean-text">m</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">N</span>
-  <span class="lean-text">·</span> -- m = 2: use -I, need N &gt; 0
+  <span class="lean-text">·</span> <span class="lean-comment">-- m = <span class="lean-number">2</span>: use -I, need N &gt; <span class="lean-number">0</span></span>
     <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `cases x` splits the main goal, producing one goal for each constructor of the
 inductive type, in which the target is replaced by a general instance of that constructor.
@@ -5408,8 +5408,8 @@ Currently, all of these are on by default.
       <span class="lean-keyword" data-docs="`haveI` behaves like `have`, but inlines the value instead of producing a `have` term. ">haveI</span> <span class="lean-text">:</span> <span class="lean-text">NeZero</span> <span class="lean-text">N</span> <span class="lean-text">:=</span> <span class="lean-text">⟨</span><span class="lean-text">Nat.pos_iff_ne_zero.mp</span> <span class="lean-text">hN_pos</span><span class="lean-text">⟩</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">two_mem_integerMatrixOrders</span> <span class="lean-text">N</span>
-  <span class="lean-text">·</span> -- m &gt; 2, i.e., m &gt;= 3
-    -- If m ≤ N, use permutation matrix directly
+  <span class="lean-text">·</span> <span class="lean-comment">-- m &gt; <span class="lean-number">2</span>, i.e., m &gt;= <span class="lean-number">3</span></span>
+    <span class="lean-comment">-- If m <span class="lean-operator">≤</span> N, use permutation matrix directly</span>
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hle</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span>
     <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
@@ -5442,7 +5442,7 @@ can be used to:
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
 ">omega</span><span class="lean-text">)</span><span class="lean-text">)</span>
-    <span class="lean-text">·</span> -- m &gt; N: need companion matrices
+    <span class="lean-text">·</span> <span class="lean-comment">-- m &gt; N: need companion matrices</span>
       <span class="lean-keyword" data-docs="Push negations into the conclusion or a hypothesis.
 For instance, a hypothesis `h : ¬ ∀ x, ∃ y, x ≤ y` will be transformed by `push_neg at h` into
 `h : ∃ x, ∀ y, y &lt; x`. Binder names are preserved.
@@ -5475,7 +5475,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
 * `at *`: target all hypotheses and the goal
 ">at</span> <span class="lean-text">hle</span>
-      -- Case split on m
+      <span class="lean-comment">-- Case split on m</span>
       <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -5518,7 +5518,7 @@ matching on the constructor `quot.mk`.
 `rcases h : e with PAT` will do the same as `rcases e with PAT` with the exception that an
 assumption `h : e = PAT` will be added to the context.
 ">rcases</span> <span class="lean-text">Nat.lt_trichotomy</span> <span class="lean-text">m</span> <span class="lean-text">5</span> <span class="lean-keyword">with</span> <span class="lean-text">hm_lt5</span> <span class="lean-text">|</span> <span class="lean-text">rfl</span> <span class="lean-text">|</span> <span class="lean-text">hm_gt5</span>
-      <span class="lean-text">·</span> -- m ∈ {3, 4}: use small case helper
+      <span class="lean-text">·</span> <span class="lean-comment">-- m <span class="lean-operator">∈</span> <span class="lean-bracket">{</span><span class="lean-number">3</span>, <span class="lean-number">4</span><span class="lean-bracket">}</span>: use small case helper</span>
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5596,10 +5596,10 @@ Currently, all of these are on by default.
 ">omega</span>
         <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">mem_integerMatrixOrders_small</span> <span class="lean-text">m</span> <span class="lean-text">N</span> <span class="lean-text">hm34</span> <span class="lean-text">hpsi</span>
-      <span class="lean-text">·</span> -- m = 5
+      <span class="lean-text">·</span> <span class="lean-comment">-- m = <span class="lean-number">5</span></span>
         <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">mem_integerMatrixOrders_five</span> <span class="lean-text">N</span> <span class="lean-text">hpsi</span>
-      <span class="lean-text">·</span> -- m &gt; 5
+      <span class="lean-text">·</span> <span class="lean-comment">-- m &gt; <span class="lean-number">5</span></span>
         <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -5670,8 +5670,8 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span> -- impossible: 5 &lt; m &lt; 6
-        <span class="lean-text">·</span> -- m = 6
+">omega</span> <span class="lean-comment">-- impossible: <span class="lean-number">5</span> &lt; m &lt; <span class="lean-number">6</span></span>
+        <span class="lean-text">·</span> <span class="lean-comment">-- m = <span class="lean-number">6</span></span>
           <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">mem_integerMatrixOrders_small</span> <span class="lean-text">6</span> <span class="lean-text">N</span> <span class="lean-text">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
@@ -5692,7 +5692,7 @@ non-dependent hypotheses. It has many variants:
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
 ">simp</span><span class="lean-text">)</span> <span class="lean-text">hpsi</span>
-        <span class="lean-text">·</span> -- m &gt; 6: general case
+        <span class="lean-text">·</span> <span class="lean-comment">-- m &gt; <span class="lean-number">6</span>: general case</span>
           <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le_large</span> <span class="lean-text">m</span> <span class="lean-text">N</span> <span class="lean-text">hm_gt6</span> <span class="lean-text">hpsi</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L404-L485" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>

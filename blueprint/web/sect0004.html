@@ -501,7 +501,7 @@ has a reflexivity lemma tagged with the attribute @[refl].
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">heq</span><span class="lean-text">,</span> <span class="lean-text">Matrix.det_submatrix_equiv_self</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">Matrix.charpoly</span><span class="lean-text">,</span> <span class="lean-text">←</span> <span class="lean-text">hA_det</span><span class="lean-text">,</span> <span class="lean-text">Matrix.det_succ_column_zero</span><span class="lean-text">]</span>
-    -- Get column structure and apply Laplace simplification
+    <span class="lean-comment">-- Get column structure and apply Laplace simplification</span>
     <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -784,7 +784,7 @@ hypotheses or the goal. It can have one of the forms:
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">p</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- From hdvd, get q such that X^m - 1 = p * q
+  <span class="lean-comment">-- From hdvd, get q such that X^m - <span class="lean-number">1</span> = p * q</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -801,7 +801,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">q</span><span class="lean-text">,</span> <span class="lean-text">hq</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hdvd</span>
-  -- Let A = companion p
+  <span class="lean-comment">-- Let A = companion p</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -828,7 +828,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span>
-  -- We have aeval A p = 0 by companion_aeval_eq_zero
+  <span class="lean-comment">-- We have aeval A p = <span class="lean-number">0</span> by companion_aeval_eq_zero</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -856,7 +856,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hp_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-text">companion_aeval_eq_zero</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span>
-  -- Therefore aeval A (X^m - 1) = aeval A (p * q) = aeval A p * aeval A q = 0
+  <span class="lean-comment">-- Therefore aeval A <span class="lean-bracket">(</span>X^m - <span class="lean-number">1</span><span class="lean-bracket">)</span> = aeval A <span class="lean-bracket">(</span>p * q<span class="lean-bracket">)</span> = aeval A p * aeval A q = <span class="lean-number">0</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -886,7 +886,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 ">have</span> <span class="lean-text">hXm1_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hq</span><span class="lean-text">,</span> <span class="lean-text">aeval_mul</span><span class="lean-text">,</span> <span class="lean-text">hp_zero</span><span class="lean-text">,</span> <span class="lean-text">zero_mul</span><span class="lean-text">]</span>
-  -- But aeval A (X^m - 1) = A^m - 1
+  <span class="lean-comment">-- But aeval A <span class="lean-bracket">(</span>X^m - <span class="lean-number">1</span><span class="lean-bracket">)</span> = A^m - <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -933,7 +933,7 @@ non-dependent hypotheses. It has many variants:
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
-  -- So A^m - 1 = 0, i.e., A^m = 1
+  <span class="lean-comment">-- So A^m - <span class="lean-number">1</span> = <span class="lean-number">0</span>, i.e., A^m = <span class="lean-number">1</span></span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">haeval</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
@@ -1321,7 +1321,7 @@ non-dependent hypotheses. It has many variants:
 ">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
       <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hAk</span><span class="lean-text">,</span> <span class="lean-text">sub_self</span><span class="lean-text">]</span>
-    -- Work over ℚ where cyclotomic is irreducible
+    <span class="lean-comment">-- Work over ℚ where cyclotomic is irreducible</span>
     <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 

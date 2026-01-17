@@ -913,7 +913,7 @@ introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is decidable, it uses `Decidable.byContradiction` instead of `Classical.byContradiction`.
 * If `h` is omitted, the introduced variable will be called `this`.
 ">by_contra</span> <span class="lean-text">hm_not_in</span>
-  -- All elements of S are proper divisors of p^k, so they divide p^(k-1)
+  <span class="lean-comment">-- All elements of S are proper divisors of p^k, so they divide p^<span class="lean-bracket">(</span>k-<span class="lean-number">1</span><span class="lean-bracket">)</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2274,7 +2274,7 @@ be a `let` or function type.
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_neg_of_odd_order</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk_odd</span> <span class="lean-text">:</span> <span class="lean-text">Odd</span> <span class="lean-text">k</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hA_ord</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">-</span><span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">*</span> <span class="lean-text">k</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  -- Express -A as (-1) * A
+  <span class="lean-comment">-- Express -A as <span class="lean-bracket">(</span>-<span class="lean-number">1</span><span class="lean-bracket">)</span> * A</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2322,7 +2322,7 @@ non-dependent hypotheses. It has many variants:
 ">simp</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hneg_eq</span><span class="lean-text">]</span>
-  -- -1 and A commute
+  <span class="lean-comment">-- -<span class="lean-number">1</span> and A commute</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2350,7 +2350,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hcomm</span> <span class="lean-text">:</span> <span class="lean-text">Commute</span> <span class="lean-text">(</span><span class="lean-text">-</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-text">Commute.neg_one_left</span> <span class="lean-text">A</span>
-  -- orderOf(-1) = 2 in char 0
+  <span class="lean-comment">-- orderOf<span class="lean-bracket">(</span>-<span class="lean-number">1</span><span class="lean-bracket">)</span> = <span class="lean-number">2</span> in char <span class="lean-number">0</span></span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2399,7 +2399,7 @@ non-dependent hypotheses. It has many variants:
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
 ">simp</span>
-  -- Coprimality: gcd(2, k) = 1 since k is odd
+  <span class="lean-comment">-- Coprimality: gcd<span class="lean-bracket">(</span><span class="lean-number">2</span>, k<span class="lean-bracket">)</span> = <span class="lean-number">1</span> since k is odd</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2458,7 +2458,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hord_neg1</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">hcop</span>
-  -- Apply the product formula
+  <span class="lean-comment">-- Apply the product formula</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hcomm.orderOf_mul_eq_mul_orderOf_of_coprime</span> <span class="lean-text">hord_cop</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.

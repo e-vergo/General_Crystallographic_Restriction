@@ -509,7 +509,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">,</span> <span class="lean-text">hA_pos</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hm</span>
-  -- N = M + (N - M)
+  <span class="lean-comment">-- N = M + <span class="lean-bracket">(</span>N - M<span class="lean-bracket">)</span></span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -563,7 +563,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hN</span> <span class="lean-text">:</span> <span class="lean-text">N</span> <span class="lean-text">=</span> <span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span> <span class="lean-text">:=</span> <span class="lean-text">(</span><span class="lean-text">Nat.add_sub_cancel&#x27;</span> <span class="lean-text">hMN</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span>
-  -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
+  <span class="lean-comment">-- First embed A into <span class="lean-bracket">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket">)</span>-indexed matrix</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -590,7 +590,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
 ">let</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span> <span class="lean-text">:=</span> <span class="lean-text">embedMatrixSum</span> <span class="lean-text">A</span>
-  -- Then reindex to Fin N using the equivalence
+  <span class="lean-comment">-- Then reindex to Fin N using the equivalence</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
