@@ -100,8 +100,31 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>  The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
+  <p>   The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). -/
+@[blueprint
+  &quot;integerMatrixOrders-def&quot;
+  (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
+  with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
+  $A$ with order $m$. -/)]
+def integerMatrixOrders (N : ℕ) : Set ℕ :=
+  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:one-mem-orders">
@@ -166,8 +189,27 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   Order \(1\) is achievable in any dimension. </p>
+  <p>    Order \(1\) is achievable in any dimension. </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L61-L66" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
+@[blueprint &quot;lem:one-mem-orders&quot;
+  (statement := /-- Order $1$ is achievable in any dimension. -/)
+  (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
+lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000026">
@@ -244,8 +286,28 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   Order \(2\) is achievable for \(N \geq 1\). </p>
+  <p>    Order \(2\) is achievable for \(N \geq 1\). </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L76-L82" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- For N ≥ 1, the negation of the identity matrix has order 2. -/
+@[blueprint &quot;lem:two-mem-orders&quot;
+  (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
+  (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
+  so it has order $2$. -/)]
+lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000027">
@@ -322,8 +384,51 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+  <p>    \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L156-L185" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Monotonicity: if M &lt;= N, then any order achievable for M x M matrices is also achievable
+for N x N matrices.
+
+The construction pads the M x M matrix with an identity block in the lower-right corner. -/
+@[blueprint &quot;lem:orders-mono&quot;
+  (statement := /-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
+  \uses{integerMatrixOrders-def} -/)
+  (proof := /-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
+  top-left block of an $N \times N$ matrix with identity in the bottom-right. The order is
+  preserved. -/)]
+theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
+    integerMatrixOrders M ⊆ integerMatrixOrders N := by
+  intro m hm
+  simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
+  obtain ⟨A, hA_ord, hA_pos⟩ := hm
+  -- N = M + (N - M)
+  let K := N - M
+  have hN : N = M + K := (Nat.add_sub_cancel&#x27; hMN).symm
+  -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
+  let A&#x27; : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ := embedMatrixSum A
+  -- Then reindex to Fin N using the equivalence
+  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ finSumFinEquiv.symm
+  let A&#x27;&#x27; : Matrix (Fin N) (Fin N) ℤ := (reindexMonoidEquiv e).symm A&#x27;
+  use A&#x27;&#x27;
+  constructor
+  · simp only [A&#x27;&#x27;]
+    have h1 : orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27; :=
+      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm A&#x27;
+    rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
+  · exact hA_pos
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000028">
@@ -377,8 +482,28 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>  Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
+  <p>   Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L189-L195" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
+@[blueprint &quot;def:blockDiag2&quot;
+  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
+def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
+  Matrix.fromBlocks A 0 0 B
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:blockDiag2-one">
@@ -443,8 +568,29 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
+  <p>    \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Block diagonal of identity matrices is the identity. -/
+@[simp, blueprint &quot;lem:blockDiag2-one&quot;
+  (statement := /-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/)
+  (proof := /-- Immediate from the definition of block diagonal and the identity matrix. -/)]
+lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000029">
@@ -521,8 +667,32 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
+  <p>    \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Block diagonal preserves multiplication. -/
+@[simp, blueprint &quot;lem:blockDiag2-mul&quot;
+  (statement := /-- $\mathrm{diag}(AA&#x27;, BB&#x27;) = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;)$.
+  \uses{def:blockDiag2} -/)
+  (proof := /-- Block multiplication respects the diagonal structure since off-diagonal blocks
+  are zero. -/)]
+lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
+    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by
+  simp only [blockDiag2, Matrix.fromBlocks_multiply]
+  congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000030">
@@ -600,8 +770,31 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>   The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
+  <p>    The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L218-L227" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/
+@[blueprint &quot;def:blockDiag2-prodMonoidHom&quot;
+  (statement := /-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
+  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/)]
+def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
+    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
+  toFun := fun p =&gt; blockDiag2 p.1 p.2
+  map_one&#x27; := blockDiag2_one
+  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:blockDiag2-eq-one">
@@ -668,8 +861,32 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
+  <p>    \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Block diagonal is one iff both components are one. -/
+@[blueprint &quot;lem:blockDiag2-eq-one&quot;
+  (statement := /-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/)
+  (proof := /-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
+  respective identities. -/)]
+lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by
+  rw [← blockDiag2_one]
+  simp only [blockDiag2, Matrix.fromBlocks_inj]
+  tauto
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000031">
@@ -746,8 +963,33 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
+  <p>    \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Power of block diagonal distributes to each block.
+
+(blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/
+@[blueprint &quot;lem:blockDiag2-pow&quot;
+  (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)
+  (proof := /-- By induction on $n$: the block structure is preserved under multiplication, and
+  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;) = \mathrm{diag}(AA&#x27;, BB&#x27;)$. -/)]
+lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
+    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by
+  simp only [blockDiag2]
+  exact Matrix.fromBlocks_diagonal_pow A B k
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000032">
@@ -830,8 +1072,37 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
+  <p>    The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Order of block diagonal is lcm of orders.
+
+Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
+and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
+@[blueprint &quot;thm:orderOf-blockDiag2&quot;
+  (statement := /-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
+  \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)
+  (proof := /-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
+  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/)]
+theorem orderOf_blockDiag2 {M K : ℕ}
+    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
+  have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
+    Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
+  rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
+      orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000033">
@@ -912,8 +1183,36 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
+  <p>    If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L51-L65" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- Block diagonal construction for integer matrix orders.
+    If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
+    then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
+@[blueprint &quot;lem:lcm-mem-orders&quot;
+  (statement := /-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
+  \uses{thm:orderOf-blockDiag2} -/)
+  (proof := /-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
+  diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/)]
+lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
+    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by
+  obtain ⟨A, hA_ord, hA_pos⟩ := h₁
+  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
+  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
+  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000034">
@@ -992,8 +1291,34 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>   Product of coprime achievable orders is achievable.  </p>
+  <p>    Product of coprime achievable orders is achievable.  </p>
 
+  </div>
+  <div class="thm_body_extras">
+
+
+<div class="lean-source-panel">
+    <div class="lean-source-header">
+        <span class="lean-source-title">Lean Source</span>
+        
+        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
+        
+    </div>
+    <pre class="lean-code"><code><span class="lean-plain">/-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
+    then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/
+@[blueprint &quot;lem:mul-mem-orders-coprime&quot;
+  (statement := /-- Product of coprime achievable orders is achievable.
+  \uses{lem:lcm-mem-orders} -/)
+  (proof := /-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
+  follows from the lcm result. -/)]
+lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
+    (hcop : Nat.Coprime m₁ m₂) :
+    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by
+  rw [← hcop.lcm_eq_mul]
+  exact lcm_mem_integerMatrixOrders h₁ h₂
+</span></code></pre>
+</div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000035">

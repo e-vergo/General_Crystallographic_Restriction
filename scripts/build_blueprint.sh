@@ -1,11 +1,22 @@
 #!/bin/bash
 # Build and serve the Crystallographic Restriction Theorem blueprint locally
 # Usage: ./scripts/build_blueprint.sh
+#
+# This script:
+# 1. Builds and pushes changes to LeanArchitect fork
+# 2. Builds and pushes changes to leanblueprint fork
+# 3. Updates this project's dependencies and fetches caches
+# 4. Builds the Lean project and blueprint
+# 5. Serves the blueprint locally
 
 set -e
 
 cd "$(dirname "$0")/.."
 PROJECT_ROOT=$(pwd)
+
+# Configuration - paths to forked repos
+LEAN_ARCHITECT_PATH="/Users/eric/GitHub/LeanArchitect"
+LEANBLUEPRINT_PATH="/Users/eric/GitHub/leanblueprint"
 
 # Add pipx leanblueprint venv to PATH for plastex
 export PATH="$HOME/.local/pipx/venvs/leanblueprint/bin:$PATH"
@@ -24,6 +35,7 @@ check_dependency() {
 
 check_dependency "lake" "Please install Lean 4 and Lake."
 check_dependency "leanblueprint" "Install with: pipx install leanblueprint"
+check_dependency "gh" "Install with: brew install gh"
 
 # Check for xelatex (required by latexmkrc)
 if ! command -v xelatex &> /dev/null; then
@@ -31,15 +43,110 @@ if ! command -v xelatex &> /dev/null; then
     echo "Install a TeX distribution (e.g., MacTeX or TeX Live)."
 fi
 
-echo "=== Step 1: Building Lean project ==="
+# Function to commit and push changes in a git repo
+push_repo_changes() {
+    local repo_path="$1"
+    local repo_name="$2"
+
+    echo ""
+    echo "=== Checking $repo_name for changes ==="
+    cd "$repo_path"
+
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "Found uncommitted changes in $repo_name"
+        git add -A
+        git status --short
+
+        # Auto-commit with timestamp
+        local commit_msg="Auto-commit from build_blueprint.sh at $(date '+%Y-%m-%d %H:%M:%S')"
+        git commit -m "$commit_msg" || true
+    fi
+
+    # Check if we need to push
+    local upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "")
+    if [[ -n "$upstream" ]]; then
+        local local_hash=$(git rev-parse HEAD)
+        local remote_hash=$(git rev-parse @{u} 2>/dev/null || echo "")
+
+        if [[ "$local_hash" != "$remote_hash" ]]; then
+            echo "Pushing changes to remote..."
+            git push
+        else
+            echo "No new commits to push"
+        fi
+    else
+        echo "No upstream configured, skipping push"
+    fi
+
+    cd "$PROJECT_ROOT"
+}
+
+# Function to build a Lean project
+build_lean_project() {
+    local repo_path="$1"
+    local repo_name="$2"
+
+    echo ""
+    echo "=== Building $repo_name ==="
+    cd "$repo_path"
+    lake build
+    cd "$PROJECT_ROOT"
+}
+
+echo ""
+echo "=== Step 0: Building and pushing dependency repositories ==="
+
+# Build LeanArchitect first (it's a dependency)
+if [[ -d "$LEAN_ARCHITECT_PATH" ]]; then
+    build_lean_project "$LEAN_ARCHITECT_PATH" "LeanArchitect"
+    push_repo_changes "$LEAN_ARCHITECT_PATH" "LeanArchitect"
+else
+    echo "WARNING: LeanArchitect path not found at $LEAN_ARCHITECT_PATH"
+    echo "Skipping LeanArchitect build/push"
+fi
+
+# Push leanblueprint changes (Python, no build needed)
+if [[ -d "$LEANBLUEPRINT_PATH" ]]; then
+    push_repo_changes "$LEANBLUEPRINT_PATH" "leanblueprint"
+
+    # Ensure leanblueprint is installed from local fork
+    echo "Ensuring leanblueprint is installed from local fork..."
+    if ! pip show leanblueprint 2>/dev/null | grep -q "Location.*$LEANBLUEPRINT_PATH"; then
+        echo "Reinstalling leanblueprint from local fork..."
+        pipx uninstall leanblueprint 2>/dev/null || true
+        pipx install -e "$LEANBLUEPRINT_PATH"
+    fi
+else
+    echo "WARNING: leanblueprint path not found at $LEANBLUEPRINT_PATH"
+    echo "Skipping leanblueprint push"
+fi
+
+echo ""
+echo "=== Step 1: Updating dependencies and fetching caches ==="
+cd "$PROJECT_ROOT"
+
+# Update lake dependencies
+echo "Updating lake dependencies..."
+lake update
+
+# Fetch mathlib cache
+echo "Fetching mathlib cache..."
+lake exe cache get || echo "Cache fetch completed (some files may have been skipped)"
+
+echo ""
+echo "=== Step 2: Building Lean project ==="
 lake build
 
 echo ""
-echo "=== Step 2: Building LeanArchitect blueprint data ==="
+echo "=== Step 3: Building LeanArchitect blueprint data ==="
 lake build :blueprint
 
 echo ""
-echo "=== Step 3: Building blueprint (PDF and web) ==="
+echo "=== Step 4: Pushing main project changes ==="
+push_repo_changes "$PROJECT_ROOT" "General_Crystallographic_Restriction"
+
+echo ""
+echo "=== Step 5: Building blueprint (PDF and web) ==="
 cd blueprint
 # Use pdf and web separately instead of 'all' to skip checkdecls
 # (checkdecls requires extra dependency and is redundant when using LeanArchitect)
@@ -47,7 +154,7 @@ leanblueprint pdf
 leanblueprint web
 
 echo ""
-echo "=== Step 4: Launching local server ==="
+echo "=== Step 6: Launching local server ==="
 echo ""
 echo "Blueprint is ready!"
 echo "  - PDF: blueprint/print/print.pdf"
@@ -57,6 +164,6 @@ echo "Press Ctrl+C to stop the server."
 echo ""
 
 # Open browser after a short delay (in background)
-(sleep 2 && open "http://localhost:8000") &
+(open "http://localhost:8000") &
 
 leanblueprint serve
