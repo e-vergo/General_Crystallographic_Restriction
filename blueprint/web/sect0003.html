@@ -101,13 +101,39 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>       The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
+    <p>      The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
-  <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">|</span> <span class="lean-text">∃</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">,</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">}</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). -/</span>
+<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span>
+  <span class="lean-string">&quot;integerMatrixOrders-def&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
+  with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
+  $A$ with order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
+  <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">|</span> <span class="lean-text">∃</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">,</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
+  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -729,16 +755,39 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>       Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
+    <p>      Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/</span>
+<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;def:blockDiag2&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
-  <span class="lean-text">Matrix.fromBlocks</span> <span class="lean-text">A</span> <span class="lean-text">0</span> <span class="lean-text">0</span> <span class="lean-text">B</span></code></pre>
+    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
+  <span class="lean-text">Matrix.fromBlocks</span> <span class="lean-text">A</span> <span class="lean-text">0</span> <span class="lean-text">0</span> <span class="lean-text">B</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
+  Matrix.fromBlocks A 0 0 B</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L189-L195" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1030,18 +1079,44 @@ non-dependent hypotheses. It has many variants:
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>        The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
+    <p>       The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/</span>
+<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;def:blockDiag2-prodMonoidHom&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
+  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">×</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">→*</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-keyword">where</span>
-  <span class="lean-text">toFun</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">=&gt;</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">2</span>
-  <span class="lean-text">map_one&#x27;</span> <span class="lean-text">:=</span> <span class="lean-text">blockDiag2_one</span>
-  <span class="lean-text">map_mul&#x27;</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span></code></pre>
+  <span class="lean-text">toFun</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2`"><span class="lean-text">blockDiag2</span></span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">2</span>
+  <span class="lean-text">map_one&#x27;</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_one`"><span class="lean-text">blockDiag2_one</span></span>
+  <span class="lean-text">map_mul&#x27;</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_mul`"><span class="lean-text">blockDiag2_mul</span></span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span></code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
+    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
+  toFun := fun p =&gt; blockDiag2 p.1 p.2
+  map_one&#x27; := blockDiag2_one
+  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L218-L227" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
