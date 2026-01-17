@@ -146,8 +146,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The polynomial $X^k - 1$ annihilates $A$ (since the minimal polynomial does),
   meaning $A^k - I = 0$. Transfer this identity from $\mathbb{Q}$ back to $\mathbb{Z}$ via
   the injectivity of $\mathbb{Z} \to \mathbb{Q}$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">pow_eq_one_of_minpoly_dvd_X_pow_sub_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">pow_eq_one_of_minpoly_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -201,7 +201,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">haeval</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Unknown identifier `aeval`"><span class="lean-text">aeval</span></span> <span class="lean-text">A_Q</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> <span class="lean-text">haeval</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A_Q</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -239,7 +239,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Unknown identifier `aeval_X`"><span class="lean-text">aeval_X</span></span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">,</span> <span class="lean-text">sub_eq_zero</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">,</span> <span class="lean-text">sub_eq_zero</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -382,8 +382,8 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{def:minpoly} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The polynomial $X^m - 1$ annihilates $A$ since $(A_{\mathbb{Q}})^m - I = 0$.
   The minimal polynomial divides any annihilating polynomial by definition. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_X_pow_sub_one_of_pow_eq_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hpow</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_X_pow_sub_one_of_pow_eq_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hpow</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
 If it succeeds, then the tactic returns as many subgoals as the number of premises that
 have not been fixed by type inference or type class resolution.
@@ -410,20 +410,9 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Unknown identifier `aeval_X`"><span class="lean-text">aeval_X</span></span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Tactic `rewrite` failed: Did not find an occurrence of the pattern
-  highlights
-in the target expression
-  highlights
-
-case hp
-X : highlights
-N : highlights
-A : highlights
-m : highlights
-hpow : highlights
-⊢ highlights"><span class="lean-text">←</span> <span class="lean-text">Matrix.map_pow</span></span><span class="lean-text">,</span> <span class="lean-text">hpow</span><span class="lean-text">,</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">Matrix.map_pow</span><span class="lean-text">,</span> <span class="lean-text">hpow</span><span class="lean-text">,</span>
     <span class="lean-text">Matrix.map_one</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">map_zero</span> <span class="lean-text">_</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">map_one</span> <span class="lean-text">_</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">sub_self</span><span class="lean-text">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L73-L85" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -515,34 +504,9 @@ Use `blueprint?` to show the raw data of the added node.
   use that cyclotomic polynomials with distinct indices are coprime over $\mathbb{Q}$, so
   $\Phi_d$ is coprime to $\prod_{x \in s} \Phi_x$ when $d \notin s$. Then apply coprime
   divisibility: if $a, b$ are coprime and both divide $f$, then $ab \mid f$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_finset_product_dvd</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">target</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hdvd_each</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">∣</span> <span class="lean-text">target</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">(</span><span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span></span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">target</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_finset_product_dvd</span> <span class="lean-text">{</span><span class="lean-text">target</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hdvd_each</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">target</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">target</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
 producing one goal for each constructor of the inductive type,
@@ -570,7 +534,7 @@ You can use `with` to provide the variables names for each constructor.
 ">induction</span> <span class="lean-text">S</span> <span class="lean-keyword">using</span> <span class="lean-text">Finset.induction</span> <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
 then a list of alternatives.
 ">with</span>
-  <span class="lean-text">|</span> <span class="lean-text">empty</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+  <span class="lean-text">|</span> <span class="lean-text">empty</span> <span class="lean-text">=&gt;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -588,7 +552,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Finset.prod_empty</span><span class="lean-text">,</span> <span class="lean-text">one_dvd</span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Finset.prod_empty</span><span class="lean-text">,</span> <span class="lean-text">one_dvd</span><span class="lean-text">]</span>
   <span class="lean-text">|</span> <span class="lean-text">@</span><span class="lean-text">insert</span> <span class="lean-text">d</span> <span class="lean-text">s</span> <span class="lean-text">hd_notin</span> <span class="lean-text">IH</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">Finset.prod_insert</span> <span class="lean-text">hd_notin</span><span class="lean-text">]</span>
@@ -825,43 +789,11 @@ Use `blueprint?` to show the raw data of the added node.
   Since $\Phi_d$ is irreducible and does not divide $\mu_A$ for $d \notin S$, we have
   $\gcd(\mu_A, \Phi_d) = 1$. Thus $\mu_A$ is coprime to $\prod_{d \notin S} \Phi_d$.
   Since $\mu_A \mid X^m - 1$, it must divide $\prod_{d \in S} \Phi_d$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">S</span> <span class="lean-text">⊆</span> <span class="lean-text">m.divisors</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hminpoly_dvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-cyclotomic : highlights
-X : highlights
-N : highlights
-inst✝ : highlights
-A : highlights
-m : highlights
-hm : highlights
-S : highlights
-hS_sub : highlights
-hS_def : highlights
-hminpoly_dvd : highlights
-A_Q : highlights
-hS_eq : highlights
-hcoprime_with_complement : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -978,13 +910,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hcoprime_with_complement</span> <span class="lean-text">:</span> <span class="lean-text">IsCoprime</span> <span class="lean-text">(</span><span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span>
-      <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-text">·</span> <span class="lean-text">∉</span> <span class="lean-text">S</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span> <span class="lean-text">:=</span>
+      <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-text">·</span> <span class="lean-text">∉</span> <span class="lean-text">S</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">:=</span>
     <span class="lean-text">IsCoprime.prod_right</span> <span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -1066,16 +992,10 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hndvd</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">hdvd</span> <span class="lean-text">=&gt;</span>
+">have</span> <span class="lean-text">hndvd</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">hdvd</span> <span class="lean-text">=&gt;</span>
         <span class="lean-text">hd_not_in_S</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">hS_def</span> <span class="lean-text">d</span> <span class="lean-text">hd_div</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">mpr</span> <span class="lean-text">hdvd</span><span class="lean-text">)</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `cyclotomic_coprime_minpoly_of_not_mem`"><span class="lean-text">cyclotomic_coprime_minpoly_of_not_mem</span></span> <span class="lean-text">A</span> <span class="lean-text">d</span> <span class="lean-text">(</span><span class="lean-text">Nat.pos_of_mem_divisors</span> <span class="lean-text">hd_div</span><span class="lean-text">)</span> <span class="lean-text">hndvd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span>
+">exact</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic_coprime_minpoly_of_not_mem</span> <span class="lean-text">A</span> <span class="lean-text">d</span> <span class="lean-text">(</span><span class="lean-text">Nat.pos_of_mem_divisors</span> <span class="lean-text">hd_div</span><span class="lean-text">)</span> <span class="lean-text">hndvd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span>
   -- Split X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d)
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -1103,26 +1023,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hprod_split</span> <span class="lean-text">:</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">=</span>
-      <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span> <span class="lean-text">*</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-text">·</span> <span class="lean-text">∉</span> <span class="lean-text">S</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> <span class="lean-text">hprod_split</span> <span class="lean-text">:</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">=</span>
+      <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">*</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-text">·</span> <span class="lean-text">∉</span> <span class="lean-text">S</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">Finset.prod_filter_mul_prod_filter_not</span> <span class="lean-text">m.divisors</span> <span class="lean-text">(</span><span class="lean-text">·</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">hS_eq</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
@@ -1135,7 +1037,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at *`: target all hypotheses and the goal
 ">at</span> <span class="lean-text">hminpoly_dvd</span>
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">hcoprime_with_complement.dvd_of_dvd_mul_right</span> <span class="lean-text">hminpoly_dvd</span></span></code></pre>
+">exact</span> <span class="lean-text">hcoprime_with_complement.dvd_of_dvd_mul_right</span> <span class="lean-text">hminpoly_dvd</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L125-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1255,19 +1157,11 @@ Use `blueprint?` to show the raw data of the added node.
   $\mu_A \mid \prod_{d \in S} \Phi_d$. Conversely, by definition of $S$, each $\Phi_d$ for
   $d \in S$ divides $\mu_A$, so their coprime product divides $\mu_A$. Mutual divisibility
   of monic polynomials implies equality. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hminpoly_dvd</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">∃</span> <span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">,</span> <span class="lean-text">(</span><span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">∧</span>
-      <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+      <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`classical tacs` runs `tacs` in a scope where `Classical.propDecidable` is a low priority
 local instance.
 
@@ -1325,13 +1219,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * The `let` tactic is preferred for data (non-propositions).
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
-">let</span> <span class="lean-text">S</span> <span class="lean-text">:=</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span>
+">let</span> <span class="lean-text">S</span> <span class="lean-text">:=</span> <span class="lean-text">m.divisors.filter</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">=&gt;</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1413,13 +1301,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span>
+">have</span> <span class="lean-text">hS_def</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">m.divisors</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span> <span class="lean-text">↔</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span>
     <span class="lean-text">⟨</span><span class="lean-keyword">fun</span> <span class="lean-text">hS</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">Finset.mem_filter.mp</span> <span class="lean-text">hS</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">,</span> <span class="lean-keyword">fun</span> <span class="lean-text">hdvd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">Finset.mem_filter.mpr</span> <span class="lean-text">⟨</span><span class="lean-text">hd</span><span class="lean-text">,</span> <span class="lean-text">hdvd</span><span class="lean-text">⟩</span><span class="lean-text">⟩</span>
   -- minpoly ∣ ∏_{d∈S} Φ_d (by coprimality argument)
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -1448,14 +1330,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hminpoly_dvd_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span> <span class="lean-text">:=</span>
-    <span class="lean-span lean-error" title="Unknown identifier `minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one`"><span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span></span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hS_def</span> <span class="lean-text">hminpoly_dvd</span>
+">have</span> <span class="lean-text">hminpoly_dvd_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span> <span class="lean-text">:=</span>
+    <span class="lean-text">minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one</span> <span class="lean-text">A</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hS_def</span> <span class="lean-text">hminpoly_dvd</span>
   -- ∏_{d∈S} Φ_d ∣ minpoly (by definition of S)
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -1483,21 +1359,13 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hprod_dvd_minpoly</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d"><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span>
-    <span class="lean-span lean-error" title="Unknown identifier `cyclotomic_finset_product_dvd`"><span class="lean-text">cyclotomic_finset_product_dvd</span></span> <span class="lean-text">S</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">Finset.mem_filter.mp</span> <span class="lean-text">hd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">)</span>
+">have</span> <span class="lean-text">hprod_dvd_minpoly</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">:=</span>
+    <span class="lean-text">cyclotomic_finset_product_dvd</span> <span class="lean-text">S</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">(</span><span class="lean-text">Finset.mem_filter.mp</span> <span class="lean-text">hd</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">)</span>
   -- Equality by mutual divisibility of monic polynomials
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">⟨</span><span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">hS_dvd</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.eq_of_monic_of_associated</span>
     <span class="lean-text">(</span><span class="lean-text">minpoly.monic</span> <span class="lean-text">(</span><span class="lean-text">Matrix.isIntegral</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">Polynomial.monic_prod_of_monic</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">Polynomial.monic_prod_of_monic</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-text">cyclotomic.monic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">associated_of_dvd_dvd</span> <span class="lean-text">hminpoly_dvd_prod</span> <span class="lean-text">hprod_dvd_minpoly</span><span class="lean-text">)</span><span class="lean-text">⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Forward.lean#L167-L201" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -1617,19 +1485,11 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Suppose $\ell = \mathrm{lcm}(S) &lt; m$. Then $\mu_A = \prod_{d \in S} \Phi_d$
   divides $\prod_{d \mid \ell} \Phi_d = X^\ell - 1$, since each $d \in S$ divides $\ell$.
   By the transfer lemma, $A^\ell = I$. But this contradicts $\mathrm{ord}(A) = m &gt; \ell$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_divisors_lcm_eq_of_orderOf</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">cyclotomic_divisors_lcm_eq_of_orderOf</span> <span class="lean-text">{</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hA_ord</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hminpoly_eq_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  d
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">(</span><span class="lean-text">hminpoly_eq_prod</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">(</span><span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">∏</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">d</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -1831,7 +1691,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
 
 ">have</span> <span class="lean-text">hdeg</span> <span class="lean-text">:=</span> <span class="lean-text">minpoly.natDegree_pos</span> <span class="lean-text">(</span><span class="lean-text">Matrix.isIntegral</span> <span class="lean-text">A_Q</span><span class="lean-text">)</span>
       <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">hminpoly_eq_prod</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Unknown identifier `natDegree_one`"><span class="lean-text">natDegree_one</span></span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-text">[</span><span class="lean-text">hminpoly_eq_prod</span><span class="lean-text">,</span> <span class="lean-text">natDegree_one</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -1925,30 +1785,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">X_pow_sub_one_dvd</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">(</span><span class="lean-text">d</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">n</span> <span class="lean-text">→</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `X`"><span class="lean-text">X</span></span> <span class="lean-text">^</span> <span class="lean-text">d</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="failed to prove index is valid, possible solutions:
-  - Use `have`-expressions to prove the index is valid
-  - Use `a[i]!` notation instead, runtime check is performed, and &#x27;Panic&#x27; error message is produced if index is not valid
-  - Use `a[i]?` notation instead, result is an `Option` type
-  - Use `a[i]&#x27;h` notation instead, where `h` is a proof that index is valid
-x✝ : highlights
-cyclotomic : highlights
-N : highlights
-inst✝ : highlights
-A : highlights
-m : highlights
-hm : highlights
-hA_ord : highlights
-S : highlights
-hS_sub : highlights
-hminpoly_eq_prod : highlights
-A_Q : highlights
-hne : highlights
-hlcm_dvd_m : highlights
-hlcm_le : highlights
-hlcm_lt : highlights
-hlcm_pos : highlights
-d n : highlights
-⊢ highlights"><span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `X`"><span class="lean-text">X</span></span><span class="lean-text">]</span></span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-span lean-error" title="Unknown identifier `X`"><span class="lean-text">X</span></span> <span class="lean-text">^</span> <span class="lean-text">n</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> <span class="lean-text">X_pow_sub_one_dvd</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">(</span><span class="lean-text">d</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">n</span> <span class="lean-text">→</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">d</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">n</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -2017,7 +1854,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hminpoly_dvd_lcm</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-span lean-error" title="Unknown identifier `X`"><span class="lean-text">X</span></span> <span class="lean-text">^</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> <span class="lean-text">hminpoly_dvd_lcm</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">A_Q</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">(</span><span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hminpoly_eq_prod</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
@@ -2027,7 +1864,7 @@ Non-dependent premises are added before dependent ones.
 
 The `apply` tactic uses higher-order pattern matching, type class resolution,
 and first-order unification with dependent types.
-">apply</span> <span class="lean-span lean-error" title="Unknown identifier `cyclotomic_finset_product_dvd`"><span class="lean-text">cyclotomic_finset_product_dvd</span></span>
+">apply</span> <span class="lean-text">cyclotomic_finset_product_dvd</span>
     <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -2049,7 +1886,7 @@ be a `let` or function type.
   | n + 1, 0 =&gt; tac
   | ...
   ```
-">intro</span> <span class="lean-span lean-error" title="No goals to be solved"><span class="lean-text">d</span></span> <span class="lean-text">hd</span>
+">intro</span> <span class="lean-text">d</span> <span class="lean-text">hd</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2414,16 +2251,8 @@ Use `blueprint?` to show the raw data of the added node.
   various $d \mid m$. Each factor contributes $\varphi(d)$ to $\deg(\mu_A) \leq N$.
   Since distinct $\Phi_d$ are coprime and their lcm must be $m$, summing the totients
   of appearing divisors gives $\psi(m) \leq N$. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">psi_le_of_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hord</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Crystallographic.psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hord</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Crystallographic.psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Extract the matrix A with orderOf A = m
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
@@ -3010,10 +2839,10 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The permutation matrix of the identity is the identity matrix: $P_{\mathrm{id}} = I$. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Direct computation using $\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}$ and
   $\mathrm{toMatrix}(\mathrm{refl}) = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_one</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">n</span> <span class="lean-text">n</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">n</span> <span class="lean-text">n</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -3121,11 +2950,11 @@ Use `blueprint?` to show the raw data of the added node.
   (contravariant homomorphism). -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Follows from $\mathrm{toPEquiv}(\sigma \circ \tau) = \mathrm{toPEquiv}(\tau) \cdot \mathrm{toPEquiv}(\sigma)$
   and the corresponding property for partial equivalence matrices. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_mul</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_mul</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">τ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">*</span> <span class="lean-text">τ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">τ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">*</span> <span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">*</span> <span class="lean-text">τ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">τ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">*</span> <span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -3261,11 +3090,11 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{lem:permMatrix-one, lem:permMatrix-mul} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on $k$: the base case uses $P_{\mathrm{id}} = I$, and the inductive
   step uses $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$ together with commutativity of powers. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_pow</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_pow</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
 producing one goal for each constructor of the inductive type,
@@ -3311,10 +3140,10 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `permMatrix_one`"><span class="lean-text">permMatrix_one</span></span><span class="lean-text">]</span>
+">simp</span> <span class="lean-text">[</span><span class="lean-text">permMatrix_one</span><span class="lean-text">]</span>
   <span class="lean-text">|</span> <span class="lean-text">succ</span> <span class="lean-text">k</span> <span class="lean-text">ih</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Unknown identifier `permMatrix_mul`"><span class="lean-text">permMatrix_mul</span></span><span class="lean-text">,</span> <span class="lean-text">ih</span><span class="lean-text">]</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-text">pow_succ</span><span class="lean-text">,</span> <span class="lean-text">permMatrix_mul</span><span class="lean-text">,</span> <span class="lean-text">ih</span><span class="lean-text">]</span>
     -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
     -- Use SemiconjBy or direct equality - both sides are equal
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
@@ -3430,11 +3259,11 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The forward direction shows that if $P_\sigma = I$ then for each $x$, the entry
   $(P_\sigma)_{x, \sigma(x)} = 1$ forces $\sigma(x) = x$. The reverse is immediate from
   $P_{\mathrm{id}} = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_eq_one_iff</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">permMatrix_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">[</span><span class="lean-text">Nontrivial</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">σ</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">σ</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
 the first matching constructor, or else fails.
 ">constructor</span>
@@ -3618,7 +3447,7 @@ be a `let` or function type.
   ```
 ">intro</span> <span class="lean-text">h</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">h</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-span lean-error" title="Unknown identifier `permMatrix_one`"><span class="lean-text">permMatrix_one</span></span></code></pre>
+">exact</span> <span class="lean-text">permMatrix_one</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L105-L131" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -3707,11 +3536,11 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $P_{\sigma^k} = P_\sigma^k$ and $P_\sigma = I \iff \sigma = \mathrm{id}$, the order
   of $P_\sigma$ equals the order of $\sigma$. The key is that the permutation matrix map preserves
   powers and is injective on the group of permutation matrices. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix</span> <span class="lean-text">{</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">DecidableEq</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">Fintype</span> <span class="lean-text">n</span><span class="lean-text">]</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">[</span><span class="lean-text">Nontrivial</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">:</span> <span class="lean-text">Equiv.Perm</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">orderOf</span> <span class="lean-text">σ</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">σ.permMatrix</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">orderOf</span> <span class="lean-text">σ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -3806,10 +3635,10 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">h1</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `permMatrix_pow`"><span class="lean-text">permMatrix_pow</span></span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">permMatrix_pow</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">heq</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `permMatrix_eq_one_iff`"><span class="lean-text">permMatrix_eq_one_iff</span></span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-text">[</span><span class="lean-text">permMatrix_eq_one_iff</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -3826,7 +3655,7 @@ hypotheses or the goal. It can have one of the forms:
 the first matching constructor, or else fails.
 ">constructor</span>
     <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-span lean-error" title="Unknown identifier `permMatrix_pow`"><span class="lean-text">permMatrix_pow</span></span><span class="lean-text">,</span> <span class="lean-text">pow_orderOf_eq_one</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">permMatrix_pow</span><span class="lean-text">,</span> <span class="lean-text">pow_orderOf_eq_one</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">permMatrix_one</span>
     <span class="lean-text">·</span> <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
@@ -3877,10 +3706,10 @@ The tactic supports all the same syntax variants and options as the `have` term.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
 ">have</span> <span class="lean-text">hk&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">σ</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">R</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `permMatrix_pow`"><span class="lean-text">permMatrix_pow</span></span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">permMatrix_pow</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">heq</span>
       <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `permMatrix_eq_one_iff`"><span class="lean-text">permMatrix_eq_one_iff</span></span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+">rw</span> <span class="lean-text">[</span><span class="lean-text">permMatrix_eq_one_iff</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
   `(location)?` matchers. It means to target the goal only.
@@ -4004,7 +3833,7 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The $\mathrm{finRotate}(n)$ permutation is an $n$-cycle with full support $\mathrm{Fin}\ n$.
   By the cycle order theorem, the order of a cycle equals its length, which is $n$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_finRotate</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -4202,13 +4031,10 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{lem:orderOf-permMatrix, lem:orderOf-finRotate} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Combines the order-preservation property $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$
   with $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix_finRotate</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-n : highlights
-hn : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">orderOf_permMatrix_finRotate</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">finRotate</span> <span class="lean-text">n</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">permMatrix</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `orderOf_permMatrix`"><span class="lean-text">orderOf_permMatrix</span></span><span class="lean-text">,</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">n</span> <span class="lean-text">hn</span><span class="lean-text">]</span></span></code></pre>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_permMatrix</span><span class="lean-text">,</span> <span class="lean-text">orderOf_finRotate</span> <span class="lean-text">n</span> <span class="lean-text">hn</span><span class="lean-text">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/CrystallographicRestriction/Backward.lean#L170-L178" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -4318,15 +4144,7 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The permutation matrix $P_{\mathrm{finRotate}(m)}$ is an $m \times m$ integer matrix
   with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">mem_integerMatrixOrders_self</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">n</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  n
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">n</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">mem_integerMatrixOrders_self</span> <span class="lean-text">(</span><span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">n</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
 `refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
 then trying to close goals associated to the placeholders with a configurable discharger (rather
@@ -4512,17 +4330,9 @@ Use `blueprint?` to show the raw data of the added node.
   -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
   has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">primePow_mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hpk</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (psi (p ^ k))
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">)</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- psi(p^k) = totient(p^k) for this case
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -4550,9 +4360,9 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hpsi_eq</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Unknown identifier `psi`"><span class="lean-text">psi</span></span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">have</span> <span class="lean-text">hpsi_eq</span> <span class="lean-text">:</span> <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
     <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `psi_prime_pow`"><span class="lean-text">psi_prime_pow</span></span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span><span class="lean-text">]</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">psi_prime_pow</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -4816,16 +4626,8 @@ Use `blueprint?` to show the raw data of the added node.
   orders $p^e$ and $m&#x27;$ from the induction hypothesis, with dimension $\psi(p^e) + \psi(m&#x27;)
   = \psi(m)$ by additivity of $\psi$ on coprime factors. For $m = 2 \cdot m&#x27;$ with $m&#x27;$ odd,
   negating the order-$m&#x27;$ matrix doubles the order without changing dimension. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_psi</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm2</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≠</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (psi m)
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">m</span><span class="lean-text">)</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm2</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">≠</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">psi</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Use strong induction on m
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
@@ -5653,25 +5455,9 @@ Use `blueprint?` to show the raw data of the added node.
   The companion matrix $C(\Phi_{p^k})$ has order exactly $p^k$ and size $\varphi(p^k)$.
   Block diagonal matrices have order equal to the lcm of block orders, which equals $m$
   for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hpsi</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hpsi</span> <span class="lean-text">:</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Handle base cases m = 1, 2
   <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
@@ -6225,26 +6011,10 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The proof combines the forward and backward directions. The forward direction shows
   that eigenvalue constraints force $\psi(m) \leq N$. The backward direction constructs explicit
   matrices achieving each order using companion matrices of cyclotomic polynomials. --/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">crystallographic_restriction</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> <span class="lean-text">↔</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span>
-  <span class="lean-text">⟨</span><span class="lean-span lean-error" title="Unknown identifier `psi_le_of_mem_integerMatrixOrders`"><span class="lean-text">psi_le_of_mem_integerMatrixOrders</span></span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span><span class="lean-text">,</span>
-   <span class="lean-keyword">fun</span> <span class="lean-text">hpsi</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `mem_integerMatrixOrders_of_psi_le`"><span class="lean-text">mem_integerMatrixOrders_of_psi_le</span></span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hpsi</span> <span class="lean-text">hNm</span><span class="lean-text">⟩</span></code></pre>
+<span class="lean-keyword">theorem</span> <span class="lean-text">crystallographic_restriction</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hNm</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∨</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">↔</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
+  <span class="lean-text">⟨</span><span class="lean-text">psi_le_of_mem_integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span><span class="lean-text">,</span>
+   <span class="lean-keyword">fun</span> <span class="lean-text">hpsi</span> <span class="lean-text">=&gt;</span> <span class="lean-text">mem_integerMatrixOrders_of_psi_le</span> <span class="lean-text">N</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hpsi</span> <span class="lean-text">hNm</span><span class="lean-text">⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/MainTheorem.lean#L42-L75" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>

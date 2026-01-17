@@ -131,7 +131,7 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
   with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
   $A$ with order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
+<span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">|</span> <span class="lean-text">∃</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">,</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -238,15 +238,7 @@ Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;lem:one-mem-orders&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Order $1$ is achievable in any dimension. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The identity matrix $I$ has order $1$ in any dimension. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">one_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">1</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> <span class="lean-text">:=</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">1</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">⟨</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-text">orderOf_one</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
 over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
 and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
@@ -359,15 +351,7 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Order $2$ is achievable for $N \geq 1$. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
   so it has order $2$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">two_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> <span class="lean-text">:=</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">two_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">⟨</span><span class="lean-text">-</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_neg_one</span><span class="lean-text">,</span> <span class="lean-text">ringChar_matrix_int</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
@@ -504,24 +488,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
   top-left block of an $N \times N$ matrix with identity in the bottom-right. The order is
   preserved. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">integerMatrixOrders_mono</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hMN</span> <span class="lean-text">:</span> <span class="lean-text">M</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span> <span class="lean-text">⊆</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">integerMatrixOrders_mono</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hMN</span> <span class="lean-text">:</span> <span class="lean-text">M</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span> <span class="lean-text">⊆</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -543,13 +511,7 @@ be a `let` or function type.
   | n + 1, 0 =&gt; tac
   | ...
   ```
-">intro</span> <span class="lean-span lean-error" title="Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
-
-x✝ : highlights
-integerMatrixOrders : highlights
-M N : highlights
-hMN : highlights
-⊢ highlights"><span class="lean-text">m</span></span> <span class="lean-text">hm</span>
+">intro</span> <span class="lean-text">m</span> <span class="lean-text">hm</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -887,10 +849,10 @@ For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchi
 Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;def:blockDiag2&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
+    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">Matrix.fromBlocks</span> <span class="lean-text">A</span> <span class="lean-text">0</span> <span class="lean-text">0</span> <span class="lean-text">B</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L189-L195" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -1044,18 +1006,10 @@ Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-one&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Immediate from the definition of block diagonal and the identity matrix. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_one</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_one</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (1 : Matrix (Fin M) (Fin M) R)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span></span> <span class="lean-text">=</span>
-    <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span>
+    <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">=</span>
+    <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">Matrix.fromBlocks_one</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -1212,35 +1166,11 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Block multiplication respects the diagonal structure since off-diagonal blocks
   are zero. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_mul</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">B&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (A * A&#x27;)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">*</span> <span class="lean-text">A&#x27;</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">B&#x27;</span><span class="lean-text">)</span></span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span> <span class="lean-text">*</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A&#x27;
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">B&#x27;</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+    <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">*</span> <span class="lean-text">A&#x27;</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">B&#x27;</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">B&#x27;</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -1258,7 +1188,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">blockDiag2</span></span><span class="lean-text">,</span> <span class="lean-text">Matrix.fromBlocks_multiply</span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">blockDiag2</span><span class="lean-text">,</span> <span class="lean-text">Matrix.fromBlocks_multiply</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
 The optional parameter is the depth of the recursive applications.
 This is useful when `congr` is too aggressive in breaking down the goal.
@@ -1379,13 +1309,13 @@ Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;def:blockDiag2-prodMonoidHom&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
   \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">×</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">→*</span>
     <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-keyword">where</span>
-  <span class="lean-text">toFun</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2`"><span class="lean-text">blockDiag2</span></span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">2</span>
-  <span class="lean-text">map_one&#x27;</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_one`"><span class="lean-text">blockDiag2_one</span></span>
-  <span class="lean-text">map_mul&#x27;</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_mul`"><span class="lean-text">blockDiag2_mul</span></span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span></code></pre>
+  <span class="lean-text">toFun</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">=&gt;</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">2</span>
+  <span class="lean-text">map_one&#x27;</span> <span class="lean-text">:=</span> <span class="lean-text">blockDiag2_one</span>
+  <span class="lean-text">map_mul&#x27;</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L218-L227" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1494,29 +1424,12 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
   respective identities. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_eq_one_iff</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∧</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-R : highlights
-inst✝¹ : highlights
-inst✝ : highlights
-A : highlights
-B : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∧</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_one`"><span class="lean-text">blockDiag2_one</span></span><span class="lean-text">]</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">blockDiag2_one</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -1544,7 +1457,7 @@ This is a finishing tactic: it either closes the goal or raises an error.
 The Lean 3 version of this tactic by default attempted to avoid classical reasoning
 where possible. This Lean 4 version makes no such attempt. The `itauto` tactic
 is designed for that purpose.
-">tauto</span></span></code></pre>
+">tauto</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1654,27 +1567,11 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on $n$: the block structure is preserved under multiplication, and
   $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;) = \mathrm{diag}(AA&#x27;, BB&#x27;)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_pow</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_pow</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
 `&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (A ^ k)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+    <span class="lean-text">(</span><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -1692,7 +1589,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">blockDiag2</span></span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">blockDiag2</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
 ">exact</span> <span class="lean-text">Matrix.fromBlocks_diagonal_pow</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
@@ -1812,23 +1709,9 @@ Use `blueprint?` to show the raw data of the added node.
   \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
   $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_blockDiag2</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
     <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.lcm</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-A : highlights
-B : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.lcm</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1855,13 +1738,11 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hinj</span> <span class="lean-text">:</span> <span class="lean-text">Function.Injective</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">q</span> <span class="lean-text">hpq</span> <span class="lean-text">=&gt;</span>
+">have</span> <span class="lean-text">hinj</span> <span class="lean-text">:</span> <span class="lean-text">Function.Injective</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">q</span> <span class="lean-text">hpq</span> <span class="lean-text">=&gt;</span>
     <span class="lean-text">Prod.ext</span> <span class="lean-text">(</span><span class="lean-text">Matrix.fromBlocks_inj.mp</span> <span class="lean-text">hpq</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">(</span><span class="lean-text">Matrix.fromBlocks_inj.mp</span> <span class="lean-text">hpq</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">.</span><span class="lean-text">2</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-keyword">show</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span> <span class="lean-text">(</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-keyword">from</span> <span class="lean-text">rfl</span><span class="lean-text">,</span>
-      <span class="lean-text">orderOf_injective</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hinj</span> <span class="lean-text">(</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">B</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">Prod.orderOf</span><span class="lean-text">]</span></span></code></pre>
+      <span class="lean-text">orderOf_injective</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hinj</span> <span class="lean-text">(</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">B</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">Prod.orderOf</span><span class="lean-text">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1976,33 +1857,9 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{thm:orderOf-blockDiag2} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
   diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
-    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  K
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Nat.lcm</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (M + K)
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">Nat.lcm</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -2152,34 +2009,10 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{lem:lcm-mem-orders} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
   follows from the lcm result. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">mul_mem_integerMatrixOrders_of_coprime</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
-    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  K
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span></span><span class="lean-text">)</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">mul_mem_integerMatrixOrders_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hcop</span> <span class="lean-text">:</span> <span class="lean-text">Nat.Coprime</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m₁</span> <span class="lean-text">*</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (M + K)
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">m₁</span> <span class="lean-text">*</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hcop.lcm_eq_mul</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.

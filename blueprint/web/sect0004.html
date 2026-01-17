@@ -180,16 +180,8 @@ Use `blueprint?` to show the raw data of the added node.
   \vdots &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; \cdots &amp; 1 &amp; -a_{n-1} \end{pmatrix}$$
   This construction produces a matrix whose characteristic polynomial equals $p$, providing
   a canonical matrix realization for any monic polynomial. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">companion</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
+<span class="lean-keyword">def</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">Matrix.of</span> <span class="lean-keyword">fun</span> <span class="lean-text">i</span> <span class="lean-text">j</span> <span class="lean-text">=&gt;</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
@@ -205,13 +197,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is
-  highlights
-due to the absence of the instance above
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">1</span></span>
+">then</span> <span class="lean-text">1</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -226,21 +212,14 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-text">p.natDegree</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
 `[Decidable c]` argument synthesized by typeclass inference which actually
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">-</span><span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.coeff</span> <span class="lean-text">i.val</span></span></span>
+">then</span> <span class="lean-text">-</span><span class="lean-text">p.coeff</span> <span class="lean-text">i.val</span>
     <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -248,13 +227,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is
-  highlights
-due to the absence of the instance above
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">0</span></span></code></pre>
+">else</span> <span class="lean-text">0</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L46-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -376,20 +349,8 @@ Use `blueprint?` to show the raw data of the added node.
   $\det(XI - C) = X + a_0$. For $n &gt; 1$, expand along the first column: the $(1,1)$ minor
   is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
   term. The recurrence matches the polynomial coefficients. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_charpoly</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  p
-
-Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charpoly</span> <span class="lean-text">=</span> <span class="lean-text">p</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_charpoly</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charpoly</span> <span class="lean-text">=</span> <span class="lean-text">p</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
 
@@ -405,9 +366,7 @@ rcases h with ⟨patt⟩
 If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-text">hn_eq</span><span class="lean-text">⟩</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.exists_eq_succ_of_ne_zero</span> <span class="lean-text">hn.ne&#x27;</span>
+">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-text">hn_eq</span><span class="lean-text">⟩</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-text">p.natDegree</span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.exists_eq_succ_of_ne_zero</span> <span class="lean-text">hn.ne&#x27;</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
 producing one goal for each constructor of the inductive type,
@@ -793,30 +752,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By Cayley-Hamilton, every matrix satisfies its characteristic polynomial.
   Since $\chi_{C(p)} = p$ by the companion characteristic polynomial theorem,
   we have $p(C(p)) = 0$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_aeval_eq_zero</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (companion p hp hn)
-
-Hint: The identifier `aeval` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">aeval</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">p</span></span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-coll✝ : highlights
-R : highlights
-idx✝ : highlights
-X : highlights
-valid✝ : highlights
-aeval : highlights
-p : highlights
-hp : highlights
-hn : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_aeval_eq_zero</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">aeval</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -843,7 +780,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">h</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown identifier `aeval_self_charpoly`"><span class="lean-text">aeval_self_charpoly</span></span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span>
+">have</span> <span class="lean-text">h</span> <span class="lean-text">:=</span> <span class="lean-text">aeval_self_charpoly</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span>
   <span class="lean-keyword" data-docs="`rwa` is short-hand for `rw; assumption`. ">rwa</span> <span class="lean-text">[</span><span class="lean-text">companion_charpoly</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
 hypotheses or the goal. It can have one of the forms:
 * &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
@@ -851,7 +788,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
 * `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
 * `at *`: target all hypotheses and the goal
-">at</span> <span class="lean-text">h</span></span></code></pre>
+">at</span> <span class="lean-text">h</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -964,24 +901,9 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
   Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
   so $C(p)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
-  highlights
-
-Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">p</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  p
-
-Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Monic</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">p.natDegree</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-text">p</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- From hdvd, get q such that X^m - 1 = p * q
   <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
 a description of supported patterns.
@@ -1254,25 +1176,9 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{thm:companion-pow-dvd} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
   the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (cyclotomic m ℤ)
-
-Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
 If it succeeds, then the tactic returns as many subgoals as the number of premises that
 have not been fixed by type inference or type class resolution.
@@ -1280,9 +1186,9 @@ Non-dependent premises are added before dependent ones.
 
 The `apply` tactic uses higher-order pattern matching, type class resolution,
 and first-order unification with dependent types.
-">apply</span> <span class="lean-span lean-error" title="Unknown identifier `companion_pow_eq_one_of_dvd`"><span class="lean-text">companion_pow_eq_one_of_dvd</span></span>
-  <span class="lean-span lean-error" title="No goals to be solved"><span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">cyclotomic.dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span></code></pre>
+">apply</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span>
+  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">cyclotomic.dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1400,33 +1306,9 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
   For the lower bound: if $C(\Phi_m)^d = I$ for $d &lt; m$, then $\Phi_m \mid X^d - 1$,
   but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_orderOf</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (cyclotomic m ℤ)
-
-Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-x✝¹ : highlights
-cyclotomic : highlights
-x✝ : highlights
-companion : highlights
-m : highlights
-hm : highlights
-hn : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_orderOf</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
 The definition can be unfolded, unlike definitions introduced by `have`.
 
@@ -1452,13 +1334,7 @@ The tactic supports all the same syntax variants and options as the `let` term.
 * The `let` tactic is preferred for data (non-propositions).
 * Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
   which may be important for performance reasons.
-">let</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (cyclotomic m ℤ)"><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span>
+">let</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1741,7 +1617,7 @@ hypotheses or the goal. It can have one of the forms:
 * `at *`: target all hypotheses and the goal
 ">at</span> <span class="lean-text">hdvd1</span>
     <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">Nat.not_dvd_of_pos_of_lt</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hk</span> <span class="lean-text">(</span><span class="lean-text">dvd_of_cyclotomic_dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">k</span> <span class="lean-text">hm_pos</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hdvd1</span><span class="lean-text">)</span></span></code></pre>
+">exact</span> <span class="lean-text">Nat.not_dvd_of_pos_of_lt</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hk</span> <span class="lean-text">(</span><span class="lean-text">dvd_of_cyclotomic_dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">k</span> <span class="lean-text">hm_pos</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hdvd1</span><span class="lean-text">)</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L110-L141" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1855,25 +1731,9 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{thm:companion-cycl-order} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(\Phi_m)$ witnesses the membership: it is an integer matrix
   of dimension $\deg(\Phi_m) = \varphi(m)$ with multiplicative order exactly $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
 `refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
 then trying to close goals associated to the placeholders with a configurable discharger (rather
@@ -1910,12 +1770,12 @@ These tactics take an optional discharger to handle remaining explicit `Prop` co
 By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
 To turn off the discharger and keep all goals, use `(discharger := skip)`.
 To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
-">use</span> <span class="lean-span lean-error" title="Unknown identifier `companion`"><span class="lean-text">companion</span></span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span>
+">use</span> <span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span>
   <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
 the first matching constructor, or else fails.
 ">constructor</span>
   <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-span lean-error" title="Unknown identifier `companion_cyclotomic_orderOf`"><span class="lean-text">companion_cyclotomic_orderOf</span></span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span>
+">exact</span> <span class="lean-text">companion_cyclotomic_orderOf</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span>
   <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
@@ -2056,8 +1916,8 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{thm:companion-cycl-mem} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Apply the cyclotomic companion membership theorem after noting that
   $\deg(\Phi_m) = \varphi(m)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_totient</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">Nat.totient</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_totient</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">Nat.totient</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2084,7 +1944,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hdeg</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `cyclotomic`"><span class="lean-text">cyclotomic</span></span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">=</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Polynomial.natDegree_cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span>
+">have</span> <span class="lean-text">hdeg</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">=</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Polynomial.natDegree_cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2166,7 +2026,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `cyclotomic`"><span class="lean-text">cyclotomic</span></span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">have</span> <span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -2198,7 +2058,7 @@ Currently, all of these are on by default.
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hdeg</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-span lean-error" title="Unknown identifier `companion_cyclotomic_mem_integerMatrixOrders`"><span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span></span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span></code></pre>
+">exact</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L160-L173" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>

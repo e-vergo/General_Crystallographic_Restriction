@@ -145,7 +145,7 @@ Use `blueprint?` to show the raw data of the added node.
   The special case $\psi_{\text{pp}}(2, 1) = 0$ reflects that $-I$ achieves order $2$ in any
   dimension $\geq 1$, so order $2$ does not require additional dimensions. For all other
   prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">psiPrimePow</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
+<span class="lean-keyword">def</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
@@ -298,8 +298,8 @@ Use `blueprint?` to show the raw data of the added node.
     \sum_{\substack{p^k \| m \\ (p,k) \neq (2,1)}} \varphi(p^k)$$
   This gives the minimum dimension needed to realize order $m$.
   \uses{psiPrimePow-def} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">psi</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span>
-  <span class="lean-text">m.factorization.sum</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `psiPrimePow`"><span class="lean-text">psiPrimePow</span></span> <span class="lean-text">p</span> <span class="lean-text">k</span></code></pre>
+<span class="lean-keyword">def</span> <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
+  <span class="lean-text">m.factorization.sum</span> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">=&gt;</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">p</span> <span class="lean-text">k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L70-L87" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -416,16 +416,8 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{psiPrimePow-def, psi-def} -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For prime power $p^k$, the factorization has a single term, so
   $\psi(p^k) = \psi_{pp}(p, k)$. This equals $\varphi(p^k)$ except when $p = 2, k = 1$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">psi_prime_pow</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (p ^ k)
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span></span> <span class="lean-text">=</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+<span class="lean-keyword">theorem</span> <span class="lean-text">psi_prime_pow</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
 return `t` or `e` depending on whether `c` is true or false. The explicit argument
 `c : Prop` does not have any actual computational content, but there is an additional
 `[Decidable c]` argument synthesized by typeclass inference which actually
@@ -446,8 +438,8 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+">else</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -465,7 +457,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">psi</span></span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">psi</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">hp.factorization_pow</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
@@ -577,8 +569,8 @@ Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;lem:factorization-disjoint&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Coprime numbers have disjoint prime factorization supports. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">factorization_support_disjoint</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">m.Coprime</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Disjoint</span> <span class="lean-text">m.factorization.support</span> <span class="lean-text">n.factorization.support</span> <span class="lean-text">:=</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">factorization_support_disjoint</span> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">m.Coprime</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">Disjoint</span> <span class="lean-text">m.factorization.support</span> <span class="lean-text">n.factorization.support</span> <span class="lean-text">:=</span></code><code class="lean-proof-body">
   <span class="lean-text">Nat.support_factorization</span> <span class="lean-text">m</span> <span class="lean-text">▸</span> <span class="lean-text">Nat.support_factorization</span> <span class="lean-text">n</span> <span class="lean-text">▸</span> <span class="lean-text">h.disjoint_primeFactors</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Basic.lean#L161-L169" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -709,33 +701,9 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- When $\gcd(m, n) = 1$, the factorizations of $m$ and $n$ are disjoint.
   Each prime power in $mn$ comes from exactly one of $m$ or $n$, so the
   $\psi$ contributions add. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">psi_coprime_add</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">m.Coprime</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (m * n)
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">*</span> <span class="lean-text">n</span><span class="lean-text">)</span></span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">+</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  n
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">n</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+<span class="lean-keyword">theorem</span> <span class="lean-text">psi_coprime_add</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">n</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">m.Coprime</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">psi</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">*</span> <span class="lean-text">n</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">+</span> <span class="lean-text">psi</span> <span class="lean-text">n</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -753,7 +721,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">psi</span></span><span class="lean-text">,</span> <span class="lean-text">Finsupp.sum</span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">psi</span><span class="lean-text">,</span> <span class="lean-text">Finsupp.sum</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">Nat.factorization_mul</span> <span class="lean-text">(</span><span class="lean-text">Nat.pos_iff_ne_zero.mp</span> <span class="lean-text">hm</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Nat.pos_iff_ne_zero.mp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -982,26 +950,10 @@ Use `blueprint?` to show the raw data of the added node.
 ">blueprint</span> <span class="lean-string">&quot;lem:psi-ge-psiPrimePow&quot;</span>
   <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\psi(m) \geq \psi_{\mathrm{pp}}(p, v_p(m))$ for each prime $p \mid m$. -/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The sum $\psi(m)$ includes the term $\psi_{\mathrm{pp}}(p, v_p(m))$, and all terms are non-negative. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">psi_ge_psiPrimePow_of_mem_support</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">psi_ge_psiPrimePow_of_mem_support</span> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
     <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p</span> <span class="lean-text">∈</span> <span class="lean-text">m.factorization.support</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  p
-
-Hint: The identifier `psiPrimePow` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psiPrimePow</span> <span class="lean-text">p</span> <span class="lean-text">(</span><span class="lean-text">m.factorization</span> <span class="lean-text">p</span><span class="lean-text">)</span></span> <span class="lean-text">≤</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+    <span class="lean-text">psiPrimePow</span> <span class="lean-text">p</span> <span class="lean-text">(</span><span class="lean-text">m.factorization</span> <span class="lean-text">p</span><span class="lean-text">)</span> <span class="lean-text">≤</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -1019,7 +971,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">psi</span></span><span class="lean-text">,</span> <span class="lean-text">Finsupp.sum</span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">psi</span><span class="lean-text">,</span> <span class="lean-text">Finsupp.sum</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -1220,8 +1172,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By cases on $p = 2$: if $p \neq 2$, then $p \geq 3$ so
   $\varphi(p^k) = p^{k-1}(p-1) \geq 1 \cdot 2 = 2$. If $p = 2$ and $k \geq 2$,
   then $\varphi(2^k) = 2^{k-1} \geq 2$. The case $(2, 1)$ is excluded by hypothesis. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">two_le_totient_primePow</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">two_le_totient_primePow</span> <span class="lean-text">{</span><span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-text">p.Prime</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hk</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">k</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">h</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">2</span> <span class="lean-text">∧</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-text">1</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-text">[</span><span class="lean-text">Nat.totient_prime_pow</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span><span class="lean-text">]</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
@@ -1481,9 +1433,9 @@ Use `blueprint?` to show the raw data of the added node.
   Then $m&#x27; = m / p^e$ is coprime to $p^e$ (disjoint prime support). Since $m$ is not
   a prime power, $m&#x27; \neq 1$. The bounds $p^e &lt; m$ and $m&#x27; &lt; m$ follow from $m&#x27; &gt; 1$
   and $p^e \geq 2$ respectively. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">factorization_split_lt</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h_not_pp</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">IsPrimePow</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">factorization_split_lt</span> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h_not_pp</span> <span class="lean-text">:</span> <span class="lean-text">¬</span><span class="lean-text">IsPrimePow</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
     <span class="lean-text">∃</span> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">e</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">p.Prime</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">e</span> <span class="lean-text">∧</span> <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span> <span class="lean-text">*</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span>
-    <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">Coprime</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">∧</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">∧</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">Coprime</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">∧</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">∧</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">p</span> <span class="lean-text">^</span> <span class="lean-text">e</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2305,31 +2257,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The minimal prime factor $q = \mathrm{minFac}(m)$ satisfies $q \geq 3$
   (since $2 \nmid m$). Thus $(q, \nu_q(m))$ is a nontrivial pair, and
   $\psi(m) \geq \psi_{\mathrm{pp}}(q, \nu_q(m)) = \varphi(q^{\nu_q(m)}) &gt; 0$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">psi_pos_of_odd_ge_three</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">3</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm_odd</span> <span class="lean-text">:</span> <span class="lean-text">Odd</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-psi : highlights
-m : highlights
-hm : highlights
-hm_odd : highlights
-hm_ne_one : highlights
-hm_ne_zero : highlights
-q : highlights
-hq_def : highlights
-hq_prime : highlights
-hq_dvd : highlights
-hq_ne2 : highlights
-hq_ge3 : highlights
-hq_in_support : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">psi_pos_of_odd_ge_three</span> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">3</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm_odd</span> <span class="lean-text">:</span> <span class="lean-text">Odd</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- m &gt;= 3 implies m != 1, so minFac(m) is prime
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -2719,14 +2648,8 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hcontrib</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Unknown identifier `psiPrimePow`"><span class="lean-text">psiPrimePow</span></span> <span class="lean-text">q</span> <span class="lean-text">(</span><span class="lean-text">m.factorization</span> <span class="lean-text">q</span><span class="lean-text">)</span> <span class="lean-text">≤</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m"><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">:=</span>
-    <span class="lean-span lean-error" title="Unknown identifier `psi_ge_psiPrimePow_of_mem_support`"><span class="lean-text">psi_ge_psiPrimePow_of_mem_support</span></span> <span class="lean-text">hq_in_support</span>
+">have</span> <span class="lean-text">hcontrib</span> <span class="lean-text">:</span> <span class="lean-text">psiPrimePow</span> <span class="lean-text">q</span> <span class="lean-text">(</span><span class="lean-text">m.factorization</span> <span class="lean-text">q</span><span class="lean-text">)</span> <span class="lean-text">≤</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">:=</span>
+    <span class="lean-text">psi_ge_psiPrimePow_of_mem_support</span> <span class="lean-text">hq_in_support</span>
   -- psiPrimePow(q, k) = totient(q^k) &gt; 0 for q &gt;= 3 (since q != 2 means (q, k) != (2, 1))
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -2870,7 +2793,7 @@ can be used to:
 * `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
-">omega</span></span></code></pre>
+">omega</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Psi/Bounds.lean#L121-L164" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -3031,15 +2954,7 @@ Use `blueprint?` to show the raw data of the added node.
   use coprime factorization $m = a \cdot b$ with $1 &lt; a, b &lt; m$. Then
   $\psi(m) = \psi(a) + \psi(b) \leq \varphi(a) + \varphi(b) \leq \varphi(m)$
   by the inductive hypothesis and multiplicativity of $\varphi$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">psi_le_totient</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">psi_le_totient</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- Strong induction on m
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
@@ -3141,13 +3056,7 @@ can be used to:
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
 ">omega</span> -- m &lt; 1 contradicts hm
-  <span class="lean-span lean-error" title="unsolved goals
-case h.inr.inl
-x✝ : highlights
-psi : highlights
-IH : highlights
-hm : highlights
-⊢ highlights"><span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -3165,7 +3074,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `psi_one`"><span class="lean-text">psi_one</span></span><span class="lean-text">]</span></span> -- m = 1
+">simp</span> <span class="lean-text">[</span><span class="lean-text">psi_one</span><span class="lean-text">]</span> -- m = 1
   <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`rcases` is a tactic that will perform `cases` recursively, according to a pattern. It is used to
 destructure hypotheses or expressions composed of inductive types like `h1 : a ∧ b ∧ c ∨ d` or
 `h2 : ∃ x y, trans_rel R x y`. Usual usage might be `rcases h1 with ⟨ha, hb, hc⟩ | hd` or
@@ -3237,14 +3146,7 @@ can be used to:
 * `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
 Currently, all of these are on by default.
 ">omega</span> -- m &lt; 2 but m &gt; 1, contradiction
-    <span class="lean-span lean-error" title="unsolved goals
-case h.inr.inr.inr.inl
-x✝ : highlights
-psi : highlights
-IH : highlights
-hm : highlights
-hm_gt1 : highlights
-⊢ highlights"><span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+    <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -3262,7 +3164,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `psi_two`"><span class="lean-text">psi_two</span></span><span class="lean-text">]</span></span> -- m = 2
+">simp</span> <span class="lean-text">[</span><span class="lean-text">psi_two</span><span class="lean-text">]</span> -- m = 2
     <span class="lean-text">·</span> -- m ≥ 3
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -3349,7 +3251,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">p</span><span class="lean-text">,</span> <span class="lean-text">k</span><span class="lean-text">,</span> <span class="lean-text">hp</span><span class="lean-text">,</span> <span class="lean-text">hk</span><span class="lean-text">,</span> <span class="lean-text">rfl</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hpow</span>
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Unknown identifier `psi_prime_pow`"><span class="lean-text">psi_prime_pow</span></span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span><span class="lean-text">]</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">psi_prime_pow</span> <span class="lean-text">p</span> <span class="lean-text">k</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span><span class="lean-text">]</span>
         <span class="lean-keyword" data-docs="Splits all if-then-else-expressions into multiple goals.
 Given a goal of the form `g (if p then x else y)`, `split_ifs` will produce
 two goals: `p ⊢ g x` and `¬p ⊢ g y`.
@@ -3398,7 +3300,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">p</span><span class="lean-text">,</span> <span class="lean-text">e</span><span class="lean-text">,</span> <span class="lean-text">m&#x27;</span><span class="lean-text">,</span> <span class="lean-text">hp</span><span class="lean-text">,</span> <span class="lean-text">he_pos</span><span class="lean-text">,</span> <span class="lean-text">hm_eq</span><span class="lean-text">,</span> <span class="lean-text">hcop</span><span class="lean-text">,</span> <span class="lean-text">hm&#x27;_gt_one</span><span class="lean-text">,</span> <span class="lean-text">hm&#x27;_lt</span><span class="lean-text">,</span> <span class="lean-text">_</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span>
-          <span class="lean-span lean-error" title="Unknown identifier `factorization_split_lt`"><span class="lean-text">factorization_split_lt</span></span> <span class="lean-text">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+          <span class="lean-text">factorization_split_lt</span> <span class="lean-text">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -3453,7 +3355,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hm&#x27;_pos</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Unknown identifier `m&#x27;`"><span class="lean-text">m&#x27;</span></span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">have</span> <span class="lean-text">hm&#x27;_pos</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -3508,7 +3410,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">hm&#x27;_ne_one</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Unknown identifier `m&#x27;`"><span class="lean-text">m&#x27;</span></span> <span class="lean-text">≠</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+">have</span> <span class="lean-text">hm&#x27;_ne_one</span> <span class="lean-text">:</span> <span class="lean-text">m&#x27;</span> <span class="lean-text">≠</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
 
 It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
 but should be effective on many problems.
@@ -3539,7 +3441,7 @@ Currently, all of these are on by default.
 ">omega</span>
         -- psi and totient are additive/multiplicative on coprime factors
         <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-span lean-error" title="Unknown identifier `hm_eq`"><span class="lean-text">hm_eq</span></span><span class="lean-text">,</span> <span class="lean-text">psi_coprime_add</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">(</span><span class="lean-text">Nat.pow_pos</span> <span class="lean-text">hp.pos</span><span class="lean-text">)</span> <span class="lean-text">hm&#x27;_pos</span> <span class="lean-text">hcop</span><span class="lean-text">,</span>
+">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hm_eq</span><span class="lean-text">,</span> <span class="lean-text">psi_coprime_add</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">(</span><span class="lean-text">Nat.pow_pos</span> <span class="lean-text">hp.pos</span><span class="lean-text">)</span> <span class="lean-text">hm&#x27;_pos</span> <span class="lean-text">hcop</span><span class="lean-text">,</span>
             <span class="lean-text">Nat.totient_mul</span> <span class="lean-text">hcop</span><span class="lean-text">]</span>
         -- By IH: psi(m&#x27;) ≤ totient(m&#x27;)
         <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -3893,9 +3795,9 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By contradiction: if all $d \in S$ have $\nu_q(d) &lt; \nu_q(m)$, then
   $\nu_q(\mathrm{lcm}(S)) = \sup_{d \in S} \nu_q(d) &lt; \nu_q(m)$, contradicting
   $\mathrm{lcm}(S) = m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">primePow_achieved_of_lcm_eq</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">primePow_achieved_of_lcm_eq</span> <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_lcm</span> <span class="lean-text">:</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">∀</span> <span class="lean-text">q</span> <span class="lean-text">∈</span> <span class="lean-text">m.factorization.support</span><span class="lean-text">,</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">q</span> <span class="lean-text">^</span> <span class="lean-text">m.factorization</span> <span class="lean-text">q</span> <span class="lean-text">∣</span> <span class="lean-text">d</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">∀</span> <span class="lean-text">q</span> <span class="lean-text">∈</span> <span class="lean-text">m.factorization.support</span><span class="lean-text">,</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">q</span> <span class="lean-text">^</span> <span class="lean-text">m.factorization</span> <span class="lean-text">q</span> <span class="lean-text">∣</span> <span class="lean-text">d</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -4455,8 +4357,8 @@ Use `blueprint?` to show the raw data of the added node.
   \uses{} --/</span><span class="lean-text">)</span>
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By contradiction: if $S = \emptyset$, then $\mathrm{lcm}(S) = 1 &lt; 2$,
   contradicting the hypothesis. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">Finset.nonempty_of_two_le_lcm</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hS_lcm_ge2</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">S.Nonempty</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">Finset.nonempty_of_two_le_lcm</span> <span class="lean-text">{</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hS_lcm_ge2</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">S.Nonempty</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -4639,8 +4541,8 @@ Use `blueprint?` to show the raw data of the added node.
   <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By contradiction: if all $d \in S$ satisfy $d \leq 1$, then since
   all $d &gt; 0$ we have $d = 1$ for all $d \in S$. Thus $\mathrm{lcm}(S) = 1 &lt; 2$,
   a contradiction. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">Finset.exists_one_lt_of_two_le_lcm</span></code><code class="lean-proof-body"> <span class="lean-text">{</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hS_pos</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hS_lcm_ge2</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">Finset.exists_one_lt_of_two_le_lcm</span> <span class="lean-text">{</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hS_pos</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hS_lcm_ge2</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -5057,22 +4959,14 @@ Use `blueprint?` to show the raw data of the added node.
   (since $\mathrm{lcm}(S) = m$). The element with maximal $p$-valuation contributes
   at least $\varphi(p^k) \geq \psi_{\mathrm{pp}}(p, k)$. Summing over distinct prime powers
   and using non-negativity gives the bound. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">sum_totient_ge_psi_of_lcm_eq</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">sum_totient_ge_psi_of_lcm_eq</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">S</span> <span class="lean-text">:</span> <span class="lean-text">Finset</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
     <span class="lean-text">(</span><span class="lean-text">hS_sub</span> <span class="lean-text">:</span> <span class="lean-text">∀</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">d</span> <span class="lean-text">∣</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hS_lcm</span> <span class="lean-text">:</span> <span class="lean-text">S.lcm</span> <span class="lean-text">id</span> <span class="lean-text">=</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  m
-
-Hint: The identifier `psi` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">psi</span> <span class="lean-text">m</span></span> <span class="lean-text">≤</span> <span class="lean-text">∑</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">d</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-text">psi</span> <span class="lean-text">m</span> <span class="lean-text">≤</span> <span class="lean-text">∑</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">d</span> <span class="lean-text">:=</span></code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
   -- If m ∈ S, apply helper lemma directly
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hm_in_S</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">S</span>
   <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-span lean-error" title="Unknown identifier `totient_sum_ge_psi_of_mem`"><span class="lean-text">totient_sum_ge_psi_of_mem</span></span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hm_in_S</span>
+">exact</span> <span class="lean-text">totient_sum_ge_psi_of_mem</span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hm_in_S</span>
   -- If m ∉ S, we use strong induction on m
   <span class="lean-text">·</span> <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
@@ -5105,7 +4999,7 @@ then a list of alternatives.
     -- For m = 1: psi(1) = 0 ≤ any sum
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hm_eq1</span> <span class="lean-text">:</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span>
-    <span class="lean-text">·</span> <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+    <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
 - `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
@@ -5123,7 +5017,7 @@ non-dependent hypotheses. It has many variants:
 - `simp at *` simplifies all the hypotheses and the target.
 - `simp [*] at *` simplifies target and all (propositional) hypotheses using the
   other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">hm_eq1</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Unknown identifier `psi_one`"><span class="lean-text">psi_one</span></span><span class="lean-text">,</span> <span class="lean-text">Nat.zero_le</span><span class="lean-text">]</span></span>
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">hm_eq1</span><span class="lean-text">,</span> <span class="lean-text">psi_one</span><span class="lean-text">,</span> <span class="lean-text">Nat.zero_le</span><span class="lean-text">]</span>
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -5260,7 +5154,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">_hS_ne</span> <span class="lean-text">:</span> <span class="lean-text">S.Nonempty</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown constant `Finset.nonempty_of_two_le_lcm`"><span class="lean-text">Finset.nonempty_of_two_le_lcm</span></span> <span class="lean-text">hS_lcm_ge2</span>
+">have</span> <span class="lean-text">_hS_ne</span> <span class="lean-text">:</span> <span class="lean-text">S.Nonempty</span> <span class="lean-text">:=</span> <span class="lean-text">Finset.nonempty_of_two_le_lcm</span> <span class="lean-text">hS_lcm_ge2</span>
     -- Some element of S is &gt; 1
     <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -5288,7 +5182,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">_hS_has_gt1</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown constant `Finset.exists_one_lt_of_two_le_lcm`"><span class="lean-text">Finset.exists_one_lt_of_two_le_lcm</span></span> <span class="lean-text">hS_pos</span> <span class="lean-text">hS_lcm_ge2</span>
+">have</span> <span class="lean-text">_hS_has_gt1</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">d</span> <span class="lean-text">∈</span> <span class="lean-text">S</span><span class="lean-text">,</span> <span class="lean-text">1</span> <span class="lean-text">&lt;</span> <span class="lean-text">d</span> <span class="lean-text">:=</span> <span class="lean-text">Finset.exists_one_lt_of_two_le_lcm</span> <span class="lean-text">hS_pos</span> <span class="lean-text">hS_lcm_ge2</span>
     -- Check if m is a prime power
     <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> <span class="lean-text">hpow</span> <span class="lean-text">:</span> <span class="lean-text">IsPrimePow</span> <span class="lean-text">m</span>
@@ -5320,7 +5214,7 @@ If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
 If `type` is omitted, `:= proof` is required.
 ">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">p</span><span class="lean-text">,</span> <span class="lean-text">k</span><span class="lean-text">,</span> <span class="lean-text">hp</span><span class="lean-text">,</span> <span class="lean-text">hk</span><span class="lean-text">,</span> <span class="lean-text">hm_eq</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hpow</span>
       <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">hm_in_S</span> <span class="lean-text">(</span><span class="lean-text">hm_eq</span> <span class="lean-text">▸</span> <span class="lean-span lean-error" title="Unknown constant `Finset.prime_pow_mem_of_lcm_eq`"><span class="lean-text">Finset.prime_pow_mem_of_lcm_eq</span></span> <span class="lean-text">hp</span> <span class="lean-text">hk</span> <span class="lean-text">S</span>
+">exact</span> <span class="lean-text">hm_in_S</span> <span class="lean-text">(</span><span class="lean-text">hm_eq</span> <span class="lean-text">▸</span> <span class="lean-text">Finset.prime_pow_mem_of_lcm_eq</span> <span class="lean-text">hp</span> <span class="lean-text">hk</span> <span class="lean-text">S</span>
         <span class="lean-text">(</span><span class="lean-keyword">fun</span> <span class="lean-text">d</span> <span class="lean-text">hd</span> <span class="lean-text">=&gt;</span> <span class="lean-text">hm_eq</span> <span class="lean-text">▸</span> <span class="lean-text">hS_sub</span> <span class="lean-text">d</span> <span class="lean-text">hd</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm_eq</span> <span class="lean-text">▸</span> <span class="lean-text">hS_lcm</span><span class="lean-text">)</span><span class="lean-text">)</span>
     <span class="lean-text">·</span> -- m is not a prime power: use achiever function approach
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
@@ -5349,7 +5243,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   which may be important for performance reasons.
     Consider using the equivalent `let +nondep` to indicate the intent.
 
-">have</span> <span class="lean-text">h_achieves</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown identifier `primePow_achieved_of_lcm_eq`"><span class="lean-text">primePow_achieved_of_lcm_eq</span></span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hS_lcm</span>
+">have</span> <span class="lean-text">h_achieves</span> <span class="lean-text">:=</span> <span class="lean-text">primePow_achieved_of_lcm_eq</span> <span class="lean-text">hm</span> <span class="lean-text">S</span> <span class="lean-text">hS_sub</span> <span class="lean-text">hS_lcm</span>
       <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
