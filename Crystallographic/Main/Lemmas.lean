@@ -160,8 +160,8 @@ lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S 
   we conclude that $\varphi(n) \neq 1$.
   Also $\varphi(n) \neq 0$ since $n > 0$. Therefore $\varphi(n) \geq 2$. -/)]
 theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 < n) : 2 ≤ Nat.totient n := by
-  have hpos := Nat.totient_pos.mpr (by omega : 0 < n)
-  have hne_one := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
+  have := Nat.totient_pos.mpr (by omega : 0 < n)
+  have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
   omega
 
 end Crystallographic

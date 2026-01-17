@@ -45,23 +45,40 @@ namespace Crystallographic
 
 open Matrix Polynomial
 
-/-! ## Permutation matrix infrastructure
+/-!
+### Permutation matrix lemmas
 
-The following lemmas about permutation matrices are not in Mathlib as of May 2025.
+These lemmas about permutation matrices are general-purpose and could be contributed
+to `Mathlib.LinearAlgebra.Matrix.Permutation`:
+- `permMatrix_one`
+- `permMatrix_mul`
+- `permMatrix_pow`
+- `permMatrix_eq_one_iff`
+- `orderOf_permMatrix`
+
 They build on `PEquiv.toMatrix_refl`, `PEquiv.toMatrix_trans`, `Equiv.toPEquiv_refl`,
-and `Equiv.toPEquiv_trans` from Mathlib. These could be contributed to
-`Mathlib.LinearAlgebra.Matrix.Permutation`.
+and `Equiv.toPEquiv_trans` from Mathlib.
+
+TODO: Consider upstreaming these to Mathlib.
 -/
 
 namespace Equiv.Perm
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
-@[simp]
+@[simp, blueprint "lem:permMatrix-one"
+  (statement := /-- The permutation matrix of the identity is the identity matrix: $P_{\mathrm{id}} = I$. -/)
+  (proof := /-- Direct computation using $\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}$ and
+  $\mathrm{toMatrix}(\mathrm{refl}) = I$. -/)]
 lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
     (1 : Equiv.Perm n).permMatrix R = (1 : Matrix n n R) := by
   simp only [Equiv.Perm.permMatrix, Equiv.Perm.one_def, Equiv.toPEquiv_refl, PEquiv.toMatrix_refl]
 
 /-- Permutation matrices compose: (σ * τ).permMatrix = τ.permMatrix * σ.permMatrix -/
+@[blueprint "lem:permMatrix-mul"
+  (statement := /-- Permutation matrices satisfy $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$
+  (contravariant homomorphism). -/)
+  (proof := /-- Follows from $\mathrm{toPEquiv}(\sigma \circ \tau) = \mathrm{toPEquiv}(\tau) \cdot \mathrm{toPEquiv}(\sigma)$
+  and the corresponding property for partial equivalence matrices. -/)]
 lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ τ : Equiv.Perm n) :
     (σ * τ).permMatrix R = τ.permMatrix R * σ.permMatrix R := by
@@ -69,6 +86,11 @@ lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
   rw [Equiv.Perm.mul_def, Equiv.toPEquiv_trans, PEquiv.toMatrix_trans]
 
 /-- Permutation matrices power correctly: (σ^k).permMatrix = (σ.permMatrix)^k -/
+@[blueprint "lem:permMatrix-pow"
+  (statement := /-- Powers of permutation matrices satisfy $P_{\sigma^k} = P_\sigma^k$.
+  \uses{lem:permMatrix-one, lem:permMatrix-mul} -/)
+  (proof := /-- By induction on $k$: the base case uses $P_{\mathrm{id}} = I$, and the inductive
+  step uses $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$ together with commutativity of powers. -/)]
 lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     (σ : Equiv.Perm n) (k : ℕ) :
     (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
@@ -81,6 +103,12 @@ lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
     exact (Commute.pow_self (σ.permMatrix R) k).eq.symm
 
 /-- Permutation matrix is identity iff permutation is identity. -/
+@[blueprint "lem:permMatrix-eq-one-iff"
+  (statement := /-- $P_\sigma = I$ if and only if $\sigma = \mathrm{id}$.
+  \uses{lem:permMatrix-one} -/)
+  (proof := /-- The forward direction shows that if $P_\sigma = I$ then for each $x$, the entry
+  $(P_\sigma)_{x, \sigma(x)} = 1$ forces $\sigma(x) = x$. The reverse is immediate from
+  $P_{\mathrm{id}} = I$. -/)]
 lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     σ.permMatrix R = 1 ↔ σ = 1 := by
@@ -88,7 +116,7 @@ lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} 
   · intro h
     ext x
     have hx := congrFun (congrFun h x) (σ x)
-    simp only [Equiv.Perm.permMatrix, Equiv.toPEquiv_apply, PEquiv.toMatrix_apply, one_apply,
+    simp only [Equiv.Perm.permMatrix, Equiv.toPEquiv_apply, PEquiv.toMatrix_apply, Matrix.one_apply,
       Option.mem_def] at hx
     by_cases hσx : σ x = x
     · exact hσx
@@ -140,6 +168,11 @@ lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := 
   rw [hord, hsupp, Finset.card_univ, Fintype.card_fin]
 
 /-- finRotate permutation matrix has order n for n >= 2. -/
+@[blueprint "lem:orderOf-permMatrix-finRotate"
+  (statement := /-- The permutation matrix of $\mathrm{finRotate}(n)$ has order $n$ over $\mathbb{Z}$.
+  \uses{lem:orderOf-permMatrix, lem:orderOf-finRotate} -/)
+  (proof := /-- Combines the order-preservation property $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$
+  with $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/)]
 lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
     orderOf ((finRotate n).permMatrix ℤ) = n := by
   rw [orderOf_permMatrix, orderOf_finRotate n hn]
@@ -158,20 +191,6 @@ lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatri
   · omega
 
 /-! ## Backward direction: Dimension bound implies order is achievable -/
-
-/-- Helper: The identity matrix has order 1, contributing dimension 0. -/
-@[blueprint "lem:order-one-achievable"
-  (statement := /-- Order 1 is achievable: $1 \in \mathrm{Ord}_N$ for any $N$. -/)
-  (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
-lemma order_one_achievable (N : ℕ) : 1 ∈ integerMatrixOrders N :=
-  one_mem_integerMatrixOrders N
-
-/-- Helper: The negation of identity has order 2, contributing dimension 0 for N at least 1. -/
-@[blueprint "lem:order-two-achievable"
-  (statement := /-- Order 2 is achievable: $2 \in \mathrm{Ord}_N$ for $N \geq 1$. -/)
-  (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$, so it has order $2$. -/)]
-lemma order_two_achievable (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
-  two_mem_integerMatrixOrders N
 
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
@@ -194,6 +213,13 @@ theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 
       _ = p := pow_one p
       _ ≥ 2 := hp_ge2
   exact mem_integerMatrixOrders_totient (p ^ k) hpk_ge2
+
+/-!
+### Private helper lemmas for backward direction
+
+The following lemmas handle specific cases in the backward direction proof,
+particularly the cases involving coprimality with 2 and odd prime powers.
+-/
 
 /-- Derives oddness, non-equality to 2, and lower bound from coprimality to 2. -/
 private lemma odd_ne_two_ge_three_of_coprime_two {m' : ℕ} (hcop : Nat.Coprime 2 m') (hm'_ge2 : 2 ≤ m') :
@@ -280,6 +306,18 @@ handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 < N`.
 
 This theorem is used to complete the backward direction of the crystallographic
 restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
+@[blueprint "thm:mem-integerMatrixOrders-psi"
+  (statement := /-- For $m \geq 1$ with $m \neq 2$, we have $m \in \mathrm{Ord}_{\psi(m)}$.
+  The construction achieves order $m$ using exactly $\psi(m)$ dimensions via block diagonal
+  matrices of cyclotomic companion matrices.
+  \uses{thm:primePow-mem-integerMatrixOrders-psi, psi-def, lem:one-mem-orders} -/)
+  (proof := /-- By strong induction on $m$. For $m = 1$, the identity achieves order 1 in
+  dimension $\psi(1) = 0$. For prime powers $p^k$ (excluding $2^1$), the companion matrix
+  of $\Phi_{p^k}$ has order $p^k$ in dimension $\varphi(p^k) = \psi(p^k)$. For composite
+  $m = p^e \cdot m'$ with coprime factors, we use block diagonal of matrices achieving
+  orders $p^e$ and $m'$ from the induction hypothesis, with dimension $\psi(p^e) + \psi(m')
+  = \psi(m)$ by additivity of $\psi$ on coprime factors. For $m = 2 \cdot m'$ with $m'$ odd,
+  negating the order-$m'$ matrix doubles the order without changing dimension. -/)]
 theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
     m ∈ integerMatrixOrders (psi m) := by
   -- Use strong induction on m
@@ -324,16 +362,13 @@ theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
 /-- Helper for small cases: if m ∈ {3, 4, 6} and psi(m) ≤ N, then m ∈ integerMatrixOrders N. -/
 private lemma mem_integerMatrixOrders_small (m N : ℕ) (hm : m ∈ ({3, 4, 6} : Finset ℕ))
     (hpsi : psi m ≤ N) : m ∈ integerMatrixOrders N := by
-  fin_cases hm
-  · -- m = 3: psi(3) = 2
-    have hN2 : 2 ≤ N := by simp only [psi_three] at hpsi; omega
-    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 3 (by omega))
-  · -- m = 4: psi(4) = 2
-    have hN2 : 2 ≤ N := by simp only [psi_four] at hpsi; omega
-    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 4 (by omega))
-  · -- m = 6: psi(6) = 2
-    have hN2 : 2 ≤ N := by simp only [psi_six] at hpsi; omega
-    exact integerMatrixOrders_mono hN2 (mem_integerMatrixOrders_totient 6 (by omega))
+  have hm_ge2 : 2 ≤ m := by fin_cases hm <;> omega
+  have htot_eq_2 : Nat.totient m = 2 := by fin_cases hm <;> native_decide
+  have hpsi_eq_2 : psi m = 2 := by fin_cases hm <;> simp [psi_three, psi_four, psi_six]
+  have hN2 : 2 ≤ N := by omega
+  have hmem := mem_integerMatrixOrders_totient m hm_ge2
+  rw [htot_eq_2] at hmem
+  exact integerMatrixOrders_mono hN2 hmem
 
 /-- Helper for m = 5: psi(5) = 4, so if 4 ≤ N, then 5 ∈ integerMatrixOrders N. -/
 private lemma mem_integerMatrixOrders_five (N : ℕ) (hpsi : psi 5 ≤ N) :
@@ -419,13 +454,13 @@ theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
   rcases Nat.lt_trichotomy m 2 with hm_lt2 | rfl | hm_gt2
   · -- m < 2 and 0 < m, so m = 1
     interval_cases m
-    exact order_one_achievable N
+    exact one_mem_integerMatrixOrders N
   · -- m = 2: use -I, need N > 0
     cases hNm with
     | inl h => omega
     | inr hN_pos =>
       haveI : NeZero N := ⟨Nat.pos_iff_ne_zero.mp hN_pos⟩
-      exact order_two_achievable N
+      exact two_mem_integerMatrixOrders N
   · -- m > 2, i.e., m >= 3
     -- If m ≤ N, use permutation matrix directly
     by_cases hle : m ≤ N

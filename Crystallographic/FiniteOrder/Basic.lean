@@ -50,6 +50,14 @@ An integer `m` is in this set if there exists an N×N integer matrix `A` such th
 def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
+/-- Mapping integer matrices to rational matrices via `algebraMap ℤ ℚ` is injective. -/
+lemma Matrix.map_algebraMap_int_injective (N : ℕ) :
+    Function.Injective (Matrix.map · (algebraMap ℤ ℚ) :
+      Matrix (Fin N) (Fin N) ℤ → Matrix (Fin N) (Fin N) ℚ) := by
+  intro M₁ M₂ heq
+  ext i j
+  exact (algebraMap ℤ ℚ).injective_int (congrFun (congrFun heq i) j)
+
 /-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
 @[blueprint "lem:one-mem-orders"
   (statement := /-- Order $1$ is achievable in any dimension. -/)
@@ -70,11 +78,8 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
   (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
   (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
   so it has order $2$. -/)]
-lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N := by
-  use -1
-  constructor
-  · rw [orderOf_neg_one, ringChar_matrix_int, if_neg (by norm_num : (0 : ℕ) ≠ 2)]
-  · norm_num
+lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩
 
 /-- The canonical block diagonal embedding of an M×M matrix into an (M+K)×(M+K) matrix
 using Sum types. Places the matrix in the upper-left block and identity in the lower-right. -/
@@ -190,14 +195,20 @@ def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
   Matrix.fromBlocks A 0 0 B
 
 /-- Block diagonal of identity matrices is the identity. -/
-@[simp]
+@[simp, blueprint "lem:blockDiag2-one"
+  (statement := /-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/)
+  (proof := /-- Immediate from the definition of block diagonal and the identity matrix. -/)]
 lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
     blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
     (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
   Matrix.fromBlocks_one
 
 /-- Block diagonal preserves multiplication. -/
-@[simp]
+@[simp, blueprint "lem:blockDiag2-mul"
+  (statement := /-- $\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')$.
+  \uses{def:blockDiag2} -/)
+  (proof := /-- Block multiplication respects the diagonal structure since off-diagonal blocks
+  are zero. -/)]
 lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
     (A A' : Matrix (Fin M) (Fin M) R) (B B' : Matrix (Fin K) (Fin K) R) :
     blockDiag2 (A * A') (B * B') = blockDiag2 A B * blockDiag2 A' B' := by
@@ -205,6 +216,9 @@ lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
   congr 1 <;> simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]
 
 /-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/
+@[blueprint "def:blockDiag2-prodMonoidHom"
+  (statement := /-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
+  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/)]
 def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where

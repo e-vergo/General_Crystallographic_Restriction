@@ -47,6 +47,12 @@ open Polynomial
 
 /-- If the minimal polynomial of an integer matrix A divides X^k - 1, then A^k = 1.
 This transfers the polynomial identity back to the matrix via the ring homomorphism. -/
+@[blueprint "lem:pow-eq-one-of-minpoly-dvd"
+  (statement := /-- If $\mu_A \mid X^k - 1$, then $A^k = I$.
+  \uses{def:minpoly} -/)
+  (proof := /-- The polynomial $X^k - 1$ annihilates $A$ (since the minimal polynomial does),
+  meaning $A^k - I = 0$. Transfer this identity from $\mathbb{Q}$ back to $\mathbb{Z}$ via
+  the injectivity of $\mathbb{Z} \to \mathbb{Q}$. -/)]
 lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (k : ℕ)
     (hdvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ k - 1) : A ^ k = 1 := by
   let A_Q := A.map (algebraMap ℤ ℚ)
@@ -57,14 +63,7 @@ lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin
   -- This means A_Q^k = 1
   simp only [map_sub, map_pow, aeval_X, map_one, sub_eq_zero] at haeval
   -- Transfer back to A via injectivity
-  have hinj : Function.Injective
-      (Matrix.map · (algebraMap ℤ ℚ) :
-        Matrix (Fin N) (Fin N) ℤ → Matrix (Fin N) (Fin N) ℚ) := by
-    intro M₁ M₂ heq
-    ext i j
-    have h := congrFun (congrFun heq i) j
-    simp only [Matrix.map_apply] at h
-    exact (algebraMap ℤ ℚ).injective_int h
+  have hinj := Crystallographic.Matrix.map_algebraMap_int_injective N
   apply hinj
   change (A ^ k).map (algebraMap ℤ ℚ) =
     (1 : Matrix (Fin N) (Fin N) ℤ).map (algebraMap ℤ ℚ)
@@ -73,6 +72,11 @@ lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin
 
 /-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
 This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/
+@[blueprint "lem:minpoly-dvd-X-pow-sub-one"
+  (statement := /-- If $A^m = I$, then $\mu_A \mid X^m - 1$.
+  \uses{def:minpoly} -/)
+  (proof := /-- The polynomial $X^m - 1$ annihilates $A$ since $(A_{\mathbb{Q}})^m - I = 0$.
+  The minimal polynomial divides any annihilating polynomial by definition. -/)]
 lemma minpoly_dvd_X_pow_sub_one_of_pow_eq_one {N : ℕ} (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ)
     (hpow : A ^ m = 1) : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1 := by
   apply minpoly.dvd
@@ -125,6 +129,14 @@ The proof uses coprimality: minpoly is coprime to Φ_d when Φ_d does not divide
 (since Φ_d is irreducible), hence minpoly is coprime to the product of such Φ_d.
 Since X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d) and minpoly divides the LHS while
 being coprime to the second factor, it must divide the first factor. -/
+@[blueprint "lem:minpoly-dvd-prod-cyclotomic"
+  (statement := /-- If $\mu_A \mid X^m - 1$ and $S = \{d \mid m : \Phi_d \mid \mu_A\}$,
+  then $\mu_A \mid \prod_{d \in S} \Phi_d$.
+  \uses{def:minpoly, lem:cyclotomic-finset-product-dvd} -/)
+  (proof := /-- Split $X^m - 1 = (\prod_{d \in S} \Phi_d) \cdot (\prod_{d \notin S} \Phi_d)$.
+  Since $\Phi_d$ is irreducible and does not divide $\mu_A$ for $d \notin S$, we have
+  $\gcd(\mu_A, \Phi_d) = 1$. Thus $\mu_A$ is coprime to $\prod_{d \notin S} \Phi_d$.
+  Since $\mu_A \mid X^m - 1$, it must divide $\prod_{d \in S} \Phi_d$. -/)]
 lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m) (S : Finset ℕ) (hS_sub : S ⊆ m.divisors)
     (hS_def : ∀ d ∈ m.divisors, d ∈ S ↔ cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ)))
@@ -155,6 +167,14 @@ lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 /-- For a polynomial that divides X^m - 1, we can characterize it as a product of cyclotomic
 polynomials. Specifically, S = {d ∈ divisors(m) | Φ_d ∣ p} gives minpoly = ∏_{d∈S} Φ_d
 when p is monic and irreducible factors are coprime. -/
+@[blueprint "lem:minpoly-eq-prod-cyclotomic"
+  (statement := /-- If $\mu_A \mid X^m - 1$, then there exists $S \subseteq \mathrm{divisors}(m)$
+  such that $\mu_A = \prod_{d \in S} \Phi_d$.
+  \uses{def:minpoly, lem:minpoly-dvd-prod-cyclotomic, lem:cyclotomic-finset-product-dvd} -/)
+  (proof := /-- Let $S = \{d \mid m : \Phi_d \mid \mu_A\}$. By the previous lemma,
+  $\mu_A \mid \prod_{d \in S} \Phi_d$. Conversely, by definition of $S$, each $\Phi_d$ for
+  $d \in S$ divides $\mu_A$, so their coprime product divides $\mu_A$. Mutual divisibility
+  of monic polynomials implies equality. -/)]
 lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m)
     (hminpoly_dvd : minpoly ℚ (A.map (algebraMap ℤ ℚ)) ∣ X ^ m - 1) :
@@ -183,6 +203,13 @@ lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 /-- If A has order m and minpoly = ∏_{d∈S} Φ_d where S ⊆ divisors(m),
 then S.lcm id = m. This is the key lemma: if lcm(S) < m, then A^{lcm(S)} = 1,
 contradicting that A has exact order m. -/
+@[blueprint "lem:cyclotomic-divisors-lcm-eq"
+  (statement := /-- If $\mathrm{ord}(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$ with
+  $S \subseteq \mathrm{divisors}(m)$, then $\mathrm{lcm}(S) = m$.
+  \uses{lem:minpoly-eq-prod-cyclotomic, lem:pow-eq-one-of-minpoly-dvd} -/)
+  (proof := /-- Suppose $\ell = \mathrm{lcm}(S) < m$. Then $\mu_A = \prod_{d \in S} \Phi_d$
+  divides $\prod_{d \mid \ell} \Phi_d = X^\ell - 1$, since each $d \in S$ divides $\ell$.
+  By the transfer lemma, $A^\ell = I$. But this contradicts $\mathrm{ord}(A) = m > \ell$. -/)]
 lemma cyclotomic_divisors_lcm_eq_of_orderOf {N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (m : ℕ) (hm : 0 < m) (hA_ord : orderOf A = m)
     (S : Finset ℕ) (hS_sub : ∀ d ∈ S, d ∣ m)

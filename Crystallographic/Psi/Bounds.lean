@@ -36,7 +36,16 @@ namespace Crystallographic
 
 /-! ## Helper lemmas for the forward direction -/
 
-/-- Totient of a prime power is at least 2 unless it's (2,1). -/
+@[blueprint "lem:two-le-totient-prime-pow"
+  (statement := /-- For any prime power $p^k > 2$, we have $2 \leq \varphi(p^k)$.
+
+  Specifically, $\varphi(p^k) = p^{k-1}(p-1) \geq 2$ unless $(p, k) = (2, 1)$,
+  in which case $\varphi(2) = 1$. This bound is essential for showing that sums
+  of totients are bounded by products when factors are coprime.
+  \uses{} --/)
+  (proof := /-- By cases on $p = 2$: if $p \neq 2$, then $p \geq 3$ so
+  $\varphi(p^k) = p^{k-1}(p-1) \geq 1 \cdot 2 = 2$. If $p = 2$ and $k \geq 2$,
+  then $\varphi(2^k) = 2^{k-1} \geq 2$. The case $(2, 1)$ is excluded by hypothesis. -/)]
 theorem two_le_totient_primePow {p k : ℕ} (hp : p.Prime) (hk : 0 < k)
     (h : ¬(p = 2 ∧ k = 1)) : 2 ≤ Nat.totient (p ^ k) := by
   rw [Nat.totient_prime_pow hp hk]
@@ -59,12 +68,18 @@ private lemma psi_sum_le_totient_prod_of_ge_two {a b : ℕ}
       ≤ Nat.totient a + Nat.totient b := by omega
     _ ≤ Nat.totient a * Nat.totient b := Nat.add_le_mul htot_a_ge2 htot_b_ge2
 
-/-- For m > 2 that is not a prime power, we can factor m = p^e * m' with:
-    - p is the minimal prime factor
-    - 0 < e = ord_p(m)
-    - p^e and m' are coprime
-    - 1 < m' < m
-    - p^e < m -/
+@[blueprint "lem:factorization-split-lt"
+  (statement := /-- A composite number $m > 2$ that is not a prime power can be written
+  as $m = p^e \cdot m'$ where $p$ is prime, $e > 0$, $\gcd(p^e, m') = 1$, and both
+  $p^e < m$ and $1 < m' < m$.
+
+  This decomposition is essential for strong induction proofs on composite numbers:
+  it provides strictly smaller coprime factors to which the inductive hypothesis applies.
+  \uses{} --/)
+  (proof := /-- Take $p = \mathrm{minFac}(m)$ and $e = \nu_p(m)$, the $p$-adic valuation.
+  Then $m' = m / p^e$ is coprime to $p^e$ (disjoint prime support). Since $m$ is not
+  a prime power, $m' \neq 1$. The bounds $p^e < m$ and $m' < m$ follow from $m' > 1$
+  and $p^e \geq 2$ respectively. -/)]
 theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m) :
     ∃ (p e m' : ℕ), p.Prime ∧ 0 < e ∧ p ^ e * m' = m ∧
     (p ^ e).Coprime m' ∧ 1 < m' ∧ m' < m ∧ p ^ e < m := by
@@ -103,8 +118,17 @@ theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m
       _ = m := hm_eq.symm
   exact ⟨p, e, m', hminFac_prime, he_pos, hm_eq.symm, hcop, hm'_gt_one, hm'_lt, hpe_lt⟩
 
-/-- For m odd and m >= 3, we have psi(m) > 0.
-This is because m has an odd prime factor q >= 3, which contributes phi(q^k) > 0 to psi. -/
+@[blueprint "lem:psi-pos-of-odd"
+  (statement := /-- For odd $m \geq 3$, we have $\psi(m) > 0$.
+
+  Since $m \geq 3$ and $m$ is odd, $m$ has a prime factor $q \geq 3$ (specifically,
+  $q = \mathrm{minFac}(m)$). The prime power $q^{\nu_q(m)}$ contributes
+  $\psi_{\mathrm{pp}}(q, \nu_q(m)) = \varphi(q^{\nu_q(m)}) > 0$ to $\psi(m)$,
+  since $(q, \nu_q(m)) \neq (2, 1)$.
+  \uses{psi-def, psiPrimePow-def} --/)
+  (proof := /-- The minimal prime factor $q = \mathrm{minFac}(m)$ satisfies $q \geq 3$
+  (since $2 \nmid m$). Thus $(q, \nu_q(m))$ is a nontrivial pair, and
+  $\psi(m) \geq \psi_{\mathrm{pp}}(q, \nu_q(m)) = \varphi(q^{\nu_q(m)}) > 0$. -/)]
 theorem psi_pos_of_odd_ge_three {m : ℕ} (hm : 3 ≤ m) (hm_odd : Odd m) :
     0 < psi m := by
   -- m >= 3 implies m != 1, so minFac(m) is prime
@@ -226,11 +250,16 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : psi m ≤ Nat.totient m := by
             have htot_pe_ge2 : 2 ≤ Nat.totient (p ^ e) := two_le_totient_primePow hp he_pos h21
             exact psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m' htot_pe_ge2 htot_m'_ge2
 
-/-- For a finite set S of divisors of m with lcm(S) = m, each prime power p^k || m
-is achieved by some element d ∈ S (meaning p^k | d).
+@[blueprint "lem:prime-pow-achieved-of-lcm-eq"
+  (statement := /-- If $S$ is a finite set of divisors of $m$ with $\mathrm{lcm}(S) = m$,
+  then for each prime $q$ dividing $m$, some element $d \in S$ is divisible by $q^{\nu_q(m)}$.
 
-This is the key combinatorial observation: if no element of S had p^k dividing it,
-then the lcm could only have p-valuation less than k, contradicting lcm(S) = m. -/
+  In other words, the full $q$-power component of $m$ must be "achieved" by some element of $S$.
+  This is the key combinatorial fact ensuring that $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
+  \uses{lem:lcm-factorization-le-sup} --/)
+  (proof := /-- By contradiction: if all $d \in S$ have $\nu_q(d) < \nu_q(m)$, then
+  $\nu_q(\mathrm{lcm}(S)) = \sup_{d \in S} \nu_q(d) < \nu_q(m)$, contradicting
+  $\mathrm{lcm}(S) = m$. -/)]
 lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
@@ -386,8 +415,14 @@ lemma totient_sum_ge_psi_of_mem {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
         (fun d _ => Nat.le_of_lt (Nat.totient_pos.mpr (Nat.pos_of_mem_divisors
           (Nat.mem_divisors.mpr ⟨hS_sub d (by assumption), hm.ne'⟩)))) hm_in_S
 
-/-- If lcm(S) ≥ 2, then S is nonempty. -/
--- NOTE: Potential Mathlib candidate - general Finset.lcm property
+@[blueprint "lem:finset-nonempty-of-two-le-lcm"
+  (statement := /-- If $\mathrm{lcm}(S) \geq 2$ for a finite set $S$ of natural numbers,
+  then $S$ is nonempty.
+
+  This follows immediately from the fact that $\mathrm{lcm}(\emptyset) = 1$ by convention.
+  \uses{} --/)
+  (proof := /-- By contradiction: if $S = \emptyset$, then $\mathrm{lcm}(S) = 1 < 2$,
+  contradicting the hypothesis. -/)]
 lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm id) :
     S.Nonempty := by
   by_contra h
@@ -395,7 +430,15 @@ lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm i
   simp only [h, Finset.lcm_empty] at hS_lcm_ge2
   omega
 
-/-- If lcm(S) ≥ 2, then there exists d ∈ S with d > 1. -/
+@[blueprint "lem:finset-exists-one-lt-of-two-le-lcm"
+  (statement := /-- If $S$ is a finite set of positive integers with $\mathrm{lcm}(S) \geq 2$,
+  then some element $d \in S$ satisfies $d > 1$.
+
+  This is because $\mathrm{lcm}$ of a set where all elements equal $1$ would be $1$.
+  \uses{lem:finset-nonempty-of-two-le-lcm} --/)
+  (proof := /-- By contradiction: if all $d \in S$ satisfy $d \leq 1$, then since
+  all $d > 0$ we have $d = 1$ for all $d \in S$. Thus $\mathrm{lcm}(S) = 1 < 2$,
+  a contradiction. -/)]
 lemma Finset.exists_one_lt_of_two_le_lcm {S : Finset ℕ} (hS_pos : ∀ d ∈ S, 0 < d)
     (hS_lcm_ge2 : 2 ≤ S.lcm id) : ∃ d ∈ S, 1 < d := by
   by_contra hall_le1
@@ -430,7 +473,7 @@ The proof proceeds by showing that any other choice of S either:
   $\psi_{\mathrm{pp}}(p, k)$. This is the combinatorial heart of the forward direction.
   The minimum sum is achieved when $S$ consists of one prime power for each distinct prime
   in $m$'s prime factorization, giving exactly $\psi(m)$.
-  \uses{psi-def, lem:psi-le-totient} --/)
+  \uses{psi-def, lem:psi-le-totient, lem:finset-nonempty-of-two-le-lcm, lem:finset-exists-one-lt-of-two-le-lcm, lem:prime-pow-achieved-of-lcm-eq} --/)
   (proof := /-- For each prime power $p^k \| m$, some $d \in S$ must have $p^k \mid d$
   (since $\mathrm{lcm}(S) = m$). The element with maximal $p$-valuation contributes
   at least $\varphi(p^k) \geq \psi_{\mathrm{pp}}(p, k)$. Summing over distinct prime powers
@@ -450,6 +493,10 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     have hm_ge2 : 2 ≤ m := by omega
     have hS_lcm_ge2 : 2 ≤ S.lcm id := hS_lcm ▸ hm_ge2
     have hS_pos : ∀ d ∈ S, 0 < d := fun d hd => Nat.pos_of_dvd_of_pos (hS_sub d hd) hm
+    -- S is nonempty since lcm(S) >= 2
+    have _hS_ne : S.Nonempty := Finset.nonempty_of_two_le_lcm hS_lcm_ge2
+    -- Some element of S is > 1
+    have _hS_has_gt1 : ∃ d ∈ S, 1 < d := Finset.exists_one_lt_of_two_le_lcm hS_pos hS_lcm_ge2
     -- Check if m is a prime power
     by_cases hpow : IsPrimePow m
     · -- m is a prime power p^k: contradiction since p^k must be in S

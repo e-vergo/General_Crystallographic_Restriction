@@ -137,20 +137,13 @@ lemma companion_charpoly_of_natDegree_one (p : R[X]) (hp : p.Monic) (hn : 0 < p.
   -- The charmatrix of a 1×1 companion matrix has entry X + C(p.coeff 0)
   -- det of 1×1 matrix is the entry itself
   have h_det : (companion p hp hn).charmatrix.det = X + Polynomial.C (p.coeff 0) := by
-    -- Since p.natDegree = 1, the matrix is 1×1
-    haveI hUnique : Unique (Fin p.natDegree) := by
-      rw [hdeg]
-      exact ⟨⟨0, by omega⟩, fun i => Fin.ext (by omega)⟩
-    rw [Matrix.det_unique]
-    -- The (0,0) entry of charmatrix is X + C(p.coeff 0)
-    simp only [companion_charmatrix_apply, hdeg]
-    -- default has value 0 and default + 1 = 1 = p.natDegree by hdeg
-    simp only [↓reduceIte]
-    have hdefault_val : (default : Fin p.natDegree).val = 0 := by
+    haveI hUnique : Unique (Fin p.natDegree) := by rw [hdeg]; exact Fin.instUnique
+    rw [Matrix.det_unique, companion_charmatrix_apply]
+    have hdefault : (default : Fin p.natDegree).val = 0 := by
       have : default = (⟨0, hdeg ▸ Nat.zero_lt_one⟩ : Fin p.natDegree) :=
         (@Unique.eq_default _ hUnique ⟨0, hdeg ▸ Nat.zero_lt_one⟩).symm
       simp only [this]
-    simp only [hdefault_val, zero_add, ↓reduceIte]
+    simp only [hdefault, hdeg, zero_add, ↓reduceIte]
   rw [h_det, hp_eq]
   simp
 

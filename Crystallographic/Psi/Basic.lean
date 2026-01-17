@@ -121,58 +121,42 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   rw [Finsupp.sum_single_index (psiPrimePow_zero p)]
   simp only [psiPrimePow, hk.ne', ite_false]
 
-/-- `psi 3 = 2` -/
-theorem psi_three : psi 3 = 2 := by
-  have h := psi_prime_pow 3 1 Nat.prime_three (by norm_num : 0 < 1)
+/-- psi of an odd prime p equals p - 1 -/
+theorem psi_odd_prime (p : ℕ) (hp : p.Prime) (hp_odd : p ≠ 2) : psi p = p - 1 := by
+  have h := psi_prime_pow p 1 hp (by norm_num : 0 < 1)
   simp only [pow_one] at h
-  rw [h]
-  simp only [(by decide : (3 : ℕ) ≠ 2), false_and, ite_false]
-  rw [Nat.totient_prime Nat.prime_three]
+  rw [h, if_neg (by simp [hp_odd]), Nat.totient_prime hp]
 
-/-- `psi 4 = 2` -/
-theorem psi_four : psi 4 = 2 := by
-  have h := psi_prime_pow 2 2 Nat.prime_two (by norm_num : 0 < 2)
-  simp only [show (4 : ℕ) = 2 ^ 2 by norm_num] at h ⊢
-  rw [h]
-  simp only [(by decide : (2 : ℕ) ≠ 1), and_false, ite_false]
-  rw [Nat.totient_prime_pow Nat.prime_two (by norm_num : 0 < 2)]
-  norm_num
+/-- `psi 3 = 2` -/
+theorem psi_three : psi 3 = 2 := psi_odd_prime 3 Nat.prime_three (by decide)
 
 /-- `psi 5 = 4` -/
-theorem psi_five : psi 5 = 4 := by
-  have hp : Nat.Prime 5 := by decide
-  have h := psi_prime_pow 5 1 hp (by norm_num : 0 < 1)
-  simp only [pow_one] at h
-  rw [h]
-  simp only [(by decide : (5 : ℕ) ≠ 2), false_and, ite_false]
-  rw [Nat.totient_prime hp]
+theorem psi_five : psi 5 = 4 := psi_odd_prime 5 (by decide) (by decide)
 
 /-- `psi 7 = 6` -/
-theorem psi_seven : psi 7 = 6 := by
-  have hp : Nat.Prime 7 := by decide
-  have h := psi_prime_pow 7 1 hp (by norm_num : 0 < 1)
-  simp only [pow_one] at h
-  rw [h]
-  simp only [(by decide : (7 : ℕ) ≠ 2), false_and, ite_false]
-  rw [Nat.totient_prime hp]
+theorem psi_seven : psi 7 = 6 := psi_odd_prime 7 (by decide) (by decide)
+
+/-- psi of 2^k for k ≥ 2 equals φ(2^k) = 2^(k-1) -/
+theorem psi_two_pow (k : ℕ) (hk : 2 ≤ k) : psi (2 ^ k) = 2 ^ (k - 1) := by
+  have h := psi_prime_pow 2 k Nat.prime_two (by omega : 0 < k)
+  rw [h, if_neg (by omega : ¬(2 = 2 ∧ k = 1))]
+  rw [Nat.totient_prime_pow Nat.prime_two (by omega : 0 < k)]
+  ring
+
+/-- psi of p^k for odd prime p equals φ(p^k) -/
+theorem psi_odd_prime_pow (p k : ℕ) (hp : p.Prime) (hp_odd : p ≠ 2) (hk : 0 < k) :
+    psi (p ^ k) = p ^ (k - 1) * (p - 1) := by
+  rw [psi_prime_pow p k hp hk, if_neg (by simp [hp_odd])]
+  rw [Nat.totient_prime_pow hp hk]
+
+/-- `psi 4 = 2` -/
+theorem psi_four : psi 4 = 2 := by simpa using psi_two_pow 2 (by norm_num)
 
 /-- `psi 8 = 4` -/
-theorem psi_eight : psi 8 = 4 := by
-  have h := psi_prime_pow 2 3 Nat.prime_two (by norm_num : 0 < 3)
-  simp only [show (8 : ℕ) = 2 ^ 3 by norm_num] at h ⊢
-  rw [h]
-  simp only [(by decide : (3 : ℕ) ≠ 1), and_false, ite_false]
-  rw [Nat.totient_prime_pow Nat.prime_two (by norm_num : 0 < 3)]
-  norm_num
+theorem psi_eight : psi 8 = 4 := by simpa using psi_two_pow 3 (by norm_num)
 
 /-- `psi 9 = 6` -/
-theorem psi_nine : psi 9 = 6 := by
-  have h := psi_prime_pow 3 2 Nat.prime_three (by norm_num : 0 < 2)
-  simp only [show (9 : ℕ) = 3 ^ 2 by norm_num] at h ⊢
-  rw [h]
-  simp only [(by decide : (3 : ℕ) ≠ 2), false_and, ite_false]
-  rw [Nat.totient_prime_pow Nat.prime_three (by norm_num : 0 < 2)]
-  norm_num
+theorem psi_nine : psi 9 = 6 := by simpa using psi_odd_prime_pow 3 2 Nat.prime_three (by decide) (by norm_num)
 
 /-- The supports of factorizations of coprime numbers are disjoint.
 
@@ -181,9 +165,14 @@ If gcd(m, n) = 1, then m and n share no common prime factors. -/
   (statement := /-- Coprime numbers have disjoint prime factorization supports. -/)
   (proof := /-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/)]
 lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
-    Disjoint m.factorization.support n.factorization.support := by
-  simp only [Nat.support_factorization]
-  exact h.disjoint_primeFactors
+    Disjoint m.factorization.support n.factorization.support :=
+  Nat.support_factorization m ▸ Nat.support_factorization n ▸ h.disjoint_primeFactors
+
+private lemma factorization_eq_zero_of_disjoint_support {m n p : ℕ}
+    (hdisj : Disjoint m.factorization.support n.factorization.support)
+    (hp : p ∈ m.factorization.support) : n.factorization p = 0 := by
+  by_contra hne
+  exact Finset.disjoint_left.mp hdisj hp (Finsupp.mem_support_iff.mpr hne)
 
 /-- `psi` is additive on coprime factors.
 
@@ -212,21 +201,11 @@ theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) 
   · apply Finset.sum_congr rfl
     intro p hp
     congr 1
-    rw [Finsupp.add_apply]
-    have : n.factorization p = 0 := by
-      by_contra hne
-      have hmem : p ∈ n.factorization.support := Finsupp.mem_support_iff.mpr hne
-      exact Finset.disjoint_left.mp hdisj hp hmem
-    simp only [this, add_zero]
+    rw [Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj hp, add_zero]
   · apply Finset.sum_congr rfl
     intro p hp
     congr 1
-    rw [Finsupp.add_apply]
-    have : m.factorization p = 0 := by
-      by_contra hne
-      have hmem : p ∈ m.factorization.support := Finsupp.mem_support_iff.mpr hne
-      exact Finset.disjoint_right.mp hdisj hp hmem
-    simp only [this, zero_add]
+    rw [Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add]
 
 /-- `psi 6 = 2` -/
 theorem psi_six : psi 6 = 2 := by
