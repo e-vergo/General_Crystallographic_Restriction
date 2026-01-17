@@ -99,8 +99,10 @@
     
         </div>
   </div>
-  <div class="definition_thmcontent">
-  <p>   The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="definition_thmcontent">
+      <p>   The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
 <div class="displaymath" id="a0000000036">
   \[ C(p) = \begin{pmatrix}  0 
 
@@ -136,48 +138,23 @@
 </div>
 <p> This construction produces a matrix whose characteristic polynomial equals \(p\), providing a canonical matrix realization for any monic polynomial. </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L46-L74" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">/-- The companion matrix of a monic polynomial p of degree n.
-
-For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
-```
-[0  0  0  ...  0  -a_0    ]
-[1  0  0  ...  0  -a_1    ]
-[0  1  0  ...  0  -a_2    ]
-[        ...              ]
-[0  0  0  ...  1  -a_{n-1}]
-```
-
-The matrix has 1s on the subdiagonal and the negatives of the polynomial
-coefficients in the last column.
--/
-@[blueprint
-  &quot;companion-def&quot;
-  (statement := /-- The companion matrix $C(p)$ of a monic polynomial
-  $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
-  on the subdiagonal and $-a_i$ in the last column:
-  $$C(p) = \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; -a_1 \\
-  \vdots &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; \cdots &amp; 1 &amp; -a_{n-1} \end{pmatrix}$$
-  This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/)]
-def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L46-L74" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =&gt;
     if j.val + 1 = i.val then 1
     else if j.val + 1 = p.natDegree then -p.coeff i.val
-    else 0
-</span></code></pre>
-</div>
+    else 0</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-charpoly">
@@ -241,43 +218,44 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L501-L542" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">/-- The characteristic polynomial of the companion matrix equals the original polynomial.
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L501-L542" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
+    (companion p hp hn).charpoly = p := by</span></code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000037">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p>By induction on the degree \(n\). For the base case \(n = 1\), direct computation gives \(\det (XI - C) = X + a_0\). For \(n {\gt} 1\), expand along the first column: the \((1,1)\) minor is the companion matrix of lower degree, and the \((2,1)\) minor contributes the constant term. The recurrence matches the polynomial coefficients. </p>
 
-This is the fundamental property of companion matrices: they are constructed precisely
-so that their characteristic polynomial matches the given monic polynomial.
-
-The proof proceeds by strong induction on the degree n. For degree 1, direct computation
-shows both sides equal X + C(a_0). For degree n+1, Laplace expansion along the first
-column gives a recurrence matching the polynomial structure.
--/
-@[blueprint
-  &quot;thm:companion-charpoly&quot;
-  (statement := /-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
-  $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
-  along the first column. The key insight is that the minor structure reduces to smaller
-  companion matrices, and the base case (degree 1) follows by direct computation.
-  \uses{companion-def} -/)
-  (proof := /-- By induction on the degree $n$. For the base case $n = 1$, direct computation gives
-  $\det(XI - C) = X + a_0$. For $n &gt; 1$, expand along the first column: the $(1,1)$ minor
-  is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
-  term. The recurrence matches the polynomial coefficients. -/)]
-theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    (companion p hp hn).charpoly = p := by
-  obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
   induction n generalizing p with
   | zero =&gt; exact companion_charpoly_of_natDegree_one p hp hn hn_eq
   | succ m IH =&gt;
@@ -296,21 +274,9 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
     obtain ⟨hA00, hA10, hA_other⟩ := companion_charmatrix_col_zero p hp hn m hdeg A hA_def
     rw [companion_charmatrix_laplace_col_zero m A hA00 hA10 hA_other, ← Polynomial.X_mul_divX_add p,
       companion_charmatrix_minor00_det p hp hn m hdeg A hA_def IH,
-      companion_charmatrix_minor10_det p hp hn m hdeg A hA_def]
-</span></code></pre>
-</div>
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000037">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>By induction on the degree \(n\). For the base case \(n = 1\), direct computation gives \(\det (XI - C) = X + a_0\). For \(n {\gt} 1\), expand along the first column: the \((1,1)\) minor is the companion matrix of lower degree, and the \((2,1)\) minor contributes the constant term. The recurrence matches the polynomial coefficients. </p>
-
+      companion_charmatrix_minor10_det p hp hn m hdeg A hA_def]</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-aeval-zero">
@@ -376,34 +342,24 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[simp, blueprint &quot;lem:companion-aeval-zero&quot;
-  (statement := /-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
-  matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
-  $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.
-  \uses{thm:companion-charpoly} -/)
-  (proof := /-- By Cayley-Hamilton, every matrix satisfies its characteristic polynomial.
-  Since $\chi_{C(p)} = p$ by the companion characteristic polynomial theorem,
-  we have $p(C(p)) = 0$. -/)]
-theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    aeval (companion p hp hn) p = 0 := by
-  have h := aeval_self_charpoly (companion p hp hn)
-  rwa [companion_charpoly p hp hn] at h
-</span></code></pre>
-</div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
+    aeval (companion p hp hn) p = 0 := by</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000038">
@@ -413,9 +369,20 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegr
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content">
-  <p> By Cayley-Hamilton, every matrix satisfies its characteristic polynomial. Since \(\chi _{C(p)} = p\) by the companion characteristic polynomial theorem, we have \(p(C(p)) = 0\). </p>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> By Cayley-Hamilton, every matrix satisfies its characteristic polynomial. Since \(\chi _{C(p)} = p\) by the companion characteristic polynomial theorem, we have \(p(C(p)) = 0\). </p>
 
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">have h := aeval_self_charpoly (companion p hp hn)
+  rwa [companion_charpoly p hp hn] at h</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-pow-dvd">
@@ -481,32 +448,45 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegr
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L561-L586" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[blueprint &quot;thm:companion-pow-dvd&quot;
-  (statement := /-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
-  $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
-  $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.
-  \uses{lem:companion-aeval-zero} -/)
-  (proof := /-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
-  Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
-  so $C(p)^m = I$. -/)]
-theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L561-L586" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
-    (companion p hp hn) ^ m = 1 := by
-  -- From hdvd, get q such that X^m - 1 = p * q
+    (companion p hp hn) ^ m = 1 := by</span></code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000039">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some polynomial \(q\). Evaluating at \(C(p)\): \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0\), so \(C(p)^m = I\). </p>
+
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">-- From hdvd, get q such that X^m - 1 = p * q
   obtain ⟨q, hq⟩ := hdvd
   -- Let A = companion p
   let A := companion p hp hn
@@ -520,21 +500,9 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.nat
     simp only [map_sub, map_pow, aeval_X, map_one]
   -- So A^m - 1 = 0, i.e., A^m = 1
   rw [haeval] at hXm1_zero
-  exact sub_eq_zero.mp hXm1_zero
-</span></code></pre>
-</div>
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000039">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some polynomial \(q\). Evaluating at \(C(p)\): \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0\), so \(C(p)^m = I\). </p>
-
+  exact sub_eq_zero.mp hXm1_zero</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="lem:companion-cycl-pow">
@@ -600,34 +568,25 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.nat
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[blueprint &quot;lem:companion-cycl-pow&quot;
-  (statement := /-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
-  $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
-  \texttt{companion\_pow\_eq\_one\_of\_dvd}.
-  \uses{thm:companion-pow-dvd} -/)
-  (proof := /-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
-  the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/)]
-lemma companion_cyclotomic_pow_eq_one (m : ℕ)
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by
-  apply companion_pow_eq_one_of_dvd
-  exact cyclotomic.dvd_X_pow_sub_one m ℤ
-</span></code></pre>
-</div>
+    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000040">
@@ -637,9 +596,20 @@ lemma companion_cyclotomic_pow_eq_one (m : ℕ)
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content">
-  <p> Since \(\Phi _m \mid X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply the general companion power theorem to conclude \(C(\Phi _m)^m = I\). </p>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> Since \(\Phi _m \mid X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply the general companion power theorem to conclude \(C(\Phi _m)^m = I\). </p>
 
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">apply companion_pow_eq_one_of_dvd
+  exact cyclotomic.dvd_X_pow_sub_one m ℤ</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-cycl-order">
@@ -709,33 +679,45 @@ lemma companion_cyclotomic_pow_eq_one (m : ℕ)
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L110-L141" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[blueprint &quot;thm:companion-cycl-order&quot;
-  (statement := /-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
-  because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
-  for $d &lt; m$, then $\Phi_m$ would divide $X^d - 1$, contradicting that primitive $m$-th
-  roots of unity are not $d$-th roots of unity for $d &lt; m$.
-  \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/)
-  (proof := /-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
-  For the lower bound: if $C(\Phi_m)^d = I$ for $d &lt; m$, then $\Phi_m \mid X^d - 1$,
-  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/)]
-theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L110-L141" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
-  let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
+    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by</span></code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000041">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> The order is at most \(m\) since \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\). For the lower bound: if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m \mid X^d - 1\), but this contradicts that primitive \(m\)-th roots of unity are not \(d\)-th roots. </p>
+
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
   have hm_pos : 0 &lt; m := Nat.lt_of_lt_of_le (by norm_num : 0 &lt; 2) hm
   rw [orderOf_eq_iff hm_pos]
   constructor
@@ -754,21 +736,9 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     have hdvd1 : minpoly ℚ AQ ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ AQ haeval_Q_zero
     have hminpoly_eq : minpoly ℚ AQ = cyclotomic m ℚ := companion_cyclotomic_minpoly m hm_pos hn
     rw [hminpoly_eq] at hdvd1
-    exact Nat.not_dvd_of_pos_of_lt hk_pos hk (dvd_of_cyclotomic_dvd_X_pow_sub_one m k hm_pos hk_pos hdvd1)
-</span></code></pre>
-</div>
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000041">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    Proof
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p> The order is at most \(m\) since \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\). For the lower bound: if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m \mid X^d - 1\), but this contradicts that primitive \(m\)-th roots of unity are not \(d\)-th roots. </p>
-
+    exact Nat.not_dvd_of_pos_of_lt hk_pos hk (dvd_of_cyclotomic_dvd_X_pow_sub_one m k hm_pos hk_pos hdvd1)</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:companion-cycl-mem">
@@ -836,36 +806,25 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L145-L158" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[blueprint &quot;thm:companion-cycl-mem&quot;
-  (statement := /-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
-  $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
-  with integer entries, and has order exactly $m$ by \texttt{companion\_cyclotomic\_orderOf}.
-  \uses{thm:companion-cycl-order} -/)
-  (proof := /-- The companion matrix $C(\Phi_m)$ witnesses the membership: it is an integer matrix
-  of dimension $\deg(\Phi_m) = \varphi(m)$ with multiplicative order exactly $m$. -/)]
-theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L145-L158" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by
-  use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-  constructor
-  · exact companion_cyclotomic_orderOf m hm hn
-  · omega
-</span></code></pre>
-</div>
+    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000042">
@@ -875,9 +834,22 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content">
-  <p> The companion matrix \(C(\Phi _m)\) witnesses the membership: it is an integer matrix of dimension \(\deg (\Phi _m) = \varphi (m)\) with multiplicative order exactly \(m\). </p>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> The companion matrix \(C(\Phi _m)\) witnesses the membership: it is an integer matrix of dimension \(\deg (\Phi _m) = \varphi (m)\) with multiplicative order exactly \(m\). </p>
 
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
+  constructor
+  · exact companion_cyclotomic_orderOf m hm hn
+  · omega</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="theorem_thmwrapper theorem-style-definition" id="thm:mem-orders-totient">
@@ -943,36 +915,24 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p>    For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
+  <div class="sbs-statement-grid">
+    <div class="sbs-latex-cell">
+      <div class="theorem_thmcontent">
+      <p>    For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
 
-  </div>
-  <div class="thm_body_extras">
-
-
-<div class="lean-source-panel">
-    <div class="lean-source-header">
-        <span class="lean-source-title">Lean Source</span>
-        
-        <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L160-L173" class="lean-github-link" target="_blank" rel="noopener">View on GitHub</a>
-        
+      </div>
     </div>
-    <pre class="lean-code"><code><span class="lean-plain">@[blueprint &quot;thm:mem-orders-totient&quot;
-  (statement := /-- For $m \geq 2$, $m \in \mathrm{Ord}_{\varphi(m)}$. This is the key
-  existence result: for every $m \geq 2$, there exists an integer matrix of dimension
-  $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.
-  \uses{thm:companion-cycl-mem} -/)
-  (proof := /-- Apply the cyclotomic companion membership theorem after noting that
-  $\deg(\Phi_m) = \varphi(m)$. -/)]
-theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
-    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
-  have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
-  have htot_pos : 0 &lt; Nat.totient m := Nat.totient_pos.mpr (by omega)
-  have hn : 0 &lt; (cyclotomic m ℤ).natDegree := by omega
-  rw [← hdeg]
-  exact companion_cyclotomic_mem_integerMatrixOrders m hm hn
-</span></code></pre>
-</div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean</span>
+          <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L160-L173" class="lean-github-link" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
+    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000043">
@@ -982,9 +942,23 @@ theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
     </span>
     <span class="expand-proof">▶</span>
   </div>
-  <div class="proof_content">
-  <p> Apply the cyclotomic companion membership theorem after noting that \(\deg (\Phi _m) = \varphi (m)\). </p>
+  <div class="proof_content sbs-proof-grid">
+    <div class="sbs-latex-cell">
+    <p> Apply the cyclotomic companion membership theorem after noting that \(\deg (\Phi _m) = \varphi (m)\). </p>
 
+    </div>
+    <div class="sbs-lean-cell">
+      <div class="lean-source-panel">
+        <div class="lean-source-header">
+          <span class="lean-source-title">Lean Proof</span>
+        </div>
+        <pre class="lean-code"><code><span class="lean-plain">have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
+  have htot_pos : 0 &lt; Nat.totient m := Nat.totient_pos.mpr (by omega)
+  have hn : 0 &lt; (cyclotomic m ℤ).natDegree := by omega
+  rw [← hdeg]
+  exact companion_cyclotomic_mem_integerMatrixOrders m hm hn</span></code></pre>
+      </div>
+    </div>
   </div>
 </div>
 
