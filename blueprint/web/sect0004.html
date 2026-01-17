@@ -140,17 +140,121 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
-    Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
-  Matrix.of fun i j =&gt;
-    if j.val + 1 = i.val then 1
-    else if j.val + 1 = p.natDegree then -p.coeff i.val
-    else 0</span></code><code class="lean-proof-body"><span class="lean-plain">(p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :
-    Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
-  Matrix.of fun i j =&gt;
-    if j.val + 1 = i.val then 1
-    else if j.val + 1 = p.natDegree then -p.coeff i.val
-    else 0</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The companion matrix of a monic polynomial p of degree n.
+
+For p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:
+```
+[0  0  0  ...  0  -a_0    ]
+[1  0  0  ...  0  -a_1    ]
+[0  1  0  ...  0  -a_2    ]
+[        ...              ]
+[0  0  0  ...  1  -a_{n-1}]
+```
+
+The matrix has 1s on the subdiagonal and the negatives of the polynomial
+coefficients in the last column.
+-/</span>
+<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span>
+  <span class="lean-string">&quot;companion-def&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(p)$ of a monic polynomial
+  $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
+  on the subdiagonal and $-a_i$ in the last column:
+  $$C(p) = \begin{pmatrix} 0 &amp; 0 &amp; \cdots &amp; -a_0 \\ 1 &amp; 0 &amp; \cdots &amp; -a_1 \\
+  \vdots &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; \cdots &amp; 1 &amp; -a_{n-1} \end{pmatrix}$$
+  This construction produces a matrix whose characteristic polynomial equals $p$, providing
+  a canonical matrix realization for any monic polynomial. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">def</span> <span class="lean-text">companion</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">_hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">:=</span>
+  <span class="lean-text">Matrix.of</span> <span class="lean-keyword">fun</span> <span class="lean-text">i</span> <span class="lean-text">j</span> <span class="lean-text">=&gt;</span>
+    <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-text">i.val</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
+  highlights
+numerals are polymorphic in Lean, but the numeral `1` cannot be used in a context where the expected type is
+  highlights
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">1</span></span>
+    <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">else</span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">if</span> <span class="lean-text">j.val</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span> <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">then</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
+  highlights
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">-</span><span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.coeff</span> <span class="lean-text">i.val</span></span></span>
+    <span class="lean-keyword" data-docs="`if c then t else e` is notation for `ite c t e`, &quot;if-then-else&quot;, which decides to
+return `t` or `e` depending on whether `c` is true or false. The explicit argument
+`c : Prop` does not have any actual computational content, but there is an additional
+`[Decidable c]` argument synthesized by typeclass inference which actually
+determines how to evaluate `c` to true or false. Write `if h : c then t else e`
+instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
+that `c` is true/false.
+">else</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
+  highlights
+numerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is
+  highlights
+due to the absence of the instance above
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">0</span></span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L46-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -235,27 +339,301 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    (companion p hp hn).charpoly = p := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne&#x27;
-  induction n generalizing p with
-  | zero =&gt; exact companion_charpoly_of_natDegree_one p hp hn hn_eq
-  | succ m IH =&gt;
-    have hdeg : p.natDegree = m + 2 := hn_eq
-    let A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X] :=
-      (companion p hp hn).charmatrix.submatrix (Fin.cast hdeg.symm) (Fin.cast hdeg.symm)
-    have hA_def : A = (companion p hp hn).charmatrix.submatrix
-        (Fin.cast hdeg.symm) (Fin.cast hdeg.symm) := rfl
-    have hA_det : A.det = (companion p hp hn).charmatrix.det := by
-      have heq : A = (companion p hp hn).charmatrix.submatrix
-          (finCongr hdeg.symm) (finCongr hdeg.symm) := by
-        ext i j; simp only [Matrix.submatrix_apply]; rfl
-      rw [heq, Matrix.det_submatrix_equiv_self]
-    rw [Matrix.charpoly, ← hA_det, Matrix.det_succ_column_zero]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The characteristic polynomial of the companion matrix equals the original polynomial.
+
+This is the fundamental property of companion matrices: they are constructed precisely
+so that their characteristic polynomial matches the given monic polynomial.
+
+The proof proceeds by strong induction on the degree n. For degree 1, direct computation
+shows both sides equal X + C(a_0). For degree n+1, Laplace expansion along the first
+column gives a recurrence matching the polynomial structure.
+-/</span>
+<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span>
+  <span class="lean-string">&quot;thm:companion-charpoly&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
+  $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
+  along the first column. The key insight is that the minor structure reduces to smaller
+  companion matrices, and the base case (degree 1) follows by direct computation.
+  \uses{companion-def} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By induction on the degree $n$. For the base case $n = 1$, direct computation gives
+  $\det(XI - C) = X + a_0$. For $n &gt; 1$, expand along the first column: the $(1,1)$ minor
+  is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
+  term. The recurrence matches the polynomial coefficients. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_charpoly</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  p
+
+Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charpoly</span> <span class="lean-text">=</span> <span class="lean-text">p</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-text">hn_eq</span><span class="lean-text">⟩</span> <span class="lean-text">:</span> <span class="lean-text">∃</span> <span class="lean-text">n</span><span class="lean-text">,</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span> <span class="lean-text">=</span> <span class="lean-text">n</span> <span class="lean-text">+</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.exists_eq_succ_of_ne_zero</span> <span class="lean-text">hn.ne&#x27;</span>
+  <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
+`induction x` applies induction on `x` to the main goal,
+producing one goal for each constructor of the inductive type,
+in which the target is replaced by a general instance of that constructor
+and an inductive hypothesis is added for each recursive argument to the constructor.
+If the type of an element in the local context depends on `x`,
+that element is reverted and reintroduced afterward,
+so that the inductive hypothesis incorporates that hypothesis as well.
+
+For example, given `n : Nat` and a goal with a hypothesis `h : P n` and target `Q n`,
+`induction n` produces one goal with hypothesis `h : P 0` and target `Q 0`,
+and one goal with hypotheses `h : P (Nat.succ a)` and `ih₁ : P a → Q a` and target `Q (Nat.succ a)`.
+Here the names `a` and `ih₁` are chosen automatically and are not accessible.
+You can use `with` to provide the variables names for each constructor.
+- `induction e`, where `e` is an expression instead of a variable,
+  generalizes `e` in the goal, and then performs induction on the resulting variable.
+- `induction e using r` allows the user to specify the principle of induction that should be used.
+  Here `r` should be a term whose result type must be of the form `C t`,
+  where `C` is a bound variable and `t` is a (possibly empty) sequence of bound variables
+- `induction e generalizing z₁ ... zₙ`, where `z₁ ... zₙ` are variables in the local context,
+  generalizes over `z₁ ... zₙ` before applying the induction but then introduces them in each goal.
+  In other words, the net effect is that each inductive hypothesis is generalized.
+- Given `x : Nat`, `induction x with | zero =&gt; tac₁ | succ x&#x27; ih =&gt; tac₂`
+  uses tactic `tac₁` for the `zero` case, and `tac₂` for the `succ` case.
+">induction</span> <span class="lean-text">n</span> <span class="lean-keyword">generalizing</span> <span class="lean-text">p</span> <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
+then a list of alternatives.
+">with</span>
+  <span class="lean-text">|</span> <span class="lean-text">zero</span> <span class="lean-text">=&gt;</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">companion_charpoly_of_natDegree_one</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span> <span class="lean-text">hn_eq</span>
+  <span class="lean-text">|</span> <span class="lean-text">succ</span> <span class="lean-text">m</span> <span class="lean-text">IH</span> <span class="lean-text">=&gt;</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hdeg</span> <span class="lean-text">:</span> <span class="lean-text">p.natDegree</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">+</span> <span class="lean-text">2</span> <span class="lean-text">:=</span> <span class="lean-text">hn_eq</span>
+    <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+">let</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">+</span> <span class="lean-text">2</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">+</span> <span class="lean-text">2</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span> <span class="lean-text">:=</span>
+      <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charmatrix.submatrix</span> <span class="lean-text">(</span><span class="lean-text">Fin.cast</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin.cast</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hA_def</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charmatrix.submatrix</span>
+        <span class="lean-text">(</span><span class="lean-text">Fin.cast</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin.cast</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-text">rfl</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hA_det</span> <span class="lean-text">:</span> <span class="lean-text">A.det</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charmatrix.det</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">heq</span> <span class="lean-text">:</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">charmatrix.submatrix</span>
+          <span class="lean-text">(</span><span class="lean-text">finCongr</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">finCongr</span> <span class="lean-text">hdeg.symm</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+        <span class="lean-keyword" data-docs="Applies extensionality lemmas that are registered with the `@[ext]` attribute.
+* `ext pat*` applies extensionality theorems as much as possible,
+  using the patterns `pat*` to introduce the variables in extensionality theorems using `rintro`.
+  For example, the patterns are used to name the variables introduced by lemmas such as `funext`.
+* Without patterns,`ext` applies extensionality lemmas as much
+  as possible but introduces anonymous hypotheses whenever needed.
+* `ext pat* : n` applies ext theorems only up to depth `n`.
+
+The `ext1 pat*` tactic is like `ext pat*` except that it only applies a single extensionality theorem.
+
+Unused patterns will generate warning.
+Patterns that don&#x27;t match the variables will typically result in the introduction of anonymous hypotheses.
+">ext</span> <span class="lean-text">i</span> <span class="lean-text">j</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Matrix.submatrix_apply</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="This tactic applies to a goal whose target has the form `x ~ x`,
+where `~` is equality, heterogeneous equality or any relation that
+has a reflexivity lemma tagged with the attribute @[refl].
+">rfl</span>
+      <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">heq</span><span class="lean-text">,</span> <span class="lean-text">Matrix.det_submatrix_equiv_self</span><span class="lean-text">]</span>
+    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">Matrix.charpoly</span><span class="lean-text">,</span> <span class="lean-text">←</span> <span class="lean-text">hA_det</span><span class="lean-text">,</span> <span class="lean-text">Matrix.det_succ_column_zero</span><span class="lean-text">]</span>
     -- Get column structure and apply Laplace simplification
-    obtain ⟨hA00, hA10, hA_other⟩ := companion_charmatrix_col_zero p hp hn m hdeg A hA_def
-    rw [companion_charmatrix_laplace_col_zero m A hA00 hA10 hA_other, ← Polynomial.X_mul_divX_add p,
-      companion_charmatrix_minor00_det p hp hn m hdeg A hA_def IH,
-      companion_charmatrix_minor10_det p hp hn m hdeg A hA_def]</span></code></pre>
+    <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">hA00</span><span class="lean-text">,</span> <span class="lean-text">hA10</span><span class="lean-text">,</span> <span class="lean-text">hA_other</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">companion_charmatrix_col_zero</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span> <span class="lean-text">m</span> <span class="lean-text">hdeg</span> <span class="lean-text">A</span> <span class="lean-text">hA_def</span>
+    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">companion_charmatrix_laplace_col_zero</span> <span class="lean-text">m</span> <span class="lean-text">A</span> <span class="lean-text">hA00</span> <span class="lean-text">hA10</span> <span class="lean-text">hA_other</span><span class="lean-text">,</span> <span class="lean-text">←</span> <span class="lean-text">Polynomial.X_mul_divX_add</span> <span class="lean-text">p</span><span class="lean-text">,</span>
+      <span class="lean-text">companion_charmatrix_minor00_det</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span> <span class="lean-text">m</span> <span class="lean-text">hdeg</span> <span class="lean-text">A</span> <span class="lean-text">hA_def</span> <span class="lean-text">IH</span><span class="lean-text">,</span>
+      <span class="lean-text">companion_charmatrix_minor10_det</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span> <span class="lean-text">m</span> <span class="lean-text">hdeg</span> <span class="lean-text">A</span> <span class="lean-text">hA_def</span><span class="lean-text">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L501-L542" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -343,9 +721,137 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree) :
-    aeval (companion p hp hn) p = 0 := by</span></code><code class="lean-proof-body"><span class="lean-plain">have h := aeval_self_charpoly (companion p hp hn)
-  rwa [companion_charpoly p hp hn] at h</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
+(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
+We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
+Lean maintains a database/index containing all active simp theorems.
+Here is an example of a simp theorem.
+```lean
+@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
+```
+This simp theorem instructs the simplifier to replace instances of the term
+`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
+The simplifier applies simp theorems in one direction only:
+if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
+but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
+property that its right-hand side is &quot;simpler&quot; than its left-hand side.
+In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
+The following would be a terrible simp theorem (if it were even allowed):
+```lean
+@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
+```
+Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
+Even worse would be a theorem that causes expressions to grow without bound,
+causing simp to loop forever.
+
+By default the simplifier applies `simp` theorems to an expression `e`
+after its sub-expressions have been simplified.
+We say it performs a bottom-up simplification.
+You can instruct the simplifier to apply a theorem before its sub-expressions
+have been simplified by using the modifier `↓`. Here is an example
+```lean
+@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
+```
+
+You can instruct the simplifier to rewrite the lemma from right-to-left:
+```lean
+attribute @[simp ←] and_assoc
+```
+
+When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
+The equational theorems of functions are applied at very low priority (100 and below).
+If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
+```lean
+@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
+@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
+  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
+@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
+  cases d &lt;;&gt; rfl
+```
+">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;lem:companion-aeval-zero&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
+  matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
+  $C(p)$ is exactly $p$ (by \texttt{companion\_charpoly}), we have $p(C(p)) = 0$.
+  \uses{thm:companion-charpoly} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- By Cayley-Hamilton, every matrix satisfies its characteristic polynomial.
+  Since $\chi_{C(p)} = p$ by the companion characteristic polynomial theorem,
+  we have $p(C(p)) = 0$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_aeval_eq_zero</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  (companion p hp hn)
+
+Hint: The identifier `aeval` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">aeval</span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span> <span class="lean-text">p</span></span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
+coll✝ : highlights
+R : highlights
+idx✝ : highlights
+X : highlights
+valid✝ : highlights
+aeval : highlights
+p : highlights
+hp : highlights
+hn : highlights
+⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">h</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Unknown identifier `aeval_self_charpoly`"><span class="lean-text">aeval_self_charpoly</span></span> <span class="lean-text">(</span><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">)</span>
+  <span class="lean-keyword" data-docs="`rwa` is short-hand for `rw; assumption`. ">rwa</span> <span class="lean-text">[</span><span class="lean-text">companion_charpoly</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+hypotheses or the goal. It can have one of the forms:
+* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
+  `(location)?` matchers. It means to target the goal only.
+* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
+* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
+* `at *`: target all hypotheses and the goal
+">at</span> <span class="lean-text">h</span></span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -433,23 +939,210 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 &lt; p.natDegree)
-    (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
-    (companion p hp hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- From hdvd, get q such that X^m - 1 = p * q
-  obtain ⟨q, hq⟩ := hdvd
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;thm:companion-pow-dvd&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
+  $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
+  $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.
+  \uses{lem:companion-aeval-zero} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
+  Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
+  so $C(p)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_pow_eq_one_of_dvd</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">p</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hp</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.Monic</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
+  highlights
+has type `highlights` which does not have the necessary form."><span class="lean-text">p.natDegree</span></span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hdvd</span> <span class="lean-text">:</span> <span class="lean-span lean-error" title="failed to synthesize instance of type class
+  highlights
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command."><span class="lean-text">p</span> <span class="lean-text">∣</span> <span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  p
+
+Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  -- From hdvd, get q such that X^m - 1 = p * q
+  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">q</span><span class="lean-text">,</span> <span class="lean-text">hq</span><span class="lean-text">⟩</span> <span class="lean-text">:=</span> <span class="lean-text">hdvd</span>
   -- Let A = companion p
-  let A := companion p hp hn
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+">let</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-text">companion</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span>
   -- We have aeval A p = 0 by companion_aeval_eq_zero
-  have hp_zero : aeval A p = 0 := companion_aeval_eq_zero p hp hn
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hp_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">p</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-text">companion_aeval_eq_zero</span> <span class="lean-text">p</span> <span class="lean-text">hp</span> <span class="lean-text">hn</span>
   -- Therefore aeval A (X^m - 1) = aeval A (p * q) = aeval A p * aeval A q = 0
-  have hXm1_zero : aeval A (X ^ m - (1 : R[X])) = 0 := by
-    rw [hq, aeval_mul, hp_zero, zero_mul]
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hXm1_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">hq</span><span class="lean-text">,</span> <span class="lean-text">aeval_mul</span><span class="lean-text">,</span> <span class="lean-text">hp_zero</span><span class="lean-text">,</span> <span class="lean-text">zero_mul</span><span class="lean-text">]</span>
   -- But aeval A (X^m - 1) = A^m - 1
-  have haeval : aeval A (X ^ m - (1 : R[X])) = A ^ m - 1 := by
-    simp only [map_sub, map_pow, aeval_X, map_one]
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">haeval</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">R</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
   -- So A^m - 1 = 0, i.e., A^m = 1
-  rw [haeval] at hXm1_zero
-  exact sub_eq_zero.mp hXm1_zero</span></code></pre>
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">haeval</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+hypotheses or the goal. It can have one of the forms:
+* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
+  `(location)?` matchers. It means to target the goal only.
+* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
+* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
+* `at *`: target all hypotheses and the goal
+">at</span> <span class="lean-text">hXm1_zero</span>
+  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">sub_eq_zero.mp</span> <span class="lean-text">hXm1_zero</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L561-L586" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -537,10 +1230,59 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">apply companion_pow_eq_one_of_dvd
-  exact cyclotomic.dvd_X_pow_sub_one m ℤ</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;lem:companion-cycl-pow&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
+  $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
+  \texttt{companion\_pow\_eq\_one\_of\_dvd}.
+  \uses{thm:companion-pow-dvd} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Since $\Phi_m \mid X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
+  the general companion power theorem to conclude $C(\Phi_m)^m = I$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">lemma</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  m
+
+Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  (cyclotomic m ℤ)
+
+Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">m</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
+If it succeeds, then the tactic returns as many subgoals as the number of premises that
+have not been fixed by type inference or type class resolution.
+Non-dependent premises are added before dependent ones.
+
+The `apply` tactic uses higher-order pattern matching, type class resolution,
+and first-order unification with dependent types.
+">apply</span> <span class="lean-span lean-error" title="Unknown identifier `companion_pow_eq_one_of_dvd`"><span class="lean-text">companion_pow_eq_one_of_dvd</span></span>
+  <span class="lean-span lean-error" title="No goals to be solved"><span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">cyclotomic.dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -632,28 +1374,374 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by</span></code><code class="lean-proof-body"><span class="lean-plain">let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-  have hm_pos : 0 &lt; m := Nat.lt_of_lt_of_le (by norm_num : 0 &lt; 2) hm
-  rw [orderOf_eq_iff hm_pos]
-  constructor
-  · exact companion_cyclotomic_pow_eq_one m hn
-  · intro k hk hk_pos hAk
-    have haeval_zero : aeval A (X ^ k - (1 : ℤ[X])) = 0 := by
-      simp only [map_sub, map_pow, aeval_X, map_one]
-      rw [hAk, sub_self]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;thm:companion-cycl-order&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
+  because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
+  for $d &lt; m$, then $\Phi_m$ would divide $X^d - 1$, contradicting that primitive $m$-th
+  roots of unity are not $d$-th roots of unity for $d &lt; m$.
+  \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
+  For the lower bound: if $C(\Phi_m)^d = I$ for $d &lt; m$, then $\Phi_m \mid X^d - 1$,
+  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_orderOf</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  m
+
+Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  (cyclotomic m ℤ)
+
+Hint: The identifier `companion` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="unsolved goals
+x✝¹ : highlights
+cyclotomic : highlights
+x✝ : highlights
+companion : highlights
+m : highlights
+hm : highlights
+hn : highlights
+⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+">let</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  (cyclotomic m ℤ)"><span class="lean-text">companion</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span></span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hm_pos</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.lt_of_lt_of_le</span> <span class="lean-text">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
+over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
+and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
+numerical expressions. It also has a relatively simple primality prover.
+">norm_num</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">2</span><span class="lean-text">)</span> <span class="lean-text">hm</span>
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_eq_iff</span> <span class="lean-text">hm_pos</span><span class="lean-text">]</span>
+  <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
+the first matching constructor, or else fails.
+">constructor</span>
+  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">companion_cyclotomic_pow_eq_one</span> <span class="lean-text">m</span> <span class="lean-text">hn</span>
+  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
+For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
+be a `let` or function type.
+
+* `intro` by itself introduces one anonymous hypothesis, which can be accessed
+  by e.g. `assumption`. It is equivalent to `intro _`.
+* `intro x y` introduces two hypotheses and names them. Individual hypotheses
+  can be anonymized via `_`, given a type ascription, or matched against a pattern:
+  ```lean
+  -- ... ⊢ α × β → ...
+  intro (a, b)
+  -- ..., a : α, b : β ⊢ ...
+  ```
+* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
+  is a variable.
+* Alternatively, `intro` can be combined with pattern matching much like `fun`:
+  ```lean
+  intro
+  | n + 1, 0 =&gt; tac
+  | ...
+  ```
+">intro</span> <span class="lean-text">k</span> <span class="lean-text">hk</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hAk</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">haeval_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">A</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℤ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+      <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">map_sub</span><span class="lean-text">,</span> <span class="lean-text">map_pow</span><span class="lean-text">,</span> <span class="lean-text">aeval_X</span><span class="lean-text">,</span> <span class="lean-text">map_one</span><span class="lean-text">]</span>
+      <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">hAk</span><span class="lean-text">,</span> <span class="lean-text">sub_self</span><span class="lean-text">]</span>
     -- Work over ℚ where cyclotomic is irreducible
-    let AQ := A.map (algebraMap ℤ ℚ)
-    have haeval_Q_zero : aeval AQ ((X ^ k - 1 : ℤ[X]).map (algebraMap ℤ ℚ)) = 0 := by
-      have : AQ = (Algebra.ofId ℤ ℚ).mapMatrix A := rfl
-      rw [this, aeval_map_algebraMap, aeval_algHom_apply, haeval_zero, map_zero]
-    simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_one]
-      at haeval_Q_zero
-    have hdvd1 : minpoly ℚ AQ ∣ (X ^ k - 1 : ℚ[X]) := minpoly.dvd ℚ AQ haeval_Q_zero
-    have hminpoly_eq : minpoly ℚ AQ = cyclotomic m ℚ := companion_cyclotomic_minpoly m hm_pos hn
-    rw [hminpoly_eq] at hdvd1
-    exact Nat.not_dvd_of_pos_of_lt hk_pos hk (dvd_of_cyclotomic_dvd_X_pow_sub_one m k hm_pos hk_pos hdvd1)</span></code></pre>
+    <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+">let</span> <span class="lean-text">AQ</span> <span class="lean-text">:=</span> <span class="lean-text">A.map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">haeval_Q_zero</span> <span class="lean-text">:</span> <span class="lean-text">aeval</span> <span class="lean-text">AQ</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℤ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">map</span> <span class="lean-text">(</span><span class="lean-text">algebraMap</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">0</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">:</span> <span class="lean-text">AQ</span> <span class="lean-text">=</span> <span class="lean-text">(</span><span class="lean-text">Algebra.ofId</span> <span class="lean-text">ℤ</span> <span class="lean-text">ℚ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">mapMatrix</span> <span class="lean-text">A</span> <span class="lean-text">:=</span> <span class="lean-text">rfl</span>
+      <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">this</span><span class="lean-text">,</span> <span class="lean-text">aeval_map_algebraMap</span><span class="lean-text">,</span> <span class="lean-text">aeval_algHom_apply</span><span class="lean-text">,</span> <span class="lean-text">haeval_zero</span><span class="lean-text">,</span> <span class="lean-text">map_zero</span><span class="lean-text">]</span>
+    <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Polynomial.map_sub</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.map_pow</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.map_X</span><span class="lean-text">,</span> <span class="lean-text">Polynomial.map_one</span><span class="lean-text">]</span>
+      <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+hypotheses or the goal. It can have one of the forms:
+* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
+  `(location)?` matchers. It means to target the goal only.
+* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
+* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
+* `at *`: target all hypotheses and the goal
+">at</span> <span class="lean-text">haeval_Q_zero</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hdvd1</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">AQ</span> <span class="lean-text">∣</span> <span class="lean-text">(</span><span class="lean-text">X</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">-</span> <span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">ℚ</span><span class="lean-text">[</span><span class="lean-text">X</span><span class="lean-text">]</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-text">minpoly.dvd</span> <span class="lean-text">ℚ</span> <span class="lean-text">AQ</span> <span class="lean-text">haeval_Q_zero</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hminpoly_eq</span> <span class="lean-text">:</span> <span class="lean-text">minpoly</span> <span class="lean-text">ℚ</span> <span class="lean-text">AQ</span> <span class="lean-text">=</span> <span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℚ</span> <span class="lean-text">:=</span> <span class="lean-text">companion_cyclotomic_minpoly</span> <span class="lean-text">m</span> <span class="lean-text">hm_pos</span> <span class="lean-text">hn</span>
+    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">hminpoly_eq</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+hypotheses or the goal. It can have one of the forms:
+* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
+  `(location)?` matchers. It means to target the goal only.
+* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
+* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
+* `at *`: target all hypotheses and the goal
+">at</span> <span class="lean-text">hdvd1</span>
+    <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-text">Nat.not_dvd_of_pos_of_lt</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hk</span> <span class="lean-text">(</span><span class="lean-text">dvd_of_cyclotomic_dvd_X_pow_sub_one</span> <span class="lean-text">m</span> <span class="lean-text">k</span> <span class="lean-text">hm_pos</span> <span class="lean-text">hk_pos</span> <span class="lean-text">hdvd1</span><span class="lean-text">)</span></span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L110-L141" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -743,12 +1831,120 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
-    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
-    m ∈ Crystallographic.integerMatrixOrders (cyclotomic m ℤ).natDegree := by</span></code><code class="lean-proof-body"><span class="lean-plain">use companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
-  constructor
-  · exact companion_cyclotomic_orderOf m hm hn
-  · omega</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;thm:companion-cycl-mem&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
+  $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
+  with integer entries, and has order exactly $m$ by \texttt{companion\_cyclotomic\_orderOf}.
+  \uses{thm:companion-cycl-order} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- The companion matrix $C(\Phi_m)$ witnesses the membership: it is an integer matrix
+  of dimension $\deg(\Phi_m) = \varphi(m)$ with multiplicative order exactly $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span>
+    <span class="lean-text">(</span><span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  m
+
+Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
+  highlights
+but this term has type
+  highlights
+
+Note: Expected a function because this term is being applied to the argument
+  m
+
+Hint: The identifier `cyclotomic` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span></span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
+`refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
+then trying to close goals associated to the placeholders with a configurable discharger (rather
+than just `try trivial`).
+
+Examples:
+
+```lean
+example : ∃ x : Nat, x = x := by use 42
+
+example : ∃ x : Nat, ∃ y : Nat, x = y := by use 42, 42
+
+example : ∃ x : String × String, x.1 = x.2 := by use (&quot;forty-two&quot;, &quot;forty-two&quot;)
+```
+
+`use! e₁, e₂, ⋯` is similar but it applies constructors everywhere rather than just for
+goals that correspond to the last argument of a constructor. This gives the effect that
+nested constructors are being flattened out, with the supplied values being used along the
+leaves and nodes of the tree of constructors.
+With `use!` one can feed in each `42` one at a time:
+
+```lean
+example : ∃ p : Nat × Nat, p.1 = p.2 := by use! 42, 42
+
+example : ∃ p : Nat × Nat, p.1 = p.2 := by use! (42, 42)
+```
+
+The second line makes use of the fact that `use!` tries refining with the argument before
+applying a constructor. Also note that `use`/`use!` by default uses a tactic
+called `use_discharger` to discharge goals, so `use! 42` will close the goal in this example since
+`use_discharger` applies `rfl`, which as a consequence solves for the other `Nat` metavariable.
+
+These tactics take an optional discharger to handle remaining explicit `Prop` constructor arguments.
+By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
+To turn off the discharger and keep all goals, use `(discharger := skip)`.
+To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
+">use</span> <span class="lean-span lean-error" title="Unknown identifier `companion`"><span class="lean-text">companion</span></span> <span class="lean-text">(</span><span class="lean-text">cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">cyclotomic.monic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hn</span>
+  <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
+the first matching constructor, or else fails.
+">constructor</span>
+  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-span lean-error" title="Unknown identifier `companion_cyclotomic_orderOf`"><span class="lean-text">companion_cyclotomic_orderOf</span></span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span>
+  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+
+It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
+but should be effective on many problems.
+
+We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
+(and `k` a literal), along with negations of these statements.
+
+We decompose the sides of the inequalities as linear combinations of atoms.
+
+If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
+and the relevant inequalities.
+
+On the first pass, we do not perform case splits on natural subtraction.
+If `omega` fails, we recursively perform a case split on
+a natural subtraction appearing in a hypothesis, and try again.
+
+The options
+```
+omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
+```
+can be used to:
+* `splitDisjunctions`: split any disjunctions found in the context,
+  if the problem is not otherwise solvable.
+* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
+* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
+* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
+Currently, all of these are on by default.
+">omega</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L145-L158" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -836,12 +2032,173 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
-    m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ
-  have htot_pos : 0 &lt; Nat.totient m := Nat.totient_pos.mpr (by omega)
-  have hn : 0 &lt; (cyclotomic m ℤ).natDegree := by omega
-  rw [← hdeg]
-  exact companion_cyclotomic_mem_integerMatrixOrders m hm hn</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
+
+You may optionally add:
+- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
+- `statement := /-- ... -/`: The statement of the node in LaTeX.
+- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
+- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
+- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
+- `title := /-- Title -/`: The title of the node in LaTeX.
+- `notReady := true`: Whether the node is not ready.
+- `discussion := 123`: The discussion issue number of the node.
+- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
+
+For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
+
+Use `blueprint?` to show the raw data of the added node.
+">blueprint</span> <span class="lean-string">&quot;thm:mem-orders-totient&quot;</span>
+  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- For $m \geq 2$, $m \in \mathrm{Ord}_{\varphi(m)}$. This is the key
+  existence result: for every $m \geq 2$, there exists an integer matrix of dimension
+  $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.
+  \uses{thm:companion-cycl-mem} -/</span><span class="lean-text">)</span>
+  <span class="lean-text">(</span><span class="lean-keyword">proof</span> <span class="lean-text">:=</span> <span class="lean-docstring">/-- Apply the cyclotomic companion membership theorem after noting that
+  $\deg(\Phi_m) = \varphi(m)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
+<span class="lean-keyword">theorem</span> <span class="lean-text">mem_integerMatrixOrders_totient</span></code><code class="lean-proof-body"> <span class="lean-text">(</span><span class="lean-text">m</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">hm</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">≤</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:</span>
+    <span class="lean-text">m</span> <span class="lean-text">∈</span> <span class="lean-text">Crystallographic.integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">Nat.totient</span> <span class="lean-text">m</span><span class="lean-text">)</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hdeg</span> <span class="lean-text">:</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `cyclotomic`"><span class="lean-text">cyclotomic</span></span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">=</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Polynomial.natDegree_cyclotomic</span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">htot_pos</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">Nat.totient</span> <span class="lean-text">m</span> <span class="lean-text">:=</span> <span class="lean-text">Nat.totient_pos.mpr</span> <span class="lean-text">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+
+It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
+but should be effective on many problems.
+
+We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
+(and `k` a literal), along with negations of these statements.
+
+We decompose the sides of the inequalities as linear combinations of atoms.
+
+If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
+and the relevant inequalities.
+
+On the first pass, we do not perform case splits on natural subtraction.
+If `omega` fails, we recursively perform a case split on
+a natural subtraction appearing in a hypothesis, and try again.
+
+The options
+```
+omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
+```
+can be used to:
+* `splitDisjunctions`: split any disjunctions found in the context,
+  if the problem is not otherwise solvable.
+* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
+* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
+* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
+Currently, all of these are on by default.
+">omega</span><span class="lean-text">)</span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+">have</span> <span class="lean-text">hn</span> <span class="lean-text">:</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Unknown identifier `cyclotomic`"><span class="lean-text">cyclotomic</span></span> <span class="lean-text">m</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">natDegree</span> <span class="lean-text">:=</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
+
+It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
+but should be effective on many problems.
+
+We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
+(and `k` a literal), along with negations of these statements.
+
+We decompose the sides of the inequalities as linear combinations of atoms.
+
+If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
+and the relevant inequalities.
+
+On the first pass, we do not perform case splits on natural subtraction.
+If `omega` fails, we recursively perform a case split on
+a natural subtraction appearing in a hypothesis, and try again.
+
+The options
+```
+omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
+```
+can be used to:
+* `splitDisjunctions`: split any disjunctions found in the context,
+  if the problem is not otherwise solvable.
+* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
+* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
+* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
+Currently, all of these are on by default.
+">omega</span>
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hdeg</span><span class="lean-text">]</span>
+  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+">exact</span> <span class="lean-span lean-error" title="Unknown identifier `companion_cyclotomic_mem_integerMatrixOrders`"><span class="lean-text">companion_cyclotomic_mem_integerMatrixOrders</span></span> <span class="lean-text">m</span> <span class="lean-text">hm</span> <span class="lean-text">hn</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L160-L173" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
