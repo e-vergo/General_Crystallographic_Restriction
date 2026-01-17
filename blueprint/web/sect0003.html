@@ -106,33 +106,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The set of possible orders for N×N integer matrices with finite order.
-An integer `m` is in this set if there exists an N×N integer matrix `A` such that
-`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span>
-  <span class="lean-string">&quot;integerMatrixOrders-def&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
-  with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
-  $A$ with order $m$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">Set</span> <span class="lean-text">ℕ</span> 
-  <span class="lean-text">{</span><span class="lean-text">m</span> <span class="lean-text">|</span> <span class="lean-text">∃</span> <span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">,</span> <span class="lean-text">orderOf</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">m</span> <span class="lean-text">∧</span> <span class="lean-text">0</span> <span class="lean-text">&lt;</span> <span class="lean-text">m</span><span class="lean-text">}</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def integerMatrixOrders (N : ℕ) : Set ℕ :=
+  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
+  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -217,41 +193,9 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:one-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- Order $1$ is achievable in any dimension. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- The identity matrix $I$ has order $1$ in any dimension. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">one_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span> <span class="lean-text">1</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> 
-  <span class="lean-text">⟨</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-text">orderOf_one</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
-over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
-and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
-numerical expressions. It also has a relatively simple primality prover.
-">norm_num</span><span class="lean-text">⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L61-L66" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -337,61 +281,9 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For N ≥ 1, the negation of the identity matrix has order 2. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:two-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- Order $2$ is achievable for $N \geq 1$. -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
-  so it has order $2$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">two_mem_integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">NeZero</span> <span class="lean-text">N</span><span class="lean-text">]</span> <span class="lean-text">:</span> <span class="lean-text">2</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span> 
-  <span class="lean-text">⟨</span><span class="lean-text">-</span><span class="lean-text">1</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">orderOf_neg_one</span><span class="lean-text">,</span> <span class="lean-text">ringChar_matrix_int</span><span class="lean-text">]</span><span class="lean-text">;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
-over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
-and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
-numerical expressions. It also has a relatively simple primality prover.
-">norm_num</span><span class="lean-text">⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L76-L82" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -477,346 +369,25 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Monotonicity: if M &lt;= N, then any order achievable for M x M matrices is also achievable
-for N x N matrices.
-
-The construction pads the M x M matrix with an identity block in the lower-right corner. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:orders-mono&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
-  \uses{integerMatrixOrders-def} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
-  top-left block of an $N \times N$ matrix with identity in the bottom-right. The order is
-  preserved. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">integerMatrixOrders_mono</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">N</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">(</span><span class="lean-text">hMN</span> <span class="lean-text">:</span> <span class="lean-text">M</span> <span class="lean-text">≤</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span> <span class="lean-text">⊆</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  N
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">N</span></span>  <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-">intro</span> <span class="lean-span lean-error" title="Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
-
-x✝ : highlights
-integerMatrixOrders : highlights
-M N : highlights
-hMN : highlights
-⊢ highlights"><span class="lean-text">m</span></span> <span class="lean-text">hm</span>
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">integerMatrixOrders</span><span class="lean-text">,</span> <span class="lean-text">Set.mem_setOf_eq</span><span class="lean-text">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
-hypotheses or the goal. It can have one of the forms:
-* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
-  `(location)?` matchers. It means to target the goal only.
-* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
-* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
-* `at *`: target all hypotheses and the goal
-">at</span> <span class="lean-text">hm</span> <span class="lean-text">⊢</span>
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">,</span> <span class="lean-text">hA_pos</span><span class="lean-text">⟩</span>  <span class="lean-text">hm</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
+    integerMatrixOrders M ⊆ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">intro m hm
+  simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
+  obtain ⟨A, hA_ord, hA_pos⟩ := hm
   -- N = M + (N - M)
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-">let</span> <span class="lean-text">K</span>  <span class="lean-text">N</span> <span class="lean-text">-</span> <span class="lean-text">M</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-">have</span> <span class="lean-text">hN</span> <span class="lean-text">:</span> <span class="lean-text">N</span> <span class="lean-text">=</span> <span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span>  <span class="lean-text">(</span><span class="lean-text">Nat.add_sub_cancel&#x27;</span> <span class="lean-text">hMN</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span>
+  let K := N - M
+  have hN : N = M + K := (Nat.add_sub_cancel&#x27; hMN).symm
   -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-">let</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span>  <span class="lean-text">embedMatrixSum</span> <span class="lean-text">A</span>
+  let A&#x27; : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ := embedMatrixSum A
   -- Then reindex to Fin N using the equivalence
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-">let</span> <span class="lean-text">e</span> <span class="lean-text">:</span> <span class="lean-text">Fin</span> <span class="lean-text">N</span> <span class="lean-text">≃</span> <span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span>  <span class="lean-text">hN</span> <span class="lean-text">▸</span> <span class="lean-text">finSumFinEquiv.symm</span>
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-">let</span> <span class="lean-text">A&#x27;&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">N</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span>  <span class="lean-text">(</span><span class="lean-text">reindexMonoidEquiv</span> <span class="lean-text">e</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span> <span class="lean-text">A&#x27;</span>
-  <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
-`refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
-then trying to close goals associated to the placeholders with a configurable discharger (rather
-than just `try trivial`).
-
-Examples:
-
-```lean
-example : ∃ x : Nat, x = x := by use 42
-
-example : ∃ x : Nat, ∃ y : Nat, x = y := by use 42, 42
-
-example : ∃ x : String × String, x.1 = x.2 := by use (&quot;forty-two&quot;, &quot;forty-two&quot;)
-```
-
-`use! e₁, e₂, ⋯` is similar but it applies constructors everywhere rather than just for
-goals that correspond to the last argument of a constructor. This gives the effect that
-nested constructors are being flattened out, with the supplied values being used along the
-leaves and nodes of the tree of constructors.
-With `use!` one can feed in each `42` one at a time:
-
-```lean
-example : ∃ p : Nat × Nat, p.1 = p.2 := by use! 42, 42
-
-example : ∃ p : Nat × Nat, p.1 = p.2 := by use! (42, 42)
-```
-
-The second line makes use of the fact that `use!` tries refining with the argument before
-applying a constructor. Also note that `use`/`use!` by default uses a tactic
-called `use_discharger` to discharge goals, so `use! 42` will close the goal in this example since
-`use_discharger` applies `rfl`, which as a consequence solves for the other `Nat` metavariable.
-
-These tactics take an optional discharger to handle remaining explicit `Prop` constructor arguments.
-By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
-To turn off the discharger and keep all goals, use `(discharger := skip)`.
-To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
-">use</span> <span class="lean-text">A&#x27;&#x27;</span>
-  <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
-the first matching constructor, or else fails.
-">constructor</span>
-  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">A&#x27;&#x27;</span><span class="lean-text">]</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-">have</span> <span class="lean-text">h1</span> <span class="lean-text">:</span> <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-text">(</span><span class="lean-text">reindexMonoidEquiv</span> <span class="lean-text">e</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span> <span class="lean-text">A&#x27;</span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">orderOf</span> <span class="lean-text">A&#x27;</span> 
-      <span class="lean-text">MulEquiv.orderOf_eq</span> <span class="lean-text">(</span><span class="lean-text">reindexMonoidEquiv</span> <span class="lean-text">e</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span> <span class="lean-text">A&#x27;</span>
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">h1</span><span class="lean-text">,</span> <span class="lean-text">orderOf_embedMatrixSum_eq</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">]</span>
-  <span class="lean-text">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">hA_pos</span></code></pre>
+  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ finSumFinEquiv.symm
+  let A&#x27;&#x27; : Matrix (Fin N) (Fin N) ℤ := (reindexMonoidEquiv e).symm A&#x27;
+  use A&#x27;&#x27;
+  constructor
+  · simp only [A&#x27;&#x27;]
+    have h1 : orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27; :=
+      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm A&#x27;
+    rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
+  · exact hA_pos</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L156-L185" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -867,31 +438,13 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;def:blockDiag2&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span>
-    <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> 
-  <span class="lean-text">Matrix.fromBlocks</span> <span class="lean-text">A</span> <span class="lean-text">0</span> <span class="lean-text">0</span> <span class="lean-text">B</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
+  Matrix.fromBlocks A 0 0 B</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
+  Matrix.fromBlocks A 0 0 B</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L189-L195" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -976,87 +529,13 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal of identity matrices is the identity. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- Immediate from the definition of block diagonal and the identity matrix. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_one</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (1 : Matrix (Fin M) (Fin M) R)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span></span> <span class="lean-text">=</span>
-    <span class="lean-text">(</span><span class="lean-text">1</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> 
-  <span class="lean-text">Matrix.fromBlocks_one</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1142,148 +621,10 @@ Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` opt
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal preserves multiplication. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="Theorems tagged with the `simp` attribute are used by the simplifier
-(i.e., the `simp` tactic, and its variants) to simplify expressions occurring in your goals.
-We call theorems tagged with the `simp` attribute &quot;simp theorems&quot; or &quot;simp lemmas&quot;.
-Lean maintains a database/index containing all active simp theorems.
-Here is an example of a simp theorem.
-```lean
-@[simp] theorem ne_eq (a b : α) : (a ≠ b) = Not (a = b) := rfl
-```
-This simp theorem instructs the simplifier to replace instances of the term
-`a ≠ b` (e.g. `x + 0 ≠ y`) with `Not (a = b)` (e.g., `Not (x + 0 = y)`).
-The simplifier applies simp theorems in one direction only:
-if `A = B` is a simp theorem, then `simp` replaces `A`s with `B`s,
-but it doesn&#x27;t replace `B`s with `A`s. Hence a simp theorem should have the
-property that its right-hand side is &quot;simpler&quot; than its left-hand side.
-In particular, `=` and `↔` should not be viewed as symmetric operators in this situation.
-The following would be a terrible simp theorem (if it were even allowed):
-```lean
-@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
-```
-Replacing 1 with a * a⁻¹ is not a sensible default direction to travel.
-Even worse would be a theorem that causes expressions to grow without bound,
-causing simp to loop forever.
-
-By default the simplifier applies `simp` theorems to an expression `e`
-after its sub-expressions have been simplified.
-We say it performs a bottom-up simplification.
-You can instruct the simplifier to apply a theorem before its sub-expressions
-have been simplified by using the modifier `↓`. Here is an example
-```lean
-@[simp↓] theorem not_and_eq (p q : Prop) : (¬ (p ∧ q)) = (¬p ∨ ¬q) :=
-```
-
-You can instruct the simplifier to rewrite the lemma from right-to-left:
-```lean
-attribute @[simp ←] and_assoc
-```
-
-When multiple simp theorems are applicable, the simplifier uses the one with highest priority.
-The equational theorems of functions are applied at very low priority (100 and below).
-If there are several with the same priority, it is uses the &quot;most recent one&quot;. Example:
-```lean
-@[simp high] theorem cond_true (a b : α) : cond true a b = a := rfl
-@[simp low+1] theorem or_true (p : Prop) : (p ∨ True) = True :=
-  propext &lt;| Iff.intro (fun _ =&gt; trivial) (fun _ =&gt; Or.inr trivial)
-@[simp 100] theorem ite_self {d : Decidable c} (a : α) : ite c a a = a := by
-  cases d &lt;;&gt; rfl
-```
-">simp</span><span class="lean-text">,</span> <span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-mul&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- $\mathrm{diag}(AA&#x27;, BB&#x27;) = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;)$.
-  \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- Block multiplication respects the diagonal structure since off-diagonal blocks
-  are zero. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_mul</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
-    <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">B&#x27;</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (A * A&#x27;)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">*</span> <span class="lean-text">A&#x27;</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">*</span> <span class="lean-text">B&#x27;</span><span class="lean-text">)</span></span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span> <span class="lean-text">*</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A&#x27;
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A&#x27;</span> <span class="lean-text">B&#x27;</span></span> <span class="lean-span lean-error" title="`simp` made no progress"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">blockDiag2</span></span></span><span class="lean-text">,</span> <span class="lean-text">Matrix.fromBlocks_multiply</span><span class="lean-text">]</span></span>
-  <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
-The optional parameter is the depth of the recursive applications.
-This is useful when `congr` is too aggressive in breaking down the goal.
-For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
-`congr` produces the goals `⊢ x = y` and `⊢ y = x`,
-while `congr 2` produces the intended `⊢ x + y = y + x`.
-">congr</span> <span class="lean-text">1</span> <span class="lean-text">&lt;;&gt;</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">Matrix.mul_zero</span><span class="lean-text">,</span> <span class="lean-text">Matrix.zero_mul</span><span class="lean-text">,</span> <span class="lean-text">add_zero</span><span class="lean-text">,</span> <span class="lean-text">zero_add</span><span class="lean-text">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
+    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2, Matrix.fromBlocks_multiply]
+  congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1358,34 +699,17 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;def:blockDiag2-prodMonoidHom&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
-  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">def</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">)</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">:</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">×</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-text">→*</span>
-    <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span> <span class="lean-text">⊕</span> <span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span> <span class="lean-keyword">where</span>
-  <span class="lean-text">toFun</span>  <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2`"><span class="lean-text">blockDiag2</span></span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">p</span><span class="lean-text">.</span><span class="lean-text">2</span>
-  <span class="lean-text">map_one&#x27;</span>  <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_one`"><span class="lean-text">blockDiag2_one</span></span>
-  <span class="lean-text">map_mul&#x27;</span>  <span class="lean-keyword">fun</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">=&gt;</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_mul`"><span class="lean-text">blockDiag2_mul</span></span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span> <span class="lean-text">_</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
+    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
+  toFun := fun p =&gt; blockDiag2 p.1 p.2
+  map_one&#x27; := blockDiag2_one
+  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _</span></code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
+    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
+  toFun := fun p =&gt; blockDiag2 p.1 p.2
+  map_one&#x27; := blockDiag2_one
+  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L218-L227" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1472,88 +796,11 @@ Use `blueprint?` to show the raw data of the added node.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal is one iff both components are one. -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-eq-one&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
-  respective identities. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_eq_one_iff</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Zero</span> <span class="lean-text">R</span><span class="lean-text">]</span> <span class="lean-text">[</span><span class="lean-text">One</span> <span class="lean-text">R</span><span class="lean-text">]</span>
-    <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">↔</span> <span class="lean-text">A</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-text">∧</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">1</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-R : highlights
-inst✝¹ : highlights
-inst✝ : highlights
-A : highlights
-B : highlights
-⊢ highlights"> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-R : highlights
-inst✝¹ : highlights
-inst✝ : highlights
-A : highlights
-B : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-span lean-error" title="Unknown identifier `blockDiag2_one`"><span class="lean-text">blockDiag2_one</span></span></span><span class="lean-text">]</span>
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-text">blockDiag2</span><span class="lean-text">,</span> <span class="lean-text">Matrix.fromBlocks_inj</span><span class="lean-text">]</span>
-  <span class="lean-keyword" data-docs="`tauto` breaks down assumptions of the form `_ ∧ _`, `_ ∨ _`, `_ ↔ _` and `∃ _, _`
-and splits a goal of the form `_ ∧ _`, `_ ↔ _` or `∃ _, _` until it can be discharged
-using `rfl` or `solve_by_elim`.
-This is a finishing tactic: it either closes the goal or raises an error.
-
-The Lean 3 version of this tactic by default attempted to avoid classical reasoning
-where possible. This Lean 4 version makes no such attempt. The `itauto` tactic
-is designed for that purpose.
-">tauto</span></span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← blockDiag2_one]
+  simp only [blockDiag2, Matrix.fromBlocks_inj]
+  tauto</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1639,71 +886,10 @@ is designed for that purpose.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Power of block diagonal distributes to each block.
-
-(blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:blockDiag2-pow&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- By induction on $n$: the block structure is preserved under multiplication, and
-  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A&#x27;, B&#x27;) = \mathrm{diag}(AA&#x27;, BB&#x27;)$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">blockDiag2_pow</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span> <span class="lean-text">{</span><span class="lean-text">R</span> <span class="lean-text">:</span> <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. ">Type*</span><span class="lean-text">}</span> <span class="lean-text">[</span><span class="lean-text">Semiring</span> <span class="lean-text">R</span><span class="lean-text">]</span>
-    <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">R</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">k</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span><span class="lean-text">)</span> <span class="lean-text">^</span> <span class="lean-text">k</span> <span class="lean-text">=</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (A ^ k)
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">^</span> <span class="lean-text">k</span><span class="lean-text">)</span></span> <span class="lean-span lean-error" title="`simp` made no progress"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-span lean-error" title="`simp` made no progress"><span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-">simp</span> <span class="lean-keyword">only</span> <span class="lean-text">[</span><span class="lean-span lean-error" title="Invalid argument: Variable `highlights` is not a proposition or let-declaration"><span class="lean-text">blockDiag2</span></span></span><span class="lean-text">]</span></span>
-  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">Matrix.fromBlocks_diagonal_pow</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">k</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
+    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2]
+  exact Matrix.fromBlocks_diagonal_pow A B k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1795,88 +981,12 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Order of block diagonal is lcm of orders.
-
-Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
-and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;thm:orderOf-blockDiag2&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
-  \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
-  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">theorem</span> <span class="lean-text">orderOf_blockDiag2</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
-    <span class="lean-text">(</span><span class="lean-text">A</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">M</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">B</span> <span class="lean-text">:</span> <span class="lean-text">Matrix</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">Fin</span> <span class="lean-text">K</span><span class="lean-text">)</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">orderOf</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  A
-
-Hint: The identifier `blockDiag2` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span></span><span class="lean-text">)</span> <span class="lean-text">=</span> <span class="lean-text">Nat.lcm</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">A</span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">orderOf</span> <span class="lean-text">B</span><span class="lean-text">)</span>  <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-A : highlights
-B : highlights
-⊢ highlights"><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-">have</span> <span class="lean-text">hinj</span> <span class="lean-text">:</span> <span class="lean-text">Function.Injective</span> <span class="lean-text">(</span><span class="lean-span lean-error" title="Invalid field notation: Field projection operates on types of the form `C ...` where C is a constant. The expression
-  highlights
-has type `highlights` which does not have the necessary form."><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span></span></span><span class="lean-text">)</span> <span class="lean-span lean-error" title="unsolved goals
-x✝ : highlights
-blockDiag2 : highlights
-M K : highlights
-A : highlights
-B : highlights
-⊢ highlights"> <span class="lean-keyword">fun</span> <span class="lean-text">p</span> <span class="lean-text">q</span> <span class="lean-text">hpq</span> <span class="lean-text">=&gt;</span>
-    <span class="lean-text">Prod.ext</span> <span class="lean-text">(</span><span class="lean-text">Matrix.fromBlocks_inj.mp</span> <span class="lean-text">hpq</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">1</span> <span class="lean-text">(</span><span class="lean-text">Matrix.fromBlocks_inj.mp</span> <span class="lean-text">hpq</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">.</span><span class="lean-text">2</span><span class="lean-text">.</span><span class="lean-text">2</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-keyword">show</span> <span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span> <span class="lean-text">=</span> <span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span> <span class="lean-text">(</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">B</span><span class="lean-text">)</span> <span class="lean-keyword">from</span> <span class="lean-text">rfl</span><span class="lean-text">,</span>
-      <span class="lean-text">orderOf_injective</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2.prodMonoidHom</span> <span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">ℤ</span><span class="lean-text">)</span> <span class="lean-text">hinj</span> <span class="lean-text">(</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">B</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">Prod.orderOf</span><span class="lean-text">]</span></span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_blockDiag2 {M K : ℕ}
+    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
+    Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
+  rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
+      orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1966,96 +1076,12 @@ B : highlights
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- Block diagonal construction for integer matrix orders.
-    If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:lcm-mem-orders&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
-  \uses{thm:orderOf-blockDiag2} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
-  diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
-    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  K
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span></span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">Nat.lcm</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (M + K)
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span></span>  <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">A</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">,</span> <span class="lean-text">hA_pos</span><span class="lean-text">⟩</span>  <span class="lean-text">h₁</span>
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-">obtain</span> <span class="lean-text">⟨</span><span class="lean-text">B</span><span class="lean-text">,</span> <span class="lean-text">hB_ord</span><span class="lean-text">,</span> <span class="lean-text">hB_pos</span><span class="lean-text">⟩</span>  <span class="lean-text">h₂</span>
-  <span class="lean-keyword" data-docs="`refine e` behaves like `exact e`, except that named (`?x`) or unnamed (`?_`)
-holes in `e` that are not solved by unification with the main goal&#x27;s target type
-are converted into new goals, using the hole&#x27;s name, if any, as the goal case name.
-">refine</span> <span class="lean-text">⟨</span><span class="lean-text">(</span><span class="lean-text">reindexMonoidEquiv</span> <span class="lean-text">finSumFinEquiv.symm</span><span class="lean-text">)</span><span class="lean-text">.</span><span class="lean-text">symm</span> <span class="lean-text">(</span><span class="lean-text">blockDiag2</span> <span class="lean-text">A</span> <span class="lean-text">B</span><span class="lean-text">)</span><span class="lean-text">,</span> <span class="lean-text">?</span><span class="lean-text">_</span><span class="lean-text">,</span> <span class="lean-text">Nat.lcm_pos</span> <span class="lean-text">hA_pos</span> <span class="lean-text">hB_pos</span><span class="lean-text">⟩</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">MulEquiv.orderOf_eq</span><span class="lean-text">,</span> <span class="lean-text">orderOf_blockDiag2</span><span class="lean-text">,</span> <span class="lean-text">hA_ord</span><span class="lean-text">,</span> <span class="lean-text">hB_ord</span><span class="lean-text">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
+    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨A, hA_ord, hA_pos⟩ := h₁
+  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
+  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
+  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L51-L65" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -2143,62 +1169,11 @@ are converted into new goals, using the hole&#x27;s name, if any, as the goal ca
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-docstring">/-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
-    then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/</span>
-<span class="lean-text">@[</span><span class="lean-keyword" data-docs="The `blueprint` attribute tags a constant to add to the blueprint.
-
-You may optionally add:
-- `&quot;latex-label&quot;`: The LaTeX label to use for the node (default: the Lean name).
-- `statement := /-- ... -/`: The statement of the node in LaTeX.
-- `hasProof := true`: If the node has a proof part (default: true if the node is a theorem).
-- `proof := /-- ... -/`: The proof of the node in LaTeX (default: the docstrings in proof tactics).
-- `uses := [a, &quot;b&quot;]`: The dependencies of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `proofUses := [a, &quot;b&quot;]`: The dependencies of the proof of the node, as Lean constants or LaTeX labels (default: inferred from the used constants).
-- `title := /-- Title -/`: The title of the node in LaTeX.
-- `notReady := true`: Whether the node is not ready.
-- `discussion := 123`: The discussion issue number of the node.
-- `latexEnv := &quot;lemma&quot;`: The LaTeX environment to use for the node (default: &quot;theorem&quot; or &quot;definition&quot;).
-
-For more information, see [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect).
-
-Use `blueprint?` to show the raw data of the added node.
-">blueprint</span> <span class="lean-string">&quot;lem:mul-mem-orders-coprime&quot;</span>
-  <span class="lean-text">(</span><span class="lean-keyword">statement</span> <span class="lean-keyword">:=</span></code><code class="lean-proof-body"> <span class="lean-docstring">/-- Product of coprime achievable orders is achievable.
-  \uses{lem:lcm-mem-orders} -/</span><span class="lean-text">)</span>
-  <span class="lean-text">(</span><span class="lean-keyword">proof</span>  <span class="lean-docstring">/-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
-  follows from the lcm result. -/</span><span class="lean-text">)</span><span class="lean-text">]</span>
-<span class="lean-keyword">lemma</span> <span class="lean-text">mul_mem_integerMatrixOrders_of_coprime</span> <span class="lean-text">{</span><span class="lean-text">M</span> <span class="lean-text">K</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span> <span class="lean-text">:</span> <span class="lean-text">ℕ</span><span class="lean-text">}</span>
-    <span class="lean-text">(</span><span class="lean-text">h₁</span> <span class="lean-text">:</span> <span class="lean-text">m₁</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  M
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">M</span></span><span class="lean-text">)</span> <span class="lean-text">(</span><span class="lean-text">h₂</span> <span class="lean-text">:</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  K
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">K</span></span><span class="lean-text">)</span>
-    <span class="lean-text">(</span><span class="lean-text">hcop</span> <span class="lean-text">:</span> <span class="lean-text">Nat.Coprime</span> <span class="lean-text">m₁</span> <span class="lean-text">m₂</span><span class="lean-text">)</span> <span class="lean-text">:</span>
-    <span class="lean-text">m₁</span> <span class="lean-text">*</span> <span class="lean-text">m₂</span> <span class="lean-text">∈</span> <span class="lean-span lean-error" title="Function expected at
-  highlights
-but this term has type
-  highlights
-
-Note: Expected a function because this term is being applied to the argument
-  (M + K)
-
-Hint: The identifier `integerMatrixOrders` is unknown, and Lean&#x27;s `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement."><span class="lean-text">integerMatrixOrders</span> <span class="lean-text">(</span><span class="lean-text">M</span> <span class="lean-text">+</span> <span class="lean-text">K</span><span class="lean-text">)</span></span>  <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-">rw</span> <span class="lean-text">[</span><span class="lean-text">←</span> <span class="lean-text">hcop.lcm_eq_mul</span><span class="lean-text">]</span>
-  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-">exact</span> <span class="lean-text">lcm_mem_integerMatrixOrders</span> <span class="lean-text">h₁</span> <span class="lean-text">h₂</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
+    (hcop : Nat.Coprime m₁ m₂) :
+    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← hcop.lcm_eq_mul]
+  exact lcm_mem_integerMatrixOrders h₁ h₂</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
