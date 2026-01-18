@@ -5,3 +5,176 @@ a.github_link {
   color: inherit;
 }
 
+/* Override plasTeX default narrow content width for side-by-side layout */
+div.content-wrapper {
+  max-width: 1800px;  /* Much wider than default 75ch */
+}
+
+/* Side-by-side container for theorem/definition + Lean code */
+.sbs-container {
+  display: grid;
+  grid-template-columns: 75ch 1fr;  /* Standard blueprint width for LaTeX, rest for Lean */
+  gap: 3rem;  /* Gap between LaTeX and Lean columns */
+  align-items: start;
+  margin-bottom: 3rem;  /* Vertical spacing between declarations */
+  margin-left: 3rem;  /* Match gap from sidebar */
+}
+
+.sbs-latex-column,
+.sbs-lean-column {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Lean code - plain styling on page background */
+.sbs-lean-column pre.lean-code {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.sbs-lean-column pre.lean-code code {
+  font-family: inherit;
+}
+
+/* GitHub link - appears on hover only */
+.sbs-lean-column {
+  position: relative;
+}
+
+.lean-github-hover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 0.25rem;
+  color: #586069;
+}
+
+.lean-github-hover:hover {
+  color: #0366d6;
+}
+
+.sbs-lean-column:hover .lean-github-hover {
+  opacity: 1;
+}
+
+/* Proof body initially hidden, shown via JS when proof toggle is expanded */
+/* Using max-height/opacity for smooth animation instead of display:none */
+.lean-proof-body {
+  display: block;  /* block respects max-height for proper collapse */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+}
+
+.lean-proof-body.expanded {
+  max-height: 5000px;  /* Large enough for any proof */
+  opacity: 1;
+  transition: max-height 0.4s ease-in, opacity 0.3s ease-in;
+}
+
+/* Hide old sequential panel */
+.thm_body_extras {
+  display: none;
+}
+
+/* SubVerso Lean Syntax Highlighting - VSCode-inspired colors */
+.lean-keyword { color: #0000ff; }  /* Blue - keywords like def, theorem, if, then */
+.lean-const { color: #AF8700; }  /* Brown/gold - constants and functions */
+.lean-const.lean-def { font-weight: bold; }
+.lean-var { color: #0070C1; }  /* Dark blue - local variables */
+.lean-string { color: #a31515; }  /* Red - string literals */
+.lean-option { color: #795e26; }
+.lean-docstring { color: #008000; font-style: italic; }  /* Green - doc comments */
+.lean-sort { color: #267f99; }  /* Teal - Type, Prop, Sort */
+.lean-level { color: #098658; }  /* Green - universe levels */
+.lean-module { color: #795e26; }
+.lean-expr { color: inherit; }
+.lean-text { color: inherit; }
+.lean-sorry { color: #ff0000; background-color: #ffeaea; font-weight: bold; }
+
+/* Lexical token highlighting (regex-based) */
+.lean-number { color: #098658; }  /* Green - numbers */
+.lean-operator { color: #000000; }  /* Black - operators */
+.lean-comment { color: #008000; font-style: italic; }  /* Green - comments */
+
+/* Rainbow brackets - VSCode light theme colors (One Light inspired) */
+.lean-bracket-1 { color: #d000ff; }  /* DarkGoldenrod - saturated gold */
+.lean-bracket-2 { color: #5126ff; }  /* Magenta/Purple */
+.lean-bracket-3 { color: #0184BC; }  /* Cyan */
+.lean-bracket-4 { color: #4078F2; }  /* Blue */
+.lean-bracket-5 { color: #50A14F; }  /* Green */
+.lean-bracket-6 { color: #E45649; }  /* Red */
+
+/* Message spans */
+.lean-span { }
+.lean-error { text-decoration: wavy underline #c82829; }
+.lean-warning { text-decoration: wavy underline #eab700; }
+.lean-info { text-decoration: underline dotted #4271ae; }
+
+/* Point markers */
+.lean-point { display: inline-block; width: 0; height: 0; }
+.lean-point-error::before { content: "●"; color: #c82829; font-size: 0.7em; }
+.lean-point-warning::before { content: "●"; color: #eab700; font-size: 0.7em; }
+.lean-point-info::before { content: "●"; color: #4271ae; font-size: 0.7em; }
+
+/* Goals display */
+.lean-tactic { cursor: pointer; }
+.lean-goals {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 4px 0;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+.lean-goal {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.lean-goal:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.lean-goal-header {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+.lean-hypotheses {
+  margin-left: 8px;
+}
+.lean-hypothesis {
+  margin: 2px 0;
+}
+.lean-hyp-names { color: #c82829; }
+.lean-hyp-colon { color: #666; }
+.lean-conclusion {
+  margin-top: 4px;
+}
+.lean-turnstile {
+  color: #666;
+  margin-right: 4px;
+}
+.lean-goal-message {
+  color: #718c00;
+  font-style: italic;
+}
+
+/* Error rendering */
+.lean-render-error {
+  color: #c82829;
+  font-style: italic;
+}

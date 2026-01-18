@@ -6,17 +6,17 @@ defaultTargets = ["Crystallographic"]
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "v4.26.0"
+rev = "v4.27.0-rc1"
 
 [[require]]
 name = "LeanArchitect"
-git = "https://github.com/hanwenzhu/LeanArchitect.git"
-rev = "v4.26.0"
+git = "https://github.com/e-vergo/LeanArchitect.git"
+rev = "main"
 
 [[require]]
 name = "doc-gen4"
 scope = "leanprover"
-rev = "v4.26.0"
+rev = "v4.27.0-rc1"
 
 [[lean_lib]]
 name = "Crystallographic"
