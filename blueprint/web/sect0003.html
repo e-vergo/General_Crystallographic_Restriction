@@ -101,13 +101,36 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>    The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
+    <p>      The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def integerMatrixOrders (N : ℕ) : Set ℕ :=
-  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-const lean-def" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">N</span> : ℕ<span class="lean-bracket-1">)</span> : <span class="lean-const" data-name="Set" data-signature="Set.{u} (α : Type u) : Type u" data-docs="A set is a collection of elements of some type `α`.
+
+Although `Set` is defined as `α → Prop`, this is an implementation detail which should not be
+relied on. Instead, `setOf` and membership of a set (`∈`) should be used to convert between sets
+and predicates.
+" title="Set.{u} (α : Type u) : Type u
+A set is a collection of elements of some type `α`....">Set</span> ℕ :=
+  <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">m</span> | <span class="lean-operator">∃</span> <span class="lean-var" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">A</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-2">)</span> ℤ, <span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-var" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">A</span> = <span class="lean-var" data-type="ℕ" title="ℕ">m</span> <span class="lean-operator">∧</span> <span class="lean-expr" data-type="ℕ" title="ℕ">0</span> &lt; <span class="lean-var" data-type="ℕ" title="ℕ">m</span><span class="lean-bracket-1">}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -177,7 +200,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     Order \(1\) is achievable in any dimension. </p>
+    <p>        Order \(1\) is achievable in any dimension. </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000026">
@@ -194,9 +217,20 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
-  ⟨1, orderOf_one, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : 1 ∈ integerMatrixOrders N :=
-  ⟨1, orderOf_one, by norm_num⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.one_mem_integerMatrixOrders" data-signature="Crystallographic.one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N" data-docs="The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. " title="Crystallographic.one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N
+The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. ">one_mem_integerMatrixOrders</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">N</span> : ℕ<span class="lean-bracket-1">)</span> : <span class="lean-expr" data-type="ℕ" title="ℕ">1</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span> :=</code><code class="lean-proof-body">
+  <span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟨</span><span class="lean-expr" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">1</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> <span class="lean-const" data-name="orderOf_one" data-signature="orderOf_one.{u_1} {G : Type u_1} [Monoid G] : orderOf 1 = 1" title="orderOf_one.{u_1} {G : Type u_1} [Monoid G] : orderOf 1 = 1">orderOf_one</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
+over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
+and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
+numerical expressions. It also has a relatively simple primality prover.
+" title="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`">norm_num</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L61-L66" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -289,7 +323,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     Order \(2\) is achievable for \(N \geq 1\). </p>
+    <p>        Order \(2\) is achievable for \(N \geq 1\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000027">
@@ -306,9 +340,41 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
-  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
-  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.two_mem_integerMatrixOrders" data-signature="Crystallographic.two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N" data-docs="For N ≥ 1, the negation of the identity matrix has order 2. " title="Crystallographic.two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N
+For N ≥ 1, the negation of the identity matrix has order 2. ">two_mem_integerMatrixOrders</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">N</span> : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="NeZero" data-signature="NeZero.{u_1} {R : Type u_1} [Zero R] (n : R) : Prop" data-docs="A type-class version of `n ≠ 0`.  " title="NeZero.{u_1} {R : Type u_1} [Zero R] (n : R) : Prop
+A type-class version of `n ≠ 0`.  ">NeZero</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-1">]</span> : <span class="lean-expr" data-type="ℕ" title="ℕ">2</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span> :=</code><code class="lean-proof-body">
+  <span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟨</span>-<span class="lean-expr" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">1</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="orderOf_neg_one" data-signature="orderOf_neg_one.{u_1} {R : Type u_1} [Ring R] [Nontrivial R] : orderOf (-1) = if ringChar R = 2 then 1 else 2" title="orderOf_neg_one.{u_1} {R : Type u_1} [Ring R] [Nontrivial R] : orderOf (-1) = if ringChar R = 2 then 1 else 2">orderOf_neg_one</span>, <span class="lean-const" data-name="Crystallographic.ringChar_matrix_int" data-signature="Crystallographic.ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N) ℤ) = 0" data-docs="The ring characteristic of integer matrices is 0 for N ≥ 1. " title="Crystallographic.ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N) ℤ) = 0
+The ring characteristic of integer matrices is 0 for N ≥ 1. ">ringChar_matrix_int</span><span class="lean-bracket-1">]</span>; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
+over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
+and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
+numerical expressions. It also has a relatively simple primality prover.
+" title="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`">norm_num</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L76-L82" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -401,7 +467,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+    <p>        \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000028">
@@ -418,25 +484,415 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
-    integerMatrixOrders M ⊆ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">intro m hm
-  simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
-  obtain ⟨A, hA_ord, hA_pos⟩ := hm
-  -- N = M + (N - M)
-  let K := N - M
-  have hN : N = M + K := (Nat.add_sub_cancel&#x27; hMN).symm
-  -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
-  let A&#x27; : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ := embedMatrixSum A
-  -- Then reindex to Fin N using the equivalence
-  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ finSumFinEquiv.symm
-  let A&#x27;&#x27; : Matrix (Fin N) (Fin N) ℤ := (reindexMonoidEquiv e).symm A&#x27;
-  use A&#x27;&#x27;
-  constructor
-  · simp only [A&#x27;&#x27;]
-    have h1 : orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27; :=
-      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm A&#x27;
-    rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
-  · exact hA_pos</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-const lean-def" data-name="Crystallographic.integerMatrixOrders_mono" data-signature="Crystallographic.integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) : integerMatrixOrders M ⊆ integerMatrixOrders N" data-docs="Monotonicity: if M &lt;= N, then any order achievable for M x M matrices is also achievable
+for N x N matrices.
+
+The construction pads the M x M matrix with an identity block in the lower-right corner. " title="Crystallographic.integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) : integerMatrixOrders M ⊆ integerMatrixOrders N
+Monotonicity: if M &lt;= N, then any order achievable for M x M matrices is also achievable...">integerMatrixOrders_mono</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="M ≤ N" title="M ≤ N">hMN</span> : <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">≤</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊆</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
+For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
+be a `let` or function type.
+
+* `intro` by itself introduces one anonymous hypothesis, which can be accessed
+  by e.g. `assumption`. It is equivalent to `intro _`.
+* `intro x y` introduces two hypotheses and names them. Individual hypotheses
+  can be anonymized via `_`, given a type ascription, or matched against a pattern:
+  ```lean
+  -- ... ⊢ α × β → ...
+  intro (a, b)
+  -- ..., a : α, b : β ⊢ ...
+  ```
+* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
+  is a variable.
+* Alternatively, `intro` can be combined with pattern matching much like `fun`:
+  ```lean
+  intro
+  | n + 1, 0 =&gt; tac
+  | ...
+  ```
+" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> <span class="lean-var" data-type="ℕ" title="ℕ">m</span> <span class="lean-var" data-type="m ∈ integerMatrixOrders M" title="m ∈ integerMatrixOrders M">hm</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span>, <span class="lean-const" data-name="Set.mem_setOf_eq" data-signature="Set.mem_setOf_eq.{u} {α : Type u} {x : α} {p : α → Prop} : (x ∈ {y | p y}) = p x" title="Set.mem_setOf_eq.{u} {α : Type u} {x : α} {p : α → Prop} : (x ∈ {y | p y}) = p x">Set.mem_setOf_eq</span><span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
+hypotheses or the goal. It can have one of the forms:
+* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
+  `(location)?` matchers. It means to target the goal only.
+* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
+* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
+* `at *`: target all hypotheses and the goal
+" title="Location specifications are used by many tactics that can operate on either the">at</span> <span class="lean-var" data-type="m ∈ integerMatrixOrders M" title="m ∈ integerMatrixOrders M">hm</span> <span class="lean-operator">⊢</span>
+  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span>, <span class="lean-var" data-type="orderOf A = m" title="orderOf A = m">hA_ord</span>, <span class="lean-var" data-type="0 &lt; m" title="0 &lt; m">hA_pos</span><span class="lean-bracket-1">⟩</span> := <span class="lean-var" data-type="∃ A, orderOf A = m ∧ 0 &lt; m" title="∃ A, orderOf A = m ∧ 0 &lt; m">hm</span>
+  <span class="lean-comment">-- N = M + </span><span class="lean-bracket-1">(</span>N - M<span class="lean-bracket-1">)</span>
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> := <span class="lean-var" data-type="ℕ" title="ℕ">N</span> - <span class="lean-var" data-type="ℕ" title="ℕ">M</span>
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> <span class="lean-var" data-type="N = M + K" title="N = M + K">hN</span> : <span class="lean-var" data-type="ℕ" title="ℕ">N</span> = <span class="lean-var" data-type="ℕ" title="ℕ">M</span> + <span class="lean-var" data-type="ℕ" title="ℕ">K</span> := <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Nat.add_sub_cancel&#x27;" data-signature="Nat.add_sub_cancel&#x27; {n m : ℕ} (h : m ≤ n) : m + (n - m) = n" title="Nat.add_sub_cancel&#x27; {n m : ℕ} (h : m ≤ n) : m + (n - m) = n">Nat.add_sub_cancel&#x27;</span> <span class="lean-var" data-type="M ≤ N" title="M ≤ N">hMN</span><span class="lean-bracket-1">)</span>.<span class="lean-const" data-name="Eq.symm" data-signature="Eq.symm.{u} {α : Sort u} {a b : α} (h : a = b) : b = a" data-docs="Equality is symmetric: if `a = b` then `b = a`.
+
+Because this is in the `Eq` namespace, if you have a variable `h : a = b`,
+`h.symm` can be used as shorthand for `Eq.symm h` as a proof of `b = a`.
+
+For more information: [Equality](https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#equality)
+" title="Eq.symm.{u} {α : Sort u} {a b : α} (h : a = b) : b = a
+Equality is symmetric: if `a = b` then `b = a`....">symm</span>
+  <span class="lean-comment">-- First embed A into </span><span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span>-indexed matrix
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> <span class="lean-var" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ">A&#x27;</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> ℤ := <span class="lean-const" data-name="Crystallographic.embedMatrixSum" data-signature="Crystallographic.embedMatrixSum.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] (A : Matrix (Fin M) (Fin M) R) :
+  Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The canonical block diagonal embedding of an M×M matrix into an (M+K)×(M+K) matrix
+using Sum types. Places the matrix in the upper-left block and identity in the lower-right. " title="Crystallographic.embedMatrixSum.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] (A : Matrix (Fin M) (Fin M) R) :
+  Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The canonical block diagonal embedding of an M×M matrix into an (M+K)×(M+K) matrix...">embedMatrixSum</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span>
+  <span class="lean-comment">-- Then reindex to Fin N using the equivalence</span>
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> <span class="lean-var" data-type="Fin N ≃ Fin M ⊕ Fin K" title="Fin N ≃ Fin M ⊕ Fin K">e</span> : <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span> <span class="lean-operator">≃</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> := <span class="lean-var" data-type="N = M + K" title="N = M + K">hN</span> ▸ <span class="lean-const" data-name="finSumFinEquiv" data-signature="finSumFinEquiv {m n : ℕ} : Fin m ⊕ Fin n ≃ Fin (m + n)" data-docs="Equivalence between `Fin m ⊕ Fin n` and `Fin (m + n)` " title="finSumFinEquiv {m n : ℕ} : Fin m ⊕ Fin n ≃ Fin (m + n)
+Equivalence between `Fin m ⊕ Fin n` and `Fin (m + n)` ">finSumFinEquiv</span>.<span class="lean-const" data-name="Equiv.symm" data-signature="Equiv.symm.{u, v} {α : Sort u} {β : Sort v} (e : α ≃ β) : β ≃ α" data-docs="Inverse of an equivalence `e : α ≃ β`. " title="Equiv.symm.{u, v} {α : Sort u} {β : Sort v} (e : α ≃ β) : β ≃ α
+Inverse of an equivalence `e : α ≃ β`. ">symm</span>
+  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
+The definition can be unfolded, unlike definitions introduced by `have`.
+
+* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
+* `let x := e` uses the type of `e` for `t`.
+* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
+* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that let only one applicable constructor.
+  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
+  local variables `x : α`, `y : β`, and `z : γ`.
+* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `let` term.
+
+## Properties and relations
+
+* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
+  such as `simp`, `dsimp`, `unfold`, and `subst`.
+* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
+  The tactic might fail if the local context depends on the value of the variable.
+* The `let` tactic is preferred for data (non-propositions).
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> <span class="lean-var" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">A&#x27;&#x27;</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">N</span><span class="lean-bracket-1">)</span> ℤ := <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.reindexMonoidEquiv" data-signature="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R" data-docs="Reindexing defines a monoid isomorphism.
+
+Given an equivalence e : m ≃ n between index types, this provides an isomorphism
+between the corresponding matrix monoids that preserves multiplication.
+
+Note: Mathlib has `Matrix.reindexAlgEquiv` which provides an algebra equivalence,
+but we only need the multiplicative structure here. Using `MulEquiv` directly
+avoids requiring unnecessary algebra instances and keeps the API minimal. " title="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R
+Reindexing defines a monoid isomorphism....">reindexMonoidEquiv</span> <span class="lean-var" data-type="Fin N ≃ Fin M ⊕ Fin K" title="Fin N ≃ Fin M ⊕ Fin K">e</span><span class="lean-bracket-1">)</span>.<span class="lean-const" data-name="MulEquiv.symm" data-signature="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M" data-docs="The inverse of an isomorphism is an isomorphism. " title="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M
+The inverse of an isomorphism is an isomorphism. ">symm</span> <span class="lean-var" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ">A&#x27;</span>
+  <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
+`refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
+then trying to close goals associated to the placeholders with a configurable discharger (rather
+than just `try trivial`).
+
+Examples:
+
+```lean
+example : ∃ x : Nat, x = x := by use 42
+
+example : ∃ x : Nat, ∃ y : Nat, x = y := by use 42, 42
+
+example : ∃ x : String × String, x.1 = x.2 := by use (&quot;forty-two&quot;, &quot;forty-two&quot;)
+```
+
+`use! e₁, e₂, ⋯` is similar but it applies constructors everywhere rather than just for
+goals that correspond to the last argument of a constructor. This gives the effect that
+nested constructors are being flattened out, with the supplied values being used along the
+leaves and nodes of the tree of constructors.
+With `use!` one can feed in each `42` one at a time:
+
+```lean
+example : ∃ p : Nat × Nat, p.1 = p.2 := by use! 42, 42
+
+example : ∃ p : Nat × Nat, p.1 = p.2 := by use! (42, 42)
+```
+
+The second line makes use of the fact that `use!` tries refining with the argument before
+applying a constructor. Also note that `use`/`use!` by default uses a tactic
+called `use_discharger` to discharge goals, so `use! 42` will close the goal in this example since
+`use_discharger` applies `rfl`, which as a consequence solves for the other `Nat` metavariable.
+
+These tactics take an optional discharger to handle remaining explicit `Prop` constructor arguments.
+By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
+To turn off the discharger and keep all goals, use `(discharger := skip)`.
+To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
+" title="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic">use</span> <span class="lean-var" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">A&#x27;&#x27;</span>
+  <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
+the first matching constructor, or else fails.
+" title="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with">constructor</span>
+  <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-var" data-type="Matrix (Fin N) (Fin N) ℤ" title="Matrix (Fin N) (Fin N) ℤ">A&#x27;&#x27;</span><span class="lean-bracket-1">]</span>
+    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> <span class="lean-var" data-type="orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27;" title="orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27;">h1</span> : <span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-bracket-1">(</span><span class="lean-bracket-2">(</span><span class="lean-const" data-name="Crystallographic.reindexMonoidEquiv" data-signature="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R" data-docs="Reindexing defines a monoid isomorphism.
+
+Given an equivalence e : m ≃ n between index types, this provides an isomorphism
+between the corresponding matrix monoids that preserves multiplication.
+
+Note: Mathlib has `Matrix.reindexAlgEquiv` which provides an algebra equivalence,
+but we only need the multiplicative structure here. Using `MulEquiv` directly
+avoids requiring unnecessary algebra instances and keeps the API minimal. " title="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R
+Reindexing defines a monoid isomorphism....">reindexMonoidEquiv</span> <span class="lean-var" data-type="Fin N ≃ Fin M ⊕ Fin K" title="Fin N ≃ Fin M ⊕ Fin K">e</span><span class="lean-bracket-2">)</span>.<span class="lean-const" data-name="MulEquiv.symm" data-signature="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M" data-docs="The inverse of an isomorphism is an isomorphism. " title="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M
+The inverse of an isomorphism is an isomorphism. ">symm</span> <span class="lean-var" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ">A&#x27;</span><span class="lean-bracket-1">)</span> = <span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-var" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ">A&#x27;</span> :=
+      <span class="lean-const" data-name="MulEquiv.orderOf_eq" data-signature="MulEquiv.orderOf_eq.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (e : G ≃* H) (x : G) :
+  orderOf (e x) = orderOf x" data-docs="A multiplicative equivalence preserves orders of elements. " title="MulEquiv.orderOf_eq.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (e : G ≃* H) (x : G) :
+  orderOf (e x) = orderOf x
+A multiplicative equivalence preserves orders of elements. ">MulEquiv.orderOf_eq</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.reindexMonoidEquiv" data-signature="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R" data-docs="Reindexing defines a monoid isomorphism.
+
+Given an equivalence e : m ≃ n between index types, this provides an isomorphism
+between the corresponding matrix monoids that preserves multiplication.
+
+Note: Mathlib has `Matrix.reindexAlgEquiv` which provides an algebra equivalence,
+but we only need the multiplicative structure here. Using `MulEquiv` directly
+avoids requiring unnecessary algebra instances and keeps the API minimal. " title="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R
+Reindexing defines a monoid isomorphism....">reindexMonoidEquiv</span> <span class="lean-var" data-type="Fin N ≃ Fin M ⊕ Fin K" title="Fin N ≃ Fin M ⊕ Fin K">e</span><span class="lean-bracket-1">)</span>.<span class="lean-const" data-name="MulEquiv.symm" data-signature="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M" data-docs="The inverse of an isomorphism is an isomorphism. " title="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M
+The inverse of an isomorphism is an isomorphism. ">symm</span> <span class="lean-var" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ">A&#x27;</span>
+    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-var" data-type="orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27;" title="orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27;">h1</span>, <span class="lean-const" data-name="Crystallographic.orderOf_embedMatrixSum_eq" data-signature="Crystallographic.orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
+  orderOf (embedMatrixSum A) = orderOf A" data-docs="The embedding preserves order. " title="Crystallographic.orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
+  orderOf (embedMatrixSum A) = orderOf A
+The embedding preserves order. ">orderOf_embedMatrixSum_eq</span>, <span class="lean-var" data-type="orderOf A = m" title="orderOf A = m">hA_ord</span><span class="lean-bracket-1">]</span>
+  <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> <span class="lean-var" data-type="0 &lt; m" title="0 &lt; m">hA_pos</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L156-L185" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -506,15 +962,70 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>    Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
+    <p>      Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
-    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
-    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
-  Matrix.fromBlocks A 0 0 B</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Zero" data-signature="Zero.{u} (α : Type u) : Type u" data-docs="A type with a zero element. " title="Zero.{u} (α : Type u) : Type u
+A type with a zero element. ">Zero</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> :=
+  <span class="lean-const" data-name="Matrix.fromBlocks" data-signature="Matrix.fromBlocks.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type u_12}
+  (A : Matrix n l α) (B : Matrix n m α) (C : Matrix o l α) (D : Matrix o m α) : Matrix (n ⊕ o) (l ⊕ m) α" data-docs="We can form a single large matrix by flattening smaller &#x27;block&#x27; matrices of compatible
+dimensions. " title="Matrix.fromBlocks.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type u_12}
+  (A : Matrix n l α) (B : Matrix n m α) (C : Matrix o l α) (D : Matrix o m α) : Matrix (n ⊕ o) (l ⊕ m) α
+We can form a single large matrix by flattening smaller &#x27;block&#x27; matrices of compatible...">Matrix.fromBlocks</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-expr" data-type="Matrix (Fin M) (Fin K) R" title="Matrix (Fin M) (Fin K) R">0</span> <span class="lean-expr" data-type="Matrix (Fin K) (Fin M) R" title="Matrix (Fin K) (Fin M) R">0</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
   Matrix.fromBlocks A 0 0 B</span></code></pre>
@@ -586,7 +1097,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
+    <p>        \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000029">
@@ -603,13 +1114,65 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
-    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
-    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
-  Matrix.fromBlocks_one</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R] [One R] :
-    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
-    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
-  Matrix.fromBlocks_one</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2_one" data-signature="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1" data-docs="Block diagonal of identity matrices is the identity. " title="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1
+Block diagonal of identity matrices is the identity. ">blockDiag2_one</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Zero" data-signature="Zero.{u} (α : Type u) : Type u" data-docs="A type with a zero element. " title="Zero.{u} (α : Type u) : Type u
+A type with a zero element. ">Zero</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="One" data-signature="One.{u} (α : Type u) : Type u" data-docs="A type with a &quot;one&quot; element. " title="One.{u} (α : Type u) : Type u
+A type with a &quot;one&quot; element. ">One</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span> :
+    <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-bracket-1">(</span><span class="lean-expr" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">1</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-expr" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">1</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> =
+    <span class="lean-bracket-1">(</span><span class="lean-expr" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R">1</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body">
+  <span class="lean-const" data-name="Matrix.fromBlocks_one" data-signature="Matrix.fromBlocks_one.{u_1, u_2, u_12} {l : Type u_1} {m : Type u_2} {α : Type u_12} [DecidableEq l] [DecidableEq m]
+  [Zero α] [One α] : fromBlocks 1 0 0 1 = 1" title="Matrix.fromBlocks_one.{u_1, u_2, u_12} {l : Type u_1} {m : Type u_2} {α : Type u_12} [DecidableEq l] [DecidableEq m]
+  [Zero α] [One α] : fromBlocks 1 0 0 1 = 1">Matrix.fromBlocks_one</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -702,7 +1265,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
+    <p>        \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000030">
@@ -719,10 +1282,110 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
-    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2, Matrix.fromBlocks_multiply]
-  congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2_mul" data-signature="Crystallographic.blockDiag2_mul.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A A&#x27; : Matrix (Fin M) (Fin M) R)
+  (B B&#x27; : Matrix (Fin K) (Fin K) R) : blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27;" data-docs="Block diagonal preserves multiplication. " title="Crystallographic.blockDiag2_mul.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A A&#x27; : Matrix (Fin M) (Fin M) R)
+  (B B&#x27; : Matrix (Fin K) (Fin K) R) : blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27;
+Block diagonal preserves multiplication. ">blockDiag2_mul</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Semiring" data-signature="Semiring.{u} (α : Type u) : Type u" data-docs="A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is
+commutative and associative, multiplication is associative and left and right distributive over
+addition, and `0` and `1` are additive and multiplicative identities. " title="Semiring.{u} (α : Type u) : Type u
+A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is...">Semiring</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A&#x27;</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B&#x27;</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> * <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A&#x27;</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> * <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B&#x27;</span><span class="lean-bracket-1">)</span> = <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> * <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A&#x27;</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B&#x27;</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span>, <span class="lean-const" data-name="Matrix.fromBlocks_multiply" data-signature="Matrix.fromBlocks_multiply.{u_1, u_2, u_3, u_4, u_5, u_6, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3}
+  {o : Type u_4} {p : Type u_5} {q : Type u_6} {α : Type u_12} [Fintype l] [Fintype m] [NonUnitalNonAssocSemiring α]
+  (A : Matrix n l α) (B : Matrix n m α) (C : Matrix o l α) (D : Matrix o m α) (A&#x27; : Matrix l p α) (B&#x27; : Matrix l q α)
+  (C&#x27; : Matrix m p α) (D&#x27; : Matrix m q α) :
+  fromBlocks A B C D * fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; =
+    fromBlocks (A * A&#x27; + B * C&#x27;) (A * B&#x27; + B * D&#x27;) (C * A&#x27; + D * C&#x27;) (C * B&#x27; + D * D&#x27;)" title="Matrix.fromBlocks_multiply.{u_1, u_2, u_3, u_4, u_5, u_6, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3}
+  {o : Type u_4} {p : Type u_5} {q : Type u_6} {α : Type u_12} [Fintype l] [Fintype m] [NonUnitalNonAssocSemiring α]
+  (A : Matrix n l α) (B : Matrix n m α) (C : Matrix o l α) (D : Matrix o m α) (A&#x27; : Matrix l p α) (B&#x27; : Matrix l q α)
+  (C&#x27; : Matrix m p α) (D&#x27; : Matrix m q α) :
+  fromBlocks A B C D * fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; =
+    fromBlocks (A * A&#x27; + B * C&#x27;) (A * B&#x27; + B * D&#x27;) (C * A&#x27; + D * C&#x27;) (C * B&#x27; + D * D&#x27;)">Matrix.fromBlocks_multiply</span><span class="lean-bracket-1">]</span>
+  <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
+The optional parameter is the depth of the recursive applications.
+This is useful when `congr` is too aggressive in breaking down the goal.
+For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
+`congr` produces the goals `⊢ x = y` and `⊢ y = x`,
+while `congr 2` produces the intended `⊢ x + y = y + x`.
+" title="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.">congr</span> <span class="lean-number">1</span> &lt;;&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Matrix.mul_zero" data-signature="Matrix.mul_zero.{v, u_2, u_3, u_4} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type v}
+  [NonUnitalNonAssocSemiring α] [Fintype n] (M : Matrix m n α) : M * 0 = 0" title="Matrix.mul_zero.{v, u_2, u_3, u_4} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type v}
+  [NonUnitalNonAssocSemiring α] [Fintype n] (M : Matrix m n α) : M * 0 = 0">Matrix.mul_zero</span>, <span class="lean-const" data-name="Matrix.zero_mul" data-signature="Matrix.zero_mul.{v, u_1, u_2, u_3} {l : Type u_1} {m : Type u_2} {n : Type u_3} {α : Type v}
+  [NonUnitalNonAssocSemiring α] [Fintype m] (M : Matrix m n α) : 0 * M = 0" title="Matrix.zero_mul.{v, u_1, u_2, u_3} {l : Type u_1} {m : Type u_2} {n : Type u_3} {α : Type v}
+  [NonUnitalNonAssocSemiring α] [Fintype m] (M : Matrix m n α) : 0 * M = 0">Matrix.zero_mul</span>, <span class="lean-const" data-name="add_zero" data-signature="add_zero.{u} {M : Type u} [AddZeroClass M] (a : M) : a + 0 = a" title="add_zero.{u} {M : Type u} [AddZeroClass M] (a : M) : a + 0 = a">add_zero</span>, <span class="lean-const" data-name="zero_add" data-signature="zero_add.{u} {M : Type u} [AddZeroClass M] (a : M) : 0 + a = a" title="zero_add.{u} {M : Type u} [AddZeroClass M] (a : M) : 0 + a = a">zero_add</span><span class="lean-bracket-1">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -816,17 +1479,82 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>     The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
+    <p>       The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
-    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
-    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
-  toFun := fun p =&gt; blockDiag2 p.1 p.2
-  map_one&#x27; := blockDiag2_one
-  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _</span></code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2.prodMonoidHom" data-signature="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. " title="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. ">blockDiag2.prodMonoidHom</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Semiring" data-signature="Semiring.{u} (α : Type u) : Type u" data-docs="A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is
+commutative and associative, multiplication is associative and left and right distributive over
+addition, and `0` and `1` are additive and multiplicative identities. " title="Semiring.{u} (α : Type u) : Type u
+A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is...">Semiring</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span> :
+    <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-1">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> <span class="lean-operator">×</span> <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> <span class="lean-operator">→</span>*
+    <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-operator">⊕</span> <span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> <span class="lean-keyword">where</span>
+  <span class="lean-const" data-name="OneHom.toFun" data-signature="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R → Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The underlying function " title="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R → Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The underlying function ">toFun</span> := <span class="lean-keyword">fun</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R" title="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R">p</span> =&gt; <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R" title="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R">p</span>.<span class="lean-number">1</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R" title="Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R">p</span>.<span class="lean-number">2</span>
+  <span class="lean-const" data-name="OneHom.map_one&#x27;" data-signature="blockDiag2 1 1 = 1" data-docs="The proposition that the function preserves 1 " title="blockDiag2 1 1 = 1
+The proposition that the function preserves 1 ">map_one&#x27;</span> := <span class="lean-const" data-name="Crystallographic.blockDiag2_one" data-signature="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1" data-docs="Block diagonal of identity matrices is the identity. " title="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1
+Block diagonal of identity matrices is the identity. ">blockDiag2_one</span>
+  <span class="lean-const" data-name="MonoidHom.map_mul&#x27;" data-signature="∀ (x x_1 : Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R),
+  blockDiag2 (x.1 * x_1.1) (x.2 * x_1.2) = blockDiag2 x.1 x.2 * blockDiag2 x_1.1 x_1.2" data-docs="The proposition that the function preserves multiplication " title="∀ (x x_1 : Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R),
+  blockDiag2 (x.1 * x_1.1) (x.2 * x_1.2) = blockDiag2 x.1 x.2 * blockDiag2 x_1.1 x_1.2
+The proposition that the function preserves multiplication ">map_mul&#x27;</span> := <span class="lean-keyword">fun</span> _ _ =&gt; <span class="lean-const" data-name="Crystallographic.blockDiag2_mul" data-signature="Crystallographic.blockDiag2_mul.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A A&#x27; : Matrix (Fin M) (Fin M) R)
+  (B B&#x27; : Matrix (Fin K) (Fin K) R) : blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27;" data-docs="Block diagonal preserves multiplication. " title="Crystallographic.blockDiag2_mul.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A A&#x27; : Matrix (Fin M) (Fin M) R)
+  (B B&#x27; : Matrix (Fin K) (Fin K) R) : blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27;
+Block diagonal preserves multiplication. ">blockDiag2_mul</span> _ _ _ _</code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
   toFun := fun p =&gt; blockDiag2 p.1 p.2
@@ -902,7 +1630,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
+    <p>        \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000031">
@@ -919,11 +1647,82 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
-    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
-    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← blockDiag2_one]
-  simp only [blockDiag2, Matrix.fromBlocks_inj]
-  tauto</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2_eq_one_iff" data-signature="Crystallographic.blockDiag2_eq_one_iff.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1" data-docs="Block diagonal is one iff both components are one. " title="Crystallographic.blockDiag2_eq_one_iff.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1
+Block diagonal is one iff both components are one. ">blockDiag2_eq_one_iff</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Zero" data-signature="Zero.{u} (α : Type u) : Type u" data-docs="A type with a zero element. " title="Zero.{u} (α : Type u) : Type u
+A type with a zero element. ">Zero</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="One" data-signature="One.{u} (α : Type u) : Type u" data-docs="A type with a &quot;one&quot; element. " title="One.{u} (α : Type u) : Type u
+A type with a &quot;one&quot; element. ">One</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> = <span class="lean-expr" data-type="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" title="Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R">1</span> <span class="lean-operator">↔</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> = <span class="lean-expr" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">1</span> <span class="lean-operator">∧</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> = <span class="lean-expr" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">1</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> <span class="lean-const" data-name="Crystallographic.blockDiag2_one" data-signature="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1" data-docs="Block diagonal of identity matrices is the identity. " title="Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1
+Block diagonal of identity matrices is the identity. ">blockDiag2_one</span><span class="lean-bracket-1">]</span>
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span>, <span class="lean-const" data-name="Matrix.fromBlocks_inj" data-signature="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  fromBlocks A B C D = fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;" title="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  fromBlocks A B C D = fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;">Matrix.fromBlocks_inj</span><span class="lean-bracket-1">]</span>
+  <span class="lean-keyword" data-docs="`tauto` breaks down assumptions of the form `_ ∧ _`, `_ ∨ _`, `_ ↔ _` and `∃ _, _`
+and splits a goal of the form `_ ∧ _`, `_ ↔ _` or `∃ _, _` until it can be discharged
+using `rfl` or `solve_by_elim`.
+This is a finishing tactic: it either closes the goal or raises an error.
+
+The Lean 3 version of this tactic by default attempted to avoid classical reasoning
+where possible. This Lean 4 version makes no such attempt. The `itauto` tactic
+is designed for that purpose.
+" title="`tauto` breaks down assumptions of the form `_ ∧ _`, `_ ∨ _`, `_ ↔ _` and `∃ _, _`">tauto</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1016,7 +1815,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
+    <p>        \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000032">
@@ -1033,10 +1832,76 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
-    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
-    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2]
-  exact Matrix.fromBlocks_diagonal_pow A B k</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.blockDiag2_pow" data-signature="Crystallographic.blockDiag2_pow.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) (k : ℕ) : blockDiag2 A B ^ k = blockDiag2 (A ^ k) (B ^ k)" data-docs="Power of block diagonal distributes to each block.
+
+(blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). " title="Crystallographic.blockDiag2_pow.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) (k : ℕ) : blockDiag2 A B ^ k = blockDiag2 (A ^ k) (B ^ k)
+Power of block diagonal distributes to each block....">blockDiag2_pow</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="Type u_1" title="Type u_1">R</span> : <span class="lean-sort" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
+`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Semiring" data-signature="Semiring.{u} (α : Type u) : Type u" data-docs="A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is
+commutative and associative, multiplication is associative and left and right distributive over
+addition, and `0` and `1` are additive and multiplicative identities. " title="Semiring.{u} (α : Type u) : Type u
+A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is...">Semiring</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">]</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Type u_1" title="Type u_1">R</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">k</span> : ℕ<span class="lean-bracket-1">)</span> :
+    <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span><span class="lean-bracket-1">)</span> ^ <span class="lean-var" data-type="ℕ" title="ℕ">k</span> = <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> ^ <span class="lean-var" data-type="ℕ" title="ℕ">k</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> ^ <span class="lean-var" data-type="ℕ" title="ℕ">k</span><span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
+non-dependent hypotheses. It has many variants:
+- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
+- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
+- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
+  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
+- `simp [*]` simplifies the main goal target using the lemmas tagged with the
+  attribute `[simp]` and all hypotheses.
+- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
+- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
+  with the attribute `[simp]`, but removes the ones named `idᵢ`.
+- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
+  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
+  `hᵢ` is introduced, but the old one remains in the local context.
+- `simp at *` simplifies all the hypotheses and the target.
+- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
+  other hypotheses.
+" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span><span class="lean-bracket-1">]</span>
+  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> <span class="lean-const" data-name="Matrix.fromBlocks_diagonal_pow" data-signature="Matrix.fromBlocks_diagonal_pow.{u_2, u_3, u_12} {m : Type u_2} {n : Type u_3} {α : Type u_12} [Semiring α] [Fintype n]
+  [Fintype m] [DecidableEq n] [DecidableEq m] (A : Matrix n n α) (D : Matrix m m α) (k : ℕ) :
+  fromBlocks A 0 0 D ^ k = fromBlocks (A ^ k) 0 0 (D ^ k)" title="Matrix.fromBlocks_diagonal_pow.{u_2, u_3, u_12} {m : Type u_2} {n : Type u_3} {α : Type u_12} [Semiring α] [Fintype n]
+  [Fintype m] [DecidableEq n] [DecidableEq m] (A : Matrix n n α) (D : Matrix m m α) (k : ℕ) :
+  fromBlocks A 0 0 D ^ k = fromBlocks (A ^ k) 0 0 (D ^ k)">Matrix.fromBlocks_diagonal_pow</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) R" title="Matrix (Fin M) (Fin M) R">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) R" title="Matrix (Fin K) (Fin K) R">B</span> <span class="lean-var" data-type="ℕ" title="ℕ">k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1135,7 +2000,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
+    <p>        The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000033">
@@ -1152,12 +2017,128 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_blockDiag2 {M K : ℕ}
-    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
-    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
-    Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
-  rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
-      orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> <span class="lean-const lean-def" data-name="Crystallographic.orderOf_blockDiag2" data-signature="Crystallographic.orderOf_blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+  orderOf (blockDiag2 A B) = (orderOf A).lcm (orderOf B)" data-docs="Order of block diagonal is lcm of orders.
+
+Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
+and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). " title="Crystallographic.orderOf_blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+  orderOf (blockDiag2 A B) = (orderOf A).lcm (orderOf B)
+Order of block diagonal is lcm of orders....">orderOf_blockDiag2</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> : ℕ<span class="lean-bracket-1">}</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span> : <span class="lean-const" data-name="Matrix" data-signature="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)" data-docs="`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`
+and whose columns are indexed by `n`. " title="Matrix.{u, u&#x27;, v} (m : Type u) (n : Type u&#x27;) (α : Type v) : Type (max u u&#x27; v)
+`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`...">Matrix</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Fin" data-signature="Fin (n : ℕ) : Type" data-docs="Natural numbers less than some upper bound.
+
+In particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the
+canonical type with `n` elements.
+" title="Fin (n : ℕ) : Type
+Natural numbers less than some upper bound....">Fin</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span><span class="lean-bracket-1">)</span> = <span class="lean-const" data-name="Nat.lcm" data-signature="Nat.lcm (m n : ℕ) : ℕ" data-docs="The least common multiple of `m` and `n` is the smallest natural number that&#x27;s evenly divisible by
+both `m` and `n`. Returns `0` if either `m` or `n` is `0`.
+
+Examples:
+ * `Nat.lcm 9 6 = 18`
+ * `Nat.lcm 9 3 = 9`
+ * `Nat.lcm 0 3 = 0`
+ * `Nat.lcm 3 0 = 0`
+" title="Nat.lcm (m n : ℕ) : ℕ
+The least common multiple of `m` and `n` is the smallest natural number that&#x27;s evenly divisible by...">Nat.lcm</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="orderOf" data-signature="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ" data-docs="`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.
+Otherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. " title="orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ
+`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists....">orderOf</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span><span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
+The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
+
+* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
+* `have h := e` uses the type of `e` for `t`.
+* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
+* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
+  where `_` stands for the tactics that follow this one.
+  It is convenient for types that have only one applicable constructor.
+  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
+  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
+* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
+  which adds the equation `h : e = pat` to the local context.
+
+The tactic supports all the same syntax variants and options as the `have` term.
+
+## Properties and relations
+
+* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
+  The `let` tactic introduces definitions that can be unfolded.
+* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
+* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
+* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
+  which may be important for performance reasons.
+    Consider using the equivalent `let +nondep` to indicate the intent.
+
+" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> <span class="lean-var" data-type="Function.Injective ⇑(blockDiag2.prodMonoidHom M K ℤ)" title="Function.Injective ⇑(blockDiag2.prodMonoidHom M K ℤ)">hinj</span> : <span class="lean-const" data-name="Function.Injective" data-signature="Function.Injective.{u_1, u_2} {α : Sort u_1} {β : Sort u_2} (f : α → β) : Prop" data-docs="A function `f : α → β` is called injective if `f x = f y` implies `x = y`. " title="Function.Injective.{u_1, u_2} {α : Sort u_1} {β : Sort u_2} (f : α → β) : Prop
+A function `f : α → β` is called injective if `f x = f y` implies `x = y`. ">Function.Injective</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.blockDiag2.prodMonoidHom" data-signature="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. " title="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. ">blockDiag2.prodMonoidHom</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> ℤ<span class="lean-bracket-1">)</span> := <span class="lean-keyword">fun</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ">p</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin M) (Fin M) ℤ × Matrix (Fin K) (Fin K) ℤ">q</span> <span class="lean-var" data-type="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q" title="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q">hpq</span> =&gt;
+    <span class="lean-const" data-name="Prod.ext" data-signature="Prod.ext.{u, v} {α : Type u} {β : Type v} {x y : α × β} (fst : x.1 = y.1) (snd : x.2 = y.2) : x = y" title="Prod.ext.{u, v} {α : Type u} {β : Type v} {x y : α × β} (fst : x.1 = y.1) (snd : x.2 = y.2) : x = y">Prod.ext</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Matrix.fromBlocks_inj" data-signature="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  Matrix.fromBlocks A B C D = Matrix.fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;" title="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  Matrix.fromBlocks A B C D = Matrix.fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;">Matrix.fromBlocks_inj</span>.<span class="lean-const" data-name="Iff.mp" data-signature="Iff.mp {a b : Prop} (self : a ↔ b) : a → b" data-docs="Modus ponens for if and only if. If `a ↔ b` and `a`, then `b`. " title="Iff.mp {a b : Prop} (self : a ↔ b) : a → b
+Modus ponens for if and only if. If `a ↔ b` and `a`, then `b`. ">mp</span> <span class="lean-var" data-type="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q" title="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q">hpq</span><span class="lean-bracket-1">)</span>.<span class="lean-number">1</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Matrix.fromBlocks_inj" data-signature="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  Matrix.fromBlocks A B C D = Matrix.fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;" title="Matrix.fromBlocks_inj.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4}
+  {α : Type u_12} {A : Matrix n l α} {B : Matrix n m α} {C : Matrix o l α} {D : Matrix o m α} {A&#x27; : Matrix n l α}
+  {B&#x27; : Matrix n m α} {C&#x27; : Matrix o l α} {D&#x27; : Matrix o m α} :
+  Matrix.fromBlocks A B C D = Matrix.fromBlocks A&#x27; B&#x27; C&#x27; D&#x27; ↔ A = A&#x27; ∧ B = B&#x27; ∧ C = C&#x27; ∧ D = D&#x27;">Matrix.fromBlocks_inj</span>.<span class="lean-const" data-name="Iff.mp" data-signature="Iff.mp {a b : Prop} (self : a ↔ b) : a → b" data-docs="Modus ponens for if and only if. If `a ↔ b` and `a`, then `b`. " title="Iff.mp {a b : Prop} (self : a ↔ b) : a → b
+Modus ponens for if and only if. If `a ↔ b` and `a`, then `b`. ">mp</span> <span class="lean-var" data-type="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q" title="(blockDiag2.prodMonoidHom M K ℤ) p = (blockDiag2.prodMonoidHom M K ℤ) q">hpq</span><span class="lean-bracket-1">)</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-keyword">show</span> <span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span> = <span class="lean-const" data-name="Crystallographic.blockDiag2.prodMonoidHom" data-signature="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. " title="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. ">blockDiag2.prodMonoidHom</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> ℤ <span class="lean-bracket-2">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span>, <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span><span class="lean-bracket-2">)</span> <span class="lean-keyword">from</span> <span class="lean-const" data-name="rfl" data-signature="rfl.{u} {α : Sort u} {a : α} : a = a" data-docs="`rfl : a = a` is the unique constructor of the equality type. This is the
+same as `Eq.refl` except that it takes `a` implicitly instead of explicitly.
+
+This is a more powerful theorem than it may appear at first, because although
+the statement of the theorem is `a = a`, Lean will allow anything that is
+definitionally equal to that type. So, for instance, `2 + 2 = 4` is proven in
+Lean by `rfl`, because both sides are the same up to definitional equality.
+" title="rfl.{u} {α : Sort u} {a : α} : a = a
+`rfl : a = a` is the unique constructor of the equality type. This is the...">rfl</span>,
+      <span class="lean-const" data-name="orderOf_injective" data-signature="orderOf_injective.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (f : G →* H)
+  (hf : Function.Injective ⇑f) (x : G) : orderOf (f x) = orderOf x" data-docs="An injective homomorphism of monoids preserves orders of elements. " title="orderOf_injective.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (f : G →* H)
+  (hf : Function.Injective ⇑f) (x : G) : orderOf (f x) = orderOf x
+An injective homomorphism of monoids preserves orders of elements. ">orderOf_injective</span> <span class="lean-bracket-2">(</span><span class="lean-const" data-name="Crystallographic.blockDiag2.prodMonoidHom" data-signature="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. " title="Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :
+  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. ">blockDiag2.prodMonoidHom</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> ℤ<span class="lean-bracket-2">)</span> <span class="lean-var" data-type="Function.Injective ⇑(blockDiag2.prodMonoidHom M K ℤ)" title="Function.Injective ⇑(blockDiag2.prodMonoidHom M K ℤ)">hinj</span> <span class="lean-bracket-2">(</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span>, <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span><span class="lean-bracket-2">)</span>, <span class="lean-const" data-name="Prod.orderOf" data-signature="Prod.orderOf.{u_4, u_5} {α : Type u_4} {β : Type u_5} [Monoid α] [Monoid β] (x : α × β) :
+  orderOf x = (orderOf x.1).lcm (orderOf x.2)" title="Prod.orderOf.{u_4, u_5} {α : Type u_4} {β : Type u_5} [Monoid α] [Monoid β] (x : α × β) :
+  orderOf x = (orderOf x.1).lcm (orderOf x.2)">Prod.orderOf</span><span class="lean-bracket-1">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1254,7 +2235,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
+    <p>        If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000034">
@@ -1271,12 +2252,99 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
-    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨A, hA_ord, hA_pos⟩ := h₁
-  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
-  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
-  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.lcm_mem_integerMatrixOrders" data-signature="Crystallographic.lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) : m₁.lcm m₂ ∈ integerMatrixOrders (M + K)" data-docs="Block diagonal construction for integer matrix orders.
+If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
+then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). " title="Crystallographic.lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) : m₁.lcm m₂ ∈ integerMatrixOrders (M + K)
+Block diagonal construction for integer matrix orders....">lcm_mem_integerMatrixOrders</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> : ℕ<span class="lean-bracket-1">}</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="m₁ ∈ integerMatrixOrders M" title="m₁ ∈ integerMatrixOrders M">h₁</span> : <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="m₂ ∈ integerMatrixOrders K" title="m₂ ∈ integerMatrixOrders K">h₂</span> : <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-const" data-name="Nat.lcm" data-signature="Nat.lcm (m n : ℕ) : ℕ" data-docs="The least common multiple of `m` and `n` is the smallest natural number that&#x27;s evenly divisible by
+both `m` and `n`. Returns `0` if either `m` or `n` is `0`.
+
+Examples:
+ * `Nat.lcm 9 6 = 18`
+ * `Nat.lcm 9 3 = 9`
+ * `Nat.lcm 0 3 = 0`
+ * `Nat.lcm 3 0 = 0`
+" title="Nat.lcm (m n : ℕ) : ℕ
+The least common multiple of `m` and `n` is the smallest natural number that&#x27;s evenly divisible by...">Nat.lcm</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> + <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span><span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span>, <span class="lean-var" data-type="orderOf A = m₁" title="orderOf A = m₁">hA_ord</span>, <span class="lean-var" data-type="0 &lt; m₁" title="0 &lt; m₁">hA_pos</span><span class="lean-bracket-1">⟩</span> := <span class="lean-var" data-type="m₁ ∈ integerMatrixOrders M" title="m₁ ∈ integerMatrixOrders M">h₁</span>
+  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
+a description of supported patterns.
+
+```lean
+obtain ⟨patt⟩ : type := proof
+```
+is equivalent to
+```lean
+have h : type := proof
+rcases h with ⟨patt⟩
+```
+
+If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
+
+If `type` is omitted, `:= proof` is required.
+" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span><span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span>, <span class="lean-var" data-type="orderOf B = m₂" title="orderOf B = m₂">hB_ord</span>, <span class="lean-var" data-type="0 &lt; m₂" title="0 &lt; m₂">hB_pos</span><span class="lean-bracket-1">⟩</span> := <span class="lean-var" data-type="m₂ ∈ integerMatrixOrders K" title="m₂ ∈ integerMatrixOrders K">h₂</span>
+  <span class="lean-keyword" data-docs="`refine e` behaves like `exact e`, except that named (`?x`) or unnamed (`?_`)
+holes in `e` that are not solved by unification with the main goal&#x27;s target type
+are converted into new goals, using the hole&#x27;s name, if any, as the goal case name.
+" title="`refine e` behaves like `exact e`, except that named (`?x`) or unnamed (`?_`)">refine</span> <span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟨</span><span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.reindexMonoidEquiv" data-signature="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R" data-docs="Reindexing defines a monoid isomorphism.
+
+Given an equivalence e : m ≃ n between index types, this provides an isomorphism
+between the corresponding matrix monoids that preserves multiplication.
+
+Note: Mathlib has `Matrix.reindexAlgEquiv` which provides an algebra equivalence,
+but we only need the multiplicative structure here. Using `MulEquiv` directly
+avoids requiring unnecessary algebra instances and keeps the API minimal. " title="Crystallographic.reindexMonoidEquiv.{u_1, u_2, u_3} {m : Type u_1} {n : Type u_2} [Fintype m] [Fintype n]
+  [DecidableEq m] [DecidableEq n] {R : Type u_3} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R
+Reindexing defines a monoid isomorphism....">reindexMonoidEquiv</span> <span class="lean-const" data-name="finSumFinEquiv" data-signature="finSumFinEquiv {m n : ℕ} : Fin m ⊕ Fin n ≃ Fin (m + n)" data-docs="Equivalence between `Fin m ⊕ Fin n` and `Fin (m + n)` " title="finSumFinEquiv {m n : ℕ} : Fin m ⊕ Fin n ≃ Fin (m + n)
+Equivalence between `Fin m ⊕ Fin n` and `Fin (m + n)` ">finSumFinEquiv</span>.<span class="lean-const" data-name="Equiv.symm" data-signature="Equiv.symm.{u, v} {α : Sort u} {β : Sort v} (e : α ≃ β) : β ≃ α" data-docs="Inverse of an equivalence `e : α ≃ β`. " title="Equiv.symm.{u, v} {α : Sort u} {β : Sort v} (e : α ≃ β) : β ≃ α
+Inverse of an equivalence `e : α ≃ β`. ">symm</span><span class="lean-bracket-1">)</span>.<span class="lean-const" data-name="MulEquiv.symm" data-signature="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M" data-docs="The inverse of an isomorphism is an isomorphism. " title="MulEquiv.symm.{u_9, u_10} {M : Type u_9} {N : Type u_10} [Mul M] [Mul N] (h : M ≃* N) : N ≃* M
+The inverse of an isomorphism is an isomorphism. ">symm</span> <span class="lean-bracket-1">(</span><span class="lean-const" data-name="Crystallographic.blockDiag2" data-signature="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R" data-docs="Block diagonal of two matrices: places A in upper-left and B in lower-right. " title="Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)
+  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R
+Block diagonal of two matrices: places A in upper-left and B in lower-right. ">blockDiag2</span> <span class="lean-var" data-type="Matrix (Fin M) (Fin M) ℤ" title="Matrix (Fin M) (Fin M) ℤ">A</span> <span class="lean-var" data-type="Matrix (Fin K) (Fin K) ℤ" title="Matrix (Fin K) (Fin K) ℤ">B</span><span class="lean-bracket-1">)</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> ?_<span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">,</span> <span class="lean-const" data-name="Nat.lcm_pos" data-signature="Nat.lcm_pos {m n : ℕ} : 0 &lt; m → 0 &lt; n → 0 &lt; m.lcm n" title="Nat.lcm_pos {m n : ℕ} : 0 &lt; m → 0 &lt; n → 0 &lt; m.lcm n">Nat.lcm_pos</span> <span class="lean-var" data-type="0 &lt; m₁" title="0 &lt; m₁">hA_pos</span> <span class="lean-var" data-type="0 &lt; m₂" title="0 &lt; m₂">hB_pos</span><span class="lean-const" data-signature="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p" data-docs="Existential introduction. If `a : α` and `h : p a`,
+then `⟨a, h⟩` is a proof that `∃ x : α, p x`. " title="Exists.intro.{u} {α : Sort u} {p : α → Prop} (w : α) (h : p w) : Exists p">⟩</span>
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-const" data-name="MulEquiv.orderOf_eq" data-signature="MulEquiv.orderOf_eq.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (e : G ≃* H) (x : G) :
+  orderOf (e x) = orderOf x" data-docs="A multiplicative equivalence preserves orders of elements. " title="MulEquiv.orderOf_eq.{u_1, u_6} {G : Type u_1} [Monoid G] {H : Type u_6} [Monoid H] (e : G ≃* H) (x : G) :
+  orderOf (e x) = orderOf x
+A multiplicative equivalence preserves orders of elements. ">MulEquiv.orderOf_eq</span>, <span class="lean-const" data-name="Crystallographic.orderOf_blockDiag2" data-signature="Crystallographic.orderOf_blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+  orderOf (blockDiag2 A B) = (orderOf A).lcm (orderOf B)" data-docs="Order of block diagonal is lcm of orders.
+
+Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
+and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). " title="Crystallographic.orderOf_blockDiag2 {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+  orderOf (blockDiag2 A B) = (orderOf A).lcm (orderOf B)
+Order of block diagonal is lcm of orders....">orderOf_blockDiag2</span>, <span class="lean-var" data-type="orderOf A = m₁" title="orderOf A = m₁">hA_ord</span>, <span class="lean-var" data-type="orderOf B = m₂" title="orderOf B = m₂">hB_ord</span><span class="lean-bracket-1">]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L51-L65" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1371,7 +2439,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>     Product of coprime achievable orders is achievable.  </p>
+    <p>        Product of coprime achievable orders is achievable.  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000035">
@@ -1388,11 +2456,33 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
-    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
-    (hcop : Nat.Coprime m₁ m₂) :
-    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← hcop.lcm_eq_mul]
-  exact lcm_mem_integerMatrixOrders h₁ h₂</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> <span class="lean-const lean-def" data-name="Crystallographic.mul_mem_integerMatrixOrders_of_coprime" data-signature="Crystallographic.mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) (hcop : m₁.Coprime m₂) : m₁ * m₂ ∈ integerMatrixOrders (M + K)" data-docs="For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
+then m₁ * m₂ ∈ integerMatrixOrders (M + K). " title="Crystallographic.mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) (hcop : m₁.Coprime m₂) : m₁ * m₂ ∈ integerMatrixOrders (M + K)
+For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,...">mul_mem_integerMatrixOrders_of_coprime</span> <span class="lean-bracket-1">{</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> : ℕ<span class="lean-bracket-1">}</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="m₁ ∈ integerMatrixOrders M" title="m₁ ∈ integerMatrixOrders M">h₁</span> : <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">M</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="m₂ ∈ integerMatrixOrders K" title="m₂ ∈ integerMatrixOrders K">h₂</span> : <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span>
+    <span class="lean-bracket-1">(</span><span class="lean-var" data-type="m₁.Coprime m₂" title="m₁.Coprime m₂">hcop</span> : <span class="lean-const" data-name="Nat.Coprime" data-signature="Nat.Coprime (m n : ℕ) : Prop" data-docs="`m` and `n` are coprime, or relatively prime, if their `gcd` is 1. " title="Nat.Coprime (m n : ℕ) : Prop
+`m` and `n` are coprime, or relatively prime, if their `gcd` is 1. ">Nat.Coprime</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span><span class="lean-bracket-1">)</span> :
+    <span class="lean-var" data-type="ℕ" title="ℕ">m₁</span> * <span class="lean-var" data-type="ℕ" title="ℕ">m₂</span> <span class="lean-operator">∈</span> <span class="lean-const" data-name="Crystallographic.integerMatrixOrders" data-signature="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ" data-docs="The set of possible orders for N×N integer matrices with finite order.
+An integer `m` is in this set if there exists an N×N integer matrix `A` such that
+`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). " title="Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ
+The set of possible orders for N×N integer matrices with finite order....">integerMatrixOrders</span> <span class="lean-bracket-1">(</span><span class="lean-var" data-type="ℕ" title="ℕ">M</span> + <span class="lean-var" data-type="ℕ" title="ℕ">K</span><span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
+  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
+" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> <span class="lean-var" data-type="m₁.Coprime m₂" title="m₁.Coprime m₂">hcop</span>.<span class="lean-const" data-name="Nat.Coprime.lcm_eq_mul" data-signature="Nat.Coprime.lcm_eq_mul {m n : ℕ} (h : m.Coprime n) : m.lcm n = m * n" title="Nat.Coprime.lcm_eq_mul {m n : ℕ} (h : m.Coprime n) : m.lcm n = m * n">lcm_eq_mul</span><span class="lean-bracket-1">]</span>
+  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
+" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> <span class="lean-const" data-name="Crystallographic.lcm_mem_integerMatrixOrders" data-signature="Crystallographic.lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) : m₁.lcm m₂ ∈ integerMatrixOrders (M + K)" data-docs="Block diagonal construction for integer matrix orders.
+If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
+then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). " title="Crystallographic.lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ} (h₁ : m₁ ∈ integerMatrixOrders M)
+  (h₂ : m₂ ∈ integerMatrixOrders K) : m₁.lcm m₂ ∈ integerMatrixOrders (M + K)
+Block diagonal construction for integer matrix orders....">lcm_mem_integerMatrixOrders</span> <span class="lean-var" data-type="m₁ ∈ integerMatrixOrders M" title="m₁ ∈ integerMatrixOrders M">h₁</span> <span class="lean-var" data-type="m₂ ∈ integerMatrixOrders K" title="m₂ ∈ integerMatrixOrders K">h₂</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>

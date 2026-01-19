@@ -45,8 +45,8 @@ jobs:
           lake build :blueprint
           cd blueprint && leanblueprint pdf && leanblueprint web
 
-      - name: Build docs
-        run: lake -Kdoc=on build Crystallographic:docs
+      # - name: Build docs
+      #   run: lake -Kdoc=on build Crystallographic:docs
 
       - name: Assemble site
         run: |

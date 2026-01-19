@@ -130,9 +130,13 @@ echo "Updating lake dependencies..."
 lake update LeanArchitect
 lake update
 
-# Force rebuild of Architect library and extract_blueprint executable to ensure latest changes are used
+# Clean LeanArchitect build artifacts to ensure fresh build with latest changes
+echo "Cleaning LeanArchitect build artifacts..."
+rm -rf .lake/packages/LeanArchitect/.lake/build
+
+# Force rebuild of Architect library and extract_blueprint executable
 echo "Rebuilding Architect library and extract_blueprint..."
-lake build Architect extract_blueprint -R
+lake build Architect extract_blueprint
 
 # Fetch mathlib cache
 echo "Fetching mathlib cache..."
@@ -146,9 +150,9 @@ echo ""
 echo "=== Step 3: Building LeanArchitect blueprint data ==="
 lake build :blueprint
 
-echo ""
-echo "=== Step 4: Pushing main project changes ==="
-push_repo_changes "$PROJECT_ROOT" "General_Crystallographic_Restriction"
+# echo ""
+# echo "=== Step 4: Pushing main project changes ==="
+# push_repo_changes "$PROJECT_ROOT" "General_Crystallographic_Restriction"
 
 echo ""
 echo "=== Step 5: Building blueprint (PDF and web) ==="
