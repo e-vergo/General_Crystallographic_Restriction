@@ -125,9 +125,14 @@ echo ""
 echo "=== Step 1: Updating dependencies and fetching caches ==="
 cd "$PROJECT_ROOT"
 
-# Update lake dependencies
+# Update lake dependencies (explicitly update LeanArchitect to pick up local changes)
 echo "Updating lake dependencies..."
+lake update LeanArchitect
 lake update
+
+# Force rebuild of Architect library and extract_blueprint executable to ensure latest changes are used
+echo "Rebuilding Architect library and extract_blueprint..."
+lake build Architect extract_blueprint -R
 
 # Fetch mathlib cache
 echo "Fetching mathlib cache..."
