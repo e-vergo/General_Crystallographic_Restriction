@@ -63,7 +63,9 @@ A detailed proof blueprint with dependency graphs is available in the `blueprint
 cd blueprint && lualatex print/print.tex
 ```
 
-The blueprint is generated using [LeanArchitect](https://github.com/hanwenzhu/LeanArchitect), which extracts proof structure directly from the Lean formalization.
+The blueprint is generated using [LeanArchitect](https://github.com/e-vergo/LeanArchitect), which extracts proof structure directly from the Lean formalization.
+
+**Note:** This project uses experimental forks of [LeanArchitect](https://github.com/e-vergo/LeanArchitect) and [leanblueprint](https://github.com/e-vergo/leanblueprint) for side-by-side Lean/LaTeX display. This tooling is not production-ready.
 
 ## Building
 

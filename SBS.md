@@ -1,6 +1,6 @@
 # Side-by-Side Lean Code Display for Blueprint
 
-This document describes the architecture for displaying Lean source code side-by-side with LaTeX theorem statements in the leanblueprint HTML output, including SubVerso semantic syntax highlighting and VSCode-quality lexical highlighting. This document is meant to capture the repo at a moment in time and provide a one-stop-shop for LLMs to get up to speed on the project. It is not meant to capture development history.
+This document describes the architecture for displaying Lean source code side-by-side with LaTeX theorem statements in the leanblueprint HTML output, including SubVerso semantic syntax highlighting and VSCode-quality lexical highlighting. This document captures the current state of the repository and provides context for understanding the project.
 
 ## Overview
 
@@ -16,42 +16,82 @@ The feature involves three repositories:
 ```
 Lean Source Code (@[blueprint] attributes)
     │
-LeanArchitect extracts declarations with --highlight flag
+    ▼
+Lake Build System
     │
-Highlighting.lean re-elaborates source with withInfoTreeContext
+    ├── module_facet `highlighted` (runs once per module, cached)
+    │   │
+    │   └── Calls: subverso-extract-mod ModuleName output.json
+    │       │
+    │       └── Output: .lake/build/highlighted/Module/Name.json
     │
-SubVerso's highlightIncludingUnparsed produces Highlighted JSON
-    │
+    └── module_facet `blueprint` (depends on `highlighted`)
+        │
+        └── Calls: extract_blueprint --highlightedJson path/to/cached.json
+            │
+            ▼
+SubVersoExtract.lean: loadHighlightingFromFile() parses cached JSON
+            │
+            ▼
 Basic.lean: splitAtDefinitionAssign() splits at := for theorems with proofs
-    │
+            │
+            ▼
 Output.lean emits:
   - \leansignaturesource{base64_json}  (signature up to :=)
   - \leanproofsource{base64_json}      (proof body after :=)
   - \leanposition{...} and \leanproofposition{...}
-    │
+            │
+            ▼
 plasTeX parses .tex -> Node objects with userdata
-    │
+            │
+            ▼
 blueprint.py processes nodes:
   - If leansignature_base64 present: render_highlighted_base64() -> lean_signature_html
   - If leanproof_base64 present: render_highlighted_base64() -> lean_proof_html
   - Fallback: read source file, clean_lean_source() -> plain text HTML
-    │
+            │
+            ▼
 subverso_render.py rendering pipeline:
   1. _render_node() recursively processes SubVerso JSON
   2. _render_token() maps semantic tokens to CSS classes
   3. _highlight_plain_text() adds lexical highlighting (numbers, operators, comments, brackets)
   4. _renumber_brackets_by_depth() post-processes for global bracket depth tracking
-    │
+            │
+            ▼
 Thms.jinja2s template renders sbs-container grid layout
-    │
+            │
+            ▼
 HTML with .sbs-latex-column (75ch fixed) and .sbs-lean-column (flexible) side by side
+```
+
+### Lake Facet Caching
+
+The key optimization is **Lake facet caching**. Highlighting extraction is slow (~minutes per module) because `subverso-extract-mod` re-elaborates the entire module. Lake's facet system caches the result:
+
+1. **`highlighted` facet**: Extracts JSON for each module, stored in `.lake/build/highlighted/`
+2. **Cache invalidation**: Only re-runs when module's `.olean` file changes
+3. **`blueprint` facet**: Depends on `highlighted`, passes cached JSON path via `--highlightedJson`
+
+```lean
+-- From lakefile.lean
+module_facet highlighted (mod : Module) : FilePath := do
+  let some extract ← findLeanExe? `«subverso-extract-mod»
+  let exeJob ← extract.exe.fetch
+  let modJob ← mod.olean.fetch
+  let hlFile := mod.filePath (buildDir / "highlighted") "json"
+  -- Only rebuilds when olean changes
+  exeJob.bindM fun exeFile => do
+    modJob.mapM fun _ => do
+      buildFileUnlessUpToDate' hlFile do
+        proc { cmd := exeFile.toString, args := #[mod.name.toString, hlFile.toString], ... }
+      pure hlFile
 ```
 
 ### Code Splitting Logic
 
 The `splitAtDefinitionAssign` function in `Basic.lean` handles splitting highlighted code:
 
-1. **Strip @[blueprint] prefix**: The function always removes any prefix before the definition keyword (def/theorem/lemma/abbrev/instance/example), stripping attributes like `@[blueprint ...]`.
+1. **Strip @[blueprint] prefix**: Always removes any prefix before the definition keyword (def/theorem/lemma/abbrev/instance/example), stripping attributes like `@[blueprint ...]`.
 
 2. **Find the definition keyword**: Scans tokens for `def`, `theorem`, `lemma`, `abbrev`, `instance`, or `example`.
 
@@ -63,11 +103,11 @@ The `splitAtDefinitionAssign` function in `Basic.lean` handles splitting highlig
 
 ### SubVerso Highlighting
 
-SubVerso produces semantic highlighting by re-elaborating source code:
+SubVerso produces semantic highlighting by running `subverso-extract-mod`, which:
 
-1. `computeHighlighting` extracts the declaration source from the file using position ranges.
-2. `highlightSource` re-elaborates the source with `withInfoTreeContext` to capture proper info trees.
-3. `highlightIncludingUnparsed` produces a `Highlighted` JSON structure with token kinds.
+1. Re-elaborates the entire module with info tree capture
+2. Produces a `Highlighted` JSON structure with token kinds for each declaration
+3. Uses a deduplicated export format to reduce JSON size
 
 The `Highlighted` type contains:
 - `token`: Semantic tokens with `kind` (keyword, const, var, string, etc.) and `content`
@@ -78,7 +118,7 @@ The `Highlighted` type contains:
 
 ### Lexical Highlighting (Post-SubVerso)
 
-SubVerso captures semantic tokens but misses lexical tokens. The Python renderer adds:
+SubVerso captures semantic tokens but misses some lexical tokens. The Python renderer adds:
 
 1. **Comments**: `-- line comments` and `/- block comments -/`
 2. **Numbers**: Integers, floats, hex (`123`, `3.14`, `0xFF`)
@@ -135,20 +175,43 @@ The proof body uses `max-height` and `opacity` transitions for smooth expand/col
 
 ### LeanArchitect
 
+#### lakefile.lean
+Lake build configuration with facets:
+- `module_facet highlighted`: Runs `subverso-extract-mod`, caches JSON in `.lake/build/highlighted/`
+- `module_facet blueprint`: Depends on `highlighted`, runs `extract_blueprint --highlightedJson`
+- `buildModuleBlueprint`: Helper that threads the highlighted JSON path to extraction
+
+#### Architect/SubVersoExtract.lean
+SubVerso extraction and JSON parsing:
+- `loadHighlightingFromFile`: Reads cached JSON from Lake facet, builds `NameMap Highlighted`
+- `extractHighlightingMap`: Fallback that calls `lake exe subverso-extract-mod` directly (slower)
+- `buildHighlightingMap`: Converts `ModuleItem` array to `NameMap` for lookup by declaration name
+
 #### Architect/Basic.lean
-Core data structures and highlighting logic:
+Core data structures and splitting logic:
+- `Node`: Blueprint node with statement, proof, dependencies
 - `NodeWithPos`: Extended node with `highlightedSignature` and `highlightedProofBody` fields
 - `splitAtDefinitionAssign`: Bracket-aware splitting at `:=` token
-- `computeHighlighting`: Extracts source and runs SubVerso highlighting
-- `Node.toNodeWithPos`: Converts node with optional highlighting computation
+- `Node.toNodeWithPos`: Converts node, looks up highlighting from provided `NameMap`
 
 #### Architect/Output.lean
 LaTeX emission:
 - `NodeWithPos.toLatex`: Emits `\leansignaturesource{}` and `\leanproofsource{}` as base64-encoded SubVerso JSON
 - Commands emitted INSIDE the LaTeX environment so plasTeX attaches userdata to correct node
 
+#### Architect/Load.lean
+Module loading and extraction orchestration:
+- `latexOutputOfImportModule`: Accepts optional `highlightedJsonPath?` parameter
+- If path provided: loads from cached file (fast path from Lake facet)
+- If not provided: falls back to calling `subverso-extract-mod` directly (slow path)
+
+#### Main.lean
+CLI entry point:
+- `--highlightedJson` flag: Path to pre-computed highlighted JSON from Lake facet
+- `--highlight` flag: No-op, kept for backward compatibility
+
 #### Architect/Highlighting.lean
-SubVerso integration following the Verso pattern:
+Helper functions (mostly unused now, kept for potential fallback):
 - `highlightSource`: Re-elaborates source with `withInfoTreeContext`
 - `runCommand`: Wraps command elaboration to capture contextualized info trees
 
@@ -280,9 +343,24 @@ div.content-wrapper {
 ## Build Process
 
 The `scripts/build_blueprint.sh` executes:
-1. Build LeanArchitect (`lake build`)
-2. Build project and blueprint data (`lake build :blueprint` - uses `--highlight` flag)
-3. Run leanblueprint (`leanblueprint pdf && leanblueprint web`)
+1. Build and push LeanArchitect changes
+2. Update Lake dependencies (`lake update LeanArchitect`)
+3. Clean LeanArchitect build artifacts to ensure fresh build
+4. Rebuild Architect and extract_blueprint (`lake build Architect extract_blueprint`)
+5. Fetch mathlib cache
+6. Build Lean project (`lake build`)
+7. Build blueprint with Lake facets (`lake build :blueprint`)
+   - This triggers `highlighted` facet (cached)
+   - Then triggers `blueprint` facet with `--highlightedJson` pointing to cached JSON
+8. Run leanblueprint (`leanblueprint pdf && leanblueprint web`)
+
+### Performance
+
+| Scenario | Time |
+|----------|------|
+| First build (no cache) | ~minutes per module (subverso-extract-mod re-elaborates) |
+| Subsequent builds (cached) | ~instant (Lake uses cached JSON) |
+| Single module changed | ~minutes for that module only |
 
 ## Configuration
 
@@ -291,7 +369,8 @@ The `scripts/build_blueprint.sh` executes:
 # lakefile.toml
 [[require]]
 name = "LeanArchitect"
-path = "/Users/eric/GitHub/LeanArchitect"
+git = "https://github.com/e-vergo/LeanArchitect"
+rev = "main"
 ```
 
 ```bash
@@ -302,7 +381,7 @@ pipx install -e /Users/eric/GitHub/leanblueprint
 ```toml
 [[require]]
 name = "LeanArchitect"
-git = "https://github.com/e-vergo/LeanArchitect"
+git = "https://github.com/hanwenzhu/LeanArchitect"
 rev = "main"
 ```
 
@@ -312,11 +391,17 @@ pipx install leanblueprint
 
 ## Debugging
 
-### Check if SubVerso highlighting is working
+### Check if Lake highlighting facet ran
+```bash
+ls -la .lake/build/highlighted/
+```
+Should show JSON files for each module.
+
+### Check if SubVerso highlighting is in LaTeX output
 ```bash
 grep -r "leansignaturesource" .lake/build/blueprint/module/
 ```
-If empty, SubVerso highlighting is failing silently.
+If empty, highlighting JSON is not being embedded.
 
 ### Check HTML output classes
 ```bash
@@ -332,12 +417,18 @@ grep -o 'lean-bracket-[1-6]' blueprint/web/sect0004.html | sort | uniq -c
 ```
 Should show multiple bracket levels if nesting exists.
 
-### Force full rebuild
+### Force full rebuild of highlighting
 ```bash
-rm -rf .lake/build/blueprint
+rm -rf .lake/build/highlighted
 lake build :blueprint
 cd blueprint && leanblueprint web
 ```
+
+### Test subverso-extract-mod directly
+```bash
+lake exe subverso-extract-mod Crystallographic.FiniteOrder.Basic | head -50
+```
+Should output JSON with `items` array containing declarations.
 
 ## Known Issues / TODOs
 
@@ -350,3 +441,7 @@ cd blueprint && leanblueprint web
 4. **Tactic goal display**: SubVerso captures goal states for tactics, stored as `data-*` attributes and hidden goal displays. Interactive goal exploration is not yet implemented in the UI.
 
 5. **Dark theme support**: Current colors are optimized for light themes. A dark theme variant would require media query or class-based color switching.
+
+## Historical Note
+
+An earlier approach attempted to capture highlighting during elaboration using a hook mechanism with Lean environment extensions. This was abandoned because `SubVerso.Highlighting.Highlighted` lacks a `ToExpr` instance, meaning the data cannot be serialized to `.olean` files and persisted across module boundaries. The current approach using `subverso-extract-mod` with Lake facet caching follows the pattern used by Verso (the Lean 4 reference manual).
