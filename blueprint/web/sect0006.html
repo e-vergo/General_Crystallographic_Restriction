@@ -103,7 +103,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       For a finite set where all values \(\geq 2\), the sum is at most the product. </p>
+    <p>    For a finite set where all values \(\geq 2\), the sum is at most the product. </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000063">
@@ -120,359 +120,26 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> sum_le_prod_of_all_ge_two <span class="lean-bracket-1">{</span>α : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>DecidableEq α<span class="lean-bracket-1">]</span>
-    <span class="lean-bracket-1">(</span>s : Finset α<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>f : α <span class="lean-operator">→</span> ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hf : <span class="lean-operator">∀</span> x <span class="lean-operator">∈</span> s, <span class="lean-number">2</span> <span class="lean-operator">≤</span> f x<span class="lean-bracket-1">)</span> :
-    <span class="lean-operator">∑</span> x <span class="lean-operator">∈</span> s, f x <span class="lean-operator">≤</span> <span class="lean-operator">∏</span> x <span class="lean-operator">∈</span> s, f x := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
-`induction x` applies induction on `x` to the main goal,
-producing one goal for each constructor of the inductive type,
-in which the target is replaced by a general instance of that constructor
-and an inductive hypothesis is added for each recursive argument to the constructor.
-If the type of an element in the local context depends on `x`,
-that element is reverted and reintroduced afterward,
-so that the inductive hypothesis incorporates that hypothesis as well.
-
-For example, given `n : Nat` and a goal with a hypothesis `h : P n` and target `Q n`,
-`induction n` produces one goal with hypothesis `h : P 0` and target `Q 0`,
-and one goal with hypotheses `h : P (Nat.succ a)` and `ih₁ : P a → Q a` and target `Q (Nat.succ a)`.
-Here the names `a` and `ih₁` are chosen automatically and are not accessible.
-You can use `with` to provide the variables names for each constructor.
-- `induction e`, where `e` is an expression instead of a variable,
-  generalizes `e` in the goal, and then performs induction on the resulting variable.
-- `induction e using r` allows the user to specify the principle of induction that should be used.
-  Here `r` should be a term whose result type must be of the form `C t`,
-  where `C` is a bound variable and `t` is a (possibly empty) sequence of bound variables
-- `induction e generalizing z₁ ... zₙ`, where `z₁ ... zₙ` are variables in the local context,
-  generalizes over `z₁ ... zₙ` before applying the induction but then introduces them in each goal.
-  In other words, the net effect is that each inductive hypothesis is generalized.
-- Given `x : Nat`, `induction x with | zero =&gt; tac₁ | succ x&#x27; ih =&gt; tac₂`
-  uses tactic `tac₁` for the `zero` case, and `tac₂` for the `succ` case.
-" title="Assuming `x` is a variable in the local context with an inductive type,">induction</span> s <span class="lean-keyword">using</span> Finset.induction <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
-then a list of alternatives.
-" title="After `with`, there is an optional tactic that runs on all branches, and">with</span>
-  | empty =&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
+    (s : Finset α) (f : α → ℕ) (hf : ∀ x ∈ s, 2 ≤ f x) :
+    ∑ x ∈ s, f x ≤ ∏ x ∈ s, f x := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction s using Finset.induction with
+  | empty =&gt; simp
   | @insert a s&#x27; ha IH =&gt;
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>Finset.sum_insert ha, Finset.prod_insert ha<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h2_a : <span class="lean-number">2</span> <span class="lean-operator">≤</span> f a := hf a <span class="lean-bracket-1">(</span>Finset.mem_insert_self a s&#x27;<span class="lean-bracket-1">)</span>
-    <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
-" title="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `">by_cases</span> hs_empty : s&#x27; = <span class="lean-operator">∅</span>
-    <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-bracket-1">[</span>hs_empty<span class="lean-bracket-1">]</span>
-    <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hs_nonempty : s&#x27;.Nonempty := Finset.nonempty_of_ne_empty hs_empty
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hs&#x27;_ge2 : <span class="lean-operator">∀</span> x <span class="lean-operator">∈</span> s&#x27;, <span class="lean-number">2</span> <span class="lean-operator">≤</span> f x := <span class="lean-keyword">fun</span> x hx =&gt; hf x <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem hx<span class="lean-bracket-1">)</span>
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h2_prod : <span class="lean-number">2</span> <span class="lean-operator">≤</span> <span class="lean-operator">∏</span> x <span class="lean-operator">∈</span> s&#x27;, f x := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-        <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span>b, hb<span class="lean-bracket-1">⟩</span> := hs_nonempty
-        <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h1 : <span class="lean-operator">∀</span> x <span class="lean-operator">∈</span> s&#x27;, <span class="lean-number">1</span> <span class="lean-operator">≤</span> f x := <span class="lean-keyword">fun</span> x hx =&gt; Nat.one_le_of_lt <span class="lean-bracket-1">(</span>hs&#x27;_ge2 x hx<span class="lean-bracket-1">)</span>
-        <span class="lean-keyword" data-docs="Step-wise reasoning over transitive relations.
-```
-calc
-  a = b := pab
-  b = c := pbc
-  ...
-  y = z := pyz
-```
-proves `a = z` from the given step-wise proofs. `=` can be replaced with any
-relation implementing the typeclass `Trans`. Instead of repeating the right-
-hand sides, subsequent left-hand sides can be replaced with `_`.
-```
-calc
-  a = b := pab
-  _ = c := pbc
-  ...
-  _ = z := pyz
-```
-It is also possible to write the *first* relation as `&lt;lhs&gt;\n  _ = &lt;rhs&gt; :=
-&lt;proof&gt;`. This is useful for aligning relation symbols, especially on longer:
-identifiers:
-```
-calc abc
-  _ = bce := pabce
-  _ = cef := pbcef
-  ...
-  _ = xyz := pwxyz
-```
-
-`calc` works as a term, as a tactic or as a `conv` tactic.
-
-See [Theorem Proving in Lean 4][tpil4] for more information.
-
-[tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
-" title="Step-wise reasoning over transitive relations.">calc</span> <span class="lean-operator">∏</span> x <span class="lean-operator">∈</span> s&#x27;, f x <span class="lean-operator">≥</span> f b := Finset.single_le_prod&#x27; h1 hb
-          _ <span class="lean-operator">≥</span> <span class="lean-number">2</span> := hs&#x27;_ge2 b hb
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> IH&#x27; := IH hs&#x27;_ge2
-      <span class="lean-keyword" data-docs="Step-wise reasoning over transitive relations.
-```
-calc
-  a = b := pab
-  b = c := pbc
-  ...
-  y = z := pyz
-```
-proves `a = z` from the given step-wise proofs. `=` can be replaced with any
-relation implementing the typeclass `Trans`. Instead of repeating the right-
-hand sides, subsequent left-hand sides can be replaced with `_`.
-```
-calc
-  a = b := pab
-  _ = c := pbc
-  ...
-  _ = z := pyz
-```
-It is also possible to write the *first* relation as `&lt;lhs&gt;\n  _ = &lt;rhs&gt; :=
-&lt;proof&gt;`. This is useful for aligning relation symbols, especially on longer:
-identifiers:
-```
-calc abc
-  _ = bce := pabce
-  _ = cef := pbcef
-  ...
-  _ = xyz := pwxyz
-```
-
-`calc` works as a term, as a tactic or as a `conv` tactic.
-
-See [Theorem Proving in Lean 4][tpil4] for more information.
-
-[tpil4]: https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs
-" title="Step-wise reasoning over transitive relations.">calc</span> f a + <span class="lean-operator">∑</span> x <span class="lean-operator">∈</span> s&#x27;, f x
-          <span class="lean-operator">≤</span> f a + <span class="lean-operator">∏</span> x <span class="lean-operator">∈</span> s&#x27;, f x := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span>
-        _ <span class="lean-operator">≤</span> f a * <span class="lean-operator">∏</span> x <span class="lean-operator">∈</span> s&#x27;, f x := Nat.add_le_mul h2_a h2_prod</code></pre>
+    rw [Finset.sum_insert ha, Finset.prod_insert ha]
+    have h2_a : 2 ≤ f a := hf a (Finset.mem_insert_self a s&#x27;)
+    by_cases hs_empty : s&#x27; = ∅
+    · simp [hs_empty]
+    · have hs_nonempty : s&#x27;.Nonempty := Finset.nonempty_of_ne_empty hs_empty
+      have hs&#x27;_ge2 : ∀ x ∈ s&#x27;, 2 ≤ f x := fun x hx =&gt; hf x (Finset.mem_insert_of_mem hx)
+      have h2_prod : 2 ≤ ∏ x ∈ s&#x27;, f x := by
+        obtain ⟨b, hb⟩ := hs_nonempty
+        have h1 : ∀ x ∈ s&#x27;, 1 ≤ f x := fun x hx =&gt; Nat.one_le_of_lt (hs&#x27;_ge2 x hx)
+        calc ∏ x ∈ s&#x27;, f x ≥ f b := Finset.single_le_prod&#x27; h1 hb
+          _ ≥ 2 := hs&#x27;_ge2 b hb
+      have IH&#x27; := IH hs&#x27;_ge2
+      calc f a + ∑ x ∈ s&#x27;, f x
+          ≤ f a + ∏ x ∈ s&#x27;, f x := by omega
+        _ ≤ f a * ∏ x ∈ s&#x27;, f x := Nat.add_le_mul h2_a h2_prod</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L41-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -545,7 +212,7 @@ Currently, all of these are on by default.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
+    <p>    The factorization of \(\mathrm{lcm}(S)\) at prime \(q\) is bounded by \(\sup _{x \in S} v_q(x)\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000064">
@@ -562,259 +229,28 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> lcm_factorization_le_sup <span class="lean-bracket-1">{</span>α : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>DecidableEq α<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">(</span>S : Finset α<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>f : α <span class="lean-operator">→</span> ℕ<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>q : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_ne_zero : <span class="lean-operator">∀</span> x <span class="lean-operator">∈</span> S, f x <span class="lean-operator">≠</span> <span class="lean-number">0</span><span class="lean-bracket-1">)</span> :
-    <span class="lean-bracket-1">(</span>S.lcm f<span class="lean-bracket-1">)</span>.factorization q <span class="lean-operator">≤</span> S.sup <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> x =&gt; <span class="lean-bracket-2">(</span>f x<span class="lean-bracket-2">)</span>.factorization q<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
-`induction x` applies induction on `x` to the main goal,
-producing one goal for each constructor of the inductive type,
-in which the target is replaced by a general instance of that constructor
-and an inductive hypothesis is added for each recursive argument to the constructor.
-If the type of an element in the local context depends on `x`,
-that element is reverted and reintroduced afterward,
-so that the inductive hypothesis incorporates that hypothesis as well.
-
-For example, given `n : Nat` and a goal with a hypothesis `h : P n` and target `Q n`,
-`induction n` produces one goal with hypothesis `h : P 0` and target `Q 0`,
-and one goal with hypotheses `h : P (Nat.succ a)` and `ih₁ : P a → Q a` and target `Q (Nat.succ a)`.
-Here the names `a` and `ih₁` are chosen automatically and are not accessible.
-You can use `with` to provide the variables names for each constructor.
-- `induction e`, where `e` is an expression instead of a variable,
-  generalizes `e` in the goal, and then performs induction on the resulting variable.
-- `induction e using r` allows the user to specify the principle of induction that should be used.
-  Here `r` should be a term whose result type must be of the form `C t`,
-  where `C` is a bound variable and `t` is a (possibly empty) sequence of bound variables
-- `induction e generalizing z₁ ... zₙ`, where `z₁ ... zₙ` are variables in the local context,
-  generalizes over `z₁ ... zₙ` before applying the induction but then introduces them in each goal.
-  In other words, the net effect is that each inductive hypothesis is generalized.
-- Given `x : Nat`, `induction x with | zero =&gt; tac₁ | succ x&#x27; ih =&gt; tac₂`
-  uses tactic `tac₁` for the `zero` case, and `tac₂` for the `succ` case.
-" title="Assuming `x` is a variable in the local context with an inductive type,">induction</span> S <span class="lean-keyword">using</span> Finset.induction <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
-then a list of alternatives.
-" title="After `with`, there is an optional tactic that runs on all branches, and">with</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_factorization_le_sup {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    (q : ℕ) (hS_ne_zero : ∀ x ∈ S, f x ≠ 0) :
+    (S.lcm f).factorization q ≤ S.sup (fun x =&gt; (f x).factorization q) := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
   | empty =&gt;
-    <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>Finset.lcm_empty, Nat.factorization_one, Finsupp.coe_zero, Pi.zero_apply,
-      Finset.sup_empty, bot_eq_zero, le_refl<span class="lean-bracket-1">]</span>
+    simp only [Finset.lcm_empty, Nat.factorization_one, Finsupp.coe_zero, Pi.zero_apply,
+      Finset.sup_empty, bot_eq_zero, le_refl]
   | @insert a s&#x27; ha IH =&gt;
-    <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>Finset.lcm_insert, Finset.sup_insert<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
-" title="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `">by_cases</span> hs&#x27;_empty : s&#x27; = <span class="lean-operator">∅</span>
-    <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-bracket-1">[</span>hs&#x27;_empty<span class="lean-bracket-1">]</span>
-    <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hs&#x27;_ne_zero : s&#x27;.lcm f <span class="lean-operator">≠</span> <span class="lean-number">0</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-        <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>ne_eq, Finset.lcm_eq_zero_iff<span class="lean-bracket-1">]</span>
-        <span class="lean-keyword" data-docs="Push negations into the conclusion or a hypothesis.
-For instance, a hypothesis `h : ¬ ∀ x, ∃ y, x ≤ y` will be transformed by `push_neg at h` into
-`h : ∃ x, ∀ y, y &lt; x`. Binder names are preserved.
-
-`push_neg` is a special case of the more general `push` tactic, namely `push Not`.
-The `push` tactic can be extended using the `@[push]` attribute. `push` has special-casing
-built in for `push Not`, so that it can preserve binder names, and so that `¬ (p ∧ q)` can be
-transformed to either `p → ¬ q` (default) or `¬ p ∨ ¬ q` (`push_neg +distrib`).
-
-Tactics that introduce a negation usually have a version that automatically calls `push_neg` on
-that negation. These include `by_cases!`, `contrapose!` and `by_contra!`.
-
-Another example: given a hypothesis
-```lean
-h : ¬ ∀ ε &gt; 0, ∃ δ &gt; 0, ∀ x, |x - x₀| ≤ δ → |f x - y₀| ≤ ε
-```
-writing `push_neg at h` will turn `h` into
-```lean
-h : ∃ ε &gt; 0, ∀ δ &gt; 0, ∃ x, |x - x₀| ≤ δ ∧ ε &lt; |f x - y₀|
-```
-Note that binder names are preserved by this tactic, contrary to what would happen with `simp`
-using the relevant lemmas. One can use this tactic at the goal using `push_neg`,
-at every hypothesis and the goal using `push_neg at *` or at selected hypotheses and the goal
-using say `push_neg at h h&#x27; ⊢`, as usual.
-" title="Push negations into the conclusion or a hypothesis.">push_neg</span>
-        <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> x hx
-        <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> hS_ne_zero x <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem hx<span class="lean-bracket-1">)</span>
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> ha_ne_zero : f a <span class="lean-operator">≠</span> <span class="lean-number">0</span> := hS_ne_zero a <span class="lean-bracket-1">(</span>Finset.mem_insert_self a s&#x27;<span class="lean-bracket-1">)</span>
-      <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>lcm_eq_nat_lcm, Nat.factorization_lcm ha_ne_zero hs&#x27;_ne_zero<span class="lean-bracket-1">]</span>
-      <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>Finsupp.sup_apply, sup_le_iff<span class="lean-bracket-1">]</span>
-      <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
-the first matching constructor, or else fails.
-" title="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with">constructor</span>
-      <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> le_sup_left
-      <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hIH := IH <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> x hx =&gt; hS_ne_zero x <span class="lean-bracket-2">(</span>Finset.mem_insert_of_mem hx<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
-        <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> le_trans hIH le_sup_right</code></pre>
+    simp only [Finset.lcm_insert, Finset.sup_insert]
+    by_cases hs&#x27;_empty : s&#x27; = ∅
+    · simp [hs&#x27;_empty]
+    · have hs&#x27;_ne_zero : s&#x27;.lcm f ≠ 0 := by
+        rw [ne_eq, Finset.lcm_eq_zero_iff]
+        push_neg
+        intro x hx
+        exact hS_ne_zero x (Finset.mem_insert_of_mem hx)
+      have ha_ne_zero : f a ≠ 0 := hS_ne_zero a (Finset.mem_insert_self a s&#x27;)
+      rw [lcm_eq_nat_lcm, Nat.factorization_lcm ha_ne_zero hs&#x27;_ne_zero]
+      simp only [Finsupp.sup_apply, sup_le_iff]
+      constructor
+      · exact le_sup_left
+      · have hIH := IH (fun x hx =&gt; hS_ne_zero x (Finset.mem_insert_of_mem hx))
+        exact le_trans hIH le_sup_right</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L78-L106" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -887,7 +323,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
+    <p>    If \(\mathrm{lcm}(S) = p^k\) and all elements of \(S\) divide \(p^k\), then \(p^k \in S\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000065">
@@ -904,442 +340,32 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.prime_pow_mem_of_lcm_eq <span class="lean-bracket-1">{</span>p k : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hp : p.Prime<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>S : Finset ℕ<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ p ^ k<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_lcm : S.lcm id = p ^ k<span class="lean-bracket-1">)</span> :
-    p ^ k <span class="lean-operator">∈</span> S := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
-introducing a hypothesis `h : ¬p` and proving `False`.
-* If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
-* If `p` is decidable, it uses `Decidable.byContradiction` instead of `Classical.byContradiction`.
-* If `h` is omitted, the introduced variable will be called `this`.
-" title="`by_contra h` proves `⊢ p` by contradiction,">by_contra</span> hm_not_in
-  <span class="lean-comment">-- All elements of S are proper divisors of p^k, so they divide p^</span><span class="lean-bracket-1">(</span>k-<span class="lean-number">1</span><span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hall_lt : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d &lt; p ^ k := <span class="lean-keyword">fun</span> d hd =&gt;
-    Nat.lt_of_le_of_ne <span class="lean-bracket-1">(</span>Nat.le_of_dvd <span class="lean-bracket-2">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>hS_sub d hd<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
-      <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> heq =&gt; hm_not_in <span class="lean-bracket-2">(</span>heq ▸ hd<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hall_le : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ p ^ <span class="lean-bracket-1">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-    <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> d hd
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hdvd := hS_sub d hd
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hd_lt := hall_lt d hd
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hpr : Prime p := Nat.Prime.prime hp
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>dvd_prime_pow hpr<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
-hypotheses or the goal. It can have one of the forms:
-* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
-  `(location)?` matchers. It means to target the goal only.
-* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
-* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
-* `at *`: target all hypotheses and the goal
-" title="Location specifications are used by many tactics that can operate on either the">at</span> hdvd
-    <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span>j, _, hassoc<span class="lean-bracket-1">⟩</span> := hdvd
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hd_eq := associated_iff_eq.mp hassoc
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hd_eq<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
-hypotheses or the goal. It can have one of the forms:
-* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
-  `(location)?` matchers. It means to target the goal only.
-* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
-* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
-* `at *`: target all hypotheses and the goal
-" title="Location specifications are used by many tactics that can operate on either the">at</span> hd_lt
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hj_lt : j &lt; k := <span class="lean-bracket-1">(</span>Nat.pow_lt_pow_iff_right hp.one_lt<span class="lean-bracket-1">)</span>.mp hd_lt
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hj_le : j <span class="lean-operator">≤</span> k - <span class="lean-number">1</span> := Nat.lt_succ_iff.mp <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span><span class="lean-bracket-1">)</span>
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hd_eq<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> Nat.pow_dvd_pow p hj_le
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hlcm_le : S.lcm id ∣ p ^ <span class="lean-bracket-1">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> := Finset.lcm_dvd_iff.mpr <span class="lean-bracket-1">(</span><span class="lean-keyword">fun</span> d hd =&gt; hall_le d hd<span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hS_lcm<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
-hypotheses or the goal. It can have one of the forms:
-* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
-  `(location)?` matchers. It means to target the goal only.
-* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
-* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
-* `at *`: target all hypotheses and the goal
-" title="Location specifications are used by many tactics that can operate on either the">at</span> hlcm_le
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hle : p ^ k <span class="lean-operator">≤</span> p ^ <span class="lean-bracket-1">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> := Nat.le_of_dvd <span class="lean-bracket-1">(</span>Nat.pow_pos hp.pos<span class="lean-bracket-1">)</span> hlcm_le
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hpow_strict : p ^ <span class="lean-bracket-1">(</span>k - <span class="lean-number">1</span><span class="lean-bracket-1">)</span> &lt; p ^ k :=
-    Nat.pow_lt_pow_right hp.one_lt <span class="lean-bracket-1">(</span>Nat.sub_lt hk Nat.one_pos<span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 &lt; k) (S : Finset ℕ)
+    (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
+    p ^ k ∈ S := by</span></code><code class="lean-proof-body"><span class="lean-plain">by_contra hm_not_in
+  -- All elements of S are proper divisors of p^k, so they divide p^(k-1)
+  have hall_lt : ∀ d ∈ S, d &lt; p ^ k := fun d hd =&gt;
+    Nat.lt_of_le_of_ne (Nat.le_of_dvd (Nat.pow_pos hp.pos) (hS_sub d hd))
+      (fun heq =&gt; hm_not_in (heq ▸ hd))
+  have hall_le : ∀ d ∈ S, d ∣ p ^ (k - 1) := by
+    intro d hd
+    have hdvd := hS_sub d hd
+    have hd_lt := hall_lt d hd
+    have hpr : Prime p := Nat.Prime.prime hp
+    rw [dvd_prime_pow hpr] at hdvd
+    obtain ⟨j, _, hassoc⟩ := hdvd
+    have hd_eq := associated_iff_eq.mp hassoc
+    rw [hd_eq] at hd_lt
+    have hj_lt : j &lt; k := (Nat.pow_lt_pow_iff_right hp.one_lt).mp hd_lt
+    have hj_le : j ≤ k - 1 := Nat.lt_succ_iff.mp (by omega)
+    rw [hd_eq]
+    exact Nat.pow_dvd_pow p hj_le
+  have hlcm_le : S.lcm id ∣ p ^ (k - 1) := Finset.lcm_dvd_iff.mpr (fun d hd =&gt; hall_le d hd)
+  rw [hS_lcm] at hlcm_le
+  have hle : p ^ k ≤ p ^ (k - 1) := Nat.le_of_dvd (Nat.pow_pos hp.pos) hlcm_le
+  have hpow_strict : p ^ (k - 1) &lt; p ^ k :=
+    Nat.pow_lt_pow_right hp.one_lt (Nat.sub_lt hk Nat.one_pos)
+  omega</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L114-L151" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1412,7 +438,7 @@ Currently, all of these are on by default.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
+    <p>    For \(n {\gt} 2\), we have \(\varphi (n) \geq 2\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000066">
@@ -1429,146 +455,9 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> two_le_totient_of_two_lt <span class="lean-bracket-1">(</span>n : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hn : <span class="lean-number">2</span> &lt; n<span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient n := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> := Nat.totient_pos.mpr <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span> : <span class="lean-number">0</span> &lt; n<span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> := Nat.totient_eq_one_iff.not.mpr <span class="lean-bracket-1">(</span><span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span> : <span class="lean-operator">¬</span><span class="lean-bracket-2">(</span>n = <span class="lean-number">1</span> <span class="lean-operator">∨</span> n = <span class="lean-number">2</span><span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `omega` tactic, for resolving integer and natural linear arithmetic problems.
-
-It is not yet a full decision procedure (no &quot;dark&quot; or &quot;grey&quot; shadows),
-but should be effective on many problems.
-
-We handle hypotheses of the form `x = y`, `x &lt; y`, `x ≤ y`, and `k ∣ x` for `x y` in `Nat` or `Int`
-(and `k` a literal), along with negations of these statements.
-
-We decompose the sides of the inequalities as linear combinations of atoms.
-
-If we encounter `x / k` or `x % k` for literal integers `k` we introduce new auxiliary variables
-and the relevant inequalities.
-
-On the first pass, we do not perform case splits on natural subtraction.
-If `omega` fails, we recursively perform a case split on
-a natural subtraction appearing in a hypothesis, and try again.
-
-The options
-```
-omega +splitDisjunctions +splitNatSub +splitNatAbs +splitMinMax
-```
-can be used to:
-* `splitDisjunctions`: split any disjunctions found in the context,
-  if the problem is not otherwise solvable.
-* `splitNatSub`: for each appearance of `((a - b : Nat) : Int)`, split on `a ≤ b` if necessary.
-* `splitNatAbs`: for each appearance of `Int.natAbs a`, split on `0 ≤ a` if necessary.
-* `splitMinMax`: for each occurrence of `min a b`, split on `min a b = a ∨ min a b = b`
-Currently, all of these are on by default.
-" title="The `omega` tactic, for resolving integer and natural linear arithmetic problems.">omega</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem two_le_totient_of_two_lt (n : ℕ) (hn : 2 &lt; n) : 2 ≤ Nat.totient n := by</span></code><code class="lean-proof-body"><span class="lean-plain">have := Nat.totient_pos.mpr (by omega : 0 &lt; n)
+  have := Nat.totient_eq_one_iff.not.mpr (by omega : ¬(n = 1 ∨ n = 2))
+  omega</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L155-L165" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1641,7 +530,7 @@ Currently, all of these are on by default.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
+    <p>    If each \(f(a)\) divides \(d\) and the \(f(a)\) are pairwise coprime, then \(\prod _{a \in S} f(a)\) divides \(d\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000067">
@@ -1658,259 +547,27 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> prod_coprime_dvd <span class="lean-bracket-1">{</span>α : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>DecidableEq α<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">(</span>S : Finset α<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>f : α <span class="lean-operator">→</span> ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>d : ℕ<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>h_dvd : <span class="lean-operator">∀</span> a <span class="lean-operator">∈</span> S, f a ∣ d<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>h_coprime : <span class="lean-operator">∀</span> a₁ <span class="lean-operator">∈</span> S, <span class="lean-operator">∀</span> a₂ <span class="lean-operator">∈</span> S, a₁ <span class="lean-operator">≠</span> a₂ <span class="lean-operator">→</span> <span class="lean-bracket-2">(</span>f a₁<span class="lean-bracket-2">)</span>.Coprime <span class="lean-bracket-2">(</span>f a₂<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> :
-    <span class="lean-bracket-1">(</span><span class="lean-operator">∏</span> a <span class="lean-operator">∈</span> S, f a<span class="lean-bracket-1">)</span> ∣ d := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
-`induction x` applies induction on `x` to the main goal,
-producing one goal for each constructor of the inductive type,
-in which the target is replaced by a general instance of that constructor
-and an inductive hypothesis is added for each recursive argument to the constructor.
-If the type of an element in the local context depends on `x`,
-that element is reverted and reintroduced afterward,
-so that the inductive hypothesis incorporates that hypothesis as well.
-
-For example, given `n : Nat` and a goal with a hypothesis `h : P n` and target `Q n`,
-`induction n` produces one goal with hypothesis `h : P 0` and target `Q 0`,
-and one goal with hypotheses `h : P (Nat.succ a)` and `ih₁ : P a → Q a` and target `Q (Nat.succ a)`.
-Here the names `a` and `ih₁` are chosen automatically and are not accessible.
-You can use `with` to provide the variables names for each constructor.
-- `induction e`, where `e` is an expression instead of a variable,
-  generalizes `e` in the goal, and then performs induction on the resulting variable.
-- `induction e using r` allows the user to specify the principle of induction that should be used.
-  Here `r` should be a term whose result type must be of the form `C t`,
-  where `C` is a bound variable and `t` is a (possibly empty) sequence of bound variables
-- `induction e generalizing z₁ ... zₙ`, where `z₁ ... zₙ` are variables in the local context,
-  generalizes over `z₁ ... zₙ` before applying the induction but then introduces them in each goal.
-  In other words, the net effect is that each inductive hypothesis is generalized.
-- Given `x : Nat`, `induction x with | zero =&gt; tac₁ | succ x&#x27; ih =&gt; tac₂`
-  uses tactic `tac₁` for the `zero` case, and `tac₂` for the `succ` case.
-" title="Assuming `x` is a variable in the local context with an inductive type,">induction</span> S <span class="lean-keyword">using</span> Finset.induction <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
-then a list of alternatives.
-" title="After `with`, there is an optional tactic that runs on all branches, and">with</span>
-  | empty =&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem prod_coprime_dvd {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ) (d : ℕ)
+    (h_dvd : ∀ a ∈ S, f a ∣ d)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    (∏ a ∈ S, f a) ∣ d := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
+  | empty =&gt; simp
   | @insert q s&#x27; hq_notin IH =&gt;
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>Finset.prod_insert hq_notin<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hq_dvd : f q ∣ d := h_dvd q <span class="lean-bracket-1">(</span>Finset.mem_insert_self q s&#x27;<span class="lean-bracket-1">)</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hs&#x27;_dvd : <span class="lean-bracket-1">(</span><span class="lean-operator">∏</span> r <span class="lean-operator">∈</span> s&#x27;, f r<span class="lean-bracket-1">)</span> ∣ d := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-      <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
-If it succeeds, then the tactic returns as many subgoals as the number of premises that
-have not been fixed by type inference or type class resolution.
-Non-dependent premises are added before dependent ones.
-
-The `apply` tactic uses higher-order pattern matching, type class resolution,
-and first-order unification with dependent types.
-" title="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.">apply</span> IH
-      <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> r hr; <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_dvd r <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem hr<span class="lean-bracket-1">)</span>
-      <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> a₁ ha₁ a₂ ha₂ hne
-        <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_coprime a₁ <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem ha₁<span class="lean-bracket-1">)</span> a₂
-          <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem ha₂<span class="lean-bracket-1">)</span> hne
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h_cop : <span class="lean-bracket-1">(</span>f q<span class="lean-bracket-1">)</span>.Coprime <span class="lean-bracket-1">(</span><span class="lean-operator">∏</span> r <span class="lean-operator">∈</span> s&#x27;, f r<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-      <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
-If it succeeds, then the tactic returns as many subgoals as the number of premises that
-have not been fixed by type inference or type class resolution.
-Non-dependent premises are added before dependent ones.
-
-The `apply` tactic uses higher-order pattern matching, type class resolution,
-and first-order unification with dependent types.
-" title="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.">apply</span> Nat.Coprime.prod_right
-      <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> r hr
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hne : q <span class="lean-operator">≠</span> r := <span class="lean-keyword">fun</span> heq =&gt; hq_notin <span class="lean-bracket-1">(</span>heq ▸ hr<span class="lean-bracket-1">)</span>
-      <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_coprime q <span class="lean-bracket-1">(</span>Finset.mem_insert_self q s&#x27;<span class="lean-bracket-1">)</span> r
-        <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem hr<span class="lean-bracket-1">)</span> hne
-    <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs&#x27;_dvd</code></pre>
+    rw [Finset.prod_insert hq_notin]
+    have hq_dvd : f q ∣ d := h_dvd q (Finset.mem_insert_self q s&#x27;)
+    have hs&#x27;_dvd : (∏ r ∈ s&#x27;, f r) ∣ d := by
+      apply IH
+      · intro r hr; exact h_dvd r (Finset.mem_insert_of_mem hr)
+      · intro a₁ ha₁ a₂ ha₂ hne
+        exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+          (Finset.mem_insert_of_mem ha₂) hne
+    have h_cop : (f q).Coprime (∏ r ∈ s&#x27;, f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq =&gt; hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s&#x27;) r
+        (Finset.mem_insert_of_mem hr) hne
+    exact h_cop.mul_dvd_of_dvd_of_dvd hq_dvd hs&#x27;_dvd</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L173-L202" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1983,7 +640,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
+    <p>    For pairwise coprime \(\{ f(a)\} _{a \in S}\), we have \(\varphi (\prod _{a \in S} f(a)) = \prod _{a \in S} \varphi (f(a))\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000068">
@@ -2000,188 +657,24 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> totient_finset_prod_of_coprime <span class="lean-bracket-1">{</span>α : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>DecidableEq α<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">(</span>S : Finset α<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>f : α <span class="lean-operator">→</span> ℕ<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>h_coprime : <span class="lean-operator">∀</span> a₁ <span class="lean-operator">∈</span> S, <span class="lean-operator">∀</span> a₂ <span class="lean-operator">∈</span> S, a₁ <span class="lean-operator">≠</span> a₂ <span class="lean-operator">→</span> <span class="lean-bracket-2">(</span>f a₁<span class="lean-bracket-2">)</span>.Coprime <span class="lean-bracket-2">(</span>f a₂<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> :
-    Nat.totient <span class="lean-bracket-1">(</span><span class="lean-operator">∏</span> a <span class="lean-operator">∈</span> S, f a<span class="lean-bracket-1">)</span> = <span class="lean-operator">∏</span> a <span class="lean-operator">∈</span> S, Nat.totient <span class="lean-bracket-1">(</span>f a<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
-`induction x` applies induction on `x` to the main goal,
-producing one goal for each constructor of the inductive type,
-in which the target is replaced by a general instance of that constructor
-and an inductive hypothesis is added for each recursive argument to the constructor.
-If the type of an element in the local context depends on `x`,
-that element is reverted and reintroduced afterward,
-so that the inductive hypothesis incorporates that hypothesis as well.
-
-For example, given `n : Nat` and a goal with a hypothesis `h : P n` and target `Q n`,
-`induction n` produces one goal with hypothesis `h : P 0` and target `Q 0`,
-and one goal with hypotheses `h : P (Nat.succ a)` and `ih₁ : P a → Q a` and target `Q (Nat.succ a)`.
-Here the names `a` and `ih₁` are chosen automatically and are not accessible.
-You can use `with` to provide the variables names for each constructor.
-- `induction e`, where `e` is an expression instead of a variable,
-  generalizes `e` in the goal, and then performs induction on the resulting variable.
-- `induction e using r` allows the user to specify the principle of induction that should be used.
-  Here `r` should be a term whose result type must be of the form `C t`,
-  where `C` is a bound variable and `t` is a (possibly empty) sequence of bound variables
-- `induction e generalizing z₁ ... zₙ`, where `z₁ ... zₙ` are variables in the local context,
-  generalizes over `z₁ ... zₙ` before applying the induction but then introduces them in each goal.
-  In other words, the net effect is that each inductive hypothesis is generalized.
-- Given `x : Nat`, `induction x with | zero =&gt; tac₁ | succ x&#x27; ih =&gt; tac₂`
-  uses tactic `tac₁` for the `zero` case, and `tac₂` for the `succ` case.
-" title="Assuming `x` is a variable in the local context with an inductive type,">induction</span> S <span class="lean-keyword">using</span> Finset.induction <span class="lean-keyword" data-docs="After `with`, there is an optional tactic that runs on all branches, and
-then a list of alternatives.
-" title="After `with`, there is an optional tactic that runs on all branches, and">with</span>
-  | empty =&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
+    (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
+    Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by</span></code><code class="lean-proof-body"><span class="lean-plain">induction S using Finset.induction with
+  | empty =&gt; simp
   | @insert q s&#x27; hq_notin IH =&gt;
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>Finset.prod_insert hq_notin, Finset.prod_insert hq_notin<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h_cop_q_s : <span class="lean-bracket-1">(</span>f q<span class="lean-bracket-1">)</span>.Coprime <span class="lean-bracket-1">(</span><span class="lean-operator">∏</span> r <span class="lean-operator">∈</span> s&#x27;, f r<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-      <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
-If it succeeds, then the tactic returns as many subgoals as the number of premises that
-have not been fixed by type inference or type class resolution.
-Non-dependent premises are added before dependent ones.
-
-The `apply` tactic uses higher-order pattern matching, type class resolution,
-and first-order unification with dependent types.
-" title="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.">apply</span> Nat.Coprime.prod_right
-      <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> r hr
-      <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hne : q <span class="lean-operator">≠</span> r := <span class="lean-keyword">fun</span> heq =&gt; hq_notin <span class="lean-bracket-1">(</span>heq ▸ hr<span class="lean-bracket-1">)</span>
-      <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_coprime q <span class="lean-bracket-1">(</span>Finset.mem_insert_self q s&#x27;<span class="lean-bracket-1">)</span> r
-        <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem hr<span class="lean-bracket-1">)</span> hne
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>Nat.totient_mul h_cop_q_s<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
-The optional parameter is the depth of the recursive applications.
-This is useful when `congr` is too aggressive in breaking down the goal.
-For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
-`congr` produces the goals `⊢ x = y` and `⊢ y = x`,
-while `congr 2` produces the intended `⊢ x + y = y + x`.
-" title="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.">congr</span> <span class="lean-number">1</span>
-    <span class="lean-keyword" data-docs="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.
-If it succeeds, then the tactic returns as many subgoals as the number of premises that
-have not been fixed by type inference or type class resolution.
-Non-dependent premises are added before dependent ones.
-
-The `apply` tactic uses higher-order pattern matching, type class resolution,
-and first-order unification with dependent types.
-" title="`apply e` tries to match the current goal against the conclusion of `e`&#x27;s type.">apply</span> IH
-    <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> a₁ ha₁ a₂ ha₂ hne
-    <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> h_coprime a₁ <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem ha₁<span class="lean-bracket-1">)</span> a₂
-      <span class="lean-bracket-1">(</span>Finset.mem_insert_of_mem ha₂<span class="lean-bracket-1">)</span> hne</code></pre>
+    rw [Finset.prod_insert hq_notin, Finset.prod_insert hq_notin]
+    have h_cop_q_s : (f q).Coprime (∏ r ∈ s&#x27;, f r) := by
+      apply Nat.Coprime.prod_right
+      intro r hr
+      have hne : q ≠ r := fun heq =&gt; hq_notin (heq ▸ hr)
+      exact h_coprime q (Finset.mem_insert_self q s&#x27;) r
+        (Finset.mem_insert_of_mem hr) hne
+    rw [Nat.totient_mul h_cop_q_s]
+    congr 1
+    apply IH
+    intro a₁ ha₁ a₂ ha₂ hne
+    exact h_coprime a₁ (Finset.mem_insert_of_mem ha₁) a₂
+      (Finset.mem_insert_of_mem ha₂) hne</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L210-L242" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -2254,7 +747,7 @@ be a `let` or function type.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>       If \(A\) has odd order \(k\), then \(-A\) has order \(2k\). </p>
+    <p>    If \(A\) has odd order \(k\), then \(-A\) has order \(2k\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000069">
@@ -2271,198 +764,25 @@ be a `let` or function type.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> orderOf_neg_of_odd_order <span class="lean-bracket-1">{</span>n : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>NeZero n<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">(</span>k : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk_odd : Odd k<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>A : Matrix <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hA_ord : orderOf A = k<span class="lean-bracket-1">)</span> :
-    orderOf <span class="lean-bracket-1">(</span>-A<span class="lean-bracket-1">)</span> = <span class="lean-number">2</span> * k := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-comment">-- Express -A as </span><span class="lean-bracket-1">(</span>-<span class="lean-number">1</span><span class="lean-bracket-1">)</span> * A
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hneg_eq : -A = <span class="lean-bracket-1">(</span>-<span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> * A := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hneg_eq<span class="lean-bracket-1">]</span>
-  <span class="lean-comment">-- -<span class="lean-number">1</span> and A commute</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hcomm : Commute <span class="lean-bracket-1">(</span>-<span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> A := Commute.neg_one_left A
-  <span class="lean-comment">-- orderOf</span><span class="lean-bracket-1">(</span>-<span class="lean-number">1</span><span class="lean-bracket-1">)</span> = <span class="lean-number">2</span> in char <span class="lean-number">0</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hord_neg1 : orderOf <span class="lean-bracket-1">(</span>-<span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin n<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> = <span class="lean-number">2</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>orderOf_neg_one, ringChar_matrix_int<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>
-  <span class="lean-comment">-- Coprimality: gcd</span><span class="lean-bracket-1">(</span><span class="lean-number">2</span>, k<span class="lean-bracket-1">)</span> = <span class="lean-number">1</span> since k is odd
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hcop : Nat.Coprime <span class="lean-number">2</span> k := Nat.Coprime.symm <span class="lean-bracket-1">(</span>Odd.coprime_two_right hk_odd<span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hord_cop : Nat.Coprime <span class="lean-bracket-1">(</span>orderOf <span class="lean-bracket-2">(</span>-<span class="lean-number">1</span> : Matrix <span class="lean-bracket-3">(</span>Fin n<span class="lean-bracket-3">)</span> <span class="lean-bracket-3">(</span>Fin n<span class="lean-bracket-3">)</span> ℤ<span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>orderOf A<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hord_neg1, hA_ord<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> hcop
-  <span class="lean-comment">-- Apply the product formula</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>hord_neg1, hA_ord<span class="lean-bracket-1">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
+    (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
+    orderOf (-A) = 2 * k := by</span></code><code class="lean-proof-body"><span class="lean-plain">-- Express -A as (-1) * A
+  have hneg_eq : -A = (-1 : Matrix (Fin n) (Fin n) ℤ) * A := by simp
+  rw [hneg_eq]
+  -- -1 and A commute
+  have hcomm : Commute (-1 : Matrix (Fin n) (Fin n) ℤ) A := Commute.neg_one_left A
+  -- orderOf(-1) = 2 in char 0
+  have hord_neg1 : orderOf (-1 : Matrix (Fin n) (Fin n) ℤ) = 2 := by
+    rw [orderOf_neg_one, ringChar_matrix_int]
+    simp
+  -- Coprimality: gcd(2, k) = 1 since k is odd
+  have hcop : Nat.Coprime 2 k := Nat.Coprime.symm (Odd.coprime_two_right hk_odd)
+  have hord_cop : Nat.Coprime (orderOf (-1 : Matrix (Fin n) (Fin n) ℤ)) (orderOf A) := by
+    rw [hord_neg1, hA_ord]
+    exact hcop
+  -- Apply the product formula
+  rw [hcomm.orderOf_mul_eq_mul_orderOf_of_coprime hord_cop]
+  rw [hord_neg1, hA_ord]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Main/Lemmas.lean#L250-L278" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>

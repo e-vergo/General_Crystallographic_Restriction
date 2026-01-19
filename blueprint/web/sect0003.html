@@ -101,13 +101,13 @@
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>      The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
+    <p>    The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> integerMatrixOrders <span class="lean-bracket-1">(</span>N : ℕ<span class="lean-bracket-1">)</span> : Set ℕ :=
-  <span class="lean-bracket-1">{</span>m | <span class="lean-operator">∃</span> A : Matrix <span class="lean-bracket-2">(</span>Fin N<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin N<span class="lean-bracket-2">)</span> ℤ, orderOf A = m <span class="lean-operator">∧</span> <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def integerMatrixOrders (N : ℕ) : Set ℕ :=
+  {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 &lt; m}</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
@@ -177,7 +177,7 @@
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        Order \(1\) is achievable in any dimension. </p>
+    <p>     Order \(1\) is achievable in any dimension. </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000026">
@@ -194,12 +194,9 @@
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> one_mem_integerMatrixOrders <span class="lean-bracket-1">(</span>N : ℕ<span class="lean-bracket-1">)</span> : <span class="lean-number">1</span> <span class="lean-operator">∈</span> integerMatrixOrders N :=</code><code class="lean-proof-body">
-  <span class="lean-bracket-1">⟨</span><span class="lean-number">1</span>, orderOf_one, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
-over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
-and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
-numerical expressions. It also has a relatively simple primality prover.
-" title="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`">norm_num</span><span class="lean-bracket-1">⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L61-L66" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -292,7 +289,7 @@ numerical expressions. It also has a relatively simple primality prover.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        Order \(2\) is achievable for \(N \geq 1\). </p>
+    <p>     Order \(2\) is achievable for \(N \geq 1\). </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000027">
@@ -309,31 +306,9 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> two_mem_integerMatrixOrders <span class="lean-bracket-1">(</span>N : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">[</span>NeZero N<span class="lean-bracket-1">]</span> : <span class="lean-number">2</span> <span class="lean-operator">∈</span> integerMatrixOrders N :=</code><code class="lean-proof-body">
-  <span class="lean-bracket-1">⟨</span>-<span class="lean-number">1</span>, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-2">[</span>orderOf_neg_one, ringChar_matrix_int<span class="lean-bracket-2">]</span>; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span>, <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span> <span class="lean-keyword" data-docs="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`
-over numerical types such as `ℕ`, `ℤ`, `ℚ`, `ℝ`, `ℂ` and some general algebraic types,
-and can prove goals of the form `A = B`, `A ≠ B`, `A &lt; B` and `A ≤ B`, where `A` and `B` are
-numerical expressions. It also has a relatively simple primality prover.
-" title="Normalize numerical expressions. Supports the operations `+` `-` `*` `/` `⁻¹` `^` and `%`">norm_num</span><span class="lean-bracket-1">⟩</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code><code class="lean-proof-body"><span class="lean-plain">(N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L76-L82" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -426,7 +401,7 @@ numerical expressions. It also has a relatively simple primality prover.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+    <p>     \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000028">
@@ -443,297 +418,25 @@ numerical expressions. It also has a relatively simple primality prover.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> integerMatrixOrders_mono <span class="lean-bracket-1">{</span>M N : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hMN : M <span class="lean-operator">≤</span> N<span class="lean-bracket-1">)</span> :
-    integerMatrixOrders M <span class="lean-operator">⊆</span> integerMatrixOrders N := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
-For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
-be a `let` or function type.
-
-* `intro` by itself introduces one anonymous hypothesis, which can be accessed
-  by e.g. `assumption`. It is equivalent to `intro _`.
-* `intro x y` introduces two hypotheses and names them. Individual hypotheses
-  can be anonymized via `_`, given a type ascription, or matched against a pattern:
-  ```lean
-  -- ... ⊢ α × β → ...
-  intro (a, b)
-  -- ..., a : α, b : β ⊢ ...
-  ```
-* `intro rfl` is short for `intro h; subst h`, if `h` is an equality where the left-hand or right-hand side
-  is a variable.
-* Alternatively, `intro` can be combined with pattern matching much like `fun`:
-  ```lean
-  intro
-  | n + 1, 0 =&gt; tac
-  | ...
-  ```
-" title="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.">intro</span> m hm
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>integerMatrixOrders, Set.mem_setOf_eq<span class="lean-bracket-1">]</span> <span class="lean-keyword" data-docs="Location specifications are used by many tactics that can operate on either the
-hypotheses or the goal. It can have one of the forms:
-* &#x27;empty&#x27; is not actually present in this syntax, but most tactics use
-  `(location)?` matchers. It means to target the goal only.
-* `at h₁ ... hₙ`: target the hypotheses `h₁`, ..., `hₙ`
-* `at h₁ h₂ ⊢`: target the hypotheses `h₁` and `h₂`, and the goal
-* `at *`: target all hypotheses and the goal
-" title="Location specifications are used by many tactics that can operate on either the">at</span> hm <span class="lean-operator">⊢</span>
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span>A, hA_ord, hA_pos<span class="lean-bracket-1">⟩</span> := hm
-  <span class="lean-comment">-- N = M + </span><span class="lean-bracket-1">(</span>N - M<span class="lean-bracket-1">)</span>
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> K := N - M
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hN : N = M + K := <span class="lean-bracket-1">(</span>Nat.add_sub_cancel&#x27; hMN<span class="lean-bracket-1">)</span>.symm
-  <span class="lean-comment">-- First embed A into </span><span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span>-indexed matrix
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> A&#x27; : Matrix <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> ℤ := embedMatrixSum A
-  <span class="lean-comment">-- Then reindex to Fin N using the equivalence</span>
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> e : Fin N <span class="lean-operator">≃</span> Fin M <span class="lean-operator">⊕</span> Fin K := hN ▸ finSumFinEquiv.symm
-  <span class="lean-keyword" data-docs="The `let` tactic is for adding definitions to the local context of the main goal.
-The definition can be unfolded, unlike definitions introduced by `have`.
-
-* `let x : t := e` adds the definition `x : t := e` if `e` is a term of type `t`.
-* `let x := e` uses the type of `e` for `t`.
-* `let : t := e` and `let := e` use `this` for the name of the hypothesis.
-* `let pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that let only one applicable constructor.
-  For example, given `p : α × β × γ`, `let ⟨x, y, z⟩ := p` produces the
-  local variables `x : α`, `y : β`, and `z : γ`.
-* The syntax `let (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `let` term.
-
-## Properties and relations
-
-* Unlike `have`, it is possible to unfold definitions introduced using `let`, using tactics
-  such as `simp`, `dsimp`, `unfold`, and `subst`.
-* The `clear_value` tactic turns a `let` definition into a `have` definition after the fact.
-  The tactic might fail if the local context depends on the value of the variable.
-* The `let` tactic is preferred for data (non-propositions).
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-" title="The `let` tactic is for adding definitions to the local context of the main goal.">let</span> A&#x27;&#x27; : Matrix <span class="lean-bracket-1">(</span>Fin N<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin N<span class="lean-bracket-1">)</span> ℤ := <span class="lean-bracket-1">(</span>reindexMonoidEquiv e<span class="lean-bracket-1">)</span>.symm A&#x27;
-  <span class="lean-keyword" data-docs="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic
-`refine ⟨e₁, e₂, ⋯, ?_, ⋯, ?_⟩` with any number of placeholders (rather than just one) and
-then trying to close goals associated to the placeholders with a configurable discharger (rather
-than just `try trivial`).
-
-Examples:
-
-```lean
-example : ∃ x : Nat, x = x := by use 42
-
-example : ∃ x : Nat, ∃ y : Nat, x = y := by use 42, 42
-
-example : ∃ x : String × String, x.1 = x.2 := by use (&quot;forty-two&quot;, &quot;forty-two&quot;)
-```
-
-`use! e₁, e₂, ⋯` is similar but it applies constructors everywhere rather than just for
-goals that correspond to the last argument of a constructor. This gives the effect that
-nested constructors are being flattened out, with the supplied values being used along the
-leaves and nodes of the tree of constructors.
-With `use!` one can feed in each `42` one at a time:
-
-```lean
-example : ∃ p : Nat × Nat, p.1 = p.2 := by use! 42, 42
-
-example : ∃ p : Nat × Nat, p.1 = p.2 := by use! (42, 42)
-```
-
-The second line makes use of the fact that `use!` tries refining with the argument before
-applying a constructor. Also note that `use`/`use!` by default uses a tactic
-called `use_discharger` to discharge goals, so `use! 42` will close the goal in this example since
-`use_discharger` applies `rfl`, which as a consequence solves for the other `Nat` metavariable.
-
-These tactics take an optional discharger to handle remaining explicit `Prop` constructor arguments.
-By default it is `use (discharger := try with_reducible use_discharger) e₁, e₂, ⋯`.
-To turn off the discharger and keep all goals, use `(discharger := skip)`.
-To allow &quot;heavy refls&quot;, use `(discharger := try use_discharger)`.
-" title="`use e₁, e₂, ⋯` is similar to `exists`, but unlike `exists` it is equivalent to applying the tactic">use</span> A&#x27;&#x27;
-  <span class="lean-keyword" data-docs="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with
-the first matching constructor, or else fails.
-" title="If the main goal&#x27;s target type is an inductive type, `constructor` solves it with">constructor</span>
-  <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>A&#x27;&#x27;<span class="lean-bracket-1">]</span>
-    <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> h1 : orderOf <span class="lean-bracket-1">(</span><span class="lean-bracket-2">(</span>reindexMonoidEquiv e<span class="lean-bracket-2">)</span>.symm A&#x27;<span class="lean-bracket-1">)</span> = orderOf A&#x27; :=
-      MulEquiv.orderOf_eq <span class="lean-bracket-1">(</span>reindexMonoidEquiv e<span class="lean-bracket-1">)</span>.symm A&#x27;
-    <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>h1, orderOf_embedMatrixSum_eq, hA_ord<span class="lean-bracket-1">]</span>
-  <span class="lean-operator">·</span> <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> hA_pos</code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
+    integerMatrixOrders M ⊆ integerMatrixOrders N := by</span></code><code class="lean-proof-body"><span class="lean-plain">intro m hm
+  simp only [integerMatrixOrders, Set.mem_setOf_eq] at hm ⊢
+  obtain ⟨A, hA_ord, hA_pos⟩ := hm
+  -- N = M + (N - M)
+  let K := N - M
+  have hN : N = M + K := (Nat.add_sub_cancel&#x27; hMN).symm
+  -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
+  let A&#x27; : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ := embedMatrixSum A
+  -- Then reindex to Fin N using the equivalence
+  let e : Fin N ≃ Fin M ⊕ Fin K := hN ▸ finSumFinEquiv.symm
+  let A&#x27;&#x27; : Matrix (Fin N) (Fin N) ℤ := (reindexMonoidEquiv e).symm A&#x27;
+  use A&#x27;&#x27;
+  constructor
+  · simp only [A&#x27;&#x27;]
+    have h1 : orderOf ((reindexMonoidEquiv e).symm A&#x27;) = orderOf A&#x27; :=
+      MulEquiv.orderOf_eq (reindexMonoidEquiv e).symm A&#x27;
+    rw [h1, orderOf_embedMatrixSum_eq, hA_ord]
+  · exact hA_pos</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L156-L185" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -803,16 +506,15 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>      Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
+    <p>    Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> blockDiag2 <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>Zero R<span class="lean-bracket-1">]</span>
-    <span class="lean-bracket-1">(</span>A : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> :
-    Matrix <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> R :=
-  Matrix.fromBlocks A <span class="lean-number">0</span> <span class="lean-number">0</span> B</code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
+  Matrix.fromBlocks A 0 0 B</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
   Matrix.fromBlocks A 0 0 B</span></code></pre>
@@ -884,7 +586,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
+    <p>     \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000029">
@@ -901,11 +603,13 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> blockDiag2_one <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>Zero R<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">[</span>One R<span class="lean-bracket-1">]</span> :
-    blockDiag2 <span class="lean-bracket-1">(</span><span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span><span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> =
-    <span class="lean-bracket-1">(</span><span class="lean-number">1</span> : Matrix <span class="lean-bracket-2">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body">
-  Matrix.fromBlocks_one</code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one</span></code><code class="lean-proof-body"><span class="lean-plain">{M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -998,7 +702,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
+    <p>     \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000030">
@@ -1015,54 +719,10 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> blockDiag2_mul <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>Semiring R<span class="lean-bracket-1">]</span>
-    <span class="lean-bracket-1">(</span>A A&#x27; : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B B&#x27; : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> :
-    blockDiag2 <span class="lean-bracket-1">(</span>A * A&#x27;<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B * B&#x27;<span class="lean-bracket-1">)</span> = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>blockDiag2, Matrix.fromBlocks_multiply<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.
-The optional parameter is the depth of the recursive applications.
-This is useful when `congr` is too aggressive in breaking down the goal.
-For example, given `⊢ f (g (x + y)) = f (g (y + x))`,
-`congr` produces the goals `⊢ x = y` and `⊢ y = x`,
-while `congr 2` produces the intended `⊢ x + y = y + x`.
-" title="Apply congruence (recursively) to goals of the form `⊢ f as = f bs` and `⊢ f as ≍ f bs`.">congr</span> <span class="lean-number">1</span> &lt;;&gt; <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add<span class="lean-bracket-1">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
+    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2, Matrix.fromBlocks_multiply]
+  congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1156,18 +816,17 @@ non-dependent hypotheses. It has many variants:
           </div>
     </div>
     <div class="definition_thmcontent">
-    <p>       The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
+    <p>     The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
 
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">def</span> blockDiag2.prodMonoidHom <span class="lean-bracket-1">(</span>M K : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">)</span> <span class="lean-bracket-1">[</span>Semiring R<span class="lean-bracket-1">]</span> :
-    Matrix <span class="lean-bracket-1">(</span>Fin M<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin M<span class="lean-bracket-1">)</span> R <span class="lean-operator">×</span> Matrix <span class="lean-bracket-1">(</span>Fin K<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin K<span class="lean-bracket-1">)</span> R <span class="lean-operator">→</span>*
-    Matrix <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>Fin M <span class="lean-operator">⊕</span> Fin K<span class="lean-bracket-1">)</span> R <span class="lean-keyword">where</span>
-  toFun := <span class="lean-keyword">fun</span> p =&gt; blockDiag2 p.<span class="lean-number">1</span> p.<span class="lean-number">2</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
+    Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
+    Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
+  toFun := fun p =&gt; blockDiag2 p.1 p.2
   map_one&#x27; := blockDiag2_one
-  map_mul&#x27; := <span class="lean-keyword">fun</span> _ _ =&gt; blockDiag2_mul _ _ _ _</code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
+  map_mul&#x27; := fun _ _ =&gt; blockDiag2_mul _ _ _ _</span></code><code class="lean-proof-body"><span class="lean-plain">(M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
   toFun := fun p =&gt; blockDiag2 p.1 p.2
@@ -1243,7 +902,7 @@ non-dependent hypotheses. It has many variants:
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
+    <p>     \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000031">
@@ -1260,40 +919,11 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> blockDiag2_eq_one_iff <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>Zero R<span class="lean-bracket-1">]</span> <span class="lean-bracket-1">[</span>One R<span class="lean-bracket-1">]</span>
-    <span class="lean-bracket-1">(</span>A : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> :
-    blockDiag2 A B = <span class="lean-number">1</span> <span class="lean-operator">↔</span> A = <span class="lean-number">1</span> <span class="lean-operator">∧</span> B = <span class="lean-number">1</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> blockDiag2_one<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>blockDiag2, Matrix.fromBlocks_inj<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="`tauto` breaks down assumptions of the form `_ ∧ _`, `_ ∨ _`, `_ ↔ _` and `∃ _, _`
-and splits a goal of the form `_ ∧ _`, `_ ↔ _` or `∃ _, _` until it can be discharged
-using `rfl` or `solve_by_elim`.
-This is a finishing tactic: it either closes the goal or raises an error.
-
-The Lean 3 version of this tactic by default attempted to avoid classical reasoning
-where possible. This Lean 4 version makes no such attempt. The `itauto` tactic
-is designed for that purpose.
-" title="`tauto` breaks down assumptions of the form `_ ∧ _`, `_ ∨ _`, `_ ↔ _` and `∃ _, _`">tauto</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← blockDiag2_one]
+  simp only [blockDiag2, Matrix.fromBlocks_inj]
+  tauto</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1386,7 +1016,7 @@ is designed for that purpose.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
+    <p>     \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000032">
@@ -1403,31 +1033,10 @@ is designed for that purpose.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> blockDiag2_pow <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">{</span>R : <span class="lean-keyword" data-docs="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable
-`&gt; 0` for each variable in the sequence. " title="The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable">Type*</span><span class="lean-bracket-1">}</span> <span class="lean-bracket-1">[</span>Semiring R<span class="lean-bracket-1">]</span>
-    <span class="lean-bracket-1">(</span>A : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> R<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>k : ℕ<span class="lean-bracket-1">)</span> :
-    <span class="lean-bracket-1">(</span>blockDiag2 A B<span class="lean-bracket-1">)</span> ^ k = blockDiag2 <span class="lean-bracket-1">(</span>A ^ k<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B ^ k<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
-non-dependent hypotheses. It has many variants:
-- `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
-- `simp [h₁, h₂, ..., hₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]` and the given `hᵢ`&#x27;s, where the `hᵢ`&#x27;s are expressions.-
-- If an `hᵢ` is a defined constant `f`, then `f` is unfolded. If `f` has equational lemmas associated
-  with it (and is not a projection or a `reducible` definition), these are used to rewrite with `f`.
-- `simp [*]` simplifies the main goal target using the lemmas tagged with the
-  attribute `[simp]` and all hypotheses.
-- `simp only [h₁, h₂, ..., hₙ]` is like `simp [h₁, h₂, ..., hₙ]` but does not use `[simp]` lemmas.
-- `simp [-id₁, ..., -idₙ]` simplifies the main goal target using the lemmas tagged
-  with the attribute `[simp]`, but removes the ones named `idᵢ`.
-- `simp at h₁ h₂ ... hₙ` simplifies the hypotheses `h₁ : T₁` ... `hₙ : Tₙ`. If
-  the target or another hypothesis depends on `hᵢ`, a new simplified hypothesis
-  `hᵢ` is introduced, but the old one remains in the local context.
-- `simp at *` simplifies all the hypotheses and the target.
-- `simp [*] at *` simplifies target and all (propositional) hypotheses using the
-  other hypotheses.
-" title="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or">simp</span> <span class="lean-keyword">only</span> <span class="lean-bracket-1">[</span>blockDiag2<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> Matrix.fromBlocks_diagonal_pow A B k</code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
+    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2]
+  exact Matrix.fromBlocks_diagonal_pow A B k</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1526,7 +1135,7 @@ non-dependent hypotheses. It has many variants:
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
+    <p>     The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000033">
@@ -1543,40 +1152,12 @@ non-dependent hypotheses. It has many variants:
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> orderOf_blockDiag2 <span class="lean-bracket-1">{</span>M K : ℕ<span class="lean-bracket-1">}</span>
-    <span class="lean-bracket-1">(</span>A : Matrix <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin M<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>B : Matrix <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> <span class="lean-bracket-2">(</span>Fin K<span class="lean-bracket-2">)</span> ℤ<span class="lean-bracket-1">)</span> :
-    orderOf <span class="lean-bracket-1">(</span>blockDiag2 A B<span class="lean-bracket-1">)</span> = Nat.lcm <span class="lean-bracket-1">(</span>orderOf A<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>orderOf B<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
-The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
-
-* `have h : t := e` adds the hypothesis `h : t` if `e` is a term of type `t`.
-* `have h := e` uses the type of `e` for `t`.
-* `have : t := e` and `have := e` use `this` for the name of the hypothesis.
-* `have pat := e` for a pattern `pat` is equivalent to `match e with | pat =&gt; _`,
-  where `_` stands for the tactics that follow this one.
-  It is convenient for types that have only one applicable constructor.
-  For example, given `h : p ∧ q ∧ r`, `have ⟨h₁, h₂, h₃⟩ := h` produces the
-  hypotheses `h₁ : p`, `h₂ : q`, and `h₃ : r`.
-* The syntax `have (eq := h) pat := e` is equivalent to `match h : e with | pat =&gt; _`,
-  which adds the equation `h : e = pat` to the local context.
-
-The tactic supports all the same syntax variants and options as the `have` term.
-
-## Properties and relations
-
-* It is not possible to unfold a variable introduced using `have`, since the definition&#x27;s value is forgotten.
-  The `let` tactic introduces definitions that can be unfolded.
-* The `have h : t := e` is like doing `let h : t := e; clear_value h`.
-* The `have` tactic is preferred for propositions, and `let` is preferred for non-propositions.
-* Sometimes `have` is used for non-propositions to ensure that the variable is never unfolded,
-  which may be important for performance reasons.
-    Consider using the equivalent `let +nondep` to indicate the intent.
-
-" title="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main g">have</span> hinj : Function.Injective <span class="lean-bracket-1">(</span>blockDiag2.prodMonoidHom M K ℤ<span class="lean-bracket-1">)</span> := <span class="lean-keyword">fun</span> p q hpq =&gt;
-    Prod.ext <span class="lean-bracket-1">(</span>Matrix.fromBlocks_inj.mp hpq<span class="lean-bracket-1">)</span>.<span class="lean-number">1</span> <span class="lean-bracket-1">(</span>Matrix.fromBlocks_inj.mp hpq<span class="lean-bracket-1">)</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>.<span class="lean-number">2</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-keyword">show</span> blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ <span class="lean-bracket-2">(</span>A, B<span class="lean-bracket-2">)</span> <span class="lean-keyword">from</span> rfl,
-      orderOf_injective <span class="lean-bracket-2">(</span>blockDiag2.prodMonoidHom M K ℤ<span class="lean-bracket-2">)</span> hinj <span class="lean-bracket-2">(</span>A, B<span class="lean-bracket-2">)</span>, Prod.orderOf<span class="lean-bracket-1">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">theorem orderOf_blockDiag2 {M K : ℕ}
+    (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
+    orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by</span></code><code class="lean-proof-body"><span class="lean-plain">have hinj : Function.Injective (blockDiag2.prodMonoidHom M K ℤ) := fun p q hpq =&gt;
+    Prod.ext (Matrix.fromBlocks_inj.mp hpq).1 (Matrix.fromBlocks_inj.mp hpq).2.2.2
+  rw [show blockDiag2 A B = blockDiag2.prodMonoidHom M K ℤ (A, B) from rfl,
+      orderOf_injective (blockDiag2.prodMonoidHom M K ℤ) hinj (A, B), Prod.orderOf]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1673,7 +1254,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
+    <p>     If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000034">
@@ -1690,47 +1271,12 @@ The tactic supports all the same syntax variants and options as the `have` term.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> lcm_mem_integerMatrixOrders <span class="lean-bracket-1">{</span>M K m₁ m₂ : ℕ<span class="lean-bracket-1">}</span>
-    <span class="lean-bracket-1">(</span>h₁ : m₁ <span class="lean-operator">∈</span> integerMatrixOrders M<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h₂ : m₂ <span class="lean-operator">∈</span> integerMatrixOrders K<span class="lean-bracket-1">)</span> :
-    Nat.lcm m₁ m₂ <span class="lean-operator">∈</span> integerMatrixOrders <span class="lean-bracket-1">(</span>M + K<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span>A, hA_ord, hA_pos<span class="lean-bracket-1">⟩</span> := h₁
-  <span class="lean-keyword" data-docs="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for
-a description of supported patterns.
-
-```lean
-obtain ⟨patt⟩ : type := proof
-```
-is equivalent to
-```lean
-have h : type := proof
-rcases h with ⟨patt⟩
-```
-
-If `⟨patt⟩` is omitted, `rcases` will try to infer the pattern.
-
-If `type` is omitted, `:= proof` is required.
-" title="The `obtain` tactic is a combination of `have` and `rcases`. See `rcases` for">obtain</span> <span class="lean-bracket-1">⟨</span>B, hB_ord, hB_pos<span class="lean-bracket-1">⟩</span> := h₂
-  <span class="lean-keyword" data-docs="`refine e` behaves like `exact e`, except that named (`?x`) or unnamed (`?_`)
-holes in `e` that are not solved by unification with the main goal&#x27;s target type
-are converted into new goals, using the hole&#x27;s name, if any, as the goal case name.
-" title="`refine e` behaves like `exact e`, except that named (`?x`) or unnamed (`?_`)">refine</span> <span class="lean-bracket-1">⟨</span><span class="lean-bracket-2">(</span>reindexMonoidEquiv finSumFinEquiv.symm<span class="lean-bracket-2">)</span>.symm <span class="lean-bracket-2">(</span>blockDiag2 A B<span class="lean-bracket-2">)</span>, ?_, Nat.lcm_pos hA_pos hB_pos<span class="lean-bracket-1">⟩</span>
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span>MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord<span class="lean-bracket-1">]</span></code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
+    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨A, hA_ord, hA_pos⟩ := h₁
+  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
+  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
+  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L51-L65" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
@@ -1825,7 +1371,7 @@ are converted into new goals, using the hole&#x27;s name, if any, as the goal ca
           </div>
     </div>
     <div class="theorem_thmcontent">
-    <p>        Product of coprime achievable orders is achievable.  </p>
+    <p>     Product of coprime achievable orders is achievable.  </p>
 
     </div>
     <div class="proof_wrapper proof_inline" id="a0000000035">
@@ -1842,14 +1388,11 @@ are converted into new goals, using the hole&#x27;s name, if any, as the goal ca
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> mul_mem_integerMatrixOrders_of_coprime <span class="lean-bracket-1">{</span>M K m₁ m₂ : ℕ<span class="lean-bracket-1">}</span>
-    <span class="lean-bracket-1">(</span>h₁ : m₁ <span class="lean-operator">∈</span> integerMatrixOrders M<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h₂ : m₂ <span class="lean-operator">∈</span> integerMatrixOrders K<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>hcop : Nat.Coprime m₁ m₂<span class="lean-bracket-1">)</span> :
-    m₁ * m₂ <span class="lean-operator">∈</span> integerMatrixOrders <span class="lean-bracket-1">(</span>M + K<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. " title="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
-  <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
-" title="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.">rw</span> <span class="lean-bracket-1">[</span><span class="lean-operator">←</span> hcop.lcm_eq_mul<span class="lean-bracket-1">]</span>
-  <span class="lean-keyword" data-docs="`exact e` closes the main goal if its target type matches that of `e`.
-" title="`exact e` closes the main goal if its target type matches that of `e`.">exact</span> lcm_mem_integerMatrixOrders h₁ h₂</code></pre>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
+    (hcop : Nat.Coprime m₁ m₂) :
+    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← hcop.lcm_eq_mul]
+  exact lcm_mem_integerMatrixOrders h₁ h₂</span></code></pre>
     <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
 </a>
   </div>
