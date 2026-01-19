@@ -356,7 +356,7 @@ return `t` or `e` depending on whether `c` is true or false. The explicit argume
 determines how to evaluate `c` to true or false. Write `if h : c then t else e`
 instead for a &quot;dependent if-then-else&quot; `dite`, which allows `t`/`e` to use the fact
 that `c` is true/false.
-">else</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+">else</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -612,7 +612,7 @@ non-dependent hypotheses. It has many variants:
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_coprime_add <span class="lean-bracket-1">(</span>m n : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hn : <span class="lean-number">0</span> &lt; n<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h : m.Coprime n<span class="lean-bracket-1">)</span> :
-    psi <span class="lean-bracket-1">(</span>m * n<span class="lean-bracket-1">)</span> = psi m + psi n :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    psi <span class="lean-bracket-1">(</span>m * n<span class="lean-bracket-1">)</span> = psi m + psi n := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -863,7 +863,7 @@ while `congr 2` produces the intended `⊢ x + y = y + x`.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_ge_psiPrimePow_of_mem_support <span class="lean-bracket-1">{</span>m p : ℕ<span class="lean-bracket-1">}</span>
     <span class="lean-bracket-1">(</span>hp : p <span class="lean-operator">∈</span> m.factorization.support<span class="lean-bracket-1">)</span> :
-    psiPrimePow p <span class="lean-bracket-1">(</span>m.factorization p<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> psi m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    psiPrimePow p <span class="lean-bracket-1">(</span>m.factorization p<span class="lean-bracket-1">)</span> <span class="lean-operator">≤</span> psi m := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="The `simp` tactic uses lemmas and hypotheses to simplify the main goal target or
 non-dependent hypotheses. It has many variants:
 - `simp` simplifies the main goal target using lemmas tagged with the attribute `[simp]`.
@@ -1081,7 +1081,7 @@ Currently, all of these are on by default.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> two_le_totient_primePow <span class="lean-bracket-1">{</span>p k : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hp : p.Prime<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hk : <span class="lean-number">0</span> &lt; k<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-2">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-bracket-1">(</span>h : <span class="lean-operator">¬</span><span class="lean-bracket-2">(</span>p = <span class="lean-number">2</span> <span class="lean-operator">∧</span> k = <span class="lean-number">1</span><span class="lean-bracket-2">)</span><span class="lean-bracket-1">)</span> : <span class="lean-number">2</span> <span class="lean-operator">≤</span> Nat.totient <span class="lean-bracket-1">(</span>p ^ k<span class="lean-bracket-1">)</span> := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="`rw` is like `rewrite`, but also tries to close the goal by &quot;cheap&quot; (reducible) `rfl` afterwards.
 ">rw</span> <span class="lean-bracket-1">[</span>Nat.totient_prime_pow hp hk<span class="lean-bracket-1">]</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
@@ -1338,7 +1338,7 @@ Currently, all of these are on by default.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> factorization_split_lt <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">2</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>h_not_pp : <span class="lean-operator">¬</span>IsPrimePow m<span class="lean-bracket-1">)</span> :
     <span class="lean-operator">∃</span> <span class="lean-bracket-1">(</span>p e m&#x27; : ℕ<span class="lean-bracket-1">)</span>, p.Prime <span class="lean-operator">∧</span> <span class="lean-number">0</span> &lt; e <span class="lean-operator">∧</span> p ^ e * m&#x27; = m <span class="lean-operator">∧</span>
-    <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span>.Coprime m&#x27; <span class="lean-operator">∧</span> <span class="lean-number">1</span> &lt; m&#x27; <span class="lean-operator">∧</span> m&#x27; &lt; m <span class="lean-operator">∧</span> p ^ e &lt; m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-bracket-1">(</span>p ^ e<span class="lean-bracket-1">)</span>.Coprime m&#x27; <span class="lean-operator">∧</span> <span class="lean-number">1</span> &lt; m&#x27; <span class="lean-operator">∧</span> m&#x27; &lt; m <span class="lean-operator">∧</span> p ^ e &lt; m := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
 
@@ -2157,7 +2157,7 @@ See [Theorem Proving in Lean 4][tpil4] for more information.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">theorem</span> psi_pos_of_odd_ge_three <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">3</span> <span class="lean-operator">≤</span> m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm_odd : Odd m<span class="lean-bracket-1">)</span> :
-    <span class="lean-number">0</span> &lt; psi m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-number">0</span> &lt; psi m := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-comment">-- m &gt;= <span class="lean-number">3</span> implies m != <span class="lean-number">1</span>, so minFac</span><span class="lean-bracket-1">(</span>m<span class="lean-bracket-1">)</span> is prime
   <span class="lean-keyword" data-docs="The `have` tactic is for adding opaque definitions and hypotheses to the local context of the main goal.
 The definitions forget their associated value and cannot be unfolded, unlike definitions added by the `let` tactic.
@@ -2829,7 +2829,7 @@ Currently, all of these are on by default.
     </div>
   </div>
   <div class="sbs-lean-column">
-    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_le_totient <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> : psi m <span class="lean-operator">≤</span> Nat.totient m :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> psi_le_totient <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> : psi m <span class="lean-operator">≤</span> Nat.totient m := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-comment">-- Strong induction on m</span>
   <span class="lean-keyword" data-docs="Assuming `x` is a variable in the local context with an inductive type,
 `induction x` applies induction on `x` to the main goal,
@@ -3669,7 +3669,7 @@ The tactic supports all the same syntax variants and options as the `have` term.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> primePow_achieved_of_lcm_eq <span class="lean-bracket-1">{</span>m : ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>S : Finset ℕ<span class="lean-bracket-1">)</span>
     <span class="lean-bracket-1">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-1">)</span> :
-    <span class="lean-operator">∀</span> q <span class="lean-operator">∈</span> m.factorization.support, <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, q ^ m.factorization q ∣ d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-operator">∀</span> q <span class="lean-operator">∈</span> m.factorization.support, <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, q ^ m.factorization q ∣ d := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="Introduces one or more hypotheses, optionally naming and/or pattern-matching them.
 For each hypothesis to be introduced, the remaining main goal&#x27;s target type must
 be a `let` or function type.
@@ -4229,7 +4229,7 @@ Currently, all of these are on by default.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.nonempty_of_two_le_lcm <span class="lean-bracket-1">{</span>S : Finset ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-1">)</span> :
-    S.Nonempty :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    S.Nonempty := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -4411,7 +4411,7 @@ Currently, all of these are on by default.
   </div>
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> Finset.exists_one_lt_of_two_le_lcm <span class="lean-bracket-1">{</span>S : Finset ℕ<span class="lean-bracket-1">}</span> <span class="lean-bracket-1">(</span>hS_pos : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">0</span> &lt; d<span class="lean-bracket-1">)</span>
-    <span class="lean-bracket-1">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-1">)</span> : <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">1</span> &lt; d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    <span class="lean-bracket-1">(</span>hS_lcm_ge2 : <span class="lean-number">2</span> <span class="lean-operator">≤</span> S.lcm id<span class="lean-bracket-1">)</span> : <span class="lean-operator">∃</span> d <span class="lean-operator">∈</span> S, <span class="lean-number">1</span> &lt; d := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-keyword" data-docs="`by_contra h` proves `⊢ p` by contradiction,
 introducing a hypothesis `h : ¬p` and proving `False`.
 * If `p` is a negation `¬q`, `h : q` will be introduced instead of `¬¬q`.
@@ -4813,7 +4813,7 @@ Currently, all of these are on by default.
   <div class="sbs-lean-column">
     <pre class="lean-code"><code class="lean-signature"><span class="lean-keyword">lemma</span> sum_totient_ge_psi_of_lcm_eq <span class="lean-bracket-1">(</span>m : ℕ<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hm : <span class="lean-number">0</span> &lt; m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>S : Finset ℕ<span class="lean-bracket-1">)</span>
     <span class="lean-bracket-1">(</span>hS_sub : <span class="lean-operator">∀</span> d <span class="lean-operator">∈</span> S, d ∣ m<span class="lean-bracket-1">)</span> <span class="lean-bracket-1">(</span>hS_lcm : S.lcm id = m<span class="lean-bracket-1">)</span> :
-    psi m <span class="lean-operator">≤</span> <span class="lean-operator">∑</span> d <span class="lean-operator">∈</span> S, Nat.totient d :=</code><code class="lean-proof-body"> <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span>
+    psi m <span class="lean-operator">≤</span> <span class="lean-operator">∑</span> d <span class="lean-operator">∈</span> S, Nat.totient d := <span class="lean-keyword" data-docs="`by tac` constructs a term of the expected type by running the tactic(s) `tac`. ">by</span></code><code class="lean-proof-body">
   <span class="lean-comment">-- If m <span class="lean-operator">∈</span> S, apply helper lemma directly</span>
   <span class="lean-keyword" data-docs="`by_cases (h :)? p` splits the main goal into two cases, assuming `h : p` in the first branch, and `h : ¬ p` in the second branch.
 ">by_cases</span> hm_in_S : m <span class="lean-operator">∈</span> S
