@@ -252,3 +252,5 @@ lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
   exact Matrix.fromBlocks_diagonal_pow A B k
 
 end Crystallographic
+
+#export_blueprint_highlighting

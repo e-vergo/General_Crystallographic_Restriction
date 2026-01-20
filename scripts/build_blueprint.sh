@@ -130,12 +130,9 @@ echo "Updating lake dependencies..."
 lake update LeanArchitect
 lake update
 
-# Clean LeanArchitect build artifacts to ensure fresh build with latest changes
-echo "Cleaning LeanArchitect build artifacts..."
-rm -rf .lake/packages/LeanArchitect/.lake/build
-
-# Force rebuild of Architect library and extract_blueprint executable
-echo "Rebuilding Architect library and extract_blueprint..."
+# Build Architect library and extract_blueprint executable
+# (lake update handles dependency changes, no need to clean)
+echo "Building Architect library and extract_blueprint..."
 lake build Architect extract_blueprint
 
 # Fetch mathlib cache
@@ -143,11 +140,14 @@ echo "Fetching mathlib cache..."
 lake exe cache get || echo "Cache fetch completed (some files may have been skipped)"
 
 echo ""
-echo "=== Step 2: Building Lean project ==="
-lake build
+echo "=== Step 2: Building Lean project with dressed artifacts ==="
+# BLUEPRINT_DRESS=1 enables automatic export of dressed artifacts
+# (highlighting, HTML, base64) for all @[blueprint] declarations
+BLUEPRINT_DRESS=1 lake build
 
 echo ""
 echo "=== Step 3: Building LeanArchitect blueprint data ==="
+# Reads pre-generated highlighting JSON (no re-elaboration needed)
 lake build :blueprint
 
 # echo ""

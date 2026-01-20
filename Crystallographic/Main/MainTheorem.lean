@@ -75,3 +75,5 @@ theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0
    fun hpsi => mem_integerMatrixOrders_of_psi_le N m hm hpsi hNm⟩
 
 end Crystallographic
+
+#export_blueprint_highlighting

@@ -485,3 +485,5 @@ theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
           exact mem_integerMatrixOrders_of_psi_le_large m N hm_gt6 hpsi
 
 end Crystallographic
+
+#export_blueprint_highlighting

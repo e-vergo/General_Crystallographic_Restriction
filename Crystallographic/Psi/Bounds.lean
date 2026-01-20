@@ -525,3 +525,5 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
 
 
 end Crystallographic
+
+#export_blueprint_highlighting

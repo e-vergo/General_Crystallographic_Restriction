@@ -346,3 +346,5 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
       _ ≤ N := hminpoly_deg_le
 
 end Crystallographic
+
+#export_blueprint_highlighting

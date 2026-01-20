@@ -173,3 +173,5 @@ theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
   exact companion_cyclotomic_mem_integerMatrixOrders m hm hn
 
 end Crystallographic
+
+#export_blueprint_highlighting

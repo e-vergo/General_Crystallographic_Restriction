@@ -586,3 +586,5 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDeg
   exact sub_eq_zero.mp hXm1_zero
 
 end Crystallographic
+
+#export_blueprint_highlighting

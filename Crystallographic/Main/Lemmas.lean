@@ -278,3 +278,5 @@ theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
   rw [hord_neg1, hA_ord]
 
 end Crystallographic
+
+#export_blueprint_highlighting

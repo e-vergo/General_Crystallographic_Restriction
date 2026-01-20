@@ -244,3 +244,5 @@ lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}
   exact Finset.single_le_sum hnonneg hp
 
 end Crystallographic
+
+#export_blueprint_highlighting

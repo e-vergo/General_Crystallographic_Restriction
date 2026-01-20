@@ -79,3 +79,5 @@ lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
   exact lcm_mem_integerMatrixOrders h₁ h₂
 
 end Crystallographic
+
+#export_blueprint_highlighting
