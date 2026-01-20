@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Crystallographic.FiniteOrder.Basic
 
 /-!
@@ -80,4 +80,3 @@ lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
 
 end Crystallographic
 
-#export_blueprint_highlighting

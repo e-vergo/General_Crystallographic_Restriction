@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Mathlib.GroupTheory.Perm.Fin
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
@@ -486,4 +486,3 @@ theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
 
 end Crystallographic
 
-#export_blueprint_highlighting

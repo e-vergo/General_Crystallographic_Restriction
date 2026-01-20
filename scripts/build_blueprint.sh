@@ -16,6 +16,7 @@ PROJECT_ROOT=$(pwd)
 
 # Configuration - paths to forked repos
 LEAN_ARCHITECT_PATH="/Users/eric/GitHub/LeanArchitect"
+DRESS_PATH="/Users/eric/GitHub/Dress"
 LEANBLUEPRINT_PATH="/Users/eric/GitHub/leanblueprint"
 
 # Add pipx leanblueprint venv to PATH for plastex
@@ -36,7 +37,7 @@ rm -rf "$PROJECT_ROOT/blueprint/web"
 rm -rf "$PROJECT_ROOT/blueprint/print"
 echo "Cleaned blueprint/web and blueprint/print"
 
-# Clean LeanArchitect blueprint output
+# Clean Dress blueprint output
 rm -rf "$PROJECT_ROOT/.lake/build/blueprint"
 rm -rf "$PROJECT_ROOT/.lake/build/dressed"
 echo "Cleaned .lake/build/blueprint and .lake/build/dressed"
@@ -126,13 +127,21 @@ build_lean_project() {
 echo ""
 echo "=== Step 0: Building and pushing dependency repositories ==="
 
-# Build LeanArchitect first (it's a dependency)
+# Build LeanArchitect and Dress (both are dependencies)
 if [[ -d "$LEAN_ARCHITECT_PATH" ]]; then
     build_lean_project "$LEAN_ARCHITECT_PATH" "LeanArchitect"
     push_repo_changes "$LEAN_ARCHITECT_PATH" "LeanArchitect"
 else
     echo "WARNING: LeanArchitect path not found at $LEAN_ARCHITECT_PATH"
     echo "Skipping LeanArchitect build/push"
+fi
+
+if [[ -d "$DRESS_PATH" ]]; then
+    build_lean_project "$DRESS_PATH" "Dress"
+    push_repo_changes "$DRESS_PATH" "Dress"
+else
+    echo "WARNING: Dress path not found at $DRESS_PATH"
+    echo "Skipping Dress build/push"
 fi
 
 # Push leanblueprint changes (Python, no build needed)
@@ -147,15 +156,16 @@ echo ""
 echo "=== Step 1: Updating dependencies and fetching caches ==="
 cd "$PROJECT_ROOT"
 
-# Update lake dependencies (explicitly update LeanArchitect to pick up local changes)
+# Update lake dependencies (explicitly update LeanArchitect and Dress to pick up local changes)
 echo "Updating lake dependencies..."
 lake update LeanArchitect
+lake update Dress
 lake update
 
-# Build Architect library and extract_blueprint executable
+# Build Architect and Dress libraries and extract_blueprint executable
 # (lake update handles dependency changes, no need to clean)
-echo "Building Architect library and extract_blueprint..."
-lake build Architect extract_blueprint
+echo "Building Architect and Dress libraries and extract_blueprint..."
+lake build Architect Dress extract_blueprint
 
 # Fetch mathlib cache
 echo "Fetching mathlib cache..."
@@ -163,12 +173,20 @@ lake exe cache get || echo "Cache fetch completed (some files may have been skip
 
 echo ""
 echo "=== Step 2: Building Lean project with dressed artifacts ==="
-# BLUEPRINT_DRESS=1 enables automatic export of dressed artifacts to .lake/build/dressed/
-# and .tex files to .lake/build/blueprint/module/ for all @[blueprint] declarations
-BLUEPRINT_DRESS=1 lake build
+# Create marker file to enable dressed artifact generation during build.
+# Dress's Hook.lean checks for .lake/build/.dress marker to export:
+# - .lake/build/dressed/{Module/Path}.json (highlighting)
+# - .lake/build/blueprint/module/{Module/Path}.tex (LaTeX)
+# Note: `lake run dress` is defined in Dress's lakefile but scripts are package-local,
+# so we manually create the marker file here instead.
+DRESS_MARKER="$PROJECT_ROOT/.lake/build/.dress"
+mkdir -p "$(dirname "$DRESS_MARKER")"
+echo "1" > "$DRESS_MARKER"
+lake build
+rm -f "$DRESS_MARKER"
 
 echo ""
-echo "=== Step 3: Building LeanArchitect blueprint data ==="
+echo "=== Step 3: Building Dress blueprint data ==="
 # Reads pre-generated dressed JSON from .lake/build/dressed/ (no re-elaboration needed)
 # Skips module .tex generation since files already exist from Step 2
 lake build :blueprint

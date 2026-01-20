@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Algebra.CharP.Two
 import Mathlib.Algebra.GCDMonoid.Finset
@@ -279,4 +279,3 @@ theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
 
 end Crystallographic
 
-#export_blueprint_highlighting

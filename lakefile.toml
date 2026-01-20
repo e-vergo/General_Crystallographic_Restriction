@@ -10,8 +10,11 @@ rev = "v4.27.0-rc1"
 
 [[require]]
 name = "LeanArchitect"
-git = "https://github.com/e-vergo/LeanArchitect.git"
-rev = "main"
+path = "../LeanArchitect"
+
+[[require]]
+name = "Dress"
+path = "../Dress"
 
 [[require]]
 name = "doc-gen4"

@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Mathlib.Algebra.Polynomial.Degree.Definitions
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Matrix.Block
@@ -587,4 +587,3 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDeg
 
 end Crystallographic
 
-#export_blueprint_highlighting

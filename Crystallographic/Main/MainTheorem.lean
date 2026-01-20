@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Crystallographic.CrystallographicRestriction.Backward
 import Crystallographic.CrystallographicRestriction.Forward
 import Crystallographic.FiniteOrder.Basic
@@ -76,4 +76,3 @@ theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0
 
 end Crystallographic
 
-#export_blueprint_highlighting

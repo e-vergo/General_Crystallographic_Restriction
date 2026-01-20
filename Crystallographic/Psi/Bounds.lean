@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Mathlib.Algebra.BigOperators.Finprod
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.GCD.BigOperators
@@ -526,4 +526,3 @@ lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
 
 end Crystallographic
 
-#export_blueprint_highlighting

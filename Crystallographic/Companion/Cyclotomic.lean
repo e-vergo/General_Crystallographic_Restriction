@@ -3,7 +3,7 @@ Copyright (c) 2026 Eric Vergo. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Eric Vergo
 -/
-import Architect
+import Dress
 import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots
@@ -174,4 +174,3 @@ theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
 
 end Crystallographic
 
-#export_blueprint_highlighting
