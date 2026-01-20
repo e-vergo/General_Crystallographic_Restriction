@@ -19,7 +19,11 @@ LEAN_ARCHITECT_PATH="/Users/eric/GitHub/LeanArchitect"
 LEANBLUEPRINT_PATH="/Users/eric/GitHub/leanblueprint"
 
 # Add pipx leanblueprint venv to PATH for plastex
-export PATH="$HOME/.local/pipx/venvs/leanblueprint/bin:$PATH"
+# Use explicit path expansion in case $HOME is not set
+PIPX_VENV="${HOME:-/Users/eric}/.local/pipx/venvs/leanblueprint/bin"
+if [[ -d "$PIPX_VENV" ]]; then
+    export PATH="$PIPX_VENV:$PATH"
+fi
 
 echo "=== Crystallographic Restriction Theorem Blueprint Builder ==="
 echo ""
@@ -141,13 +145,14 @@ lake exe cache get || echo "Cache fetch completed (some files may have been skip
 
 echo ""
 echo "=== Step 2: Building Lean project with dressed artifacts ==="
-# BLUEPRINT_DRESS=1 enables automatic export of dressed artifacts
-# (highlighting, HTML, base64) for all @[blueprint] declarations
+# BLUEPRINT_DRESS=1 enables automatic export of dressed artifacts to .lake/build/dressed/
+# and .tex files to .lake/build/blueprint/module/ for all @[blueprint] declarations
 BLUEPRINT_DRESS=1 lake build
 
 echo ""
 echo "=== Step 3: Building LeanArchitect blueprint data ==="
-# Reads pre-generated highlighting JSON (no re-elaboration needed)
+# Reads pre-generated dressed JSON from .lake/build/dressed/ (no re-elaboration needed)
+# Skips module .tex generation since files already exist from Step 2
 lake build :blueprint
 
 # echo ""

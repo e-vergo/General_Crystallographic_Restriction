@@ -61,6 +61,1275 @@
 <div class="main-text">
 <h1 id="a0000000005">4 Companion Matrices</h1>
 <p>Companion matrices provide a key construction for achieving orders via cyclotomic polynomials. </p>
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="companion-def">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">4.0.1</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#companion-def">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion" class="lean_decl">Crystallographic.companion</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>     The companion matrix \(C(p)\) of a monic polynomial \(p = X^n + a_{n-1}X^{n-1} + \cdots + a_0\) is the \(n \times n\) matrix with \(1\)s on the subdiagonal and \(-a_i\) in the last column: </p>
+<div class="displaymath" id="a0000000036">
+  \[ C(p) = \begin{pmatrix}  0 
+
+&  0 
+
+&  \cdots 
+
+&  -a_0 
+
+\\ 1 
+
+&  0 
+
+&  \cdots 
+
+&  -a_1 
+
+\\ \vdots 
+
+&  \ddots 
+
+& &  \vdots 
+
+\\ 0 
+
+&  \cdots 
+
+&  1 
+
+&  -a_{n-1} 
+
+\end{pmatrix} \]
+</div>
+<p> This construction produces a matrix whose characteristic polynomial equals \(p\), providing a canonical matrix realization for any monic polynomial. </p>
+
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>Crystallographic.companion.{u_1} {R : Type u_1} [CommRing R] (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :\n  Matrix (Fin p.natDegree) (Fin p.natDegree) R</code><span class=\"sep\"></span><code class=\"docstring\">The companion matrix of a monic polynomial p of degree n.\n\nFor p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:\n```\n[0  0  0  ...  0  -a_0    ]\n[1  0  0  ...  0  -a_1    ]\n[0  1  0  ...  0  -a_2    ]\n[        ...              ]\n[0  0  0  ...  1  -a_{n-1}]\n```\n\nThe matrix has 1s on the subdiagonal and the negatives of the polynomial\ncoefficients in the last column.\n</code>","1":"<code>R[X]</code>","10":"<code>Matrix.of.{v, u_2, u_3} {m : Type u_2} {n : Type u_3} {α : Type v} : (m → n → α) ≃ Matrix m n α</code><span class=\"sep\"></span><code class=\"docstring\">Cast a function into a matrix.\n\nThe two sides of the equivalence are definitionally equal types. We want to use an explicit cast\nto distinguish the types because `Matrix` has different instances to pi types (such as `Pi.mul`,\nwhich performs elementwise multiplication, vs `Matrix.mul`).\n\nIf you are defining a matrix, in terms of its entries, use `of (fun i j ↦ _)`. The\npurpose of this approach is to ensure that terms of the form `(fun i j ↦ _) * (fun i j ↦ _)` do not\nappear, as the type of `*` can be misleading.\n</code>","11":"<code>Fin p.natDegree</code>","12":"<code class=\"docstring\">`if c then t else e` is notation for `ite c t e`, \"if-then-else\", which decides to\nreturn `t` or `e` depending on whether `c` is true or false. The explicit argument\n`c : Prop` does not have any actual computational content, but there is an additional\n`[Decidable c]` argument synthesized by typeclass inference which actually\ndetermines how to evaluate `c` to true or false. Write `if h : c then t else e`\ninstead for a \"dependent if-then-else\" `dite`, which allows `t`/`e` to use the fact\nthat `c` is true/false.\n</code>","13":"<code>Fin.val {n : ℕ} (self : Fin n) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The number that is strictly less than `n`.\n\n`Fin.val` is a coercion, so any `Fin n` can be used in a position where a `Nat` is expected.\n</code>","14":"<code>R</code>","15":"<code>Polynomial.coeff.{u} {R : Type u} [Semiring R] : R[X] → ℕ → R</code><span class=\"sep\"></span><code class=\"docstring\">`coeff p n` (often denoted `p.coeff n`) is the coefficient of `X^n` in `p`. </code>","2":"<code>Type u_1</code>","3":"<code>p.Monic</code>","4":"<code>Polynomial.Monic.{u} {R : Type u} [Semiring R] (p : R[X]) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">a polynomial is `Monic` if its leading coefficient is 1 </code>","5":"<code>0 &lt; p.natDegree</code>","6":"<code>ℕ</code>","7":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","8":"<code>Matrix.{u, u', v} (m : Type u) (n : Type u') (α : Type v) : Type (max u u' v)</code><span class=\"sep\"></span><code class=\"docstring\">`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`\nand whose columns are indexed by `n`. </code>","9":"<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-2166">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.companion" data-verso-hover="0">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9" data-verso-hover="2">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.64" data-verso-hover="3">_hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.Monic" data-verso-hover="4">Monic</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.156" data-verso-hover="5">_hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="6">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="7">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Matrix" data-verso-hover="8">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="9">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="7">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="9">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="7">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Matrix.of" data-verso-hover="10">Matrix.of</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-2297">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.290" data-verso-hover="11">i</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.293" data-verso-hover="11">j</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2312" data-verso-hover="12">if</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.293" data-verso-hover="11">j</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Fin.val" data-verso-hover="13">val</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="6">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.290" data-verso-hover="11">i</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Fin.val" data-verso-hover="13">val</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2312" data-verso-hover="12">then</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="14">1</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2312" data-verso-hover="12">else</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2349" data-verso-hover="12">if</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.293" data-verso-hover="11">j</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Fin.val" data-verso-hover="13">val</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="6">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="7">natDegree</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2349" data-verso-hover="12">then</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="var token" data-binding="var-_uniq.56" data-verso-hover="1">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.coeff" data-verso-hover="15">coeff</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.290" data-verso-hover="11">i</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Fin.val" data-verso-hover="13">val</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-termIfThenElse-2349" data-verso-hover="12">else</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="14">0</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L46-L74" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:companion-charpoly">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.1</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:companion-charpoly">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#companion-def">Definition 4.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_charpoly" class="lean_decl">Crystallographic.companion_charpoly</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      The characteristic polynomial of the companion matrix \(C(p)\) equals \(p\): \(\chi _{C(p)} = p\). The proof proceeds by induction on the degree, using cofactor expansion along the first column. The key insight is that the minor structure reduces to smaller companion matrices, and the base case (degree 1) follows by direct computation.  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000037">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By induction on the degree \(n\). For the base case \(n = 1\), direct computation gives \(\det (XI - C) = X + a_0\). For \(n {\gt} 1\), expand along the first column: the \((1,1)\) minor is the companion matrix of lower degree, and the \((2,1)\) minor contributes the constant term. The recurrence matches the polynomial coefficients. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>R[X]</code>","1":"<code>Type u_1</code>","2":"<code>p.Monic</code>","3":"<code>Polynomial.Monic.{u} {R : Type u} [Semiring R] (p : R[X]) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">a polynomial is `Monic` if its leading coefficient is 1 </code>","4":"<code>0 &lt; p.natDegree</code>","5":"<code>ℕ</code>","6":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","7":"<code>Crystallographic.companion.{u_1} {R : Type u_1} [CommRing R] (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :\n  Matrix (Fin p.natDegree) (Fin p.natDegree) R</code><span class=\"sep\"></span><code class=\"docstring\">The companion matrix of a monic polynomial p of degree n.\n\nFor p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:\n```\n[0  0  0  ...  0  -a_0    ]\n[1  0  0  ...  0  -a_1    ]\n[0  1  0  ...  0  -a_2    ]\n[        ...              ]\n[0  0  0  ...  1  -a_{n-1}]\n```\n\nThe matrix has 1s on the subdiagonal and the negatives of the polynomial\ncoefficients in the last column.\n</code>","8":"<code>Matrix.charpoly.{u_1, u_4} {R : Type u_1} [CommRing R] {n : Type u_4} [DecidableEq n] [Fintype n] (M : Matrix n n R) :\n  R[X]</code><span class=\"sep\"></span><code class=\"docstring\">The characteristic polynomial of a matrix `M` is given by $\\det (t I - M)$. </code>","9":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-26793">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_charpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18665" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18618" data-verso-hover="1">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18673" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18665" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.Monic" data-verso-hover="3">Monic</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18725" data-verso-hover="4">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="5">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18665" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="6">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Crystallographic.companion" data-verso-hover="7">companion</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18665" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18673" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18725" data-verso-hover="4">hn</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Matrix.charpoly" data-verso-hover="8">charpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18665" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-26911" data-verso-hover="9">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.obtain-26916" data-verso-hover="0">obtain</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⟨</span><span class="unknown token" data-binding="">n</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn_eq</span><span class="unknown token" data-binding="">⟩</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="unknown token" data-binding="">n</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p.natDegree</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">n</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.exists_eq_succ_of_ne_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn.ne'</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.induction-27009" data-verso-hover="1">induction</span><span class="inter-text"> </span><span class="unknown token" data-binding="">n</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-27021">generalizing</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.inductionAlts-27036" data-verso-hover="2">with</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">|</span><span class="inter-text"> </span><span class="unknown token" data-binding="">zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-27053" data-verso-hover="3">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_charpoly_of_natDegree_one</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn_eq</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">|</span><span class="inter-text"> </span><span class="unknown token" data-binding="">succ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">IH</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-27130" data-verso-hover="4">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p.natDegree</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn_eq</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-27175" data-verso-hover="5">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">R</span><span class="unknown token" data-binding="">[X]</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">charmatrix.submatrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin.cast</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin.cast</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-27319" data-verso-hover="4">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_def</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">charmatrix.submatrix</span><span class="inter-text">
+        </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin.cast</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin.cast</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">rfl</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-27439" data-verso-hover="4">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_det</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A.det</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">charmatrix.det</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-27499" data-verso-hover="6">by</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-27508" data-verso-hover="4">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">heq</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">charmatrix.submatrix</span><span class="inter-text">
+          </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">finCongr</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">finCongr</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg.symm</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-27619" data-verso-hover="6">by</span><span class="inter-text">
+        </span><span class="keyword token" data-binding="kw-occ-Lean.Elab.Tactic.Ext.ext-27630" data-verso-hover="7">ext</span><span class="inter-text"> </span><span class="unknown token" data-binding="">i</span><span class="inter-text"> </span><span class="unknown token" data-binding="">j</span><span class="unknown token" data-binding="">;</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-27639" data-verso-hover="8">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-27644">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">Matrix.submatrix_apply</span><span class="unknown token" data-binding="">]</span><span class="unknown token" data-binding="">;</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticRfl-27675" data-verso-hover="9">rfl</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-27685" data-verso-hover="10">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">heq</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Matrix.det_submatrix_equiv_self</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-27731" data-verso-hover="10">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">Matrix.charpoly</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">←</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_det</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Matrix.det_succ_column_zero</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    -- Get column structure and apply Laplace simplification
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.obtain-27858" data-verso-hover="0">obtain</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⟨</span><span class="unknown token" data-binding="">hA00</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA10</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_other</span><span class="unknown token" data-binding="">⟩</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_charmatrix_col_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_def</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-27953" data-verso-hover="10">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">companion_charmatrix_laplace_col_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA00</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA10</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_other</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">←</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Polynomial.X_mul_divX_add</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="unknown token" data-binding="">,</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">companion_charmatrix_minor00_det</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_def</span><span class="inter-text"> </span><span class="unknown token" data-binding="">IH</span><span class="unknown token" data-binding="">,</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">companion_charmatrix_minor10_det</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_def</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L501-L542" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:companion-charpoly');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:companion-aeval-zero">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.2</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:companion-aeval-zero">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000038"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-charpoly">Theorem 4.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_aeval_eq_zero" class="lean_decl">Crystallographic.companion_aeval_eq_zero</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      \(p(C(p)) = 0\) (Cayley-Hamilton). By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. Since the characteristic polynomial of \(C(p)\) is exactly \(p\) (by <span class="ttfamily">companion_charpoly</span>), we have \(p(C(p)) = 0\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000038">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By Cayley-Hamilton, every matrix satisfies its characteristic polynomial. Since \(\chi _{C(p)} = p\) by the companion characteristic polynomial theorem, we have \(p(C(p)) = 0\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>R[X]</code>","1":"<code>Type u_1</code>","10":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>","2":"<code>p.Monic</code>","3":"<code>Polynomial.Monic.{u} {R : Type u} [Semiring R] (p : R[X]) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">a polynomial is `Monic` if its leading coefficient is 1 </code>","4":"<code>0 &lt; p.natDegree</code>","5":"<code>ℕ</code>","6":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","7":"<code>Polynomial.aeval.{u, z} {R : Type u} {A : Type z} [CommSemiring R] [Semiring A] [Algebra R A] (x : A) : R[X] →ₐ[R] A</code><span class=\"sep\"></span><code class=\"docstring\">Given a valuation `x` of the variable in an `R`-algebra `A`, `aeval R A x` is\nthe unique `R`-algebra homomorphism from `R[X]` to `A` sending `X` to `x`.\n\nThis is a stronger variant of the linear map `Polynomial.leval`. </code>","8":"<code>Crystallographic.companion.{u_1} {R : Type u_1} [CommRing R] (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :\n  Matrix (Fin p.natDegree) (Fin p.natDegree) R</code><span class=\"sep\"></span><code class=\"docstring\">The companion matrix of a monic polynomial p of degree n.\n\nFor p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:\n```\n[0  0  0  ...  0  -a_0    ]\n[1  0  0  ...  0  -a_1    ]\n[0  1  0  ...  0  -a_2    ]\n[        ...              ]\n[0  0  0  ...  1  -a_{n-1}]\n```\n\nThe matrix has 1s on the subdiagonal and the negatives of the polynomial\ncoefficients in the last column.\n</code>","9":"<code>Matrix (Fin p.natDegree) (Fin p.natDegree) R</code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-28759">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_aeval_eq_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18831" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18784" data-verso-hover="1">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18839" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18831" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.Monic" data-verso-hover="3">Monic</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.18891" data-verso-hover="4">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="5">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18831" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="6">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Polynomial.aeval" data-verso-hover="7">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Crystallographic.companion" data-verso-hover="8">companion</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18831" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18839" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18891" data-verso-hover="4">hn</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.18831" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="9">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-28881" data-verso-hover="10">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-28886" data-verso-hover="0">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">h</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_self_charpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticRwa__-28938" data-verso-hover="1">rwa</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">companion_charpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="unknown token" data-binding="">]</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.location-28971" data-verso-hover="2">at</span><span class="inter-text"> </span><span class="unknown token" data-binding="">h</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L546-L557" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:companion-aeval-zero');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:companion-pow-dvd">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.3</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:companion-pow-dvd">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_pow_eq_one_of_dvd" class="lean_decl">Crystallographic.companion_pow_eq_one_of_dvd</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      If \(p \mid X^m - 1\), then \(C(p)^m = I\). If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some \(q\). Since \(p(C(p)) = 0\), evaluating at \(C(p)\) gives \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0\), so \(C(p)^m - I = 0\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000039">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>If \(p \mid X^m - 1\), write \(X^m - 1 = p \cdot q\) for some polynomial \(q\). Evaluating at \(C(p)\): \((X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0\), so \(C(p)^m = I\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>R[X]</code>","1":"<code>Type u_1</code>","10":"<code>Matrix (Fin p.natDegree) (Fin p.natDegree) R</code>","11":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>","2":"<code>p.Monic</code>","3":"<code>Polynomial.Monic.{u} {R : Type u} [Semiring R] (p : R[X]) : Prop</code><span class=\"sep\"></span><code class=\"docstring\">a polynomial is `Monic` if its leading coefficient is 1 </code>","4":"<code>0 &lt; p.natDegree</code>","5":"<code>ℕ</code>","6":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","7":"<code>p ∣ X ^ m - 1</code>","8":"<code>Polynomial.X.{u} {R : Type u} [Semiring R] : R[X]</code><span class=\"sep\"></span><code class=\"docstring\">`X` is the polynomial variable (aka indeterminate). </code>","9":"<code>Crystallographic.companion.{u_1} {R : Type u_1} [CommRing R] (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :\n  Matrix (Fin p.natDegree) (Fin p.natDegree) R</code><span class=\"sep\"></span><code class=\"docstring\">The companion matrix of a monic polynomial p of degree n.\n\nFor p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:\n```\n[0  0  0  ...  0  -a_0    ]\n[1  0  0  ...  0  -a_1    ]\n[0  1  0  ...  0  -a_2    ]\n[        ...              ]\n[0  0  0  ...  1  -a_{n-1}]\n```\n\nThe matrix has 1s on the subdiagonal and the negatives of the polynomial\ncoefficients in the last column.\n</code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-29526">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_pow_eq_one_of_dvd</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.19541" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19494" data-verso-hover="1">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.19549" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19541" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.Monic" data-verso-hover="3">Monic</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.19601" data-verso-hover="4">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="5">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19541" data-verso-hover="0">p</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="6">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.19603" data-verso-hover="5">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.19880" data-verso-hover="7">hdvd</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19541" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∣</span><span class="inter-text"> </span><span class="const token" data-binding="const-Polynomial.X" data-verso-hover="8">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19603" data-verso-hover="5">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">1</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Crystallographic.companion" data-verso-hover="9">companion</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19541" data-verso-hover="0">p</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19549" data-verso-hover="2">hp</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19601" data-verso-hover="4">hn</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.19603" data-verso-hover="5">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="10">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-29687" data-verso-hover="11">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  -- From hdvd, get q such that X^m - 1 = p * q
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.obtain-29740" data-verso-hover="0">obtain</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⟨</span><span class="unknown token" data-binding="">q</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hq</span><span class="unknown token" data-binding="">⟩</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdvd</span><span class="inter-text">
+  -- Let A = companion p
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-29794" data-verso-hover="1">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  -- We have aeval A p = 0 by companion_aeval_eq_zero
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-29877" data-verso-hover="2">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_aeval_eq_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  -- Therefore aeval A (X^m - 1) = aeval A (p * q) = aeval A p * aeval A q = 0
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-30022" data-verso-hover="2">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hXm1_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-30075" data-verso-hover="3">by</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-30082" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">hq</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_mul</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hp_zero</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">zero_mul</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+  -- But aeval A (X^m - 1) = A^m - 1
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-30159" data-verso-hover="2">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">R</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-30217" data-verso-hover="3">by</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-30224" data-verso-hover="5">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-30229">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">map_sub</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">map_pow</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_X</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">map_one</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+  -- So A^m - 1 = 0, i.e., A^m = 1
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-30308" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">haeval</span><span class="unknown token" data-binding="">]</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.location-30320" data-verso-hover="6">at</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hXm1_zero</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-30335" data-verso-hover="7">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">sub_eq_zero.mp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hXm1_zero</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Basic.lean#L561-L586" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:companion-pow-dvd');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:companion-cycl-pow">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.4</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#lem:companion-cycl-pow">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-pow-dvd">Theorem 4.0.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_pow_eq_one" class="lean_decl">Crystallographic.companion_cyclotomic_pow_eq_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   \(C(\Phi _m)^m = I\). Since the cyclotomic polynomial \(\Phi _m\) divides \(X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply <span class="ttfamily">companion_pow_eq_one_of_dvd</span>.  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000040">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Since \(\Phi _m \mid X^m - 1\) (as \(X^m - 1 = \prod _{d \mid m} \Phi _d\)), we apply the general companion power theorem to conclude \(C(\Phi _m)^m = I\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma companion_cyclotomic_pow_eq_one (m : ℕ)
+    (hn : 0 &lt; (cyclotomic m ℤ).natDegree) :
+    (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) ^ m = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">apply companion_pow_eq_one_of_dvd
+  exact cyclotomic.dvd_X_pow_sub_one m ℤ</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L39-L50" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:companion-cycl-pow');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:companion-cycl-order">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.5</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:companion-cycl-order">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#lem:companion-cycl-pow">Theorem 4.0.4</a></li>
+          
+          <li><a href="sect0004.html#lem:companion-aeval-zero">Theorem 4.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_orderOf" class="lean_decl">Crystallographic.companion_cyclotomic_orderOf</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      \(\mathrm{ord}(C(\Phi _m)) = m\) for \(m \geq 2\). The order is exactly \(m\) because: (1) \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\), and (2) if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m\) would divide \(X^d - 1\), contradicting that primitive \(m\)-th roots of unity are not \(d\)-th roots of unity for \(d {\lt} m\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000041">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The order is at most \(m\) since \(\Phi _m \mid X^m - 1\) implies \(C(\Phi _m)^m = I\). For the lower bound: if \(C(\Phi _m)^d = I\) for \(d {\lt} m\), then \(\Phi _m \mid X^d - 1\), but this contradicts that primitive \(m\)-th roots of unity are not \(d\)-th roots. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>ℕ</code>","1":"<code>2 ≤ m</code>","2":"<code>0 &lt; (cyclotomic m ℤ).natDegree</code>","3":"<code>Polynomial.cyclotomic.{u_1} (n : ℕ) (R : Type u_1) [Ring R] : R[X]</code><span class=\"sep\"></span><code class=\"docstring\">The `n`-th cyclotomic polynomial with coefficients in `R`. </code>","4":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","5":"<code>orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.\nOtherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. </code>","6":"<code>Crystallographic.companion.{u_1} {R : Type u_1} [CommRing R] (p : R[X]) (_hp : p.Monic) (_hn : 0 &lt; p.natDegree) :\n  Matrix (Fin p.natDegree) (Fin p.natDegree) R</code><span class=\"sep\"></span><code class=\"docstring\">The companion matrix of a monic polynomial p of degree n.\n\nFor p = X^n + a_{n-1}X^{n-1} + ... + a_1 X + a_0, the companion matrix is:\n```\n[0  0  0  ...  0  -a_0    ]\n[1  0  0  ...  0  -a_1    ]\n[0  1  0  ...  0  -a_2    ]\n[        ...              ]\n[0  0  0  ...  1  -a_{n-1}]\n```\n\nThe matrix has 1s on the subdiagonal and the negatives of the polynomial\ncoefficients in the last column.\n</code>","7":"<code>Polynomial.cyclotomic.monic.{u_1} (n : ℕ) (R : Type u_1) [Ring R] : (cyclotomic n R).Monic</code><span class=\"sep\"></span><code class=\"docstring\">`cyclotomic n` is monic. </code>","8":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-5497">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.1947" data-verso-hover="1">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2011" data-verso-hover="2">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Polynomial.cyclotomic" data-verso-hover="3">cyclotomic</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="4">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-orderOf" data-verso-hover="5">orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Crystallographic.companion" data-verso-hover="6">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Polynomial.cyclotomic" data-verso-hover="3">cyclotomic</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Polynomial.cyclotomic.monic" data-verso-hover="7">cyclotomic.monic</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2011" data-verso-hover="2">hn</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.1905" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-5683" data-verso-hover="8">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-5688" data-verso-hover="0">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic.monic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-5756" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.lt_of_lt_of_le</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-5799" data-verso-hover="2">by</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Mathlib.Tactic.normNum-5802" data-verso-hover="3">norm_num</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">2</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-5825" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">orderOf_eq_iff</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm_pos</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.constructor-5854" data-verso-hover="5">constructor</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-5871" data-verso-hover="6">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_pow_eq_one</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.intro-5919" data-verso-hover="7">intro</span><span class="inter-text"> </span><span class="unknown token" data-binding="">k</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hk</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hk_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hAk</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-5945" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">k</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-6002" data-verso-hover="2">by</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-6011" data-verso-hover="8">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-6016">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">map_sub</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">map_pow</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_X</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">map_one</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-6064" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">hAk</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">sub_self</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    -- Work over ℚ where cyclotomic is irreducible
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-6140" data-verso-hover="0">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A.map</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">algebraMap</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-6181" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval_Q_zero</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">k</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">map</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">algebraMap</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-6266" data-verso-hover="2">by</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-6275" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Algebra.ofId</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">mapMatrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">rfl</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-6335" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">this</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_map_algebraMap</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">aeval_algHom_apply</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval_zero</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">map_zero</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-6414" data-verso-hover="8">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-6419">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">Polynomial.map_sub</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Polynomial.map_pow</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Polynomial.map_X</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Polynomial.map_one</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+      </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.location-6509" data-verso-hover="9">at</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval_Q_zero</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-6530" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdvd1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">minpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∣</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">X</span><span class="inter-text"> </span><span class="unknown token" data-binding="">^</span><span class="inter-text"> </span><span class="unknown token" data-binding="">k</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="unknown token" data-binding="">[X]</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">minpoly.dvd</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">haeval_Q_zero</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-6623" data-verso-hover="1">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hminpoly_eq</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">minpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">AQ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℚ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_minpoly</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-6724" data-verso-hover="4">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">hminpoly_eq</span><span class="unknown token" data-binding="">]</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.location-6741" data-verso-hover="9">at</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdvd1</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-6754" data-verso-hover="6">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.not_dvd_of_pos_of_lt</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hk_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hk</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">dvd_of_cyclotomic_dvd_X_pow_sub_one</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">k</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hk_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdvd1</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L110-L141" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:companion-cycl-order');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:companion-cycl-mem">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.6</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:companion-cycl-mem">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000042"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-cycl-order">Theorem 4.0.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.companion_cyclotomic_mem_integerMatrixOrders" class="lean_decl">Crystallographic.companion_cyclotomic_mem_integerMatrixOrders</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      \(m \in \mathrm{Ord}_{\varphi (m)}\) via \(C(\Phi _m)\). Since \(\deg (\Phi _m) = \varphi (m)\), the companion matrix \(C(\Phi _m)\) is \(\varphi (m) \times \varphi (m)\) with integer entries, and has order exactly \(m\) by <span class="ttfamily">companion_cyclotomic_orderOf</span>.  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000042">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The companion matrix \(C(\Phi _m)\) witnesses the membership: it is an integer matrix of dimension \(\deg (\Phi _m) = \varphi (m)\) with multiplicative order exactly \(m\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>ℕ</code>","1":"<code>2 ≤ m</code>","2":"<code>0 &lt; (cyclotomic m ℤ).natDegree</code>","3":"<code>Polynomial.cyclotomic.{u_1} (n : ℕ) (R : Type u_1) [Ring R] : R[X]</code><span class=\"sep\"></span><code class=\"docstring\">The `n`-th cyclotomic polynomial with coefficients in `R`. </code>","4":"<code>Polynomial.natDegree.{u} {R : Type u} [Semiring R] (p : R[X]) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`natDegree p` forces `degree p` to ℕ, by defining `natDegree 0 = 0`. </code>","5":"<code>Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The set of possible orders for N×N integer matrices with finite order.\nAn integer `m` is in this set if there exists an N×N integer matrix `A` such that\n`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). </code>","6":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-7426">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_mem_integerMatrixOrders</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2279" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2321" data-verso-hover="1">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2279" data-verso-hover="0">m</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2385" data-verso-hover="2">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Polynomial.cyclotomic" data-verso-hover="3">cyclotomic</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2279" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="4">natDegree</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.2279" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.integerMatrixOrders" data-verso-hover="5">Crystallographic.integerMatrixOrders</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Polynomial.cyclotomic" data-verso-hover="3">cyclotomic</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2279" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="const token" data-binding="const-Polynomial.natDegree" data-verso-hover="4">natDegree</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-7629" data-verso-hover="6">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Mathlib.Tactic.useSyntax-7634" data-verso-hover="0">use</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic.monic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.constructor-7697" data-verso-hover="1">constructor</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-7714" data-verso-hover="2">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.omega-7762" data-verso-hover="3">omega</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L145-L158" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:companion-cycl-mem');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:mem-orders-totient">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">4.0.7</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0004.html#thm:mem-orders-totient">#</a>
+    
+    <a class="icon proof" href="sect0004.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#thm:companion-cycl-mem">Theorem 4.0.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.mem_integerMatrixOrders_totient" class="lean_decl">Crystallographic.mem_integerMatrixOrders_totient</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      For \(m \geq 2\), \(m \in \mathrm{Ord}_{\varphi (m)}\). This is the key existence result: for every \(m \geq 2\), there exists an integer matrix of dimension \(\varphi (m)\) with multiplicative order exactly \(m\), namely the companion matrix of \(\Phi _m\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000043">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Apply the cyclotomic companion membership theorem after noting that \(\deg (\Phi _m) = \varphi (m)\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>ℕ</code>","1":"<code>2 ≤ m</code>","2":"<code>Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The set of possible orders for N×N integer matrices with finite order.\nAn integer `m` is in this set if there exists an N×N integer matrix `A` such that\n`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). </code>","3":"<code>Nat.totient (n : ℕ) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">Euler's totient function. This counts the number of naturals strictly less than `n` which are\ncoprime with `n`. </code>","4":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-8230">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">mem_integerMatrixOrders_totient</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2475" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2517" data-verso-hover="1">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="0">2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2475" data-verso-hover="0">m</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="var token" data-binding="var-_uniq.2475" data-verso-hover="0">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∈</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.integerMatrixOrders" data-verso-hover="2">Crystallographic.integerMatrixOrders</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Nat.totient" data-verso-hover="3">Nat.totient</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2475" data-verso-hover="0">m</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-8363" data-verso-hover="4">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-8368" data-verso-hover="0">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">natDegree</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.totient</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Polynomial.natDegree_cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-8468" data-verso-hover="0">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">htot_pos</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.totient</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Nat.totient_pos.mpr</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-8526" data-verso-hover="1">by</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.omega-8529" data-verso-hover="2">omega</span><span class="unknown token" data-binding="">)</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-8538" data-verso-hover="0">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">cyclotomic</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">natDegree</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-8584" data-verso-hover="1">by</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.omega-8587" data-verso-hover="2">omega</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-8595" data-verso-hover="3">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">←</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hdeg</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-8611" data-verso-hover="4">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">companion_cyclotomic_mem_integerMatrixOrders</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hn</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/Companion/Cyclotomic.lean#L160-L173" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:mem-orders-totient');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->

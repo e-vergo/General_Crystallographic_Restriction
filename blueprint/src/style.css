@@ -1,1 +1,67 @@
 /* Custom styles for Crystallographic Restriction Theorem Blueprint */
+
+/* SubVerso syntax highlighting for Lean code */
+.lean-code .keyword.token {
+  color: #0000ff;
+  font-weight: 500;
+}
+
+.lean-code .const.token {
+  color: #263179;
+}
+
+.lean-code .var.token {
+  color: #001080;
+}
+
+.lean-code .typed.token {
+  color: #098658;
+}
+
+.lean-code .literal.string {
+  color: #a31515;
+}
+
+.lean-code .sort.token {
+  color: #267f99;
+}
+
+.lean-code .unknown.token {
+  color: #000000;
+}
+
+.lean-code .inter-text {
+  color: #000000;
+}
+
+/* Hover effects for interactive elements */
+.lean-code [data-verso-hover] {
+  cursor: help;
+}
+
+.lean-code [data-binding]:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* Lean hover tooltip */
+.lean-hover-tooltip {
+  position: absolute;
+  z-index: 1000;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+  font-size: 13px;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.lean-hover-tooltip code {
+  background: transparent;
+  padding: 0;
+}

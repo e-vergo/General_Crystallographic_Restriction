@@ -61,6 +61,1471 @@
 <div class="main-text">
 <h1 id="a0000000004">3 Integer Matrix Orders</h1>
 <p>We define the set \(\mathrm{Ord}_N\) of achievable orders for \(N \times N\) integer matrices. </p>
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="integerMatrixOrders-def">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.0.1</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#integerMatrixOrders-def">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.integerMatrixOrders" class="lean_decl">Crystallographic.integerMatrixOrders</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>     The set \(\mathrm{Ord}_N\) of possible orders for \(N \times N\) integer matrices with finite order. A natural number \(m\) is in this set if there exists an \(N \times N\) integer matrix \(A\) with order \(m\). </p>
+
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The set of possible orders for N×N integer matrices with finite order.\nAn integer `m` is in this set if there exists an N×N integer matrix `A` such that\n`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). </code>","1":"<code>ℕ</code>","2":"<code>Set.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A set is a collection of elements of some type `α`.\n\nAlthough `Set` is defined as `α → Prop`, this is an implementation detail which should not be\nrelied on. Instead, `setOf` and membership of a set (`∈`) should be used to convert between sets\nand predicates.\n</code>","3":"<code>Matrix (Fin N) (Fin N) ℤ</code>","4":"<code>Matrix.{u, u', v} (m : Type u) (n : Type u') (α : Type v) : Type (max u u' v)</code><span class=\"sep\"></span><code class=\"docstring\">`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`\nand whose columns are indexed by `n`. </code>","5":"<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>","6":"<code>orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.\nOtherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-1676">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.integerMatrixOrders" data-verso-hover="0">integerMatrixOrders</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="1">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Set" data-verso-hover="2">Set</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">{</span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="1">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">|</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∃</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.20" data-verso-hover="3">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="4">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="5">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="1">N</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="5">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="1">N</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="const token" data-binding="const-orderOf" data-verso-hover="6">orderOf</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.20" data-verso-hover="3">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="1">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">∧</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="1">0</span><span class="inter-text"> </span><span class="unknown token" data-binding="">&lt;</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.13" data-verso-hover="1">m</span><span class="unknown token" data-binding="">}</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L42-L51" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:one-mem-orders">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.1</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:one-mem-orders">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.one_mem_integerMatrixOrders" class="lean_decl">Crystallographic.one_mem_integerMatrixOrders</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   Order \(1\) is achievable in any dimension. </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000026">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The identity matrix \(I\) has order \(1\) in any dimension. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
+  ⟨1, orderOf_one, by norm_num⟩</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L61-L66" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:two-mem-orders">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.2</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:two-mem-orders">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.two_mem_integerMatrixOrders" class="lean_decl">Crystallographic.two_mem_integerMatrixOrders</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   Order \(2\) is achievable for \(N \geq 1\). </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000027">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The matrix \(-I\) satisfies \((-I)^2 = I\) and \(-I \neq I\) for \(N \geq 1\), so it has order \(2\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
+  ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L76-L82" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:orders-mono">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.3</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:orders-mono">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#integerMatrixOrders-def">Definition 3.0.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.integerMatrixOrders_mono" class="lean_decl">Crystallographic.integerMatrixOrders_mono</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      \(\mathrm{Ord}_M \subseteq \mathrm{Ord}_N\) for \(M \leq N\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000028">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Given \(M \leq N\) and \(A \in M_M(\mathbb {Z})\) with order \(m\), embed \(A\) as the top-left block of an \(N \times N\) matrix with identity in the bottom-right. The order is preserved. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>ℕ</code>","1":"<code>M ≤ N</code>","2":"<code>Crystallographic.integerMatrixOrders (N : ℕ) : Set ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The set of possible orders for N×N integer matrices with finite order.\nAn integer `m` is in this set if there exists an N×N integer matrix `A` such that\n`orderOf A = m` and `m &gt; 0` (equivalently, `A` has finite order). </code>","3":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-7548">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">integerMatrixOrders_mono</span><span class="inter-text"> </span><span class="unknown token" data-binding="">{</span><span class="var token" data-binding="var-_uniq.4935" data-verso-hover="0">M</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4937" data-verso-hover="0">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">}</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.4945" data-verso-hover="1">hMN</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4935" data-verso-hover="0">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">≤</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4937" data-verso-hover="0">N</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Crystallographic.integerMatrixOrders" data-verso-hover="2">integerMatrixOrders</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4935" data-verso-hover="0">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊆</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.integerMatrixOrders" data-verso-hover="2">integerMatrixOrders</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4937" data-verso-hover="0">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-7666" data-verso-hover="3">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.intro-7671" data-verso-hover="0">intro</span><span class="inter-text"> </span><span class="unknown token" data-binding="">m</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-7684" data-verso-hover="1">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-7689">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">integerMatrixOrders</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Set.mem_setOf_eq</span><span class="unknown token" data-binding="">]</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.location-7734" data-verso-hover="2">at</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊢</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.obtain-7746" data-verso-hover="3">obtain</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⟨</span><span class="unknown token" data-binding="">A</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_ord</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_pos</span><span class="unknown token" data-binding="">⟩</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hm</span><span class="inter-text">
+  -- N = M + (N - M)
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-7806" data-verso-hover="4">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">-</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-7823" data-verso-hover="5">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hN</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">+</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Nat.add_sub_cancel'</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hMN</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">symm</span><span class="inter-text">
+  -- First embed A into (Fin M ⊕ Fin K)-indexed matrix
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-7936" data-verso-hover="4">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A'</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">embedMatrixSum</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text">
+  -- Then reindex to Fin N using the equivalence
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-8063" data-verso-hover="4">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">e</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">N</span><span class="inter-text"> </span><span class="unknown token" data-binding="">≃</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hN</span><span class="inter-text"> </span><span class="unknown token" data-binding="">▸</span><span class="inter-text"> </span><span class="unknown token" data-binding="">finSumFinEquiv.symm</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticLet__-8129" data-verso-hover="4">let</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A''</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">N</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Fin</span><span class="inter-text"> </span><span class="unknown token" data-binding="">N</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">reindexMonoidEquiv</span><span class="inter-text"> </span><span class="unknown token" data-binding="">e</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">symm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A'</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Mathlib.Tactic.useSyntax-8202" data-verso-hover="6">use</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A''</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.constructor-8212" data-verso-hover="7">constructor</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.simp-8229" data-verso-hover="1">simp</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-null-8234">only</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">A''</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-8249" data-verso-hover="5">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">h1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">reindexMonoidEquiv</span><span class="inter-text"> </span><span class="unknown token" data-binding="">e</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">symm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A'</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A'</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">MulEquiv.orderOf_eq</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">reindexMonoidEquiv</span><span class="inter-text"> </span><span class="unknown token" data-binding="">e</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">symm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A'</span><span class="inter-text">
+    </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-8377" data-verso-hover="8">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="unknown token" data-binding="">h1</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">orderOf_embedMatrixSum_eq</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_ord</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+  </span><span class="unknown token" data-binding="">·</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.exact-8425" data-verso-hover="9">exact</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hA_pos</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L156-L185" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:orders-mono');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="def:blockDiag2">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.0.2</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:blockDiag2">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2" class="lean_decl">Crystallographic.blockDiag2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>     Block diagonal matrix \(\mathrm{diag}(A, B)\) of dimension \(M + N\). </p>
+
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)\n  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R</code><span class=\"sep\"></span><code class=\"docstring\">Block diagonal of two matrices: places A in upper-left and B in lower-right. </code>","1":"<code>ℕ</code>","10":"<code>Matrix (Fin M) (Fin K) R</code>","11":"<code>Matrix (Fin K) (Fin M) R</code>","2":"<code>Type u_1</code>","3":"<code class=\"docstring\">The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable\n`&gt; 0` for each variable in the sequence. </code>","4":"<code>Zero.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A type with a zero element. </code>","5":"<code>Matrix (Fin M) (Fin M) R</code>","6":"<code>Matrix.{u, u', v} (m : Type u) (n : Type u') (α : Type v) : Type (max u u' v)</code><span class=\"sep\"></span><code class=\"docstring\">`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`\nand whose columns are indexed by `n`. </code>","7":"<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>","8":"<code>Matrix (Fin K) (Fin K) R</code>","9":"<code>Matrix.fromBlocks.{u_1, u_2, u_3, u_4, u_12} {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type u_12}\n  (A : Matrix n l α) (B : Matrix n m α) (C : Matrix o l α) (D : Matrix o m α) : Matrix (n ⊕ o) (l ⊕ m) α</code><span class=\"sep\"></span><code class=\"docstring\">We can form a single large matrix by flattening smaller 'block' matrices of compatible\ndimensions. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-8691">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.blockDiag2" data-verso-hover="0">blockDiag2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">{</span><span class="var token" data-binding="var-_uniq.4966" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4968" data-verso-hover="1">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">}</span><span class="inter-text"> </span><span class="unknown token" data-binding="">{</span><span class="var token" data-binding="var-_uniq.4971" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-2022587232982003368" data-verso-hover="3">Type*</span><span class="unknown token" data-binding="">}</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="const token" data-binding="const-Zero" data-verso-hover="4">Zero</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4971" data-verso-hover="2">R</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.4979" data-verso-hover="5">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="6">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4966" data-verso-hover="1">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4966" data-verso-hover="1">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4971" data-verso-hover="2">R</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.4984" data-verso-hover="8">B</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="6">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4968" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4968" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4971" data-verso-hover="2">R</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Matrix" data-verso-hover="6">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4966" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4968" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4966" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fin" data-verso-hover="7">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4968" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4971" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-Matrix.fromBlocks" data-verso-hover="9">Matrix.fromBlocks</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4979" data-verso-hover="5">A</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="10">0</span><span class="inter-text"> </span><span class="typed token" data-binding="" data-verso-hover="11">0</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4984" data-verso-hover="8">B</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L189-L195" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:blockDiag2-one">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.4</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:blockDiag2-one">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2_one" class="lean_decl">Crystallographic.blockDiag2_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   \(\mathrm{diag}(I_M, I_K) = I_{M+K}\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000029">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Immediate from the definition of block diagonal and the identity matrix. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
+    blockDiag2 (1 : Matrix (Fin M) (Fin M) R) (1 : Matrix (Fin K) (Fin K) R) =
+    (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) :=
+  Matrix.fromBlocks_one</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L197-L204" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:blockDiag2-mul">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.5</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:blockDiag2-mul">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000030"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2_mul" class="lean_decl">Crystallographic.blockDiag2_mul</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   \(\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000030">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Block multiplication respects the diagonal structure since off-diagonal blocks are zero. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
+    (A A&#x27; : Matrix (Fin M) (Fin M) R) (B B&#x27; : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 (A * A&#x27;) (B * B&#x27;) = blockDiag2 A B * blockDiag2 A&#x27; B&#x27; := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2, Matrix.fromBlocks_multiply]
+  congr 1 &lt;;&gt; simp only [Matrix.mul_zero, Matrix.zero_mul, add_zero, zero_add]</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L206-L216" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:blockDiag2-mul');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
+<div class="definition_thmwrapper sbs-container theorem-style-definition" id="def:blockDiag2-prodMonoidHom">
+  <div class="sbs-latex-column">
+    <div class="definition_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3.0.3</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:blockDiag2-prodMonoidHom">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+          <li><a href="sect0003.html#lem:blockDiag2-one">Theorem 3.0.4</a></li>
+          
+          <li><a href="sect0003.html#lem:blockDiag2-mul">Theorem 3.0.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2.prodMonoidHom" class="lean_decl">Crystallographic.blockDiag2.prodMonoidHom</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="definition_thmcontent">
+    <p>     The map \((A, B) \mapsto \mathrm{diag}(A, B)\) is a monoid homomorphism.  </p>
+
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>Crystallographic.blockDiag2.prodMonoidHom.{u_1} (M K : ℕ) (R : Type u_1) [Semiring R] :\n  Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R</code><span class=\"sep\"></span><code class=\"docstring\">The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. </code>","1":"<code>ℕ</code>","10":"<code>blockDiag2 1 1 = 1</code><span class=\"sep\"></span><code class=\"docstring\">The proposition that the function preserves 1 </code>","11":"<code>Crystallographic.blockDiag2_one.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] [One R] : blockDiag2 1 1 = 1</code><span class=\"sep\"></span><code class=\"docstring\">Block diagonal of identity matrices is the identity. </code>","12":"<code>∀ (x x_1 : Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R),\n  blockDiag2 (x.1 * x_1.1) (x.2 * x_1.2) = blockDiag2 x.1 x.2 * blockDiag2 x_1.1 x_1.2</code><span class=\"sep\"></span><code class=\"docstring\">The proposition that the function preserves multiplication </code>","13":"<code>Crystallographic.blockDiag2_mul.{u_1} {M K : ℕ} {R : Type u_1} [Semiring R] (A A' : Matrix (Fin M) (Fin M) R)\n  (B B' : Matrix (Fin K) (Fin K) R) : blockDiag2 (A * A') (B * B') = blockDiag2 A B * blockDiag2 A' B'</code><span class=\"sep\"></span><code class=\"docstring\">Block diagonal preserves multiplication. </code>","2":"<code>Type u_1</code>","3":"<code class=\"docstring\">The syntax `variable (X Y ... Z : Type*)` creates a new distinct implicit universe variable\n`&gt; 0` for each variable in the sequence. </code>","4":"<code>Semiring.{u} (α : Type u) : Type u</code><span class=\"sep\"></span><code class=\"docstring\">A `Semiring` is a type with addition, multiplication, a `0` and a `1` where addition is\ncommutative and associative, multiplication is associative and left and right distributive over\naddition, and `0` and `1` are additive and multiplicative identities. </code>","5":"<code>Matrix.{u, u', v} (m : Type u) (n : Type u') (α : Type v) : Type (max u u' v)</code><span class=\"sep\"></span><code class=\"docstring\">`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`\nand whose columns are indexed by `n`. </code>","6":"<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>","7":"<code>Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R → Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R</code><span class=\"sep\"></span><code class=\"docstring\">The underlying function </code>","8":"<code>Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R</code>","9":"<code>Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)\n  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R</code><span class=\"sep\"></span><code class=\"docstring\">Block diagonal of two matrices: places A in upper-left and B in lower-right. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.definition-10356">def</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.blockDiag2.prodMonoidHom" data-verso-hover="0">prodMonoidHom</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.6018" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6020" data-verso-hover="1">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.6023" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="sort token" data-binding="sort-2022587232982003368" data-verso-hover="3">Type*</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="const token" data-binding="const-Semiring" data-verso-hover="4">Semiring</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6023" data-verso-hover="2">R</span><span class="unknown token" data-binding="">]</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Matrix" data-verso-hover="5">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6018" data-verso-hover="1">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6018" data-verso-hover="1">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6023" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">×</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="5">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6020" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6020" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6023" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="unknown token" data-binding="">→*</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-Matrix" data-verso-hover="5">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6018" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6020" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6018" data-verso-hover="1">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">⊕</span><span class="inter-text"> </span><span class="const token" data-binding="const-Fin" data-verso-hover="6">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6020" data-verso-hover="1">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6023" data-verso-hover="2">R</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.whereStructInst-10535">where</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-OneHom.toFun" data-verso-hover="7">toFun</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-10552">fun</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6523" data-verso-hover="8">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.blockDiag2" data-verso-hover="9">blockDiag2</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6523" data-verso-hover="8">p</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.6523" data-verso-hover="8">p</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">2</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-OneHom.map_one'" data-verso-hover="10">map_one'</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.blockDiag2_one" data-verso-hover="11">blockDiag2_one</span><span class="inter-text">
+  </span><span class="const token" data-binding="const-MonoidHom.map_mul'" data-verso-hover="12">map_mul'</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-10623">fun</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text"> </span><span class="const token" data-binding="const-Crystallographic.blockDiag2_mul" data-verso-hover="13">blockDiag2_mul</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text"> </span><span class="unknown token" data-binding="">_</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L218-L227" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:blockDiag2-eq-one">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.6</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:blockDiag2-eq-one">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000031"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2_eq_one_iff" class="lean_decl">Crystallographic.blockDiag2_eq_one_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   \(\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000031">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The block diagonal matrix equals \(I\) iff both diagonal blocks equal their respective identities. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
+    blockDiag2 A B = 1 ↔ A = 1 ∧ B = 1 := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← blockDiag2_one]
+  simp only [blockDiag2, Matrix.fromBlocks_inj]
+  tauto</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L229-L239" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:blockDiag2-eq-one');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:blockDiag2-pow">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.7</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:blockDiag2-pow">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.blockDiag2_pow" class="lean_decl">Crystallographic.blockDiag2_pow</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   \(\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000032">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>By induction on \(n\): the block structure is preserved under multiplication, and \(\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
+    (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
+    (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by</span></code><code class="lean-proof-body"><span class="lean-plain">simp only [blockDiag2]
+  exact Matrix.fromBlocks_diagonal_pow A B k</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Basic.lean#L241-L252" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:blockDiag2-pow');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="thm:orderOf-blockDiag2">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.8</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:orderOf-blockDiag2">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:blockDiag2">Definition 3.0.2</a></li>
+          
+          <li><a href="sect0003.html#lem:blockDiag2-pow">Theorem 3.0.7</a></li>
+          
+          <li><a href="sect0003.html#lem:blockDiag2-eq-one">Theorem 3.0.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.orderOf_blockDiag2" class="lean_decl">Crystallographic.orderOf_blockDiag2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>      The order of \(\mathrm{diag}(A, B)\) equals \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000033">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>The order is the least \(n\) such that \(A^n = I\) and \(B^n = I\), which is exactly \(\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code" data-lean-hovers='{"0":"<code>ℕ</code>","1":"<code>Matrix (Fin M) (Fin M) ℤ</code>","2":"<code>Matrix.{u, u', v} (m : Type u) (n : Type u') (α : Type v) : Type (max u u' v)</code><span class=\"sep\"></span><code class=\"docstring\">`Matrix m n R` is the type of matrices with entries in `R`, whose rows are indexed by `m`\nand whose columns are indexed by `n`. </code>","3":"<code>Fin (n : ℕ) : Type</code><span class=\"sep\"></span><code class=\"docstring\">Natural numbers less than some upper bound.\n\nIn particular, a `Fin n` is a natural number `i` with the constraint that `i &lt; n`. It is the\ncanonical type with `n` elements.\n</code>","4":"<code>Matrix (Fin K) (Fin K) ℤ</code>","5":"<code>orderOf.{u_1} {G : Type u_1} [Monoid G] (x : G) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">`orderOf x` is the order of the element `x`, i.e. the `n ≥ 1`, s.t. `x ^ n = 1` if it exists.\nOtherwise, i.e. if `x` is of infinite order, then `orderOf x` is `0` by convention. </code>","6":"<code>Crystallographic.blockDiag2.{u_1} {M K : ℕ} {R : Type u_1} [Zero R] (A : Matrix (Fin M) (Fin M) R)\n  (B : Matrix (Fin K) (Fin K) R) : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R</code><span class=\"sep\"></span><code class=\"docstring\">Block diagonal of two matrices: places A in upper-left and B in lower-right. </code>","7":"<code>Nat.lcm (m n : ℕ) : ℕ</code><span class=\"sep\"></span><code class=\"docstring\">The least common multiple of `m` and `n` is the smallest natural number that's evenly divisible by\nboth `m` and `n`. Returns `0` if either `m` or `n` is `0`.\n\nExamples:\n * `Nat.lcm 9 6 = 18`\n * `Nat.lcm 9 3 = 9`\n * `Nat.lcm 0 3 = 0`\n * `Nat.lcm 3 0 = 0`\n</code>","8":"<code class=\"docstring\">`by tac` constructs a term of the expected type by running the tactic(s) `tac`. </code>"}'><code class="lean-signature"><span class="keyword token" data-binding="kw-occ-Lean.Parser.Command.theorem-1452">theorem</span><span class="inter-text"> </span><span class="unknown token" data-binding="">orderOf_blockDiag2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">{</span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="0">M</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4" data-verso-hover="0">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℕ</span><span class="unknown token" data-binding="">}</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.9" data-verso-hover="1">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="2">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="3">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="0">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="3">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.2" data-verso-hover="0">M</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="var token" data-binding="var-_uniq.14" data-verso-hover="4">B</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="const token" data-binding="const-Matrix" data-verso-hover="2">Matrix</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="3">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4" data-verso-hover="0">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Fin" data-verso-hover="3">Fin</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.4" data-verso-hover="0">K</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text">
+    </span><span class="const token" data-binding="const-orderOf" data-verso-hover="5">orderOf</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-Crystallographic.blockDiag2" data-verso-hover="6">blockDiag2</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9" data-verso-hover="1">A</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.14" data-verso-hover="4">B</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="const token" data-binding="const-Nat.lcm" data-verso-hover="7">Nat.lcm</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-orderOf" data-verso-hover="5">orderOf</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.9" data-verso-hover="1">A</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="const token" data-binding="const-orderOf" data-verso-hover="5">orderOf</span><span class="inter-text"> </span><span class="var token" data-binding="var-_uniq.14" data-verso-hover="4">B</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.byTactic-1629" data-verso-hover="8">by</span></code><code class="lean-proof-body"><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.tacticHave__-1634" data-verso-hover="0">have</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hinj</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Function.Injective</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">blockDiag2.prodMonoidHom</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">:=</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fun-1703">fun</span><span class="inter-text"> </span><span class="unknown token" data-binding="">p</span><span class="inter-text"> </span><span class="unknown token" data-binding="">q</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hpq</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=&gt;</span><span class="inter-text">
+    </span><span class="unknown token" data-binding="">Prod.ext</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Matrix.fromBlocks_inj.mp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hpq</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">1</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">Matrix.fromBlocks_inj.mp</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hpq</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">2</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">2</span><span class="unknown token" data-binding="">.</span><span class="unknown token" data-binding="">2</span><span class="inter-text">
+  </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Tactic.rwSeq-1803" data-verso-hover="1">rw</span><span class="inter-text"> </span><span class="unknown token" data-binding="">[</span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.show-1807">show</span><span class="inter-text"> </span><span class="unknown token" data-binding="">blockDiag2</span><span class="inter-text"> </span><span class="unknown token" data-binding="">A</span><span class="inter-text"> </span><span class="unknown token" data-binding="">B</span><span class="inter-text"> </span><span class="unknown token" data-binding="">=</span><span class="inter-text"> </span><span class="unknown token" data-binding="">blockDiag2.prodMonoidHom</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">A</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">B</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="keyword token" data-binding="kw-occ-Lean.Parser.Term.fromTerm-1869">from</span><span class="inter-text"> </span><span class="unknown token" data-binding="">rfl</span><span class="unknown token" data-binding="">,</span><span class="inter-text">
+      </span><span class="unknown token" data-binding="">orderOf_injective</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">blockDiag2.prodMonoidHom</span><span class="inter-text"> </span><span class="unknown token" data-binding="">M</span><span class="inter-text"> </span><span class="unknown token" data-binding="">K</span><span class="inter-text"> </span><span class="unknown token" data-binding="">ℤ</span><span class="unknown token" data-binding="">)</span><span class="inter-text"> </span><span class="unknown token" data-binding="">hinj</span><span class="inter-text"> </span><span class="unknown token" data-binding="">(</span><span class="unknown token" data-binding="">A</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">B</span><span class="unknown token" data-binding="">)</span><span class="unknown token" data-binding="">,</span><span class="inter-text"> </span><span class="unknown token" data-binding="">Prod.orderOf</span><span class="unknown token" data-binding="">]</span><span class="inter-text">
+
+</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L34-L49" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('thm:orderOf-blockDiag2');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+<script>
+(function() {
+  // Global initialization guard - only run once per page
+  if (window._leanHoverTooltipsInitialized) return;
+  window._leanHoverTooltipsInitialized = true;
+
+  // Create tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.className = 'lean-hover-tooltip';
+  tooltip.style.display = 'none';
+  document.body.appendChild(tooltip);
+
+  // Initialize hover tooltips for all .lean-code blocks
+  document.querySelectorAll('.lean-code[data-lean-hovers]').forEach(function(codeBlock) {
+    var hoverData = codeBlock.dataset.leanHovers;
+    if (!hoverData) return;
+
+    var hovers;
+    try {
+      hovers = JSON.parse(hoverData);
+    } catch (e) {
+      console.warn('Failed to parse hover data:', e);
+      return;
+    }
+
+    codeBlock.querySelectorAll('[data-verso-hover]').forEach(function(el) {
+      var hoverId = el.dataset.versoHover;
+      var content = hovers[hoverId];
+      if (!content) return;
+
+      el.addEventListener('mouseenter', function(e) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        tooltip.style.left = rect.left + window.scrollX + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      });
+
+      el.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:lcm-mem-orders">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.9</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:lcm-mem-orders">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000034"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:orderOf-blockDiag2">Theorem 3.0.8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.lcm_mem_integerMatrixOrders" class="lean_decl">Crystallographic.lcm_mem_integerMatrixOrders</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   If \(m, n \in \mathrm{Ord}_N\) are coprime, then \(mn \in \mathrm{Ord}_{2N}\).  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000034">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>Given matrices \(A, B\) achieving orders \(m_1, m_2\) in dimensions \(M, K\), the block diagonal \(\mathrm{diag}(A, B)\) has order \(\mathrm{lcm}(m_1, m_2)\) in dimension \(M + K\). </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K) :
+    Nat.lcm m₁ m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">obtain ⟨A, hA_ord, hA_pos⟩ := h₁
+  obtain ⟨B, hB_ord, hB_pos⟩ := h₂
+  refine ⟨(reindexMonoidEquiv finSumFinEquiv.symm).symm (blockDiag2 A B), ?_, Nat.lcm_pos hA_pos hB_pos⟩
+  rw [MulEquiv.orderOf_eq, orderOf_blockDiag2, hA_ord, hB_ord]</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L51-L65" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:lcm-mem-orders');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
+<div class="theorem_thmwrapper sbs-container theorem-style-definition" id="lem:mul-mem-orders-coprime">
+  <div class="sbs-latex-column">
+    <div class="theorem_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">3.0.10</span>
+      <div class="thm_header_extras">
+
+    
+    ✓
+          </div>
+      <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:mul-mem-orders-coprime">#</a>
+    
+    <a class="icon proof" href="sect0003.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#lem:lcm-mem-orders">Theorem 3.0.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://e-vergo.github.io/General_Crystallographic_Restriction/docs/find/#doc/Crystallographic.mul_mem_integerMatrixOrders_of_coprime" class="lean_decl">Crystallographic.mul_mem_integerMatrixOrders_of_coprime</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+          </div>
+    </div>
+    <div class="theorem_thmcontent">
+    <p>   Product of coprime achievable orders is achievable.  </p>
+
+    </div>
+    <div class="proof_wrapper proof_inline" id="a0000000035">
+      <div class="proof_heading">
+        <span class="proof_caption">
+        Proof
+        </span>
+        <span class="expand-proof">▶</span>
+      </div>
+      <div class="proof_content">
+      <p>For coprime \(m_1, m_2\), we have \(\mathrm{lcm}(m_1, m_2) = m_1 m_2\), so this follows from the lcm result. </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="sbs-lean-column">
+    <pre class="lean-code"><code class="lean-signature"><span class="lean-plain">lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
+    (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
+    (hcop : Nat.Coprime m₁ m₂) :
+    m₁ * m₂ ∈ integerMatrixOrders (M + K) := by</span></code><code class="lean-proof-body"><span class="lean-plain">rw [← hcop.lcm_eq_mul]
+  exact lcm_mem_integerMatrixOrders h₁ h₂</span></code></pre>
+    <a href="https://github.com/e-vergo/General_Crystallographic_Restriction/blob/main/Crystallographic/FiniteOrder/Order.lean#L67-L79" class="lean-github-hover" target="_blank" title="View on GitHub"><svg  class="icon icon-github "><use xlink:href="symbol-defs.svg#icon-github"></use></svg>
+</a>
+  </div>
+</div>
+<script>
+(function() {
+  var container = document.getElementById('lem:mul-mem-orders-coprime');
+  if (!container) return;
+  var proofHeading = container.querySelector('.proof_heading');
+  var leanProofBody = container.querySelector('.lean-proof-body');
+  if (!proofHeading || !leanProofBody) return;
+
+  proofHeading.addEventListener('click', function() {
+    // Read icon state after plastex.js has toggled it
+    setTimeout(function() {
+      var icon = container.querySelector('.expand-proof');
+      var isExpanded = icon && icon.textContent.trim() === '▼';
+      // Toggle expanded class for smooth CSS animation
+      if (isExpanded) {
+        leanProofBody.classList.add('expanded');
+      } else {
+        leanProofBody.classList.remove('expanded');
+      }
+    }, 50);
+  });
+})();
+</script>
+
+
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
