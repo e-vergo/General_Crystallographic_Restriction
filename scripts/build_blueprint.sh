@@ -35,7 +35,8 @@ echo "=== Cleaning all build artifacts ==="
 # Clean blueprint output directories
 rm -rf "$PROJECT_ROOT/blueprint/web"
 rm -rf "$PROJECT_ROOT/blueprint/print"
-echo "Cleaned blueprint/web and blueprint/print"
+rm -rf "$PROJECT_ROOT/blueprint/src/web"  # Clean stale web content from src/
+echo "Cleaned blueprint/web, blueprint/print, and blueprint/src/web"
 
 # Clean Dress blueprint output
 rm -rf "$PROJECT_ROOT/.lake/build/blueprint"
@@ -44,7 +45,8 @@ echo "Cleaned .lake/build/blueprint and .lake/build/dressed"
 
 # Ensure leanblueprint is installed from local fork (editable mode picks up changes automatically)
 if [[ -d "$LEANBLUEPRINT_PATH" ]]; then
-    if ! pip show leanblueprint 2>/dev/null | grep -q "Editable project location.*$LEANBLUEPRINT_PATH"; then
+    # Check if leanblueprint is installed via pipx from the local fork
+    if ! pipx list 2>/dev/null | grep -q "leanblueprint.*editable"; then
         echo "Installing leanblueprint from local fork (editable)..."
         pipx uninstall leanblueprint 2>/dev/null || true
         pipx install -e "$LEANBLUEPRINT_PATH"
