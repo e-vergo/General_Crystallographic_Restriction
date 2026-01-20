@@ -28,6 +28,32 @@ fi
 echo "=== Crystallographic Restriction Theorem Blueprint Builder ==="
 echo ""
 
+# Clean all build artifacts to ensure fresh build
+echo "=== Cleaning all build artifacts ==="
+
+# Clean blueprint output directories
+rm -rf "$PROJECT_ROOT/blueprint/web"
+rm -rf "$PROJECT_ROOT/blueprint/print"
+echo "Cleaned blueprint/web and blueprint/print"
+
+# Clean LeanArchitect blueprint output
+rm -rf "$PROJECT_ROOT/.lake/build/blueprint"
+rm -rf "$PROJECT_ROOT/.lake/build/dressed"
+echo "Cleaned .lake/build/blueprint and .lake/build/dressed"
+
+# Ensure leanblueprint is installed from local fork (editable mode picks up changes automatically)
+if [[ -d "$LEANBLUEPRINT_PATH" ]]; then
+    if ! pip show leanblueprint 2>/dev/null | grep -q "Editable project location.*$LEANBLUEPRINT_PATH"; then
+        echo "Installing leanblueprint from local fork (editable)..."
+        pipx uninstall leanblueprint 2>/dev/null || true
+        pipx install -e "$LEANBLUEPRINT_PATH"
+    else
+        echo "leanblueprint already installed from local fork (editable)"
+    fi
+fi
+
+echo ""
+
 # Check dependencies
 check_dependency() {
     if ! command -v "$1" &> /dev/null; then
@@ -112,14 +138,6 @@ fi
 # Push leanblueprint changes (Python, no build needed)
 if [[ -d "$LEANBLUEPRINT_PATH" ]]; then
     push_repo_changes "$LEANBLUEPRINT_PATH" "leanblueprint"
-
-    # Ensure leanblueprint is installed from local fork
-    echo "Ensuring leanblueprint is installed from local fork..."
-    if ! pip show leanblueprint 2>/dev/null | grep -q "Location.*$LEANBLUEPRINT_PATH"; then
-        echo "Reinstalling leanblueprint from local fork..."
-        pipx uninstall leanblueprint 2>/dev/null || true
-        pipx install -e "$LEANBLUEPRINT_PATH"
-    fi
 else
     echo "WARNING: leanblueprint path not found at $LEANBLUEPRINT_PATH"
     echo "Skipping leanblueprint push"

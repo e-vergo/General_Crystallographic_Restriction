@@ -28,11 +28,36 @@ jobs:
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
-      - name: Get Mathlib cache
-        run: lake exe cache get
+      # Cache Lake packages and build artifacts
+      - name: Cache Lake packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan
+            .lake/packages
+            .lake/build
+          key: lake-${{ runner.os }}-${{ hashFiles('lake-manifest.json', 'lakefile.toml') }}
+          restore-keys: |
+            lake-${{ runner.os }}-
 
+      - name: Get Mathlib cache
+        run: lake exe cache get || true
+
+      # Build with BLUEPRINT_DRESS=1 to generate dressed artifacts and .tex files
       - name: Build project
-        run: lake build
+        run: BLUEPRINT_DRESS=1 lake build
+
+      - name: Build blueprint data
+        run: lake build :blueprint
+
+      # Cache pip packages
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
 
       - name: Install blueprint dependencies
         run: |
@@ -42,18 +67,12 @@ jobs:
 
       - name: Build blueprint
         run: |
-          lake build :blueprint
           cd blueprint && leanblueprint pdf && leanblueprint web
-
-      # - name: Build docs
-      #   run: lake -Kdoc=on build Crystallographic:docs
 
       - name: Assemble site
         run: |
           mkdir -p _site
-          cp docs/index.html _site/
-          cp -r .lake/build/doc _site/docs
-          cp -r blueprint/web _site/blueprint
+          cp -r blueprint/web/* _site/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
