@@ -10,8 +10,7 @@ rev = "v4.27.0-rc1"
 
 [[require]]
 name = "Dress"
-git = "https://github.com/e-vergo/Dress"
-rev = "main"
+path = "../Dress"
 
 [[require]]
 name = "doc-gen4"

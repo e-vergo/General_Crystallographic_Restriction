@@ -4,11 +4,12 @@ This document describes the architecture for displaying Lean source code side-by
 
 ## Overview
 
-The feature involves three repositories:
+The feature involves four repositories (all local forks for faster development):
 
 1. **LeanArchitect** (`/Users/eric/GitHub/LeanArchitect`) - Lightweight Lean 4 library that provides the `@[blueprint]` attribute and stores declaration metadata
 2. **Dress** (`/Users/eric/GitHub/Dress`) - Lean 4 tool that generates syntax-highlighted artifacts during compilation
 3. **leanblueprint** (`/Users/eric/GitHub/leanblueprint`) - Python package that consumes Dress artifacts to produce interactive HTML/PDF
+4. **SubVerso** (`/Users/eric/GitHub/subverso`) - Fork of leanprover/subverso with fix for synthetic source info handling
 
 ## Architecture
 
@@ -24,26 +25,19 @@ The feature involves three repositories:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         DRESS                                       │
 │                                                                     │
-│  Hook.lean intercepts elaboration of @[blueprint] declarations:     │
+│  Phase 1: Elaboration-time (per @[blueprint] declaration)           │
 │  ├── SubVerso captures semantic highlighting from info trees        │
 │  ├── Verso renders HTML with hover tooltips                         │
-│  └── Output.lean generates LaTeX with base64-embedded HTML          │
+│  └── Writes per-declaration artifacts immediately:                  │
+│      .lake/build/dressed/{Module/Path}/{label}/                     │
+│          decl.tex, decl.html, decl.json                             │
 │                                                                     │
-│  Artifacts written to:                                              │
-│  ├── .lake/build/dressed/{Module/Path}.json (highlighting data)     │
-│  └── .lake/build/blueprint/module/{Module/Path}.tex (LaTeX + HTML) │
+│  Phase 2: Lake facet (per module, after compilation)                │
+│  ├── Scans declaration subdirs, aggregates into module.json         │
+│  └── Generates module.tex with \input{} paths                       │
 └─────────────────────────────────────────────────────────────────────┘
                               │
                               │ lake build :blueprint
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                 LIBRARY INDEX GENERATION                            │
-│                                                                     │
-│  extract_blueprint index: Collates module .tex files                │
-│  Output: .lake/build/blueprint/library/{Library}.tex                │
-└─────────────────────────────────────────────────────────────────────┘
-                              │
-                              │ leanblueprint pdf / leanblueprint web
                               ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      LEANBLUEPRINT                                  │
@@ -70,6 +64,20 @@ The feature involves three repositories:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+## Output Directory Structure
+
+```
+.lake/build/dressed/{Module/Path}/
+├── thm-main/
+│   ├── decl.tex       # LaTeX with \lean{}, \leanok, base64 data
+│   ├── decl.html      # Syntax-highlighted HTML with hover data
+│   └── decl.json      # {"name": "...", "label": "...", "highlighting": {...}}
+├── lem-helper/
+│   └── ...
+├── module.json        # Aggregated: {"DeclName": {"html", "htmlBase64", "jsonBase64"}}
+└── module.tex         # \newleannode entries + \input{} directives
+```
+
 ## Key Files
 
 ### LeanArchitect
@@ -88,21 +96,22 @@ LeanArchitect is a lightweight metadata store with no artifact generation.
 
 ### Dress
 
-Dress generates all artifacts during Lean elaboration.
+Dress uses a two-phase architecture: per-declaration artifacts during elaboration, module-level aggregation via Lake facets.
 
 | File | Purpose |
 |------|---------|
-| `Dress/Hook.lean` | Elaboration-time capture via `elab_rules`, marker file detection |
-| `Dress/HookState.lean` | IO refs for recursion prevention |
-| `Dress/Highlighting.lean` | SubVerso highlighting wrapper |
+| `Dress/Capture/ElabRules.lean` | `elab_rules` for `@[blueprint]` declarations |
+| `Dress/Capture/InfoTree.lean` | Environment extension, info tree capture |
+| `Dress/Capture/Config.lean` | Blueprint config parsing |
+| `Dress/Generate/Declaration.lean` | Per-declaration artifact writer (tex, html, json) |
+| `Dress/Generate/Latex.lean` | LaTeX generation with base64-embedded HTML |
+| `Dress/Paths.lean` | Path utilities for artifact locations |
 | `Dress/HtmlRender.lean` | Verso HTML rendering with hover tooltips |
-| `Dress/Output.lean` | LaTeX generation with base64-embedded HTML |
 | `Dress/Core.lean` | `NodeWithPos` structure, signature/proof splitting |
-| `Dress/Load.lean` | Environment loading utilities |
-| `Main.lean` | `extract_blueprint` CLI for index generation |
-| `lakefile.lean` | Lake facets (`dressed`, `blueprint`), `script dress` |
+| `Dress/Hook.lean` | Main entry point, re-exports submodules |
+| `lakefile.lean` | Lake facets (`dressed`, `blueprint`) for aggregation |
 
-**Dependencies:** LeanArchitect, SubVerso, Verso, Cli
+**Dependencies:** LeanArchitect (local), SubVerso (local fork), Verso (local), Cli
 
 ### leanblueprint
 
@@ -116,28 +125,62 @@ leanblueprint consumes Dress artifacts (no fallback rendering).
 
 **Dependencies:** plasTeX, plastexdepgraph
 
-## Elaboration-Time Capture
+### SubVerso (Fork)
 
-Dress uses Hook.lean to capture highlighting **during** Lean elaboration, not as a post-processing step.
+SubVerso provides semantic syntax highlighting by extracting info trees during Lean elaboration. Our fork adds support for synthetic source info.
 
-### Marker File Detection
+| File | Modification |
+|------|--------------|
+| `src/SubVerso/Highlighting/Code.lean` | `emitToken` now handles `.synthetic` source info |
 
-When `.lake/build/.dress` exists, Hook.lean enables artifact generation:
+**Upstream:** [leanprover/subverso](https://github.com/leanprover/subverso)
+
+**Fix:** The upstream `emitToken` function throws an error for syntax with `.synthetic` source info (e.g., from macros or term-mode proofs). Our fork handles synthetic info gracefully by using its begin/end positions directly:
 
 ```lean
--- From Hook.lean
+-- Before (upstream): throws error for synthetic info
+| .synthetic b e =>
+  throwError "Syntax {blame} not original, can't highlight: ..."
+
+-- After (fork): handles synthetic info
+| .synthetic b e _ =>
+  openUntil <| text.toPosition b
+  modify fun st => {st with output := Output.addToken st.output token}
+  closeUntil e
+  setLastPos (some e)
+```
+
+This allows highlighting to succeed for all declarations, not just those with original source info.
+
+## Two-Phase Capture
+
+Dress captures highlighting **during** Lean elaboration and writes artifacts immediately.
+
+### Phase 1: Elaboration-time (per declaration)
+
+When `.lake/build/.dress` exists, artifact generation is enabled:
+
+```lean
+-- From Capture/ElabRules.lean
 let markerFile : System.FilePath := ".lake" / "build" / ".dress"
 let markerExists ← markerFile.pathExists
 let dressEnabled := dressEnv == some "1" || blueprint.dress.get (← getOptions) || markerExists
 ```
 
-### Capture Flow
-
-1. `elab_rules` fire after `@[blueprint]` declaration elaboration
+For each `@[blueprint]` declaration:
+1. `elab_rules` fire after declaration elaboration
 2. Info trees (containing type info for hovers) are captured while still available
 3. SubVerso's `highlightIncludingUnparsed` extracts semantic highlighting
 4. Verso renders HTML with `data-hover-id` attributes for tooltips
-5. Output.lean writes artifacts with base64-encoded HTML
+5. `Generate.writeDeclarationArtifacts` writes `decl.tex`, `decl.html`, `decl.json`
+
+### Phase 2: Lake facet (per module)
+
+After compilation, Lake facets aggregate per-declaration artifacts:
+1. `dressed` facet scans `{label}/decl.json` files in module directory
+2. Parses each to extract name, label, and highlighting data
+3. Generates `module.json` in Dress format for leanblueprint
+4. `blueprint` facet generates `module.tex` with `\input{}` paths
 
 ### Code Splitting
 
@@ -260,14 +303,20 @@ This ensures consistent, high-quality output. There is no fallback to:
 ### Check if Dress artifacts were generated
 
 ```bash
+# List module directories
 ls -la .lake/build/dressed/
-ls -la .lake/build/blueprint/module/
+
+# List declarations in a module
+ls .lake/build/dressed/Crystallographic/FiniteOrder/Basic/
+
+# Check a specific declaration's artifacts
+ls .lake/build/dressed/Crystallographic/FiniteOrder/Basic/def-blockDiag2/
 ```
 
 ### Check for pre-rendered HTML in .tex files
 
 ```bash
-grep -r "leansourcehtml" .lake/build/blueprint/module/
+grep -r "leansourcehtml" .lake/build/dressed/
 ```
 
 ### Verify HTML classes in output
@@ -281,8 +330,8 @@ Should show `lean-keyword`, `lean-const`, `lean-bracket-*`, etc.
 ### Force full rebuild
 
 ```bash
-rm -rf .lake/build/dressed .lake/build/blueprint
-echo "1" > .lake/build/.dress
+rm -rf .lake/build/dressed
+mkdir -p .lake/build && echo "1" > .lake/build/.dress
 lake build
 rm .lake/build/.dress
 lake build :blueprint

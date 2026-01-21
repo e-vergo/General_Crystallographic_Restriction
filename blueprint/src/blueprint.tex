@@ -1,4 +1,4 @@
-\input{../../.lake/build/blueprint/library/Crystallographic.tex}
+\input{../../.lake/build/dressed/library/Crystallographic.tex}
 
 \usepackage{amsmath, amsthm}
 \usepackage{hyperref}
@@ -109,9 +109,29 @@ We define the set $\mathrm{Ord}_N$ of achievable orders for $N \times N$ integer
 
 \chapter{Companion Matrices}
 
-Companion matrices provide a key construction for achieving orders via cyclotomic polynomials.
+Companion matrices provide a key construction for achieving specific orders via cyclotomic
+polynomials.
 
-\inputleanmodule{Crystallographic.Companion.Basic}
+\section{Definition and Basic Properties}
+
+\inputleannode{companion-def}
+
+The characteristic polynomial of the companion matrix is exactly the defining polynomial,
+and by the Cayley-Hamilton theorem, $C_p$ satisfies $p(C_p) = 0$. This makes companion
+matrices ideal for constructing matrices with prescribed minimal polynomials.
+
+\inputleannode{lem:companion-aeval-zero}
+
+\inputleannode{thm:companion-charpoly}
+
+\inputleannode{thm:companion-pow-dvd}
+
+\section{Cyclotomic Companion Matrices}
+
+For achieving finite order $m$, we use the companion matrix of the $m$-th cyclotomic
+polynomial $\Phi_m$. Since roots of $\Phi_m$ are primitive $m$-th roots of unity,
+this companion matrix has order exactly $m$.
+
 \inputleanmodule{Crystallographic.Companion.Cyclotomic}
 
 \chapter{The Crystallographic Restriction Theorem}
