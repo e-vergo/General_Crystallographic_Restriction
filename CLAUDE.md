@@ -306,13 +306,14 @@ leanblueprint decodes these directly - no SubVerso JSON rendering needed.
 | `lean-sort` | `Type`, `Prop`, `Sort` | Teal (#267f99) |
 | `lean-sorry` | `sorry` | Red with pink background |
 
-### Lexical Highlighting (from Dress)
+### Known Limitations
 
-| Class | Element | Color |
-|-------|---------|-------|
-| `lean-number` | Numeric literals | Green (#098658) |
-| `lean-operator` | Mathematical symbols | Black (#000000) |
-| `lean-comment` | `-- comments` | Green italic (#008000) |
+SubVerso captures different semantic information for term mode vs tactic mode:
+- **Term mode** (signatures): Numbers get `typed` class with hover info
+- **Tactic mode** (proof bodies): Numbers get `unknown` class without hover info
+- **Comments**: Line comments (`-- ...`) are not captured as semantic tokens in either mode
+
+The CSS classes `lean-number` and `lean-comment` exist in leanblueprint but are not currently generated.
 
 ### Rainbow Brackets (6 colors cycling by depth)
 
