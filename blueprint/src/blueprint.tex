@@ -75,14 +75,32 @@ matrix has order $\mathrm{lcm}$ of the individual orders, which equals $m$.
 
 \medskip
 
-This formalization follows the approach of Bamberg, Cairns, and Kilminster~\cite{BCK2003},
-who characterized achievable orders in arbitrary dimension using the $\psi$ function.
+\noindent\textbf{Historical Context.}
+The question of which orders can be achieved by integer matrices has a rich history.
+The classical crystallographic restriction theorem states that rotations in two and
+three dimensions preserving a lattice can only have orders 1, 2, 3, 4, or 6---a
+fundamental result explaining the possible symmetries of crystals.
 
-\begin{thebibliography}{1}
+The general $N$-dimensional problem was studied by Kuzmanovich and
+Pavlichenkov~\cite{KP2002}, who characterized achievable orders using a function
+$W(m) = \sum (p_i - 1)p_i^{e_i - 1}$ equivalent to our $\psi$ function. Their
+Theorem~2.7 establishes the bound using companion matrices of cyclotomic polynomials
+and block diagonal constructions---the same techniques formalized here.
+
+This formalization follows the exposition of Bamberg, Cairns, and
+Kilminster~\cite{BCK2003}, who independently characterized achievable orders
+and connected the result to permutation matrices and Goldbach's conjecture.
+
+\begin{thebibliography}{KP2002}
 \bibitem{BCK2003}
 J.~Bamberg, G.~Cairns, and D.~Kilminster.
 \newblock The crystallographic restriction, permutations, and {G}oldbach's conjecture.
 \newblock \textit{Amer. Math. Monthly}, 110(3):202--209, 2003.
+
+\bibitem{KP2002}
+J.~Kuzmanovich and A.~Pavlichenkov.
+\newblock Finite groups of matrices whose entries are integers.
+\newblock \textit{Amer. Math. Monthly}, 109(2):173--186, 2002.
 \end{thebibliography}
 
 \chapter{The Psi Function}
