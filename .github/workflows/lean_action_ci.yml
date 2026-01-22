@@ -40,6 +40,26 @@ jobs:
       - name: Get Mathlib cache
         run: lake exe cache get
 
+      - name: Delete existing Pages artifact
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            for (const artifact of artifacts.data.artifacts) {
+              if (artifact.name === 'github-pages') {
+                await github.rest.actions.deleteArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                });
+              }
+            }
+
       - name: Build blueprint with Dress
         uses: e-vergo/dress-blueprint-action@main
         with:
