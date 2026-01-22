@@ -108,9 +108,9 @@ lake exe cache get || echo "Cache fetch completed (some files may have been skip
 
 echo ""
 echo "=== Step 3: Building Lean project with dressed artifacts ==="
-# Create marker file to enable dressed artifact generation during build.
-# Dress's ElabRules.lean checks for .lake/build/.dress marker to generate
-# per-declaration artifacts during elaboration.
+# Use BLUEPRINT_DRESS=1 environment variable to enable dressed artifact generation.
+# Dress's ElabRules.lean checks this env var to generate per-declaration artifacts
+# during elaboration. This is more reliable than the marker file approach.
 #
 # Must clean build artifacts to force re-elaboration (cached oleans skip elab_rules).
 # Clean oleans, IR files, and dressed artifacts - Lake uses multiple caching mechanisms.
@@ -120,11 +120,7 @@ rm -rf "$PROJECT_ROOT/.lake/build/lib/Crystallographic"
 rm -rf "$PROJECT_ROOT/.lake/build/ir/Crystallographic"
 rm -rf "$PROJECT_ROOT/.lake/build/dressed"
 
-DRESS_MARKER="$PROJECT_ROOT/.lake/build/.dress"
-mkdir -p "$(dirname "$DRESS_MARKER")"
-echo "1" > "$DRESS_MARKER"
-lake build
-rm -f "$DRESS_MARKER"
+BLUEPRINT_DRESS=1 lake build
 
 echo ""
 echo "=== Step 4: Building blueprint facet ==="
