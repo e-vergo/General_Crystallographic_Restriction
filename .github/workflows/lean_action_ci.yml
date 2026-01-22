@@ -37,12 +37,16 @@ jobs:
           restore-keys: |
             lake-${{ runner.os }}-
 
+      - name: Get Mathlib cache
+        run: lake exe cache get
+
       - name: Build blueprint with Dress
         uses: e-vergo/dress-blueprint-action@main
         with:
           build-dressed: true
           build-pdf: false
           check-decls: false
+          use-mathlib-cache: false
 
   deploy:
     needs: build
