@@ -40,8 +40,8 @@ jobs:
       - name: Get Mathlib cache
         run: lake exe cache get
 
-      - name: Clean Dress package to get latest
-        run: rm -rf .lake/packages/Dress .lake/packages/subverso
+      - name: Clean Dress package and artifacts to get latest
+        run: rm -rf .lake/packages/Dress .lake/packages/subverso .lake/build/dressed
 
       - name: Delete existing Pages artifact
         uses: actions/github-script@v7
