@@ -5,7 +5,7 @@
 # This script:
 # 1. Builds all four local dependency forks (SubVerso, LeanArchitect, Dress, leanblueprint)
 # 2. Builds the Lean project with dressed artifacts
-# 3. Builds the blueprint (PDF and web)
+# 3. Builds the blueprint (web only - PDF skipped)
 # 4. Serves the blueprint locally
 #
 # All dependencies use local paths, so no git push/pull is needed.
@@ -16,16 +16,18 @@ cd "$(dirname "$0")/.."
 PROJECT_ROOT=$(pwd)
 
 # Configuration - paths to local dependency forks
-SUBVERSO_PATH="/Users/eric/GitHub/subverso"
-LEAN_ARCHITECT_PATH="/Users/eric/GitHub/LeanArchitect"
-DRESS_PATH="/Users/eric/GitHub/Dress"
-LEANBLUEPRINT_PATH="/Users/eric/GitHub/leanblueprint"
+SUBVERSO_PATH="/Users/eric/Github/subverso"
+LEAN_ARCHITECT_PATH="/Users/eric/Github/LeanArchitect"
+DRESS_PATH="/Users/eric/Github/Dress"
+LEANBLUEPRINT_PATH="/Users/eric/Github/leanblueprint"
 
-# Add pipx leanblueprint venv to PATH for plastex
-PIPX_VENV="${HOME:-/Users/eric}/.local/pipx/venvs/leanblueprint/bin"
-if [[ -d "$PIPX_VENV" ]]; then
-    export PATH="$PIPX_VENV:$PATH"
+# Create/activate a local venv for leanblueprint
+VENV_PATH="$PROJECT_ROOT/.venv"
+if [[ ! -d "$VENV_PATH" ]]; then
+    echo "Creating virtual environment..."
+    python3 -m venv "$VENV_PATH"
 fi
+source "$VENV_PATH/bin/activate"
 
 echo "=== Crystallographic Restriction Theorem Blueprint Builder ==="
 echo ""
@@ -33,7 +35,6 @@ echo ""
 # Clean build artifacts
 echo "=== Cleaning build artifacts ==="
 rm -rf "$PROJECT_ROOT/blueprint/web"
-rm -rf "$PROJECT_ROOT/blueprint/print"
 rm -rf "$PROJECT_ROOT/blueprint/src/web"
 rm -rf "$PROJECT_ROOT/.lake/build/blueprint"
 rm -rf "$PROJECT_ROOT/.lake/build/dressed"
@@ -44,11 +45,8 @@ if [[ ! -d "$LEANBLUEPRINT_PATH" ]]; then
     echo "ERROR: leanblueprint not found at $LEANBLUEPRINT_PATH"
     exit 1
 fi
-if ! pipx list 2>/dev/null | grep -q "leanblueprint.*editable"; then
-    echo "Installing leanblueprint from local fork (editable)..."
-    pipx uninstall leanblueprint 2>/dev/null || true
-    pipx install -e "$LEANBLUEPRINT_PATH" --force
-fi
+echo "Installing leanblueprint from local fork (editable)..."
+pip install -e "$LEANBLUEPRINT_PATH" -q
 
 echo ""
 
@@ -62,11 +60,7 @@ check_dependency() {
 }
 
 check_dependency "lake" "Please install Lean 4 and Lake."
-check_dependency "leanblueprint" "Install with: pipx install -e $LEANBLUEPRINT_PATH"
-
-if ! command -v xelatex &> /dev/null; then
-    echo "WARNING: xelatex is not installed. PDF generation may fail."
-fi
+check_dependency "leanblueprint" "Install with: pip install -e $LEANBLUEPRINT_PATH"
 
 echo ""
 echo "=== Step 1: Building local dependency forks ==="
@@ -127,14 +121,12 @@ echo "=== Step 4: Building blueprint facet ==="
 lake build :blueprint
 
 echo ""
-echo "=== Step 5: Building blueprint (PDF and web) ==="
+echo "=== Step 5: Building blueprint (web only) ==="
 cd blueprint
-leanblueprint pdf
 leanblueprint web
 
 echo ""
 echo "=== Blueprint ready ==="
-echo "  PDF: blueprint/print/print.pdf"
 echo "  Web: http://localhost:8000"
 echo ""
 echo "Press Ctrl+C to stop the server."

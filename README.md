@@ -1,5 +1,7 @@
 # Crystallographic Restriction Theorem
 
+[![Blueprint](https://img.shields.io/badge/Blueprint-Live-blue)](https://e-vergo.github.io/General_Crystallographic_Restriction/blueprint/)
+
 A formal verification in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which rotation orders are achievable by integer matrices in arbitrary dimension. All proofs are complete with no `sorry` statements.
 
 ## Main Result
@@ -57,15 +59,12 @@ Crystallographic/
 
 ## Blueprint
 
-A detailed proof blueprint with dependency graphs is available in the `blueprint/` directory. Build it with:
+**[View the live blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/blueprint/)** — an interactive proof document with side-by-side LaTeX/Lean display, hover tooltips, and dependency graphs.
 
-```bash
-cd blueprint && lualatex print/print.tex
-```
-
-The blueprint is generated using [LeanArchitect](https://github.com/e-vergo/LeanArchitect), which extracts proof structure directly from the Lean formalization.
-
-**Note:** This project uses experimental forks of [LeanArchitect](https://github.com/e-vergo/LeanArchitect) and [leanblueprint](https://github.com/e-vergo/leanblueprint) for side-by-side Lean/LaTeX display. This tooling is not production-ready.
+The blueprint is generated using experimental tooling:
+- [Dress](https://github.com/e-vergo/Dress) — Artifact generator with syntax highlighting
+- [LeanArchitect](https://github.com/e-vergo/LeanArchitect) — `@[blueprint]` attribute for marking declarations
+- [leanblueprint](https://github.com/e-vergo/leanblueprint) — Interactive web/PDF generation
 
 ## Building
 
@@ -85,7 +84,7 @@ Eric Vergo
 
 ## License
 
-MIT License
+Apache 2.0 — see [LICENSE](LICENSE) for details.
 
 ## References
 

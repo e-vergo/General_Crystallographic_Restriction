@@ -6,12 +6,12 @@ This document describes the architecture for displaying Lean source code side-by
 
 The feature involves six repositories (local forks for faster development):
 
-1. **LeanArchitect** (`/Users/eric/GitHub/LeanArchitect`) - Lightweight Lean 4 library providing the `@[blueprint]` attribute and metadata storage
-2. **Dress** (`/Users/eric/GitHub/Dress`) - Lean 4 tool generating syntax-highlighted artifacts during compilation
-3. **leanblueprint** (`/Users/eric/GitHub/leanblueprint`) - Python/plasTeX package consuming Dress artifacts to produce interactive HTML/PDF
-4. **SubVerso** (`/Users/eric/GitHub/subverso`) - Fork of leanprover/subverso with fixes for synthetic source info and identifier resolution
-5. **dress-blueprint-action** (`/Users/eric/GitHub/dress-blueprint-action`) - GitHub Action automating the full build pipeline
-6. **General_Crystallographic_Restriction** (`/Users/eric/GitHub/General_Crystallographic_Restriction`) - Example consumer project demonstrating ecosystem usage
+1. **LeanArchitect** (`/Users/eric/Github/LeanArchitect`) - Lightweight Lean 4 library providing the `@[blueprint]` attribute and metadata storage
+2. **Dress** (`/Users/eric/Github/Dress`) - Lean 4 tool generating syntax-highlighted artifacts during compilation
+3. **leanblueprint** (`/Users/eric/Github/leanblueprint`) - Python/plasTeX package consuming Dress artifacts to produce interactive HTML/PDF
+4. **SubVerso** (`/Users/eric/Github/subverso`) - Syntax highlighting library for Lean 4 that extracts semantic info from elaboration
+5. **dress-blueprint-action** (`/Users/eric/Github/dress-blueprint-action`) - GitHub Action automating the full build pipeline
+6. **General_Crystallographic_Restriction** (`/Users/eric/Github/General_Crystallographic_Restriction`) - Example consumer project demonstrating ecosystem usage
 
 ## Architecture
 
@@ -73,20 +73,25 @@ The feature involves six repositories (local forks for faster development):
 
 ## Output Directory Structure
 
+```text
+.lake/build/dressed/
+├── {Module/Path}/                    # Per-module directory
+│   ├── {sanitized-label}/            # Per-declaration subdirectory
+│   │   ├── decl.tex                  # LaTeX with \lean{}, \leanok, base64 data
+│   │   ├── decl.html                 # Syntax-highlighted HTML with hover data
+│   │   └── decl.json                 # {"name": "...", "label": "...", "highlighting": {...}}
+│   ├── module.json                   # Aggregated: {"DeclName": {"html", "htmlBase64", "jsonBase64"}}
+│   └── module.tex                    # \input{} directives for each declaration
+│
+├── nodes/                            # Flat directory for \inputleannode lookup
+│   └── {sanitized-label}/
+│       └── decl.tex                  # Copy of declaration .tex (enables label-based lookup)
+│
+└── library/
+    └── {LibraryName}.tex             # Library index with macro definitions and module paths
 ```
-.lake/build/dressed/{Module/Path}/
-├── thm-main/
-│   ├── decl.tex       # LaTeX with \lean{}, \leanok, base64 data
-│   ├── decl.html      # Syntax-highlighted HTML with hover data
-│   └── decl.json      # {"name": "...", "label": "...", "highlighting": {...}}
-├── lem-helper/
-│   └── ...
-├── module.json        # Aggregated: {"DeclName": {"html", "htmlBase64", "jsonBase64"}}
-└── module.tex         # \newleannode entries + \input{} directives
 
-.lake/build/dressed/library/
-└── {LibraryName}.tex  # Library index with all module imports
-```
+The `nodes/` flat directory enables `\inputleannode{label}` to find declarations by label without knowing the module path.
 
 ## Key Files
 
@@ -160,36 +165,37 @@ plasTeX plugin consuming Dress artifacts (no fallback rendering).
 
 **Dependencies:** plasTeX (≥3.1), plastexshowmore, plastexdepgraph, click, Jinja2, GitPython
 
-### SubVerso (Fork)
+### SubVerso
 
-Semantic syntax highlighting by extracting info trees during elaboration. Fork adds support for synthetic source info and improved identifier resolution.
+Semantic syntax highlighting library for Lean 4 that extracts and exports highlighted representations of Lean modules as JSON. Maintained by Lean FRO as a support library for Verso documentation.
 
-| File | Modification |
-|------|--------------|
-| `src/SubVerso/Highlighting/Code.lean` | `emitToken` handles `.synthetic` source info; identifier resolution fixes |
+| File | Purpose |
+|------|---------|
+| `src/SubVerso/Highlighting/Highlighted.lean` | Core data structures: `Token.Kind`, `Highlighted` inductive, `Goal`, `Message` |
+| `src/SubVerso/Highlighting/Code.lean` | Main highlighting logic: `InfoTable`, token priority, expression tagging |
+| `src/SubVerso/Highlighting/Export.lean` | Size optimization through deduplication |
+| `src/SubVerso/Highlighting/Anchors.lean` | Example extraction with `-- ANCHOR:` markers |
+| `src/SubVerso/Module.lean` | `ModuleItem` and `Module` structures for file-level metadata |
+| `ExtractModule.lean` | CLI tool `subverso-extract-mod` for batch highlighting |
 
-**Upstream:** [leanprover/subverso](https://github.com/leanprover/subverso)
+**Key Components:**
 
-**Fixes:**
+1. **Highlighted Data Structure:** Inductive type representing tokens, text, spans, tactics (with proof goals), and diagnostics
+2. **Token.Kind:** Semantic categories (keyword, const, var, str, option, sort, moduleName)
+3. **InfoTable:** Preprocessed info tree for efficient tactic state lookup
+4. **Export:** Deduplication tables for compact JSON output
 
-1. **Synthetic Source Info Handling:** Upstream throws an error for `.synthetic` source info (from macros or term-mode proofs). Fork handles it gracefully:
+**Integration with Dress:**
 
-```lean
--- Before (upstream): throws error for synthetic info
-| .synthetic b e =>
-  throwError "Syntax {blame} not original, can't highlight: ..."
-
--- After (fork): handles synthetic info
-| .synthetic b e _ =>
-  openUntil <| text.toPosition b
-  modify fun st => {st with output := Output.addToken st.output token}
-  closeUntil e
-  setLastPos (some e)
+```text
+Dress Project
+    └── extractModuleHighlighting(moduleName)
+        ├── Calls: lake exe subverso-extract-mod <moduleName>
+        ├── Parses JSON output (deduplicated tables + items)
+        └── Returns: Array ModuleItem with Highlighted data
 ```
 
-2. **Namespace-based Identifier Resolution:** Uses registered namespaces first, falls back to suffix matching across all constants.
-
-3. **Macro Scope Handling:** Erases macro scopes when looking up identifiers, fixing cases where tactic argument identifiers have scopes preventing direct lookup.
+**Using `tactic-hover-support` branch** for enhanced tactic state capture.
 
 ### dress-blueprint-action
 
@@ -366,21 +372,31 @@ Dress embeds pre-rendered HTML in LaTeX:
 ### Local Build
 
 ```bash
-# 1. Enable Dress artifact generation
+# 1. Clean previous artifacts and enable Dress generation
+rm -rf .lake/build/dressed .lake/build/lib/{YourProject} .lake/build/ir/{YourProject}
 BLUEPRINT_DRESS=1 lake build
-# OR: mkdir -p .lake/build && echo "1" > .lake/build/.dress && lake build
 
-# 2. Generate library index
+# 2. Generate library index and module aggregation
 lake build :blueprint
 
-# 3. Build blueprint website and PDF
+# 3. Build blueprint website (PDF skipped by default - requires latexmk)
 cd blueprint
-leanblueprint pdf
 leanblueprint web
 
-# 4. Serve locally (optional)
+# 4. Serve locally
 leanblueprint serve
 ```
+
+### Using build_blueprint.sh
+
+The project includes a convenience script at `scripts/build_blueprint.sh` that:
+
+1. Builds all local dependency forks (SubVerso, LeanArchitect, Dress)
+2. Installs leanblueprint from local fork
+3. Cleans and rebuilds with `BLUEPRINT_DRESS=1`
+4. Runs `lake build :blueprint`
+5. Runs `leanblueprint web` (PDF skipped)
+6. Serves the result locally
 
 ### GitHub Actions
 

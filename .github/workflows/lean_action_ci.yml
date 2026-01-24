@@ -64,7 +64,7 @@ jobs:
             }
 
       - name: Build blueprint with Dress
-        uses: e-vergo/dress-blueprint-action@main
+        uses: e-vergo/dress-blueprint-action@976a03f5e018f60a3cbe5702816162ad500c92fc
         with:
           build-dressed: true
           build-pdf: false

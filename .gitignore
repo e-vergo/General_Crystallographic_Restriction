@@ -16,3 +16,9 @@ Thumbs.db
 # Misc.
 blueprint/
 /compliance_review
+
+# Local development
+scripts/
+SBS.md
+.mcp.json
+.venv/
