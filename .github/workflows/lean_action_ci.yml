@@ -43,6 +43,8 @@ jobs:
       - name: Clean Dress package and artifacts to get latest
         run: |
           rm -rf .lake/packages/Dress .lake/packages/subverso .lake/build/dressed
+          # Delete project oleans to force re-elaboration (Dress hook only fires during elaboration)
+          rm -rf .lake/build/lib/Crystallographic .lake/build/ir/Crystallographic
           # Also remove Lake facet traces to force blueprint facet to rebuild module.tex files
           find .lake -name '*.trace' -path '*blueprint*' -delete 2>/dev/null || true
           find .lake -name '*.trace.json' -path '*blueprint*' -delete 2>/dev/null || true
