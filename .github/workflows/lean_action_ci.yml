@@ -41,7 +41,11 @@ jobs:
         run: lake exe cache get
 
       - name: Clean Dress package and artifacts to get latest
-        run: rm -rf .lake/packages/Dress .lake/packages/subverso .lake/build/dressed
+        run: |
+          rm -rf .lake/packages/Dress .lake/packages/subverso .lake/build/dressed
+          # Also remove Lake facet traces to force blueprint facet to rebuild module.tex files
+          find .lake -name '*.trace' -path '*blueprint*' -delete 2>/dev/null || true
+          find .lake -name '*.trace.json' -path '*blueprint*' -delete 2>/dev/null || true
 
       - name: Delete existing Pages artifact
         uses: actions/github-script@v7
