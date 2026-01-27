@@ -27,34 +27,34 @@ jobs:
 
       # Check out project and sibling repos
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: project
           fetch-depth: 0
 
       - name: Checkout Dress
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/Dress
           path: Dress
           ref: main
 
       - name: Checkout Runway
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/Runway
           path: Runway
           ref: main
 
       - name: Checkout LeanArchitect
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/LeanArchitect
           path: LeanArchitect
           ref: main
 
       - name: Checkout SubVerso
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/subverso
           path: subverso

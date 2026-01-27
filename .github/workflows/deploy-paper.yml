@@ -20,20 +20,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: project
           fetch-depth: 0
 
       - name: Checkout Runway
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/Runway
           path: Runway
           ref: main
 
       - name: Checkout dress-blueprint-action (for assets)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: e-vergo/dress-blueprint-action
           path: dress-blueprint-action
