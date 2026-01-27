@@ -184,7 +184,7 @@ jobs:
           key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: project/.lake/build/runway
 
