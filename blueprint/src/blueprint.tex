@@ -1,173 +1,443 @@
+\documentclass{article}
+
 \input{../../.lake/build/dressed/library/Crystallographic.tex}
 
-\usepackage{amsmath, amsthm}
+\usepackage{amsmath, amsthm, amssymb}
 \usepackage{hyperref}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}{Proposition}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{corollary}{Corollary}[section]
-\newtheorem{auxlemma}{Lemma}[section]
 
-\title{Crystallographic Restriction Theorem}
+\title{The Crystallographic Restriction Theorem}
+\author{Eric Vergo}
 
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Ord}{\mathrm{Ord}}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\lcm}{\mathrm{lcm}}
 
 \begin{document}
 \maketitle
 
 \chapter{Introduction}
 
-The \emph{Crystallographic Restriction Theorem} characterizes exactly which orders can be
-achieved by integer matrices of a given dimension. For an $N \times N$ matrix $M$ with
-integer entries, we say $M$ has \emph{finite order} $m$ if $M^m = I$ and $m$ is the smallest
-such positive integer. The theorem provides a complete answer to the question: which values
-of $m$ can occur as orders of $N \times N$ integer matrices?
+This document presents a complete formalization of the \emph{crystallographic restriction theorem},
+which provides a precise characterization of which rotation orders are achievable by integer matrices
+in each dimension. The result connects linear algebra over the integers with number-theoretic
+properties of Euler's totient function.
 
-\medskip
+\section{The Main Result}
 
-\noindent\textbf{Main Theorem.} \textit{An $N \times N$ integer matrix can have finite order $m$
-if and only if $\psi(m) \leq N$, where $\psi$ is defined below.}
+The crystallographic restriction theorem answers a fundamental question: given a positive integer $N$,
+which finite orders $m$ can be realized by some $N \times N$ matrix with integer entries? Equivalently,
+for which $m$ does there exist $A \in GL_N(\Z)$ satisfying $A^m = I$ but $A^k \neq I$ for
+$0 < k < m$?
 
-\medskip
-
-The function $\psi$ measures the ``arithmetic complexity'' of $m$ in terms of Euler's
-totient function $\varphi$. For a prime power $p^k$, we define the \emph{prime power
-contribution}:
-\[
-\psi_{\mathrm{pp}}(p, k) =
-\begin{cases}
-0 & \text{if } p = 2 \text{ and } k = 1, \\
-\varphi(p^k) & \text{otherwise}.
-\end{cases}
-\]
-The special case $\psi_{\mathrm{pp}}(2, 1) = 0$ reflects the fact that order 2 can be achieved
-by the $0 \times 0$ empty matrix (or equivalently, $-I$ achieves order 2 without increasing
-dimension). For a general positive integer $m$ with prime factorization
-$m = \prod_{i} p_i^{k_i}$, we define:
-\[
-\psi(m) = \sum_{i} \psi_{\mathrm{pp}}(p_i, k_i).
-\]
-
-\medskip
-
-\noindent\textbf{Proof Strategy.}
-The proof splits naturally into two directions.
-
-\textit{Forward direction ($m \in \mathrm{Ord}_N \Rightarrow \psi(m) \leq N$):}
-If $M$ is an $N \times N$ integer matrix with order $m$, then $M$ satisfies
-$M^m = I$, so its minimal polynomial divides $X^m - 1$. Since $M$ has exact order $m$,
-the $m$-th cyclotomic polynomial $\Phi_m$ divides the minimal polynomial, and hence divides
-the characteristic polynomial of $M$. By the degree constraint,
-$\deg(\chi_M) = N \geq \deg(\Phi_m) = \varphi(m) \geq \psi(m)$.
-
-\textit{Backward direction ($\psi(m) \leq N \Rightarrow m \in \mathrm{Ord}_N$):}
-We construct an integer matrix of order $m$ with dimension exactly $\psi(m)$, which can
-then be embedded into any larger dimension. The construction uses companion matrices of
-cyclotomic polynomials. For a prime power $p^k$ with $\psi_{\mathrm{pp}}(p, k) > 0$,
-the companion matrix of $\Phi_{p^k}$ is a $\varphi(p^k) \times \varphi(p^k)$ integer matrix
-with order $p^k$. For composite $m$, we combine companion matrices for each prime power
-factor in a block diagonal arrangement. The coprimality of orders ensures the combined
-matrix has order $\mathrm{lcm}$ of the individual orders, which equals $m$.
-
-\medskip
-
-\noindent\textbf{Historical Context.}
-The question of which orders can be achieved by integer matrices has a rich history.
-The classical crystallographic restriction theorem states that rotations in two and
-three dimensions preserving a lattice can only have orders 1, 2, 3, 4, or 6---a
-fundamental result explaining the possible symmetries of crystals.
-
-The general $N$-dimensional problem was studied by Kuzmanovich and
-Pavlichenkov~\cite{KP2002}, who characterized achievable orders using a function
-$W(m) = \sum (p_i - 1)p_i^{e_i - 1}$ equivalent to our $\psi$ function. Their
-Theorem~2.7 establishes the bound using companion matrices of cyclotomic polynomials
-and block diagonal constructions---the same techniques formalized here.
-
-This formalization follows the exposition of Bamberg, Cairns, and
-Kilminster~\cite{BCK2003}, who independently characterized achievable orders
-and connected the result to permutation matrices and Goldbach's conjecture.
-
-\begin{thebibliography}{KP2002}
-\bibitem{BCK2003}
-J.~Bamberg, G.~Cairns, and D.~Kilminster.
-\newblock The crystallographic restriction, permutations, and {G}oldbach's conjecture.
-\newblock \textit{Amer. Math. Monthly}, 110(3):202--209, 2003.
-
-\bibitem{KP2002}
-J.~Kuzmanovich and A.~Pavlichenkov.
-\newblock Finite groups of matrices whose entries are integers.
-\newblock \textit{Amer. Math. Monthly}, 109(2):173--186, 2002.
-\end{thebibliography}
-
-\chapter{The Psi Function}
-
-The $\psi$ function measures the ``arithmetic complexity'' of a positive integer $m$.
-For a prime power $p^k$, we define:
+The answer involves a function $\psi : \N \to \N$ that we will define precisely in Chapter~3.
+Informally, $\psi(m)$ measures the ``dimensional cost'' of achieving order $m$:
 \begin{itemize}
-\item $\psi_{\mathrm{pp}}(p,k) = \varphi(p^k)$ for $p$ odd or $k \geq 2$
-\item $\psi_{\mathrm{pp}}(2,1) = 0$
+\item $\psi(1) = \psi(2) = 0$ (orders 1 and 2 are ``free'' --- the identity and $-I$ work in any dimension)
+\item For other $m$, $\psi(m)$ is the sum of $\varphi(p^k)$ over prime power factors $p^k \| m$,
+      excluding the contribution from $2^1$
 \end{itemize}
 
-For a general integer $m$ with prime factorization $m = \prod_i p_i^{k_i}$, we have:
-$$\psi(m) = \sum_i \psi_{\mathrm{pp}}(p_i, k_i)$$
+The main theorem states that an $N \times N$ integer matrix can have finite order $m$ if and only if
+$\psi(m) \leq N$. This elegant characterization reduces the geometric question of matrix orders
+to a purely arithmetic condition.
 
-\inputleanmodule{Crystallographic.Psi.Basic}
-\inputleanmodule{Crystallographic.Psi.Bounds}
+\section{Historical Context and Motivation}
 
-\chapter{Integer Matrix Orders}
+The name ``crystallographic restriction'' originates from crystallography, where the theorem
+constrains the possible rotational symmetries of crystal lattices. In two and three dimensions,
+this gives the classical result that crystal lattices can only have 2-fold, 3-fold, 4-fold, or
+6-fold rotational symmetry --- never 5-fold or 7-fold.
 
-We define the set $\mathrm{Ord}_N$ of achievable orders for $N \times N$ integer matrices.
+From a pure mathematics perspective, the theorem characterizes finite cyclic subgroups of
+$GL_N(\Z)$. Minkowski proved the remarkable result that $GL_N(\Z)$ contains only finitely
+many isomorphism classes of finite subgroups. Our theorem provides the complete answer for
+cyclic subgroups: the possible orders are precisely those $m$ with $\psi(m) \leq N$.
 
-\inputleanmodule{Crystallographic.FiniteOrder.Basic}
-\inputleanmodule{Crystallographic.FiniteOrder.Order}
+\section{Proof Strategy}
+
+The proof proceeds in two directions:
+
+\textbf{Forward direction:} If an $N \times N$ integer matrix $A$ has order $m$, we must show
+$\psi(m) \leq N$. The key insight is that $A^m = I$ implies the minimal polynomial of $A$
+(viewed over $\Q$) divides $X^m - 1$. Since cyclotomic polynomials are irreducible over $\Q$
+and pairwise coprime, the minimal polynomial factors as a product of cyclotomic polynomials
+$\Phi_d$ for various divisors $d$ of $m$. The constraint that $\ord(A) = m$ (not some smaller
+divisor) forces the lcm of these $d$ values to equal $m$, which leads to the bound $\psi(m) \leq N$.
+
+\textbf{Backward direction:} If $\psi(m) \leq N$, we construct an explicit $N \times N$ integer
+matrix with order $m$. The construction uses companion matrices of cyclotomic polynomials
+combined via block diagonal. For each prime power factor $p^k$ of $m$ (with $p \neq 2$ or $k \geq 2$),
+the companion matrix of $\Phi_{p^k}$ contributes order $p^k$ in dimension $\varphi(p^k)$.
+Block diagonal combination gives order $\lcm = m$ in dimension $\sum \varphi(p^k) = \psi(m)$.
 
 \chapter{Companion Matrices}
 
-Companion matrices provide a key construction for achieving specific orders via cyclotomic
-polynomials.
+Companion matrices provide a systematic way to construct matrices with prescribed characteristic
+polynomials, making them the fundamental tool for achieving specific matrix orders.
 
-\section{Definition and Basic Properties}
+\section{Basic Definitions}
+
+Given a monic polynomial $p(X) = X^n + a_{n-1}X^{n-1} + \cdots + a_1 X + a_0$, its
+\emph{companion matrix} is the $n \times n$ matrix:
+$$C(p) = \begin{pmatrix}
+0 & 0 & \cdots & 0 & -a_0 \\
+1 & 0 & \cdots & 0 & -a_1 \\
+0 & 1 & \cdots & 0 & -a_2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & 1 & -a_{n-1}
+\end{pmatrix}$$
+
+The companion matrix of a monic polynomial provides a canonical matrix realization
+whose characteristic polynomial equals the original polynomial.
 
 \inputleannode{companion-def}
 
-The characteristic polynomial of the companion matrix is exactly the defining polynomial,
-and by the Cayley-Hamilton theorem, $C_p$ satisfies $p(C_p) = 0$. This makes companion
-matrices ideal for constructing matrices with prescribed minimal polynomials.
+\section{Characteristic Polynomial}
+
+The fundamental property of companion matrices is that their characteristic polynomial
+equals the defining polynomial. This means we can ``design'' a matrix to have any
+monic polynomial as its characteristic polynomial.
+
+\inputleannode{thm-companion-charpoly}
+
+Since the companion matrix satisfies its own characteristic polynomial (by Cayley-Hamilton),
+evaluating the defining polynomial at the companion matrix gives zero.
 
 \inputleannode{lem-companion-aeval-zero}
 
-\inputleannode{thm-companion-charpoly}
+This immediately gives us control over powers of the companion matrix: if $p(X)$ divides
+$X^m - 1$, then $C(p)^m = I$.
 
 \inputleannode{thm-companion-pow-dvd}
 
 \section{Cyclotomic Companion Matrices}
 
-For achieving finite order $m$, we use the companion matrix of the $m$-th cyclotomic
-polynomial $\Phi_m$. Since roots of $\Phi_m$ are primitive $m$-th roots of unity,
-this companion matrix has order exactly $m$.
+Companion matrices of cyclotomic polynomials have particularly nice properties:
+they are integer matrices with prescribed finite order. This makes them the building
+blocks for our backward direction construction.
 
-\inputleanmodule{Crystallographic.Companion.Cyclotomic}
+The $m$-th cyclotomic polynomial $\Phi_m(X)$ has integer coefficients (a non-trivial fact),
+degree $\varphi(m)$, and divides $X^m - 1$ but not $X^k - 1$ for any $k < m$. These
+properties transfer directly to its companion matrix.
 
-\chapter{The Crystallographic Restriction Theorem}
+\inputleannode{lem-companion-cycl-pow}
 
-The proof splits into two directions: showing $\psi(m) \leq N$ is necessary (forward)
-and sufficient (backward) for $m \in \mathrm{Ord}_N$.
+The order of the companion matrix of $\Phi_m$ is exactly $m$. This is because $\Phi_m$
+is the minimal polynomial of primitive $m$-th roots of unity, so $\Phi_m(X)$ divides
+$X^m - 1$ but not $X^k - 1$ for $k < m$.
 
-\inputleanmodule{Crystallographic.CrystallographicRestriction.Forward}
-\inputleanmodule{Crystallographic.CrystallographicRestriction.Backward}
-\inputleanmodule{Crystallographic.Main.MainTheorem}
+\inputleannode{thm-companion-cycl-order}
 
-\appendix
-\chapter{Appendix}
+Since $\Phi_m$ has integer coefficients, the companion matrix has integer entries.
 
-This appendix collects technical lemmas used throughout the proof.
-These are general-purpose results about finite sets, coprime products,
-Euler's totient function, and matrix orders that support the main arguments.
+\inputleannode{thm-companion-cycl-mem}
 
-\inputleanmodule{Crystallographic.Main.Lemmas}
+This gives us the key result for constructing matrices of prescribed order: the companion
+matrix of $\Phi_m$ achieves order $m$ in dimension $\varphi(m)$.
+
+\inputleannode{thm-mem-orders-totient}
+
+\chapter{The Psi Function}
+
+The $\psi$ function is the key invariant that characterizes achievable matrix orders.
+It refines Euler's totient function $\varphi$ by accounting for the special role of
+order 2.
+
+\section{Definition}
+
+The function $\psi : \N \to \N$ computes the minimum dimension needed to achieve a
+given order. The key insight is that order 2 is ``free'' in any positive dimension
+(achieved by $-I$), so we should not count the $\varphi(2) = 1$ contribution from
+a single factor of 2.
+
+For a prime power $p^k$, we define:
+$$\psi_{\text{pp}}(p, k) = \begin{cases}
+0 & \text{if } k = 0 \\
+0 & \text{if } p = 2 \text{ and } k = 1 \\
+\varphi(p^k) & \text{otherwise}
+\end{cases}$$
+
+\inputleannode{psiPrimePow-def}
+
+For a general positive integer $m$ with prime factorization $m = \prod_i p_i^{k_i}$,
+we define:
+$$\psi(m) = \sum_i \psi_{\text{pp}}(p_i, k_i)$$
+
+\inputleannode{psi-def}
+
+\section{Basic Properties}
+
+For a prime power $p^k$ (with $k \geq 1$), $\psi(p^k)$ equals $\varphi(p^k)$ in all cases
+except $\psi(2) = 0$.
+
+\inputleannode{lem-psi-prime-pow}
+
+The power of $\psi$ comes from its additivity on coprime factors. When $\gcd(m, n) = 1$,
+the prime factorizations of $m$ and $n$ are disjoint.
+
+\inputleannode{lem-factorization-disjoint}
+
+This disjointness gives us the key additivity property:
+
+\inputleannode{lem-psi-coprime-add}
+
+The function $\psi$ is bounded below by the contribution from any single prime power factor:
+
+\inputleannode{lem-psi-ge-psiPrimePow}
+
+\section{Bounds}
+
+These bounds on the $\psi$ function are essential for the forward direction of the main theorem.
+They establish relationships between $\psi$ and the totient function that allow us to
+translate eigenvalue constraints into dimension bounds.
+
+\inputleannode{lem-two-le-totient-prime-pow}
+
+The following lemma provides a way to factor composite numbers that are not prime powers,
+which is crucial for the inductive structure of our proofs.
+
+\inputleannode{lem-factorization-split-lt}
+
+For odd numbers at least 3, $\psi$ is strictly positive:
+
+\inputleannode{lem-psi-pos-of-odd}
+
+The function $\psi$ is bounded above by the totient function:
+
+\inputleannode{lem-psi-le-totient}
+
+The following lemmas establish key properties about sets of divisors whose lcm equals a
+given value. These are essential for the forward direction, where we need to show that
+if divisors $d_1, \ldots, d_s$ have $\lcm(d_1, \ldots, d_s) = m$, then the sum of their
+totients is at least $\psi(m)$.
+
+\inputleannode{lem-prime-pow-achieved-of-lcm-eq}
+
+\inputleannode{lem-finset-nonempty-of-two-le-lcm}
+
+\inputleannode{lem-finset-exists-one-lt-of-two-le-lcm}
+
+The crucial bound relating sums of totients to $\psi$:
+
+\inputleannode{lem-sum-totient-ge-psi}
+
+\chapter{Integer Matrix Orders}
+
+This chapter develops the theory of finite orders achievable by integer matrices,
+including closure properties under block diagonal operations that are essential for
+the backward direction.
+
+\section{Basic Properties}
+
+We define $\Ord_N$ as the set of finite orders achievable by $N \times N$ integer matrices:
+$$\Ord_N = \{ m \in \N^+ : \exists A \in M_N(\Z),\ \ord(A) = m \}$$
+
+\inputleannode{integerMatrixOrders-def}
+
+The identity matrix has order 1, so $1 \in \Ord_N$ for all $N$:
+
+\inputleannode{lem-one-mem-orders}
+
+For $N \geq 1$, the matrix $-I$ has order 2:
+
+\inputleannode{lem-two-mem-orders}
+
+The set of achievable orders is monotone in dimension: if $m \in \Ord_N$ and $N \leq N'$,
+then $m \in \Ord_{N'}$ (by padding with identity blocks).
+
+\inputleannode{lem-orders-mono}
+
+\section{Block Diagonal Matrices}
+
+Block diagonal matrices are essential for combining matrices with coprime orders.
+If $A$ has order $m$ and $B$ has order $n$ with $\gcd(m, n) = 1$, then the block
+diagonal matrix $\begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}$ has order $mn$.
+
+\inputleannode{def-blockDiag2}
+
+Block diagonal respects the identity:
+
+\inputleannode{lem-blockDiag2-one}
+
+Block diagonal respects multiplication:
+
+\inputleannode{lem-blockDiag2-mul}
+
+This gives us a monoid homomorphism structure:
+
+\inputleannode{def-blockDiag2-prodMonoidHom}
+
+A block diagonal matrix equals the identity iff both blocks equal the identity:
+
+\inputleannode{lem-blockDiag2-eq-one}
+
+Powers distribute over block diagonal:
+
+\inputleannode{lem-blockDiag2-pow}
+
+\section{Order Results}
+
+The order of a block diagonal matrix is the lcm of the block orders:
+
+\inputleannode{thm-orderOf-blockDiag2}
+
+This gives us the key closure property: $\Ord_N$ is closed under lcm for dimensions
+that accommodate both factors.
+
+\inputleannode{lem-lcm-mem-orders}
+
+For coprime orders, the lcm equals the product, so we can combine coprime orders:
+
+\inputleannode{lem-mul-mem-orders-coprime}
+
+\chapter{The Crystallographic Restriction}
+
+This chapter contains the forward and backward directions of the crystallographic restriction theorem.
+Together, they establish that $m \in \Ord_N$ if and only if $\psi(m) \leq N$.
+
+\section{Forward Direction}
+
+The forward direction shows that if an $N \times N$ integer matrix has order $m$, then $\psi(m) \leq N$.
+The proof uses eigenvalue theory: the minimal polynomial must be a product of cyclotomic polynomials,
+and the constraint that the order is exactly $m$ (not some smaller divisor) forces enough cyclotomic
+factors to appear that their degrees sum to at least $\psi(m)$.
+
+The first lemma transfers polynomial divisibility to matrix powers:
+
+\inputleannode{lem-pow-eq-one-of-minpoly-dvd}
+
+Conversely, if $A^m = I$ then the minimal polynomial divides $X^m - 1$:
+
+\inputleannode{lem-minpoly-dvd-X-pow-sub-one}
+
+When cyclotomic polynomials divide a target, so does their product (since distinct
+cyclotomic polynomials are coprime over $\Q$):
+
+\inputleannode{lem-cyclotomic-finset-product-dvd}
+
+The minimal polynomial divides the product of just those cyclotomic polynomials that divide it:
+
+\inputleannode{lem-minpoly-dvd-prod-cyclotomic}
+
+In fact, the minimal polynomial equals this product (by mutual divisibility of monic polynomials):
+
+\inputleannode{lem-minpoly-eq-prod-cyclotomic}
+
+The key constraint: if $\ord(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$, then $\lcm(S) = m$.
+Otherwise, $A^{\lcm(S)} = I$ with $\lcm(S) < m$, contradicting $\ord(A) = m$.
+
+\inputleannode{lem-cyclotomic-divisors-lcm-eq}
+
+The forward direction theorem:
+
+\inputleannode{thm-forward-direction}
+
+\section{Backward Direction}
+
+The backward direction shows that if $\psi(m) \leq N$, then there exists an $N \times N$ integer matrix
+with order $m$. The construction uses companion matrices of cyclotomic polynomials combined via
+block diagonal.
+
+First, we establish properties of permutation matrices, which provide an alternative construction
+for some orders:
+
+\inputleannode{lem-permMatrix-one}
+
+\inputleannode{lem-permMatrix-mul}
+
+\inputleannode{lem-permMatrix-pow}
+
+\inputleannode{lem-permMatrix-eq-one-iff}
+
+\inputleannode{lem-orderOf-permMatrix}
+
+\inputleannode{lem-orderOf-finRotate}
+
+\inputleannode{lem-orderOf-permMatrix-finRotate}
+
+This gives us that $m \in \Ord_m$ for $m \geq 2$:
+
+\inputleannode{lem-mem-integerMatrixOrders-self}
+
+For prime powers (excluding $2^1$), we use cyclotomic companion matrices:
+
+\inputleannode{thm-primePow-mem-integerMatrixOrders-psi}
+
+The general case uses strong induction, combining the prime power result with
+block diagonal constructions for composite $m$:
+
+\inputleannode{thm-mem-integerMatrixOrders-psi}
+
+The backward direction theorem:
+
+\inputleannode{thm-backward-direction}
+
+\chapter{Main Results}
+
+This chapter contains the main theorem and its supporting lemmas, bringing together all
+the machinery developed in previous chapters.
+
+\section{Supporting Lemmas}
+
+Several auxiliary results are needed for the final synthesis:
+
+\inputleannode{lem-sum-le-prod}
+
+\inputleannode{lem-lcm-factorization-le-sup}
+
+\inputleannode{lem-primePow-mem-of-lcm-eq}
+
+\inputleannode{lem-totient-ge-two}
+
+\inputleannode{lem-prod-coprime-dvd}
+
+\inputleannode{lem-totient-prod-coprime}
+
+A key lemma for the construction: if $A$ has odd order $m$, then $-A$ has order $2m$:
+
+\inputleannode{lem-orderOf-neg-of-odd-order}
+
+\section{The Main Theorem}
+
+We can now state and prove the crystallographic restriction theorem in its complete form.
+The theorem provides a necessary and sufficient condition for an order to be achievable
+by integer matrices of a given dimension.
+
+\inputleannode{thm-main-theorem}
+
+\section{Consequences}
+
+The theorem has several immediate consequences:
+
+\begin{enumerate}
+\item \textbf{Classical 2D/3D restriction:} In dimensions 2 and 3, the achievable orders
+      are $\{1, 2, 3, 4, 6\}$. This explains why crystals can only have 2-, 3-, 4-, or
+      6-fold rotational symmetry.
+
+\item \textbf{Dimension parity:} Since $\psi(m)$ is always even for $m > 2$, the achievable
+      orders in dimension $2k$ are the same as in dimension $2k+1$.
+
+\item \textbf{No 5-fold symmetry in low dimensions:} Since $\psi(5) = 4$, order 5 first
+      becomes achievable in dimension 4.
+\end{enumerate}
+
+The following table shows $\psi(m)$ for small values of $m$:
+
+\begin{center}
+\begin{tabular}{c|cccccccccccc}
+$m$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+\hline
+$\psi(m)$ & 0 & 0 & 2 & 2 & 4 & 2 & 6 & 4 & 6 & 4 & 10 & 4
+\end{tabular}
+\end{center}
 
 \end{document}

@@ -1,0 +1,141 @@
+name: Build and Cache Artifacts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-cache-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.0
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+
+      # Check out General_Crystallographic_Restriction and sibling repos
+      - name: Checkout General_Crystallographic_Restriction
+        uses: actions/checkout@v4
+        with:
+          path: General_Crystallographic_Restriction
+          fetch-depth: 0
+
+      - name: Checkout Dress
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/Dress
+          path: Dress
+          ref: main
+
+      - name: Checkout Runway
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/Runway
+          path: Runway
+          ref: main
+
+      - name: Checkout LeanArchitect
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/LeanArchitect
+          path: LeanArchitect
+          ref: main
+
+      - name: Checkout SubVerso
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/subverso
+          path: subverso
+          ref: main
+
+      - name: Install elan
+        uses: leanprover/lean-action@c544e89643240c6b398f14a431bcdc6309e36b3e # v1.4.0
+        with:
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+          build: false
+          lake-package-directory: General_Crystallographic_Restriction
+
+      - name: Restore toolchain cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            Dress/.lake
+            Runway/.lake
+            LeanArchitect/.lake
+            subverso/.lake
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          restore-keys: |
+            toolchain-build-${{ runner.os }}-
+
+      - name: Get mathlib cache
+        working-directory: General_Crystallographic_Restriction
+        run: lake exe cache get
+
+      - name: Build SubVerso
+        working-directory: subverso
+        run: lake build
+
+      - name: Build LeanArchitect
+        working-directory: LeanArchitect
+        run: lake build
+
+      - name: Build Dress
+        working-directory: Dress
+        run: lake build
+
+      - name: Build Runway
+        working-directory: Runway
+        run: lake build
+
+      - name: Build Crystallographic with dressed artifacts
+        working-directory: General_Crystallographic_Restriction
+        run: |
+          mkdir -p .lake/build
+          echo "1" > .lake/build/.dress
+          lake build
+          rm -f .lake/build/.dress
+
+      - name: Build blueprint facet
+        working-directory: General_Crystallographic_Restriction
+        run: lake build :blueprint
+
+      - name: Generate dependency graph
+        working-directory: General_Crystallographic_Restriction
+        run: |
+          lake env ../Dress/.lake/build/bin/extract_blueprint graph \
+            --build .lake/build \
+            Crystallographic
+
+      - name: Save toolchain cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            Dress/.lake
+            Runway/.lake
+            LeanArchitect/.lake
+            subverso/.lake
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+
+      - name: Save dressed artifacts cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            General_Crystallographic_Restriction/.lake/build/dressed
+            General_Crystallographic_Restriction/.lake/build/lib
+            Runway/.lake
+            Dress/.lake
+          key: dress-artifacts-${{ github.sha }}

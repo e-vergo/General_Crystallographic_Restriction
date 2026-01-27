@@ -37,6 +37,7 @@ namespace Crystallographic
 /-! ## Helper lemmas for the forward direction -/
 
 @[blueprint "lem:two-le-totient-prime-pow"
+  (displayName := "Totient of Prime Power")
   (statement := /-- For any prime power $p^k > 2$, we have $2 \leq \varphi(p^k)$.
 
   Specifically, $\varphi(p^k) = p^{k-1}(p-1) \geq 2$ unless $(p, k) = (2, 1)$,
@@ -69,6 +70,7 @@ private lemma psi_sum_le_totient_prod_of_ge_two {a b : ℕ}
     _ ≤ Nat.totient a * Nat.totient b := Nat.add_le_mul htot_a_ge2 htot_b_ge2
 
 @[blueprint "lem:factorization-split-lt"
+  (displayName := "Factorization Split Bound")
   (statement := /-- A composite number $m > 2$ that is not a prime power can be written
   as $m = p^e \cdot m'$ where $p$ is prime, $e > 0$, $\gcd(p^e, m') = 1$, and both
   $p^e < m$ and $1 < m' < m$.
@@ -119,6 +121,7 @@ theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m
   exact ⟨p, e, m', hminFac_prime, he_pos, hm_eq.symm, hcop, hm'_gt_one, hm'_lt, hpe_lt⟩
 
 @[blueprint "lem:psi-pos-of-odd"
+  (displayName := "Psi Positive for Odd")
   (statement := /-- For odd $m \geq 3$, we have $\psi(m) > 0$.
 
   Since $m \geq 3$ and $m$ is odd, $m$ has a prime factor $q \geq 3$ (specifically,
@@ -176,6 +179,7 @@ Key cases:
 - m = 2 * odd (with odd > 1): psi(m) = psi(odd) ≤ totient(odd) = totient(m)
 - m = composite without 2^1 factor: each φ(p^k) ≥ 2, so sum ≤ product -/
 @[blueprint "lem:psi-le-totient"
+  (displayName := "Psi Totient Bound")
   (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
 
   We prove $\psi(m) \leq \varphi(m)$ by strong induction on $m$. The key observation is that
@@ -251,6 +255,7 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : psi m ≤ Nat.totient m := by
             exact psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m' htot_pe_ge2 htot_m'_ge2
 
 @[blueprint "lem:prime-pow-achieved-of-lcm-eq"
+  (displayName := "Prime Power Achievement")
   (statement := /-- If $S$ is a finite set of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   then for each prime $q$ dividing $m$, some element $d \in S$ is divisible by $q^{\nu_q(m)}$.
 
@@ -416,6 +421,7 @@ lemma totient_sum_ge_psi_of_mem {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
           (Nat.mem_divisors.mpr ⟨hS_sub d (by assumption), hm.ne'⟩)))) hm_in_S
 
 @[blueprint "lem:finset-nonempty-of-two-le-lcm"
+  (displayName := "Nonempty Finset from LCM")
   (statement := /-- If $\mathrm{lcm}(S) \geq 2$ for a finite set $S$ of natural numbers,
   then $S$ is nonempty.
 
@@ -431,6 +437,7 @@ lemma Finset.nonempty_of_two_le_lcm {S : Finset ℕ} (hS_lcm_ge2 : 2 ≤ S.lcm i
   omega
 
 @[blueprint "lem:finset-exists-one-lt-of-two-le-lcm"
+  (displayName := "Finset Element Exists")
   (statement := /-- If $S$ is a finite set of positive integers with $\mathrm{lcm}(S) \geq 2$,
   then some element $d \in S$ satisfies $d > 1$.
 
@@ -464,6 +471,7 @@ The proof proceeds by showing that any other choice of S either:
 2. Uses a composite element d covering multiple prime powers, which costs
    φ(d) = Π φ(p^k) ≥ Σ φ(p^k) when each φ(p^k) ≥ 2. -/
 @[blueprint "lem:sum-totient-ge-psi"
+  (displayName := "Totient Sum Lower Bound")
   (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
 

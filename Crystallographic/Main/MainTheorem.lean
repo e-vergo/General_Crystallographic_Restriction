@@ -45,6 +45,8 @@ An N×N integer matrix can have finite order m if and only if psi(m) ≤ N.
 This characterizes exactly which rotation orders are possible in N-dimensional
 crystallographic groups. -/
 @[blueprint "thm:main-theorem"
+  (displayName := "Crystallographic Restriction Theorem")
+  (keyTheorem := true)
   (statement := /-- \textbf{The Crystallographic Restriction Theorem:}
   An $N \times N$ integer matrix can have finite order $m$ if and only if $\psi(m) \leq N$.
 

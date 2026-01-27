@@ -1,0 +1,187 @@
+name: Full Build and Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: full-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.0
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+
+      # Check out General_Crystallographic_Restriction and sibling repos
+      - name: Checkout General_Crystallographic_Restriction
+        uses: actions/checkout@v4
+        with:
+          path: General_Crystallographic_Restriction
+          fetch-depth: 0
+
+      - name: Checkout Dress
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/Dress
+          path: Dress
+          ref: main
+
+      - name: Checkout Runway
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/Runway
+          path: Runway
+          ref: main
+
+      - name: Checkout dress-blueprint-action (for assets)
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/dress-blueprint-action
+          path: dress-blueprint-action
+          ref: main
+
+      - name: Checkout LeanArchitect
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/LeanArchitect
+          path: LeanArchitect
+          ref: main
+
+      - name: Checkout SubVerso
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/subverso
+          path: subverso
+          ref: main
+
+      - name: Install elan
+        uses: leanprover/lean-action@c544e89643240c6b398f14a431bcdc6309e36b3e # v1.4.0
+        with:
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+          build: false
+          lake-package-directory: General_Crystallographic_Restriction
+
+      - name: Restore toolchain cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            Dress/.lake
+            Runway/.lake
+            LeanArchitect/.lake
+            subverso/.lake
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          restore-keys: |
+            toolchain-build-${{ runner.os }}-
+
+      - name: Get mathlib cache
+        working-directory: General_Crystallographic_Restriction
+        run: |
+          echo "=== Lake version ==="
+          lake --version
+          echo "=== Resolving dependencies ==="
+          lake update
+          echo "=== Fetching mathlib cache ==="
+          lake exe cache get
+          echo "=== Checking for oleans ==="
+          find .lake/packages/mathlib -name "*.olean" 2>/dev/null | head -5 || echo "No oleans found"
+          ls -la .lake/packages/mathlib/.lake/build/lib/Mathlib/ 2>/dev/null | head -10 || echo "No Mathlib lib dir"
+
+      - name: Build SubVerso
+        working-directory: subverso
+        run: lake build
+
+      - name: Build LeanArchitect
+        working-directory: LeanArchitect
+        run: lake build
+
+      - name: Build Dress
+        working-directory: Dress
+        run: lake build
+
+      - name: Build Runway
+        working-directory: Runway
+        run: lake build
+
+      - name: Build Crystallographic with dressed artifacts
+        working-directory: General_Crystallographic_Restriction
+        run: |
+          mkdir -p .lake/build
+          echo "1" > .lake/build/.dress
+          lake build
+          rm -f .lake/build/.dress
+
+      - name: Build blueprint facet
+        working-directory: General_Crystallographic_Restriction
+        run: lake build :blueprint
+
+      - name: Generate dependency graph
+        working-directory: General_Crystallographic_Restriction
+        run: |
+          lake env ../Dress/.lake/build/bin/extract_blueprint graph \
+            --build .lake/build \
+            Crystallographic
+
+      - name: Generate site with Runway
+        run: |
+          mkdir -p General_Crystallographic_Restriction/.lake/build/runway
+          # Create CI-compatible runway config with absolute paths
+          cat > General_Crystallographic_Restriction/runway-ci.json << EOF
+          {
+            "title": "General Crystallographic Restriction",
+            "projectName": "Crystallographic",
+            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
+            "baseUrl": "/General_Crystallographic_Restriction/",
+            "docgen4Url": null,
+            "blueprintTexPath": "${{ github.workspace }}/General_Crystallographic_Restriction/blueprint/src/blueprint.tex",
+            "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
+          }
+          EOF
+          cd Runway && lake exe runway \
+            --build-dir ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build \
+            --output ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build/runway \
+            build \
+            ${{ github.workspace }}/General_Crystallographic_Restriction/runway-ci.json
+
+      - name: Save toolchain cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            Dress/.lake
+            Runway/.lake
+            LeanArchitect/.lake
+            subverso/.lake
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: General_Crystallographic_Restriction/.lake/build/runway
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

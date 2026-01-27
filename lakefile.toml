@@ -1,22 +1,20 @@
 name = "Crystallographic"
-version = "0.1.0"
-keywords = ["math"]
 defaultTargets = ["Crystallographic"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+relaxedAutoImplicit = false
 
 [[require]]
 name = "mathlib"
-scope = "leanprover-community"
+git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.27.0-rc1"
 
 [[require]]
 name = "Dress"
-git = "https://github.com/e-vergo/Dress"
+git = "https://github.com/e-vergo/Dress.git"
 rev = "main"
-
-[[require]]
-name = "doc-gen4"
-scope = "leanprover"
-rev = "v4.27.0-rc1"
 
 [[lean_lib]]
 name = "Crystallographic"

@@ -1,0 +1,91 @@
+name: Deploy Blueprint
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-blueprint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout General_Crystallographic_Restriction
+        uses: actions/checkout@v4
+        with:
+          path: General_Crystallographic_Restriction
+          fetch-depth: 0
+
+      - name: Checkout Runway
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/Runway
+          path: Runway
+          ref: main
+
+      - name: Checkout dress-blueprint-action (for assets)
+        uses: actions/checkout@v4
+        with:
+          repository: e-vergo/dress-blueprint-action
+          path: dress-blueprint-action
+          ref: main
+
+      - name: Restore dressed artifacts cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            General_Crystallographic_Restriction/.lake/build/dressed
+            General_Crystallographic_Restriction/.lake/build/lib
+            Runway/.lake
+            Dress/.lake
+          key: dress-artifacts-${{ github.sha }}
+          restore-keys: |
+            dress-artifacts-
+
+      - name: Install elan
+        uses: leanprover/lean-action@c544e89643240c6b398f14a431bcdc6309e36b3e # v1.4.0
+        with:
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+          build: false
+          lake-package-directory: Runway
+
+      - name: Generate site with Runway
+        run: |
+          mkdir -p General_Crystallographic_Restriction/.lake/build/runway
+          # Create CI-compatible runway config with absolute paths
+          cat > General_Crystallographic_Restriction/runway-ci.json << EOF
+          {
+            "title": "General Crystallographic Restriction",
+            "projectName": "Crystallographic",
+            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
+            "baseUrl": "/General_Crystallographic_Restriction/",
+            "docgen4Url": null,
+            "blueprintTexPath": "${{ github.workspace }}/General_Crystallographic_Restriction/blueprint/src/blueprint.tex",
+            "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
+          }
+          EOF
+          cd Runway && lake exe runway \
+            --build-dir ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build \
+            --output ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build/runway \
+            build \
+            ${{ github.workspace }}/General_Crystallographic_Restriction/runway-ci.json
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: General_Crystallographic_Restriction/.lake/build/runway
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
