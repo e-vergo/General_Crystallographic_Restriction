@@ -27,11 +27,11 @@ jobs:
           docker-images: false
           swap-storage: false
 
-      # Check out project and sibling repos (Dress, Runway)
-      - name: Checkout project
+      # Check out GCR and sibling repos (Dress, Runway)
+      - name: Checkout GCR
         uses: actions/checkout@v4
         with:
-          path: project
+          path: GCR
           fetch-depth: 0
 
       - name: Checkout Dress
@@ -76,7 +76,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: false
           build: false
-          lake-package-directory: project
+          lake-package-directory: GCR
 
       - name: Restore toolchain cache
         uses: actions/cache/restore@v4
@@ -86,7 +86,7 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('GCR/lean-toolchain') }}
           restore-keys: |
             toolchain-build-${{ runner.os }}-
 
@@ -94,11 +94,11 @@ jobs:
         id: mathlib-cache
         uses: actions/cache/restore@v4
         with:
-          path: project/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
+          path: GCR/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('GCR/lake-manifest.json') }}
 
       - name: Get mathlib (cache or build)
-        working-directory: project
+        working-directory: GCR
         run: |
           if [ "${{ steps.mathlib-cache.outputs.cache-hit }}" == "true" ]; then
             echo "Mathlib restored from GitHub Actions cache"
@@ -126,8 +126,8 @@ jobs:
         working-directory: Runway
         run: lake build
 
-      - name: Build project with dressed artifacts
-        working-directory: project
+      - name: Build GCR with dressed artifacts
+        working-directory: GCR
         run: |
           mkdir -p .lake/build
           echo "1" > .lake/build/.dress
@@ -135,11 +135,11 @@ jobs:
           rm -f .lake/build/.dress
 
       - name: Build blueprint facet
-        working-directory: project
+        working-directory: GCR
         run: lake build :blueprint
 
       - name: Generate dependency graph
-        working-directory: project
+        working-directory: GCR
         run: |
           lake env ../Dress/.lake/build/bin/extract_blueprint graph \
             --build .lake/build \
@@ -147,24 +147,24 @@ jobs:
 
       - name: Generate site with Runway
         run: |
-          mkdir -p project/.lake/build/runway
+          mkdir -p GCR/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
-          cat > project/runway-ci.json << EOF
+          cat > GCR/runway-ci.json << EOF
           {
             "title": "General Crystallographic Restriction Theorem",
             "projectName": "Crystallographic",
             "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
             "baseUrl": "/General_Crystallographic_Restriction/",
             "docgen4Url": null,
-            "blueprintTexPath": "${{ github.workspace }}/project/blueprint/src/blueprint.tex",
+            "blueprintTexPath": "${{ github.workspace }}/GCR/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
           cd Runway && lake exe runway \
-            --build-dir ${{ github.workspace }}/project/.lake/build \
-            --output ${{ github.workspace }}/project/.lake/build/runway \
+            --build-dir ${{ github.workspace }}/GCR/.lake/build \
+            --output ${{ github.workspace }}/GCR/.lake/build/runway \
             build \
-            ${{ github.workspace }}/project/runway-ci.json
+            ${{ github.workspace }}/GCR/runway-ci.json
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4
@@ -174,19 +174,19 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('GCR/lean-toolchain') }}
 
       - name: Save mathlib cache
         if: steps.mathlib-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: project/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
+          path: GCR/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('GCR/lake-manifest.json') }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: project/.lake/build/runway
+          path: GCR/.lake/build/runway
 
   deploy:
     needs: build
