@@ -19,10 +19,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout General_Crystallographic_Restriction
+      - name: Checkout SBS-Test
         uses: actions/checkout@v4
         with:
-          path: General_Crystallographic_Restriction
+          path: SBS-Test
           fetch-depth: 0
 
       - name: Checkout Runway
@@ -43,8 +43,8 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            General_Crystallographic_Restriction/.lake/build/dressed
-            General_Crystallographic_Restriction/.lake/build/lib
+            SBS-Test/.lake/build/dressed
+            SBS-Test/.lake/build/lib
             Runway/.lake
             Dress/.lake
           key: dress-artifacts-${{ github.sha }}
@@ -66,13 +66,13 @@ jobs:
           echo "Paper generation not yet implemented"
           echo "This workflow will generate ar5iv-style paper output once the feature is complete"
           # Future command will be something like:
-          # cd Runway && lake exe runway paper ${{ github.workspace }}/General_Crystallographic_Restriction/runway-ci.json
+          # cd Runway && lake exe runway paper ${{ github.workspace }}/SBS-Test/runway-ci.json
 
       # Placeholder steps for when paper generation is implemented
       # - name: Upload Pages artifact
       #   uses: actions/upload-pages-artifact@v3
       #   with:
-      #     path: General_Crystallographic_Restriction/.lake/build/paper
+      #     path: SBS-Test/.lake/build/paper
 
       # - name: Deploy to GitHub Pages
       #   id: deployment

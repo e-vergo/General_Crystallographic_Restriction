@@ -27,11 +27,11 @@ jobs:
           docker-images: false
           swap-storage: false
 
-      # Check out General_Crystallographic_Restriction and sibling repos
-      - name: Checkout General_Crystallographic_Restriction
+      # Check out SBS-Test and sibling repos (Dress, Runway)
+      - name: Checkout SBS-Test
         uses: actions/checkout@v4
         with:
-          path: General_Crystallographic_Restriction
+          path: SBS-Test
           fetch-depth: 0
 
       - name: Checkout Dress
@@ -76,7 +76,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: false
           build: false
-          lake-package-directory: General_Crystallographic_Restriction
+          lake-package-directory: SBS-Test
 
       - name: Restore toolchain cache
         uses: actions/cache/restore@v4
@@ -86,22 +86,29 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
           restore-keys: |
             toolchain-build-${{ runner.os }}-
 
-      - name: Get mathlib cache
-        working-directory: General_Crystallographic_Restriction
+      - name: Restore mathlib cache
+        id: mathlib-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: SBS-Test/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+
+      - name: Get mathlib (cache or build)
+        working-directory: SBS-Test
         run: |
-          echo "=== Lake version ==="
-          lake --version
-          echo "=== Resolving dependencies ==="
-          lake update
-          echo "=== Fetching mathlib cache ==="
-          lake exe cache get
-          echo "=== Checking for oleans ==="
-          find .lake/packages/mathlib -name "*.olean" 2>/dev/null | head -5 || echo "No oleans found"
-          ls -la .lake/packages/mathlib/.lake/build/lib/Mathlib/ 2>/dev/null | head -10 || echo "No Mathlib lib dir"
+          if [ "${{ steps.mathlib-cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Mathlib restored from GitHub Actions cache"
+            find .lake/packages/mathlib -name "*.olean" 2>/dev/null | wc -l
+          else
+            echo "No cache hit - trying mathlib cache server..."
+            lake exe cache get || echo "Server cache unavailable, will build from source"
+            OLEAN_COUNT=$(find .lake/packages/mathlib -name "*.olean" 2>/dev/null | wc -l)
+            echo "Found $OLEAN_COUNT oleans after cache get"
+          fi
 
       - name: Build SubVerso
         working-directory: subverso
@@ -119,8 +126,8 @@ jobs:
         working-directory: Runway
         run: lake build
 
-      - name: Build Crystallographic with dressed artifacts
-        working-directory: General_Crystallographic_Restriction
+      - name: Build SBS-Test with dressed artifacts
+        working-directory: SBS-Test
         run: |
           mkdir -p .lake/build
           echo "1" > .lake/build/.dress
@@ -128,36 +135,36 @@ jobs:
           rm -f .lake/build/.dress
 
       - name: Build blueprint facet
-        working-directory: General_Crystallographic_Restriction
+        working-directory: SBS-Test
         run: lake build :blueprint
 
       - name: Generate dependency graph
-        working-directory: General_Crystallographic_Restriction
+        working-directory: SBS-Test
         run: |
           lake env ../Dress/.lake/build/bin/extract_blueprint graph \
             --build .lake/build \
-            Crystallographic
+            SBSTest
 
       - name: Generate site with Runway
         run: |
-          mkdir -p General_Crystallographic_Restriction/.lake/build/runway
+          mkdir -p SBS-Test/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
-          cat > General_Crystallographic_Restriction/runway-ci.json << EOF
+          cat > SBS-Test/runway-ci.json << EOF
           {
-            "title": "General Crystallographic Restriction",
-            "projectName": "Crystallographic",
-            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
-            "baseUrl": "/General_Crystallographic_Restriction/",
+            "title": "SBS-Test: Blueprint Feature Demonstration",
+            "projectName": "SBSTest",
+            "githubUrl": "https://github.com/e-vergo/SBS-Test",
+            "baseUrl": "/SBS-Test/",
             "docgen4Url": null,
-            "blueprintTexPath": "${{ github.workspace }}/General_Crystallographic_Restriction/blueprint/src/blueprint.tex",
+            "blueprintTexPath": "${{ github.workspace }}/SBS-Test/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
           cd Runway && lake exe runway \
-            --build-dir ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build \
-            --output ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build/runway \
+            --build-dir ${{ github.workspace }}/SBS-Test/.lake/build \
+            --output ${{ github.workspace }}/SBS-Test/.lake/build/runway \
             build \
-            ${{ github.workspace }}/General_Crystallographic_Restriction/runway-ci.json
+            ${{ github.workspace }}/SBS-Test/runway-ci.json
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4
@@ -167,12 +174,19 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+
+      - name: Save mathlib cache
+        if: steps.mathlib-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: SBS-Test/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: General_Crystallographic_Restriction/.lake/build/runway
+          path: SBS-Test/.lake/build/runway
 
   deploy:
     needs: build

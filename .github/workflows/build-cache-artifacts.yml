@@ -25,11 +25,11 @@ jobs:
           docker-images: false
           swap-storage: false
 
-      # Check out General_Crystallographic_Restriction and sibling repos
-      - name: Checkout General_Crystallographic_Restriction
+      # Check out SBS-Test and sibling repos
+      - name: Checkout SBS-Test
         uses: actions/checkout@v4
         with:
-          path: General_Crystallographic_Restriction
+          path: SBS-Test
           fetch-depth: 0
 
       - name: Checkout Dress
@@ -67,7 +67,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: false
           build: false
-          lake-package-directory: General_Crystallographic_Restriction
+          lake-package-directory: SBS-Test
 
       - name: Restore toolchain cache
         uses: actions/cache/restore@v4
@@ -77,13 +77,26 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
           restore-keys: |
             toolchain-build-${{ runner.os }}-
 
-      - name: Get mathlib cache
-        working-directory: General_Crystallographic_Restriction
-        run: lake exe cache get
+      - name: Restore mathlib cache
+        id: mathlib-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: SBS-Test/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+
+      - name: Get mathlib (cache or build)
+        working-directory: SBS-Test
+        run: |
+          if [ "${{ steps.mathlib-cache.outputs.cache-hit }}" == "true" ]; then
+            echo "Mathlib restored from GitHub Actions cache"
+          else
+            echo "No cache hit - trying mathlib cache server..."
+            lake exe cache get || echo "Server cache unavailable, will build from source"
+          fi
 
       - name: Build SubVerso
         working-directory: subverso
@@ -101,8 +114,8 @@ jobs:
         working-directory: Runway
         run: lake build
 
-      - name: Build Crystallographic with dressed artifacts
-        working-directory: General_Crystallographic_Restriction
+      - name: Build SBS-Test with dressed artifacts
+        working-directory: SBS-Test
         run: |
           mkdir -p .lake/build
           echo "1" > .lake/build/.dress
@@ -110,15 +123,15 @@ jobs:
           rm -f .lake/build/.dress
 
       - name: Build blueprint facet
-        working-directory: General_Crystallographic_Restriction
+        working-directory: SBS-Test
         run: lake build :blueprint
 
       - name: Generate dependency graph
-        working-directory: General_Crystallographic_Restriction
+        working-directory: SBS-Test
         run: |
           lake env ../Dress/.lake/build/bin/extract_blueprint graph \
             --build .lake/build \
-            Crystallographic
+            SBSTest
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4
@@ -128,14 +141,21 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('General_Crystallographic_Restriction/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+
+      - name: Save mathlib cache
+        if: steps.mathlib-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: SBS-Test/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
 
       - name: Save dressed artifacts cache
         uses: actions/cache/save@v4
         with:
           path: |
-            General_Crystallographic_Restriction/.lake/build/dressed
-            General_Crystallographic_Restriction/.lake/build/lib
+            SBS-Test/.lake/build/dressed
+            SBS-Test/.lake/build/lib
             Runway/.lake
             Dress/.lake
           key: dress-artifacts-${{ github.sha }}

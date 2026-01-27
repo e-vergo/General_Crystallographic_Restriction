@@ -107,17 +107,17 @@ The fundamental property of companion matrices is that their characteristic poly
 equals the defining polynomial. This means we can ``design'' a matrix to have any
 monic polynomial as its characteristic polynomial.
 
-\inputleannode{thm-companion-charpoly}
+\inputleannode{thm:companion-charpoly}
 
 Since the companion matrix satisfies its own characteristic polynomial (by Cayley-Hamilton),
 evaluating the defining polynomial at the companion matrix gives zero.
 
-\inputleannode{lem-companion-aeval-zero}
+\inputleannode{lem:companion-aeval-zero}
 
 This immediately gives us control over powers of the companion matrix: if $p(X)$ divides
 $X^m - 1$, then $C(p)^m = I$.
 
-\inputleannode{thm-companion-pow-dvd}
+\inputleannode{thm:companion-pow-dvd}
 
 \section{Cyclotomic Companion Matrices}
 
@@ -129,22 +129,22 @@ The $m$-th cyclotomic polynomial $\Phi_m(X)$ has integer coefficients (a non-tri
 degree $\varphi(m)$, and divides $X^m - 1$ but not $X^k - 1$ for any $k < m$. These
 properties transfer directly to its companion matrix.
 
-\inputleannode{lem-companion-cycl-pow}
+\inputleannode{lem:companion-cycl-pow}
 
 The order of the companion matrix of $\Phi_m$ is exactly $m$. This is because $\Phi_m$
 is the minimal polynomial of primitive $m$-th roots of unity, so $\Phi_m(X)$ divides
 $X^m - 1$ but not $X^k - 1$ for $k < m$.
 
-\inputleannode{thm-companion-cycl-order}
+\inputleannode{thm:companion-cycl-order}
 
 Since $\Phi_m$ has integer coefficients, the companion matrix has integer entries.
 
-\inputleannode{thm-companion-cycl-mem}
+\inputleannode{thm:companion-cycl-mem}
 
 This gives us the key result for constructing matrices of prescribed order: the companion
 matrix of $\Phi_m$ achieves order $m$ in dimension $\varphi(m)$.
 
-\inputleannode{thm-mem-orders-totient}
+\inputleannode{thm:mem-orders-totient}
 
 \chapter{The Psi Function}
 
@@ -179,20 +179,20 @@ $$\psi(m) = \sum_i \psi_{\text{pp}}(p_i, k_i)$$
 For a prime power $p^k$ (with $k \geq 1$), $\psi(p^k)$ equals $\varphi(p^k)$ in all cases
 except $\psi(2) = 0$.
 
-\inputleannode{lem-psi-prime-pow}
+\inputleannode{lem:psi-prime-pow}
 
 The power of $\psi$ comes from its additivity on coprime factors. When $\gcd(m, n) = 1$,
 the prime factorizations of $m$ and $n$ are disjoint.
 
-\inputleannode{lem-factorization-disjoint}
+\inputleannode{lem:factorization-disjoint}
 
 This disjointness gives us the key additivity property:
 
-\inputleannode{lem-psi-coprime-add}
+\inputleannode{lem:psi-coprime-add}
 
 The function $\psi$ is bounded below by the contribution from any single prime power factor:
 
-\inputleannode{lem-psi-ge-psiPrimePow}
+\inputleannode{lem:psi-ge-psiPrimePow}
 
 \section{Bounds}
 
@@ -200,35 +200,35 @@ These bounds on the $\psi$ function are essential for the forward direction of t
 They establish relationships between $\psi$ and the totient function that allow us to
 translate eigenvalue constraints into dimension bounds.
 
-\inputleannode{lem-two-le-totient-prime-pow}
+\inputleannode{lem:two-le-totient-prime-pow}
 
 The following lemma provides a way to factor composite numbers that are not prime powers,
 which is crucial for the inductive structure of our proofs.
 
-\inputleannode{lem-factorization-split-lt}
+\inputleannode{lem:factorization-split-lt}
 
 For odd numbers at least 3, $\psi$ is strictly positive:
 
-\inputleannode{lem-psi-pos-of-odd}
+\inputleannode{lem:psi-pos-of-odd}
 
 The function $\psi$ is bounded above by the totient function:
 
-\inputleannode{lem-psi-le-totient}
+\inputleannode{lem:psi-le-totient}
 
 The following lemmas establish key properties about sets of divisors whose lcm equals a
 given value. These are essential for the forward direction, where we need to show that
 if divisors $d_1, \ldots, d_s$ have $\lcm(d_1, \ldots, d_s) = m$, then the sum of their
 totients is at least $\psi(m)$.
 
-\inputleannode{lem-prime-pow-achieved-of-lcm-eq}
+\inputleannode{lem:prime-pow-achieved-of-lcm-eq}
 
-\inputleannode{lem-finset-nonempty-of-two-le-lcm}
+\inputleannode{lem:finset-nonempty-of-two-le-lcm}
 
-\inputleannode{lem-finset-exists-one-lt-of-two-le-lcm}
+\inputleannode{lem:finset-exists-one-lt-of-two-le-lcm}
 
 The crucial bound relating sums of totients to $\psi$:
 
-\inputleannode{lem-sum-totient-ge-psi}
+\inputleannode{lem:sum-totient-ge-psi}
 
 \chapter{Integer Matrix Orders}
 
@@ -245,16 +245,16 @@ $$\Ord_N = \{ m \in \N^+ : \exists A \in M_N(\Z),\ \ord(A) = m \}$$
 
 The identity matrix has order 1, so $1 \in \Ord_N$ for all $N$:
 
-\inputleannode{lem-one-mem-orders}
+\inputleannode{lem:one-mem-orders}
 
 For $N \geq 1$, the matrix $-I$ has order 2:
 
-\inputleannode{lem-two-mem-orders}
+\inputleannode{lem:two-mem-orders}
 
 The set of achievable orders is monotone in dimension: if $m \in \Ord_N$ and $N \leq N'$,
 then $m \in \Ord_{N'}$ (by padding with identity blocks).
 
-\inputleannode{lem-orders-mono}
+\inputleannode{lem:orders-mono}
 
 \section{Block Diagonal Matrices}
 
@@ -262,42 +262,42 @@ Block diagonal matrices are essential for combining matrices with coprime orders
 If $A$ has order $m$ and $B$ has order $n$ with $\gcd(m, n) = 1$, then the block
 diagonal matrix $\begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}$ has order $mn$.
 
-\inputleannode{def-blockDiag2}
+\inputleannode{def:blockDiag2}
 
 Block diagonal respects the identity:
 
-\inputleannode{lem-blockDiag2-one}
+\inputleannode{lem:blockDiag2-one}
 
 Block diagonal respects multiplication:
 
-\inputleannode{lem-blockDiag2-mul}
+\inputleannode{lem:blockDiag2-mul}
 
 This gives us a monoid homomorphism structure:
 
-\inputleannode{def-blockDiag2-prodMonoidHom}
+\inputleannode{def:blockDiag2-prodMonoidHom}
 
 A block diagonal matrix equals the identity iff both blocks equal the identity:
 
-\inputleannode{lem-blockDiag2-eq-one}
+\inputleannode{lem:blockDiag2-eq-one}
 
 Powers distribute over block diagonal:
 
-\inputleannode{lem-blockDiag2-pow}
+\inputleannode{lem:blockDiag2-pow}
 
 \section{Order Results}
 
 The order of a block diagonal matrix is the lcm of the block orders:
 
-\inputleannode{thm-orderOf-blockDiag2}
+\inputleannode{thm:orderOf-blockDiag2}
 
 This gives us the key closure property: $\Ord_N$ is closed under lcm for dimensions
 that accommodate both factors.
 
-\inputleannode{lem-lcm-mem-orders}
+\inputleannode{lem:lcm-mem-orders}
 
 For coprime orders, the lcm equals the product, so we can combine coprime orders:
 
-\inputleannode{lem-mul-mem-orders-coprime}
+\inputleannode{lem:mul-mem-orders-coprime}
 
 \chapter{The Crystallographic Restriction}
 
@@ -313,33 +313,33 @@ factors to appear that their degrees sum to at least $\psi(m)$.
 
 The first lemma transfers polynomial divisibility to matrix powers:
 
-\inputleannode{lem-pow-eq-one-of-minpoly-dvd}
+\inputleannode{lem:pow-eq-one-of-minpoly-dvd}
 
 Conversely, if $A^m = I$ then the minimal polynomial divides $X^m - 1$:
 
-\inputleannode{lem-minpoly-dvd-X-pow-sub-one}
+\inputleannode{lem:minpoly-dvd-X-pow-sub-one}
 
 When cyclotomic polynomials divide a target, so does their product (since distinct
 cyclotomic polynomials are coprime over $\Q$):
 
-\inputleannode{lem-cyclotomic-finset-product-dvd}
+\inputleannode{lem:cyclotomic-finset-product-dvd}
 
 The minimal polynomial divides the product of just those cyclotomic polynomials that divide it:
 
-\inputleannode{lem-minpoly-dvd-prod-cyclotomic}
+\inputleannode{lem:minpoly-dvd-prod-cyclotomic}
 
 In fact, the minimal polynomial equals this product (by mutual divisibility of monic polynomials):
 
-\inputleannode{lem-minpoly-eq-prod-cyclotomic}
+\inputleannode{lem:minpoly-eq-prod-cyclotomic}
 
 The key constraint: if $\ord(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$, then $\lcm(S) = m$.
 Otherwise, $A^{\lcm(S)} = I$ with $\lcm(S) < m$, contradicting $\ord(A) = m$.
 
-\inputleannode{lem-cyclotomic-divisors-lcm-eq}
+\inputleannode{lem:cyclotomic-divisors-lcm-eq}
 
 The forward direction theorem:
 
-\inputleannode{thm-forward-direction}
+\inputleannode{thm:forward-direction}
 
 \section{Backward Direction}
 
@@ -350,36 +350,36 @@ block diagonal.
 First, we establish properties of permutation matrices, which provide an alternative construction
 for some orders:
 
-\inputleannode{lem-permMatrix-one}
+\inputleannode{lem:permMatrix-one}
 
-\inputleannode{lem-permMatrix-mul}
+\inputleannode{lem:permMatrix-mul}
 
-\inputleannode{lem-permMatrix-pow}
+\inputleannode{lem:permMatrix-pow}
 
-\inputleannode{lem-permMatrix-eq-one-iff}
+\inputleannode{lem:permMatrix-eq-one-iff}
 
-\inputleannode{lem-orderOf-permMatrix}
+\inputleannode{lem:orderOf-permMatrix}
 
-\inputleannode{lem-orderOf-finRotate}
+\inputleannode{lem:orderOf-finRotate}
 
-\inputleannode{lem-orderOf-permMatrix-finRotate}
+\inputleannode{lem:orderOf-permMatrix-finRotate}
 
 This gives us that $m \in \Ord_m$ for $m \geq 2$:
 
-\inputleannode{lem-mem-integerMatrixOrders-self}
+\inputleannode{lem:mem-integerMatrixOrders-self}
 
 For prime powers (excluding $2^1$), we use cyclotomic companion matrices:
 
-\inputleannode{thm-primePow-mem-integerMatrixOrders-psi}
+\inputleannode{thm:primePow-mem-integerMatrixOrders-psi}
 
 The general case uses strong induction, combining the prime power result with
 block diagonal constructions for composite $m$:
 
-\inputleannode{thm-mem-integerMatrixOrders-psi}
+\inputleannode{thm:mem-integerMatrixOrders-psi}
 
 The backward direction theorem:
 
-\inputleannode{thm-backward-direction}
+\inputleannode{thm:backward-direction}
 
 \chapter{Main Results}
 
@@ -390,21 +390,21 @@ the machinery developed in previous chapters.
 
 Several auxiliary results are needed for the final synthesis:
 
-\inputleannode{lem-sum-le-prod}
+\inputleannode{lem:sum-le-prod}
 
-\inputleannode{lem-lcm-factorization-le-sup}
+\inputleannode{lem:lcm-factorization-le-sup}
 
-\inputleannode{lem-primePow-mem-of-lcm-eq}
+\inputleannode{lem:primePow-mem-of-lcm-eq}
 
-\inputleannode{lem-totient-ge-two}
+\inputleannode{lem:totient-ge-two}
 
-\inputleannode{lem-prod-coprime-dvd}
+\inputleannode{lem:prod-coprime-dvd}
 
-\inputleannode{lem-totient-prod-coprime}
+\inputleannode{lem:totient-prod-coprime}
 
 A key lemma for the construction: if $A$ has odd order $m$, then $-A$ has order $2m$:
 
-\inputleannode{lem-orderOf-neg-of-odd-order}
+\inputleannode{lem:orderOf-neg-of-odd-order}
 
 \section{The Main Theorem}
 
@@ -412,7 +412,7 @@ We can now state and prove the crystallographic restriction theorem in its compl
 The theorem provides a necessary and sufficient condition for an order to be achievable
 by integer matrices of a given dimension.
 
-\inputleannode{thm-main-theorem}
+\inputleannode{thm:main-theorem}
 
 \section{Consequences}
 

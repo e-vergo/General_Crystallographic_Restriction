@@ -19,10 +19,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout General_Crystallographic_Restriction
+      - name: Checkout SBS-Test
         uses: actions/checkout@v4
         with:
-          path: General_Crystallographic_Restriction
+          path: SBS-Test
           fetch-depth: 0
 
       - name: Checkout Runway
@@ -43,8 +43,8 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            General_Crystallographic_Restriction/.lake/build/dressed
-            General_Crystallographic_Restriction/.lake/build/lib
+            SBS-Test/.lake/build/dressed
+            SBS-Test/.lake/build/lib
             Runway/.lake
             Dress/.lake
           key: dress-artifacts-${{ github.sha }}
@@ -62,29 +62,29 @@ jobs:
 
       - name: Generate site with Runway
         run: |
-          mkdir -p General_Crystallographic_Restriction/.lake/build/runway
+          mkdir -p SBS-Test/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
-          cat > General_Crystallographic_Restriction/runway-ci.json << EOF
+          cat > SBS-Test/runway-ci.json << EOF
           {
-            "title": "General Crystallographic Restriction",
-            "projectName": "Crystallographic",
-            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
-            "baseUrl": "/General_Crystallographic_Restriction/",
+            "title": "SBS-Test: Blueprint Feature Demonstration",
+            "projectName": "SBSTest",
+            "githubUrl": "https://github.com/e-vergo/SBS-Test",
+            "baseUrl": "/SBS-Test/",
             "docgen4Url": null,
-            "blueprintTexPath": "${{ github.workspace }}/General_Crystallographic_Restriction/blueprint/src/blueprint.tex",
+            "blueprintTexPath": "${{ github.workspace }}/SBS-Test/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
           cd Runway && lake exe runway \
-            --build-dir ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build \
-            --output ${{ github.workspace }}/General_Crystallographic_Restriction/.lake/build/runway \
+            --build-dir ${{ github.workspace }}/SBS-Test/.lake/build \
+            --output ${{ github.workspace }}/SBS-Test/.lake/build/runway \
             build \
-            ${{ github.workspace }}/General_Crystallographic_Restriction/runway-ci.json
+            ${{ github.workspace }}/SBS-Test/runway-ci.json
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: General_Crystallographic_Restriction/.lake/build/runway
+          path: SBS-Test/.lake/build/runway
 
       - name: Deploy to GitHub Pages
         id: deployment
