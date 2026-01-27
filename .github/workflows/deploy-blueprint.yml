@@ -1,4 +1,7 @@
 name: Deploy Blueprint
+# NOTE: This workflow requires build-cache-artifacts.yml to run first to seed
+# the dressed artifacts cache. Without cached artifacts, Runway has nothing to
+# render and the workflow will fail at the validation step.
 
 on:
   workflow_dispatch:
@@ -60,7 +63,15 @@ jobs:
           build: false
           lake-package-directory: Runway
 
+      - name: Validate dressed artifacts exist
+        run: |
+          if [ ! -d "project/.lake/build/dressed" ] || [ -z "$(ls -A project/.lake/build/dressed)" ]; then
+            echo "ERROR: Dressed artifacts not found. Run build-cache-artifacts.yml first."
+            exit 1
+          fi
+
       - name: Generate site with Runway
+        timeout-minutes: 10
         run: |
           mkdir -p project/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
