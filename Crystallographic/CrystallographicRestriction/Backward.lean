@@ -98,7 +98,7 @@ lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
     (σ : Equiv.Perm n) (k : ℕ) :
     (σ ^ k).permMatrix R = (σ.permMatrix R) ^ k := by
   induction k with
-  | zero => simp [permMatrix_one]
+  | zero => simp
   | succ k ih =>
     rw [pow_succ, pow_succ, permMatrix_mul, ih]
     -- Goal: σ.permMatrix * (σ.permMatrix)^k = (σ.permMatrix)^k * σ.permMatrix
