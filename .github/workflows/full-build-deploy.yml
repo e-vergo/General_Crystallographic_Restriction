@@ -27,11 +27,11 @@ jobs:
           docker-images: false
           swap-storage: false
 
-      # Check out SBS-Test and sibling repos (Dress, Runway)
-      - name: Checkout SBS-Test
+      # Check out project and sibling repos (Dress, Runway)
+      - name: Checkout project
         uses: actions/checkout@v4
         with:
-          path: SBS-Test
+          path: project
           fetch-depth: 0
 
       - name: Checkout Dress
@@ -76,7 +76,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: false
           build: false
-          lake-package-directory: SBS-Test
+          lake-package-directory: project
 
       - name: Restore toolchain cache
         uses: actions/cache/restore@v4
@@ -86,7 +86,7 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
           restore-keys: |
             toolchain-build-${{ runner.os }}-
 
@@ -94,11 +94,11 @@ jobs:
         id: mathlib-cache
         uses: actions/cache/restore@v4
         with:
-          path: SBS-Test/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+          path: project/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
 
       - name: Get mathlib (cache or build)
-        working-directory: SBS-Test
+        working-directory: project
         run: |
           if [ "${{ steps.mathlib-cache.outputs.cache-hit }}" == "true" ]; then
             echo "Mathlib restored from GitHub Actions cache"
@@ -126,8 +126,8 @@ jobs:
         working-directory: Runway
         run: lake build
 
-      - name: Build SBS-Test with dressed artifacts
-        working-directory: SBS-Test
+      - name: Build project with dressed artifacts
+        working-directory: project
         run: |
           mkdir -p .lake/build
           echo "1" > .lake/build/.dress
@@ -135,36 +135,36 @@ jobs:
           rm -f .lake/build/.dress
 
       - name: Build blueprint facet
-        working-directory: SBS-Test
+        working-directory: project
         run: lake build :blueprint
 
       - name: Generate dependency graph
-        working-directory: SBS-Test
+        working-directory: project
         run: |
           lake env ../Dress/.lake/build/bin/extract_blueprint graph \
             --build .lake/build \
-            SBSTest
+            Crystallographic
 
       - name: Generate site with Runway
         run: |
-          mkdir -p SBS-Test/.lake/build/runway
+          mkdir -p project/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
-          cat > SBS-Test/runway-ci.json << EOF
+          cat > project/runway-ci.json << EOF
           {
-            "title": "SBS-Test: Blueprint Feature Demonstration",
-            "projectName": "SBSTest",
-            "githubUrl": "https://github.com/e-vergo/SBS-Test",
-            "baseUrl": "/SBS-Test/",
+            "title": "General Crystallographic Restriction Theorem",
+            "projectName": "Crystallographic",
+            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
+            "baseUrl": "/General_Crystallographic_Restriction/",
             "docgen4Url": null,
-            "blueprintTexPath": "${{ github.workspace }}/SBS-Test/blueprint/src/blueprint.tex",
+            "blueprintTexPath": "${{ github.workspace }}/project/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
           cd Runway && lake exe runway \
-            --build-dir ${{ github.workspace }}/SBS-Test/.lake/build \
-            --output ${{ github.workspace }}/SBS-Test/.lake/build/runway \
+            --build-dir ${{ github.workspace }}/project/.lake/build \
+            --output ${{ github.workspace }}/project/.lake/build/runway \
             build \
-            ${{ github.workspace }}/SBS-Test/runway-ci.json
+            ${{ github.workspace }}/project/runway-ci.json
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4
@@ -174,19 +174,19 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
 
       - name: Save mathlib cache
         if: steps.mathlib-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: SBS-Test/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+          path: project/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: SBS-Test/.lake/build/runway
+          path: project/.lake/build/runway
 
   deploy:
     needs: build

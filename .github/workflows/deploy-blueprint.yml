@@ -19,10 +19,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout SBS-Test
+      - name: Checkout project
         uses: actions/checkout@v4
         with:
-          path: SBS-Test
+          path: project
           fetch-depth: 0
 
       - name: Checkout Runway
@@ -43,8 +43,8 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            SBS-Test/.lake/build/dressed
-            SBS-Test/.lake/build/lib
+            project/.lake/build/dressed
+            project/.lake/build/lib
             Runway/.lake
             Dress/.lake
           key: dress-artifacts-${{ github.sha }}
@@ -62,29 +62,29 @@ jobs:
 
       - name: Generate site with Runway
         run: |
-          mkdir -p SBS-Test/.lake/build/runway
+          mkdir -p project/.lake/build/runway
           # Create CI-compatible runway config with absolute paths
-          cat > SBS-Test/runway-ci.json << EOF
+          cat > project/runway-ci.json << EOF
           {
-            "title": "SBS-Test: Blueprint Feature Demonstration",
-            "projectName": "SBSTest",
-            "githubUrl": "https://github.com/e-vergo/SBS-Test",
-            "baseUrl": "/SBS-Test/",
+            "title": "General Crystallographic Restriction Theorem",
+            "projectName": "Crystallographic",
+            "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
+            "baseUrl": "/General_Crystallographic_Restriction/",
             "docgen4Url": null,
-            "blueprintTexPath": "${{ github.workspace }}/SBS-Test/blueprint/src/blueprint.tex",
+            "blueprintTexPath": "${{ github.workspace }}/project/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
           cd Runway && lake exe runway \
-            --build-dir ${{ github.workspace }}/SBS-Test/.lake/build \
-            --output ${{ github.workspace }}/SBS-Test/.lake/build/runway \
+            --build-dir ${{ github.workspace }}/project/.lake/build \
+            --output ${{ github.workspace }}/project/.lake/build/runway \
             build \
-            ${{ github.workspace }}/SBS-Test/runway-ci.json
+            ${{ github.workspace }}/project/runway-ci.json
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: SBS-Test/.lake/build/runway
+          path: project/.lake/build/runway
 
       - name: Deploy to GitHub Pages
         id: deployment

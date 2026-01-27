@@ -25,11 +25,11 @@ jobs:
           docker-images: false
           swap-storage: false
 
-      # Check out SBS-Test and sibling repos
-      - name: Checkout SBS-Test
+      # Check out project and sibling repos
+      - name: Checkout project
         uses: actions/checkout@v4
         with:
-          path: SBS-Test
+          path: project
           fetch-depth: 0
 
       - name: Checkout Dress
@@ -67,7 +67,7 @@ jobs:
           use-github-cache: false
           use-mathlib-cache: false
           build: false
-          lake-package-directory: SBS-Test
+          lake-package-directory: project
 
       - name: Restore toolchain cache
         uses: actions/cache/restore@v4
@@ -77,7 +77,7 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
           restore-keys: |
             toolchain-build-${{ runner.os }}-
 
@@ -85,11 +85,11 @@ jobs:
         id: mathlib-cache
         uses: actions/cache/restore@v4
         with:
-          path: SBS-Test/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+          path: project/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
 
       - name: Get mathlib (cache or build)
-        working-directory: SBS-Test
+        working-directory: project
         run: |
           if [ "${{ steps.mathlib-cache.outputs.cache-hit }}" == "true" ]; then
             echo "Mathlib restored from GitHub Actions cache"
@@ -114,8 +114,8 @@ jobs:
         working-directory: Runway
         run: lake build
 
-      - name: Build SBS-Test with dressed artifacts
-        working-directory: SBS-Test
+      - name: Build project with dressed artifacts
+        working-directory: project
         run: |
           mkdir -p .lake/build
           echo "1" > .lake/build/.dress
@@ -123,15 +123,15 @@ jobs:
           rm -f .lake/build/.dress
 
       - name: Build blueprint facet
-        working-directory: SBS-Test
+        working-directory: project
         run: lake build :blueprint
 
       - name: Generate dependency graph
-        working-directory: SBS-Test
+        working-directory: project
         run: |
           lake env ../Dress/.lake/build/bin/extract_blueprint graph \
             --build .lake/build \
-            SBSTest
+            Crystallographic
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4
@@ -141,21 +141,21 @@ jobs:
             Runway/.lake
             LeanArchitect/.lake
             subverso/.lake
-          key: toolchain-build-${{ runner.os }}-${{ hashFiles('SBS-Test/lean-toolchain') }}
+          key: toolchain-build-${{ runner.os }}-${{ hashFiles('project/lean-toolchain') }}
 
       - name: Save mathlib cache
         if: steps.mathlib-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: SBS-Test/.lake/packages/mathlib
-          key: mathlib-${{ runner.os }}-${{ hashFiles('SBS-Test/lake-manifest.json') }}
+          path: project/.lake/packages/mathlib
+          key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
 
       - name: Save dressed artifacts cache
         uses: actions/cache/save@v4
         with:
           path: |
-            SBS-Test/.lake/build/dressed
-            SBS-Test/.lake/build/lib
+            project/.lake/build/dressed
+            project/.lake/build/lib
             Runway/.lake
             Dress/.lake
           key: dress-artifacts-${{ github.sha }}
