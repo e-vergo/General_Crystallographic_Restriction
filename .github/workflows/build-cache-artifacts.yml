@@ -156,6 +156,4 @@ jobs:
           path: |
             project/.lake/build/dressed
             project/.lake/build/lib
-            Runway/.lake
-            Dress/.lake
           key: dress-artifacts-${{ github.sha }}
