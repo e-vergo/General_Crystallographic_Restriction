@@ -79,7 +79,7 @@ jobs:
           lake-package-directory: project
 
       - name: Restore toolchain cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             Dress/.lake
@@ -92,7 +92,7 @@ jobs:
 
       - name: Restore mathlib cache
         id: mathlib-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: project/.lake/packages/mathlib
           key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}
@@ -167,7 +167,7 @@ jobs:
             ${{ github.workspace }}/project/runway-ci.json
 
       - name: Save toolchain cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: |
             Dress/.lake
@@ -178,7 +178,7 @@ jobs:
 
       - name: Save mathlib cache
         if: steps.mathlib-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: project/.lake/packages/mathlib
           key: mathlib-${{ runner.os }}-${{ hashFiles('project/lake-manifest.json') }}

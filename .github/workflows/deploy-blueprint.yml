@@ -40,7 +40,7 @@ jobs:
           ref: main
 
       - name: Restore dressed artifacts cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             project/.lake/build/dressed

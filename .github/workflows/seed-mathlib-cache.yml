@@ -25,7 +25,7 @@ jobs:
           echo "oleans found"
 
       - name: Save mathlib cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .lake/packages/mathlib
           key: mathlib-${{ runner.os }}-${{ hashFiles('lake-manifest.json') }}
