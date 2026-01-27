@@ -49,6 +49,27 @@ jobs:
           path: dress-blueprint-action
           ref: main
 
+      - name: DEBUG - Verify checkouts
+        run: |
+          echo "=== Verifying all repos were checked out ==="
+          echo "Workspace contents:"
+          ls -la
+          echo ""
+          echo "project/:"
+          ls project/ | head -5
+          echo ""
+          echo "Runway/:"
+          ls Runway/ | head -5
+          echo ""
+          echo "Dress/:"
+          ls Dress/ | head -5 || echo "DRESS NOT FOUND!"
+          echo ""
+          echo "Dress/lakefile.lean exists?"
+          ls -la Dress/lakefile.lean || echo "LAKEFILE NOT FOUND!"
+          echo ""
+          echo "dress-blueprint-action/:"
+          ls dress-blueprint-action/ | head -5
+
       - name: Restore dressed artifacts cache
         uses: actions/cache/restore@v4
         with:
