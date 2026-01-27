@@ -73,8 +73,28 @@ jobs:
       - name: Generate site with Runway
         timeout-minutes: 10
         run: |
+          echo "=== DEBUG: Pre-flight checks ==="
+          echo "Workspace: ${{ github.workspace }}"
+
+          echo "=== DEBUG: Checking runway-ci.json will have valid paths ==="
+          echo "blueprintTexPath will be: ${{ github.workspace }}/project/blueprint/src/blueprint.tex"
+          ls -la "${{ github.workspace }}/project/blueprint/src/blueprint.tex" || echo "FATAL: blueprint.tex not found!"
+
+          echo "assetsDir will be: ${{ github.workspace }}/dress-blueprint-action/assets"
+          ls -la "${{ github.workspace }}/dress-blueprint-action/assets/" || echo "FATAL: assets dir not found!"
+
+          echo "=== DEBUG: Checking dressed artifacts ==="
+          echo "manifest.json:"
+          cat "${{ github.workspace }}/project/.lake/build/dressed/manifest.json" 2>/dev/null | head -50 || echo "manifest.json not found"
+
+          echo "dep-graph.json:"
+          head -20 "${{ github.workspace }}/project/.lake/build/dressed/dep-graph.json" 2>/dev/null || echo "dep-graph.json not found"
+
+          echo "decl.tex file count:"
+          find "${{ github.workspace }}/project/.lake/build/dressed" -name "decl.tex" 2>/dev/null | wc -l
+
+          echo "=== DEBUG: Creating runway-ci.json ==="
           mkdir -p project/.lake/build/runway
-          # Create CI-compatible runway config with absolute paths
           cat > project/runway-ci.json << EOF
           {
             "title": "General Crystallographic Restriction Theorem",
@@ -86,11 +106,16 @@ jobs:
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
           EOF
+          cat project/runway-ci.json
+
+          echo "=== DEBUG: Starting runway (output should show progress) ==="
           cd Runway && lake exe runway \
             --build-dir ${{ github.workspace }}/project/.lake/build \
             --output ${{ github.workspace }}/project/.lake/build/runway \
             build \
             ${{ github.workspace }}/project/runway-ci.json
+
+          echo "=== DEBUG: Runway completed successfully ==="
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
