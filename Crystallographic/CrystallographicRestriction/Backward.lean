@@ -429,7 +429,6 @@ The construction uses companion matrices of cyclotomic polynomials.
 -/
 @[blueprint "thm:backward-direction"
   (displayName := "Backward Direction")
-  (keyDeclaration := true)
   (message := "Explicit construction proves psi(m) <= N is sufficient")
   (statement := /-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
 
@@ -498,4 +497,3 @@ theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
           exact mem_integerMatrixOrders_of_psi_le_large m N hm_gt6 hpsi
 
 end Crystallographic
-

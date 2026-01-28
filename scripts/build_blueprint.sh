@@ -56,6 +56,78 @@ echo "Killing any existing servers on port 8000..."
 lsof -ti:8000 | xargs kill -9 2>/dev/null || true
 
 echo ""
+echo "=== Step 0: Syncing local repos to GitHub ==="
+
+# Function to commit and push a repo if it has changes
+sync_repo() {
+    local repo_path="$1"
+    local repo_name=$(basename "$repo_path")
+
+    echo "Checking $repo_name..."
+    cd "$repo_path"
+
+    # Check for uncommitted changes (staged or unstaged)
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "  Committing changes in $repo_name..."
+        git add -A
+        git commit -m "Auto-commit from build_blueprint.sh"
+        echo "  Pushing $repo_name to GitHub..."
+        git push
+    else
+        echo "  No changes in $repo_name"
+    fi
+
+    cd "$PROJECT_ROOT"
+}
+
+# Sync repos in dependency order (upstream first, then this project)
+sync_repo "$SUBVERSO_PATH"
+sync_repo "$LEAN_ARCHITECT_PATH"
+sync_repo "$DRESS_PATH"
+sync_repo "$RUNWAY_PATH"
+sync_repo "$PROJECT_ROOT"
+
+echo ""
+echo "=== Step 0b: Updating lake manifests ==="
+
+# Update LeanArchitect's SubVerso dependency
+echo "Updating LeanArchitect dependencies..."
+(cd "$LEAN_ARCHITECT_PATH" && lake update SubVerso 2>/dev/null || true)
+
+# Update Dress's LeanArchitect dependency
+echo "Updating Dress dependencies..."
+(cd "$DRESS_PATH" && lake update LeanArchitect 2>/dev/null || true)
+
+# Update Runway's Dress dependency
+echo "Updating Runway dependencies..."
+(cd "$RUNWAY_PATH" && lake update Dress 2>/dev/null || true)
+
+# Update GCR's Dress dependency
+echo "Updating project dependencies..."
+(cd "$PROJECT_ROOT" && lake update Dress 2>/dev/null || true)
+
+# Commit and push any manifest changes
+for repo_path in "$LEAN_ARCHITECT_PATH" "$DRESS_PATH" "$RUNWAY_PATH"; do
+    repo_name=$(basename "$repo_path")
+    cd "$repo_path"
+    if [[ -n $(git status --porcelain lake-manifest.json 2>/dev/null) ]]; then
+        echo "  Committing manifest update in $repo_name..."
+        git add lake-manifest.json
+        git commit -m "Update lake-manifest.json from build_blueprint.sh"
+        git push
+    fi
+    cd "$PROJECT_ROOT"
+done
+
+# Commit and push GCR manifest if changed
+if [[ -n $(git status --porcelain lake-manifest.json 2>/dev/null) ]]; then
+    echo "  Committing manifest update in project..."
+    git add lake-manifest.json
+    git commit -m "Update lake-manifest.json from build_blueprint.sh"
+    git push
+fi
+
+echo ""
 echo "=== Step 1: Building local dependency forks ==="
 
 # Build order: SubVerso -> LeanArchitect -> Dress -> Runway (respects dependency chain)

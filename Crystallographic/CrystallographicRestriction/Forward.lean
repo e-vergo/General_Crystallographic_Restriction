@@ -279,7 +279,6 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
 -/
 @[blueprint "thm:forward-direction"
   (displayName := "Forward Direction")
-  (keyDeclaration := true)
   (message := "Shows psi(m) <= N is necessary")
   (statement := /-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
 
@@ -355,4 +354,3 @@ theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
       _ ≤ N := hminpoly_deg_le
 
 end Crystallographic
-
