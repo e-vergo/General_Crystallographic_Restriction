@@ -37,7 +37,6 @@ Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both 
 and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 @[blueprint "thm:orderOf-blockDiag2"
   (displayName := "Block Diagonal Order")
-  (keyTheorem := true)
   (statement := /-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
   \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)
   (proof := /-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly

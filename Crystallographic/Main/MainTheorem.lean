@@ -47,6 +47,7 @@ crystallographic groups. -/
 @[blueprint "thm:main-theorem"
   (displayName := "Crystallographic Restriction Theorem")
   (keyTheorem := true)
+  (message := "Central result of the formalization")
   (statement := /-- \textbf{The Crystallographic Restriction Theorem:}
   An $N \times N$ integer matrix can have finite order $m$ if and only if $\psi(m) \leq N$.
 

@@ -203,7 +203,6 @@ lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatri
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
   (displayName := "Prime Power in Orders")
-  (keyTheorem := true)
   (statement := /-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
   -/)
   (proof := /-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
@@ -318,7 +317,6 @@ This theorem is used to complete the backward direction of the crystallographic
 restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
 @[blueprint "thm:mem-integerMatrixOrders-psi"
   (displayName := "Psi Characterizes Orders")
-  (keyTheorem := true)
   (statement := /-- For $m \geq 1$ with $m \neq 2$, we have $m \in \mathrm{Ord}_{\psi(m)}$.
   The construction achieves order $m$ using exactly $\psi(m)$ dimensions via block diagonal
   matrices of cyclotomic companion matrices.
@@ -432,6 +430,7 @@ The construction uses companion matrices of cyclotomic polynomials.
 @[blueprint "thm:backward-direction"
   (displayName := "Backward Direction")
   (keyTheorem := true)
+  (message := "Explicit construction proves psi(m) <= N is sufficient")
   (statement := /-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
 
   \textbf{Mathematical context:}

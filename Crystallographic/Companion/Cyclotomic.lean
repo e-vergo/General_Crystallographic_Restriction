@@ -110,7 +110,6 @@ lemma dvd_of_cyclotomic_dvd_X_pow_sub_one (m k : ℕ) (hm_pos : 0 < m)
 
 @[blueprint "thm:companion-cycl-order"
   (displayName := "Cyclotomic Companion Order")
-  (keyTheorem := true)
   (statement := /-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
   because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
   for $d < m$, then $\Phi_m$ would divide $X^d - 1$, contradicting that primitive $m$-th
@@ -147,7 +146,6 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
 
 @[blueprint "thm:companion-cycl-mem"
   (displayName := "Cyclotomic Companion Membership")
-  (keyTheorem := true)
   (statement := /-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
   $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
   with integer entries, and has order exactly $m$ by \texttt{companion\_cyclotomic\_orderOf}.
@@ -164,7 +162,6 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
 
 @[blueprint "thm:mem-orders-totient"
   (displayName := "Totient in Matrix Orders")
-  (keyTheorem := true)
   (statement := /-- For $m \geq 2$, $m \in \mathrm{Ord}_{\varphi(m)}$. This is the key
   existence result: for every $m \geq 2$, there exists an integer matrix of dimension
   $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.

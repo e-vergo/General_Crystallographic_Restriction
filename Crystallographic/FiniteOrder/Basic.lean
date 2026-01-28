@@ -45,6 +45,7 @@ An integer `m` is in this set if there exists an N×N integer matrix `A` such th
 @[blueprint
   "integerMatrixOrders-def"
   (displayName := "Integer Matrix Orders Definition")
+  (misc := "The set Ord_N captures all achievable orders in dimension N")
   (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
   with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
   $A$ with order $m$. -/)]
@@ -193,6 +194,7 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
 @[blueprint "def:blockDiag2"
   (displayName := "Block Diagonal Matrix")
+  (misc := "Block diagonal construction enables combining orders via lcm")
   (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
 def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :

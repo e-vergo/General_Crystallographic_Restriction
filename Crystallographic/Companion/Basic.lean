@@ -60,6 +60,7 @@ coefficients in the last column.
 @[blueprint
   "companion-def"
   (displayName := "Companion Matrix Definition")
+  (misc := "Companion matrices provide canonical realizations of polynomials")
   (statement := /-- The companion matrix $C(p)$ of a monic polynomial
   $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
   on the subdiagonal and $-a_i$ in the last column:
@@ -511,7 +512,6 @@ column gives a recurrence matching the polynomial structure.
 @[blueprint
   "thm:companion-charpoly"
   (displayName := "Companion Characteristic Polynomial")
-  (keyTheorem := true)
   (statement := /-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
   $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
   along the first column. The key insight is that the minor structure reduces to smaller
@@ -564,7 +564,6 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
 
 @[blueprint "thm:companion-pow-dvd"
   (displayName := "Companion Power Divisibility")
-  (keyTheorem := true)
   (statement := /-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
   $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
   $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0$, so $C(p)^m - I = 0$.

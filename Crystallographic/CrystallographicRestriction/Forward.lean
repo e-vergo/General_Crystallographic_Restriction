@@ -280,6 +280,7 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
 @[blueprint "thm:forward-direction"
   (displayName := "Forward Direction")
   (keyTheorem := true)
+  (message := "Shows psi(m) <= N is necessary")
   (statement := /-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
 
   \textbf{Mathematical context:}
