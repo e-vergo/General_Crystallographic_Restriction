@@ -76,6 +76,7 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
 @[blueprint
   "psi-def"
   (displayName := "Psi Function Definition")
+  (keyDeclaration := true)
   (message := "The psi function characterizes achievable orders")
   (statement := /-- The psi function $\psi(m) = \sum_{p^k \| m} \psi_{\text{pp}}(p, k)$,
   which gives the minimum dimension $N$ such that an $N \times N$ integer matrix
