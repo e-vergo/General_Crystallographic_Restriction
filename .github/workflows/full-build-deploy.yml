@@ -169,7 +169,11 @@ jobs:
             "baseUrl": "/General_Crystallographic_Restriction/",
             "docgen4Url": "docs/",
             "blueprintTexPath": "${{ github.workspace }}/GCR/blueprint/src/blueprint.tex",
-            "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
+            "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets",
+            "paperTexPath": null,
+            "paperTitle": "The Crystallographic Restriction Theorem: A Formalized Proof in Lean 4",
+            "paperAuthors": ["J. Kuzmanovich", "A. Pavlichenkov", "E. Vergo"],
+            "paperAbstract": "We present a complete formalization in Lean 4 of the crystallographic restriction theorem."
           }
           EOF
           cd Runway && lake exe runway \
