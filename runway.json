@@ -5,7 +5,7 @@
   "baseUrl": "/General_Crystallographic_Restriction/",
   "docgen4Url": "docs/",
   "blueprintTexPath": "blueprint/src/blueprint.tex",
-  "assetsDir": null,
+  "assetsDir": "../dress-blueprint-action/assets",
   "paperTexPath": "blueprint/src/paper.tex",
   "paperTitle": "The Crystallographic Restriction Theorem: A Formalized Proof in Lean 4",
   "paperAuthors": ["J. Kuzmanovich", "A. Pavlichenkov", "E. Vergo"],
