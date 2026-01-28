@@ -145,6 +145,18 @@ jobs:
             --build .lake/build \
             Crystallographic
 
+      - name: Download pre-generated DocGen4 documentation
+        run: |
+          # Download docs from docs-static branch (pre-generated to save CI time)
+          mkdir -p GCR/.lake/build/doc
+          cd GCR/.lake/build/doc
+          git init
+          git remote add origin https://github.com/e-vergo/General_Crystallographic_Restriction.git
+          git fetch origin docs-static --depth=1
+          git checkout FETCH_HEAD
+          rm -rf .git
+          echo "Downloaded $(find . -name '*.html' | wc -l) HTML files from docs-static branch"
+
       - name: Generate site with Runway
         run: |
           mkdir -p GCR/.lake/build/runway
@@ -155,7 +167,7 @@ jobs:
             "projectName": "Crystallographic",
             "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
             "baseUrl": "/General_Crystallographic_Restriction/",
-            "docgen4Url": null,
+            "docgen4Url": "docs/",
             "blueprintTexPath": "${{ github.workspace }}/GCR/blueprint/src/blueprint.tex",
             "assetsDir": "${{ github.workspace }}/dress-blueprint-action/assets"
           }
@@ -165,6 +177,12 @@ jobs:
             --output ${{ github.workspace }}/GCR/.lake/build/runway \
             build \
             ${{ github.workspace }}/GCR/runway-ci.json
+
+      - name: Copy DocGen4 to output
+        run: |
+          # Copy docgen4 output as 'docs' subdirectory of the site
+          cp -r GCR/.lake/build/doc GCR/.lake/build/runway/docs
+          echo "Copied DocGen4 docs to runway/docs/"
 
       - name: Save toolchain cache
         uses: actions/cache/save@v4

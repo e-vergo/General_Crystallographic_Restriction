@@ -16,5 +16,11 @@ name = "Dress"
 git = "https://github.com/e-vergo/Dress.git"
 rev = "main"
 
+[[require]]
+scope = "dev"
+name = "«doc-gen4»"
+git = "https://github.com/leanprover/doc-gen4.git"
+rev = "01e1433"  # v4.27.0 compatible
+
 [[lean_lib]]
 name = "Crystallographic"
