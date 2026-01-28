@@ -6,7 +6,7 @@
   "docgen4Url": null,
   "blueprintTexPath": "/Users/eric/GitHub/Side-By-Side-Blueprint/General_Crystallographic_Restriction/blueprint/src/blueprint.tex",
   "assetsDir": "/Users/eric/GitHub/Side-By-Side-Blueprint/dress-blueprint-action/assets",
-  "paperTexPath": null,
+  "paperTexPath": "/Users/eric/GitHub/Side-By-Side-Blueprint/General_Crystallographic_Restriction/blueprint/src/paper.tex",
   "paperTitle": "The Crystallographic Restriction Theorem: A Formalized Proof in Lean 4",
   "paperAuthors": ["J. Kuzmanovich", "A. Pavlichenkov", "E. Vergo"],
   "paperAbstract": "We present a complete formalization in Lean 4 of the crystallographic restriction theorem, which characterizes the possible finite orders of integer matrices. The theorem states that an N×N integer matrix can have finite multiplicative order m if and only if ψ(m) ≤ N, where ψ is a specific arithmetic function. This result has classical applications to crystallography, explaining why crystals exhibit only 2-, 3-, 4-, and 6-fold rotational symmetries."
