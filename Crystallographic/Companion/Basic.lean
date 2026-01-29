@@ -60,7 +60,6 @@ coefficients in the last column.
 @[blueprint
   "companion-def"
   (title := "Companion Matrix Definition")
-  (keyDeclaration := true)
   (message := "Central construction for realizing polynomial orders as matrix orders")
   (misc := "Companion matrices provide canonical realizations of polynomials")
   (statement := /-- The companion matrix $C(p)$ of a monic polynomial
@@ -593,4 +592,3 @@ theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDeg
   exact sub_eq_zero.mp hXm1_zero
 
 end Crystallographic
-
