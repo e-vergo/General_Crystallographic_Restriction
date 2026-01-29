@@ -60,6 +60,8 @@ coefficients in the last column.
 @[blueprint
   "companion-def"
   (title := "Companion Matrix Definition")
+  (keyDeclaration := true)
+  (message := "Central construction for realizing polynomial orders as matrix orders")
   (misc := "Companion matrices provide canonical realizations of polynomials")
   (statement := /-- The companion matrix $C(p)$ of a monic polynomial
   $p = X^n + a_{n-1}X^{n-1} + \cdots + a_0$ is the $n \times n$ matrix with $1$s
