@@ -24,61 +24,6 @@
 \begin{document}
 \maketitle
 
-\chapter{Introduction}
-
-This document presents a complete formalization of the \emph{crystallographic restriction theorem},
-which provides a precise characterization of which rotation orders are achievable by integer matrices
-in each dimension. The result connects linear algebra over the integers with number-theoretic
-properties of Euler's totient function.
-
-\section{The Main Result}
-
-The crystallographic restriction theorem answers a fundamental question: given a positive integer $N$,
-which finite orders $m$ can be realized by some $N \times N$ matrix with integer entries? Equivalently,
-for which $m$ does there exist $A \in GL_N(\Z)$ satisfying $A^m = I$ but $A^k \neq I$ for
-$0 < k < m$?
-
-The answer involves a function $\psi : \N \to \N$ that we will define precisely in Chapter~3.
-Informally, $\psi(m)$ measures the ``dimensional cost'' of achieving order $m$:
-\begin{itemize}
-\item $\psi(1) = \psi(2) = 0$ (orders 1 and 2 are ``free'' --- the identity and $-I$ work in any dimension)
-\item For other $m$, $\psi(m)$ is the sum of $\varphi(p^k)$ over prime power factors $p^k \| m$,
-      excluding the contribution from $2^1$
-\end{itemize}
-
-The main theorem states that an $N \times N$ integer matrix can have finite order $m$ if and only if
-$\psi(m) \leq N$. This elegant characterization reduces the geometric question of matrix orders
-to a purely arithmetic condition.
-
-\section{Historical Context and Motivation}
-
-The name ``crystallographic restriction'' originates from crystallography, where the theorem
-constrains the possible rotational symmetries of crystal lattices. In two and three dimensions,
-this gives the classical result that crystal lattices can only have 2-fold, 3-fold, 4-fold, or
-6-fold rotational symmetry --- never 5-fold or 7-fold.
-
-From a pure mathematics perspective, the theorem characterizes finite cyclic subgroups of
-$GL_N(\Z)$. Minkowski proved the remarkable result that $GL_N(\Z)$ contains only finitely
-many isomorphism classes of finite subgroups. Our theorem provides the complete answer for
-cyclic subgroups: the possible orders are precisely those $m$ with $\psi(m) \leq N$.
-
-\section{Proof Strategy}
-
-The proof proceeds in two directions:
-
-\textbf{Forward direction:} If an $N \times N$ integer matrix $A$ has order $m$, we must show
-$\psi(m) \leq N$. The key insight is that $A^m = I$ implies the minimal polynomial of $A$
-(viewed over $\Q$) divides $X^m - 1$. Since cyclotomic polynomials are irreducible over $\Q$
-and pairwise coprime, the minimal polynomial factors as a product of cyclotomic polynomials
-$\Phi_d$ for various divisors $d$ of $m$. The constraint that $\ord(A) = m$ (not some smaller
-divisor) forces the lcm of these $d$ values to equal $m$, which leads to the bound $\psi(m) \leq N$.
-
-\textbf{Backward direction:} If $\psi(m) \leq N$, we construct an explicit $N \times N$ integer
-matrix with order $m$. The construction uses companion matrices of cyclotomic polynomials
-combined via block diagonal. For each prime power factor $p^k$ of $m$ (with $p \neq 2$ or $k \geq 2$),
-the companion matrix of $\Phi_{p^k}$ contributes order $p^k$ in dimension $\varphi(p^k)$.
-Block diagonal combination gives order $\lcm = m$ in dimension $\sum \varphi(p^k) = \psi(m)$.
-
 \chapter{Companion Matrices}
 
 Companion matrices provide a systematic way to construct matrices with prescribed characteristic
