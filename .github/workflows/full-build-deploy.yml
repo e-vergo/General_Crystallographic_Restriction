@@ -196,10 +196,10 @@ jobs:
             Crystallographic
 
           # Verify manifest was generated
-          if [ -f ".lake/build/manifest.json" ]; then
+          if [ -f ".lake/build/dressed/manifest.json" ]; then
             echo "Manifest generated successfully"
           else
-            echo "::error::manifest.json not found"
+            echo "::error::manifest.json not found at .lake/build/dressed/manifest.json"
             exit 1
           fi
 
