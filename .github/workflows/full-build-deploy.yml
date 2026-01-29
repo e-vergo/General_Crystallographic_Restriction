@@ -97,19 +97,22 @@ jobs:
       # ========================================
       # CACHE: Restore toolchain and mathlib
       # ========================================
-      - name: Restore toolchain cache
-        id: toolchain-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            subverso/.lake
-            LeanArchitect/.lake
-            Dress/.lake
-            Runway/.lake
-          key: toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('GCR/lean-toolchain') }}
-          restore-keys: |
-            toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-
-            toolchain-build-${{ runner.os }}-
+      # NOTE: Toolchain cache disabled - it was restoring old binaries and ignoring code fixes.
+      # Each build now compiles from source (~5 min overhead but guarantees correctness).
+      # TODO: Re-enable with proper cache invalidation based on source file hashes.
+      # - name: Restore toolchain cache
+      #   id: toolchain-cache
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: |
+      #       subverso/.lake
+      #       LeanArchitect/.lake
+      #       Dress/.lake
+      #       Runway/.lake
+      #     key: toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('GCR/lean-toolchain') }}
+      #     restore-keys: |
+      #       toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-
+      #       toolchain-build-${{ runner.os }}-
 
       - name: Restore mathlib cache
         id: mathlib-cache
@@ -297,16 +300,17 @@ jobs:
       # ========================================
       # CACHE: Save for future builds
       # ========================================
-      - name: Save toolchain cache
-        if: steps.toolchain-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            subverso/.lake
-            LeanArchitect/.lake
-            Dress/.lake
-            Runway/.lake
-          key: toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('GCR/lean-toolchain') }}
+      # NOTE: Toolchain cache save disabled (restore also disabled above)
+      # - name: Save toolchain cache
+      #   if: steps.toolchain-cache.outputs.cache-hit != 'true'
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: |
+      #       subverso/.lake
+      #       LeanArchitect/.lake
+      #       Dress/.lake
+      #       Runway/.lake
+      #     key: toolchain-build-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('GCR/lean-toolchain') }}
 
       - name: Save mathlib cache
         if: steps.mathlib-cache.outputs.cache-hit != 'true'
