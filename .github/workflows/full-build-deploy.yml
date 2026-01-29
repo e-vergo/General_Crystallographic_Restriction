@@ -79,13 +79,15 @@ jobs:
       # TOOLCHAIN: Install Lean and LaTeX
       # ========================================
       - name: Install elan
-        uses: leanprover/lean-action@c544e89643240c6b398f14a431bcdc6309e36b3e
-        with:
-          auto-config: false
-          use-github-cache: false
-          use-mathlib-cache: false
-          build: false
-          lake-package-directory: GCR
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+
+      - name: Install Lean toolchain
+        working-directory: GCR
+        run: |
+          source $HOME/.elan/env
+          lake --version
 
       - name: Install LaTeX
         run: |
