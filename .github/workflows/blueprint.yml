@@ -1,4 +1,4 @@
-name: Blueprint
+name: Full Blueprint Build and Deploy
 
 on:
   push:
