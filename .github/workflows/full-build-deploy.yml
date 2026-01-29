@@ -276,7 +276,7 @@ jobs:
           ls -la GCR/.lake/build/runway/
           echo ""
           echo "Key files:"
-          for f in index.html dep_graph.html paper.html; do
+          for f in index.html dep_graph.html paper.html paper.pdf pdf.html; do
             if [ -f "GCR/.lake/build/runway/$f" ]; then
               echo "  [OK] $f"
             else
