@@ -2,7 +2,6 @@
 
 [![Blueprint](https://img.shields.io/badge/Blueprint-Live-blue)](https://e-vergo.github.io/General_Crystallographic_Restriction/blueprint/)
 [![Paper](https://img.shields.io/badge/Paper-Live-green)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper/)
-[![Build](https://github.com/e-vergo/General_Crystallographic_Restriction/actions/workflows/blueprint.yml/badge.svg)](https://github.com/e-vergo/General_Crystallographic_Restriction/actions)
 
 > **Side-by-Side Blueprint Example Project** — This formalization demonstrates the [Side-by-Side Blueprint](https://github.com/e-vergo/Dress) toolchain for interactive proof documentation.
 
