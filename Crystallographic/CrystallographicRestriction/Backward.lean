@@ -66,7 +66,7 @@ namespace Equiv.Perm
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
 @[simp, blueprint "lem:permMatrix-one"
-  (displayName := "Permutation Matrix Identity Base")
+  (title := "Permutation Matrix Identity Base")
   (statement := /-- The permutation matrix of the identity is the identity matrix: $P_{\mathrm{id}} = I$. -/)
   (proof := /-- Direct computation using $\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}$ and
   $\mathrm{toMatrix}(\mathrm{refl}) = I$. -/)]
@@ -76,7 +76,7 @@ lemma permMatrix_one {n : Type*} [DecidableEq n] {R : Type*} [Zero R] [One R] :
 
 /-- Permutation matrices compose: (σ * τ).permMatrix = τ.permMatrix * σ.permMatrix -/
 @[blueprint "lem:permMatrix-mul"
-  (displayName := "Permutation Matrix Multiplication")
+  (title := "Permutation Matrix Multiplication")
   (statement := /-- Permutation matrices satisfy $P_{\sigma \cdot \tau} = P_\tau \cdot P_\sigma$
   (contravariant homomorphism). -/)
   (proof := /-- Follows from $\mathrm{toPEquiv}(\sigma \circ \tau) = \mathrm{toPEquiv}(\tau) \cdot \mathrm{toPEquiv}(\sigma)$
@@ -89,7 +89,7 @@ lemma permMatrix_mul {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
 
 /-- Permutation matrices power correctly: (σ^k).permMatrix = (σ.permMatrix)^k -/
 @[blueprint "lem:permMatrix-pow"
-  (displayName := "Permutation Matrix Power")
+  (title := "Permutation Matrix Power")
   (statement := /-- Powers of permutation matrices satisfy $P_{\sigma^k} = P_\sigma^k$.
   \uses{lem:permMatrix-one, lem:permMatrix-mul} -/)
   (proof := /-- By induction on $k$: the base case uses $P_{\mathrm{id}} = I$, and the inductive
@@ -107,7 +107,7 @@ lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
 
 /-- Permutation matrix is identity iff permutation is identity. -/
 @[blueprint "lem:permMatrix-eq-one-iff"
-  (displayName := "Permutation Matrix Identity")
+  (title := "Permutation Matrix Identity")
   (statement := /-- $P_\sigma = I$ if and only if $\sigma = \mathrm{id}$.
   \uses{lem:permMatrix-one} -/)
   (proof := /-- The forward direction shows that if $P_\sigma = I$ then for each $x$, the entry
@@ -136,7 +136,7 @@ lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} 
 
 /-- Order of permutation matrix equals order of permutation. -/
 @[blueprint "lem:orderOf-permMatrix"
-  (displayName := "Permutation Matrix Order")
+  (title := "Permutation Matrix Order")
   (statement := /-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/)
   (proof := /-- Since $P_{\sigma^k} = P_\sigma^k$ and $P_\sigma = I \iff \sigma = \mathrm{id}$, the order
   of $P_\sigma$ equals the order of $\sigma$. The key is that the permutation matrix map preserves
@@ -163,7 +163,7 @@ lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Se
 
 /-- The finRotate permutation has order n for n at least 2. -/
 @[blueprint "lem:orderOf-finRotate"
-  (displayName := "Rotation Order")
+  (title := "Rotation Order")
   (statement := /-- The order of $\mathrm{finRotate}(n)$ equals $n$. -/)
   (proof := /-- The $\mathrm{finRotate}(n)$ permutation is an $n$-cycle with full support $\mathrm{Fin}\ n$.
   By the cycle order theorem, the order of a cycle equals its length, which is $n$. -/)]
@@ -175,7 +175,7 @@ lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := 
 
 /-- finRotate permutation matrix has order n for n >= 2. -/
 @[blueprint "lem:orderOf-permMatrix-finRotate"
-  (displayName := "Rotation Permutation Order")
+  (title := "Rotation Permutation Order")
   (statement := /-- The permutation matrix of $\mathrm{finRotate}(n)$ has order $n$ over $\mathbb{Z}$.
   \uses{lem:orderOf-permMatrix, lem:orderOf-finRotate} -/)
   (proof := /-- Combines the order-preservation property $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$
@@ -188,7 +188,7 @@ end Equiv.Perm
 
 /-- Order n is achievable by an n x n integer matrix for n at least 2. -/
 @[blueprint "lem:mem-integerMatrixOrders-self"
-  (displayName := "Self in Matrix Orders")
+  (title := "Self in Matrix Orders")
   (statement := /-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/)
   (proof := /-- The permutation matrix $P_{\mathrm{finRotate}(m)}$ is an $m \times m$ integer matrix
   with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/)]
@@ -202,7 +202,7 @@ lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatri
 
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
-  (displayName := "Prime Power in Orders")
+  (title := "Prime Power in Orders")
   (statement := /-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
   -/)
   (proof := /-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
@@ -316,7 +316,7 @@ handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 < N`.
 This theorem is used to complete the backward direction of the crystallographic
 restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
 @[blueprint "thm:mem-integerMatrixOrders-psi"
-  (displayName := "Psi Characterizes Orders")
+  (title := "Psi Characterizes Orders")
   (statement := /-- For $m \geq 1$ with $m \neq 2$, we have $m \in \mathrm{Ord}_{\psi(m)}$.
   The construction achieves order $m$ using exactly $\psi(m)$ dimensions via block diagonal
   matrices of cyclotomic companion matrices.
@@ -428,7 +428,7 @@ The construction uses companion matrices of cyclotomic polynomials.
 5. Pad with identity blocks to reach size N x N
 -/
 @[blueprint "thm:backward-direction"
-  (displayName := "Backward Direction")
+  (title := "Backward Direction")
   (message := "Explicit construction proves psi(m) <= N is sufficient")
   (statement := /-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
 

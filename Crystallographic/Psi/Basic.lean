@@ -50,7 +50,7 @@ open Nat Finsupp
     Returns 0 if k = 0, returns 0 if p = 2 and k = 1, otherwise returns phi(p^k). -/
 @[blueprint
   "psiPrimePow-def"
-  (displayName := "Psi Prime Power Definition")
+  (title := "Psi Prime Power Definition")
   (statement := /-- The function $\psi_{\text{pp}}(p, k)$ computes the contribution of a single
   prime power $p^k$ to $\psi$. Returns $0$ if $k = 0$ or if $p = 2$ and $k = 1$,
   otherwise returns $\varphi(p^k)$.
@@ -75,7 +75,7 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
     psi(m) = sum_i (if p_i = 2 and k_i = 1 then 0 else phi(p_i^{k_i})) -/
 @[blueprint
   "psi-def"
-  (displayName := "Psi Function Definition")
+  (title := "Psi Function Definition")
   (keyDeclaration := true)
   (message := "The psi function characterizes achievable orders")
   (statement := /-- The psi function $\psi(m) = \sum_{p^k \| m} \psi_{\text{pp}}(p, k)$,
@@ -110,7 +110,7 @@ theorem psi_two : psi 2 = 0 := by
 
 /-- `psi` of a prime power p^k equals phi(p^k), except `psi 2 = 0` -/
 @[blueprint "lem:psi-prime-pow"
-  (displayName := "Psi of Prime Power")
+  (title := "Psi of Prime Power")
   (statement := /-- For prime $p$ and $k > 0$: $\psi(p^k) = \varphi(p^k)$ unless $p = 2, k = 1$.
 
   For a prime power $p^k$, the factorization has a single term, so
@@ -167,7 +167,7 @@ theorem psi_nine : psi 9 = 6 := by simpa using psi_odd_prime_pow 3 2 Nat.prime_t
 
 If gcd(m, n) = 1, then m and n share no common prime factors. -/
 @[blueprint "lem:factorization-disjoint"
-  (displayName := "Factorization Support Disjoint")
+  (title := "Factorization Support Disjoint")
   (statement := /-- Coprime numbers have disjoint prime factorization supports. -/)
   (proof := /-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/)]
 lemma factorization_support_disjoint {m n : ℕ} (h : m.Coprime n) :
@@ -186,7 +186,7 @@ For coprime m and n, `psi (m * n) = psi m + psi n`. This follows from the
 factorization m * n = prod(p_i^{k_i}) * prod(q_j^{l_j}) where the prime
 factors of m and n are disjoint. -/
 @[blueprint "lem:psi-coprime-add"
-  (displayName := "Psi Coprime Additivity")
+  (title := "Psi Coprime Additivity")
   (statement := /-- $\psi(mn) = \psi(m) + \psi(n)$ for coprime $m, n$.
 
   When $\gcd(m, n) = 1$, the prime factorizations of $m$ and $n$ share no common primes, so
@@ -238,7 +238,7 @@ theorem psi_twelve : psi 12 = 4 := by
 
 If p^k divides m exactly, then `psi m ≥ psiPrimePow p k`. -/
 @[blueprint "lem:psi-ge-psiPrimePow"
-  (displayName := "Psi Lower Bound by Prime Power")
+  (title := "Psi Lower Bound by Prime Power")
   (statement := /-- $\psi(m) \geq \psi_{\mathrm{pp}}(p, v_p(m))$ for each prime $p \mid m$. -/)
   (proof := /-- The sum $\psi(m)$ includes the term $\psi_{\mathrm{pp}}(p, v_p(m))$, and all terms are non-negative. -/)]
 lemma psi_ge_psiPrimePow_of_mem_support {m p : ℕ}

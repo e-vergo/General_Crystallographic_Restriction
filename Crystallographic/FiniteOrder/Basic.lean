@@ -44,7 +44,7 @@ An integer `m` is in this set if there exists an N×N integer matrix `A` such th
 `orderOf A = m` and `m > 0` (equivalently, `A` has finite order). -/
 @[blueprint
   "integerMatrixOrders-def"
-  (displayName := "Integer Matrix Orders Definition")
+  (title := "Integer Matrix Orders Definition")
   (misc := "The set Ord_N captures all achievable orders in dimension N")
   (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
   with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
@@ -62,7 +62,7 @@ lemma Matrix.map_algebraMap_int_injective (N : ℕ) :
 
 /-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
 @[blueprint "lem:one-mem-orders"
-  (displayName := "One in Matrix Orders")
+  (title := "One in Matrix Orders")
   (statement := /-- Order $1$ is achievable in any dimension. -/)
   (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
 lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
@@ -78,7 +78,7 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
 
 /-- For N ≥ 1, the negation of the identity matrix has order 2. -/
 @[blueprint "lem:two-mem-orders"
-  (displayName := "Two in Matrix Orders")
+  (title := "Two in Matrix Orders")
   (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
   (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
   so it has order $2$. -/)]
@@ -162,7 +162,7 @@ for N x N matrices.
 
 The construction pads the M x M matrix with an identity block in the lower-right corner. -/
 @[blueprint "lem:orders-mono"
-  (displayName := "Matrix Orders Monotonicity")
+  (title := "Matrix Orders Monotonicity")
   (statement := /-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
   \uses{integerMatrixOrders-def} -/)
   (proof := /-- Given $M \leq N$ and $A \in M_M(\mathbb{Z})$ with order $m$, embed $A$ as the
@@ -193,7 +193,7 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
 
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
 @[blueprint "def:blockDiag2"
-  (displayName := "Block Diagonal Matrix")
+  (title := "Block Diagonal Matrix")
   (misc := "Block diagonal construction enables combining orders via lcm")
   (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
 def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
@@ -203,7 +203,7 @@ def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
 
 /-- Block diagonal of identity matrices is the identity. -/
 @[simp, blueprint "lem:blockDiag2-one"
-  (displayName := "Block Diagonal Identity")
+  (title := "Block Diagonal Identity")
   (statement := /-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/)
   (proof := /-- Immediate from the definition of block diagonal and the identity matrix. -/)]
 lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
@@ -213,7 +213,7 @@ lemma blockDiag2_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
 
 /-- Block diagonal preserves multiplication. -/
 @[simp, blueprint "lem:blockDiag2-mul"
-  (displayName := "Block Diagonal Multiplication")
+  (title := "Block Diagonal Multiplication")
   (statement := /-- $\mathrm{diag}(AA', BB') = \mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B')$.
   \uses{def:blockDiag2} -/)
   (proof := /-- Block multiplication respects the diagonal structure since off-diagonal blocks
@@ -226,7 +226,7 @@ lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
 
 /-- The monoid homomorphism that embeds a pair of block-diagonal matrices into a larger matrix. -/
 @[blueprint "def:blockDiag2-prodMonoidHom"
-  (displayName := "Block Diagonal Homomorphism")
+  (title := "Block Diagonal Homomorphism")
   (statement := /-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
   \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/)]
 def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
@@ -238,7 +238,7 @@ def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
 
 /-- Block diagonal is one iff both components are one. -/
 @[blueprint "lem:blockDiag2-eq-one"
-  (displayName := "Block Diagonal Identity Criterion")
+  (title := "Block Diagonal Identity Criterion")
   (statement := /-- $\mathrm{diag}(A, B) = 1 \iff A = 1 \land B = 1$. \uses{def:blockDiag2} -/)
   (proof := /-- The block diagonal matrix equals $I$ iff both diagonal blocks equal their
   respective identities. -/)]
@@ -253,7 +253,7 @@ lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
 
 (blockDiag2 A B)^k = blockDiag2 (A^k) (B^k). -/
 @[blueprint "lem:blockDiag2-pow"
-  (displayName := "Block Diagonal Power")
+  (title := "Block Diagonal Power")
   (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)
   (proof := /-- By induction on $n$: the block structure is preserved under multiplication, and
   $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')$. -/)]

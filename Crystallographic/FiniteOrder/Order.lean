@@ -36,7 +36,7 @@ open Matrix
 Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
 and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 @[blueprint "thm:orderOf-blockDiag2"
-  (displayName := "Block Diagonal Order")
+  (title := "Block Diagonal Order")
   (statement := /-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
   \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)
   (proof := /-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
@@ -53,7 +53,7 @@ theorem orderOf_blockDiag2 {M K : ℕ}
     If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
     then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
 @[blueprint "lem:lcm-mem-orders"
-  (displayName := "LCM in Matrix Orders")
+  (title := "LCM in Matrix Orders")
   (statement := /-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
   \uses{thm:orderOf-blockDiag2} -/)
   (proof := /-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
@@ -69,7 +69,7 @@ lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
 /-- For coprime m₁, m₂, if m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
     then m₁ * m₂ ∈ integerMatrixOrders (M + K). -/
 @[blueprint "lem:mul-mem-orders-coprime"
-  (displayName := "Coprime Product in Orders")
+  (title := "Coprime Product in Orders")
   (statement := /-- Product of coprime achievable orders is achievable.
   \uses{lem:lcm-mem-orders} -/)
   (proof := /-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this

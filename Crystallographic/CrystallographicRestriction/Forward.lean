@@ -48,7 +48,7 @@ open Polynomial
 /-- If the minimal polynomial of an integer matrix A divides X^k - 1, then A^k = 1.
 This transfers the polynomial identity back to the matrix via the ring homomorphism. -/
 @[blueprint "lem:pow-eq-one-of-minpoly-dvd"
-  (displayName := "Power Equals One from Minpoly")
+  (title := "Power Equals One from Minpoly")
   (statement := /-- If $\mu_A \mid X^k - 1$, then $A^k = I$.
   \uses{def:minpoly} -/)
   (proof := /-- The polynomial $X^k - 1$ annihilates $A$ (since the minimal polynomial does),
@@ -74,7 +74,7 @@ lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin
 /-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
 This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/
 @[blueprint "lem:minpoly-dvd-X-pow-sub-one"
-  (displayName := "Minpoly Divides X^n - 1")
+  (title := "Minpoly Divides X^n - 1")
   (statement := /-- If $A^m = I$, then $\mu_A \mid X^m - 1$.
   \uses{def:minpoly} -/)
   (proof := /-- The polynomial $X^m - 1$ annihilates $A$ since $(A_{\mathbb{Q}})^m - I = 0$.
@@ -95,7 +95,7 @@ open Matrix Polynomial
 /-- If each cyclotomic polynomial in a finset divides a target polynomial,
 then their product also divides the target. -/
 @[blueprint "lem:cyclotomic-finset-product-dvd"
-  (displayName := "Cyclotomic Product Divisibility")
+  (title := "Cyclotomic Product Divisibility")
   (statement := /-- If $\Phi_d \mid f$ for all $d \in S$, then $\prod_{d \in S} \Phi_d \mid f$. -/)
   (proof := /-- By induction on $S$. The empty product divides everything. For the insert case,
   use that cyclotomic polynomials with distinct indices are coprime over $\mathbb{Q}$, so
@@ -133,7 +133,7 @@ The proof uses coprimality: minpoly is coprime to Φ_d when Φ_d does not divide
 Since X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d) and minpoly divides the LHS while
 being coprime to the second factor, it must divide the first factor. -/
 @[blueprint "lem:minpoly-dvd-prod-cyclotomic"
-  (displayName := "Minpoly Divides Cyclotomic Product")
+  (title := "Minpoly Divides Cyclotomic Product")
   (statement := /-- If $\mu_A \mid X^m - 1$ and $S = \{d \mid m : \Phi_d \mid \mu_A\}$,
   then $\mu_A \mid \prod_{d \in S} \Phi_d$.
   \uses{def:minpoly, lem:cyclotomic-finset-product-dvd} -/)
@@ -172,7 +172,7 @@ lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 polynomials. Specifically, S = {d ∈ divisors(m) | Φ_d ∣ p} gives minpoly = ∏_{d∈S} Φ_d
 when p is monic and irreducible factors are coprime. -/
 @[blueprint "lem:minpoly-eq-prod-cyclotomic"
-  (displayName := "Minpoly Cyclotomic Factorization")
+  (title := "Minpoly Cyclotomic Factorization")
   (statement := /-- If $\mu_A \mid X^m - 1$, then there exists $S \subseteq \mathrm{divisors}(m)$
   such that $\mu_A = \prod_{d \in S} \Phi_d$.
   \uses{def:minpoly, lem:minpoly-dvd-prod-cyclotomic, lem:cyclotomic-finset-product-dvd} -/)
@@ -209,7 +209,7 @@ lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 then S.lcm id = m. This is the key lemma: if lcm(S) < m, then A^{lcm(S)} = 1,
 contradicting that A has exact order m. -/
 @[blueprint "lem:cyclotomic-divisors-lcm-eq"
-  (displayName := "Cyclotomic Divisors LCM")
+  (title := "Cyclotomic Divisors LCM")
   (statement := /-- If $\mathrm{ord}(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$ with
   $S \subseteq \mathrm{divisors}(m)$, then $\mathrm{lcm}(S) = m$.
   \uses{lem:minpoly-eq-prod-cyclotomic, lem:pow-eq-one-of-minpoly-dvd} -/)
@@ -278,7 +278,7 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
 6. Therefore psi(m) <= deg(minpoly) <= deg(charpoly) = N
 -/
 @[blueprint "thm:forward-direction"
-  (displayName := "Forward Direction")
+  (title := "Forward Direction")
   (message := "Shows psi(m) <= N is necessary")
   (statement := /-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
 
