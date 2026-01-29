@@ -1,9 +1,10 @@
 # Crystallographic Restriction Theorem
 
-[![Blueprint](https://img.shields.io/badge/Blueprint-Live-blue)](https://e-vergo.github.io/General_Crystallographic_Restriction/blueprint/)
-[![Paper](https://img.shields.io/badge/Paper-Live-green)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper/)
+[![Blueprint](https://img.shields.io/badge/Blueprint-Live-blue)](https://e-vergo.github.io/General_Crystallographic_Restriction/)
+[![Paper](https://img.shields.io/badge/Paper-PDF-green)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf)
+[![Docs](https://img.shields.io/badge/Docs-API-orange)](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/)
 
-> **Side-by-Side Blueprint Example Project** — This formalization demonstrates the [Side-by-Side Blueprint](https://github.com/e-vergo/Dress) toolchain for interactive proof documentation.
+> **Side-by-Side Blueprint Example Project** -- This formalization demonstrates the [Side-by-Side Blueprint](https://github.com/e-vergo/Dress) toolchain for interactive proof documentation with coupled LaTeX/Lean display.
 
 A complete formalization in Lean 4 of the crystallographic restriction theorem, characterizing exactly which rotation orders are achievable by integer matrices in arbitrary dimension.
 
@@ -31,12 +32,25 @@ The special case for 2^1 reflects that -I has order 2 in any dimension >= 1.
 
 ## Live Documentation
 
-This project serves as a **showcase for the Side-by-Side Blueprint toolchain**, demonstrating all major features:
+This project serves as a **production example for the Side-by-Side Blueprint toolchain**, demonstrating all major features:
 
-- **[Blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/blueprint/)** — Interactive dashboard with side-by-side LaTeX/Lean display, proof toggles, dependency graphs, and MathJax-rendered mathematics
-- **[Paper](https://e-vergo.github.io/General_Crystallographic_Restriction/paper/)** — ar5iv-style mathematical exposition with `\paperstatement{}` and `\paperfull{}` hooks linking to formal proofs
+| Output | Description |
+|--------|-------------|
+| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Dashboard with progress metrics, soundness checks, and project operational details|
+| [Side-by-side blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/companion-matrices.html) | Blueprint with LaTeX and lean, with Verso support|
+| [Paper](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | PDF with `\paperstatement{}` and `\paperfull{}` hooks linking formal proofs to exposition |
 
-Both outputs are generated automatically from the `@[blueprint]` annotations in the Lean source code.
+All outputs are generated automatically from `@[blueprint]` annotations in the Lean source code.
+
+### Blueprint Features Demonstrated
+
+- **Dashboard homepage** with stats, key theorems, user messages, and project notes
+- **Side-by-side display** showing LaTeX statements alongside Lean code with syntax highlighting
+- **Proof toggles** to expand/collapse formal proofs
+- **Dependency graph** with Sugiyama layout, edge routing, pan/zoom, and clickable modals
+- **Paper generation** with PDF output and ar5iv-style HTML
+- **Real dependency inference** from Lean code (not manual `\uses{}` annotations)
+- **Validation checks** for connectivity and cycles
 
 ## Proof Strategy
 
@@ -63,9 +77,29 @@ Crystallographic/
 └── CrystallographicRestriction/
     ├── Forward.lean          -- Forward direction proof
     └── Backward.lean         -- Backward direction proof
+
+blueprint/src/
+├── blueprint.tex             -- LaTeX source with \inputleannode{} commands
+└── paper.tex                 -- Paper source with \paperstatement{} commands
 ```
 
 ## Building
+
+### Full Blueprint Build
+
+```bash
+./scripts/build_blueprint.sh
+```
+
+This runs the complete pipeline:
+1. Builds the Lean project with `BLUEPRINT_DRESS=1`
+2. Generates artifacts via the `:blueprint` Lake facet
+3. Creates dependency graph and manifest
+4. Generates the static site with Runway
+5. Generates paper PDF (if configured)
+6. Starts a local server at `localhost:8000`
+
+### Lean Only
 
 ```bash
 lake build
@@ -74,21 +108,24 @@ lake build
 ### Dependencies
 
 - Lean 4 (see `lean-toolchain`)
-- Mathlib
+- Mathlib (v4.27.0)
 - Dress (for blueprint generation)
 
 ## Side-by-Side Blueprint Toolchain
 
-This project demonstrates the Side-by-Side Blueprint toolchain — a pure Lean 4 system for generating interactive documentation that couples formal proofs with mathematical exposition.
+This project demonstrates the Side-by-Side Blueprint toolchain -- a pure Lean 4 system for generating interactive documentation that couples formal proofs with mathematical exposition.
 
 | Component | Purpose |
 |-----------|---------|
-| [Dress](https://github.com/e-vergo/Dress) | Artifact generation, validation checks (connectivity, cycles), and dependency inference |
-| [LeanArchitect](https://github.com/e-vergo/LeanArchitect) | `@[blueprint]` attribute with metadata options (keyTheorem, displayName, message, etc.) |
-| [Runway](https://github.com/e-vergo/Runway) | Static site generator with dashboard, dependency graph visualization, and paper/PDF generation |
+| [Dress](https://github.com/e-vergo/Dress) | Artifact generation, graph construction, validation (connectivity, cycles), dependency inference |
+| [LeanArchitect](https://github.com/e-vergo/LeanArchitect) | `@[blueprint]` attribute with metadata options (`title`, `keyDeclaration`, `message`, status flags) |
+| [Runway](https://github.com/e-vergo/Runway) | Static site generator with dashboard, dependency graph, paper/PDF generation |
 | [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action) | GitHub Action for CI/CD with CSS/JS assets |
 
-See also the [PrimeNumberTheoremAnd](https://github.com/e-vergo/PrimeNumberTheoremAnd) project for a large-scale integration example (530 annotations across 33 files).
+### Related Projects
+
+- [SBS-Test](https://github.com/e-vergo/SBS-Test) -- Minimal test project (11 nodes, all features)
+- [PrimeNumberTheoremAnd](https://github.com/e-vergo/PrimeNumberTheoremAnd) -- Large-scale integration (530 annotations, 33 files)
 
 ## References
 
