@@ -86,25 +86,15 @@ blueprint/src/
 
 ## Building
 
-### Full Blueprint Build
-
-```bash
-./scripts/build_blueprint.sh
-```
-
-This runs the complete pipeline:
-1. Builds the Lean project with `BLUEPRINT_DRESS=1`
-2. Generates artifacts via the `:blueprint` Lake facet
-3. Creates dependency graph and manifest
-4. Generates the static site with Runway
-5. Generates paper PDF
-6. Starts a local server at `localhost:8000`
-
-### Lean Only
+### Lean Project
 
 ```bash
 lake build
 ```
+
+### Blueprint Site
+
+The blueprint site is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). The live site is deployed automatically on push to main.
 
 ### Dependencies
 

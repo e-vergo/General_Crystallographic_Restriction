@@ -21,3 +21,6 @@ blueprint/
 SBS.md
 .mcp.json
 .venv/
+
+# Local build scripts
+scripts/
