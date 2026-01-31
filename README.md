@@ -2,15 +2,15 @@
 
 A formalization in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which finite orders are achievable by integer matrices in any dimension.
 
-**Live Documentation:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
+**Live Blueprint:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
 
-## The Crystallographic Restriction Theorem
+## The Theorem
 
 An N x N integer matrix can have finite order m if and only if psi(m) <= N.
 
 ```lean
-theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0 < N) :
-    m ∈ integerMatrixOrders N ↔ psi m ≤ N
+theorem crystallographic_restriction (N m : Nat) (hm : 0 < m) (hNm : m = 1 \/ 0 < N) :
+    m \in integerMatrixOrders N <-> psi m <= N
 ```
 
 This theorem explains why crystals in three-dimensional space can only exhibit 2-, 3-, 4-, or 6-fold rotational symmetry: these correspond to the finite orders achievable by 3x3 integer matrices.
@@ -33,6 +33,16 @@ The special treatment of 2^1 reflects that -I achieves order 2 in any dimension 
 **Forward direction:** If an N x N integer matrix A has order m, its minimal polynomial over Q divides X^m - 1 and factors as a product of distinct cyclotomic polynomials Phi_d for various divisors d of m. The constraint that ord(A) = m forces the lcm of these divisors to equal m. The sum of phi(d) over these divisors is at least psi(m), bounded by deg(minpoly) <= deg(charpoly) = N.
 
 **Backward direction:** Companion matrices of cyclotomic polynomials Phi_{p^k} have size phi(p^k) and order exactly p^k. Block diagonal combinations of these matrices achieve order m = prod p_i^{k_i} in dimension psi(m). The construction handles the special case of 2^1 by using matrix negation: if A has odd order k, then -A has order 2k without increasing dimension.
+
+## Live Documentation
+
+| Output | URL |
+|--------|-----|
+| Dashboard | [e-vergo.github.io/General_Crystallographic_Restriction/](https://e-vergo.github.io/General_Crystallographic_Restriction/) |
+| Dependency Graph | [dep_graph.html](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) |
+| Paper (HTML) | [paper_tex.html](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) |
+| Paper (PDF) | [paper.pdf](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) |
+| API Documentation | [docs/](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) |
 
 ## Project Structure
 
@@ -70,7 +80,7 @@ General_Crystallographic_Restriction/
 Psi.Basic --> Psi.Bounds
     |
     v
-FiniteOrder.Basic --> FiniteOrder.Order
+ FiniteOrder.Basic --> FiniteOrder.Order
     |                      |
     v                      v
 Companion.Basic --> Companion.Cyclotomic
@@ -109,104 +119,17 @@ lake build
 
 ### Generate Blueprint Site
 
-The blueprint site is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). To trigger a build:
+The blueprint site is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). Navigate to the Actions tab on GitHub, select "Full Blueprint Build and Deploy", and click "Run workflow".
 
-1. Navigate to the Actions tab on GitHub
-2. Select "Full Blueprint Build and Deploy"
-3. Click "Run workflow"
-
-The workflow builds the Lean project with artifact generation, generates the dependency graph and statistics, produces the interactive blueprint site, generates paper.html and paper.pdf, downloads pre-generated DocGen4 documentation from the `docs-static` branch, and deploys to GitHub Pages.
+The workflow builds the Lean project with artifact generation, generates the dependency graph (57 nodes), produces the interactive blueprint site and academic paper (HTML + PDF), downloads pre-generated DocGen4 documentation from the `docs-static` branch, and deploys to GitHub Pages.
 
 ### Local Development
-
-For local blueprint generation, use the shared build script:
 
 ```bash
 ./scripts/build_blueprint.sh
 ```
 
-This script:
-- Builds the complete toolchain (SubVerso -> LeanArchitect -> Dress -> Runway)
-- Fetches mathlib cache
-- Generates artifacts with `BLUEPRINT_DRESS=1`
-- Runs the `:blueprint` Lake facet
-- Generates the dependency graph
-- Produces the HTML site and paper
-- Starts a local server at http://localhost:8000
-
-## Output Artifacts
-
-### Live Documentation
-
-| Output | URL |
-|--------|-----|
-| Dashboard | [e-vergo.github.io/General_Crystallographic_Restriction/](https://e-vergo.github.io/General_Crystallographic_Restriction/) |
-| Dependency Graph | [dep_graph.html](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) |
-| Paper (HTML) | [paper_tex.html](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) |
-| Paper (PDF) | [paper.pdf](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) |
-| API Documentation | [docs/](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) |
-
-### Build Outputs
-
-| Location | Content |
-|----------|---------|
-| `.lake/build/dressed/` | Per-declaration artifacts (decl.tex, decl.html, decl.json) |
-| `.lake/build/runway/` | Generated HTML site |
-| `.lake/build/runway/manifest.json` | Statistics, validation, project metadata |
-| `.lake/build/runway/paper.pdf` | Compiled paper |
-
-## Configuration
-
-### runway.json
-
-```json
-{
-  "title": "General Crystallographic Restriction Theorem",
-  "projectName": "Crystallographic",
-  "githubUrl": "https://github.com/e-vergo/General_Crystallographic_Restriction",
-  "baseUrl": "/General_Crystallographic_Restriction/",
-  "docgen4Url": "docs/",
-  "blueprintTexPath": "blueprint/src/blueprint.tex",
-  "assetsDir": "../dress-blueprint-action/assets",
-  "paperTexPath": "blueprint/src/paper.tex"
-}
-```
-
-### lakefile.toml
-
-```toml
-name = "Crystallographic"
-defaultTargets = ["Crystallographic"]
-
-[leanOptions]
-pp.unicode.fun = true
-autoImplicit = false
-relaxedAutoImplicit = false
-
-[[require]]
-name = "mathlib"
-git = "https://github.com/leanprover-community/mathlib4.git"
-rev = "v4.27.0"
-
-[[require]]
-name = "Dress"
-git = "https://github.com/e-vergo/Dress.git"
-rev = "main"
-
-[[require]]
-name = "verso"
-git = "https://github.com/e-vergo/verso.git"
-rev = "main"
-
-[[require]]
-scope = "dev"
-name = "«doc-gen4»"
-git = "https://github.com/leanprover/doc-gen4.git"
-rev = "01e1433"  # v4.27.0 compatible
-
-[[lean_lib]]
-name = "Crystallographic"
-```
+This script builds the complete toolchain, fetches mathlib cache, generates artifacts, runs the `:blueprint` Lake facet, generates the dependency graph, produces the HTML site and paper, and starts a local server at http://localhost:8000.
 
 ## Side-by-Side Blueprint Toolchain
 
@@ -216,18 +139,15 @@ This project uses the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-B
 
 | Component | Purpose |
 |-----------|---------|
-| [SubVerso](https://github.com/e-vergo/subverso) | Syntax highlighting extraction with O(1) indexed lookups |
-| [LeanArchitect](https://github.com/e-vergo/LeanArchitect) | `@[blueprint]` attribute with 8 metadata + 3 status options |
-| [Dress](https://github.com/e-vergo/Dress) | Artifact generation, graph layout, validation |
-| [Verso](https://github.com/e-vergo/verso) | Document framework with blueprint genres |
-| [Runway](https://github.com/e-vergo/Runway) | Static site generator with dashboard and paper support |
-| [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action) | GitHub Action for CI/CD + CSS/JS assets |
+| [SubVerso](https://github.com/e-vergo/subverso) | Syntax highlighting extraction |
+| [LeanArchitect](https://github.com/e-vergo/LeanArchitect) | `@[blueprint]` attribute |
+| [Dress](https://github.com/e-vergo/Dress) | Artifact generation, graph layout |
+| [Verso](https://github.com/e-vergo/verso) | Document framework |
+| [Runway](https://github.com/e-vergo/Runway) | Static site generator |
+| [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action) | GitHub Action for CI/CD |
 
-The dependency chain is: `SubVerso -> LeanArchitect -> Dress -> Runway`
+### Blueprint Annotation Example
 
-### Blueprint Annotation Patterns
-
-**Main theorem with full metadata:**
 ```lean
 @[blueprint "thm:main-theorem"
   (title := "Crystallographic Restriction Theorem")
@@ -238,39 +158,7 @@ The dependency chain is: `SubVerso -> LeanArchitect -> Dress -> Runway`
 theorem crystallographic_restriction ...
 ```
 
-**Key definition:**
-```lean
-@[blueprint "psi-def"
-  (title := "Psi Function Definition")
-  (keyDeclaration := true)
-  (message := "The psi function characterizes achievable orders")
-  (statement := /-- The psi function... \uses{psiPrimePow-def} -/)]
-def psi (m : Nat) : Nat := ...
-```
-
-**Lemma with dependency tracking:**
-```lean
-@[blueprint "lem:psi-coprime-add"
-  (title := "Psi Coprime Additivity")
-  (statement := /-- psi(mn) = psi(m) + psi(n) for coprime m, n.
-    \uses{psi-def, lem:factorization-disjoint} -/)
-  (proof := /-- Coprime factorizations are disjoint... -/)]
-theorem psi_coprime_add ...
-```
-
-### Attribute Options Used
-
-| Option | Usage in Project |
-|--------|------------------|
-| `title` | Custom labels for graph nodes |
-| `keyDeclaration` | Marks main theorem and psi definition |
-| `message` | Progress notes on key results |
-| `statement` | LaTeX theorem statements with `\uses{}` |
-| `proof` | Proof outlines for documentation |
-
 ### Status Model
-
-The project uses a 6-status color model for tracking formalization progress:
 
 | Status | Color | Meaning |
 |--------|-------|---------|
@@ -281,8 +169,6 @@ The project uses a 6-status color model for tracking formalization progress:
 | fullyProven | Forest Green | Proven with all dependencies proven |
 | mathlibReady | Light Blue | Ready for mathlib contribution |
 
-Status is auto-detected from the Lean code (sorry detection, dependency analysis) with manual override options.
-
 ## References
 
 - Kuzmanovich, J. and Pavlichenkov, A. (2002). "Finite groups of matrices whose entries are integers." *American Mathematical Monthly*, 109(2):173-186.
@@ -290,13 +176,6 @@ Status is auto-detected from the Lean code (sorry detection, dependency analysis
 - Bamberg, J., Cairns, G., and Kilminster, D. (2003). "The crystallographic restriction, permutations, and Goldbach's conjecture." *American Mathematical Monthly*, 110(3):202-209.
 
 - Newman, M. (1972). *Integral Matrices*. Academic Press.
-
-## Related Projects
-
-| Project | Description |
-|---------|-------------|
-| [SBS-Test](https://github.com/e-vergo/SBS-Test) | Minimal test project for the toolchain (32 nodes) |
-| [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd) | Large-scale blueprint integration (530 nodes) |
 
 ## Authors
 
