@@ -9,7 +9,7 @@ A formalization in Lean 4 of the crystallographic restriction theorem, which cha
 An N x N integer matrix can have finite order m if and only if psi(m) <= N.
 
 ```lean
-theorem crystallographic_restriction (N m : Nat) (hm : 0 < m) (hNm : m = 1 \/ 0 < N) :
+theorem crystallographic_restriction (N m : ℕ) (hm : 0 < m) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N ↔ psi m ≤ N
 ```
 
@@ -178,6 +178,11 @@ This script:
 name = "Crystallographic"
 defaultTargets = ["Crystallographic"]
 
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+relaxedAutoImplicit = false
+
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
@@ -195,9 +200,12 @@ rev = "main"
 
 [[require]]
 scope = "dev"
-name = "doc-gen4"
+name = "«doc-gen4»"
 git = "https://github.com/leanprover/doc-gen4.git"
-rev = "01e1433"
+rev = "01e1433"  # v4.27.0 compatible
+
+[[lean_lib]]
+name = "Crystallographic"
 ```
 
 ## Side-by-Side Blueprint Toolchain
