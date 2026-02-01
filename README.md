@@ -1,32 +1,41 @@
-# General Crystallographic Restriction
+# The Crystallographic Restriction Theorem
 
-A formalization in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which finite orders are achievable by integer matrices in any dimension.
+A complete formalization in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which finite orders are achievable by integer matrices in any dimension.
 
-**Live Blueprint:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
+**Live Documentation:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
 
-## The Theorem
+## The Mathematics
 
-An N x N integer matrix can have finite order m if and only if psi(m) <= N.
+The crystallographic restriction theorem answers a fundamental question in crystallography and linear algebra: **Which finite orders can an integer matrix have?**
+
+This is not merely a curiosity. The theorem explains a physical phenomenon: why crystals in three-dimensional space can only exhibit 2-, 3-, 4-, or 6-fold rotational symmetry. These are precisely the orders achievable by 3x3 integer matrices (since psi(m) <= 3 for m in {1, 2, 3, 4, 6}).
+
+### Main Result
 
 ```lean
 theorem crystallographic_restriction (N m : Nat) (hm : 0 < m) (hNm : m = 1 \/ 0 < N) :
     m \in integerMatrixOrders N <-> psi m <= N
 ```
 
-This theorem explains why crystals in three-dimensional space can only exhibit 2-, 3-, 4-, or 6-fold rotational symmetry: these correspond to the finite orders achievable by 3x3 integer matrices.
+**In words:** An N x N integer matrix can have finite order m if and only if psi(m) <= N.
 
 ### The Psi Function
 
-The function `psi : Nat -> Nat` determines the minimum dimension required to realize a given order:
+The key is the function psi : Nat -> Nat, which determines the minimum dimension required to realize a given order.
 
-- `psi(1) = psi(2) = 0`
-- For m with prime factorization m = prod p_i^{k_i}: `psi(m) = sum phi(p_i^{k_i})`, excluding `phi(2)` when exactly 2^1 divides m
+**Definition:**
+- psi(1) = psi(2) = 0
+- For m with prime factorization m = prod p_i^{k_i}, we have psi(m) = sum phi(p_i^{k_i}), excluding phi(2) when exactly 2^1 divides m
 
-The special treatment of 2^1 reflects that -I achieves order 2 in any dimension >= 1.
+The special case psi(2) = 0 reflects that -I (negative identity) achieves order 2 in any dimension >= 1, so order 2 is "free."
 
 | m      | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |--------|---|---|---|---|---|---|---|---|---|----|----|-----|
 | psi(m) | 0 | 0 | 2 | 2 | 4 | 2 | 6 | 4 | 6 | 4  | 10 | 4  |
+
+### Physical Interpretation
+
+In crystallography, the symmetry group of a crystal lattice consists of isometries preserving the lattice. The rotational part of such an isometry is represented by an integer matrix (when expressed in the basis of lattice vectors). The crystallographic restriction explains why pentagons don't tile the plane and why quasicrystals with 5-fold symmetry were so surprising when discovered.
 
 ### Proof Strategy
 
@@ -36,73 +45,80 @@ The special treatment of 2^1 reflects that -I achieves order 2 in any dimension 
 
 ## Live Documentation
 
-| Output | URL |
-|--------|-----|
-| Dashboard | [e-vergo.github.io/General_Crystallographic_Restriction/](https://e-vergo.github.io/General_Crystallographic_Restriction/) |
-| Dependency Graph | [dep_graph.html](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) |
-| Paper (HTML) | [paper_tex.html](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) |
-| Paper (PDF) | [paper.pdf](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) |
-| API Documentation | [docs/](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) |
+| Output | Description |
+|--------|-------------|
+| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Overview with progress stats, key theorems, and project notes |
+| [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive visualization of 57 theorem dependencies |
+| [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.html) | Academic paper with links to Lean formalizations |
+| [Paper (PDF)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | Printable PDF |
+| [API Docs](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) | DocGen4 API documentation |
 
 ## Project Structure
 
 ```
 General_Crystallographic_Restriction/
-├── Crystallographic.lean              # Library root
+├── Crystallographic.lean              # Library root (imports all modules)
 ├── Crystallographic/
-│   ├── Main/
-│   │   ├── MainTheorem.lean           # Main theorem statement and proof
-│   │   └── Lemmas.lean                # Supporting technical lemmas
 │   ├── Psi/
-│   │   ├── Basic.lean                 # Definition of psi, additivity on coprime factors
+│   │   ├── Basic.lean                 # psi definition, values, coprime additivity
 │   │   └── Bounds.lean                # Bounds relating psi to totient function
 │   ├── FiniteOrder/
-│   │   ├── Basic.lean                 # Definition of integerMatrixOrders, block diagonal
+│   │   ├── Basic.lean                 # integerMatrixOrders definition, block diagonal
 │   │   └── Order.lean                 # Order properties, lcm of block diagonal orders
 │   ├── Companion/
-│   │   ├── Basic.lean                 # Companion matrix definition and charpoly theorem
+│   │   ├── Basic.lean                 # Companion matrix definition, charpoly theorem
 │   │   └── Cyclotomic.lean            # Companion matrices of cyclotomic polynomials
 │   ├── CrystallographicRestriction/
 │   │   ├── Forward.lean               # Forward direction via minimal polynomial theory
 │   │   └── Backward.lean              # Backward direction via explicit construction
+│   ├── Main/
+│   │   ├── MainTheorem.lean           # Main theorem statement and proof
+│   │   └── Lemmas.lean                # Supporting technical lemmas
 │   └── Paper.lean                     # Verso document for paper generation
 ├── blueprint/src/
 │   ├── blueprint.tex                  # LaTeX blueprint document
-│   └── paper.tex                      # Academic paper
+│   └── paper.tex                      # Academic paper source
 ├── runway.json                        # Site configuration
 ├── lakefile.toml                      # Lake build configuration
 └── lean-toolchain                     # Lean version (v4.27.0)
 ```
 
-### Module Dependencies
+### Module Dependency Structure
 
 ```
-Psi.Basic --> Psi.Bounds
-    |
-    v
- FiniteOrder.Basic --> FiniteOrder.Order
-    |                      |
-    v                      v
-Companion.Basic --> Companion.Cyclotomic
-    |                      |
-    |                      v
-    +---------> CrystallographicRestriction.Forward
-                CrystallographicRestriction.Backward
-                           |
-                           v
-                    Main.MainTheorem
+          Psi.Basic
+             |
+             v
+       Psi.Bounds     FiniteOrder.Basic
+             |               |
+             v               v
+       Companion.Basic  FiniteOrder.Order
+             |               |
+             v               v
+       Companion.Cyclotomic  |
+             |               |
+             +-------+-------+
+                     |
+                     v
+        CrystallographicRestriction.Forward
+        CrystallographicRestriction.Backward
+                     |
+                     v
+              Main.MainTheorem
 ```
 
-## Key Lemmas
+## Key Formalizations
 
-| Label | Description |
-|-------|-------------|
-| `psi-def` | Definition of the psi function via prime factorization |
-| `lem:psi-coprime-add` | psi(mn) = psi(m) + psi(n) for coprime m, n |
-| `thm:companion-charpoly` | Companion matrix has prescribed characteristic polynomial |
-| `thm:companion-cycl-order` | Companion of Phi_m has order exactly m |
-| `thm:forward-direction` | m in Ord_N implies psi(m) <= N |
-| `thm:backward-direction` | psi(m) <= N implies m in Ord_N |
+| Label | Lean Name | Description |
+|-------|-----------|-------------|
+| `psi-def` | `Crystallographic.psi` | The psi function via prime factorization |
+| `lem:psi-coprime-add` | `psi_coprime_add` | psi(mn) = psi(m) + psi(n) for coprime m, n |
+| `lem:psi-prime-pow` | `psi_prime_pow` | psi(p^k) = phi(p^k) for most prime powers |
+| `thm:companion-charpoly` | `charpoly_companion_eq` | Companion matrix has prescribed charpoly |
+| `thm:companion-cycl-order` | `orderOf_companion_cyclotomic` | Companion of Phi_m has order exactly m |
+| `thm:forward-direction` | `psi_le_of_mem_integerMatrixOrders` | m in Ord_N implies psi(m) <= N |
+| `thm:backward-direction` | `mem_integerMatrixOrders_of_psi_le` | psi(m) <= N implies m in Ord_N |
+| `thm:main-theorem` | `crystallographic_restriction` | The complete iff statement |
 
 ## Building
 
@@ -111,65 +127,46 @@ Companion.Basic --> Companion.Cyclotomic
 - Lean 4.27.0 (specified in `lean-toolchain`)
 - Mathlib v4.27.0
 
-### Build Lean Project
+### Build the Lean Project
 
 ```bash
+lake exe cache get    # Fetch mathlib cache
 lake build
 ```
 
-### Generate Blueprint Site
+### Generate Documentation Locally
 
-The blueprint site is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). Navigate to the Actions tab on GitHub, select "Full Blueprint Build and Deploy", and click "Run workflow".
-
-The workflow builds the Lean project with artifact generation, generates the dependency graph (57 nodes), produces the interactive blueprint site and academic paper (HTML + PDF), downloads pre-generated DocGen4 documentation from the `docs-static` branch, and deploys to GitHub Pages.
-
-### Local Development
+The project uses the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain for documentation. To build locally:
 
 ```bash
 ./scripts/build_blueprint.sh
 ```
 
-This script builds the complete toolchain, fetches mathlib cache, generates artifacts, runs the `:blueprint` Lake facet, generates the dependency graph, produces the HTML site and paper, and starts a local server at http://localhost:8000.
+This generates the complete documentation site at `.lake/build/runway/` and starts a local server at http://localhost:8000.
 
-## Side-by-Side Blueprint Toolchain
+### CI/CD
 
-This project uses the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain for interactive documentation.
+The live documentation is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). To rebuild, navigate to Actions > "Full Blueprint Build and Deploy" > Run workflow.
 
-### Toolchain Components
+## Documentation Toolchain
 
-| Component | Purpose |
-|-----------|---------|
-| [SubVerso](https://github.com/e-vergo/subverso) | Syntax highlighting extraction |
-| [LeanArchitect](https://github.com/e-vergo/LeanArchitect) | `@[blueprint]` attribute |
-| [Dress](https://github.com/e-vergo/Dress) | Artifact generation, graph layout |
-| [Verso](https://github.com/e-vergo/verso) | Document framework |
-| [Runway](https://github.com/e-vergo/Runway) | Static site generator |
-| [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action) | GitHub Action for CI/CD |
+This project uses the **Side-by-Side Blueprint** toolchain for its documentation, which provides:
 
-### Blueprint Annotation Example
+- **Side-by-side display**: LaTeX theorem statements alongside syntax-highlighted Lean code
+- **Interactive dependency graph**: 57-node visualization with pan/zoom and rich modals
+- **Progress tracking**: Dashboard with formalization status (notReady, ready, sorry, proven, fullyProven, mathlibReady)
+- **Paper generation**: Academic paper with links to Lean proofs
+- **Automatic dependency inference**: Dependencies traced from actual Lean code, not manual annotations
 
-```lean
-@[blueprint "thm:main-theorem"
-  (title := "Crystallographic Restriction Theorem")
-  (keyDeclaration := true)
-  (message := "Central result of the formalization")
-  (statement := /-- LaTeX statement... -/)
-  (proof := /-- Proof outline... -/)]
-theorem crystallographic_restriction ...
-```
-
-### Status Model
-
-| Status | Color | Meaning |
-|--------|-------|---------|
-| notReady | Sandy Brown | Not ready to formalize |
-| ready | Light Sea Green | Ready to be proven |
-| sorry | Dark Red | Contains sorry |
-| proven | Light Green | Complete proof |
-| fullyProven | Forest Green | Proven with all dependencies proven |
-| mathlibReady | Light Blue | Ready for mathlib contribution |
+The toolchain is a pure Lean implementation (no Python/texlive required for site generation) built on:
+- [SubVerso](https://github.com/e-vergo/subverso) - Syntax highlighting
+- [LeanArchitect](https://github.com/e-vergo/LeanArchitect) - `@[blueprint]` attribute
+- [Dress](https://github.com/e-vergo/Dress) - Artifact generation and graph layout
+- [Runway](https://github.com/e-vergo/Runway) - Site generator
 
 ## References
+
+The formalization is based on classical results about integer matrices and cyclotomic polynomials:
 
 - Kuzmanovich, J. and Pavlichenkov, A. (2002). "Finite groups of matrices whose entries are integers." *American Mathematical Monthly*, 109(2):173-186.
 
@@ -177,10 +174,12 @@ theorem crystallographic_restriction ...
 
 - Newman, M. (1972). *Integral Matrices*. Academic Press.
 
+- Sasse, R. (2020). "Crystallographic Groups" - Primary reference for the proof structure.
+
 ## Authors
 
-- Eric Vergo
-- Claude (Anthropic)
+- **Eric Vergo** - Formalization and documentation
+- **Claude** (Anthropic) - Pair programming and code review
 
 ## License
 
