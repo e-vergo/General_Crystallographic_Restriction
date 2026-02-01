@@ -142,12 +142,11 @@ lake build
 
 ### Generate Documentation Locally
 
-```bash
-# Using the wrapper script (recommended)
-./scripts/build_blueprint.sh
+From the project directory:
 
-# Or using Python build script directly
-python ../scripts/build.py
+```bash
+# Using the monorepo build script
+python ../../dev/scripts/build.py
 ```
 
 This generates the complete documentation site at `.lake/build/runway/` and starts a local server at http://localhost:8000.
@@ -169,10 +168,6 @@ This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side
 - **Validation checks**: Connectivity and cycle detection (inspired by the Tao incident)
 
 The toolchain requires only Lean - no Python or texlive needed for site generation.
-
-## Tooling
-
-For build commands, screenshot capture, compliance validation, archive management, and custom rubrics, see the [Archive & Tooling Hub](../archive/README.md).
 
 ## References
 

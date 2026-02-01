@@ -5,6 +5,6 @@
   "baseUrl": "/General_Crystallographic_Restriction/",
   "docgen4Url": "docs/",
   "blueprintTexPath": "blueprint/src/blueprint.tex",
-  "assetsDir": "../dress-blueprint-action/assets",
+  "assetsDir": "../../toolchain/dress-blueprint-action/assets",
   "paperTexPath": "blueprint/src/paper.tex"
 }
