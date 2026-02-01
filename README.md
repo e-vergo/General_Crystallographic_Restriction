@@ -7,40 +7,41 @@
 
 A complete formalization in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which finite orders are achievable by integer matrices in any dimension.
 
-**Live Documentation:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
+**Live Demo:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
+
+This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and paper generation.
 
 ## The Mathematics
 
-The crystallographic restriction theorem answers a fundamental question in crystallography and linear algebra: **Which finite orders can an integer matrix have?**
+### The Problem
 
-This is not merely a curiosity. The theorem explains a physical phenomenon: why crystals in three-dimensional space can only exhibit 2-, 3-, 4-, or 6-fold rotational symmetry. These are precisely the orders achievable by 3x3 integer matrices (since psi(m) <= 3 for m in {1, 2, 3, 4, 6}).
+Which finite orders can an integer matrix have? This question has a complete answer, and that answer explains a physical phenomenon: why crystals in three-dimensional space can only exhibit 2-, 3-, 4-, or 6-fold rotational symmetry.
 
 ### Main Result
+
+**Theorem (Crystallographic Restriction).** An N x N integer matrix can have finite order m if and only if psi(m) <= N.
 
 ```lean
 theorem crystallographic_restriction (N m : Nat) (hm : 0 < m) (hNm : m = 1 \/ 0 < N) :
     m \in integerMatrixOrders N <-> psi m <= N
 ```
 
-**In words:** An N x N integer matrix can have finite order m if and only if psi(m) <= N.
-
 ### The Psi Function
 
-The key is the function psi : Nat -> Nat, which determines the minimum dimension required to realize a given order.
+The key is the function psi : Nat -> Nat, which determines the minimum dimension required to realize a given order:
 
-**Definition:**
 - psi(1) = psi(2) = 0
 - For m with prime factorization m = prod p_i^{k_i}, we have psi(m) = sum phi(p_i^{k_i}), excluding phi(2) when exactly 2^1 divides m
-
-The special case psi(2) = 0 reflects that -I (negative identity) achieves order 2 in any dimension >= 1, so order 2 is "free."
 
 | m      | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |--------|---|---|---|---|---|---|---|---|---|----|----|-----|
 | psi(m) | 0 | 0 | 2 | 2 | 4 | 2 | 6 | 4 | 6 | 4  | 10 | 4  |
 
+The special case psi(2) = 0 reflects that -I (negative identity) achieves order 2 in any dimension >= 1, so order 2 is "free."
+
 ### Physical Interpretation
 
-In crystallography, the symmetry group of a crystal lattice consists of isometries preserving the lattice. The rotational part of such an isometry is represented by an integer matrix (when expressed in the basis of lattice vectors). The crystallographic restriction explains why pentagons don't tile the plane and why quasicrystals with 5-fold symmetry were so surprising when discovered.
+In crystallography, the symmetry group of a crystal lattice consists of isometries preserving the lattice. The rotational part of such an isometry is represented by an integer matrix. The crystallographic restriction explains why pentagons don't tile the plane and why quasicrystals with 5-fold symmetry were so surprising when discovered.
 
 ### Proof Strategy
 
@@ -50,11 +51,9 @@ In crystallography, the symmetry group of a crystal lattice consists of isometri
 
 ## Live Documentation
 
-The project includes comprehensive interactive documentation:
-
 | Page | Description |
 |------|-------------|
-| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Project overview with progress stats, key theorems, and notes |
+| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Project overview with progress stats and key theorems |
 | [Blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/chapter-1.html) | Side-by-side LaTeX and Lean with proof toggles |
 | [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive 57-node visualization with pan/zoom |
 | [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) | Academic paper with links to Lean proofs |
@@ -171,6 +170,10 @@ This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side
 
 The toolchain requires only Lean - no Python or texlive needed for site generation.
 
+## Tooling
+
+For build commands, screenshot capture, compliance validation, archive management, and custom rubrics, see the [Archive & Tooling Hub](../archive/README.md).
+
 ## References
 
 The formalization is based on classical results about integer matrices and cyclotomic polynomials:
@@ -183,9 +186,15 @@ The formalization is based on classical results about integer matrices and cyclo
 
 - Sasse, R. (2020). "Crystallographic Groups" - Primary reference for the proof structure.
 
-## Authors
+## Attribution
 
-- **Eric Vergo** - Formalization and documentation
+- **Side-by-Side Blueprint**: Documentation toolchain by [e-vergo](https://github.com/e-vergo/Side-By-Side-Blueprint)
+- **leanblueprint**: Original Python implementation by [Patrick Massot](https://github.com/PatrickMassot/leanblueprint)
+- **LeanArchitect**: Based on [hanwenzhu/LeanArchitect](https://github.com/hanwenzhu/LeanArchitect)
+
+## Author
+
+Eric Vergo
 
 ## License
 
