@@ -9,7 +9,13 @@ A complete formalization in Lean 4 of the crystallographic restriction theorem, 
 
 **Live Demo:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
 
-This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and paper generation.
+This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and academic paper generation.
+
+**What to explore:**
+- **Blueprint**: Complete side-by-side documentation with theorem statements and formal proofs
+- **Dependency Graph**: 57-node visualization showing how lemmas and theorems build toward the main result
+- **Paper (HTML and PDF)**: Standalone academic publication with links to formal proofs
+- **Dashboard**: Progress overview with key theorems and formalization status
 
 ## The Mathematics
 
@@ -133,23 +139,44 @@ General_Crystallographic_Restriction/
 - Lean 4.27.0 (specified in `lean-toolchain`)
 - Mathlib v4.27.0
 
-### Build the Lean Project
+### One-Click Build (Recommended)
+
+From the monorepo root:
 
 ```bash
-lake exe cache get    # Fetch mathlib cache
+./dev/build-gcr.sh
+```
+
+This executes a single command that:
+1. Validates project configuration
+2. Syncs all repos to GitHub
+3. Builds the toolchain in dependency order
+4. Fetches mathlib cache
+5. Compiles the Lean project with blueprint artifact generation
+6. Generates the dependency graph and site
+7. Generates the academic paper (PDF and HTML)
+8. Captures screenshots for compliance validation
+9. Starts a local server at http://localhost:8000
+
+The site is generated at `.lake/build/runway/` with interactive pages, assets, and manifest files.
+
+### Manual Build
+
+For finer control, you can build components individually:
+
+```bash
+# Fetch mathlib cache
+lake exe cache get
+
+# Build the Lean project with blueprint artifacts
 lake build
+
+# Generate dependency graph and manifest
+lake exe Dress extract_blueprint graph
+
+# Generate the site
+lake exe Runway build runway.json
 ```
-
-### Generate Documentation Locally
-
-From the project directory:
-
-```bash
-# Using the monorepo build script
-python ../../dev/scripts/build.py
-```
-
-This generates the complete documentation site at `.lake/build/runway/` and starts a local server at http://localhost:8000.
 
 ### CI/CD
 
@@ -157,17 +184,25 @@ The live documentation is built via GitHub Actions using [dress-blueprint-action
 
 ## Documentation Toolchain
 
-This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint)** toolchain, a pure Lean implementation providing:
+This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint)** toolchain, a pure Lean implementation consisting of:
 
+**Core Components:**
+- **Dress**: Captures blueprint artifacts during elaboration (syntax highlighting, code blocks, metadata)
+- **Runway**: Generates the interactive website, dashboard, and paper
+- **LeanArchitect**: Provides the `@[blueprint]` attribute for tagging theorems and lemmas
+- **SubVerso**: O(1) indexed syntax highlighting with semantic information
+- **Verso**: Document framework supporting side-by-side displays with rainbow brackets
+
+**Feature Set:**
 - **Side-by-side display**: LaTeX theorem statements alongside syntax-highlighted Lean code
-- **Interactive dependency graph**: Sugiyama hierarchical layout with pan/zoom and modals
+- **Interactive dependency graph**: Sugiyama hierarchical layout with pan/zoom, modals, and connectivity validation
 - **6-status tracking**: notReady, ready, sorry, proven, fullyProven, mathlibReady
-- **Paper generation**: Academic paper with verification badges and links to proofs
-- **Automatic dependencies**: Traced from actual Lean code (no manual `\uses{}`)
+- **Paper generation**: Academic ar5iv-style paper with verification badges and links to proofs
+- **Automatic dependency inference**: Traces actual Lean code dependencies (no manual `\uses{}`)
 - **Rainbow brackets**: Depth-colored bracket matching for nested expressions
-- **Validation checks**: Connectivity and cycle detection (inspired by the Tao incident)
+- **Validation checks**: Connectivity and cycle detection to catch missing dependencies (inspired by the Tao incident)
 
-The toolchain requires only Lean - no Python or texlive needed for site generation.
+The toolchain runs entirely during build time and requires only Lean - no additional runtime dependencies.
 
 ## References
 
