@@ -1,5 +1,10 @@
 # The Crystallographic Restriction Theorem
 
+![Lean](https://img.shields.io/badge/Lean-v4.27.0-blue)
+![Mathlib](https://img.shields.io/badge/Mathlib-v4.27.0-purple)
+![Nodes](https://img.shields.io/badge/Blueprint-57%20nodes-green)
+![License](https://img.shields.io/badge/License-Apache%202.0-orange)
+
 A complete formalization in Lean 4 of the crystallographic restriction theorem, which characterizes exactly which finite orders are achievable by integer matrices in any dimension.
 
 **Live Documentation:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
@@ -45,12 +50,15 @@ In crystallography, the symmetry group of a crystal lattice consists of isometri
 
 ## Live Documentation
 
-| Output | Description |
-|--------|-------------|
-| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Overview with progress stats, key theorems, and project notes |
-| [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive visualization of 57 theorem dependencies |
-| [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.html) | Academic paper with links to Lean formalizations |
-| [Paper (PDF)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | Printable PDF |
+The project includes comprehensive interactive documentation:
+
+| Page | Description |
+|------|-------------|
+| [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Project overview with progress stats, key theorems, and notes |
+| [Blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/chapter-1.html) | Side-by-side LaTeX and Lean with proof toggles |
+| [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive 57-node visualization with pan/zoom |
+| [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) | Academic paper with links to Lean proofs |
+| [Paper (PDF)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | Printable PDF version |
 | [API Docs](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) | DocGen4 API documentation |
 
 ## Project Structure
@@ -71,10 +79,9 @@ General_Crystallographic_Restriction/
 │   ├── CrystallographicRestriction/
 │   │   ├── Forward.lean               # Forward direction via minimal polynomial theory
 │   │   └── Backward.lean              # Backward direction via explicit construction
-│   ├── Main/
-│   │   ├── MainTheorem.lean           # Main theorem statement and proof
-│   │   └── Lemmas.lean                # Supporting technical lemmas
-│   └── Paper.lean                     # Verso document for paper generation
+│   └── Main/
+│       ├── MainTheorem.lean           # Main theorem statement and proof
+│       └── Lemmas.lean                # Supporting technical lemmas
 ├── blueprint/src/
 │   ├── blueprint.tex                  # LaTeX blueprint document
 │   └── paper.tex                      # Academic paper source
@@ -136,33 +143,33 @@ lake build
 
 ### Generate Documentation Locally
 
-The project uses the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain for documentation. To build locally:
-
 ```bash
+# Using the wrapper script (recommended)
 ./scripts/build_blueprint.sh
+
+# Or using Python build script directly
+python ../scripts/build.py
 ```
 
 This generates the complete documentation site at `.lake/build/runway/` and starts a local server at http://localhost:8000.
 
 ### CI/CD
 
-The live documentation is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). To rebuild, navigate to Actions > "Full Blueprint Build and Deploy" > Run workflow.
+The live documentation is built via GitHub Actions using [dress-blueprint-action](https://github.com/e-vergo/dress-blueprint-action). Navigate to Actions > "Full Blueprint Build and Deploy" > Run workflow to rebuild.
 
 ## Documentation Toolchain
 
-This project uses the **Side-by-Side Blueprint** toolchain for its documentation, which provides:
+This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint)** toolchain, a pure Lean implementation providing:
 
 - **Side-by-side display**: LaTeX theorem statements alongside syntax-highlighted Lean code
-- **Interactive dependency graph**: 57-node visualization with pan/zoom and rich modals
-- **Progress tracking**: Dashboard with formalization status (notReady, ready, sorry, proven, fullyProven, mathlibReady)
-- **Paper generation**: Academic paper with links to Lean proofs
-- **Automatic dependency inference**: Dependencies traced from actual Lean code, not manual annotations
+- **Interactive dependency graph**: Sugiyama hierarchical layout with pan/zoom and modals
+- **6-status tracking**: notReady, ready, sorry, proven, fullyProven, mathlibReady
+- **Paper generation**: Academic paper with verification badges and links to proofs
+- **Automatic dependencies**: Traced from actual Lean code (no manual `\uses{}`)
+- **Rainbow brackets**: Depth-colored bracket matching for nested expressions
+- **Validation checks**: Connectivity and cycle detection (inspired by the Tao incident)
 
-The toolchain is a pure Lean implementation (no Python/texlive required for site generation) built on:
-- [SubVerso](https://github.com/e-vergo/subverso) - Syntax highlighting
-- [LeanArchitect](https://github.com/e-vergo/LeanArchitect) - `@[blueprint]` attribute
-- [Dress](https://github.com/e-vergo/Dress) - Artifact generation and graph layout
-- [Runway](https://github.com/e-vergo/Runway) - Site generator
+The toolchain requires only Lean - no Python or texlive needed for site generation.
 
 ## References
 
@@ -179,7 +186,6 @@ The formalization is based on classical results about integer matrices and cyclo
 ## Authors
 
 - **Eric Vergo** - Formalization and documentation
-- **Claude** (Anthropic) - Pair programming and code review
 
 ## License
 
