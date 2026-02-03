@@ -15,6 +15,7 @@ This is a full production example of the [Side-by-Side Blueprint](https://github
 - **Blueprint**: Complete side-by-side documentation with theorem statements and formal proofs
 - **Dependency Graph**: 57-node visualization showing how lemmas and theorems build toward the main result
 - **Paper (HTML and PDF)**: Standalone academic publication with links to formal proofs
+- **Verso Paper**: Alternative paper rendering via Verso's VersoPaper genre
 - **Dashboard**: Progress overview with key theorems and formalization status
 
 ## The Mathematics
@@ -64,6 +65,7 @@ In crystallography, the symmetry group of a crystal lattice consists of isometri
 | [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive 57-node visualization with pan/zoom |
 | [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) | Academic paper with links to Lean proofs |
 | [Paper (PDF)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | Printable PDF version |
+| [Paper (Verso)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_verso.html) | Verso-rendered paper |
 | [API Docs](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) | DocGen4 API documentation |
 
 ## Project Structure
@@ -90,6 +92,7 @@ General_Crystallographic_Restriction/
 ├── blueprint/src/
 │   ├── blueprint.tex                  # LaTeX blueprint document
 │   └── paper.tex                      # Academic paper source
+├── GeneratePaper.lean                 # Verso paper generator executable
 ├── runway.json                        # Site configuration
 ├── lakefile.toml                      # Lake build configuration
 └── lean-toolchain                     # Lean version (v4.27.0)
