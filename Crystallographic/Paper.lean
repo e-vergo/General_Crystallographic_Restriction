@@ -14,9 +14,6 @@ set_option maxRecDepth 2048
 
 #doc (SBSBlueprint) "The Crystallographic Restriction Theorem: A Formalized Proof in Lean 4" =>
 
-%%%
-authors := ["Eric Vergo", "Claude (Anthropic)"]
-%%%
 
 # Abstract
 
@@ -67,6 +64,7 @@ The characterization involves a function $\psi : \mathbb{N} \to \mathbb{N}$ that
 construct an integer matrix of order $m$.
 
 :::paperStatement "thm:main-theorem"
+:::
 
 The function $\psi$ is defined as follows. For a prime power $p^k$:
 $$\psi_{\text{pp}}(p, k) = \begin{cases}
@@ -143,6 +141,7 @@ The dimensional cost function $\psi$ is central to the crystallographic restrict
 define it on prime powers.
 
 :::paperStatement "psiPrimePow-def"
+:::
 
 The function $\psi_{\text{pp}}(p, k)$ equals $\varphi(p^k) = (p-1)p^{k-1}$ in most cases, with two
 exceptions: $\psi_{\text{pp}}(p, 0) = 0$ for any prime $p$, and $\psi_{\text{pp}}(2, 1) = 0$. The
@@ -150,6 +149,7 @@ latter exception captures the fact that order 2 requires no "dimensional cost" s
 order 2 in any positive dimension.
 
 :::paperStatement "psi-def"
+:::
 
 ## Properties of Psi
 
@@ -162,14 +162,17 @@ Several properties of $\psi$ are essential for the proof.
 | $\psi(m)$ | 0 | 0 | 2 | 2 | 4 | 2 | 6 | 4 | 6 | 4 | 10 | 4 |
 
 :::paperFull "lem:psi-prime-pow"
+:::
 
 The power of $\psi$ comes from its additivity on coprime factors.
 
 :::paperFull "lem:psi-coprime-add"
+:::
 
 The function $\psi$ is bounded above by the totient function.
 
 :::paperFull "lem:psi-le-totient"
+:::
 
 **Remark.** The only case where $\psi(m) < \varphi(m)$ is when $2 \| m$ (that is, $m$ is divisible
 by 2 but not by 4). In this case, the factor of 2 contributes $\varphi(2) = 1$ to the totient but
@@ -183,18 +186,22 @@ polynomials. They play a central role in the backward direction of our proof.
 ## Definition and Basic Properties
 
 :::paperStatement "companion-def"
+:::
 
 The companion matrix of a monic polynomial provides a canonical matrix realization
 whose characteristic polynomial equals the original polynomial.
 
 :::paperFull "thm:companion-charpoly"
+:::
 
 By the Cayley-Hamilton theorem, every matrix satisfies its characteristic polynomial. For
 companion matrices, this means the defining polynomial evaluates to zero at the companion matrix.
 
 :::paperFull "lem:companion-aeval-zero"
+:::
 
 :::paperFull "thm:companion-pow-dvd"
+:::
 
 ## Cyclotomic Companion Matrices
 
@@ -208,14 +215,18 @@ of a primitive $m$-th root of unity. It has three crucial properties:
 3. $\Phi_m(X)$ divides $X^m - 1$ but does not divide $X^k - 1$ for any $0 < k < m$.
 
 :::paperFull "lem:companion-cycl-pow"
+:::
 
 :::paperFull "thm:companion-cycl-order"
+:::
 
 :::paperFull "thm:companion-cycl-mem"
+:::
 
 This gives us the key result for constructing matrices of prescribed order.
 
 :::paperFull "thm:mem-orders-totient"
+:::
 
 **Example.** The cyclotomic polynomial $\Phi_3(X) = X^2 + X + 1$ has companion matrix
 $$C(\Phi_3) = \begin{pmatrix} 0 & -1 \\ 1 & -1 \end{pmatrix}.$$
@@ -234,23 +245,29 @@ use block diagonal combinations.
 ## Definition
 
 :::paperStatement "def:blockDiag2"
+:::
 
 This construction extends naturally to any finite number of blocks.
 
 ## Order of Block Diagonal Matrices
 
 :::paperFull "lem:blockDiag2-one"
+:::
 
 :::paperFull "lem:blockDiag2-mul"
+:::
 
 :::paperFull "lem:blockDiag2-pow"
+:::
 
 :::paperFull "thm:orderOf-blockDiag2"
+:::
 
 **Corollary.** If $A$ has order $a$, $B$ has order $b$, and $\gcd(a, b) = 1$, then
 $\mathrm{diag}(A, B)$ has order $ab$.
 
 :::paperFull "lem:lcm-mem-orders"
+:::
 
 # The Forward Direction
 
@@ -270,28 +287,36 @@ This is a standard result: every $m$-th root of unity is a primitive $d$-th root
 exactly one divisor $d$ of $m$.
 
 :::paperFull "lem:pow-eq-one-of-minpoly-dvd"
+:::
 
 :::paperFull "lem:minpoly-dvd-X-pow-sub-one"
+:::
 
 ## The Order Constraint
 
 :::paperFull "lem:cyclotomic-finset-product-dvd"
+:::
 
 :::paperFull "lem:minpoly-dvd-prod-cyclotomic"
+:::
 
 :::paperFull "lem:minpoly-eq-prod-cyclotomic"
+:::
 
 :::paperFull "lem:cyclotomic-divisors-lcm-eq"
+:::
 
 ## The Key Inequality
 
 The heart of the forward direction is the following combinatorial lemma about subsets of divisors.
 
 :::paperFull "lem:sum-totient-ge-psi"
+:::
 
 ## Proof of the Forward Direction
 
 :::paperFull "thm:forward-direction"
+:::
 
 # The Backward Direction
 
@@ -303,16 +328,19 @@ By Corollary 3.7, for any prime power $p^k$ with $k \geq 1$, the companion matri
 achieves order $p^k$ in dimension $\varphi(p^k)$.
 
 :::paperFull "thm:primePow-mem-integerMatrixOrders-psi"
+:::
 
 ## Order 2 is Free
 
 The special case $(p, k) = (2, 1)$ requires separate treatment.
 
 :::paperFull "lem:two-mem-orders"
+:::
 
 This is why $\psi(2) = 0$: achieving order 2 costs nothing beyond having at least one dimension.
 
 :::paperFull "lem:orderOf-neg-of-odd-order"
+:::
 
 **Corollary.** If order $k$ (odd) is achievable in dimension $N$, then order $2k$ is achievable
 in dimension $N$.
@@ -320,8 +348,10 @@ in dimension $N$.
 ## General Construction
 
 :::paperFull "thm:mem-integerMatrixOrders-psi"
+:::
 
 :::paperFull "thm:backward-direction"
+:::
 
 **Example (Order 12 in Dimension 4).** We have $12 = 4 \cdot 3 = 2^2 \cdot 3$, so we use Case 3
 with $a = 2$ and $m' = 3$.
@@ -348,8 +378,10 @@ We now combine the forward and backward directions.
 ## The Main Result
 
 :::paperFull "thm:main-theorem"
+:::
 
 :::paperStatement "integerMatrixOrders-def"
+:::
 
 **Corollary.** $\mathrm{Ord}_N = \{m \geq 1 : \psi(m) \leq N\}$.
 
