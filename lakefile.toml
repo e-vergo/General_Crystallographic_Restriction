@@ -29,3 +29,7 @@ rev = "01e1433"  # v4.27.0 compatible
 
 [[lean_lib]]
 name = "Crystallographic"
+
+[[lean_exe]]
+name = "generate-paper-verso"
+root = "GeneratePaper"
