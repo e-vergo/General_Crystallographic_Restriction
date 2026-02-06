@@ -9,7 +9,7 @@ A complete formalization in Lean 4 of the crystallographic restriction theorem, 
 
 **Live Demo:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
 
-This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and academic paper generation.
+This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/SLS-Strange-Loop-Station) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and academic paper generation.
 
 **What to explore:**
 - **Blueprint**: Complete side-by-side documentation with theorem statements and formal proofs
@@ -187,7 +187,7 @@ The live documentation is built via GitHub Actions using [dress-blueprint-action
 
 ## Documentation Toolchain
 
-This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint)** toolchain, a pure Lean implementation consisting of:
+This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/SLS-Strange-Loop-Station)** toolchain, a pure Lean implementation consisting of:
 
 **Core Components:**
 - **Dress**: Captures blueprint artifacts during elaboration (syntax highlighting, code blocks, metadata)
@@ -221,7 +221,7 @@ The formalization is based on classical results about integer matrices and cyclo
 
 ## Attribution
 
-- **Side-by-Side Blueprint**: Documentation toolchain by [e-vergo](https://github.com/e-vergo/Side-By-Side-Blueprint)
+- **Side-by-Side Blueprint**: Documentation toolchain by [e-vergo](https://github.com/e-vergo/SLS-Strange-Loop-Station)
 - **leanblueprint**: Original Python implementation by [Patrick Massot](https://github.com/PatrickMassot/leanblueprint)
 - **LeanArchitect**: Based on [hanwenzhu/LeanArchitect](https://github.com/hanwenzhu/LeanArchitect)
 
