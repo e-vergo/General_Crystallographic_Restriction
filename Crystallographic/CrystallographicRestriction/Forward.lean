@@ -48,6 +48,10 @@ open Polynomial
 /-- If the minimal polynomial of an integer matrix A divides X^k - 1, then A^k = 1.
 This transfers the polynomial identity back to the matrix via the ring homomorphism. -/
 @[blueprint "lem:pow-eq-one-of-minpoly-dvd"
+  (above := /-- The next two lemmas establish the fundamental bridge between polynomial
+  divisibility and matrix powers. Together, they show that $A^k = I$ if and only if
+  $\mu_A \mid X^k - 1$, allowing us to translate questions about matrix order into
+  questions about the minimal polynomial. -/)
   (title := "Power Equals One from Minpoly")
   (statement := /-- If $\mu_A \mid X^k - 1$, then $A^k = I$.
   \uses{def:minpoly} -/)
@@ -74,6 +78,11 @@ lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin
 /-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
 This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/
 @[blueprint "lem:minpoly-dvd-X-pow-sub-one"
+  (above := /-- This is the converse of the previous lemma: if a matrix power equals the
+  identity, then $X^m - 1$ annihilates $A$, so the minimal polynomial must divide it.
+  This direction is used to connect $A^m = I$ to the cyclotomic factorization
+  $X^m - 1 = \prod_{d \mid m} \Phi_d$, which is the starting point of the
+  forward direction argument. -/)
   (title := "Minpoly Divides X^n - 1")
   (statement := /-- If $A^m = I$, then $\mu_A \mid X^m - 1$.
   \uses{def:minpoly} -/)
@@ -95,6 +104,10 @@ open Matrix Polynomial
 /-- If each cyclotomic polynomial in a finset divides a target polynomial,
 then their product also divides the target. -/
 @[blueprint "lem:cyclotomic-finset-product-dvd"
+  (above := /-- The following coprimality lemma is used repeatedly throughout the forward direction.
+  Over $\mathbb{Q}$, cyclotomic polynomials with distinct indices are coprime (since they are
+  distinct irreducibles in a UFD), so if each $\Phi_d$ individually divides a polynomial $f$,
+  their product does as well. -/)
   (title := "Cyclotomic Product Divisibility")
   (statement := /-- If $\Phi_d \mid f$ for all $d \in S$, then $\prod_{d \in S} \Phi_d \mid f$. -/)
   (proof := /-- By induction on $S$. The empty product divides everything. For the insert case,
@@ -133,6 +146,11 @@ The proof uses coprimality: minpoly is coprime to Φ_d when Φ_d does not divide
 Since X^m - 1 = (∏_{d∈S} Φ_d) * (∏_{d∉S} Φ_d) and minpoly divides the LHS while
 being coprime to the second factor, it must divide the first factor. -/
 @[blueprint "lem:minpoly-dvd-prod-cyclotomic"
+  (above := /-- We now begin the core factorization argument. Since $X^m - 1 = \prod_{d \mid m} \Phi_d$
+  and the minimal polynomial divides $X^m - 1$, we want to show that $\mu_A$ is precisely
+  a product of cyclotomic factors. The strategy is to split $X^m - 1$ into two parts---the
+  cyclotomic factors that divide $\mu_A$ and those that do not---and use coprimality to
+  isolate $\mu_A$ in the first group. -/)
   (title := "Minpoly Divides Cyclotomic Product")
   (statement := /-- If $\mu_A \mid X^m - 1$ and $S = \{d \mid m : \Phi_d \mid \mu_A\}$,
   then $\mu_A \mid \prod_{d \in S} \Phi_d$.
@@ -172,6 +190,12 @@ lemma minpoly_dvd_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 polynomials. Specifically, S = {d ∈ divisors(m) | Φ_d ∣ p} gives minpoly = ∏_{d∈S} Φ_d
 when p is monic and irreducible factors are coprime. -/
 @[blueprint "lem:minpoly-eq-prod-cyclotomic"
+  (above := /-- Combining the previous divisibility in both directions, we obtain the exact
+  cyclotomic factorization of the minimal polynomial. This is a structural result about
+  polynomials dividing $X^m - 1$ over $\mathbb{Q}$: any such monic polynomial is
+  necessarily a product of distinct cyclotomic factors $\Phi_d$ for various $d \mid m$.
+  The key point is that equality (not just divisibility) holds, which is established
+  by mutual divisibility of monic polynomials. -/)
   (title := "Minpoly Cyclotomic Factorization")
   (statement := /-- If $\mu_A \mid X^m - 1$, then there exists $S \subseteq \mathrm{divisors}(m)$
   such that $\mu_A = \prod_{d \in S} \Phi_d$.
@@ -209,6 +233,14 @@ lemma minpoly_eq_prod_cyclotomic_of_dvd_X_pow_sub_one {N : ℕ} [NeZero N]
 then S.lcm id = m. This is the key lemma: if lcm(S) < m, then A^{lcm(S)} = 1,
 contradicting that A has exact order m. -/
 @[blueprint "lem:cyclotomic-divisors-lcm-eq"
+  (above := /-- Having established that $\mu_A = \prod_{d \in S} \Phi_d$ for some
+  $S \subseteq \mathrm{divisors}(m)$, we now show that $S$ must be ``large enough''
+  to force $\mathrm{lcm}(S) = m$. This is where the hypothesis $\mathrm{ord}(A) = m$
+  (rather than merely $A^m = I$) is essential: if $\mathrm{lcm}(S)$ were a proper
+  divisor $\ell$ of $m$, the minimal polynomial would divide $X^\ell - 1$, giving
+  $A^\ell = I$ and contradicting the minimality of $m$ as the order of $A$.
+  This constraint on $S$ is what ultimately forces the degree $\sum_{d \in S} \varphi(d)$
+  to be at least $\psi(m)$. -/)
   (title := "Cyclotomic Divisors LCM")
   (statement := /-- If $\mathrm{ord}(A) = m$ and $\mu_A = \prod_{d \in S} \Phi_d$ with
   $S \subseteq \mathrm{divisors}(m)$, then $\mathrm{lcm}(S) = m$.
@@ -278,18 +310,25 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
 6. Therefore psi(m) <= deg(minpoly) <= deg(charpoly) = N
 -/
 @[blueprint "thm:forward-direction"
+  (above := /-- We are now ready to assemble the forward direction from the preceding lemmas.
+  The argument chains together three structural facts: (1) the minimal polynomial of a
+  finite-order integer matrix is a product of cyclotomic polynomials
+  (the cyclotomic factorization lemma), (2) the set of cyclotomic indices has lcm
+  equal to the matrix order (the LCM lemma), and (3) for any
+  such set with $\mathrm{lcm}(S) = m$, the sum $\sum_{d \in S} \varphi(d) \geq \psi(m)$
+  (the sum-totient bound). Since this sum equals $\deg(\mu_A) \leq N$,
+  the bound $\psi(m) \leq N$ follows. -/)
   (title := "Forward Direction")
   (message := "Shows psi(m) <= N is necessary")
-  (statement := /-- \textbf{Forward Direction:} If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
+  (statement := /-- Forward Direction: If $m \in \mathrm{Ord}_N$, then $\psi(m) \leq N$.
 
-  \textbf{Mathematical context:}
   The key insight is that integer matrices with finite order have constrained eigenvalues:
   if $A^m = I$, all eigenvalues are $m$-th roots of unity. The minimal polynomial over $\mathbb{Q}$
   factors into cyclotomic polynomials $\Phi_d$ for various divisors $d$ of $m$. The requirement
   that $\mathrm{ord}(A) = m$ (not some proper divisor) forces the set of cyclotomic factors to
   have $\mathrm{lcm} = m$, which constrains the total degree.
 
-  \textbf{Proof outline:}
+  Proof outline:
   \begin{enumerate}
   \item Let $A$ be an $N \times N$ integer matrix with $\mathrm{ord}(A) = m$.
   \item The minimal polynomial of $A$ over $\mathbb{Q}$ divides $X^m - 1 = \prod_{d \mid m} \Phi_d$.
@@ -309,7 +348,11 @@ as eigenvalues, and their algebraic degree constrains the matrix dimension.
   over $\mathbb{Q}$ divides $X^m - 1$ and factors into cyclotomic polynomials $\Phi_d$ for
   various $d \mid m$. Each factor contributes $\varphi(d)$ to $\deg(\mu_A) \leq N$.
   Since distinct $\Phi_d$ are coprime and their lcm must be $m$, summing the totients
-  of appearing divisors gives $\psi(m) \leq N$. --/)]
+  of appearing divisors gives $\psi(m) \leq N$. --/)
+  (below := /-- With the forward direction established, we know that $\psi(m) \leq N$ is a
+  necessary condition for order $m$ to be achievable. The backward direction
+  completes the characterization by showing this
+  condition is also sufficient, via explicit construction of companion matrices. -/)]
 theorem psi_le_of_mem_integerMatrixOrders (N m : ℕ) (hm : 0 < m)
     (hord : m ∈ integerMatrixOrders N) : Crystallographic.psi m ≤ N := by
   -- Extract the matrix A with orderOf A = m

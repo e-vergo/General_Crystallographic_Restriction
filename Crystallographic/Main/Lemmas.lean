@@ -46,6 +46,11 @@ we have `a + b ≤ a * b`, which extends by induction to finite products.
 
 For upstreaming to Mathlib, this should be placed in `Mathlib.Algebra.Order.BigOperators.Group.Finset`. -/
 @[blueprint "lem:sum-le-prod"
+  (above := /-- This elementary combinatorial inequality is a key ingredient in the forward
+  direction. When bounding $\psi(m) \leq N$, we need that a sum of totient values (each
+  $\geq 2$ by the totient lower bound) is bounded by the degree of the minimal polynomial.
+  The sum-product inequality converts between additive and multiplicative structure in these
+  estimates. -/)
   (title := "Sum-Product Inequality")
   (statement := /-- For a finite set where all values $\geq 2$, the sum is at most the product. -/)
   (proof := /-- By induction on the size of the finite set. Base case: empty sum is $0 \leq 1$ (empty product).
@@ -78,6 +83,10 @@ lemma sum_le_prod_of_all_ge_two {α : Type*} [DecidableEq α]
 
 /-- The factorization of a finset lcm at any prime is at most the supremum. -/
 @[blueprint "lem:lcm-factorization-le-sup"
+  (above := /-- The next two lemmas provide fine control over the prime factorization of
+  finset lcm values. They support the forward direction's analysis of cyclotomic divisor
+  sets, where one must show that certain prime powers appear explicitly among the
+  divisors. -/)
   (title := "LCM Factorization Bound")
   (statement := /-- The factorization of $\mathrm{lcm}(S)$ at prime $q$ is bounded by
   $\sup_{x \in S} v_q(x)$. -/)
@@ -124,7 +133,11 @@ that `lcm(S) = p^k`. -/
   (statement := /-- If $\mathrm{lcm}(S) = p^k$ and all elements of $S$ divide $p^k$,
   then $p^k \in S$. -/)
   (proof := /-- Since $\mathrm{lcm}(S) = p^k$ and all elements divide $p^k$, each element has form $p^j$ for some $j \leq k$.
-  Taking lcm over these powers gives $p^{\max_j} = p^k$, so some element must have $j = k$, meaning $p^k \in S$. -/)]
+  Taking lcm over these powers gives $p^{\max_j} = p^k$, so some element must have $j = k$, meaning $p^k \in S$. -/)
+  (below := /-- This is used in the forward direction to show that when the lcm of a
+  set of divisors of $m$ equals $m$, every prime-power factor of $m$ must already
+  appear in the set. This forces enough cyclotomic factors into the minimal
+  polynomial to give the required degree bound. -/)]
 lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ p ^ k) (hS_lcm : S.lcm id = p ^ k) :
     p ^ k ∈ S := by
@@ -157,6 +170,9 @@ lemma Finset.prime_pow_mem_of_lcm_eq {p k : ℕ} (hp : p.Prime) (hk : 0 < k) (S 
 
 /-- Euler's totient function is at least 2 for any n > 2. -/
 @[blueprint "lem:totient-ge-two"
+  (above := /-- Euler's totient function satisfies $\varphi(n) \geq 2$ for $n > 2$. This
+  threshold is exactly what is needed to apply the sum-product inequality to collections
+  of totient values. -/)
   (title := "Totient Lower Bound")
   (statement := /-- For $n > 2$, we have $\varphi(n) \geq 2$. -/)
   (proof := /-- Since $n > 2$, we have $n \neq 1$ and $n \neq 2$.
@@ -176,6 +192,9 @@ namespace Finset
 
 /-- If each f(a) divides d and they're pairwise coprime, then ∏ f(a) divides d. -/
 @[blueprint "lem:prod-coprime-dvd"
+  (above := /-- When decomposing $m$ into its prime-power factors, one frequently needs that
+  a product of pairwise coprime divisors again divides $m$. The CRT-flavored lemma below
+  generalizes the binary statement to arbitrary finite products. -/)
   (title := "Coprime Product Divisibility")
   (statement := /-- If each $f(a)$ divides $d$ and the $f(a)$ are pairwise coprime,
   then $\prod_{a \in S} f(a)$ divides $d$. -/)
@@ -221,12 +240,19 @@ the binary `Nat.totient_mul`.
 
 For upstreaming to Mathlib, this should be placed in `Mathlib.Data.Nat.Totient`. -/
 @[blueprint "lem:totient-prod-coprime"
+  (above := /-- The multiplicativity of Euler's totient function on coprime arguments is
+  classical. We need the finitary generalization to products indexed by arbitrary finite
+  sets, since $\psi$ is defined as a sum of $\varphi(p^k)$ over the prime-power factorization
+  of $m$. -/)
   (title := "Totient Multiplicativity")
   (statement := /-- For pairwise coprime $\{f(a)\}_{a \in S}$, we have
   $\varphi(\prod_{a \in S} f(a)) = \prod_{a \in S} \varphi(f(a))$. -/)
   (proof := /-- By induction on the finite set. Empty case: $\varphi(1) = 1$ equals empty product.
   Insert case: use $\varphi(ab) = \varphi(a)\varphi(b)$ for coprime $a, b$
-  (`Nat.totient_mul`), where coprimality follows from `Nat.Coprime.prod_right`. -/)]
+  (`Nat.totient_mul`), where coprimality follows from `Nat.Coprime.prod_right`. -/)
+  (below := /-- This multiplicativity is what makes the $\psi$ function additive on
+  coprime factors, which in turn ensures that the backward construction achieves total
+  dimension exactly $\psi(m)$. -/)]
 theorem totient_finset_prod_of_coprime {α : Type*} [DecidableEq α] (S : Finset α) (f : α → ℕ)
     (h_coprime : ∀ a₁ ∈ S, ∀ a₂ ∈ S, a₁ ≠ a₂ → (f a₁).Coprime (f a₂)) :
     Nat.totient (∏ a ∈ S, f a) = ∏ a ∈ S, Nat.totient (f a) := by
@@ -257,12 +283,20 @@ namespace Crystallographic
 This uses orderOf(-1) = 2 (in char 0), commutativity of -1 with A,
 and gcd(2, k) = 1 for odd k. -/
 @[blueprint "lem:orderOf-neg-of-odd-order"
+  (above := /-- The special role of $-I$ (order $2$) means that negation can double the order
+  of a matrix, provided the original order is odd. This handles the factor of $2$ that
+  appears in composite orders of the form $2k$ with $k$ odd, and is used in the backward
+  direction when the prime $p = 2$ contributes only a single factor (i.e., $2 \| m$ but
+  $4 \nmid m$). -/)
   (title := "Order of Negation")
   (statement := /-- If $A$ has odd order $k$, then $-A$ has order $2k$. -/)
   (proof := /-- We have $-A = (-1) \cdot A$ where $-1$ commutes with $A$.
   In characteristic $0$, the order of $-1$ is $2$. Since $k$ is odd,
   $\gcd(2, k) = 1$, so by the product formula for commuting elements with
-  coprime orders, the order of $-A$ equals the order of $-1$ times the order of $A$, which is $2k$. -/)]
+  coprime orders, the order of $-A$ equals the order of $-1$ times the order of $A$, which is $2k$. -/)
+  (below := /-- Note that this exploits the fact that $\psi(2) = 0$: negation costs no
+  additional dimensions. This is why orders $1$ and $2$ are "free" in the crystallographic
+  restriction. -/)]
 theorem orderOf_neg_of_odd_order {n : ℕ} [NeZero n] (k : ℕ) (hk_odd : Odd k)
     (A : Matrix (Fin n) (Fin n) ℤ) (hA_ord : orderOf A = k) :
     orderOf (-A) = 2 * k := by

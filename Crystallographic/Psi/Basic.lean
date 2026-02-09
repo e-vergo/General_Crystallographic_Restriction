@@ -50,6 +50,12 @@ open Nat Finsupp
     Returns 0 if k = 0, returns 0 if p = 2 and k = 1, otherwise returns phi(p^k). -/
 @[blueprint
   "psiPrimePow-def"
+  (above := /-- To define $\psi$, we first specify the contribution of each prime power
+  factor. The key subtlety is at $p = 2$, $k = 1$: the matrix $-I$ has order $2$ in
+  dimension $1$, so order $2$ costs zero additional dimensions beyond whatever
+  the other prime powers already require. For every other prime power $p^k$, the
+  companion matrix of the $p^k$-th cyclotomic polynomial provides a $\varphi(p^k)$-dimensional
+  realization, and this is optimal. -/)
   (title := "Psi Prime Power Definition")
   (statement := /-- The function $\psi_{\text{pp}}(p, k)$ computes the contribution of a single
   prime power $p^k$ to $\psi$. Returns $0$ if $k = 0$ or if $p = 2$ and $k = 1$,
@@ -57,7 +63,9 @@ open Nat Finsupp
 
   The special case $\psi_{\text{pp}}(2, 1) = 0$ reflects that $-I$ achieves order $2$ in any
   dimension $\geq 1$, so order $2$ does not require additional dimensions. For all other
-  prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/)]
+  prime powers $p^k$, we need $\varphi(p^k)$ dimensions to achieve order $p^k$. -/)
+  (below := /-- With the prime power contribution in hand, we sum over the prime
+  factorization to obtain the full $\psi$ function. -/)]
 def psiPrimePow (p k : ℕ) : ℕ :=
   if k = 0 then 0
   else if p = 2 ∧ k = 1 then 0
@@ -75,6 +83,12 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
     psi(m) = sum_i (if p_i = 2 and k_i = 1 then 0 else phi(p_i^{k_i})) -/
 @[blueprint
   "psi-def"
+  (above := /-- The crystallographic restriction asks: for which orders $m$ does
+  $\mathrm{GL}_N(\mathbb{Z})$ contain an element of order $m$? The answer is governed
+  by a single arithmetic function $\psi$ that records the minimum dimension needed.
+  Its definition reduces the problem to prime powers via the factorization of $m$,
+  with the sole twist at $m = 2$ where the scalar matrix $-I$ provides a
+  zero-cost realization. -/)
   (title := "Psi Function Definition")
   (keyDeclaration := true)
   (message := "The psi function characterizes achievable orders")
@@ -86,7 +100,11 @@ lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
   $$\psi(m) = \sum_i \psi_{\text{pp}}(p_i, k_i) =
     \sum_{\substack{p^k \| m \\ (p,k) \neq (2,1)}} \varphi(p^k)$$
   This gives the minimum dimension needed to realize order $m$.
-  \uses{psiPrimePow-def} -/)]
+  \uses{psiPrimePow-def} -/)
+  (below := /-- For example, $\psi(6) = \psi_{\text{pp}}(2,1) + \psi_{\text{pp}}(3,1)
+  = 0 + 2 = 2$, $\psi(12) = \psi_{\text{pp}}(2,2) + \psi_{\text{pp}}(3,1) = 2 + 2 = 4$,
+  and $\psi(10) = 0 + 4 = 4$. The basic properties below confirm these values
+  and establish the algebraic identities needed for the main theorem. -/)]
 def psi (m : ℕ) : ℕ :=
   m.factorization.sum fun p k => psiPrimePow p k
 
@@ -110,6 +128,8 @@ theorem psi_two : psi 2 = 0 := by
 
 /-- `psi` of a prime power p^k equals phi(p^k), except `psi 2 = 0` -/
 @[blueprint "lem:psi-prime-pow"
+  (above := /-- Since $\psi$ is defined via the prime factorization, evaluating it on
+  a prime power is immediate: the sum has a single term. -/)
   (title := "Psi of Prime Power")
   (statement := /-- For prime $p$ and $k > 0$: $\psi(p^k) = \varphi(p^k)$ unless $p = 2, k = 1$.
 
@@ -118,7 +138,9 @@ theorem psi_two : psi 2 = 0 := by
   when $p = 2$ and $k = 1$.
   \uses{psiPrimePow-def, psi-def} -/)
   (proof := /-- For prime power $p^k$, the factorization has a single term, so
-  $\psi(p^k) = \psi_{pp}(p, k)$. This equals $\varphi(p^k)$ except when $p = 2, k = 1$. -/)]
+  $\psi(p^k) = \psi_{pp}(p, k)$. This equals $\varphi(p^k)$ except when $p = 2, k = 1$. -/)
+  (below := /-- In particular, $\psi(3) = 2$, $\psi(4) = 2$, $\psi(5) = 4$, $\psi(7) = 6$,
+  $\psi(8) = 4$, and $\psi(9) = 6$. These values are verified explicitly below. -/)]
 theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
     psi (p ^ k) = if p = 2 ∧ k = 1 then 0 else Nat.totient (p ^ k) := by
   simp only [psi]
@@ -167,6 +189,8 @@ theorem psi_nine : psi 9 = 6 := by simpa using psi_odd_prime_pow 3 2 Nat.prime_t
 
 If gcd(m, n) = 1, then m and n share no common prime factors. -/
 @[blueprint "lem:factorization-disjoint"
+  (above := /-- To extend $\psi$ from prime powers to arbitrary $m$, we exploit coprime
+  additivity. The first ingredient is that coprime integers share no prime factors. -/)
   (title := "Factorization Support Disjoint")
   (statement := /-- Coprime numbers have disjoint prime factorization supports. -/)
   (proof := /-- If $p$ divides both $m$ and $n$, then $p \mid \gcd(m,n) = 1$, contradicting $p$ prime. -/)]
@@ -186,6 +210,10 @@ For coprime m and n, `psi (m * n) = psi m + psi n`. This follows from the
 factorization m * n = prod(p_i^{k_i}) * prod(q_j^{l_j}) where the prime
 factors of m and n are disjoint. -/
 @[blueprint "lem:psi-coprime-add"
+  (above := /-- The disjointness of factorization supports immediately yields the
+  fundamental algebraic property of $\psi$: it is additive on coprime arguments.
+  This is the multiplicative counterpart to the fact that block-diagonal matrices
+  have order equal to the lcm of the block orders. -/)
   (title := "Psi Coprime Additivity")
   (statement := /-- $\psi(mn) = \psi(m) + \psi(n)$ for coprime $m, n$.
 
@@ -196,7 +224,10 @@ factors of m and n are disjoint. -/
   \uses{psi-def, lem:factorization-disjoint} -/)
   (proof := /-- When $\gcd(m, n) = 1$, the factorizations of $m$ and $n$ are disjoint.
   Each prime power in $mn$ comes from exactly one of $m$ or $n$, so the
-  $\psi$ contributions add. -/)]
+  $\psi$ contributions add. -/)
+  (below := /-- As concrete illustrations: $\psi(6) = \psi(2) + \psi(3) = 0 + 2 = 2$,
+  $\psi(10) = \psi(2) + \psi(5) = 0 + 4 = 4$, and
+  $\psi(12) = \psi(4) + \psi(3) = 2 + 2 = 4$. -/)]
 theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) :
     psi (m * n) = psi m + psi n := by
   simp only [psi, Finsupp.sum]
@@ -238,6 +269,10 @@ theorem psi_twelve : psi 12 = 4 := by
 
 If p^k divides m exactly, then `psi m ≥ psiPrimePow p k`. -/
 @[blueprint "lem:psi-ge-psiPrimePow"
+  (above := /-- We close this file with a simple monotonicity fact that is used
+  when proving $\psi(m) > 0$ for odd $m \geq 3$: each prime power contributes
+  non-negatively, so the total is at least as large as any single
+  contribution. -/)
   (title := "Psi Lower Bound by Prime Power")
   (statement := /-- $\psi(m) \geq \psi_{\mathrm{pp}}(p, v_p(m))$ for each prime $p \mid m$. -/)
   (proof := /-- The sum $\psi(m)$ includes the term $\psi_{\mathrm{pp}}(p, v_p(m))$, and all terms are non-negative. -/)]

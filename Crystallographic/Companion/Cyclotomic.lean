@@ -37,6 +37,11 @@ namespace Crystallographic
 open Matrix Polynomial
 
 @[blueprint "lem:companion-cycl-pow"
+  (above := /-- We now specialize the general companion matrix theory from the companion power
+  divisibility theorem to cyclotomic polynomials. The $m$-th cyclotomic polynomial $\Phi_m$
+  divides $X^m - 1$ (since $X^m - 1 = \prod_{d \mid m} \Phi_d$), so the companion power
+  divisibility theorem immediately gives $C(\Phi_m)^m = I$. This is the first half of showing
+  that $C(\Phi_m)$ has order exactly $m$. -/)
   (title := "Cyclotomic Companion Power")
   (statement := /-- $C(\Phi_m)^m = I$. Since the cyclotomic polynomial $\Phi_m$ divides
   $X^m - 1$ (as $X^m - 1 = \prod_{d \mid m} \Phi_d$), we apply
@@ -109,6 +114,11 @@ lemma dvd_of_cyclotomic_dvd_X_pow_sub_one (m k : ℕ) (hm_pos : 0 < m)
   exact hm_notin hd_mem
 
 @[blueprint "thm:companion-cycl-order"
+  (above := /-- Having shown $C(\Phi_m)^m = I$ in the cyclotomic companion power lemma, we must
+  rule out $C(\Phi_m)^d = I$ for any proper divisor $d < m$. The argument passes to the rational
+  field $\mathbb{Q}$ where $\Phi_m$ is irreducible, so the minimal polynomial of $C(\Phi_m)$
+  over $\mathbb{Q}$ is exactly $\Phi_m$. If $C(\Phi_m)^d = I$ then $\Phi_m \mid X^d - 1$
+  over $\mathbb{Q}$, which forces $m \mid d$---a contradiction for $d < m$. -/)
   (title := "Cyclotomic Companion Order")
   (statement := /-- $\mathrm{ord}(C(\Phi_m)) = m$ for $m \geq 2$. The order is exactly $m$
   because: (1) $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$, and (2) if $C(\Phi_m)^d = I$
@@ -117,7 +127,10 @@ lemma dvd_of_cyclotomic_dvd_X_pow_sub_one (m k : ℕ) (hm_pos : 0 < m)
   \uses{lem:companion-cycl-pow, lem:companion-aeval-zero} -/)
   (proof := /-- The order is at most $m$ since $\Phi_m \mid X^m - 1$ implies $C(\Phi_m)^m = I$.
   For the lower bound: if $C(\Phi_m)^d = I$ for $d < m$, then $\Phi_m \mid X^d - 1$,
-  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/)]
+  but this contradicts that primitive $m$-th roots of unity are not $d$-th roots. -/)
+  (below := /-- This is the central algebraic fact: the cyclotomic companion matrix $C(\Phi_m)$ has
+  order exactly $m$, and its dimension is $\deg(\Phi_m) = \varphi(m)$. Together, these show
+  that order $m$ is achievable in dimension $\varphi(m)$. -/)]
 theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     orderOf (companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn) = m := by
@@ -145,6 +158,10 @@ theorem companion_cyclotomic_orderOf (m : ℕ) (hm : 2 ≤ m)
 /-! ### Integer matrix membership -/
 
 @[blueprint "thm:companion-cycl-mem"
+  (above := /-- We now package the order computation from the cyclotomic companion order theorem
+  into the language of integer matrix orders. The companion matrix $C(\Phi_m)$ is a
+  $\varphi(m) \times \varphi(m)$ integer matrix (since $\Phi_m \in \mathbb{Z}[X]$) with order
+  exactly $m$. -/)
   (title := "Cyclotomic Companion Membership")
   (statement := /-- $m \in \mathrm{Ord}_{\varphi(m)}$ via $C(\Phi_m)$. Since
   $\deg(\Phi_m) = \varphi(m)$, the companion matrix $C(\Phi_m)$ is $\varphi(m) \times \varphi(m)$
@@ -167,7 +184,12 @@ theorem companion_cyclotomic_mem_integerMatrixOrders (m : ℕ) (hm : 2 ≤ m)
   $\varphi(m)$ with multiplicative order exactly $m$, namely the companion matrix of $\Phi_m$.
   \uses{thm:companion-cycl-mem} -/)
   (proof := /-- Apply the cyclotomic companion membership theorem after noting that
-  $\deg(\Phi_m) = \varphi(m)$. -/)]
+  $\deg(\Phi_m) = \varphi(m)$. -/)
+  (below := /-- This result provides the building blocks for the backward direction. For each
+  prime power $p^k$ appearing in the factorization of $m$, we obtain a $\varphi(p^k) \times
+  \varphi(p^k)$ integer matrix of order $p^k$. The backward direction then assembles these
+  via block diagonal matrices, with total dimension $\psi(m) = \sum \varphi(p_i^{k_i})$,
+  where the sum omits the contribution from $p = 2, k = 1$ due to the negation trick. -/)]
 theorem mem_integerMatrixOrders_totient (m : ℕ) (hm : 2 ≤ m) :
     m ∈ Crystallographic.integerMatrixOrders (Nat.totient m) := by
   have hdeg : (cyclotomic m ℤ).natDegree = Nat.totient m := Polynomial.natDegree_cyclotomic m ℤ

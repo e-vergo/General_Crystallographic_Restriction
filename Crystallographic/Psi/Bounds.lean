@@ -37,6 +37,9 @@ namespace Crystallographic
 /-! ## Helper lemmas for the forward direction -/
 
 @[blueprint "lem:two-le-totient-prime-pow"
+  (above := /-- A recurring theme in the bounds on $\psi$ is that $\varphi(p^k) \geq 2$
+  whenever $(p,k) \neq (2,1)$. This threshold is what makes $\sum a_i \leq \prod a_i$
+  applicable, converting additive $\psi$ bounds into multiplicative $\varphi$ bounds. -/)
   (title := "Totient of Prime Power")
   (statement := /-- For any prime power $p^k > 2$, we have $2 \leq \varphi(p^k)$.
 
@@ -70,6 +73,9 @@ private lemma psi_sum_le_totient_prod_of_ge_two {a b : ℕ}
     _ ≤ Nat.totient a * Nat.totient b := Nat.add_le_mul htot_a_ge2 htot_b_ge2
 
 @[blueprint "lem:factorization-split-lt"
+  (above := /-- The proof of $\psi(m) \leq \varphi(m)$ proceeds by strong induction. When $m$
+  is not a prime power, we need to split it into strictly smaller coprime factors so that the
+  inductive hypothesis applies to both parts. -/)
   (title := "Factorization Split Bound")
   (statement := /-- A composite number $m > 2$ that is not a prime power can be written
   as $m = p^e \cdot m'$ where $p$ is prime, $e > 0$, $\gcd(p^e, m') = 1$, and both
@@ -81,7 +87,10 @@ private lemma psi_sum_le_totient_prod_of_ge_two {a b : ℕ}
   (proof := /-- Take $p = \mathrm{minFac}(m)$ and $e = \nu_p(m)$, the $p$-adic valuation.
   Then $m' = m / p^e$ is coprime to $p^e$ (disjoint prime support). Since $m$ is not
   a prime power, $m' \neq 1$. The bounds $p^e < m$ and $m' < m$ follow from $m' > 1$
-  and $p^e \geq 2$ respectively. -/)]
+  and $p^e \geq 2$ respectively. -/)
+  (below := /-- This decomposition is the structural backbone of the strong induction in
+  the psi-totient bound: it reduces the composite case to coprime factors where
+  $\psi$ additivity and $\varphi$ multiplicativity can be combined. -/)]
 theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m) :
     ∃ (p e m' : ℕ), p.Prime ∧ 0 < e ∧ p ^ e * m' = m ∧
     (p ^ e).Coprime m' ∧ 1 < m' ∧ m' < m ∧ p ^ e < m := by
@@ -121,6 +130,10 @@ theorem factorization_split_lt {m : ℕ} (hm : 2 < m) (h_not_pp : ¬IsPrimePow m
   exact ⟨p, e, m', hminFac_prime, he_pos, hm_eq.symm, hcop, hm'_gt_one, hm'_lt, hpe_lt⟩
 
 @[blueprint "lem:psi-pos-of-odd"
+  (above := /-- A useful consequence of the definition: for odd $m \geq 3$, every prime
+  factor is at least $3$, so every prime power contribution is positive and
+  $\psi(m) > 0$. This is needed in the backward direction to ensure
+  the block-diagonal construction produces matrices of the correct dimension. -/)
   (title := "Psi Positive for Odd")
   (statement := /-- For odd $m \geq 3$, we have $\psi(m) > 0$.
 
@@ -179,6 +192,11 @@ Key cases:
 - m = 2 * odd (with odd > 1): psi(m) = psi(odd) ≤ totient(odd) = totient(m)
 - m = composite without 2^1 factor: each φ(p^k) ≥ 2, so sum ≤ product -/
 @[blueprint "lem:psi-le-totient"
+  (above := /-- The inequality $\psi(m) \leq \varphi(m)$ is the first of two key bounds.
+  Intuitively, $\psi$ and $\varphi$ agree on every prime power except $(2,1)$, and the
+  multiplicativity of $\varphi$ (versus the additivity of $\psi$) creates slack at every
+  composite level: $a + b \leq ab$ whenever $a, b \geq 2$. The proof makes this precise
+  by strong induction. -/)
   (title := "Psi Totient Bound")
   (statement := /-- For all $m \geq 1$, we have $\psi(m) \leq \varphi(m)$.
 
@@ -199,7 +217,10 @@ Key cases:
   (proof := /-- By strong induction on $m$. For $m = 1$: both sides are $0$. For $m > 1$:
   use coprime factorization $m = a \cdot b$ with $1 < a, b < m$. Then
   $\psi(m) = \psi(a) + \psi(b) \leq \varphi(a) + \varphi(b) \leq \varphi(m)$
-  by the inductive hypothesis and multiplicativity of $\varphi$. -/)]
+  by the inductive hypothesis and multiplicativity of $\varphi$. -/)
+  (below := /-- This bound is used directly in the sum-of-totients lemma and also
+  provides a quick proof when $m$ itself belongs to the set $S$ of divisors. The sharper
+  result we need for the forward direction is the sum-of-totients bound below. -/)]
 lemma psi_le_totient (m : ℕ) (hm : 0 < m) : psi m ≤ Nat.totient m := by
   -- Strong induction on m
   induction m using Nat.strong_induction_on with
@@ -255,6 +276,9 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : psi m ≤ Nat.totient m := by
             exact psi_sum_le_totient_prod_of_ge_two hpsi_pe IH_m' htot_pe_ge2 htot_m'_ge2
 
 @[blueprint "lem:prime-pow-achieved-of-lcm-eq"
+  (above := /-- We now develop the machinery for the sum-of-totients bound. The central
+  idea is to assign each prime power $q^{\nu_q(m)}$ to a ``witness'' $d \in S$ that
+  is divisible by it. The following lemma guarantees such witnesses exist. -/)
   (title := "Prime Power Achievement")
   (statement := /-- If $S$ is a finite set of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   then for each prime $q$ dividing $m$, some element $d \in S$ is divisible by $q^{\nu_q(m)}$.
@@ -264,7 +288,10 @@ lemma psi_le_totient (m : ℕ) (hm : 0 < m) : psi m ≤ Nat.totient m := by
   \uses{lem:lcm-factorization-le-sup} --/)
   (proof := /-- By contradiction: if all $d \in S$ have $\nu_q(d) < \nu_q(m)$, then
   $\nu_q(\mathrm{lcm}(S)) = \sup_{d \in S} \nu_q(d) < \nu_q(m)$, contradicting
-  $\mathrm{lcm}(S) = m$. -/)]
+  $\mathrm{lcm}(S) = m$. -/)
+  (below := /-- Given achievement, we partition the nontrivial primes of $m$ by their
+  witness and bound each fiber's totient sum by $\varphi(d)$. Summing over $S$
+  yields $\psi(m) \leq \sum_{d \in S} \varphi(d)$. -/)]
 lemma primePow_achieved_of_lcm_eq {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     ∀ q ∈ m.factorization.support, ∃ d ∈ S, q ^ m.factorization q ∣ d := by
@@ -421,6 +448,8 @@ lemma totient_sum_ge_psi_of_mem {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
           (Nat.mem_divisors.mpr ⟨hS_sub d (by assumption), hm.ne'⟩)))) hm_in_S
 
 @[blueprint "lem:finset-nonempty-of-two-le-lcm"
+  (above := /-- The final ingredient for the sum-of-totients bound is a pair of
+  bookkeeping lemmas about sets with large lcm. -/)
   (title := "Nonempty Finset from LCM")
   (statement := /-- If $\mathrm{lcm}(S) \geq 2$ for a finite set $S$ of natural numbers,
   then $S$ is nonempty.
@@ -471,6 +500,13 @@ The proof proceeds by showing that any other choice of S either:
 2. Uses a composite element d covering multiple prime powers, which costs
    φ(d) = Π φ(p^k) ≥ Σ φ(p^k) when each φ(p^k) ≥ 2. -/
 @[blueprint "lem:sum-totient-ge-psi"
+  (above := /-- We arrive at the combinatorial heart of the forward direction. Given a
+  finite-order integer matrix $A$ of order $m$, the minimal polynomial of $A$ is a
+  product of cyclotomic polynomials $\Phi_{d_1} \cdots \Phi_{d_r}$ with
+  $\mathrm{lcm}(d_1, \ldots, d_r) = m$. The dimension of $A$ is at least
+  $\sum \deg \Phi_{d_i} = \sum \varphi(d_i)$. The following bound shows that this sum
+  is always at least $\psi(m)$, completing the chain
+  $N \geq \sum \varphi(d_i) \geq \psi(m)$. -/)
   (title := "Totient Sum Lower Bound")
   (statement := /-- For any finite set $S$ of divisors of $m$ with $\mathrm{lcm}(S) = m$,
   we have $\psi(m) \leq \sum_{d \in S} \varphi(d)$.
@@ -485,7 +521,10 @@ The proof proceeds by showing that any other choice of S either:
   (proof := /-- For each prime power $p^k \| m$, some $d \in S$ must have $p^k \mid d$
   (since $\mathrm{lcm}(S) = m$). The element with maximal $p$-valuation contributes
   at least $\varphi(p^k) \geq \psi_{\mathrm{pp}}(p, k)$. Summing over distinct prime powers
-  and using non-negativity gives the bound. -/)]
+  and using non-negativity gives the bound. -/)
+  (below := /-- Combined with the cyclotomic divisor structure of minimal polynomials,
+  this yields the forward direction of the crystallographic restriction: if
+  $A \in \mathrm{GL}_N(\mathbb{Z})$ has order $m$, then $N \geq \psi(m)$. -/)]
 lemma sum_totient_ge_psi_of_lcm_eq (m : ℕ) (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hS_lcm : S.lcm id = m) :
     psi m ≤ ∑ d ∈ S, Nat.totient d := by

@@ -59,6 +59,11 @@ coefficients in the last column.
 -/
 @[blueprint
   "companion-def"
+  (above := /-- The backward direction of the crystallographic restriction requires constructing
+  an explicit integer matrix of prescribed finite order. The key tool is the companion matrix
+  of a monic polynomial, which translates polynomial divisibility into matrix equations.
+  Given a monic polynomial $p$ of degree $n$, its companion matrix $C(p)$ is an $n \times n$ matrix
+  that is entirely determined by the coefficients of $p$. -/)
   (title := "Companion Matrix Definition")
   (message := "Central construction for realizing polynomial orders as matrix orders")
   (misc := "Companion matrices provide canonical realizations of polynomials")
@@ -68,7 +73,11 @@ coefficients in the last column.
   $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\
   \vdots & \ddots & & \vdots \\ 0 & \cdots & 1 & -a_{n-1} \end{pmatrix}$$
   This construction produces a matrix whose characteristic polynomial equals $p$, providing
-  a canonical matrix realization for any monic polynomial. -/)]
+  a canonical matrix realization for any monic polynomial. -/)
+  (below := /-- The fundamental property of this construction is that $\chi_{C(p)} = p$:
+  the characteristic polynomial of $C(p)$ recovers $p$ exactly. This is proved in
+  the companion characteristic polynomial theorem by induction on the degree, using cofactor
+  expansion along the first column. -/)]
 def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
     Matrix (Fin p.natDegree) (Fin p.natDegree) R :=
   Matrix.of fun i j =>
@@ -512,6 +521,11 @@ column gives a recurrence matching the polynomial structure.
 -/
 @[blueprint
   "thm:companion-charpoly"
+  (above := /-- The companion matrix $C(p)$ was defined so that its structure encodes the
+  coefficients of $p$. We now verify the key identity that justifies the construction: the
+  characteristic polynomial $\chi_{C(p)} = \det(XI - C(p))$ equals $p$ itself. This is what
+  makes companion matrices useful---they provide a canonical matrix realization of any monic
+  polynomial. -/)
   (title := "Companion Characteristic Polynomial")
   (statement := /-- The characteristic polynomial of the companion matrix $C(p)$ equals $p$:
   $\chi_{C(p)} = p$. The proof proceeds by induction on the degree, using cofactor expansion
@@ -521,7 +535,11 @@ column gives a recurrence matching the polynomial structure.
   (proof := /-- By induction on the degree $n$. For the base case $n = 1$, direct computation gives
   $\det(XI - C) = X + a_0$. For $n > 1$, expand along the first column: the $(1,1)$ minor
   is the companion matrix of lower degree, and the $(2,1)$ minor contributes the constant
-  term. The recurrence matches the polynomial coefficients. -/)]
+  term. The recurrence matches the polynomial coefficients. -/)
+  (below := /-- Since $\chi_{C(p)} = p$, the Cayley--Hamilton theorem immediately gives
+  $p(C(p)) = 0$, and hence $C(p)^m = I$ whenever $p \mid X^m - 1$. This chain of
+  consequences is developed in the companion evaluation and companion power divisibility
+  results that follow. -/)]
 theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     (companion p hp hn).charpoly = p := by
   obtain ⟨n, hn_eq⟩ : ∃ n, p.natDegree = n + 1 := Nat.exists_eq_succ_of_ne_zero hn.ne'
@@ -548,6 +566,9 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
 /-! ### Polynomial evaluation -/
 
 @[simp, blueprint "lem:companion-aeval-zero"
+  (above := /-- With the identity $\chi_{C(p)} = p$ established in the companion characteristic
+  polynomial theorem, the Cayley--Hamilton theorem ($A$ always satisfies $\chi_A$) specializes
+  to a clean annihilation result for companion matrices. -/)
   (title := "Companion Evaluation Zero")
   (statement := /-- $p(C(p)) = 0$ (Cayley-Hamilton). By the Cayley-Hamilton theorem, every
   matrix satisfies its characteristic polynomial. Since the characteristic polynomial of
@@ -564,6 +585,11 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
 /-! ### Powers and order -/
 
 @[blueprint "thm:companion-pow-dvd"
+  (above := /-- The annihilation result $p(C(p)) = 0$ from the companion evaluation theorem
+  translates polynomial divisibility into a matrix power equation. If $p$ divides
+  $X^m - 1$, then evaluating at $C(p)$ forces $C(p)^m = I$. This is the mechanism by which
+  cyclotomic divisibility (an algebraic fact) produces matrices of prescribed finite order
+  (a linear-algebraic fact). -/)
   (title := "Companion Power Divisibility")
   (statement := /-- If $p \mid X^m - 1$, then $C(p)^m = I$. If $p \mid X^m - 1$, write
   $X^m - 1 = p \cdot q$ for some $q$. Since $p(C(p)) = 0$, evaluating at $C(p)$ gives
@@ -571,7 +597,12 @@ theorem companion_aeval_eq_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
   \uses{lem:companion-aeval-zero} -/)
   (proof := /-- If $p \mid X^m - 1$, write $X^m - 1 = p \cdot q$ for some polynomial $q$.
   Evaluating at $C(p)$: $(X^m - 1)(C(p)) = p(C(p)) \cdot q(C(p)) = 0 \cdot q(C(p)) = 0$,
-  so $C(p)^m = I$. -/)]
+  so $C(p)^m = I$. -/)
+  (below := /-- Applying this to the cyclotomic polynomial $\Phi_m$, which divides $X^m - 1$ by
+  definition, gives $C(\Phi_m)^m = I$. Combined with a minimality argument showing
+  $\mathrm{ord}(C(\Phi_m)) = m$ exactly, this yields the companion matrices needed for
+  the backward direction. The cyclotomic companion power and cyclotomic companion order
+  results develop this further. -/)]
 theorem companion_pow_eq_one_of_dvd (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdvd : p ∣ X ^ m - 1) :
     (companion p hp hn) ^ m = 1 := by

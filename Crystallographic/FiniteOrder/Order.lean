@@ -36,11 +36,19 @@ open Matrix
 Since blockDiag2 A B acts independently on the two blocks, it equals 1 iff both A^k = 1
 and B^k = 1, which happens at k = lcm(orderOf A, orderOf B). -/
 @[blueprint "thm:orderOf-blockDiag2"
+  (above := /-- With the monoid homomorphism structure of block diagonals established, we
+  can now compute orders. The key observation is that block diagonals act independently on
+  each summand: $\mathrm{diag}(A, B)^n = I$ if and only if $A^n = I$ and $B^n = I$. The
+  least such $n$ is the lcm of the individual orders. -/)
   (title := "Block Diagonal Order")
   (statement := /-- The order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
   \mathrm{ord}(B))$. \uses{def:blockDiag2, lem:blockDiag2-pow, lem:blockDiag2-eq-one} -/)
   (proof := /-- The order is the least $n$ such that $A^n = I$ and $B^n = I$, which is exactly
-  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/)]
+  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/)
+  (below := /-- This formula is the engine of the backward direction. For coprime orders
+  $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so block diagonal
+  composition of matrices with coprime orders produces a matrix whose order is
+  the product. -/)]
 theorem orderOf_blockDiag2 {M K : ℕ}
     (A : Matrix (Fin M) (Fin M) ℤ) (B : Matrix (Fin K) (Fin K) ℤ) :
     orderOf (blockDiag2 A B) = Nat.lcm (orderOf A) (orderOf B) := by
@@ -53,8 +61,12 @@ theorem orderOf_blockDiag2 {M K : ℕ}
     If m₁ ∈ integerMatrixOrders M and m₂ ∈ integerMatrixOrders K,
     then lcm(m₁, m₂) ∈ integerMatrixOrders (M + K). -/
 @[blueprint "lem:lcm-mem-orders"
+  (above := /-- The order formula translates directly into a closure property for
+  $\mathrm{Ord}_N$: block diagonal composition combines achievable orders via lcm while
+  adding the dimensions. -/)
   (title := "LCM in Matrix Orders")
-  (statement := /-- If $m, n \in \mathrm{Ord}_N$ are coprime, then $mn \in \mathrm{Ord}_{2N}$.
+  (statement := /-- If $m_1 \in \mathrm{Ord}_M$ and $m_2 \in \mathrm{Ord}_K$, then
+  $\mathrm{lcm}(m_1, m_2) \in \mathrm{Ord}_{M+K}$.
   \uses{thm:orderOf-blockDiag2} -/)
   (proof := /-- Given matrices $A, B$ achieving orders $m_1, m_2$ in dimensions $M, K$, the block
   diagonal $\mathrm{diag}(A, B)$ has order $\mathrm{lcm}(m_1, m_2)$ in dimension $M + K$. -/)]
@@ -73,7 +85,11 @@ lemma lcm_mem_integerMatrixOrders {M K m₁ m₂ : ℕ}
   (statement := /-- Product of coprime achievable orders is achievable.
   \uses{lem:lcm-mem-orders} -/)
   (proof := /-- For coprime $m_1, m_2$, we have $\mathrm{lcm}(m_1, m_2) = m_1 m_2$, so this
-  follows from the lcm result. -/)]
+  follows from the lcm result. -/)
+  (below := /-- This is the form actually used in the backward direction: one decomposes
+  $m$ into coprime prime-power factors, constructs a matrix for each factor, then assembles
+  them via iterated block diagonal. The additivity of $\psi$ on coprime factors ensures the
+  total dimension is $\psi(m)$. -/)]
 lemma mul_mem_integerMatrixOrders_of_coprime {M K m₁ m₂ : ℕ}
     (h₁ : m₁ ∈ integerMatrixOrders M) (h₂ : m₂ ∈ integerMatrixOrders K)
     (hcop : Nat.Coprime m₁ m₂) :

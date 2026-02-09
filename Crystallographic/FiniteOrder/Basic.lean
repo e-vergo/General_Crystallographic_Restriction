@@ -44,11 +44,19 @@ An integer `m` is in this set if there exists an N×N integer matrix `A` such th
 `orderOf A = m` and `m > 0` (equivalently, `A` has finite order). -/
 @[blueprint
   "integerMatrixOrders-def"
+  (above := /-- The crystallographic restriction theorem asks: for a given dimension $N$, which
+  finite orders can an $N \times N$ integer matrix have? The answer is encoded by the set
+  $\mathrm{Ord}_N$, which collects all achievable orders. The main theorem
+  gives a complete characterization: $m \in \mathrm{Ord}_N$ if and
+  only if $\psi(m) \leq N$. -/)
   (title := "Integer Matrix Orders Definition")
   (misc := "The set Ord_N captures all achievable orders in dimension N")
   (statement := /-- The set $\mathrm{Ord}_N$ of possible orders for $N \times N$ integer matrices
   with finite order. A natural number $m$ is in this set if there exists an $N \times N$ integer matrix
-  $A$ with order $m$. -/)]
+  $A$ with order $m$. -/)
+  (below := /-- The first structural properties of $\mathrm{Ord}_N$ are that it always contains
+  $1$ and $2$, and that it is monotone in the dimension. The block diagonal construction
+  provides the key mechanism for combining orders across dimensions. -/)]
 def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
@@ -62,6 +70,8 @@ lemma Matrix.map_algebraMap_int_injective (N : ℕ) :
 
 /-- The identity matrix has order 1, so 1 ∈ integerMatrixOrders N for any N. -/
 @[blueprint "lem:one-mem-orders"
+  (above := /-- The trivial orders $1$ and $2$ are always achievable, regardless of dimension.
+  These form the base cases for the inductive structure of $\mathrm{Ord}_N$. -/)
   (title := "One in Matrix Orders")
   (statement := /-- Order $1$ is achievable in any dimension. -/)
   (proof := /-- The identity matrix $I$ has order $1$ in any dimension. -/)]
@@ -81,7 +91,9 @@ lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N
   (title := "Two in Matrix Orders")
   (statement := /-- Order $2$ is achievable for $N \geq 1$. -/)
   (proof := /-- The matrix $-I$ satisfies $(-I)^2 = I$ and $-I \neq I$ for $N \geq 1$,
-  so it has order $2$. -/)]
+  so it has order $2$. -/)
+  (below := /-- The fact that $\psi(1) = \psi(2) = 0$ reflects exactly that orders $1$ and $2$
+  are achievable in every dimension, requiring no "real" space. -/)]
 lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrders N :=
   ⟨-1, by rw [orderOf_neg_one, ringChar_matrix_int]; simp, by norm_num⟩
 
@@ -162,6 +174,11 @@ for N x N matrices.
 
 The construction pads the M x M matrix with an identity block in the lower-right corner. -/
 @[blueprint "lem:orders-mono"
+  (above := /-- Increasing the dimension can only make more orders available: any order
+  achievable in dimension $M$ remains achievable in dimension $N \geq M$ by padding with
+  an identity block. This monotonicity is used implicitly throughout the backward direction,
+  where matrices are first constructed in dimension $\psi(m)$
+  and then embedded into dimension $N$. -/)
   (title := "Matrix Orders Monotonicity")
   (statement := /-- $\mathrm{Ord}_M \subseteq \mathrm{Ord}_N$ for $M \leq N$.
   \uses{integerMatrixOrders-def} -/)
@@ -193,9 +210,19 @@ theorem integerMatrixOrders_mono {M N : ℕ} (hMN : M ≤ N) :
 
 /-- Block diagonal of two matrices: places A in upper-left and B in lower-right. -/
 @[blueprint "def:blockDiag2"
+  (above := /-- The block diagonal construction is the principal tool for combining matrices
+  across dimensions. Given $A \in M_M(\mathbb{Z})$ and $B \in M_K(\mathbb{Z})$, we form the
+  $(M+K) \times (M+K)$ block diagonal matrix $\mathrm{diag}(A, B)$. Since the two blocks act
+  independently, the order of $\mathrm{diag}(A, B)$ equals $\mathrm{lcm}(\mathrm{ord}(A),
+  \mathrm{ord}(B))$. This is the mechanism by which the backward direction of the
+  crystallographic restriction assembles prime-power companion matrices into a single matrix
+  achieving a composite order. -/)
   (title := "Block Diagonal Matrix")
   (misc := "Block diagonal construction enables combining orders via lcm")
-  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)]
+  (statement := /-- Block diagonal matrix $\mathrm{diag}(A, B)$ of dimension $M + N$. -/)
+  (below := /-- The algebraic properties of block diagonals are developed next: preservation
+  of multiplication, characterization of the identity, and distribution of powers.
+  These combine to give the order formula for block diagonal matrices. -/)]
 def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
@@ -203,6 +230,9 @@ def blockDiag2 {M K : ℕ} {R : Type*} [Zero R]
 
 /-- Block diagonal of identity matrices is the identity. -/
 @[simp, blueprint "lem:blockDiag2-one"
+  (above := /-- The next three lemmas establish that $\mathrm{diag}(-, -)$ is a monoid
+  homomorphism from the product of matrix monoids, which is the key algebraic input
+  for computing orders. -/)
   (title := "Block Diagonal Identity")
   (statement := /-- $\mathrm{diag}(I_M, I_K) = I_{M+K}$. \uses{def:blockDiag2} -/)
   (proof := /-- Immediate from the definition of block diagonal and the identity matrix. -/)]
@@ -228,7 +258,10 @@ lemma blockDiag2_mul {M K : ℕ} {R : Type*} [Semiring R]
 @[blueprint "def:blockDiag2-prodMonoidHom"
   (title := "Block Diagonal Homomorphism")
   (statement := /-- The map $(A, B) \mapsto \mathrm{diag}(A, B)$ is a monoid homomorphism.
-  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/)]
+  \uses{def:blockDiag2, lem:blockDiag2-one, lem:blockDiag2-mul} -/)
+  (below := /-- Packaging the block diagonal as a monoid homomorphism lets us apply Mathlib's
+  general theory of orders in monoids. In particular, the injectivity of this map together
+  with `orderOf_injective` yields the order formula for block diagonals. -/)]
 def blockDiag2.prodMonoidHom (M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R × Matrix (Fin K) (Fin K) R →*
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
@@ -256,7 +289,11 @@ lemma blockDiag2_eq_one_iff {M K : ℕ} {R : Type*} [Zero R] [One R]
   (title := "Block Diagonal Power")
   (statement := /-- $\mathrm{diag}(A, B)^n = \mathrm{diag}(A^n, B^n)$. \uses{def:blockDiag2} -/)
   (proof := /-- By induction on $n$: the block structure is preserved under multiplication, and
-  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')$. -/)]
+  $\mathrm{diag}(A, B) \cdot \mathrm{diag}(A', B') = \mathrm{diag}(AA', BB')$. -/)
+  (below := /-- Together with the identity criterion, this immediately gives:
+  $\mathrm{diag}(A, B)^n = I$ if and only if $A^n = I$ and $B^n = I$.
+  The order of the block diagonal is therefore
+  $\mathrm{lcm}(\mathrm{ord}(A), \mathrm{ord}(B))$. -/)]
 lemma blockDiag2_pow {M K : ℕ} {R : Type*} [Semiring R]
     (A : Matrix (Fin M) (Fin M) R) (B : Matrix (Fin K) (Fin K) R) (k : ℕ) :
     (blockDiag2 A B) ^ k = blockDiag2 (A ^ k) (B ^ k) := by

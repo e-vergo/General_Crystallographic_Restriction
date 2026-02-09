@@ -66,6 +66,11 @@ namespace Equiv.Perm
 
 /-- The permutation matrix of the identity permutation is the identity matrix. -/
 @[simp, blueprint "lem:permMatrix-one"
+  (above := /-- Before constructing companion matrices, we develop a simpler family of integer matrices
+  with prescribed finite order: permutation matrices. A permutation $\sigma \in S_n$ gives
+  an $n \times n$ matrix $P_\sigma$ with entries 0 and 1. The key properties we need are that
+  $\sigma \mapsto P_\sigma$ preserves powers and is injective, so
+  $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$. We begin with the base case. -/)
   (title := "Permutation Matrix Identity Base")
   (statement := /-- The permutation matrix of the identity is the identity matrix: $P_{\mathrm{id}} = I$. -/)
   (proof := /-- Direct computation using $\mathrm{toPEquiv}(\mathrm{id}) = \mathrm{refl}$ and
@@ -107,6 +112,9 @@ lemma permMatrix_pow {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiri
 
 /-- Permutation matrix is identity iff permutation is identity. -/
 @[blueprint "lem:permMatrix-eq-one-iff"
+  (above := /-- The power identity $P_{\sigma^k} = P_\sigma^k$ from the permutation matrix power lemma
+  reduces the order question for $P_\sigma$ to an injectivity statement: we need
+  $P_\sigma = I \iff \sigma = \mathrm{id}$. -/)
   (title := "Permutation Matrix Identity")
   (statement := /-- $P_\sigma = I$ if and only if $\sigma = \mathrm{id}$.
   \uses{lem:permMatrix-one} -/)
@@ -140,7 +148,10 @@ lemma permMatrix_eq_one_iff {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} 
   (statement := /-- The order of $P_\sigma$ equals the order of $\sigma$ for a permutation matrix. -/)
   (proof := /-- Since $P_{\sigma^k} = P_\sigma^k$ and $P_\sigma = I \iff \sigma = \mathrm{id}$, the order
   of $P_\sigma$ equals the order of $\sigma$. The key is that the permutation matrix map preserves
-  powers and is injective on the group of permutation matrices. -/)]
+  powers and is injective on the group of permutation matrices. -/)
+  (below := /-- With order preservation established, we can produce integer matrices of any desired
+  order $n$ simply by finding a permutation of order $n$. The canonical choice is the cyclic
+  rotation $\mathrm{finRotate}(n)$, which has order $n$ by the cycle order theorem. -/)]
 lemma orderOf_permMatrix {n : Type*} [DecidableEq n] [Fintype n] {R : Type*} [Semiring R]
     [Nontrivial R] (σ : Equiv.Perm n) :
     orderOf (σ.permMatrix R) = orderOf σ := by
@@ -179,7 +190,11 @@ lemma orderOf_finRotate (n : ℕ) (hn : 2 ≤ n) : orderOf (finRotate n) = n := 
   (statement := /-- The permutation matrix of $\mathrm{finRotate}(n)$ has order $n$ over $\mathbb{Z}$.
   \uses{lem:orderOf-permMatrix, lem:orderOf-finRotate} -/)
   (proof := /-- Combines the order-preservation property $\mathrm{ord}(P_\sigma) = \mathrm{ord}(\sigma)$
-  with $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/)]
+  with $\mathrm{ord}(\mathrm{finRotate}(n)) = n$. -/)
+  (below := /-- This gives $n \in \mathrm{Ord}_n$ for all $n \geq 2$: the rotation permutation matrix
+  is an $n \times n$ integer matrix with order $n$. While this only shows order $n$ is achievable
+  in dimension $n$ (not the optimal $\psi(n)$), it handles the easy case where $n \leq N$
+  in the backward direction. -/)]
 lemma orderOf_permMatrix_finRotate (n : ℕ) (hn : 2 ≤ n) :
     orderOf ((finRotate n).permMatrix ℤ) = n := by
   rw [orderOf_permMatrix, orderOf_finRotate n hn]
@@ -191,7 +206,11 @@ end Equiv.Perm
   (title := "Self in Matrix Orders")
   (statement := /-- $m \in \mathrm{Ord}_m$ for $m \geq 2$ via permutation matrix. -/)
   (proof := /-- The permutation matrix $P_{\mathrm{finRotate}(m)}$ is an $m \times m$ integer matrix
-  with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/)]
+  with order exactly $m$, since $\mathrm{finRotate}(m)$ has order $m$. -/)
+  (below := /-- This corollary is used in the backward direction to handle the case $m \leq N$:
+  if the matrix dimension $N$ is at least $m$, we can simply use a permutation matrix
+  and pad with identity blocks, without needing the more sophisticated companion matrix
+  construction. -/)]
 lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatrixOrders n := by
   use (finRotate n).permMatrix ℤ
   constructor
@@ -202,11 +221,21 @@ lemma mem_integerMatrixOrders_self (n : ℕ) (hn : 2 ≤ n) : n ∈ integerMatri
 
 /-- For prime power with p odd or k at least 2, p^k is in integerMatrixOrders(psi(p^k)). -/
 @[blueprint "thm:primePow-mem-integerMatrixOrders-psi"
+  (above := /-- We now begin the core of the backward direction. The strategy is to show
+  $m \in \mathrm{Ord}_{\psi(m)}$ by building matrices for each prime power factor and combining
+  them via block diagonals. The first step handles individual prime powers $p^k$
+  (excluding $2^1$, which is treated separately via negation). For these, $\psi(p^k) = \varphi(p^k)$,
+  and the companion matrix of $\Phi_{p^k}$ from the totient membership theorem provides a matrix
+  of the correct dimension and order. -/)
   (title := "Prime Power in Orders")
   (statement := /-- For a prime power $p^k$ with $p$ odd or $k \geq 2$, we have $p^k \in \mathrm{Ord}_{\psi(p^k)}$.
   -/)
   (proof := /-- For these prime powers, $\psi(p^k) = \varphi(p^k)$. The companion matrix of $\Phi_{p^k}$
-  has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/)]
+  has dimension $\varphi(p^k)$ and order exactly $p^k$, so $p^k \in \mathrm{Ord}_{\varphi(p^k)} = \mathrm{Ord}_{\psi(p^k)}$. -/)
+  (below := /-- The excluded case $p^k = 2$ is special: $\psi(2) = 0$ and $\varphi(2) = 1$, so
+  the companion matrix approach would require dimension 1 but $\psi$ promises dimension 0.
+  Instead, multiplying by $-I$ doubles the order of an odd-order matrix without increasing
+  dimension. This trick is why $\psi(m)$ can be strictly less than $\varphi(m)$ when $m$ is even. -/)]
 theorem primePow_mem_integerMatrixOrders_psi (p k : ℕ) (hp : p.Prime) (hk : 0 < k)
     (hpk : ¬(p = 2 ∧ k = 1)) :
     p ^ k ∈ integerMatrixOrders (psi (p ^ k)) := by
@@ -316,6 +345,12 @@ handles `m = 2` separately using the hypothesis `hNm : m = 1 ∨ 0 < N`.
 This theorem is used to complete the backward direction of the crystallographic
 restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
 @[blueprint "thm:mem-integerMatrixOrders-psi"
+  (above := /-- With the prime power case and
+  the negation trick for factors of 2, we can now prove the full result: every $m \geq 1$
+  (except $m = 2$) belongs to $\mathrm{Ord}_{\psi(m)}$. The proof uses strong induction on $m$,
+  factoring $m$ into coprime parts and assembling block diagonal matrices. The
+  additivity of $\psi$ on coprime factors ensures the dimensions
+  combine correctly. -/)
   (title := "Psi Characterizes Orders")
   (statement := /-- For $m \geq 1$ with $m \neq 2$, we have $m \in \mathrm{Ord}_{\psi(m)}$.
   The construction achieves order $m$ using exactly $\psi(m)$ dimensions via block diagonal
@@ -327,7 +362,11 @@ restriction theorem: if `psi m ≤ N`, then `m ∈ integerMatrixOrders N`. -/
   $m = p^e \cdot m'$ with coprime factors, we use block diagonal of matrices achieving
   orders $p^e$ and $m'$ from the induction hypothesis, with dimension $\psi(p^e) + \psi(m')
   = \psi(m)$ by additivity of $\psi$ on coprime factors. For $m = 2 \cdot m'$ with $m'$ odd,
-  negating the order-$m'$ matrix doubles the order without changing dimension. -/)]
+  negating the order-$m'$ matrix doubles the order without changing dimension. -/)
+  (below := /-- The exclusion of $m = 2$ is necessary: $\psi(2) = 0$, but there is no $0 \times 0$
+  integer matrix with order 2. The backward direction theorem
+  handles $m = 2$ separately using the hypothesis that $N \geq 1$, since $-I_N$ has order 2
+  in any positive dimension. -/)]
 theorem mem_integerMatrixOrders_psi (m : ℕ) (hm : 0 < m) (hm2 : m ≠ 2) :
     m ∈ integerMatrixOrders (psi m) := by
   -- Use strong induction on m
@@ -428,11 +467,17 @@ The construction uses companion matrices of cyclotomic polynomials.
 5. Pad with identity blocks to reach size N x N
 -/
 @[blueprint "thm:backward-direction"
+  (above := /-- We now assemble the full backward direction from the components developed above.
+  The psi characterization theorem shows $m \in \mathrm{Ord}_{\psi(m)}$ for
+  $m \neq 2$, and monotonicity of $\mathrm{Ord}$ extends this to any
+  $N \geq \psi(m)$. The proof handles $m = 2$ separately using $-I$, and small cases $m \leq 6$
+  by direct computation, before applying the general companion matrix construction for larger $m$.
+  Together with the forward direction, this completes the crystallographic restriction:
+  $m \in \mathrm{Ord}_N \iff \psi(m) \leq N$. -/)
   (title := "Backward Direction")
   (message := "Explicit construction proves psi(m) <= N is sufficient")
-  (statement := /-- \textbf{Backward Direction:} If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
+  (statement := /-- Backward Direction: If $\psi(m) \leq N$, then $m \in \mathrm{Ord}_N$.
 
-  \textbf{Mathematical context:}
   The companion matrix of a monic polynomial $p(X)$ has $p(X)$ as both its characteristic
   and minimal polynomial. For the cyclotomic polynomial $\Phi_m$, the companion matrix $C_m$
   satisfies $\Phi_m(C_m) = 0$, so $C_m^m = I$, and since $\Phi_m$ is minimal (irreducible over
@@ -440,7 +485,7 @@ The construction uses companion matrices of cyclotomic polynomials.
   The key optimization in the $\psi$ function is that $\psi(2) = 0$: order 2 is achieved by $-I$
   in any dimension, so we do not need to ``pay'' $\varphi(2) = 1$ for the factor of 2.
 
-  \textbf{Proof by explicit construction:}
+  Proof by explicit construction:
   \begin{enumerate}
   \item For $m = 1$: Use the identity matrix (any dimension).
   \item For $m = 2$: Use $-I$ (dimension $\geq 1$), achieving order 2 without adding to $\psi$.
@@ -458,7 +503,10 @@ The construction uses companion matrices of cyclotomic polynomials.
   of companion matrices for cyclotomic polynomials $\Phi_{p^k}$ of each prime power factor.
   The companion matrix $C(\Phi_{p^k})$ has order exactly $p^k$ and size $\varphi(p^k)$.
   Block diagonal matrices have order equal to the lcm of block orders, which equals $m$
-  for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/)]
+  for coprime factors. Identity padding extends to dimension $N \geq \psi(m)$. --/)
+  (below := /-- Combined with the forward direction, this yields the
+  full crystallographic restriction: $m \in \mathrm{Ord}_N$ if and only if $\psi(m) \leq N$.
+  The function $\psi$ is therefore the exact dimension cost of achieving order $m$. -/)]
 theorem mem_integerMatrixOrders_of_psi_le (N m : ℕ) (hm : 0 < m)
     (hpsi : psi m ≤ N) (hNm : m = 1 ∨ 0 < N) :
     m ∈ integerMatrixOrders N := by
