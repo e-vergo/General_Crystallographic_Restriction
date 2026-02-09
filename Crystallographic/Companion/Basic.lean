@@ -519,6 +519,9 @@ The proof proceeds by strong induction on the degree n. For degree 1, direct com
 shows both sides equal X + C(a_0). For degree n+1, Laplace expansion along the first
 column gives a recurrence matching the polynomial structure.
 -/
+
+
+
 @[blueprint
   "thm:companion-charpoly"
   (above := /-- The companion matrix $C(p)$ was defined so that its structure encodes the
@@ -562,6 +565,11 @@ theorem companion_charpoly (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree) :
     rw [companion_charmatrix_laplace_col_zero m A hA00 hA10 hA_other, ← Polynomial.X_mul_divX_add p,
       companion_charmatrix_minor00_det p hp hn m hdeg A hA_def IH,
       companion_charmatrix_minor10_det p hp hn m hdeg A hA_def]
+
+
+
+
+
 
 /-! ### Polynomial evaluation -/
 
