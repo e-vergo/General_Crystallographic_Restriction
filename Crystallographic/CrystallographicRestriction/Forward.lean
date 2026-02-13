@@ -75,14 +75,12 @@ lemma pow_eq_one_of_minpoly_dvd_X_pow_sub_one {N : ℕ} (A : Matrix (Fin N) (Fin
   rw [Matrix.map_pow, Matrix.map_one (algebraMap ℤ ℚ) (map_zero _) (map_one _)]
   exact haeval
 
-/-- If A^m = 1, then the minimal polynomial of A divides X^m - 1.
-This is because X^m - 1 annihilates A, and the minimal polynomial divides any annihilating polynomial. -/
 @[blueprint "lem:minpoly-dvd-X-pow-sub-one"
   (above := /-- This is the converse of the previous lemma: if a matrix power equals the
   identity, then $X^m - 1$ annihilates $A$, so the minimal polynomial must divide it.
   This direction is used to connect $A^m = I$ to the cyclotomic factorization
   $X^m - 1 = \prod_{d \mid m} \Phi_d$, which is the starting point of the
-  forward direction argument. -/)
+  forward direction argument -/)
   (title := "Minpoly Divides X^n - 1")
   (statement := /-- If $A^m = I$, then $\mu_A \mid X^m - 1$.
   \uses{def:minpoly} -/)
