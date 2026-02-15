@@ -57,6 +57,7 @@ lemma companion_cyclotomic_pow_eq_one (m : ℕ)
 
 /-- For the companion matrix of cyclotomic m ℤ, the minimal polynomial over ℚ equals cyclotomic m ℚ.
 This uses that minpoly | charpoly = cyclotomic, and cyclotomic is monic irreducible over ℚ. -/
+@[blueprint "lem:companion-cyclotomic-minpoly" (title := "Cyclotomic Companion Minpoly")]
 lemma companion_cyclotomic_minpoly (m : ℕ) (hm_pos : 0 < m)
     (hn : 0 < (cyclotomic m ℤ).natDegree) :
     let A := companion (cyclotomic m ℤ) (cyclotomic.monic m ℤ) hn
@@ -85,6 +86,7 @@ lemma companion_cyclotomic_minpoly (m : ℕ) (hm_pos : 0 < m)
 /-- If cyclotomic m ℚ divides X^k - 1 for 0 < k, then m ∣ k.
 This uses the factorization X^k - 1 = ∏_{d|k} Φ_d and that cyclotomic polynomials
 are coprime for different indices. -/
+@[blueprint "lem:dvd-of-cyclotomic-dvd-X-pow-sub-one" (title := "Divisibility from Cyclotomic Divisibility")]
 lemma dvd_of_cyclotomic_dvd_X_pow_sub_one (m k : ℕ) (hm_pos : 0 < m)
     (hk_pos : 0 < k) (hdvd : cyclotomic m ℚ ∣ (X ^ k - 1 : ℚ[X])) :
     m ∣ k := by

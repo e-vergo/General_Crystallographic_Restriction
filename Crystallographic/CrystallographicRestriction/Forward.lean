@@ -130,6 +130,7 @@ lemma cyclotomic_finset_product_dvd {target : ℚ[X]} (S : Finset ℕ)
 
 /-- For a divisor d not in the cyclotomic divisor set S of the minimal polynomial,
 the cyclotomic polynomial Φ_d is coprime to the minimal polynomial. -/
+@[blueprint "lem:cyclotomic-coprime-minpoly-of-not-mem" (title := "Cyclotomic Coprime to Minpoly")]
 lemma cyclotomic_coprime_minpoly_of_not_mem {N : ℕ} [NeZero N]
     (A : Matrix (Fin N) (Fin N) ℤ) (d : ℕ) (hd_pos : 0 < d)
     (hndvd : ¬cyclotomic d ℚ ∣ minpoly ℚ (A.map (algebraMap ℤ ℚ))) :

@@ -72,7 +72,7 @@ def psiPrimePow (p k : ℕ) : ℕ :=
   else Nat.totient (p ^ k)
 
 /-- psiPrimePow at exponent 0 is always 0. -/
-@[simp]
+@[blueprint "lem:psi-prime-pow-zero" (title := "Psi Prime Power at Zero"), simp]
 lemma psiPrimePow_zero (p : ℕ) : psiPrimePow p 0 = 0 := by
   simp [psiPrimePow]
 
@@ -109,17 +109,17 @@ def psi (m : ℕ) : ℕ :=
   m.factorization.sum fun p k => psiPrimePow p k
 
 /-- `psi 0 = 0` by convention. -/
-@[simp]
+@[blueprint "lem:psi-zero" (title := "Psi of Zero"), simp]
 theorem psi_zero : psi 0 = 0 := by
   simp [psi, Nat.factorization_zero]
 
 /-- `psi 1 = 0`: The identity matrix has order 1 in any dimension. -/
-@[simp]
+@[blueprint "lem:psi-one" (title := "Psi of One"), simp]
 theorem psi_one : psi 1 = 0 := by
   simp [psi, Nat.factorization_one]
 
 /-- `psi 2 = 0`: The negation of identity has order 2 in any dimension ≥ 1. -/
-@[simp]
+@[blueprint "lem:psi-two" (title := "Psi of Two"), simp]
 theorem psi_two : psi 2 = 0 := by
   simp only [psi]
   rw [Nat.prime_two.factorization]
@@ -149,21 +149,26 @@ theorem psi_prime_pow (p k : ℕ) (hp : p.Prime) (hk : 0 < k) :
   simp only [psiPrimePow, hk.ne', ite_false]
 
 /-- psi of an odd prime p equals p - 1 -/
+@[blueprint "lem:psi-odd-prime" (title := "Psi of Odd Prime")]
 theorem psi_odd_prime (p : ℕ) (hp : p.Prime) (hp_odd : p ≠ 2) : psi p = p - 1 := by
   have h := psi_prime_pow p 1 hp (by norm_num : 0 < 1)
   simp only [pow_one] at h
   rw [h, if_neg (by simp [hp_odd]), Nat.totient_prime hp]
 
 /-- `psi 3 = 2` -/
+@[blueprint "lem:psi-three" (title := "Psi of Three")]
 theorem psi_three : psi 3 = 2 := psi_odd_prime 3 Nat.prime_three (by decide)
 
 /-- `psi 5 = 4` -/
+@[blueprint "lem:psi-five" (title := "Psi of Five")]
 theorem psi_five : psi 5 = 4 := psi_odd_prime 5 (by decide) (by decide)
 
 /-- `psi 7 = 6` -/
+@[blueprint "lem:psi-seven" (title := "Psi of Seven")]
 theorem psi_seven : psi 7 = 6 := psi_odd_prime 7 (by decide) (by decide)
 
 /-- psi of 2^k for k ≥ 2 equals φ(2^k) = 2^(k-1) -/
+@[blueprint "lem:psi-two-pow" (title := "Psi of Power of Two")]
 theorem psi_two_pow (k : ℕ) (hk : 2 ≤ k) : psi (2 ^ k) = 2 ^ (k - 1) := by
   have h := psi_prime_pow 2 k Nat.prime_two (by omega : 0 < k)
   rw [h, if_neg (by omega : ¬(2 = 2 ∧ k = 1))]
@@ -171,18 +176,22 @@ theorem psi_two_pow (k : ℕ) (hk : 2 ≤ k) : psi (2 ^ k) = 2 ^ (k - 1) := by
   ring
 
 /-- psi of p^k for odd prime p equals φ(p^k) -/
+@[blueprint "lem:psi-odd-prime-pow" (title := "Psi of Odd Prime Power")]
 theorem psi_odd_prime_pow (p k : ℕ) (hp : p.Prime) (hp_odd : p ≠ 2) (hk : 0 < k) :
     psi (p ^ k) = p ^ (k - 1) * (p - 1) := by
   rw [psi_prime_pow p k hp hk, if_neg (by simp [hp_odd])]
   rw [Nat.totient_prime_pow hp hk]
 
 /-- `psi 4 = 2` -/
+@[blueprint "lem:psi-four" (title := "Psi of Four")]
 theorem psi_four : psi 4 = 2 := by simpa using psi_two_pow 2 (by norm_num)
 
 /-- `psi 8 = 4` -/
+@[blueprint "lem:psi-eight" (title := "Psi of Eight")]
 theorem psi_eight : psi 8 = 4 := by simpa using psi_two_pow 3 (by norm_num)
 
 /-- `psi 9 = 6` -/
+@[blueprint "lem:psi-nine" (title := "Psi of Nine")]
 theorem psi_nine : psi 9 = 6 := by simpa using psi_odd_prime_pow 3 2 Nat.prime_three (by decide) (by norm_num)
 
 /-- The supports of factorizations of coprime numbers are disjoint.
@@ -246,18 +255,21 @@ theorem psi_coprime_add (m n : ℕ) (hm : 0 < m) (hn : 0 < n) (h : m.Coprime n) 
     rw [Finsupp.add_apply, factorization_eq_zero_of_disjoint_support hdisj.symm hp, zero_add]
 
 /-- `psi 6 = 2` -/
+@[blueprint "lem:psi-six" (title := "Psi of Six")]
 theorem psi_six : psi 6 = 2 := by
   have h6 : (6 : ℕ) = 2 * 3 := by norm_num
   rw [h6, psi_coprime_add 2 3 (by norm_num) (by norm_num) (by decide)]
   rw [psi_two, psi_three]
 
 /-- `psi 10 = 4` -/
+@[blueprint "lem:psi-ten" (title := "Psi of Ten")]
 theorem psi_ten : psi 10 = 4 := by
   have h10 : (10 : ℕ) = 2 * 5 := by norm_num
   rw [h10, psi_coprime_add 2 5 (by norm_num) (by norm_num) (by decide)]
   rw [psi_two, psi_five]
 
 /-- `psi 12 = 4` -/
+@[blueprint "lem:psi-twelve" (title := "Psi of Twelve")]
 theorem psi_twelve : psi 12 = 4 := by
   have h12 : (12 : ℕ) = 4 * 3 := by norm_num
   rw [h12, psi_coprime_add 4 3 (by norm_num) (by norm_num) (by decide)]

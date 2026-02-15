@@ -61,6 +61,8 @@ def integerMatrixOrders (N : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin N) (Fin N) ℤ, orderOf A = m ∧ 0 < m}
 
 /-- Mapping integer matrices to rational matrices via `algebraMap ℤ ℚ` is injective. -/
+@[blueprint "lem:matrix-map-algebraMap-int-injective"
+  (title := "Integer to Rational Matrix Map Injective")]
 lemma Matrix.map_algebraMap_int_injective (N : ℕ) :
     Function.Injective (Matrix.map · (algebraMap ℤ ℚ) :
       Matrix (Fin N) (Fin N) ℤ → Matrix (Fin N) (Fin N) ℚ) := by
@@ -79,6 +81,8 @@ lemma one_mem_integerMatrixOrders (N : ℕ) : 1 ∈ integerMatrixOrders N :=
   ⟨1, orderOf_one, by norm_num⟩
 
 /-- The ring characteristic of integer matrices is 0 for N ≥ 1. -/
+@[blueprint "lem:ringChar-matrix-int"
+  (title := "Ring Characteristic of Integer Matrices")]
 lemma ringChar_matrix_int (N : ℕ) [NeZero N] : ringChar (Matrix (Fin N) (Fin N) ℤ) = 0 := by
   rw [ringChar.eq_iff]
   refine ⟨fun n => ⟨fun hn => ?_, fun h => by simp [Nat.zero_dvd.mp h]⟩⟩
@@ -99,19 +103,23 @@ lemma two_mem_integerMatrixOrders (N : ℕ) [NeZero N] : 2 ∈ integerMatrixOrde
 
 /-- The canonical block diagonal embedding of an M×M matrix into an (M+K)×(M+K) matrix
 using Sum types. Places the matrix in the upper-left block and identity in the lower-right. -/
+@[blueprint "def:embed-matrix-sum"
+  (title := "Block Diagonal Embedding")]
 def embedMatrixSum {M K : ℕ} {R : Type*} [Zero R] [One R] (A : Matrix (Fin M) (Fin M) R) :
     Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R :=
   Matrix.fromBlocks A 0 0 1
 
 /-- The embedded identity is identity. -/
-@[simp]
+@[simp, blueprint "lem:embed-matrix-sum-one"
+  (title := "Embedding Preserves Identity")]
 lemma embedMatrixSum_one {M K : ℕ} {R : Type*} [Zero R] [One R] :
     embedMatrixSum (1 : Matrix (Fin M) (Fin M) R) =
     (1 : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R) := by
   simp only [embedMatrixSum, fromBlocks_one]
 
 /-- The embedding preserves multiplication. -/
-@[simp]
+@[simp, blueprint "lem:embed-matrix-sum-mul"
+  (title := "Embedding Preserves Multiplication")]
 lemma embedMatrixSum_mul {M K : ℕ} {R : Type*} [Semiring R] (A B : Matrix (Fin M) (Fin M) R) :
     embedMatrixSum (K := K) (A * B) = embedMatrixSum A * embedMatrixSum B := by
   simp only [embedMatrixSum]
@@ -119,6 +127,8 @@ lemma embedMatrixSum_mul {M K : ℕ} {R : Type*} [Semiring R] (A B : Matrix (Fin
   simp
 
 /-- The embedding is a monoid homomorphism. -/
+@[blueprint "def:embed-matrix-sum-monoidHom"
+  (title := "Embedding Monoid Homomorphism")]
 def embedMatrixSum.monoidHom (M K : ℕ) (R : Type*) [Semiring R] :
     Matrix (Fin M) (Fin M) R →* Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) R where
   toFun := embedMatrixSum
@@ -126,6 +136,8 @@ def embedMatrixSum.monoidHom (M K : ℕ) (R : Type*) [Semiring R] :
   map_mul' := embedMatrixSum_mul
 
 /-- The embedding is injective. -/
+@[blueprint "lem:embed-matrix-sum-monoidHom-injective"
+  (title := "Embedding Monoid Homomorphism Injective")]
 lemma embedMatrixSum.monoidHom_injective (M K : ℕ) (R : Type*) [Semiring R] :
     Function.Injective (embedMatrixSum.monoidHom M K R) := by
   intro A B hAB
@@ -136,6 +148,8 @@ lemma embedMatrixSum.monoidHom_injective (M K : ℕ) (R : Type*) [Semiring R] :
   exact h
 
 /-- The embedding preserves order. -/
+@[blueprint "lem:orderOf-embed-matrix-sum-eq"
+  (title := "Embedding Preserves Order")]
 lemma orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
     orderOf (embedMatrixSum (K := K) A) = orderOf A :=
   orderOf_injective (embedMatrixSum.monoidHom M K ℤ) (embedMatrixSum.monoidHom_injective M K ℤ) A
@@ -144,10 +158,14 @@ lemma orderOf_embedMatrixSum_eq {M K : ℕ} (A : Matrix (Fin M) (Fin M) ℤ) :
 
 This is equivalent to integerMatrixOrders (M + K) but uses Sum types for indexing,
 which simplifies working with block diagonal matrices. -/
+@[blueprint "def:integer-matrix-orders-sum"
+  (title := "Sum-Indexed Integer Matrix Orders")]
 def integerMatrixOrdersSum (M K : ℕ) : Set ℕ :=
   {m | ∃ A : Matrix (Fin M ⊕ Fin K) (Fin M ⊕ Fin K) ℤ, orderOf A = m ∧ 0 < m}
 
 /-- Orders achievable for M×M matrices are achievable for (M⊕K)-indexed matrices. -/
+@[blueprint "lem:integer-matrix-orders-subset-sum"
+  (title := "Matrix Orders Subset Sum-Indexed")]
 theorem integerMatrixOrders_subset_sum (M K : ℕ) :
     integerMatrixOrders M ⊆ integerMatrixOrdersSum M K :=
   fun _ ⟨A, hA_ord, hA_pos⟩ => ⟨embedMatrixSum A, by rw [orderOf_embedMatrixSum_eq, hA_ord], hA_pos⟩
@@ -160,6 +178,8 @@ between the corresponding matrix monoids that preserves multiplication.
 Note: Mathlib has `Matrix.reindexAlgEquiv` which provides an algebra equivalence,
 but we only need the multiplicative structure here. Using `MulEquiv` directly
 avoids requiring unnecessary algebra instances and keeps the API minimal. -/
+@[blueprint "def:reindex-monoid-equiv"
+  (title := "Reindex Monoid Equivalence")]
 def reindexMonoidEquiv {m n : Type*} [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
     {R : Type*} [Semiring R] (e : m ≃ n) : Matrix m m R ≃* Matrix n n R where
   toFun A := A.submatrix e.symm e.symm

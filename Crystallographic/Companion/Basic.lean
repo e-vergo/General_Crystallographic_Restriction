@@ -90,6 +90,7 @@ def companion (p : R[X]) (_hp : p.Monic) (_hn : 0 < p.natDegree) :
 /-- The charmatrix of a companion matrix has a specific structure: diagonal entries are
 `X` (or `X + C(p.coeff i)` in the last column), subdiagonal entries are `-1`,
 last column entries are `C(p.coeff i)`, and all other entries are `0`. -/
+@[blueprint "lem:companion-charmatrix-apply" (title := "Companion Charmatrix Apply")]
 lemma companion_charmatrix_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (i j : Fin p.natDegree) :
     charmatrix (companion p hp hn) i j =
@@ -128,6 +129,7 @@ lemma companion_charmatrix_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree
 
 /-- For a monic polynomial of degree 1, the characteristic polynomial of its companion
 matrix equals the polynomial. Both sides equal `X + C(p.coeff 0)`. -/
+@[blueprint "lem:companion-charpoly-of-nat-degree-one" (title := "Companion Charpoly Degree One")]
 lemma companion_charpoly_of_natDegree_one (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (hdeg : p.natDegree = 1) : (companion p hp hn).charpoly = p := by
   -- p = X + C(p.coeff 0) since p is monic of degree 1
@@ -161,6 +163,7 @@ lemma companion_charpoly_of_natDegree_one (p : R[X]) (hp : p.Monic) (hn : 0 < p.
 
 /-- The first column of the charmatrix of a companion matrix has `X` at position `(0,0)`,
 `-1` at position `(1,0)`, and `0` at all positions `(i,0)` for `i >= 2`. -/
+@[blueprint "lem:companion-charmatrix-col-zero" (title := "Companion Charmatrix Column Zero")]
 lemma companion_charmatrix_col_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -205,6 +208,7 @@ lemma companion_charmatrix_col_zero (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDeg
 
 /-- In the minor obtained by deleting row 1 and column 0 from the charmatrix,
 row 0 is zero except at the last position, where it equals `C(p.coeff 0)`. -/
+@[blueprint "lem:companion-charmatrix-minor10-row0" (title := "Companion Charmatrix Minor(1,0) Row Zero")]
 lemma companion_charmatrix_minor10_row0 (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -234,6 +238,7 @@ lemma companion_charmatrix_minor10_row0 (p : R[X]) (hp : p.Monic) (hn : 0 < p.na
 
 /-- The subminor obtained by further deleting row 0 and column m from the (1,0)-minor
 has entries `-1` on the diagonal, `X` on the superdiagonal, and `0` elsewhere. -/
+@[blueprint "lem:companion-charmatrix-subminor-apply" (title := "Companion Charmatrix Subminor Apply")]
 lemma companion_charmatrix_subminor_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -286,6 +291,7 @@ lemma companion_charmatrix_subminor_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.
 
 /-- The subminor (obtained by deleting row 0 and column m from the (1,0)-minor) is upper
 triangular with `-1` on the diagonal, so its determinant equals `(-1)^m`. -/
+@[blueprint "lem:companion-charmatrix-subminor-det" (title := "Companion Charmatrix Subminor Determinant")]
 lemma companion_charmatrix_subminor_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -310,6 +316,7 @@ lemma companion_charmatrix_subminor_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.na
 
 /-- The determinant of the (1,0)-minor of the charmatrix equals `C(p.coeff 0)`.
 This follows from Laplace expansion along row 0, where only the last column entry is nonzero. -/
+@[blueprint "lem:companion-charmatrix-minor10-det" (title := "Companion Charmatrix Minor(1,0) Determinant")]
 lemma companion_charmatrix_minor10_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -340,6 +347,7 @@ lemma companion_charmatrix_minor10_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.nat
 
 /-- Auxiliary structure bundling index condition equivalences for the (0,0)-minor entry lemma.
 These conditions relate entries of the charmatrix of companion(p) to those of companion(p.divX). -/
+@[blueprint "def:companion-minor00-index-conds" (title := "Companion Minor(0,0) Index Conditions")]
 structure CompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = m + 2)
     (hdivX_deg : p.divX.natDegree = m + 1) (i j : Fin (m + 1)) where
   /-- Row index in A -/
@@ -370,6 +378,7 @@ structure CompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = 
   lastcol_B : (Fin.cast hdivX_deg.symm j).val + 1 = p.divX.natDegree ↔ j.val = m
 
 /-- Constructs the index condition bundle for the (0,0)-minor entry lemma. -/
+@[blueprint "def:mk-companion-minor00-index-conds" (title := "Construct Companion Minor(0,0) Index Conditions")]
 def mkCompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = m + 2)
     (hdivX_deg : p.divX.natDegree = m + 1) (i j : Fin (m + 1)) :
     CompanionMinor00IndexConds m p hdeg hdivX_deg i j where
@@ -397,6 +406,7 @@ def mkCompanionMinor00IndexConds (m : ℕ) (p : R[X]) (hdeg : p.natDegree = m + 
 /-- The (0,0)-minor of the charmatrix of companion(p) equals the charmatrix of companion(p.divX),
 entry by entry (after appropriate index translations). This enables the inductive step
 in proving that the characteristic polynomial of a companion matrix equals the original polynomial. -/
+@[blueprint "lem:companion-charmatrix-minor00-apply" (title := "Companion Charmatrix Minor(0,0) Apply")]
 lemma companion_charmatrix_minor00_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -439,6 +449,7 @@ lemma companion_charmatrix_minor00_apply (p : R[X]) (hp : p.Monic) (hn : 0 < p.n
 /-- The determinant of the (0,0)-minor of the charmatrix equals `p.divX`.
 This follows because the minor equals the charmatrix of companion(p.divX), and we
 apply the induction hypothesis for the characteristic polynomial theorem. -/
+@[blueprint "lem:companion-charmatrix-minor00-det" (title := "Companion Charmatrix Minor(0,0) Determinant")]
 lemma companion_charmatrix_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.natDegree)
     (m : ℕ) (hdeg : p.natDegree = m + 2)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
@@ -483,6 +494,7 @@ lemma companion_charmatrix_minor00_det (p : R[X]) (hp : p.Monic) (hn : 0 < p.nat
 /-- The Laplace expansion of a matrix along column 0 reduces to two terms when only
 entries at rows 0 and 1 are nonzero. This applies to the charmatrix of companion matrices
 because entries `A i 0 = 0` for all `i >= 2`. -/
+@[blueprint "lem:companion-charmatrix-laplace-col-zero" (title := "Companion Charmatrix Laplace Column Zero")]
 lemma companion_charmatrix_laplace_col_zero (m : ℕ)
     (A : Matrix (Fin (m + 2)) (Fin (m + 2)) R[X])
     (hA00 : A 0 0 = X) (hA10 : A 1 0 = -1)

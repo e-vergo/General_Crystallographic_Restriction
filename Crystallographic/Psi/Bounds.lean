@@ -330,6 +330,7 @@ private abbrev nontrivialPrimes (m : ℕ) : Finset ℕ :=
 
 /-- psi(m) equals the sum of φ(q^{ord_q(m)}) over nontrivial primes q of m.
 This rewrites psi in terms of the filtered factorization support. -/
+@[blueprint "lem:psi-eq-sum-nontrivial-totients" (title := "Psi as Sum of Nontrivial Totients")]
 lemma psi_eq_sum_nontrivial_totients (m : ℕ) :
     psi m = ∑ q ∈ nontrivialPrimes m, Nat.totient (q ^ m.factorization q) := by
   unfold psi nontrivialPrimes
@@ -350,6 +351,7 @@ is bounded by φ(d).
 The key insight: if q₁^{k₁}, q₂^{k₂}, ... all divide d with distinct primes qᵢ,
 then their product also divides d. By multiplicativity of φ and the inequality
 ∑ aᵢ ≤ ∏ aᵢ when all aᵢ ≥ 2, we get the bound. -/
+@[blueprint "lem:fiber-totient-sum-le-totient" (title := "Fiber Totient Sum Bound")]
 lemma fiber_totient_sum_le_totient {m d : ℕ} (hd_pos : 0 < d)
     (fiber : Finset ℕ)
     (h_fiber_primes : ∀ q ∈ fiber, q.Prime)
@@ -392,6 +394,7 @@ to elements of S, the sum of φ(q^k) over nontrivial primes is bounded by ∑_{d
 
 This is the fiberwise bound: we partition nontrivial primes by their achiever,
 and for each fiber, the sum of φ(q^k) is bounded by φ(d) where d is the achiever. -/
+@[blueprint "lem:sum-nontrivial-totients-le-sum-totients" (title := "Nontrivial Totient Sum Bound")]
 lemma sum_nontrivial_totients_le_sum_totients {m : ℕ} (S : Finset ℕ)
     (hS_pos : ∀ d ∈ S, 0 < d)
     (achiever : ℕ → ℕ)
@@ -439,6 +442,7 @@ lemma sum_nontrivial_totients_le_sum_totients {m : ℕ} (S : Finset ℕ)
         h_fiber_primes h_fiber_dvd h_fiber_ge2
 
 /-- If m ∈ S, then ∑_{d∈S} φ(d) ≥ psi(m) follows from psi(m) ≤ φ(m) and m contributing to the sum. -/
+@[blueprint "lem:totient-sum-ge-psi-of-mem" (title := "Totient Sum Bound via Membership")]
 lemma totient_sum_ge_psi_of_mem {m : ℕ} (hm : 0 < m) (S : Finset ℕ)
     (hS_sub : ∀ d ∈ S, d ∣ m) (hm_in_S : m ∈ S) :
     psi m ≤ ∑ d ∈ S, Nat.totient d := by
