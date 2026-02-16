@@ -199,7 +199,7 @@ This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/SLS-
 **Feature Set:**
 - **Side-by-side display**: LaTeX theorem statements alongside syntax-highlighted Lean code
 - **Interactive dependency graph**: Sugiyama hierarchical layout with pan/zoom, modals, and connectivity validation
-- **6-status tracking**: notReady, ready, sorry, proven, fullyProven, mathlibReady
+- **7-status tracking**: notReady, wip, sorry, proven, fullyProven, axiom, mathlibReady
 - **Paper generation**: Academic ar5iv-style paper with verification badges and links to proofs
 - **Automatic dependency inference**: Traces actual Lean code dependencies (no manual `\uses{}`)
 - **Rainbow brackets**: Depth-colored bracket matching for nested expressions
