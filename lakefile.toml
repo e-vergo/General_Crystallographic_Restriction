@@ -33,3 +33,7 @@ name = "Crystallographic"
 [[lean_exe]]
 name = "generate-paper-verso"
 root = "GeneratePaper"
+
+[[lean_exe]]
+name = "generate-blueprint-verso"
+root = "GenerateBlueprint"

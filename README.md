@@ -9,12 +9,12 @@ A complete formalization in Lean 4 of the crystallographic restriction theorem, 
 
 **Live Demo:** [e-vergo.github.io/General_Crystallographic_Restriction](https://e-vergo.github.io/General_Crystallographic_Restriction/)
 
-This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/SLS-Strange-Loop-Station) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and academic paper generation.
+This is a full production example of the [Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint) toolchain, demonstrating all features including side-by-side displays, dependency graphs, and academic paper generation.
 
 **What to explore:**
 - **Blueprint**: Complete side-by-side documentation with theorem statements and formal proofs
 - **Dependency Graph**: 57-node visualization showing how lemmas and theorems build toward the main result
-- **Paper (HTML and PDF)**: Standalone academic publication with links to formal proofs
+- **Paper**: Standalone academic publication with links to formal proofs
 - **Verso Paper**: Alternative paper rendering via Verso's VersoPaper genre
 - **Dashboard**: Progress overview with key theorems and formalization status
 
@@ -63,8 +63,7 @@ In crystallography, the symmetry group of a crystal lattice consists of isometri
 | [Dashboard](https://e-vergo.github.io/General_Crystallographic_Restriction/) | Project overview with progress stats and key theorems |
 | [Blueprint](https://e-vergo.github.io/General_Crystallographic_Restriction/chapter-1.html) | Side-by-side LaTeX and Lean with proof toggles |
 | [Dependency Graph](https://e-vergo.github.io/General_Crystallographic_Restriction/dep_graph.html) | Interactive 57-node visualization with pan/zoom |
-| [Paper (HTML)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_tex.html) | Academic paper with links to Lean proofs |
-| [Paper (PDF)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper.pdf) | Printable PDF version |
+| [Paper](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_verso.html) | Academic paper with links to Lean proofs |
 | [Paper (Verso)](https://e-vergo.github.io/General_Crystallographic_Restriction/paper_verso.html) | Verso-rendered paper |
 | [API Docs](https://e-vergo.github.io/General_Crystallographic_Restriction/docs/) | DocGen4 API documentation |
 
@@ -157,9 +156,8 @@ This executes a single command that:
 4. Fetches mathlib cache
 5. Compiles the Lean project with blueprint artifact generation
 6. Generates the dependency graph and site
-7. Generates the academic paper (PDF and HTML)
-8. Captures screenshots for compliance validation
-9. Starts a local server at http://localhost:8000
+7. Captures screenshots for compliance validation
+8. Starts a local server at http://localhost:8000
 
 The site is generated at `.lake/build/runway/` with interactive pages, assets, and manifest files.
 
@@ -187,7 +185,7 @@ The live documentation is built via GitHub Actions using [dress-blueprint-action
 
 ## Documentation Toolchain
 
-This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/SLS-Strange-Loop-Station)** toolchain, a pure Lean implementation consisting of:
+This project uses the **[Side-by-Side Blueprint](https://github.com/e-vergo/Side-By-Side-Blueprint)** toolchain, a pure Lean implementation consisting of:
 
 **Core Components:**
 - **Dress**: Captures blueprint artifacts during elaboration (syntax highlighting, code blocks, metadata)
@@ -221,8 +219,7 @@ The formalization is based on classical results about integer matrices and cyclo
 
 ## Attribution
 
-- **Side-by-Side Blueprint**: Documentation toolchain by [e-vergo](https://github.com/e-vergo/SLS-Strange-Loop-Station)
-- **leanblueprint**: Original Python implementation by [Patrick Massot](https://github.com/PatrickMassot/leanblueprint)
+- **Side-by-Side Blueprint**: Documentation toolchain by [e-vergo](https://github.com/e-vergo/Side-By-Side-Blueprint)
 - **LeanArchitect**: Based on [hanwenzhu/LeanArchitect](https://github.com/hanwenzhu/LeanArchitect)
 
 ## Author
